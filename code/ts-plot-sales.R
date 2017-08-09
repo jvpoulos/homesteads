@@ -34,9 +34,9 @@ TsPlotSales <- function(df, main = "") {
   geom_hline(yintercept = 0, size = 0.5, colour = "black") +
   
  # horizontal ticks
-  # scale_x_datetime(limits=c(as.POSIXct("1892-08-01 06:00:00",tz="UTC"), as.POSIXct("1940-08-01 18:00:00",tz="UTC")),
-  #                   date_breaks="10 years",labels=date_format("%Y"),
-  #                   time_trans(tz="UTC"))+
+  scale_x_datetime(limits=c(as.POSIXct("1820-06-01 06:00:00",tz="UTC"), as.POSIXct("1889-06-01 18:00:00",tz="UTC")),
+                    date_breaks="10 years",labels=date_format("%Y"),
+                    time_trans(tz="UTC"))+
 
   # main y-axis title
   ylab("") +
@@ -48,7 +48,7 @@ TsPlotSales <- function(df, main = "") {
   ggtitle(main)
 
 # annotation text
-  ann_text <- data.frame(date = c(as.POSIXlt("1855-01-01 EST"), as.POSIXlt("1870-01-01 EST"), as.POSIXlt("1885-01-01 EST")), value=20000, 
+  ann_text <- data.frame(date = c(as.POSIXlt("1855-01-01 EST"), as.POSIXlt("1871-06-01 EST"), as.POSIXlt("1885-01-01 EST")), value=20000, 
                          series = factor("Time-series", levels = c("Time-series","Pointwise impact","Cumulative impact")),
                          lab = c("pre-intervention \n (training)", "intervention \n (test)", "post-intervention \n (test)"))
 
@@ -68,10 +68,11 @@ TsPlotSales <- function(df, main = "") {
          , legend.text=element_text(size=12, family = "serif")
          , legend.box = "horizontal" # not working?)
   ) + geom_text(data = ann_text,aes(y = value, label =lab), family="serif", fontface="italic",  size=5) +
+    scale_y_continuous(name="Number of sales", labels = scales::comma) +
     scale_colour_manual(name="", values = c("Observed sales" = wes_palette("Darjeeling")[2], "Predicted sales" = wes_palette("Darjeeling")[2]),
-                        labels=c("Observed sales", "Predicted sales")) +
+                        labels=c("Observed", "Predicted")) +
     scale_linetype_manual(name="", values = c("Predicted sales" = "dashed", "Observed sales" = "solid"),
-                          labels=c("Observed sales","Predicted sales"))  + 
+                          labels=c("Observed","Predicted"))  + 
   theme(legend.key.width=unit(3,"line")) 
 return(gg.xts)
 }

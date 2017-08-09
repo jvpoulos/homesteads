@@ -39,7 +39,7 @@ TsPlotPatents <- function(df, main = "") {
     
     # vertical line to indicate intervention
   
-  geom_vline(xintercept=c(as.numeric(as.POSIXct("1876-06-01 06:00:00",tz="UTC"))), linetype=4) + 
+  geom_vline(xintercept=c(as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC"))), linetype=4) + 
     
   # horizontal line to indicate zero values
   geom_hline(yintercept = 0, size = 0.5, colour = "black") +
@@ -59,7 +59,7 @@ TsPlotPatents <- function(df, main = "") {
   ggtitle(main)
 
 # annotation text
-  ann_text <- data.frame(date = c(as.POSIXlt("1875-01-01 EST"), as.POSIXlt("1885-01-01 EST")), value=400, 
+  ann_text <- data.frame(date = c(as.POSIXlt("1880-01-01 EST"), as.POSIXlt("1910-01-01 EST")), value=400, 
                          series = factor("Time-series", levels = c("Time-series","Pointwise impact","Cumulative impact")),
                          lab = c("pre-intervention \n (training)", "post-intervention \n (test)"))
 
@@ -79,6 +79,7 @@ TsPlotPatents <- function(df, main = "") {
          , legend.text=element_text(size=12, family = "serif")
          , legend.box = "horizontal" # not working?)
   ) + geom_text(data = ann_text,aes(y = value, label =lab), family="serif", fontface="italic",  size=5) +
+    scale_y_continuous(name="Number of land patents", labels = scales::comma) +
     scale_colour_manual(name="", values = c("Observed homesteads" = wes_palette("Darjeeling")[1],"Predicted homesteads" = wes_palette("Darjeeling")[1], "Observed sales" = wes_palette("Darjeeling")[2], "Predicted sales" = wes_palette("Darjeeling")[2]),
                         labels=c("Observed homesteads", "Observed sales", "Predicted homesteads", "Predicted sales")) +
     scale_linetype_manual(name="", values = c("Predicted homesteads" = "dashed","Predicted sales" = "dashed", "Observed homesteads" = "solid", "Observed sales" = "solid"),

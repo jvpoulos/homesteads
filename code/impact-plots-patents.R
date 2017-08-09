@@ -3,12 +3,12 @@
 
 source("ts-plot-patents.R")
 
-analysis <- "analysis-12"
+analysis <- "analysis-34"
 
 type <- "treated"
 
 ## Sales data
-setwd(paste0(results.directory, "predictions/",analysis,"/treated/sales"))
+setwd(paste0(results.directory, "predictions/",analysis,"/",type,"/sales")) # prediction files loc
 
 # Import test results
 
@@ -40,7 +40,7 @@ sales.train <- cbind(sales.y.train,
                           "sales.sd"=sales.train.sd) 
 
 ## Homesteads data 
-setwd(paste0(results.directory, "predictions/",analysis,"/treated/homesteads"))
+setwd(paste0(results.directory, "predictions/",analysis,"/",type,"/homesteads")) # prediction files loc
 
 # Import test results
 
@@ -131,28 +131,28 @@ ts.means.m[pred.vars][ts.means.m$variable=="Observed",] <- NA
 ts.plot <- TsPlotPatents(ts.means.m)
 
 data.directory <- "~/Dropbox/github/ok-lottery/data/"
-ggsave(paste0(data.directory,"plots/patents-ts-plot.png"), ts.plot, width=11, height=8.5)
+ggsave(paste0(data.directory,"plots/patents-south-treated.png"), ts.plot, width=11, height=8.5)
 
-# Calculate avg. pointwise impact: June 1876- Mar 1889
+# Calculate Avg. pointwise impact during pre-period: <= "Feb 1889"
 
-# sales
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date>="1876-06-01 19:00:00")])
+mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date<="1889-02-28 19:00:00")])
 
-mean(sds$sales.sd[(sds$date>="Jun 1876")])
+mean(sds$sales.sd[(sds$date<= "May 1866")])
 
-# homesteads
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise homesteads" & (ts.means.m$date>="1876-06-01 19:00:00")])
+# Calculate Avg. cumulative impact during pre-period: <= "Feb 1889"
 
-mean(sds$homesteads.sd[(sds$date>="Jun 1876")])
+ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1889-02-28 19:00:00"]
 
-# Calculate cumulative impact: June 1876- Mar 1889
+(abs(sds$cumulative.sales.min[(sds$date=="Feb 1889")] -sds$cumulative.sales.max[(sds$date=="Feb 1889")])/2)
 
-# sales
-ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1876-06-01 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1889-03-01 19:00:00"]
+# Calculate avg. pointwise impact during intervention/post-period: >= "Mar 1889"
 
-abs((abs(sds$cumulative.sales.min[(sds$date=="Jun 1876")] -sds$cumulative.sales.max[(sds$date=="Jun 1876")])/2) -(abs(sds$cumulative.sales.min[(sds$date=="Mar 1889")] -sds$cumulative.sales.max[(sds$date=="Mar 1889")])/2))
+mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date>="1889-03-01 19:00:00")])
 
-# homesteads
-ts.means.m$value[ts.means.m$variable=="Cumulative homesteads" & ts.means.m$date=="1876-06-01 19:00:00"]-ts.means.m$value[ts.means.m$variable=="Cumulative homesteads" & ts.means.m$date=="1889-03-01 19:00:00"]
+mean(sds$sales.sd[(sds$date>="Mar 1889")])
 
-abs((abs(sds$cumulative.homesteads.min[(sds$date=="Jun 1876")] -sds$cumulative.homesteads.max[(sds$date=="Jun 1876")])/2) -(abs(sds$cumulative.homesteads.min[(sds$date=="Mar 1889")] -sds$cumulative.homesteads.max[(sds$date=="Mar 1889")])/2))
+# Calculate cumulative impact during intervention/post-period: >= "Mar 1889"
+
+ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1976-10-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1889-03-01 19:00:00"]
+
+abs((abs(sds$cumulative.sales.min[(sds$date=="Oct 1976")] -sds$cumulative.sales.max[(sds$date=="Oct 1976")])/2) -(abs(sds$cumulative.sales.min[(sds$date=="Mar 1889")] -sds$cumulative.sales.max[(sds$date=="Mar 1889")])/2))
