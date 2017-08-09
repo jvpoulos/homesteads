@@ -5,10 +5,10 @@ source("ts-plot-sales.R")
 
 analysis <- "analysis-12"
 
-type <- "control"
+type <- "treated"
 
 ## Sales data
-setwd(paste0(results.directory, "predictions/",analysis,"/",type)) # prediction files loc
+setwd(paste0(results.directory, "predictions/",analysis,"/",type,"/sales")) # prediction files loc
 
 # Import test results
 
@@ -136,12 +136,12 @@ ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="186
 
 # Calculate avg. pointwise impact during intervention/post-period:  >= "Jun 1866" & <= "Feb 1889"
 
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date>="1876-06-01 19:00:00")])
+mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date>"1866-05-31 19:03:58")])
 
 mean(sds$sales.sd[(sds$date>="Jun 1876")])
 
 # Calculate cumulative impact during intervention/post-period:  >= "Jun 1866" & <= "Feb 1889"
 
-ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1889-01-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1866-05-31 19:03:58"]
+ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1889-01-31 19:00:00"] -ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1866-05-31 19:03:58"]
 
 abs((abs(sds$cumulative.sales.min[(sds$date=="Jun 1866")] -sds$cumulative.sales.max[(sds$date=="Jun 1866")])/2) -(abs(sds$cumulative.sales.min[(sds$date=="Feb 1889")] -sds$cumulative.sales.max[(sds$date=="Feb 1889")])/2))

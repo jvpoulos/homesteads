@@ -44,10 +44,10 @@ TsPlotPatents <- function(df, main = "") {
   # horizontal line to indicate zero values
   geom_hline(yintercept = 0, size = 0.5, colour = "black") +
   
- # horizontal ticks
-  # scale_x_datetime(limits=c(as.POSIXct("1892-08-01 06:00:00",tz="UTC"), as.POSIXct("1940-08-01 18:00:00",tz="UTC")),
-  #                   date_breaks="10 years",labels=date_format("%Y"),
-  #                   time_trans(tz="UTC"))+
+# horizontal ticks
+ scale_x_datetime(limits=c(as.POSIXct("1875-06-01 19:03:58",tz="UTC"), as.POSIXct("1976-09-01 20:00:00",tz="UTC")),
+                   date_breaks="10 years",labels=date_format("%Y"),
+                   time_trans(tz="UTC"))+
 
   # main y-axis title
   ylab("") +
@@ -59,7 +59,7 @@ TsPlotPatents <- function(df, main = "") {
   ggtitle(main)
 
 # annotation text
-  ann_text <- data.frame(date = c(as.POSIXlt("1880-01-01 EST"), as.POSIXlt("1910-01-01 EST")), value=400, 
+  ann_text <- data.frame(date = c(as.POSIXlt("1880-01-01 EST"), as.POSIXlt("1910-01-01 EST")), value=2500, 
                          series = factor("Time-series", levels = c("Time-series","Pointwise impact","Cumulative impact")),
                          lab = c("pre-intervention \n (training)", "post-intervention \n (test)"))
 
