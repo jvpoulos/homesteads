@@ -163,6 +163,8 @@ write.csv(sales.y.test[!colnames(sales.y.test) %in% c("date")], paste0(data.dire
 
 # Controls are MO counties
 
+patents.sum$id <- interaction(patents.sum$county_code,patents.sum$state_code)
+
 patents.sum.control <- patents.sum[patents.sum$state_code=="MO",] # discard treated since we have treated time-series
 
 homesteads <- reshape(data.frame(patents.sum.control[c("date","id","homesteads")]), idvar = "date", timevar = "id", direction = "wide")
