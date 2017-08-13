@@ -82,9 +82,9 @@ cats.sums <- patents.sum %>%
 
 cats.sums.r <- reshape(data.frame(cats.sums), idvar = "date", timevar = "cat", direction = "wide")
 
-## Analysis 1: Effect of SHA on treated (south) sales, intervention: June 1866-June 1876; period: - Feb 1889 (restrictions imposted March 1889)
-
-# controls are non-south
+## Analysis 1: Effect of SHA on treated sales, intervention: June 1866-June 1876; period: - Feb 1889 (restrictions imposted March 1889)
+# treated is southern public land states
+# controls are non-south public land states
 
 patents.sum$id <- interaction(patents.sum$county_code,patents.sum$state_code)
 
@@ -159,8 +159,8 @@ write.csv(sales.y.test[!colnames(sales.y.test) %in% c("date")], paste0(data.dire
 # write.csv(sales.y.train[!colnames(sales.y.train) %in% c("date")], paste0(data.directory,"sales-y-train.csv"), row.names=FALSE) 
 # write.csv(sales.y.test[!colnames(sales.y.test) %in% c("date")], paste0(data.directory,"sales-y-test.csv"), row.names=FALSE) 
 
-## Analysis 3: Effect on treated (south), intervention: Mar 1889; period: Jul 1876 - Oct 1976 (HSA repeal)
-
+## Analysis 3: Effect on treated, intervention: Mar 1889; period: Jul 1876 - Oct 1976 (HSA repeal)
+# Treated is southern public land states
 # Controls are MO counties
 
 patents.sum$id <- interaction(patents.sum$county_code,patents.sum$state_code)
