@@ -7,6 +7,13 @@ data.directory <-"~/Dropbox/github/land-reform/data/"
 code.directory <-"~/Dropbox/github/land-reform/code/"
 results.directory <-"~/Dropbox/github/land-reform/results/"
 
+# State groups
+
+pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
+state.land.states <- state.abb[!state.abb %in% pub.states] # 20 state land states
+southern.pub <- c("AL", "AR", "FL", "LA", "MS") # 5 southern public land states
+southern.state <- c("GA","NC","SC","TN","TX","VA") # 6 southern state land states
+
 # Causal estimates on land patents
 
 source(paste0(code.directory,'patents.R')) # load and export patents data
@@ -22,3 +29,7 @@ source(paste0(code.directory,'dd-patents.R')) # DD estimates for comparison
 source(paste0(code.directory,'census-county-state.R')) # get state-level pop. data
 
 source(paste0(code.directory,'capacity-state.R'))  # load and export capacity data
+
+source(paste0(code.directory,'impact-plots-rev-exp.R')) # effect of 1866 SHA on treated (south) revenue and expenditure
+
+source(paste0(code.directory,'impact-plots-ed-exp.R')) # effect of 1866 SHA on treated (south) education

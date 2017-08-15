@@ -3,6 +3,7 @@
 #####################
 
 library(reldist)
+library(dplyr)
 
 ## Load data
 census.data.directory <- "~/Dropbox/github/ok-lottery/data/"

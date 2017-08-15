@@ -1,7 +1,7 @@
 # Plot time-series and estimate causal impacts
 # Uses train/test sets from patents.R
 
-source("ts-plot-patents.R")
+source(paste0(code.directory,"ts-plot-patents.R"))
 
 analysis <- "analysis-34"
 

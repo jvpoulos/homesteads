@@ -57,13 +57,13 @@ patents$date <- as.yearmon(patents$signature_date, "%m/%d/%Y",tz="UTC") # conver
 patents <- patents[!is.na(patents$date) & !patents$date>2017,] # subset to non-missing and valid dates
 
 # Save workspace
-save.image(data.directory, "patents/patents.RData")
+save.image(paste0(data.directory, "patents/patents.RData"))
 
 #############################################
 
 # Summarize by date/county/state
 
-pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") #,30,public,land,states
+pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
 
 patents.sum <- patents %>%
   filter(state_code %in% pub.states) %>% # only public land states
@@ -120,44 +120,6 @@ write.csv(sales.x.train[!colnames(sales.x.train) %in% c("date")], paste0(data.di
 write.csv(sales.x.test[!colnames(sales.x.test) %in% c("date")] , paste0(data.directory,"sales-x-test.csv"), row.names=FALSE) 
 write.csv(sales.y.train[!colnames(sales.y.train) %in% c("date")], paste0(data.directory,"sales-y-train.csv"), row.names=FALSE) 
 write.csv(sales.y.test[!colnames(sales.y.test) %in% c("date")], paste0(data.directory,"sales-y-test.csv"), row.names=FALSE) 
-
-# ## Analysis 2: Effect on controls (non-south), intervention: June 1866-June 1876; period: - Feb 1889 (restrictions imposted March 1889)
-# 
-# # treated is south
-# 
-# patents.sum.treated <- patents.sum[patents.sum$cat=="Treated",] # discard controls since we have controls time-series
-# 
-# sales <- reshape(data.frame(patents.sum.treated[c("date","id","sales")]), idvar = "date", timevar = "id", direction = "wide")
-# 
-# # Labels
-# 
-# sales.y <- cats.sums.r[c("date", "sales.Control")]
-# sales.y <- sales.y[!is.na(sales.y$sales.Control),]
-# 
-# # Splits 
-# 
-# sales.dates <- intersect(sales$date,sales.y$date) # common sales dates in treated and control
-# 
-# sales.x.train <- sales[sales$date %in% sales.dates & sales$date <= "May 1866",]
-# sales.x.test <- sales[sales$date %in% sales.dates &sales$date >= "Jun 1866" & sales$date <= "Feb 1889",]
-# 
-# sales.y.train <- sales.y[sales.y$date %in% sales.dates & sales.y$date <= "May 1866",]
-# sales.y.test <- sales.y[sales.y$date %in% sales.dates &sales.y$date >= "Jun 1866" & sales.y$date <= "Feb 1889",]
-# 
-# # Preprocess
-# 
-# sales.pre.train <- preProcess(sales.x.train[!colnames(sales.x.train) %in% c("date")], method = c("center", "scale","medianImpute"))
-# sales.x.train[!colnames(sales.x.train) %in% c("date")] <- predict(sales.pre.train, sales.x.train[!colnames(sales.x.train) %in% c("date")] )
-# 
-# sales.x.test[!colnames(sales.x.test) %in% c("date")] <- predict(sales.pre.train, sales.x.test[!colnames(sales.x.test) %in% c("date")] ) # use training values for test set 
-# 
-# # Export each as csv (labels, features)
-# data.directory <- "~/Dropbox/github/drnns-prediction/data/patents-public/analysis-12/control/"
-# 
-# write.csv(sales.x.train[!colnames(sales.x.train) %in% c("date")], paste0(data.directory,"sales-x-train.csv"), row.names=FALSE) 
-# write.csv(sales.x.test[!colnames(sales.x.test) %in% c("date")] , paste0(data.directory,"sales-x-test.csv"), row.names=FALSE) 
-# write.csv(sales.y.train[!colnames(sales.y.train) %in% c("date")], paste0(data.directory,"sales-y-train.csv"), row.names=FALSE) 
-# write.csv(sales.y.test[!colnames(sales.y.test) %in% c("date")], paste0(data.directory,"sales-y-test.csv"), row.names=FALSE) 
 
 ## Analysis 3: Effect on treated, intervention: Mar 1889; period: Jul 1876 - Oct 1976 (HSA repeal)
 # Treated is southern public land states
@@ -220,75 +182,3 @@ write.csv(sales.x.train[!colnames(sales.x.train) %in% c("date")], paste0(data.di
 write.csv(sales.x.test[!colnames(sales.x.test) %in% c("date")] , paste0(data.directory,"sales-x-test.csv"), row.names=FALSE) 
 write.csv(sales.y.train[!colnames(sales.y.train) %in% c("date")], paste0(data.directory,"sales-y-train.csv"), row.names=FALSE) 
 write.csv(sales.y.test[!colnames(sales.y.test) %in% c("date")], paste0(data.directory,"sales-y-test.csv"), row.names=FALSE) 
-
-# ## Analysis 4: Effect on controls (missouri), intervention: Mar 1889; period: Jul 1876 - Oct 1976 (HSA repeal)
-# 
-# # treated is south
-# 
-# patents.sum.treated <- patents.sum[patents.sum$cat=="Treated",] # discard controls since we have controls time-series
-# 
-# homesteads <- reshape(data.frame(patents.sum.treated[c("date","id","homesteads")]), idvar = "date", timevar = "id", direction = "wide")
-# 
-# sales <- reshape(data.frame(patents.sum.treated[c("date","id","sales")]), idvar = "date", timevar = "id", direction = "wide")
-# 
-# # Labels
-# 
-# state.sums <- patents.sum %>% 
-#   group_by(date,state_code) %>% 
-#   summarise_each(funs(sum),sales,homesteads) 
-# 
-# state.sums.r <- reshape(data.frame(state.sums), idvar = "date", timevar = "cat", direction = "wide")
-# 
-# homesteads.y <- state.sums.r[c("date", "homesteads.MO")]
-# homesteads.y <- homesteads.y[!is.na(homesteads.y$homesteads.MO),]
-# 
-# sales.y <- state.sums.r[c("date", "sales.MO")]
-# sales.y <- sales.y[!is.na(sales.y$sales.MO),]
-# 
-# # Splits
-# 
-# sales.dates <- intersect(sales$date,sales.y$date) # common sales dates in treated and control
-# 
-# sales.x.train <- sales[sales$date %in% sales.dates & sales$date <= "May 1866",]
-# sales.x.test <- sales[sales$date %in% sales.dates &sales$date >= "Jun 1866" & sales$date <= "Feb 1889",]
-# 
-# sales.y.train <- sales.y[sales.y$date %in% sales.dates & sales.y$date <= "May 1866",]
-# sales.y.test <- sales.y[sales.y$date %in% sales.dates &sales.y$date >= "Jun 1866" & sales.y$date <= "Feb 1889",]
-# 
-# homesteads.dates <- intersect(homesteads$date,homesteads.y$date) # common homesteads dates in treated and control
-# 
-# homesteads.x.train <- homesteads[homesteads$date %in% homesteads.dates & homesteads$date <= "May 1866",]
-# homesteads.x.test <- homesteads[homesteads$date %in% homesteads.dates &homesteads$date >= "Jun 1866" & homesteads$date <= "Feb 1889",]
-# 
-# homesteads.y.train <- homesteads.y[homesteads.y$date %in% homesteads.dates & homesteads.y$date <= "May 1866",]
-# homesteads.y.test <- homesteads.y[homesteads.y$date %in% homesteads.dates &homesteads.y$date >= "Jun 1866" & homesteads.y$date <= "Feb 1889",]
-# 
-# # Preprocess
-# sales.dates <- intersect(sales$date,sales.y$date) # common sales dates in treated and control
-# 
-# sales.x.train <- sales[sales$date %in% sales.dates & sales$date >= "Jul 1876" & sales$date <= "Feb 1889",]
-# sales.x.test <- sales[sales$date %in% sales.dates & sales$date >= "Mar 1889" & sales$date <= "Oct 1976",]
-# 
-# sales.y.train <- sales.y[sales.y$date %in% sales.dates & sales.y$date >= "Jul 1876" & sales.y$date <= "Feb 1889",]
-# sales.y.test <- sales.y[sales.y$date %in% sales.dates & sales.y$date >= "Mar 1889" & sales.y$date <= "Oct 1976",]
-# 
-# homesteads.dates <- intersect(homesteads$date,homesteads.y$date) # common homesteads dates in treated and control
-# 
-# homesteads.x.train <- homesteads[homesteads$date %in% homesteads.dates & homesteads$date >= "Jul 1876" & homesteads$date <= "Feb 1889",]
-# homesteads.x.test <- homesteads[homesteads$date %in% homesteads.dates & homesteads$date >= "Mar 1889" & homesteads$date <= "Oct 1976",]
-# 
-# homesteads.y.train <- homesteads.y[homesteads.y$date %in% homesteads.dates & homesteads.y$date >= "Jul 1876" & homesteads.y$date <= "Feb 1889",]
-# homesteads.y.test <- homesteads.y[homesteads.y$date %in% homesteads.dates & homesteads.y$date >= "Mar 1889" & homesteads.y$date <= "Oct 1976",]
-# 
-# # Export each as csv (labels, features)
-# data.directory <- "~/Dropbox/github/drnns-prediction/data/patents-public/analysis-34/control/"
-# 
-# write.csv(homesteads.x.train[!colnames(homesteads.x.train) %in% c("date")], paste0(data.directory,"homesteads-x-train.csv"), row.names=FALSE) 
-# write.csv(homesteads.x.test[!colnames(homesteads.x.test) %in% c("date")], paste0(data.directory,"homesteads-x-test.csv"), row.names=FALSE) 
-# write.csv(homesteads.y.train[!colnames(homesteads.y.train) %in% c("date")], paste0(data.directory,"homesteads-y-train.csv"), row.names=FALSE) 
-# write.csv(homesteads.y.test[!colnames(homesteads.y.test) %in% c("date")], paste0(data.directory,"homesteads-y-test.csv"), row.names=FALSE) 
-# 
-# write.csv(sales.x.train[!colnames(sales.x.train) %in% c("date")], paste0(data.directory,"sales-x-train.csv"), row.names=FALSE) 
-# write.csv(sales.x.test[!colnames(sales.x.test) %in% c("date")] , paste0(data.directory,"sales-x-test.csv"), row.names=FALSE) 
-# write.csv(sales.y.train[!colnames(sales.y.train) %in% c("date")], paste0(data.directory,"sales-y-train.csv"), row.names=FALSE) 
-# write.csv(sales.y.test[!colnames(sales.y.test) %in% c("date")], paste0(data.directory,"sales-y-test.csv"), row.names=FALSE) 

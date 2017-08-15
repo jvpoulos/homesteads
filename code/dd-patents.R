@@ -50,14 +50,14 @@ cats.sums.did$time <- 0
 cats.sums.did$time[cats.sums.did$date >= "Mar 1889" & cats.sums.did$date <= "Oct 1976"] <- 1
 
 # Sales 
-did.sales <- lm(sales ~ cat*time, data = cats.sums.did[cats.sums.did$date <= "Oct 1976",]) 
+did.sales <- lm(sales ~ cat*time, data = cats.sums.did[cats.sums.did$date >= "Jul 1876" & cats.sums.did$date <= "Oct 1976",]) 
 
 summary(did.sales)
 
 confint(did.sales)[4,]
 
 # homesteads 
-did.homesteads <- lm(homesteads ~ cat*time, data = cats.sums.did[cats.sums.did$date <= "Oct 1976",]) 
+did.homesteads <- lm(homesteads ~ cat*time, data = cats.sums.did[cats.sums.did$date >= "Jul 1876" & cats.sums.did$date <= "Oct 1976",]) 
 
 summary(did.homesteads)
 
