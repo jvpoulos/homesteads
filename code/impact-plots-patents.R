@@ -109,14 +109,14 @@ levels(ts.means.m$variable) <- c("Observed sales","Predicted sales", "Observed h
 # SDs
 
 sds <- ts.dat  %>%
-  mutate(pred.sales.min = sales.mean - sales.sd,
-         pred.sales.max = sales.mean + sales.sd,
+  mutate(pred.sales.min = sales.mean - sales.sd*1.96,
+         pred.sales.max = sales.mean + sales.sd*1.96,
          pointwise.sales.min = sales.Treated-pred.sales.min,
          pointwise.sales.max = sales.Treated-pred.sales.max,
          cumulative.sales.min = cumsum(pointwise.sales.min),
          cumulative.sales.max = cumsum(pointwise.sales.max),
-         pred.homesteads.min = homesteads.mean - homesteads.sd,
-         pred.homesteads.max = homesteads.mean + homesteads.sd,
+         pred.homesteads.min = homesteads.mean - homesteads.sd*1.96,
+         pred.homesteads.max = homesteads.mean + homesteads.sd*1.96,
          pointwise.homesteads.min = homesteads.Treated-pred.homesteads.min,
          pointwise.homesteads.max = homesteads.Treated-pred.homesteads.max,
          cumulative.homesteads.min = cumsum(pointwise.homesteads.min),
@@ -135,47 +135,60 @@ ggsave(paste0(results.directory,"plots/patents-south-treat.png"), ts.plot, width
 # Calculate Avg. pointwise impact during pre-period: <= "Feb 1889"
 
 # sales
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date<="1889-02-28 19:00:00")])
+sales.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date<="1889-02-28 19:00:00")])
+sales.mu
 
-mean(sds$sales.sd[(sds$date<= "Feb 1889")])
+sales.mu - (mean(sds$sales.sd[(sds$date<= "Feb 1889")])*1.96)
+sales.mu + (mean(sds$sales.sd[(sds$date<= "Feb 1889")])*1.96)
 
 # homesteads
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise homesteads" & (ts.means.m$date<="1889-02-28 19:00:00")])
+homesteads.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise homesteads" & (ts.means.m$date<="1889-02-28 19:00:00")])
+homesteads.mu
 
-mean(sds$homesteads.sd[(sds$date<= "Feb 1889")])
+homesteads.mu - (mean(sds$homesteads.sd[(sds$date<= "Feb 1889")])*1.96)
+homesteads.mu + (mean(sds$homesteads.sd[(sds$date<= "Feb 1889")])*1.96)
 
 # Calculate Avg. cumulative impact during pre-period: <= "Feb 1889"
 
 #sales
 ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1889-02-28 19:00:00"]
 
-(abs(sds$cumulative.sales.min[(sds$date=="Feb 1889")] -sds$cumulative.sales.max[(sds$date=="Feb 1889")])/2)
+sds$cumulative.sales.max[(sds$date=="Feb 1889")]
+sds$cumulative.sales.min[(sds$date=="Feb 1889")]
 
 #homesteads
 ts.means.m$value[ts.means.m$variable=="Cumulative homesteads" & ts.means.m$date=="1889-02-28 19:00:00"]
 
-(abs(sds$cumulative.homesteads.min[(sds$date=="Feb 1889")] -sds$cumulative.homesteads.max[(sds$date=="Feb 1889")])/2)
+sds$cumulative.homesteads.max[(sds$date=="Feb 1889")]
+sds$cumulative.homesteads.min[(sds$date=="Feb 1889")]
+
 
 # Calculate avg. pointwise impact during intervention/post-period: >= "Mar 1889"
 
 #sales
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date>="1889-03-01 19:00:00")])
+sales.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date>="1889-03-01 19:00:00")])
+sales.mu
 
-mean(sds$sales.sd[(sds$date>="Mar 1889")])
+sales.mu - (mean(sds$sales.sd[(sds$date>="Mar 1889")])*1.96)
+sales.mu + (mean(sds$sales.sd[(sds$date>="Mar 1889")])*1.96)
 
 #homesteads
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise homesteads" & (ts.means.m$date>="1889-03-01 19:00:00")])
+homesteads.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise homesteads" & (ts.means.m$date>="1889-03-01 19:00:00")])
+homesteads.mu
 
-mean(sds$homesteads.sd[(sds$date>="Mar 1889")])
+homesteads.mu - (mean(sds$homesteads.sd[(sds$date>="Mar 1889")])*1.96)
+homesteads.mu + (mean(sds$homesteads.sd[(sds$date>="Mar 1889")])*1.96)
 
 # Calculate cumulative impact during intervention/post-period: >= "Mar 1889"
 
 #sales
 ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1976-09-30 20:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1889-02-28 19:00:00"]
 
-abs((abs(sds$cumulative.sales.min[(sds$date=="Oct 1976")] -sds$cumulative.sales.max[(sds$date=="Oct 1976")])/2) -(abs(sds$cumulative.sales.min[(sds$date=="Mar 1889")] -sds$cumulative.sales.max[(sds$date=="Mar 1889")])/2))
+sds$cumulative.sales.max[(sds$date=="Oct 1976")] -sds$cumulative.sales.max[(sds$date=="Mar 1889")]
+sds$cumulative.sales.min[(sds$date=="Oct 1976")] -sds$cumulative.sales.min[(sds$date=="Mar 1889")]
 
 #homesteads
 ts.means.m$value[ts.means.m$variable=="Cumulative homesteads" & ts.means.m$date=="1976-09-30 20:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative homesteads" & ts.means.m$date=="1889-02-28 19:00:00"]
 
-abs((abs(sds$cumulative.homesteads.min[(sds$date=="Oct 1976")] -sds$cumulative.homesteads.max[(sds$date=="Oct 1976")])/2) -(abs(sds$cumulative.homesteads.min[(sds$date=="Mar 1889")] -sds$cumulative.homesteads.max[(sds$date=="Mar 1889")])/2))
+sds$cumulative.homesteads.max[(sds$date=="Oct 1976")] -sds$cumulative.homesteads.max[(sds$date=="Mar 1889")]
+sds$cumulative.homesteads.min[(sds$date=="Oct 1976")] -sds$cumulative.homesteads.min[(sds$date=="Mar 1889")]

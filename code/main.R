@@ -33,3 +33,13 @@ source(paste0(code.directory,'capacity-state.R'))  # load and export capacity da
 source(paste0(code.directory,'impact-plots-rev-exp.R')) # effect of 1866 SHA on treated (south) revenue and expenditure
 
 source(paste0(code.directory,'impact-plots-ed-exp.R')) # effect of 1866 SHA on treated (south) education
+
+source(paste0(code.directory,'dd-capacity.R')) 
+
+# Causal estimates on inequality
+
+source(paste0(code.directory,'dd-inequality.R')) 
+
+# Descriptive plots
+
+source(paste0(code.directory,'descriptive.R')) 

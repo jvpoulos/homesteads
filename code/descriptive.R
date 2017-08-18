@@ -39,13 +39,13 @@ cats.sums$date <- as.POSIXct(cats.sums$date,format="%m/%d/%Y",tz="UTC")
 sales.state.time <- ggplot(cats.sums, aes( date, sales ,color=cat )) + 
   geom_line() +
   coord_cartesian(xlim=as.POSIXct(c("01/01/1800","12/31/1930"), format="%m/%d/%Y",tz="UTC")) +
-  geom_vline(xintercept=c(as.numeric(as.POSIXct("1866-06-01 06:00:00",tz="UTC"))), linetype=4) + # Southern HSA signed
-  geom_vline(xintercept=c(as.numeric(as.POSIXct("1876-06-01 06:00:00",tz="UTC"))), linetype=4) + # Southern HSA repealed
-  geom_vline(xintercept=c(as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC"))), linetype=1) +  
+  geom_vline(xintercept=c(as.numeric(as.POSIXct("1866-06-01 06:00:00",tz="UTC"))), linetype=2) + # Southern HSA signed
+  geom_vline(xintercept=c(as.numeric(as.POSIXct("1876-06-01 06:00:00",tz="UTC"))), linetype=2) + # Southern HSA repealed
+  geom_vline(xintercept=c(as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC"))), linetype=5) +  
   scale_y_continuous(name="Number of sales", labels = scales::comma) +
   xlab("") +
-  scale_color_discrete("Group",
-                       labels=c("Outside South", "South"))
+  scale_color_discrete("State type",
+                       labels=c("Non-southern public land", "Southern public land"))
 
 ggsave(paste0(results.directory,"plots/sales-state-time.png"), sales.state.time, width=11, height=8.5)
 
@@ -54,9 +54,9 @@ ggsave(paste0(results.directory,"plots/sales-state-time.png"), sales.state.time,
 homesteads.state.time <- ggplot(cats.sums, aes( date, homesteads ,color=cat )) + 
   geom_line() +
   coord_cartesian(xlim=as.POSIXct(c("05/20/1862","12/31/1930"), format="%m/%d/%Y",tz="UTC")) +
-  geom_vline(xintercept=c(as.numeric(as.POSIXct("1866-06-01 06:00:00",tz="UTC"))), linetype=4) + # Southern HSA signed
-  geom_vline(xintercept=c(as.numeric(as.POSIXct("1876-06-01 06:00:00",tz="UTC"))), linetype=4) + # Southern HSA repealed
-  geom_vline(xintercept=c(as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC"))), linetype=1) + 
+  geom_vline(xintercept=c(as.numeric(as.POSIXct("1866-06-01 06:00:00",tz="UTC"))), linetype=2) + # Southern HSA signed
+  geom_vline(xintercept=c(as.numeric(as.POSIXct("1876-06-01 06:00:00",tz="UTC"))), linetype=2) + # Southern HSA repealed
+  geom_vline(xintercept=c(as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC"))), linetype=5) + 
   scale_y_continuous(name="Number of homesteads", labels = scales::comma) +
   xlab("") +
   scale_color_discrete("Group",
@@ -71,6 +71,7 @@ funds.plot <- funds
 funds.plot$cat <- NA
 funds.plot$cat[funds.plot$state %in% southern.pub] <- "Southern public land"
 funds.plot$cat[funds.plot$state %in% southern.state] <- "Southern state land"
+funds.plot$cat[funds.plot$state %in% setdiff(pub.states,southern.pub)] <- "Non-southern public land"
 funds.plot$cat[funds.plot$state %in% setdiff(state.land.states,southern.state)] <- "Non-southern state land"
 
 cats.funds.plot <- funds.plot %>% 

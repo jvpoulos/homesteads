@@ -46,21 +46,11 @@ ts.dat <- rbind(sales.train,sales.test)
 
 ## Plot time series 
 
-if (type=='treated') {
 time.vars <- c("date","sales.Treated","sales.mean")
 
 ts.means <- ts.dat[time.vars]  %>%
   mutate(pointwise.sales = sales.Treated-sales.mean,
          cumulative.sales = cumsum(pointwise.sales)) 
-}
-
-if (type=='control') {
-  time.vars <- c("date","sales.Control","sales.mean")
-  
-  ts.means <- ts.dat[time.vars]  %>%
-    mutate(pointwise.sales = sales.Control-sales.mean,
-           cumulative.sales = cumsum(pointwise.sales)) 
-}
 
 ts.means.m <- melt(as.data.frame(ts.means), id.var=c("date"))
 
@@ -72,12 +62,8 @@ ts.means.m$date <- as.POSIXct(ts.means.m$date, tz="UTC")
 # Labels
 
 ts.means.m$series <- NA
-if (type=='treated') {
-  ts.means.m$series[ts.means.m$variable=="sales.Treated" | ts.means.m$variable=="sales.mean"] <- "Time-series"
-}
-if (type=='control') {
-  ts.means.m$series[ts.means.m$variable=="sales.Control" | ts.means.m$variable=="sales.mean"] <- "Time-series"
-}
+ts.means.m$series[ts.means.m$variable=="sales.Treated" | ts.means.m$variable=="sales.mean"] <- "Time-series"
+
 ts.means.m$series[ts.means.m$variable=="pointwise.sales" ] <- "Pointwise impact"
 ts.means.m$series[ts.means.m$variable=="cumulative.sales" ] <- "Cumulative impact"
 
@@ -87,26 +73,13 @@ levels(ts.means.m$variable) <- c("Observed sales","Predicted sales",
                                  "Pointwise sales", "Cumulative sales")
 
 # SDs
-
-if (type=='treated') {
-  sds <- ts.dat  %>%
-  mutate(pred.sales.min = sales.mean - sales.sd,
-         pred.sales.max = sales.mean + sales.sd,
+sds <- ts.dat  %>%
+mutate(pred.sales.min = sales.mean - sales.sd*1.96,
+         pred.sales.max = sales.mean + sales.sd*1.96,
          pointwise.sales.min = sales.Treated-pred.sales.min,
          pointwise.sales.max = sales.Treated-pred.sales.max,
          cumulative.sales.min = cumsum(pointwise.sales.min),
          cumulative.sales.max = cumsum(pointwise.sales.max))
-}
-
-if (type=='control') {
-  sds <- ts.dat  %>%
-    mutate(pred.sales.min = sales.mean - sales.sd,
-           pred.sales.max = sales.mean + sales.sd,
-           pointwise.sales.min = sales.Control-pred.sales.min,
-           pointwise.sales.max = sales.Control-pred.sales.max,
-           cumulative.sales.min = cumsum(pointwise.sales.min),
-           cumulative.sales.max = cumsum(pointwise.sales.max))
-}
 
 pred.vars <- c("sales.mean", "sales.sd", "pred.sales.min", "pred.sales.max", "pointwise.sales.min", "pointwise.sales.max", "cumulative.sales.min", "cumulative.sales.max")
 ts.means.m <- cbind(ts.means.m, sds[pred.vars])
@@ -115,33 +88,34 @@ ts.means.m[pred.vars][ts.means.m$variable=="Observed",] <- NA
 # Plot
 ts.plot <- TsPlotSales(ts.means.m) 
 
-if (type=='treated') {
-  ggsave(paste0(results.directory,"plots/sales-south-treat.png"), ts.plot, width=11, height=8.5)
-}
+ggsave(paste0(results.directory,"plots/sales-south-treat.png"), ts.plot, width=11, height=8.5)
 
-if (type=='control') {
-  ggsave(paste0(results.directory,"plots/sales-south-treat.png"), ts.plot, width=11, height=8.5)
-}
 # Calculate Avg. pointwise impact during pre-period: <= "May 1866"
 
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date<="1886-05-01 19:00:00")])
+sales.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date<="1886-05-01 19:00:00")])
+sales.mu
 
-mean(sds$sales.sd[(sds$date<= "May 1866")])
+sales.mu - (mean(sds$sales.sd[(sds$date<= "May 1866")])*1.96)
+sales.mu + (mean(sds$sales.sd[(sds$date<= "May 1866")])*1.96)
 
 # Calculate Avg. cumulative impact during pre-period: <= "May 1866"
 
 ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1866-05-31 19:03:58"]
 
-(abs(sds$cumulative.sales.min[(sds$date=="May 1866")] -sds$cumulative.sales.max[(sds$date=="May 1866")])/2)
+sds$cumulative.sales.max[(sds$date=="May 1866")]
+sds$cumulative.sales.min[(sds$date=="May 1866")]
 
 # Calculate avg. pointwise impact during intervention/post-period:  >= "Jun 1866" & <= "Feb 1889"
 
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date>"1866-05-31 19:03:58")])
+sales.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales" & (ts.means.m$date>"1866-05-31 19:03:58")])
+sales.mu
 
-mean(sds$sales.sd[(sds$date>="Jun 1876")])
+sales.mu - (mean(sds$sales.sd[(sds$date>="Jun 1876")])*1.96)
+sales.mu + (mean(sds$sales.sd[(sds$date>="Jun 1876")])*1.96)
 
 # Calculate cumulative impact during intervention/post-period:  >= "Jun 1866" & <= "Feb 1889"
 
 ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1889-01-31 19:00:00"] -ts.means.m$value[ts.means.m$variable=="Cumulative sales" & ts.means.m$date=="1866-05-31 19:03:58"]
 
-abs((abs(sds$cumulative.sales.min[(sds$date=="Jun 1866")] -sds$cumulative.sales.max[(sds$date=="Jun 1866")])/2) -(abs(sds$cumulative.sales.min[(sds$date=="Feb 1889")] -sds$cumulative.sales.max[(sds$date=="Feb 1889")])/2))
+sds$cumulative.sales.max[(sds$date=="Feb 1889")] -sds$cumulative.sales.max[(sds$date=="Jun 1866")]
+sds$cumulative.sales.min[(sds$date=="Feb 1889")] -sds$cumulative.sales.min[(sds$date=="Jun 1866")]

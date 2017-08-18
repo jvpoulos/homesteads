@@ -63,8 +63,6 @@ save.image(paste0(data.directory, "patents/patents.RData"))
 
 # Summarize by date/county/state
 
-pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
-
 patents.sum <- patents %>%
   filter(state_code %in% pub.states) %>% # only public land states
   group_by(date,county_code,state_code) %>%

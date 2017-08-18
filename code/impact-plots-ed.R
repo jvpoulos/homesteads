@@ -3,7 +3,7 @@
 
 source(paste0(code.directory,"ts-plot-ed.R"))
 
-analysis <- "analysis-12"
+analysis <- "analysis-34"
 
 type <- "treated"
 
@@ -75,8 +75,8 @@ levels(ts.means.m$variable) <- c("Observed ed.pc","Predicted ed.pc",
 # SDs
 
 sds <- ts.dat  %>%
-  mutate(pred.ed.pc.min = ed.pc.mean - ed.pc.sd,
-         pred.ed.pc.max = ed.pc.mean + ed.pc.sd,
+  mutate(pred.ed.pc.min = ed.pc.mean - ed.pc.sd*1.96,
+         pred.ed.pc.max = ed.pc.mean + ed.pc.sd*1.96,
          pointwise.ed.pc.min = ed.pc.Treated-pred.ed.pc.min,
          pointwise.ed.pc.max = ed.pc.Treated-pred.ed.pc.max,
          cumulative.ed.pc.min = cumsum(pointwise.ed.pc.min),
@@ -100,58 +100,107 @@ if(analysis=="analysis-12"){
 # Calculate Avg. pointwise impact during pre-period: < 1866
 
 # ed.pc
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise ed.pc" & (ts.means.m$year<"1866-12-31 19:03:58")])
+edpc.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise ed.pc" & (ts.means.m$year<"1866-12-31 19:03:58")])
+edpc.mu
 
-mean(sds$ed.pc.sd[(sds$year< 1866)])
+edpc.mu - (mean(sds$ed.pc.sd[(sds$year< 1866)])*1.96)
+edpc.mu + (mean(sds$ed.pc.sd[(sds$year< 1866)])*1.96)
 
 # Calculate Avg. cumulative impact during pre-period:< 1866
 
 #ed.pc
-ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1865-12-31 19:03:58"]
+edpc.mu <- ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1865-12-31 19:03:58"]
+edpc.mu
 
-(abs(sds$cumulative.ed.pc.min[(sds$year==1865)] -sds$cumulative.ed.pc.max[(sds$year==1865)])/2)
+sds$cumulative.ed.pc.max[(sds$year==1865)]
+sds$cumulative.ed.pc.min[(sds$year==1865)]
 
 # Calculate avg. pointwise impact during intervention/post-period: >= 1866
 
 #ed.pc
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise ed.pc" & (ts.means.m$year>="1866-12-31 19:03:58")])
+edpc.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise ed.pc" & (ts.means.m$year>="1866-12-31 19:03:58")])
+edpc.mu
 
-mean(sds$ed.pc.sd[(sds$year>=1866 & sds$year<=1914)])
+edpc.mu - (mean(sds$ed.pc.sd[(sds$year>=1866)])*1.96)
+edpc.mu + (mean(sds$ed.pc.sd[(sds$year>=1866)])*1.96)
 
 # Calculate cumulative impact during intervention/post-period: >= 1866
 
 #ed.pc
-ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1941-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1866-12-31 19:03:58"]
+ed.pc.mu <- ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1941-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1866-12-31 19:03:58"]
+ed.pc.mu
 
-abs((abs(sds$cumulative.ed.pc.min[(sds$year==1942)] -sds$cumulative.ed.pc.max[(sds$year==1942)])/2) -(abs(sds$cumulative.ed.pc.min[(sds$year==1866)] -sds$cumulative.ed.pc.max[(sds$year==1866)])/2))
+sds$cumulative.ed.pc.max[(sds$year==1942)] -sds$cumulative.ed.pc.max[(sds$year==1866)]
+sds$cumulative.ed.pc.min[(sds$year==1942)] -sds$cumulative.ed.pc.min[(sds$year==1866)]
+
+# Calculate avg. pointwise impact during intervention/post-period: >= 1866 & <=1928
+
+#ed.pc
+edpc.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise ed.pc" & (ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
+edpc.mu
+
+edpc.mu - (mean(sds$ed.pc.sd[(sds$year>=1866 & sds$year<=1914)])*1.96)
+edpc.mu + (mean(sds$ed.pc.sd[(sds$year>=1866 & sds$year<=1914)])*1.96)
+
+# Calculate cumulative impact during intervention/post-period: >= 1866 <=1928
+
+#ed.pc
+ed.pc.mu <- ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1914-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1866-12-31 19:03:58"]
+ed.pc.mu
+
+sds$cumulative.ed.pc.max[(sds$year==1914)] -sds$cumulative.ed.pc.max[(sds$year==1866)]
+sds$cumulative.ed.pc.min[(sds$year==1914)] -sds$cumulative.ed.pc.min[(sds$year==1866)]
 }
 
 if(analysis=="analysis-34"){
   # Calculate Avg. pointwise impact during pre-period: < 1889
   
   # ed.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise ed.pc" & (ts.means.m$year<"1889-12-31 19:00:00")])
+  ed.pc.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise ed.pc" & (ts.means.m$year<"1889-12-31 19:00:00"  & ts.means.m <= "1914-12-31 19:00:00")])
+  ed.pc.mu 
   
-  mean(sds$ed.pc.sd[(sds$year< 1889)])
+  ed.pc.mu - (mean(sds$ed.pc.sd[(sds$year< 1889)])*1.96)
+  ed.pc.mu + (mean(sds$ed.pc.sd[(sds$year< 1889)])*1.96)
   
   # Calculate Avg. cumulative impact during pre-period:< 1889
   
   #ed.pc
   ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1888-12-31 19:00:00"]
-  
-  (abs(sds$cumulative.ed.pc.min[(sds$year==1888)] -sds$cumulative.ed.pc.max[(sds$year==1888)])/2)
-  
-  # Calculate avg. pointwise impact during intervention/post-period: >= 1889 & <= 1914
+
+  sds$cumulative.ed.pc.max[(sds$year==1888)]
+  sds$cumulative.ed.pc.min[(sds$year==1888)]
+
+  # Calculate avg. pointwise impact during intervention/post-period: >= 1889 
   
   #ed.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise ed.pc" & (ts.means.m$year>="1889-12-31 19:00:00")])
+  ed.pc.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise ed.pc" & (ts.means.m$year>="1889-12-31 19:00:00")])
+  ed.pc.mu
   
-  mean(sds$ed.pc.sd[(sds$year>=1889)])
+  ed.pc.mu - (mean(sds$ed.pc.sd[(sds$year>=1889)])*1.96)
+  ed.pc.mu + (mean(sds$ed.pc.sd[(sds$year>=1889)])*1.96)
   
   # Calculate cumulative impact during intervention/post-period: >= 1889
   
   #ed.pc
   ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1941-12-31 19:00:0"] - ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1889-12-31 19:00:00"]
   
-  abs((abs(sds$cumulative.ed.pc.min[(sds$year==1942)] -sds$cumulative.ed.pc.max[(sds$year==1942)])/2) -(abs(sds$cumulative.ed.pc.min[(sds$year==1889)] -sds$cumulative.ed.pc.max[(sds$year==1889)])/2))
+  sds$cumulative.ed.pc.max[(sds$year==1942)] -sds$cumulative.ed.pc.max[(sds$year==1889)]
+  sds$cumulative.ed.pc.min[(sds$year==1942)] -sds$cumulative.ed.pc.min[(sds$year==1889)]
+  
+  # Calculate avg. pointwise impact during intervention/post-period: >= 1889 & <= 1928
+  
+  #ed.pc
+  ed.pc.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise ed.pc" & (ts.means.m$year>="1889-12-31 19:00:00") & (ts.means.m$year<="1916-12-31 19:00:00")])
+  ed.pc.mu
+  
+  ed.pc.mu - (mean(sds$ed.pc.sd[(sds$year>=1889 & sds$year<=1917)])*1.96)
+  ed.pc.mu + (mean(sds$ed.pc.sd[(sds$year>=1889 & sds$year<=1917)])*1.96)
+  
+  # Calculate cumulative impact during intervention/post-period: >= 1889 & <= 1928
+  
+  #ed.pc
+  ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1916-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1889-12-31 19:00:00"]
+  
+  sds$cumulative.ed.pc.max[(sds$year==1917)] -sds$cumulative.ed.pc.max[(sds$year==1889)]
+  sds$cumulative.ed.pc.min[(sds$year==1917)] -sds$cumulative.ed.pc.min[(sds$year==1889)]
 }

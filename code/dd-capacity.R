@@ -14,6 +14,7 @@ cats.funds.did$time <- NA
 cats.funds.did$time <- 0
 cats.funds.did$time[(cats.funds.did$year >= 1866 & cats.funds.did$year <= 1876) | (cats.funds.did$year >= 1889 & cats.funds.did$year <= 1976)] <- 1
 
+# DD Estimates
 # rev.pc 
 did.rev.pc <- lm(rev.pc ~ cat*time, data = cats.funds.did[cats.funds.did$year <=1976,]) 
 
@@ -35,6 +36,29 @@ summary(did.ed.pc)
 
 confint(did.ed.pc)[4,]
 
+# DD Estimates (pre-GD)
+
+# rev.pc 
+did.rev.pc <- lm(rev.pc ~ cat*time, data = cats.funds.did[cats.funds.did$year <=1915,]) 
+
+summary(did.rev.pc)
+
+confint(did.rev.pc)[4,]
+
+# exp.pc 
+did.exp.pc <- lm(exp.pc ~ cat*time, data = cats.funds.did[cats.funds.did$year <=1915,]) 
+
+summary(did.exp.pc)
+
+confint(did.exp.pc)[4,]
+
+# ed.pc 
+did.ed.pc <- lm(ed.pc ~ cat*time, data = cats.funds.did[cats.funds.did$year <=1915,]) 
+
+summary(did.ed.pc)
+
+confint(did.ed.pc)[4,]
+
 ## Analysis 3: Effect of HSA restriction on treated, intervention: Mar 1889
 # Treated is non-southern public land states (not MO)
 # Controls are MO, state land states
@@ -45,6 +69,8 @@ cats.funds.did <- cats.funds
 
 cats.funds.did$time <- 0
 cats.funds.did$time[cats.funds.did$year >= 1889 & cats.funds.did$year <= 1976] <- 1
+
+# DD estimates
 
 # rev.pc 
 did.rev.pc <- lm(rev.pc ~ cat*time, data = cats.funds.did[cats.funds.did$year <=1976,]) 
@@ -62,6 +88,29 @@ confint(did.exp.pc)[4,]
 
 # ed.pc 
 did.ed.pc <- lm(ed.pc ~ cat*time, data = cats.funds.did[cats.funds.did$year <=1976,]) 
+
+summary(did.ed.pc)
+
+confint(did.ed.pc)[4,]
+
+# DD estimates (pre-GD)
+
+# rev.pc 
+did.rev.pc <- lm(rev.pc ~ cat*time, data = cats.funds.did[cats.funds.did$year <=1915,]) 
+
+summary(did.rev.pc)
+
+confint(did.rev.pc)[4,]
+
+# exp.pc 
+did.exp.pc <- lm(exp.pc ~ cat*time, data = cats.funds.did[cats.funds.did$year <=1915,]) 
+
+summary(did.exp.pc)
+
+confint(did.exp.pc)[4,]
+
+# ed.pc 
+did.ed.pc <- lm(ed.pc ~ cat*time, data = cats.funds.did[cats.funds.did$year <=1915,]) 
 
 summary(did.ed.pc)
 
