@@ -71,7 +71,7 @@ ggsave(paste0(results.directory,"plots/homesteads-state-time.png"), homesteads.s
 
 acres.tab <- patents %>%
   filter(state_code %in% pub.states) %>% # only public land states
-  filter(authority_code %in% c(251101, 272002)) %>% # homesteads, homesteads
+  filter(authority_code %in% c(251101, 272002)) %>% # homesteads, sales
   group_by(date,authority_code) %>%
   summarise_each(funs(sum),total_acres) 
 

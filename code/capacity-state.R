@@ -14,6 +14,9 @@ library(tidyr)
 
 ## STATE-LEVEL DATA
 
+# iso.funds <- c(1,3,31) # target iso codes
+# names.funds <- c("total.rev",'total.exp','ed.exp')
+
 ## Sources and Uses of Funds in State and Local Governments, 1790-1915 (ICPSR 9728)
 ## preliminary  financial  data on  state government revenues and expenditures for 48 states during the period 1790-1915, 
 
@@ -36,28 +39,18 @@ funds.9728 <- funds.9728[!is.na(funds.9728$year),] # drop empty rows
 
 funds.9728 <- funds.9728[with(funds.9728, order(state, year)), ] # order by state and year
 
-# Keep iso codes of interest
-
-iso.funds <- c(1,3,31)
-
-names.funds <- c("total.rev",'total.exp','ed.exp')
-
-funds.9728 <- funds.9728[funds.9728$iso %in% iso.funds,] # keep obs with valid iso codes
+funds.9728 <- funds.9728[funds.9728$iso >0 & funds.9728$iso <= 417,] # keep obs with valid iso codes
 
 # Make data wide
 
 funds.9728$row <- 1:nrow(funds.9728)
 funds.9728 <- spread(funds.9728, key = iso, value = total)
 
-colnames(funds.9728) <- c("state","year","row", names.funds)
-
 # Collapse by state/year
 
 funds.9728 <- funds.9728 %>% 
   group_by(state,year) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),total.rev,total.exp,ed.exp) 
-
-funds.9728$total.exp[funds.9728$total.exp<0] <- NA # replace neg value with NA
+  summarise_each(funs(mean(., na.rm = TRUE))) 
 
 # Clean state codes
 funds.9728$state[funds.9728$state=="MIS"] <- "MS"
@@ -82,22 +75,18 @@ funds.6306 <- do.call(rbind,lapply(data.files.6306[c(1:2,5:6)],read.csv,
 
 funds.6306 <- funds.6306[with(funds.6306, order(state, year)), ] # order by state and year
 
-# Keep iso codes of interest
-
-funds.6306 <- funds.6306[funds.6306$iso %in% iso.funds,] # keep obs with valid iso codes
+funds.6306 <- funds.6306[funds.6306$iso > 0 & funds.6306$iso <= 417,] # keep obs with valid iso codes
 
 # Make data wide
 
 funds.6306$row <- 1:nrow(funds.6306)
 funds.6306 <- spread(funds.6306, key = iso, value = value)
 
-colnames(funds.6306) <- c("state","year","row", names.funds)
-
 # Collapse by state/year
 
 funds.6306 <- funds.6306 %>% 
   group_by(state,year) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),total.rev,total.exp,ed.exp) 
+  summarise_each(funs(mean(., na.rm = TRUE))) 
 
 # Clean state codes
 funds.6306$state[funds.6306$state=="NB"] <- "NE"
@@ -119,34 +108,32 @@ funds.6304 <- do.call(rbind,lapply(data.files.6304[1:7],read.csv,
                                        stringsAsFactors=FALSE,
                                        col.names = c("state","year","type","iso","value"))) 
 
-funds.6304 <- funds.6304[funds.6304$type=='SSS' & funds.6304$iso %in% c(1,3,3100),] # keep state gov't, obs with valid iso codes
+funds.6304 <- funds.6304[funds.6304$type=='SSS',] # keep state gov't
+
+funds.6304$iso[funds.6304$iso==3100] <- 31 # change ed spending for consistency
 
 # Make data wide
 
 funds.6304$row <- 1:nrow(funds.6304)
 funds.6304 <- spread(funds.6304, key = iso, value = value)
 
-colnames(funds.6304) <- c("state","year","type","row", names.funds)
-
 # Collapse by state/year
 
 funds.6304 <- funds.6304 %>% 
   group_by(state,year) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),total.rev,total.exp,ed.exp) 
+  summarise_each(funs(mean(., na.rm = TRUE))) 
 
 ## Append Wallis datasets
 
 funds <- rbind(rbind(funds.9728,funds.6306),funds.6304) %>% 
   group_by(state,year) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),total.rev,total.exp,ed.exp)  # takes mean of duplicates from 1902,1913,1932
+  summarise_each(funs(mean(., na.rm = TRUE)))  # takes mean of duplicates from 1902,1913,1932
 
 funds <- funds[with(funds, order(state, year)), ] # order by state and year
 
 # Rm Outliers
 
-funds$total.rev[(funds$state=="WA" & funds$year>=1907 & funds$year<=1918)] <- NaN
-funds$total.exp[(funds$state=="WA" & funds$year>=1907 & funds$year<=1918)] <- NaN
-funds$ed.exp[(funds$state=="WA" & funds$year>=1907 & funds$year<=1918)] <- NaN
+funds <- subset(funds, !(funds$state=="WA" & funds$year>=1907 & funds$year<=1918))
 
 ## Make per-capita measures
 
@@ -157,11 +144,18 @@ funds$year2[funds$year2==1980] <- 1983
 
 funds <- merge(funds, census.ts.state[c('year','state','ns.pop')], by.x=c('year2','state'), by.y=c('year','state'),all.x=TRUE)
 
-funds$rev.pc <- funds$total.rev/funds$ns.pop
+funds["rev.pc"] <- NA
+funds["rev.pc"] <- funds["1"]/funds$ns.pop
 
-funds$exp.pc <- funds$total.exp/funds$ns.pop
+funds["exp.pc"] <- NA
+funds["exp.pc"] <- funds["3"]/funds$ns.pop
 
-funds$ed.pc <- funds$ed.exp/funds$ns.pop
+funds["ed.pc"] <- NA
+funds["ed.pc"] <- funds["31"]/funds$ns.pop
+
+# remove targets from feature set
+drops <- c("1","3","31","year2","row","ns.pop")
+funds <- funds[!colnames(funds) %in% drops]
 
 ## Analysis 1: Effect of SHA on treated (southern public land states), intervention: June 1866-June 1876-March 1889
 # features are southern state land states
@@ -176,15 +170,16 @@ funds$cat[funds$state %in% southern.state] <- "Control"
 cats.funds <- funds %>% 
   filter(!is.na(cat)) %>% # rm non-southern state land states
   group_by(year,cat) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),rev.pc,exp.pc,ed.pc) 
+  summarise_each(funs(mean(., na.rm = TRUE))) %>%
+  select(-state)
 
 cats.funds.r <- reshape(data.frame(cats.funds), idvar = "year", timevar = "cat", direction = "wide")
 
 funds.control <- funds[!is.na(funds$cat) & funds$cat=="Control",] # discard treated since we have treated time-series
 
-rev.pc <- reshape(data.frame(funds.control[c("year","state","rev.pc")]), idvar = "year", timevar = "state", direction = "wide")
-exp.pc <- reshape(data.frame(funds.control[c("year","state","exp.pc")]), idvar = "year", timevar = "state", direction = "wide")
-ed.pc <- reshape(data.frame(funds.control[c("year","state","ed.pc")]), idvar = "year", timevar = "state", direction = "wide")
+rev.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
+exp.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
+ed.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
 
 #Labels
 
@@ -224,22 +219,28 @@ ed.pc.y.train <- ed.pc.y[ed.pc.y$year %in% ed.pc.years & ed.pc.y$year < 1866,]
 ed.pc.y.test <- ed.pc.y[ed.pc.y$year %in% ed.pc.years &ed.pc.y$year >= 1866,]
 
 # Preprocess
+rev.pc.x.train <- data.frame(sapply(rev.pc.x.train, as.numeric))
 rev.pc.x.train[is.na(rev.pc.x.train)] <- 0 # fill NA with 0 before scale
-rev.pc.pre.train <- preProcess(rev.pc.x.train[!colnames(rev.pc.x.train) %in% c("year")], method = c("center", "scale","bagImpute"))
+rev.pc.pre.train <- preProcess(rev.pc.x.train[!colnames(rev.pc.x.train) %in% c("year")], method = c("center", "scale","medianImpute"))
 rev.pc.x.train[!colnames(rev.pc.x.train) %in% c("year")] <- predict(rev.pc.pre.train, rev.pc.x.train[!colnames(rev.pc.x.train) %in% c("year")] )
 
+rev.pc.x.test <- data.frame(sapply(rev.pc.x.test, as.numeric))
 rev.pc.x.test[!colnames(rev.pc.x.test) %in% c("year")] <- predict(rev.pc.pre.train, rev.pc.x.test[!colnames(rev.pc.x.test) %in% c("year")] ) # use training values for test set 
 
+exp.pc.x.train <- data.frame(sapply(exp.pc.x.train, as.numeric))
 exp.pc.x.train[is.na(exp.pc.x.train)] <- 0 # fill NA with 0 before scale
-exp.pc.pre.train <- preProcess(exp.pc.x.train[!colnames(exp.pc.x.train) %in% c("year")], method = c("center", "scale","bagImpute"))
+exp.pc.pre.train <- preProcess(exp.pc.x.train[!colnames(exp.pc.x.train) %in% c("year")], method = c("center", "scale","medianImpute"))
 exp.pc.x.train[!colnames(exp.pc.x.train) %in% c("year")] <- predict(exp.pc.pre.train, exp.pc.x.train[!colnames(exp.pc.x.train) %in% c("year")] )
 
+exp.pc.x.test <- data.frame(sapply(exp.pc.x.test, as.numeric))
 exp.pc.x.test[!colnames(exp.pc.x.test) %in% c("year")] <- predict(exp.pc.pre.train, exp.pc.x.test[!colnames(exp.pc.x.test) %in% c("year")] ) # use training values for test set 
 
+ed.pc.x.train <- data.frame(sapply(ed.pc.x.train, as.numeric))
 ed.pc.x.train[is.na(ed.pc.x.train)] <- 0 # fill NA with 0 before scale
-ed.pc.pre.train <- preProcess(ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")], method = c("center", "scale","bagImpute"))
+ed.pc.pre.train <- preProcess(ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")], method = c("center", "scale","medianImpute"))
 ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")] <- predict(ed.pc.pre.train, ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")] )
 
+ed.pc.x.test <- data.frame(sapply(ed.pc.x.test, as.numeric))
 ed.pc.x.test[!colnames(ed.pc.x.test) %in% c("year")] <- predict(ed.pc.pre.train, ed.pc.x.test[!colnames(ed.pc.x.test) %in% c("year")] ) # use training values for test set 
 
 # Export each as csv (labels, features)
@@ -274,15 +275,16 @@ funds$cat[funds$state %in% c("MO",state.land.states)] <- "Control"
 cats.funds <- funds %>% 
   filter(!is.na(cat)) %>% # rm non-southern state land states
   group_by(year,cat) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),rev.pc,exp.pc,ed.pc) 
+  summarise_each(funs(mean(., na.rm = TRUE))) %>%
+  select(-state)
 
 cats.funds.r <- reshape(data.frame(cats.funds), idvar = "year", timevar = "cat", direction = "wide")
 
 funds.control <- funds[!is.na(funds$cat) & funds$cat=="Control",] # discard treated since we have treated time-series
 
-rev.pc <- reshape(data.frame(funds.control[c("year","state","rev.pc")]), idvar = "year", timevar = "state", direction = "wide")
-exp.pc <- reshape(data.frame(funds.control[c("year","state","exp.pc")]), idvar = "year", timevar = "state", direction = "wide")
-ed.pc <- reshape(data.frame(funds.control[c("year","state","ed.pc")]), idvar = "year", timevar = "state", direction = "wide")
+rev.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
+exp.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
+ed.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
 
 # Labels
 
@@ -323,22 +325,28 @@ ed.pc.y.test <- ed.pc.y[ed.pc.y$year %in% ed.pc.years & ed.pc.y$year >= 1889,]
 
 # Preprocess
 
+rev.pc.x.train <- data.frame(sapply(rev.pc.x.train, as.numeric))
 rev.pc.x.train[is.na(rev.pc.x.train)] <- 0 # fill NA with 0 before scale
-rev.pc.pre.train <- preProcess(rev.pc.x.train[!colnames(rev.pc.x.train) %in% c("year")], method = c("center", "scale","bagImpute"))
+rev.pc.pre.train <- preProcess(rev.pc.x.train[!colnames(rev.pc.x.train) %in% c("year")], method = c("center", "scale","medianImpute"))
 rev.pc.x.train[!colnames(rev.pc.x.train) %in% c("year")] <- predict(rev.pc.pre.train, rev.pc.x.train[!colnames(rev.pc.x.train) %in% c("year")] )
 
+rev.pc.x.test <- data.frame(sapply(rev.pc.x.test, as.numeric))
 rev.pc.x.test[!colnames(rev.pc.x.test) %in% c("year")] <- predict(rev.pc.pre.train, rev.pc.x.test[!colnames(rev.pc.x.test) %in% c("year")] ) # use training values for test set 
 
+exp.pc.x.train <- data.frame(sapply(exp.pc.x.train, as.numeric))
 exp.pc.x.train[is.na(exp.pc.x.train)] <- 0 # fill NA with 0 before scale
-exp.pc.pre.train <- preProcess(exp.pc.x.train[!colnames(exp.pc.x.train) %in% c("year")], method = c("center", "scale","bagImpute"))
+exp.pc.pre.train <- preProcess(exp.pc.x.train[!colnames(exp.pc.x.train) %in% c("year")], method = c("center", "scale","medianImpute"))
 exp.pc.x.train[!colnames(exp.pc.x.train) %in% c("year")] <- predict(exp.pc.pre.train, exp.pc.x.train[!colnames(exp.pc.x.train) %in% c("year")] )
 
+exp.pc.x.test <- data.frame(sapply(exp.pc.x.test, as.numeric))
 exp.pc.x.test[!colnames(exp.pc.x.test) %in% c("year")] <- predict(exp.pc.pre.train, exp.pc.x.test[!colnames(exp.pc.x.test) %in% c("year")] ) # use training values for test set 
 
+ed.pc.x.train <- data.frame(sapply(ed.pc.x.train, as.numeric))
 ed.pc.x.train[is.na(ed.pc.x.train)] <- 0 # fill NA with 0 before scale
-ed.pc.pre.train <- preProcess(ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")], method = c("center", "scale","bagImpute"))
+ed.pc.pre.train <- preProcess(ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")], method = c("center", "scale","medianImpute"))
 ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")] <- predict(ed.pc.pre.train, ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")] )
 
+ed.pc.x.test <- data.frame(sapply(ed.pc.x.test, as.numeric))
 ed.pc.x.test[!colnames(ed.pc.x.test) %in% c("year")] <- predict(ed.pc.pre.train, ed.pc.x.test[!colnames(ed.pc.x.test) %in% c("year")] ) # use training values for test set 
 
 # Export each as csv (labels, features)
