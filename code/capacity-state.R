@@ -327,7 +327,7 @@ rev.pc.x.val <- rev.pc[rev.pc$year %in% rev.pc.years & (rev.pc$year >= 1889 & re
 rev.pc.x.test <- rev.pc[rev.pc$year %in% rev.pc.years & rev.pc$year >= 1899,]
 
 rev.pc.y.train <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & rev.pc.y$year < 1889,]
-rev.pc.y.val <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & (rev.pc.y$year >= 1889 & rev.pc.y$year >= 1899),]
+rev.pc.y.val <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & (rev.pc.y$year >= 1889 & rev.pc.y$year <= 1899),]
 rev.pc.y.test <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & rev.pc.y$year >= 1899,]
 
 exp.pc.years <- intersect(exp.pc$year,exp.pc.y$year) # common exp.pc years in treated and control
@@ -337,7 +337,7 @@ exp.pc.x.val <- exp.pc[exp.pc$year %in% exp.pc.years & (exp.pc$year >= 1889 & ex
 exp.pc.x.test <- exp.pc[exp.pc$year %in% exp.pc.years & exp.pc$year >= 1899,]
 
 exp.pc.y.train <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & exp.pc.y$year < 1889,]
-exp.pc.y.val <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & (exp.pc.y$year >= 1889 & exp.pc.y$year >= 1899),]
+exp.pc.y.val <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & (exp.pc.y$year >= 1889 & exp.pc.y$year <= 1899),]
 exp.pc.y.test <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & exp.pc.y$year >= 1899,]
 
 ed.pc.years <- intersect(ed.pc$year,ed.pc.y$year) # common ed.pc years in treated and control
@@ -347,7 +347,7 @@ ed.pc.x.val <- ed.pc[ed.pc$year %in% ed.pc.years & (ed.pc$year >= 1889 & ed.pc$y
 ed.pc.x.test <- ed.pc[ed.pc$year %in% ed.pc.years & ed.pc$year >= 1899,]
 
 ed.pc.y.train <- ed.pc.y[ed.pc.y$year %in% ed.pc.years & ed.pc.y$year < 1889,]
-ed.pc.y.val <- ed.pc.y[ed.pc.y$year %in% ed.pc.years & (ed.pc.y$year >= 1889 & ed.pc.y$year >= 1899),]
+ed.pc.y.val <- ed.pc.y[ed.pc.y$year %in% ed.pc.years & (ed.pc.y$year >= 1889 & ed.pc.y$year <= 1899),]
 ed.pc.y.test <- ed.pc.y[ed.pc.y$year %in% ed.pc.years & ed.pc.y$year >= 1899,]
 
 # Preprocess
