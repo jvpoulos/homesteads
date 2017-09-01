@@ -23,7 +23,7 @@ TsPlotEd <- function(df, analysis, main = "") {
 
   # intervals
    
-    geom_ribbon(data = subset(df, variable == "Pointwise ed.pc"), aes(ymin = pointwise.ed.pc.min, ymax=pointwise.ed.pc.max, colour="Predicted ed.pc", colour="Predicted ed.pc"), alpha=.2, size=1, show.legend = FALSE) +
+    geom_ribbon(data = subset(df, variable == "Pointwise ed.pc"), aes(ymin = pointwise.ed.pc.min, ymax=pointwise.ed.pc.max, colour="Predicted ed.pc"), alpha=.2, size=1, show.legend = FALSE) +
     
     geom_ribbon(data = subset(df, variable == "Cumulative ed.pc"), aes(ymin = cumulative.ed.pc.min, ymax=cumulative.ed.pc.max, colour="Predicted ed.pc"), alpha=.2, size=1, show.legend = FALSE) +   
     
@@ -47,7 +47,8 @@ TsPlotEd <- function(df, analysis, main = "") {
     } 
   
   if(analysis=='analysis-34'){
-    intervention <- geom_vline(xintercept= as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC")), linetype=5)
+    intervention <- geom_vline(xintercept= c(as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC")),
+                                             as.numeric(as.POSIXct("1899-03-01 06:00:00",tz="UTC"))), linetype=2)
   }
   
   # horizontal ticks
@@ -64,12 +65,12 @@ TsPlotEd <- function(df, analysis, main = "") {
   if(analysis=='analysis-12'){
     ann_text <- data.frame(year = c(as.POSIXlt("1850-01-01 EST"), as.POSIXlt("1871-06-01 EST"), as.POSIXlt("1890-01-01 EST")), value=2, 
                            series = factor("Time-series", levels = c("Time-series","Pointwise impact","Cumulative impact")),
-                           lab = c("pre-intervention \n (training)", "intervention \n (test)", "post-intervention \n (test)"))
+                           lab = c("pre-intervention \n (train)", "intervention \n (validation)", "post-intervention \n (test)"))
   }
   if(analysis=='analysis-34'){
-    ann_text <- data.frame(year = c(as.POSIXlt("1870-01-01 EST"), as.POSIXlt("1910-01-01 EST")), value=10, 
+    ann_text <- data.frame(year = c(as.POSIXlt("1870-01-01 EST"), as.POSIXlt("1895-01-01 EST"),as.POSIXlt("1910-01-01 EST")), value=10, 
                            series = factor("Time-series", levels = c("Time-series","Pointwise impact","Cumulative impact")),
-                           lab = c("pre-intervention \n (training)", "post-intervention \n (test)"))
+                           lab = c("pre-intervention \n (train)", "intervention \n (validation)", "post-intervention \n (test)"))
   }
   
   

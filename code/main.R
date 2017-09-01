@@ -43,3 +43,7 @@ source(paste0(code.directory,'dd-inequality.R'))
 # Descriptive plots
 
 source(paste0(code.directory,'descriptive.R')) 
+
+source(paste0(code.directory,'attention-plot-capacity.R')) # Attention heatmap
+
+source(paste0(code.directory,'attention-plot-patents.R')) # Attention heatmap

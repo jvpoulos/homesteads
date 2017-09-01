@@ -2,15 +2,14 @@
 # Prepare capacity data (state-level or aggregated at county level)        #
 ############################################################################
 
-require(doParallel)
 require(data.table)
 require(reshape2)
 require(stringr)
-library(dplyr)
-library(weights)
-library(caret)
-library(zoo)
-library(tidyr)
+require(dplyr)
+require(weights)
+require(caret)
+require(zoo)
+require(tidyr)
 
 ## STATE-LEVEL DATA
 
