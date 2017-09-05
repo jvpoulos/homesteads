@@ -8,7 +8,7 @@ require(matrixStats)
 
 source(paste0(code.directory,"ts-plot-ed.R"))
 
-analysis <- "analysis-34"
+analysis <- "analysis-12"
 
 type <- "treated"
 
@@ -49,10 +49,10 @@ ed.pc.train.sd <- matrixStats::rowSds(as.matrix(ed.pc.train.pred))
 # Bind to splits
 ed.pc.test <- cbind(ed.pc.y.test, 
                          "ed.pc.mean"= ed.pc.test.mean, 
-                         "ed.pc.sd"= ed.pc.test.sd) 
+                         "ed.pc.sd"= ed.pc.test.sd)
 ed.pc.val <- cbind(ed.pc.y.val, 
                     "ed.pc.mean"= ed.pc.val.mean, 
-                    "ed.pc.sd"= ed.pc.val.sd) 
+                    "ed.pc.sd"= ed.pc.val.sd) [-11,] # dont' double count 1899
 ed.pc.train <- cbind(ed.pc.y.train, 
                           "ed.pc.mean"=ed.pc.train.mean, 
                           "ed.pc.sd"=ed.pc.train.sd) 
@@ -69,7 +69,13 @@ time.vars <- c("year","ed.pc.Treated","ed.pc.mean")
 
 ts.means <- ts.dat[time.vars]  %>%
   mutate(pointwise.ed.pc = ed.pc.Treated-ed.pc.mean,
-         cumulative.ed.pc = rollmean(pointwise.ed.pc,2,fill=NA, align='right'))
+         cumulative.ed.pc = NA)
+
+ts.means <- ts.means[with(ts.means, order(year)), ] # sort by year
+
+for (i in 1:nrow(ts.means)){
+  ts.means$cumulative.ed.pc[i] <- rollmean(ts.means$pointwise.ed.pc,i, align='right')
+}
 
 ts.means.m <- melt(as.data.frame(ts.means), id.var=c("year"))
 
@@ -97,8 +103,17 @@ sds <- ts.dat  %>%
          pred.ed.pc.max = ed.pc.mean + ed.pc.sd*1.96,
          pointwise.ed.pc.min = ed.pc.Treated-pred.ed.pc.min,
          pointwise.ed.pc.max = ed.pc.Treated-pred.ed.pc.max,
-         cumulative.ed.pc.min = rollmean(pointwise.ed.pc.min,2,fill=NA, align='right'),
-         cumulative.ed.pc.max = rollmean(pointwise.ed.pc.max,2,fill=NA, align='right'))
+         cumulative.ed.pc.min = NA,
+         cumulative.ed.pc.max = NA)
+
+sds <- sds[with(sds, order(year)), ] # sort by year
+
+for (i in 1:nrow(sds)){
+  sds$cumulative.ed.pc.min[i] <- rollmean(sds$pointwise.ed.pc.min,i, align='right')
+}
+for (i in 1:nrow(sds)){
+  sds$cumulative.ed.pc.max[i] <- rollmean(sds$pointwise.ed.pc.max,i, align='right')
+}
 
 pred.vars <- c("ed.pc.mean", "ed.pc.sd", "pred.ed.pc.min", "pred.ed.pc.max", "pointwise.ed.pc.min", "pointwise.ed.pc.max", "cumulative.ed.pc.min", "cumulative.ed.pc.max")
 ts.means.m <- cbind(ts.means.m, sds[pred.vars])
@@ -131,8 +146,8 @@ edpc.mu + (mean(sds$ed.pc.sd[(sds$year>=1866 & sds$year<=1914)])*1.96)
 ed.pc.mu <- ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1914-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative ed.pc" & ts.means.m$year=="1866-12-31 19:03:58"]
 ed.pc.mu
 
-ts.means.m$cumulative.ed.pc.max[ts.means.m$year=="1914-12-31 19:00:00"] - ts.means.m$cumulative.ed.pc.max[ts.means.m$year=="1866-12-31 19:03:58"]
-ts.means.m$cumulative.ed.pc.min[ts.means.m$year=="1914-12-31 19:00:00"] - ts.means.m$cumulative.ed.pc.min[ts.means.m$year=="1866-12-31 19:03:58"]
+sds$cumulative.ed.pc.max[(sds$year==1914)] -sds$cumulative.ed.pc.max[(sds$year==1866)]
+sds$cumulative.ed.pc.min[(sds$year==1914)] -sds$cumulative.ed.pc.min[(sds$year==1866)]
 }
 
 if(analysis=="analysis-34"){

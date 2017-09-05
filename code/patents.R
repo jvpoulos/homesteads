@@ -2,7 +2,6 @@
 # Prepare patents data            #
 ###################################
 
-require(doParallel)
 require(data.table)
 require(reshape2)
 require(stringr)

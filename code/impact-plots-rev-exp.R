@@ -4,7 +4,7 @@
 require(reshape2)
 require(dplyr)
 require(zoo)
-require("matrixStats")
+require(matrixStats)
 
 analysis <- "analysis-12"
 
@@ -117,9 +117,20 @@ time.vars <- c("year","rev.pc.Treated","rev.pc.mean","exp.pc.Treated", "exp.pc.m
 
 ts.means <- ts.dat[time.vars]  %>%
   mutate(pointwise.rev.pc = rev.pc.Treated-rev.pc.mean,
-         cumulative.rev.pc = rollmean(pointwise.rev.pc,2,fill=NA, align='right'),
-         pointwise.exp.pc = exp.pc.Treated-exp.pc.mean,
-         cumulative.exp.pc = rollmean(pointwise.exp.pc,2,fill=NA, align='right')) 
+         pointwise.exp.pc = exp.pc.Treated-exp.pc.mean) 
+
+ts.means <- ts.means[with(ts.means, order(year)), ] # sort by year
+
+ts.means$cumulative.rev.pc <- NA
+ts.means$cumulative.exp.pc <- NA
+
+for (i in 1:nrow(ts.means)){
+  ts.means$cumulative.rev.pc[i] <- rollmean(ts.means$pointwise.rev.pc,i, align='right')
+}
+
+for (i in 1:nrow(ts.means)){
+  ts.means$cumulative.exp.pc[i] <- rollmean(ts.means$pointwise.exp.pc,i, align='right')
+}
 
 ts.means.m <- melt(as.data.frame(ts.means), id.var=c("year"))
 
@@ -138,8 +149,7 @@ ts.means.m$series[ts.means.m$variable=="cumulative.rev.pc" | ts.means.m$variable
 ts.means.m$series<- factor(ts.means.m$series, levels=c("Time-series","Pointwise impact", "Cumulative impact")) # reverse order
 
 levels(ts.means.m$variable) <- c("Observed rev.pc","Predicted rev.pc", "Observed exp.pc", "Predicted exp.pc",
-                                 "Pointwise rev.pc", "Cumulative rev.pc", 
-                                 "Pointwise exp.pc", "Cumulative exp.pc")
+                                 "Pointwise rev.pc", "Pointwise exp.pc", "Cumulative rev.pc",  "Cumulative exp.pc")
 
 # SDs
 
@@ -148,14 +158,30 @@ sds <- ts.dat  %>%
          pred.rev.pc.max = rev.pc.mean + rev.pc.sd*1.96,
          pointwise.rev.pc.min = rev.pc.Treated-pred.rev.pc.min,
          pointwise.rev.pc.max = rev.pc.Treated-pred.rev.pc.max,
-         cumulative.rev.pc.min = rollmean(pointwise.rev.pc.min,2,fill=NA, align='right'),
-         cumulative.rev.pc.max = rollmean(pointwise.rev.pc.max,2,fill=NA, align='right'),
+         cumulative.rev.pc.min = NA,
+         cumulative.rev.pc.max = NA,
          pred.exp.pc.min = exp.pc.mean - exp.pc.sd*1.96,
          pred.exp.pc.max = exp.pc.mean + exp.pc.sd*1.96,
          pointwise.exp.pc.min = exp.pc.Treated-pred.exp.pc.min,
          pointwise.exp.pc.max = exp.pc.Treated-pred.exp.pc.max,
-         cumulative.exp.pc.min = rollmean(pointwise.exp.pc.min,2,fill=NA, align='right'),
-         cumulative.exp.pc.max = rollmean(pointwise.exp.pc.max,2,fill=NA, align='right'))
+         cumulative.exp.pc.min = NA,
+         cumulative.exp.pc.max = NA)
+
+sds <- sds[with(sds, order(year)), ] # sort by year
+
+for (i in 1:nrow(sds)){
+  sds$cumulative.rev.pc.min[i] <- rollmean(sds$pointwise.rev.pc.min,i, align='right')
+}
+for (i in 1:nrow(sds)){
+  sds$cumulative.rev.pc.max[i] <- rollmean(sds$pointwise.rev.pc.max,i, align='right')
+}
+
+for (i in 1:nrow(sds)){
+  sds$cumulative.exp.pc.min[i] <- rollmean(sds$pointwise.exp.pc.min,i, align='right')
+}
+for (i in 1:nrow(sds)){
+  sds$cumulative.exp.pc.max[i] <- rollmean(sds$pointwise.exp.pc.max,i, align='right')
+}
 
 pred.vars <- c("rev.pc.mean", "rev.pc.sd", "pred.rev.pc.min", "pred.rev.pc.max", "pointwise.rev.pc.min", "pointwise.rev.pc.max", "cumulative.rev.pc.min", "cumulative.rev.pc.max",
                "exp.pc.mean", "exp.pc.sd", "pred.exp.pc.min", "pred.exp.pc.max", "pointwise.exp.pc.min", "pointwise.exp.pc.max", "cumulative.exp.pc.min", "cumulative.exp.pc.max")
@@ -163,7 +189,7 @@ ts.means.m <- cbind(ts.means.m, sds[pred.vars])
 ts.means.m[pred.vars][ts.means.m$variable=="Observed",] <- NA
 
 if(analysis=="analysis-12"){
-  ts.plot <- TsPlotRevExp(ts.means.m[ts.means.m$year >"1832-12-31 19:03:58",], analysis)
+  ts.plot <- TsPlotRevExp(ts.means.m[ts.means.m$year >"1832-12-31 19:03:58" & ts.means.m$year <="1971-12-31 19:00:00",], analysis)
   ggsave(paste0(results.directory,"plots/rev-exp-south-treat.png"), ts.plot, width=11, height=8.5)
 }
 
@@ -194,13 +220,14 @@ exp.pc.mu+(mean(sds$exp.pc.sd[(sds$year>=1866 & sds$year<=1915)])*1.96)
 #rev.pc
 ts.means.m$value[ts.means.m$variable=="Cumulative rev.pc" & ts.means.m$year=="1914-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative rev.pc" & ts.means.m$year=="1866-12-31 19:03:58"]
 
-ts.means.m$cumulative.rev.pc.max[ts.means.m$year=="1914-12-31 19:00:00"] - ts.means.m$cumulative.rev.pc.max[ts.means.m$year=="1866-12-31 19:03:58"]
-ts.means.m$cumulative.rev.pc.min[ts.means.m$year=="1914-12-31 19:00:00"] - ts.means.m$cumulative.rev.pc.min[ts.means.m$year=="1866-12-31 19:03:58"]
+sds$cumulative.rev.pc.max[(sds$year==1914)] -sds$cumulative.rev.pc.max[(sds$year==1866)]
+sds$cumulative.rev.pc.min[(sds$year==1914)] -sds$cumulative.rev.pc.min[(sds$year==1866)]
 
 #exp.pc
 ts.means.m$value[ts.means.m$variable=="Cumulative exp.pc" & ts.means.m$year=="1914-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative exp.pc" & ts.means.m$year=="1866-12-31 19:03:58"]
 
-sds$cumulative.rev.pc.max[(sds$year==1917)] - sds$cumulative.rev.pc.max[(sds$year==1889)]ts.means.m$cumulative.exp.pc.min[ts.means.m$year=="1914-12-31 19:00:00"] - ts.means.m$cumulative.exp.pc.min[ts.means.m$year=="1866-12-31 19:03:58"]
+sds$cumulative.exp.pc.max[(sds$year==1914)] -sds$cumulative.exp.pc.max[(sds$year==1866)]
+sds$cumulative.exp.pc.min[(sds$year==1914)] -sds$cumulative.exp.pc.min[(sds$year==1866)]
 }
 
 if(analysis=="analysis-34"){
@@ -225,13 +252,13 @@ if(analysis=="analysis-34"){
   #rev.pc
   ts.means.m$value[ts.means.m$variable=="Cumulative rev.pc" & ts.means.m$year=="1916-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative rev.pc" & ts.means.m$year=="1889-12-31 19:00:00"]
   
-  sds$cumulative.rev.pc.max[(sds$year==1928)] - sds$cumulative.rev.pc.max[(sds$year==1889)]
-  sds$cumulative.rev.pc.min[(sds$year==1928)] - sds$cumulative.rev.pc.min[(sds$year==1889)]
+  sds$cumulative.rev.pc.max[(sds$year==1916)] - sds$cumulative.rev.pc.max[(sds$year==1889)]
+  sds$cumulative.rev.pc.min[(sds$year==1916)] - sds$cumulative.rev.pc.min[(sds$year==1889)]
   
   #exp.pc
   ts.means.m$value[ts.means.m$variable=="Cumulative exp.pc" & ts.means.m$year=="1916-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative exp.pc" & ts.means.m$year=="1889-12-31 19:00:00"]
   
-  sds$cumulative.exp.pc.max[(sds$year==1917)] - sds$cumulative.exp.pc.max[(sds$year==1889)]
-  sds$cumulative.exp.pc.min[(sds$year==1917)] - sds$cumulative.exp.pc.min[(sds$year==1889)]
+  sds$cumulative.exp.pc.max[(sds$year==1916)] - sds$cumulative.exp.pc.max[(sds$year==1889)]
+  sds$cumulative.exp.pc.min[(sds$year==1916)] - sds$cumulative.exp.pc.min[(sds$year==1889)]
   
 }

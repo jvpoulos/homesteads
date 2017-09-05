@@ -14,7 +14,7 @@ TsPlotEd <- function(df, analysis, main = "") {
   # line colours
     geom_line(data = subset(df, variable == "Observed ed.pc"), aes(y = value, colour = "Observed ed.pc", linetype="Observed ed.pc"), show.legend = TRUE, size=0.3) +
    
-    geom_line(data = subset(df, variable == "Predicted ed.pc"), aes(y = value, colour = "Predicted ed.pc", linetype="Predicted ed.pc"), show.legend = TRUE, size=0.3) +
+    geom_line(data = subset(df, variable == "Predicted ed.pc"), aes(y = value, colour = "Predicted ed.pc", linetype="Predicted ed.pc"), show.legend = FALSE, size=0.3) +
    
     geom_line(data = subset(df, variable == "Pointwise ed.pc"), aes(y = value, colour = "Predicted ed.pc", linetype="Predicted ed.pc"), show.legend = FALSE, size=1) +
    

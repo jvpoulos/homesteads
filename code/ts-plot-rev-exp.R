@@ -14,13 +14,13 @@ TsPlotRevExp <- function(df, analysis, main = "") {
   # line colours
     geom_line(data = subset(df, variable == "Observed rev.pc"), aes(y = value, colour = "Observed rev.pc", linetype="Observed rev.pc"), show.legend = TRUE, size=0.3) +
    
-    geom_line(data = subset(df, variable == "Predicted rev.pc"), aes(y = value, colour = "Predicted rev.pc", linetype="Predicted rev.pc"), show.legend = TRUE, size=0.3) +
+    geom_line(data = subset(df, variable == "Predicted rev.pc"), aes(y = value, colour = "Predicted rev.pc", linetype="Predicted rev.pc"), show.legend = FALSE, size=0.3) +
    
     geom_line(data = subset(df, variable == "Pointwise rev.pc"), aes(y = value, colour = "Predicted rev.pc", linetype="Predicted rev.pc"), show.legend = FALSE, size=1) +
    
     geom_line(data = subset(df, variable == "Cumulative rev.pc"), aes(y = value ,colour = "Predicted rev.pc", linetype="Predicted rev.pc"), show.legend = FALSE, size=1) +
     
-    geom_line(data = subset(df, variable == "Observed exp.pc"), aes(y = value, colour = "Observed exp.pc", linetype="Observed exp.pc"), show.legend = FALSE, size=0.3) +
+    geom_line(data = subset(df, variable == "Observed exp.pc"), aes(y = value, colour = "Observed exp.pc", linetype="Observed exp.pc"), show.legend = TRUE, size=0.3) +
     
     geom_line(data = subset(df, variable == "Predicted exp.pc"), aes(y = value, colour = "Predicted exp.pc", linetype="Predicted exp.pc"), show.legend = FALSE, size=0.3) +
     
@@ -74,7 +74,7 @@ TsPlotRevExp <- function(df, analysis, main = "") {
     
 # annotation text
   if(analysis=='analysis-12'){
-    ann_text <- data.frame(year = c(as.POSIXlt("1850-01-01 EST"), as.POSIXlt("1871-06-01 EST"), as.POSIXlt("1895-01-01 EST")), value=15, 
+    ann_text <- data.frame(year = c(as.POSIXlt("1850-01-01 EST"), as.POSIXlt("1872-01-01 EST"), as.POSIXlt("1895-01-01 EST")), value=15, 
                            series = factor("Time-series", levels = c("Time-series","Pointwise impact","Cumulative impact")),
                            lab = c("pre-intervention \n (train)", "intervention \n (validation)", "post-intervention \n (test)"))
   }

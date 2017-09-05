@@ -8,7 +8,7 @@ analysis <- "analysis-34"
 type <- "treated"
 
 ## Sales data
-setwd(paste0(results.directory, "predictions/",analysis,"/",type,"/sales")) # prediction files loc
+setwd(paste0(results.directory, "predictions/","/sales/",analysis,"/",type)) # prediction files loc
 
 # Import test results
 
@@ -19,6 +19,16 @@ sales.test.pred <- do.call(cbind,lapply(test.files,read.csv,
                                 col.names="sales.pred"))
 sales.test.mean <-rowMeans(sales.test.pred)
 sales.test.sd <- matrixStats::rowSds(as.matrix(sales.test.pred))
+
+# Import val results
+
+val.files <- list.files(pattern = "*val.csv")
+
+sales.val.pred <- do.call(cbind,lapply(val.files,read.csv, 
+                                        header=FALSE,
+                                        col.names="sales.pred"))
+sales.val.mean <-rowMeans(sales.val.pred)
+sales.val.sd <- matrixStats::rowSds(as.matrix(sales.val.pred))
 
 # Import training fit
 
@@ -35,12 +45,16 @@ sales.train.sd <- matrixStats::rowSds(as.matrix(sales.train.pred))
 sales.test <- cbind(sales.y.test, 
                          "sales.mean"= sales.test.mean, 
                          "sales.sd"= sales.test.sd) 
+sales.val <- cbind(sales.y.val, 
+                    "sales.mean"= sales.val.mean, 
+                    "sales.sd"= sales.val.sd) 
 sales.train <- cbind(sales.y.train, 
                           "sales.mean"=sales.train.mean, 
                           "sales.sd"=sales.train.sd) 
 
+if(analysis=="analysis-34"){
 ## Homesteads data 
-setwd(paste0(results.directory, "predictions/",analysis,"/",type,"/homesteads")) # prediction files loc
+setwd(paste0(results.directory, "predictions/","/homesteads/",analysis,"/",type)) # prediction files loc
 
 # Import test results
 
@@ -51,6 +65,16 @@ homesteads.test.pred <- do.call(cbind,lapply(test.files,read.csv,
                                              col.names="homesteads.pred"))
 homesteads.test.mean <-rowMeans(homesteads.test.pred)
 homesteads.test.sd <- matrixStats::rowSds(as.matrix(homesteads.test.pred))
+
+# Import val results
+
+val.files <- list.files(pattern = "*val.csv")
+
+homesteads.val.pred <- do.call(cbind,lapply(val.files,read.csv, 
+                                             header=FALSE,
+                                             col.names="homesteads.pred"))
+homesteads.val.mean <-rowMeans(homesteads.val.pred)
+homesteads.val.sd <- matrixStats::rowSds(as.matrix(homesteads.val.pred))
 
 # Import training fit
 
@@ -64,20 +88,29 @@ homesteads.train.sd <- matrixStats::rowSds(as.matrix(homesteads.train.pred))
 
 
 # Bind to splits
-homesteads.test <- cbind(homesteads.y.test, 
+homesteads.test <- cbind(homesteads.y.test[-c(1:119),], # exclude val set
                          "homesteads.mean"= homesteads.test.mean, 
                          "homesteads.sd"= homesteads.test.sd) 
+homesteads.val <- cbind(homesteads.y.val, 
+                         "homesteads.mean"= homesteads.val.mean, 
+                         "homesteads.sd"= homesteads.val.sd) 
 homesteads.train <- cbind(homesteads.y.train, 
                           "homesteads.mean"=homesteads.train.mean, 
                           "homesteads.sd"=homesteads.train.sd) 
-
+}
 ## Create time series data
 setwd(code.directory)
 
-ts.dat <- merge(rbind(sales.train,sales.test), rbind(homesteads.train,homesteads.test), by="date")
+if(analysis=="analysis-34"){
+ts.dat <- merge(rbind(sales.train,sales.val, sales.test), rbind(homesteads.train,homesteads.val, homesteads.test), by="date")
+}
 
+if(analysis=="analysis-12"){
+  ts.dat <- rbind(sales.train,sales.val, sales.test)
+}
 ## Plot time series 
 
+if(analysis=="analysis-34"){
 time.vars <- c("date","sales.Treated","sales.mean","homesteads.Treated", "homesteads.mean")
 
 ts.means <- ts.dat[time.vars]  %>%
@@ -85,6 +118,15 @@ ts.means <- ts.dat[time.vars]  %>%
          cumulative.sales = cumsum(pointwise.sales),
          pointwise.homesteads = homesteads.Treated-homesteads.mean,
          cumulative.homesteads = cumsum(pointwise.homesteads)) 
+}
+
+if(analysis=="analysis-12"){
+  time.vars <- c("date","sales.Treated","sales.mean")
+  
+  ts.means <- ts.dat[time.vars]  %>%
+    mutate(pointwise.sales = sales.Treated-sales.mean,
+           cumulative.sales = cumsum(pointwise.sales)) 
+}
 
 ts.means.m <- melt(as.data.frame(ts.means), id.var=c("date"))
 
@@ -94,8 +136,9 @@ ts.means.m$date <- as.yearmon(ts.means.m$date, "%Y-%m",tz="UTC") # convert date 
 ts.means.m$date <- as.POSIXct(ts.means.m$date, tz="UTC")
                          
 # Labels
-
+if(analysis=="analysis-34"){
 ts.means.m$series <- NA
+
 ts.means.m$series[ts.means.m$variable=="sales.Treated" | ts.means.m$variable=="sales.mean" | ts.means.m$variable=="homesteads.Treated" | ts.means.m$variable=="homesteads.mean"] <- "Time-series"
 ts.means.m$series[ts.means.m$variable=="pointwise.sales" | ts.means.m$variable=="pointwise.homesteads"] <- "Pointwise impact"
 ts.means.m$series[ts.means.m$variable=="cumulative.sales" | ts.means.m$variable=="cumulative.homesteads"] <- "Cumulative impact"
@@ -127,10 +170,46 @@ pred.vars <- c("sales.mean", "sales.sd", "pred.sales.min", "pred.sales.max", "po
 ts.means.m <- cbind(ts.means.m, sds[pred.vars])
 ts.means.m[pred.vars][ts.means.m$variable=="Observed",] <- NA
 
-# Plot
-ts.plot <- TsPlotPatents(ts.means.m)
+}
 
-ggsave(paste0(results.directory,"plots/patents-south-treat.png"), ts.plot, width=11, height=8.5)
+if(analysis=="analysis-12"){
+  ts.means.m$series <- NA
+  
+  ts.means.m$series[ts.means.m$variable=="sales.Treated" | ts.means.m$variable=="sales.mean"] <- "Time-series"
+  ts.means.m$series[ts.means.m$variable=="pointwise.sales" ] <- "Pointwise impact"
+  ts.means.m$series[ts.means.m$variable=="cumulative.sales"] <- "Cumulative impact"
+  
+  ts.means.m$series<- factor(ts.means.m$series, levels=c("Time-series","Pointwise impact", "Cumulative impact")) # reverse order
+  
+  levels(ts.means.m$variable) <- c("Observed sales","Predicted sales", 
+                                   "Pointwise sales", "Cumulative sales")
+  
+  # SDs
+  
+  sds <- ts.dat  %>%
+    mutate(pred.sales.min = sales.mean - sales.sd*1.96,
+           pred.sales.max = sales.mean + sales.sd*1.96,
+           pointwise.sales.min = sales.Treated-pred.sales.min,
+           pointwise.sales.max = sales.Treated-pred.sales.max,
+           cumulative.sales.min = cumsum(pointwise.sales.min),
+           cumulative.sales.max = cumsum(pointwise.sales.max))
+  
+  pred.vars <- c("sales.mean", "sales.sd", "pred.sales.min", "pred.sales.max", "pointwise.sales.min", "pointwise.sales.max", "cumulative.sales.min", "cumulative.sales.max")
+  ts.means.m <- cbind(ts.means.m, sds[pred.vars])
+  ts.means.m[pred.vars][ts.means.m$variable=="Observed",] <- NA
+  
+}
+
+# Plot
+if(analysis=="analysis-12"){
+  ts.plot <- TsPlotPatents(ts.means.m)
+  ggsave(paste0(results.directory,"plots/patents-south-treat.png"), ts.plot, width=11, height=8.5)
+}
+
+if(analysis=="analysis-34"){
+  ts.plot <- TsPlotPatents(ts.means.m)
+  ggsave(paste0(results.directory,"plots/patents-public-treat.png"), ts.plot, width=11, height=8.5)
+}
 
 # Calculate Avg. pointwise impact during pre-period: <= "Feb 1889"
 
