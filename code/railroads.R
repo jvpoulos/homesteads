@@ -11,6 +11,8 @@ require(spdep)
 require(ifultools)
 require(broom)
 library(raster)
+library(reshape2)
+library(tidyr)
 
 download.data <- FALSE
 
@@ -98,16 +100,38 @@ rr.1862 <- ggplot() +
 
 ggsave(paste0(results.directory,"plots/rr-1862.png"), rr.1862, width=11, height=8.5) 
 
+
+################### 
 # Intersect lines with polygons
 
-rr.inter.1911 <- gIntersects(county.rr[county.rr$InOpBy == 1911,], county.map, byid=TRUE)
+ID <- over( county.rr , county.map )
 
-rr.inter.1911 <- data.frame("access"=apply(rr.inter.1911, 1, any)) # collapse to county IDs (y-axis)
-rr.inter.1911$access[rr.inter.1911$access=="FALSE"] <- 0
-rr.inter.1911$access[rr.inter.1911$access=="TRUE"] <- 1
+county.rr@data <- cbind( county.rr@data , ID )
 
-# merge back county info
-rr.inter.1911$id <- as.numeric(row.names(rr.inter.1911)) +1
+rr.inter <- county.rr@data[!is.na(county.rr@data$ID_NUM), ] # county-rail observations # drop 363 w/o county info
 
-rr.inter.1911 <- merge(rr.inter.1911, county.map@data, by.x="id", by.y="ID_NUM")
+rr.inter.1911 <- rr.inter[(!duplicated(rr.inter$ID)) & rr.inter$InOpBy<=1911,] # keep unique counties w intersections # 91% coverage in 1911
+
+rr.inter.1862 <- rr.inter[(!duplicated(rr.inter$ID)) & rr.inter$InOpBy<=1862,]  # 29% coverage in 1862
+
+# Get intersections for all years
+
+rr.inter <- dcast(rr.inter, InOpBy~ID_NUM) 
+
+rr.inter[rr.inter == 0] <- NA
+
+rr.inter <- fill(rr.inter, colnames(rr.inter[-1]), .direction="down")  # fill in 1s after first inop
+
+rr.inter[is.na(rr.inter)] <- 0
+rr.inter[-1][rr.inter[-1] != 0] <-1
+
+rr.inter <- melt(rr.inter, id.vars = c("InOpBy"),
+            variable.name = "ID_NUM", 
+            value.name = "access")
+
+rr.inter <- merge(rr.inter, county.map@data, by="ID_NUM") # merge back county info
+
+rr.inter$state <- state.abb[match(rr.inter$STATE_TERR,state.name)] # state abbr
+
+rr.inter <- subset(rr.inter, !is.na(state), select= c("ID_NUM","InOpBy", "FIPS","access","state")) # rm DC & territories
 

@@ -27,7 +27,7 @@ cats.rr.did$time <- 0
 cats.rr.did$time[(cats.rr.did$year >= 1866 & cats.rr.did$year <= 1876) | (cats.rr.did$year >= 1889 & cats.rr.did$year <= 1976)] <- 1
 
 # access 
-did.access <- lm(access ~ cat*time, data = cats.rr.did[cats.rr.did$year <=1976,]) 
+did.access <- lm(access ~ cat*time, data = cats.rr.did) 
 
 summary(did.access)
 
@@ -55,7 +55,7 @@ cats.rr.did$time <- 0
 cats.rr.did$time[cats.rr.did$year >= 1889 & cats.rr.did$year <= 1976] <- 1
 
 # access 
-did.access <- lm(access ~ cat*time, data = cats.rr.did[cats.rr.did$year <=1976,]) 
+did.access <- lm(access ~ cat*time, data = cats.rr.did) 
 
 summary(did.access)
 
