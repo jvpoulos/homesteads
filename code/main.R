@@ -36,9 +36,13 @@ source(paste0(code.directory,'impact-plots-ed-exp.R')) # effect of 1866 SHA on t
 
 source(paste0(code.directory,'dd-capacity.R')) 
 
-# Causal estimates on inequality
+# DD estimates on inequality and tenancy
 
-source(paste0(code.directory,'dd-inequality.R')) 
+source(paste0(code.directory,'dd-census.R')) 
+
+# DD estimates on railroads
+
+source(paste0(code.directory,'dd-railroads.R')) 
 
 # Descriptive plots
 
