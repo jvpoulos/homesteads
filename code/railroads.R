@@ -13,6 +13,8 @@ require(broom)
 library(raster)
 library(reshape2)
 library(tidyr)
+library(dplyr)
+require(caret)
 
 download.data <- FALSE
 
@@ -101,7 +103,7 @@ rr.1862 <- ggplot() +
 ggsave(paste0(results.directory,"plots/rr-1862.png"), rr.1862, width=11, height=8.5) 
 
 
-################### 
+################### Load railraods.RData
 # Intersect lines with polygons
 
 ID <- over( county.rr , county.map )
@@ -110,28 +112,168 @@ county.rr@data <- cbind( county.rr@data , ID )
 
 rr.inter <- county.rr@data[!is.na(county.rr@data$ID_NUM), ] # county-rail observations # drop 363 w/o county info
 
-rr.inter.1911 <- rr.inter[(!duplicated(rr.inter$ID)) & rr.inter$InOpBy<=1911,] # keep unique counties w intersections # 91% coverage in 1911
-
-rr.inter.1862 <- rr.inter[(!duplicated(rr.inter$ID)) & rr.inter$InOpBy<=1862,]  # 29% coverage in 1862
+rr.inter <- rr.inter %>% 
+  group_by(ID_NUM,InOpBy) %>% 
+  summarise_each(funs(sum(., na.rm = TRUE)),track) %>% # county/year sums of track
+  select(ID_NUM,InOpBy,track)
 
 # Get intersections for all years
 
-rr.inter <- dcast(rr.inter, InOpBy~ID_NUM) 
+rr.inter.m <- dcast(rr.inter, InOpBy~ID_NUM)
 
-rr.inter[rr.inter == 0] <- NA
+rr.inter.m[is.na(rr.inter.m)] <- 0
 
-rr.inter <- fill(rr.inter, colnames(rr.inter[-1]), .direction="down")  # fill in 1s after first inop
+rr.inter.m <- melt(rr.inter.m, id.vars = c("InOpBy"),
+            variable.name = "ID_NUM",
+            value.name = "track")
 
-rr.inter[is.na(rr.inter)] <- 0
-rr.inter[-1][rr.inter[-1] != 0] <-1
+colnames(rr.inter.m) <- c("InOpBy", "ID_NUM", "track")
 
-rr.inter <- melt(rr.inter, id.vars = c("InOpBy"),
-            variable.name = "ID_NUM", 
-            value.name = "access")
+rr.inter.m <- merge(rr.inter.m, county.map@data, by="ID_NUM") # merge back county info
 
-rr.inter <- merge(rr.inter, county.map@data, by="ID_NUM") # merge back county info
+rr.inter.m$state <- state.abb[match(rr.inter.m$STATE_TERR,state.name)] # state abbr
 
-rr.inter$state <- state.abb[match(rr.inter$STATE_TERR,state.name)] # state abbr
+# Create cumulative miles per sq mile measure
+rr.inter.m <- rr.inter.m %>% 
+  filter(!is.na(state)) %>% # rm DC & territories
+  arrange(ID_NUM,InOpBy)  %>% # sort by county/year
+  group_by(ID_NUM) %>% 
+  mutate(cumulative.track = cumsum(track), # cumulative sum of track miles by county
+         track2 = cumulative.track/AREA_SQMI) %>% # cumulative track miles per square mile
+  select(ID_NUM,InOpBy,FIPS,cumulative.track,track2,state)
 
-rr.inter <- subset(rr.inter, !is.na(state), select= c("ID_NUM","InOpBy", "FIPS","access","state")) # rm DC & territories
+## Analysis 1: Effect of SHA on treated (southern public land states), intervention: June 1866-June 1876-March 1889
+# features are southern state land states
 
+# Summarize by category
+
+rr.1 <- rr.inter.m
+  
+rr.1$cat <- NA
+rr.1$cat[rr.1$state %in% southern.pub] <- "Treated"
+rr.1$cat[rr.1$state %in% southern.state] <- "Control"
+
+rr.1$year <- rr.1$InOpBy
+
+# Create control and treated sums
+cats.rr.1 <- rr.1 %>% 
+  select(year, cat, track2)  %>%
+  filter(!is.na(cat)) %>% # rm non-southern state land states
+  group_by(year,cat) %>% 
+  summarise_each(funs(mean(., na.rm = TRUE)))
+
+cats.rr.1 <- select(cats.rr.1, -ID_NUM)
+
+cats.rr.1.r <- reshape(data.frame(cats.rr.1), idvar = "year", timevar = "cat", direction = "wide")
+
+rr.1.control <- rr.1[!is.na(rr.1$cat) & rr.1$cat=="Control",] # discard treated since we have treated time-series
+
+track2.1 <- reshape(data.frame(rr.1.control)[c("track2","ID_NUM","year")], idvar = "year", timevar = "ID_NUM", direction = "wide") # county-level analysis 
+
+#Labels
+
+track2.1.y <- cats.rr.1.r[c("year", "track2.Treated")]
+track2.1.y <- track2.1.y[!is.na(track2.1.y$track2.Treated),]
+
+# Splits
+
+track2.1.years <- intersect(track2.1$year,track2.1.y$year) # common track2.1 years in treated and control
+
+track2.1.x.train <- track2.1[track2.1$year %in% track2.1.years & track2.1$year < 1866,]
+track2.1.x.val <- track2.1[track2.1$year %in% track2.1.years & (track2.1$year >= 1866  & track2.1$year <= 1876),]
+track2.1.x.test <- track2.1[track2.1$year %in% track2.1.years & track2.1$year > 1876,]
+
+track2.1.y.train <- track2.1.y[track2.1.y$year %in% track2.1.years & track2.1.y$year < 1866,]
+track2.1.y.val <- track2.1.y[track2.1.y$year %in% track2.1.years & (track2.1.y$year >= 1866 & track2.1.y$year <= 1876),]
+track2.1.y.test <- track2.1.y[track2.1.y$year %in% track2.1.years &track2.1.y$year > 1876,]
+
+# Preprocess
+track2.1.x.train <- data.frame(sapply(track2.1.x.train, as.numeric))
+track2.1.x.train[is.na(track2.1.x.train)] <- 0 # fill NA with 0 before scale
+track2.1.pre.train <- preProcess(track2.1.x.train[!colnames(track2.1.x.train) %in% c("year")], method = c("center", "scale","medianImpute"))
+track2.1.x.train[!colnames(track2.1.x.train) %in% c("year")] <- predict(track2.1.pre.train, track2.1.x.train[!colnames(track2.1.x.train) %in% c("year")] )
+
+track2.1.x.val <- data.frame(sapply(track2.1.x.val, as.numeric))
+track2.1.x.val[!colnames(track2.1.x.val) %in% c("year")] <- predict(track2.1.pre.train, track2.1.x.val[!colnames(track2.1.x.val) %in% c("year")] ) # use training values for val set 
+
+track2.1.x.test <- data.frame(sapply(track2.1.x.test, as.numeric))
+track2.1.x.test[!colnames(track2.1.x.test) %in% c("year")] <- predict(track2.1.pre.train, track2.1.x.test[!colnames(track2.1.x.test) %in% c("year")] ) # use training values for test set 
+
+# Export each as csv (labels, features)
+data.directory <- "~/Dropbox/github/drnns-prediction/data/railroads/analysis-12/treated/"
+
+write.csv(track2.1.x.train[!colnames(track2.1.x.train) %in% c("year")], paste0(data.directory,"track2-x-train.csv"), row.names=FALSE) 
+write.csv(track2.1.x.val[!colnames(track2.1.x.val) %in% c("year")] , paste0(data.directory,"track2-x-val.csv"), row.names=FALSE) 
+write.csv(track2.1.x.test[!colnames(track2.1.x.test) %in% c("year")] , paste0(data.directory,"track2-x-test.csv"), row.names=FALSE) 
+write.csv(track2.1.y.train[!colnames(track2.1.y.train) %in% c("year")], paste0(data.directory,"track2-y-train.csv"), row.names=FALSE) 
+write.csv(track2.1.y.val[!colnames(track2.1.y.val) %in% c("year")], paste0(data.directory,"track2-y-val.csv"), row.names=FALSE) 
+write.csv(track2.1.y.test[!colnames(track2.1.y.test) %in% c("year")], paste0(data.directory,"track2-y-test.csv"), row.names=FALSE) 
+
+## Analysis 3: Effect of HSA restriction on treated, intervention: Mar 1889
+# Treated is non-southern public land states (not MO)
+# Controls are MO, state land states
+
+rr.3 <- rr.inter.m
+
+# Summarize by category
+
+rr.3$cat <- NA
+rr.3$cat[rr.3$state %in% setdiff(setdiff(pub.states,southern.pub), "MO")] <- "Treated"
+rr.3$cat[rr.3$state %in% c("MO",state.land.states)] <- "Control"
+
+rr.3$year <- rr.3$InOpBy
+
+# Create control and treated sums
+cats.rr.3 <- rr.3 %>% 
+  select(year, cat, track2)  %>%
+  filter(!is.na(cat)) %>% # rm non-southern state land states
+  group_by(year,cat) %>% 
+  summarise_each(funs(mean(., na.rm = TRUE)))
+
+cats.rr.3 <- select(cats.rr.3, -ID_NUM)
+
+cats.rr.3.r <- reshape(data.frame(cats.rr.3), idvar = "year", timevar = "cat", direction = "wide")
+
+rr.3.control <- rr.3[!is.na(rr.3$cat) & rr.3$cat=="Control",] # discard treated since we have treated time-series
+
+track2.3 <- reshape(data.frame(rr.3.control)[c("track2","ID_NUM","year")], idvar = "year", timevar = "ID_NUM", direction = "wide") # county-level analysis
+
+# Labels
+
+track2.3.y <- cats.rr.3.r[c("year", "track2.Treated")]
+track2.3.y <- track2.3.y[!is.na(track2.3.y$track2.Treated),]
+
+# Splits
+
+track2.3.years <- intersect(track2.3$year,track2.3.y$year) # common track2.3 years in treated and control
+
+track2.3.x.train <- track2.3[track2.3$year %in% track2.3.years & track2.3$year < 1889,]
+track2.3.x.val <- track2.3[track2.3$year %in% track2.3.years & (track2.3$year >= 1889 & track2.3$year <= 1899),]
+track2.3.x.test <- track2.3[track2.3$year %in% track2.3.years & track2.3$year >= 1899,]
+
+track2.3.y.train <- track2.3.y[track2.3.y$year %in% track2.3.years & track2.3.y$year < 1889,]
+track2.3.y.val <- track2.3.y[track2.3.y$year %in% track2.3.years & (track2.3.y$year >= 1889 & track2.3.y$year <= 1899),]
+track2.3.y.test <- track2.3.y[track2.3.y$year %in% track2.3.years & track2.3.y$year >= 1899,]
+
+# Preprocess
+
+track2.3.x.train <- data.frame(sapply(track2.3.x.train, as.numeric))
+track2.3.x.train[is.na(track2.3.x.train)] <- 0 # fill NA with 0 before scale
+track2.3.pre.train <- preProcess(track2.3.x.train[!colnames(track2.3.x.train) %in% c("year")], method = c("center", "scale","medianImpute"))
+track2.3.x.train[!colnames(track2.3.x.train) %in% c("year")] <- predict(track2.3.pre.train, track2.3.x.train[!colnames(track2.3.x.train) %in% c("year")] )
+
+track2.3.x.val <- data.frame(sapply(track2.3.x.val, as.numeric))
+track2.3.x.val[!colnames(track2.3.x.val) %in% c("year")] <- predict(track2.3.pre.train, track2.3.x.val[!colnames(track2.3.x.val) %in% c("year")] ) # use training values for val set 
+
+track2.3.x.test <- data.frame(sapply(track2.3.x.test, as.numeric))
+track2.3.x.test[!colnames(track2.3.x.test) %in% c("year")] <- predict(track2.3.pre.train, track2.3.x.test[!colnames(track2.3.x.test) %in% c("year")] ) # use training values for test set 
+
+# Export each as csv (labels, features)
+data.directory <- "~/Dropbox/github/drnns-prediction/data/capacity/analysis-34/treated/"
+
+write.csv(track2.3.x.train[!colnames(track2.3.x.train) %in% c("year")], paste0(data.directory,"track2-x-train.csv"), row.names=FALSE) 
+write.csv(track2.3.x.val[!colnames(track2.3.x.val) %in% c("year")] , paste0(data.directory,"track2-x-val.csv"), row.names=FALSE) 
+write.csv(track2.3.x.test[!colnames(track2.3.x.test) %in% c("year")] , paste0(data.directory,"track2-x-test.csv"), row.names=FALSE) 
+write.csv(track2.3.y.train[!colnames(track2.3.y.train) %in% c("year")], paste0(data.directory,"track2-y-train.csv"), row.names=FALSE) 
+write.csv(track2.3.y.val[!colnames(track2.3.y.val) %in% c("year")], paste0(data.directory,"track2-y-val.csv"), row.names=FALSE) 
+write.csv(track2.3.y.test[!colnames(track2.3.y.test) %in% c("year")], paste0(data.directory,"track2-y-test.csv"), row.names=FALSE) 

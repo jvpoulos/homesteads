@@ -208,7 +208,7 @@ ggsave(paste0(results.directory,"plots/ed-pc-state-time.png"), ed.pc.state.time,
 
 ## Plot railroads time-series
 
-rr.plot <- rr.inter
+rr.plot <- rr.inter.m
 
 rr.plot$cat <- NA
 rr.plot$cat[rr.plot$state %in% southern.pub] <- "Southern public land"
@@ -221,18 +221,18 @@ rr.plot$year <- rr.plot$InOpBy
 cats.rr.plot <- rr.plot %>% 
   filter(!is.na(cat)) %>%  # rm non-southern state land states
   group_by(year,cat) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),access) 
+  summarise_each(funs(mean(., na.rm = TRUE)),track2) 
 
 # By time x region 
 
-access.state.time <- ggplot(cats.rr.plot, aes( year, access ,color=cat )) + 
+track.state.time <- ggplot(cats.rr.plot, aes( year, track2 ,color=cat )) + 
   geom_smooth(span=0.1, se = FALSE) +
   coord_cartesian(xlim=c(1826,1911)) +
   geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
   geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
   geom_vline(xintercept=1889, linetype=5) +  
-  scale_y_continuous(name="Railroad access") +
+  scale_y_continuous(name="Railroad track miles per square mile") +
   xlab("") +
   scale_color_discrete("State type")
 
-ggsave(paste0(results.directory,"plots/access-state-time.png"), access.state.time, width=11, height=8.5)
+ggsave(paste0(results.directory,"plots/track-state-time.png"), track.state.time, width=11, height=8.5)
