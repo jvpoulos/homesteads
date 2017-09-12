@@ -24,10 +24,10 @@ cats.rr.did <- rr.inter.did %>%
 
 cats.rr.did$time <- NA
 cats.rr.did$time <- 0
-cats.rr.did$time[(cats.rr.did$year >= 1866 & cats.rr.did$year <= 1876) | (cats.rr.did$year >= 1889 & cats.rr.did$year <= 1976)] <- 1
+cats.rr.did$time[(cats.rr.did$year >= 1866 & cats.rr.did$year <= 1876)] <- 1
 
 # track2 
-did.track2 <- lm(track2 ~ cat*time, data = cats.rr.did) 
+did.track2 <- lm(track2 ~ cat*time, data = cats.rr.did[cats.rr.did$year<1889,]) 
 
 summary(did.track2)
 

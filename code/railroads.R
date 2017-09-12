@@ -269,7 +269,7 @@ track2.3.x.test <- data.frame(sapply(track2.3.x.test, as.numeric))
 track2.3.x.test[!colnames(track2.3.x.test) %in% c("year")] <- predict(track2.3.pre.train, track2.3.x.test[!colnames(track2.3.x.test) %in% c("year")] ) # use training values for test set 
 
 # Export each as csv (labels, features)
-data.directory <- "~/Dropbox/github/drnns-prediction/data/capacity/analysis-34/treated/"
+data.directory <- "~/Dropbox/github/drnns-prediction/data/railroads/analysis-34/treated/"
 
 write.csv(track2.3.x.train[!colnames(track2.3.x.train) %in% c("year")], paste0(data.directory,"track2-x-train.csv"), row.names=FALSE) 
 write.csv(track2.3.x.val[!colnames(track2.3.x.val) %in% c("year")] , paste0(data.directory,"track2-x-val.csv"), row.names=FALSE) 

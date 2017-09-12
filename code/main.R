@@ -30,9 +30,9 @@ source(paste0(code.directory,'census-county-state.R')) # get state-level pop. da
 
 source(paste0(code.directory,'capacity-state.R'))  # load and export capacity data
 
-source(paste0(code.directory,'impact-plots-rev-exp.R')) # effect of 1866 SHA on treated (south) revenue and expenditure
+source(paste0(code.directory,'impact-plots-rev-exp.R')) # effects of 1866 SHA/1889 HSA restrictions on revenue and expenditure
 
-source(paste0(code.directory,'impact-plots-ed-exp.R')) # effect of 1866 SHA on treated (south) education
+source(paste0(code.directory,'impact-plots-ed-exp.R')) # effects 866 SHA/1889 HSA restrictions treated (south) education
 
 source(paste0(code.directory,'dd-capacity.R')) 
 
@@ -40,9 +40,13 @@ source(paste0(code.directory,'dd-capacity.R'))
 
 source(paste0(code.directory,'dd-census.R')) 
 
-# DD estimates on railroads
+# Causal/DD estimates on railroads
+
+source(paste0(code.directory,'railroads.R')) 
 
 source(paste0(code.directory,'dd-railroads.R')) 
+
+source(paste0(code.directory,'impact-plots-rr.R')) # effects 866 SHA/1889 HSA restrictions treated (south) education
 
 # Descriptive plots
 
