@@ -46,12 +46,12 @@ source(paste0(code.directory,'railroads.R'))
 
 source(paste0(code.directory,'dd-railroads.R')) 
 
-source(paste0(code.directory,'impact-plots-rr.R')) # effects 866 SHA/1889 HSA restrictions treated (south) education
+# Descriptive plots, attention heatmaps, scatter plots
 
-# Descriptive plots
-
-source(paste0(code.directory,'descriptive.R')) 
+source(paste0(code.directory,'descriptive.R')) # Descriptive plots
 
 source(paste0(code.directory,'attention-plot-capacity.R')) # Attention heatmap
 
 source(paste0(code.directory,'attention-plot-patents.R')) # Attention heatmap
+
+source(paste0(code.directory,'rr-capacity.R')) # early rr track vs. later state capacity 

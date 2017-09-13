@@ -18,6 +18,8 @@ require(caret)
 
 download.data <- FALSE
 
+data.directory <-"~/Dropbox/github/land-reform/data/"
+
 # Download U.S. historical county map data
 if(download.data){
 setwd(data.directory)
@@ -108,9 +110,9 @@ ggsave(paste0(results.directory,"plots/rr-1862.png"), rr.1862, width=11, height=
 
 ID <- over( county.rr , county.map )
 
-county.rr@data <- cbind( county.rr@data , ID )
+county.rr.data <- cbind( county.rr@data , ID )
 
-rr.inter <- county.rr@data[!is.na(county.rr@data$ID_NUM), ] # county-rail observations # drop 363 w/o county info
+rr.inter <- county.rr.data[!is.na(county.rr.data$ID_NUM), ] # county-rail observations # drop 363 w/o county info
 
 rr.inter <- rr.inter %>% 
   group_by(ID_NUM,InOpBy) %>% 
@@ -140,7 +142,7 @@ rr.inter.m <- rr.inter.m %>%
   group_by(ID_NUM) %>% 
   mutate(cumulative.track = cumsum(track), # cumulative sum of track miles by county
          track2 = cumulative.track/AREA_SQMI) %>% # cumulative track miles per square mile
-  select(ID_NUM,InOpBy,FIPS,cumulative.track,track2,state)
+  select(ID_NUM,InOpBy,FIPS,cumulative.track,track2,state,AREA_SQMI)
 
 ## Analysis 1: Effect of SHA on treated (southern public land states), intervention: June 1866-June 1876-March 1889
 # features are southern state land states
