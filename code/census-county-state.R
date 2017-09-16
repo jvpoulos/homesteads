@@ -24,6 +24,9 @@ names(census.county) <- years
 ## pc taxes (1870,1880)
 ## avg farm size (1860-1950)
 ## farm tenancy (1880-1950, 1962, 1967)
+## farm wages as share of adult male pop. (1870, 1900)
+## farm output as share of total # farms (1870-1900)
+
 
 # 1790
 census.county[[1]] <- census.county[[1]] %>%
@@ -91,14 +94,18 @@ for(i in c(9:10)){
            adultm = m21tot, # Males aged 21+
            p = farms/adultm, 
            aland.gini = p*land.gini + (1-p),
+           output= farmout/farms, 
            taxpc = taxcoun/ns.pop) # Amount of county taxes
 }
+
+census.county[[9]] <- census.county[[9]] %>% # no wages for 1880
+  group_by(state,county) %>%
+  mutate(wages = farmlab/adultm) # farm wages as share of adult male pop.
 
 census.county[[10]] <- census.county[[10]] %>% # no avg. farm size 1870
   group_by(state,county) %>%
   mutate(farmsize = sum(c((farm02*1),(farm39*6),(farm1019*14.5),(farm2049*34.5),(farm5099*74.5),(farm100*299.5),(farm500*749.5),(farm1000)*1000))/farms,
          tenancy = sum(farmten,farmsc)/farms)
-
 
 # 1890
 census.county[[11]] <- census.county[[11]] %>%
@@ -110,6 +117,7 @@ census.county[[11]] <- census.county[[11]] %>%
          p = farms/adultm,
          aland.gini = p*land.gini + (1-p),
          farmsize = farmsize,
+         output= farmout/farms, 
          tenancy = (sum(fa09te,fa1019te,fa2049te,fa5099te,fa100te,fa500te,fa1000te,
                         fa09sc,fa1019sc,fa2049sc,fa5099sc,fa100sc,fa500sc,fa1000sc))/(farms))
 
@@ -123,6 +131,8 @@ census.county[[12]] <- census.county[[12]] %>%
          p = farms/adultm, 
          aland.gini = p*land.gini + (1-p),
          farmsize = farmsize,
+         wages = farmlab/adultm,
+         output= farmout/farms, 
          tenancy=(sum(farmwhct,farmcoct,farmwhst,farmcost)/(farms)))
 
 # 1910, 1920 # no farm size
@@ -220,7 +230,11 @@ census.list <- list(census.county[[1]],census.county[[2]],census.county[[3]],cen
 
 census.ts <- do.call(rbind, census.list) 
 
-census.ts <- subset(census.ts, select=c("year","name","state", "county", "land.gini", "aland.gini","ns.pop","adultm","farms","farmsize","tenancy"))
+census.ts <- subset(census.ts, select=c("year","name","state", "county", "land.gini", "aland.gini","ns.pop","adultm","farms","farmsize","tenancy","wages","output"))
+
+# Rm inf in wages
+
+census.ts$wages[is.infinite(census.ts$wages)] <- NA
 
 # Fix county codes
 

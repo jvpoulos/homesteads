@@ -2,6 +2,16 @@
 # Main                            #
 ###################################
 
+# Setup parallel processing 
+require(parallel)
+require(doParallel)
+
+cores <- detectCores() # specify number of cores to use
+
+registerDoParallel(cores) # register cores
+
+RNGkind("L'Ecuyer-CMRG") # ensure random number generation
+
 # Set directories
 data.directory <-"~/Dropbox/github/land-reform/data/"
 code.directory <-"~/Dropbox/github/land-reform/code/"
@@ -14,21 +24,11 @@ state.land.states <- state.abb[!state.abb %in% pub.states] # 20 state land state
 southern.pub <- c("AL", "AR", "FL", "LA", "MS") # 5 southern public land states
 southern.state <- c("GA","NC","SC","TN","TX","VA") # 6 southern state land states
 
-# Causal estimates on land patents
-
-source(paste0(code.directory,'patents.R')) # load and export patents data
-
-source(paste0(code.directory,'impact-plots-sales.R')) # effect of 1866 SHA on treated (south) sales
-
-source(paste0(code.directory,'impact-plots-patents.R')) # effect of 1889 HSA restrictions on treated (south) sales and homesteads 
-
-source(paste0(code.directory,'dd-patents.R')) # DD estimates for comparison
-
 # Causal estimates on state capacity
 
-source(paste0(code.directory,'census-county-state.R')) # get state-level pop. data
+source(paste0(code.directory,'census-county-state.R')) # get census data
 
-source(paste0(code.directory,'capacity-state.R'))  # load and export capacity data
+source(paste0(code.directory,'capacity-state.R'))  # load and export capacity data [need to run census-county-state.R before]
 
 source(paste0(code.directory,'impact-plots-rev-exp.R')) # effects of 1866 SHA/1889 HSA restrictions on revenue and expenditure
 

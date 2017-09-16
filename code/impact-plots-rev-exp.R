@@ -6,7 +6,7 @@ require(dplyr)
 require(zoo)
 require(matrixStats)
 
-analysis <- "analysis-12"
+analysis <- "analysis-34"
 
 type <- "treated"
 
@@ -189,12 +189,12 @@ ts.means.m <- cbind(ts.means.m, sds[pred.vars])
 ts.means.m[pred.vars][ts.means.m$variable=="Observed",] <- NA
 
 if(analysis=="analysis-12"){
-  ts.plot <- TsPlotRevExp(ts.means.m[ts.means.m$year >"1832-12-31 19:03:58" & ts.means.m$year <="1971-12-31 19:00:00",], analysis)
+  ts.plot <- TsPlotRevExp(ts.means.m, analysis)
   ggsave(paste0(results.directory,"plots/rev-exp-south-treat.png"), ts.plot, width=11, height=8.5)
 }
 
 if(analysis=="analysis-34"){
-  ts.plot <- TsPlotRevExp(ts.means.m[ts.means.m$year > "1834-12-31 19:03:58" & ts.means.m$year <="1971-12-31 19:00:00",], analysis)
+  ts.plot <- TsPlotRevExp(ts.means.m, analysis)
   ggsave(paste0(results.directory,"plots/rev-exp-public-treat.png"), ts.plot, width=11, height=8.5)
 }
 
@@ -205,15 +205,15 @@ if(analysis=="analysis-12"){
 rev.pc.mu <-mean(ts.means.m$value[ts.means.m$variable=="Pointwise rev.pc" & (ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
 rev.pc.mu
 
-rev.pc.mu - (mean(sds$rev.pc.sd[(sds$year>=1866 & sds$year<=1915)])*1.96)
-rev.pc.mu + (mean(sds$rev.pc.sd[(sds$year>=1866 & sds$year<=1915)])*1.96)
+rev.pc.mu - (mean(sds$rev.pc.sd[(sds$year>=1866 & sds$year<=1914)])*1.96)
+rev.pc.mu + (mean(sds$rev.pc.sd[(sds$year>=1866 & sds$year<=1914)])*1.96)
 
 #exp.pc
 exp.pc.mu <- mean(ts.means.m$value[ts.means.m$variable=="Pointwise exp.pc" & (ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
 exp.pc.mu
 
-exp.pc.mu-(mean(sds$exp.pc.sd[(sds$year>=1866 & sds$year<=1915)])*1.96)
-exp.pc.mu+(mean(sds$exp.pc.sd[(sds$year>=1866 & sds$year<=1915)])*1.96)
+exp.pc.mu-(mean(sds$exp.pc.sd[(sds$year>=1866 & sds$year<=1914)])*1.96)
+exp.pc.mu+(mean(sds$exp.pc.sd[(sds$year>=1866 & sds$year<=1914)])*1.96)
 
 # Calculate cumulative impact during intervention/post-period: >= 1866 & <= 1928
 

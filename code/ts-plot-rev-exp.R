@@ -64,24 +64,26 @@ TsPlotRevExp <- function(df, analysis, main = "") {
   
   # horizontal ticks
   if(analysis=='analysis-12'){
-    ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"),
-                     time_trans(tz="UTC")) 
-  } 
+    ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"), 
+                     time_trans(tz="UTC"),
+                     limits = c(as.POSIXct("1823-12-31 19:03:58"), as.POSIXct("1981-12-31 19:00:00")))
+  }  
   if(analysis=='analysis-34'){
     ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"),
-                              time_trans(tz="UTC")) 
+                              time_trans(tz="UTC"),
+                              limits = c(as.POSIXct("1826-12-31 19:03:58"), as.POSIXct("1981-12-31 19:00:00")))
   } 
     
 # annotation text
   if(analysis=='analysis-12'){
     ann_text <- data.frame(year = c(as.POSIXlt("1850-01-01 EST"), as.POSIXlt("1872-01-01 EST"), as.POSIXlt("1895-01-01 EST")), value=15, 
                            series = factor("Time-series", levels = c("Time-series","Pointwise impact","Cumulative impact")),
-                           lab = c("pre-intervention \n (train)", "intervention \n (validation)", "post-intervention \n (test)"))
+                           lab = c("pre-intervention \n (train)", "inter. \n (val.)", "post-intervention \n (test)"))
   }
   if(analysis=='analysis-34'){
-    ann_text <- data.frame(year = c(as.POSIXlt("1870-01-01 EST"), as.POSIXlt("1895-01-01 EST"),as.POSIXlt("1910-01-01 EST")), value=50, 
+    ann_text <- data.frame(year = c(as.POSIXlt("1870-01-01 EST"), as.POSIXlt("1894-01-01 EST"),as.POSIXlt("1915-01-01 EST")), value=50, 
                            series = factor("Time-series", levels = c("Time-series","Pointwise impact","Cumulative impact")),
-                           lab = c("pre-intervention \n (train)", "intervention \n (validation)", "post-intervention \n (test)"))
+                           lab = c("pre-intervention \n (train)", "inter. \n (val.)", "post-intervention \n (test)"))
   }
 
 

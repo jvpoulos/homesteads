@@ -8,69 +8,51 @@ library(dplyr)
 
 rr.inter.did <- rr.inter.m 
 
-rr.inter.did$cat <- NA
-rr.inter.did$cat[rr.inter.did$state %in% southern.pub] <- "Treated"
-rr.inter.did$cat[rr.inter.did$state %in% southern.state] <- "Control"
+rr.inter.did$treat <- NA
+rr.inter.did$treat[rr.inter.did$state %in% southern.pub] <- 1
+rr.inter.did$treat[rr.inter.did$state %in% southern.state] <- 0
+
+rr.inter.did <- subset(rr.inter.did, !is.na(treat)) # rm non-southern state land states
 
 rr.inter.did$year <- rr.inter.did$InOpBy
 
-# Create control and treated sums
-cats.rr.did <- rr.inter.did %>% 
-  filter(!is.na(cat)) %>% # rm non-southern state land states
-  group_by(year,cat) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),track2,cumulative.track) 
-
 # Create var for when treatment started
 
-cats.rr.did$time <- NA
-cats.rr.did$time <- 0
-cats.rr.did$time[(cats.rr.did$year >= 1866 & cats.rr.did$year <= 1876)] <- 1
+rr.inter.did$time <- NA
+rr.inter.did$time <- 0
+rr.inter.did$time[rr.inter.did$year >= 1866] <- 1
 
 # track2 
-did.track2 <- lm(track2 ~ cat*time, data = cats.rr.did[cats.rr.did$year<1889,]) 
+did.track2 <- lm(track2 ~ treat*time, data = rr.inter.did)
 
 summary(did.track2)
 
 confint(did.track2)[4,]
-
-# cumulative.track 
-did.cumulative.track <- lm(cumulative.track ~ cat*time, data = cats.rr.did[cats.rr.did$year<1889,]) 
-
-summary(did.cumulative.track)
-
-confint(did.cumulative.track)[4,]
 
 ## Analysis 3: Effect of HSA restriction on treated, intervention: Mar 1889
 # Treated is non-southern public land states (not MO)
 # Controls are MO, state land states
 
-# Summarize by category
+rr.inter.did <- rr.inter.m 
 
-rr.inter.did$cat <- NA
-rr.inter.did$cat[rr.inter.did$state %in% setdiff(setdiff(pub.states,southern.pub), "MO")] <- "Treated"
-rr.inter.did$cat[rr.inter.did$state %in% c("MO",state.land.states)] <- "Control"
+# Summarize by treategory
 
-# Create control and treated sums
-cats.rr.did <- rr.inter.did %>% 
-  filter(!is.na(cat)) %>% # rm non-southern state land states
-  group_by(year,cat) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),track2) 
+rr.inter.did$treat <- NA
+rr.inter.did$treat[rr.inter.did$state %in% setdiff(setdiff(pub.states,southern.pub), "MO")] <- 1
+rr.inter.did$treat[rr.inter.did$state %in% c("MO",state.land.states)] <- 0
+
+rr.inter.did <- subset(rr.inter.did, !is.na(treat)) # rm non-southern state land states
+
+rr.inter.did$year <- rr.inter.did$InOpBy
 
 # Create var for when treatment started
 
-cats.rr.did$time <- 0
-cats.rr.did$time[cats.rr.did$year >= 1889 & cats.rr.did$year <= 1976] <- 1
+rr.inter.did$time <- 0
+rr.inter.did$time[rr.inter.did$year >= 1889] <- 1
 
 # track2 
-did.track2 <- lm(track2 ~ cat*time, data = cats.rr.did) 
+did.track2 <- lm(track2 ~ treat*time, data = rr.inter.did) # two-period DD
 
 summary(did.track2)
 
 confint(did.track2)[4,]
-
-# cumulative.track 
-did.cumulative.track <- lm(cumulative.track ~ cat*time, data = cats.rr.did) 
-
-summary(did.cumulative.track)
-
-confint(did.cumulative.track)[4,]
