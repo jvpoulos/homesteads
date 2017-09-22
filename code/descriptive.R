@@ -46,30 +46,6 @@ aland.gini.state.time <- ggplot(cats.census.plot, aes( year, aland.gini ,color=c
 
 ggsave(paste0(results.directory,"plots/aland-gini-state-time.png"), aland.gini.state.time, width=11, height=8.5)
 
-exp.pc.state.time <- ggplot(cats.census.plot, aes( year, exp.pc ,color=cat )) + 
-  geom_smooth(span=0.1, se = FALSE) +
-  coord_cartesian(xlim=c(1800,1975)) +
-  geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
-  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
-  geom_vline(xintercept=1889, linetype=5) +  
-  scale_y_continuous(name="State government total expenditure, per-capita ($)") +
-  xlab("") +
-  scale_color_discrete("State type")
-
-ggsave(paste0(results.directory,"plots/exp-pc-state-time.png"), exp.pc.state.time, width=11, height=8.5)
-
-ed.pc.state.time <- ggplot(cats.census.plot, aes( year, ed.pc ,color=cat )) + 
-  coord_cartesian(xlim=c(1800,1940)) +
-  geom_smooth(span=0.3, se = FALSE) +
-  geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
-  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
-  geom_vline(xintercept=1889, linetype=5) +  
-  scale_y_continuous(name="State government education spending, per-capita ($)") +
-  xlab("") +
-  scale_color_discrete("State type")
-
-ggsave(paste0(results.directory,"plots/ed-pc-state-time.png"), ed.pc.state.time, width=11, height=8.5)
-
 
 ## Plot capacity time-series
 
@@ -84,9 +60,9 @@ funds.plot$cat[funds.plot$state %in% setdiff(state.land.states,southern.state)] 
 cats.funds.plot <- funds.plot %>% 
   filter(!is.na(cat)) %>%  # rm non-southern state land states
   group_by(year,cat) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),rev.pc,exp.pc,ed.pc) 
+  summarise_each(funs(mean(., na.rm = TRUE)),rev.pc,exp.pc) 
 
-# By time x region (sales)
+# By time x region
 
 rev.pc.state.time <- ggplot(cats.funds.plot, aes( year, rev.pc ,color=cat )) + 
   geom_smooth(span=0.1, se = FALSE) +

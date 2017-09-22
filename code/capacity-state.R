@@ -13,8 +13,8 @@ require(tidyr)
 
 ## STATE-LEVEL DATA
 
-# iso.funds <- c(1,3,31) # target iso codes
-# names.funds <- c("total.rev",'total.exp','ed.exp')
+iso.funds <- c(1,3) # target iso codes
+names.funds <- c("total.rev",'total.exp')
 
 ## Sources and Uses of Funds in State and Local Governments, 1790-1915 (ICPSR 9728)
 ## preliminary  financial  data on  state government revenues and expenditures for 48 states during the period 1790-1915, 
@@ -38,7 +38,8 @@ funds.9728 <- funds.9728[!is.na(funds.9728$year),] # drop empty rows
 
 funds.9728 <- funds.9728[with(funds.9728, order(state, year)), ] # order by state and year
 
-funds.9728 <- funds.9728[funds.9728$iso >0 & funds.9728$iso <= 417,] # keep obs with valid iso codes
+#funds.9728 <- funds.9728[funds.9728$iso >0 & funds.9728$iso <= 417,] # keep obs with valid iso codes
+funds.9728 <- funds.9728[funds.9728$iso %in% iso.funds,] # keep 1 digit iso codes
 
 # Make data wide
 
@@ -72,9 +73,13 @@ funds.6306 <- do.call(rbind,lapply(data.files.6306[c(1:2,5:6)],read.csv,
                                    stringsAsFactors=FALSE,
                                    col.names = c("state","year","iso","value"))) # 1-2 levels of aggregation
 
+funds.6306 <- funds.6306[!is.na(funds.6306$year),] # drop empty rows
+
 funds.6306 <- funds.6306[with(funds.6306, order(state, year)), ] # order by state and year
 
-funds.6306 <- funds.6306[funds.6306$iso > 0 & funds.6306$iso <= 417,] # keep obs with valid iso codes
+funds.6306 <- funds.6306[with(funds.6306, order(state, year)), ] # order by state and year
+
+funds.6306 <- funds.6306[funds.6306$iso %in% iso.funds,] # keep 1 digit iso codes
 
 # Make data wide
 
@@ -109,7 +114,7 @@ funds.6304 <- do.call(rbind,lapply(data.files.6304[1:7],read.csv,
 
 funds.6304 <- funds.6304[funds.6304$type=='SSS',] # keep state gov't
 
-funds.6304$iso[funds.6304$iso==3100] <- 31 # change ed spending for consistency
+funds.6304 <- funds.6304[funds.6304$iso %in% iso.funds,] # keep 1 digit iso codes
 
 # Make data wide
 
@@ -133,6 +138,7 @@ funds <- funds[with(funds, order(state, year)), ] # order by state and year
 # Rm Outliers
 
 funds <- subset(funds, !(funds$state=="WA" & funds$year>=1907 & funds$year<=1918))
+funds <- subset(funds, !(funds$state=="RI" & funds$year==1822))
 
 ## Make per-capita measures
 
@@ -149,12 +155,9 @@ funds["rev.pc"] <- funds["1"]/funds$ns.pop
 funds["exp.pc"] <- NA
 funds["exp.pc"] <- funds["3"]/funds$ns.pop
 
-funds["ed.pc"] <- NA
-funds["ed.pc"] <- funds["31"]/funds$ns.pop
-
-# remove targets from feature set
-drops <- c("1","3","31","year2","row","ns.pop")
-funds <- funds[!colnames(funds) %in% drops]
+# clean feature set
+funds <- funds[colnames(funds) %in% c("state","year",
+                                      "rev.pc","exp.pc")]
 
 ## Analysis 1: Effect of SHA on treated (southern public land states), intervention: June 1866-June 1876-March 1889
 # features are southern state land states
@@ -174,11 +177,10 @@ cats.funds <- funds %>%
 
 cats.funds.r <- reshape(data.frame(cats.funds), idvar = "year", timevar = "cat", direction = "wide")
 
-funds.control <- funds[!is.na(funds$cat) & funds$cat=="Control",] # discard treated since we have treated time-series
+funds.control <- funds[!is.na(funds$cat) & funds$cat=="Control",][c("state","year","rev.pc","exp.pc")] # discard treated since we have treated time-series
 
 rev.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
 exp.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
-ed.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
 
 #Labels
 
@@ -188,40 +190,27 @@ rev.pc.y <- rev.pc.y[!is.na(rev.pc.y$rev.pc.Treated),]
 exp.pc.y <- cats.funds.r[c("year", "exp.pc.Treated")]
 exp.pc.y <- exp.pc.y[!is.na(exp.pc.y$exp.pc.Treated),]
 
-ed.pc.y <- cats.funds.r[c("year", "ed.pc.Treated")]
-ed.pc.y <- ed.pc.y[!is.na(ed.pc.y$ed.pc.Treated),]
-
 # Splits
 
 rev.pc.years <- intersect(rev.pc$year,rev.pc.y$year) # common rev.pc years in treated and control
 
-rev.pc.x.train <- rev.pc[rev.pc$year %in% rev.pc.years & rev.pc$year < 1866,]
-rev.pc.x.val <- rev.pc[rev.pc$year %in% rev.pc.years & (rev.pc$year >= 1866  & rev.pc$year <= 1876),]
-rev.pc.x.test <- rev.pc[rev.pc$year %in% rev.pc.years & rev.pc$year > 1876,]
+rev.pc.x.train <- rev.pc[rev.pc$year %in% rev.pc.years & rev.pc$year < 1860,]
+rev.pc.x.val <- rev.pc[rev.pc$year %in% rev.pc.years & (rev.pc$year >= 1860 & rev.pc$year < 1866),] # 1860, 1865 for validation
+rev.pc.x.test <- rev.pc[rev.pc$year %in% rev.pc.years & rev.pc$year >= 1866,]
 
-rev.pc.y.train <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & rev.pc.y$year < 1866,]
-rev.pc.y.val <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & (rev.pc.y$year >= 1866 & rev.pc.y$year <= 1876),]
-rev.pc.y.test <- rev.pc.y[rev.pc.y$year %in% rev.pc.years &rev.pc.y$year > 1876,]
+rev.pc.y.train <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & rev.pc.y$year < 1860,]
+rev.pc.y.val <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & (rev.pc.y$year >= 1860 & rev.pc.y$year < 1866),]
+rev.pc.y.test <- rev.pc.y[rev.pc.y$year %in% rev.pc.years &rev.pc.y$year >= 1866,]
 
 exp.pc.years <- intersect(exp.pc$year,exp.pc.y$year) # common exp.pc years in treated and control
 
-exp.pc.x.train <- exp.pc[exp.pc$year %in% exp.pc.years & exp.pc$year < 1866,]
-exp.pc.x.val <- exp.pc[exp.pc$year %in% exp.pc.years & (exp.pc$year >= 1866  & exp.pc$year <= 1876),]
-exp.pc.x.test <- exp.pc[exp.pc$year %in% exp.pc.years & exp.pc$year > 1876,]
+exp.pc.x.train <- exp.pc[exp.pc$year %in% exp.pc.years & exp.pc$year < 1860,]
+exp.pc.x.val <- exp.pc[exp.pc$year %in% exp.pc.years & (exp.pc$year >= 1860  & exp.pc$year < 1866),]
+exp.pc.x.test <- exp.pc[exp.pc$year %in% exp.pc.years & exp.pc$year >= 1866,]
 
-exp.pc.y.train <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & exp.pc.y$year < 1866,]
-exp.pc.y.val <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & (exp.pc.y$year >= 1866 & exp.pc.y$year <= 1876),]
-exp.pc.y.test <- exp.pc.y[exp.pc.y$year %in% exp.pc.years &exp.pc.y$year > 1876,]
-
-ed.pc.years <- intersect(ed.pc$year,ed.pc.y$year) # common ed.pc years in treated and control
-
-ed.pc.x.train <- ed.pc[ed.pc$year %in% ed.pc.years & ed.pc$year < 1866,]
-ed.pc.x.val <- ed.pc[ed.pc$year %in% ed.pc.years & (ed.pc$year >= 1866  & ed.pc$year <= 1876),]
-ed.pc.x.test <- ed.pc[ed.pc$year %in% ed.pc.years & ed.pc$year > 1876,]
-
-ed.pc.y.train <- ed.pc.y[ed.pc.y$year %in% ed.pc.years & ed.pc.y$year < 1866,]
-ed.pc.y.val <- ed.pc.y[ed.pc.y$year %in% ed.pc.years & (ed.pc.y$year >= 1866 & ed.pc.y$year <= 1876),]
-ed.pc.y.test <- ed.pc.y[ed.pc.y$year %in% ed.pc.years &ed.pc.y$year > 1876,]
+exp.pc.y.train <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & exp.pc.y$year < 1860,]
+exp.pc.y.val <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & (exp.pc.y$year >= 1860 & exp.pc.y$year < 1866),]
+exp.pc.y.test <- exp.pc.y[exp.pc.y$year %in% exp.pc.years &exp.pc.y$year >= 1866,]
 
 # Preprocess
 rev.pc.x.train <- data.frame(sapply(rev.pc.x.train, as.numeric))
@@ -246,17 +235,6 @@ exp.pc.x.val[!colnames(exp.pc.x.val) %in% c("year")] <- predict(exp.pc.pre.train
 exp.pc.x.test <- data.frame(sapply(exp.pc.x.test, as.numeric))
 exp.pc.x.test[!colnames(exp.pc.x.test) %in% c("year")] <- predict(exp.pc.pre.train, exp.pc.x.test[!colnames(exp.pc.x.test) %in% c("year")] ) # use training values for test set 
 
-ed.pc.x.train <- data.frame(sapply(ed.pc.x.train, as.numeric))
-ed.pc.x.train[is.na(ed.pc.x.train)] <- 0 # fill NA with 0 before scale
-ed.pc.pre.train <- preProcess(ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")], method = c("center", "scale","medianImpute"))
-ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")] <- predict(ed.pc.pre.train, ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")] )
-
-ed.pc.x.val <- data.frame(sapply(ed.pc.x.val, as.numeric))
-ed.pc.x.val[!colnames(ed.pc.x.val) %in% c("year")] <- predict(ed.pc.pre.train, ed.pc.x.val[!colnames(ed.pc.x.val) %in% c("year")] ) # use training values for val set 
-
-ed.pc.x.test <- data.frame(sapply(ed.pc.x.test, as.numeric))
-ed.pc.x.test[!colnames(ed.pc.x.test) %in% c("year")] <- predict(ed.pc.pre.train, ed.pc.x.test[!colnames(ed.pc.x.test) %in% c("year")] ) # use training values for test set 
-
 # Export each as csv (labels, features)
 data.directory <- "~/Dropbox/github/drnns-prediction/data/capacity/analysis-12/treated/"
 
@@ -273,13 +251,6 @@ write.csv(exp.pc.x.test[!colnames(exp.pc.x.test) %in% c("year")] , paste0(data.d
 write.csv(exp.pc.y.train[!colnames(exp.pc.y.train) %in% c("year")], paste0(data.directory,"exppc-y-train.csv"), row.names=FALSE) 
 write.csv(exp.pc.y.val[!colnames(exp.pc.y.val) %in% c("year")], paste0(data.directory,"exppc-y-val.csv"), row.names=FALSE) 
 write.csv(exp.pc.y.test[!colnames(exp.pc.y.test) %in% c("year")], paste0(data.directory,"exppc-y-test.csv"), row.names=FALSE) 
-
-write.csv(ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")], paste0(data.directory,"edpc-x-train.csv"), row.names=FALSE) 
-write.csv(ed.pc.x.val[!colnames(ed.pc.x.val) %in% c("year")] , paste0(data.directory,"edpc-x-val.csv"), row.names=FALSE) 
-write.csv(ed.pc.x.test[!colnames(ed.pc.x.test) %in% c("year")] , paste0(data.directory,"edpc-x-test.csv"), row.names=FALSE) 
-write.csv(ed.pc.y.train[!colnames(ed.pc.y.train) %in% c("year")], paste0(data.directory,"edpc-y-train.csv"), row.names=FALSE) 
-write.csv(ed.pc.y.val[!colnames(ed.pc.y.val) %in% c("year")], paste0(data.directory,"edpc-y-val.csv"), row.names=FALSE) 
-write.csv(ed.pc.y.test[!colnames(ed.pc.y.test) %in% c("year")], paste0(data.directory,"edpc-y-test.csv"), row.names=FALSE) 
 
 ## Analysis 3: Effect of HSA restriction on treated, intervention: Mar 1889
 # Treated is non-southern public land states (not MO)
@@ -300,7 +271,7 @@ cats.funds <- funds %>%
 
 cats.funds.r <- reshape(data.frame(cats.funds), idvar = "year", timevar = "cat", direction = "wide")
 
-funds.control <- funds[!is.na(funds$cat) & funds$cat=="Control",] # discard treated since we have treated time-series
+funds.control <- funds[!is.na(funds$cat) & funds$cat=="Control",][c("state","year","rev.pc","exp.pc")] # discard treated since we have treated time-series
 
 rev.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
 exp.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
@@ -321,33 +292,23 @@ ed.pc.y <- ed.pc.y[!is.na(ed.pc.y$ed.pc.Treated),]
 
 rev.pc.years <- intersect(rev.pc$year,rev.pc.y$year) # common rev.pc years in treated and control
 
-rev.pc.x.train <- rev.pc[rev.pc$year %in% rev.pc.years & rev.pc$year < 1889,]
-rev.pc.x.val <- rev.pc[rev.pc$year %in% rev.pc.years & (rev.pc$year >= 1889 & rev.pc$year <= 1899),]
-rev.pc.x.test <- rev.pc[rev.pc$year %in% rev.pc.years & rev.pc$year >= 1899,]
+rev.pc.x.train <- rev.pc[rev.pc$year %in% rev.pc.years & rev.pc$year < 1887,]
+rev.pc.x.val <- rev.pc[rev.pc$year %in% rev.pc.years & (rev.pc$year >= 1887 & rev.pc$year < 1889),] # 1887, 1888 for validation
+rev.pc.x.test <- rev.pc[rev.pc$year %in% rev.pc.years & rev.pc$year >= 1889,]
 
-rev.pc.y.train <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & rev.pc.y$year < 1889,]
-rev.pc.y.val <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & (rev.pc.y$year >= 1889 & rev.pc.y$year <= 1899),]
-rev.pc.y.test <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & rev.pc.y$year >= 1899,]
+rev.pc.y.train <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & rev.pc.y$year < 1887,]
+rev.pc.y.val <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & (rev.pc.y$year >= 1887 & rev.pc.y$year < 1889),]
+rev.pc.y.test <- rev.pc.y[rev.pc.y$year %in% rev.pc.years & rev.pc.y$year >= 1889,]
 
 exp.pc.years <- intersect(exp.pc$year,exp.pc.y$year) # common exp.pc years in treated and control
 
-exp.pc.x.train <- exp.pc[exp.pc$year %in% exp.pc.years & exp.pc$year < 1889,]
-exp.pc.x.val <- exp.pc[exp.pc$year %in% exp.pc.years & (exp.pc$year >= 1889 & exp.pc$year <= 1899),]
-exp.pc.x.test <- exp.pc[exp.pc$year %in% exp.pc.years & exp.pc$year >= 1899,]
+exp.pc.x.train <- exp.pc[exp.pc$year %in% exp.pc.years & exp.pc$year < 1887,]
+exp.pc.x.val <- exp.pc[exp.pc$year %in% exp.pc.years & (exp.pc$year >= 1887 & exp.pc$year < 1889),]
+exp.pc.x.test <- exp.pc[exp.pc$year %in% exp.pc.years & exp.pc$year >= 1889,]
 
-exp.pc.y.train <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & exp.pc.y$year < 1889,]
-exp.pc.y.val <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & (exp.pc.y$year >= 1889 & exp.pc.y$year <= 1899),]
-exp.pc.y.test <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & exp.pc.y$year >= 1899,]
-
-ed.pc.years <- intersect(ed.pc$year,ed.pc.y$year) # common ed.pc years in treated and control
-
-ed.pc.x.train <- ed.pc[ed.pc$year %in% ed.pc.years & ed.pc$year < 1889,]
-ed.pc.x.val <- ed.pc[ed.pc$year %in% ed.pc.years & (ed.pc$year >= 1889 & ed.pc$year <= 1899),]
-ed.pc.x.test <- ed.pc[ed.pc$year %in% ed.pc.years & ed.pc$year >= 1899,]
-
-ed.pc.y.train <- ed.pc.y[ed.pc.y$year %in% ed.pc.years & ed.pc.y$year < 1889,]
-ed.pc.y.val <- ed.pc.y[ed.pc.y$year %in% ed.pc.years & (ed.pc.y$year >= 1889 & ed.pc.y$year <= 1899),]
-ed.pc.y.test <- ed.pc.y[ed.pc.y$year %in% ed.pc.years & ed.pc.y$year >= 1899,]
+exp.pc.y.train <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & exp.pc.y$year < 1887,]
+exp.pc.y.val <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & (exp.pc.y$year >= 1887 & exp.pc.y$year < 1889),]
+exp.pc.y.test <- exp.pc.y[exp.pc.y$year %in% exp.pc.years & exp.pc.y$year >= 1889,]
 
 # Preprocess
 
@@ -373,17 +334,6 @@ exp.pc.x.val[!colnames(exp.pc.x.val) %in% c("year")] <- predict(exp.pc.pre.train
 exp.pc.x.test <- data.frame(sapply(exp.pc.x.test, as.numeric))
 exp.pc.x.test[!colnames(exp.pc.x.test) %in% c("year")] <- predict(exp.pc.pre.train, exp.pc.x.test[!colnames(exp.pc.x.test) %in% c("year")] ) # use training values for test set 
 
-ed.pc.x.train <- data.frame(sapply(ed.pc.x.train, as.numeric))
-ed.pc.x.train[is.na(ed.pc.x.train)] <- 0 # fill NA with 0 before scale
-ed.pc.pre.train <- preProcess(ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")], method = c("center", "scale","medianImpute"))
-ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")] <- predict(ed.pc.pre.train, ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")] )
-
-ed.pc.x.val <- data.frame(sapply(ed.pc.x.val, as.numeric))
-ed.pc.x.val[!colnames(ed.pc.x.val) %in% c("year")] <- predict(ed.pc.pre.train, ed.pc.x.val[!colnames(ed.pc.x.val) %in% c("year")] ) # use training values for val set 
-
-ed.pc.x.test <- data.frame(sapply(ed.pc.x.test, as.numeric))
-ed.pc.x.test[!colnames(ed.pc.x.test) %in% c("year")] <- predict(ed.pc.pre.train, ed.pc.x.test[!colnames(ed.pc.x.test) %in% c("year")] ) # use training values for test set 
-
 # Export each as csv (labels, features)
 data.directory <- "~/Dropbox/github/drnns-prediction/data/capacity/analysis-34/treated/"
 
@@ -400,10 +350,3 @@ write.csv(exp.pc.x.test[!colnames(exp.pc.x.test) %in% c("year")] , paste0(data.d
 write.csv(exp.pc.y.train[!colnames(exp.pc.y.train) %in% c("year")], paste0(data.directory,"exppc-y-train.csv"), row.names=FALSE) 
 write.csv(exp.pc.y.val[!colnames(exp.pc.y.val) %in% c("year")], paste0(data.directory,"exppc-y-val.csv"), row.names=FALSE) 
 write.csv(exp.pc.y.test[!colnames(exp.pc.y.test) %in% c("year")], paste0(data.directory,"exppc-y-test.csv"), row.names=FALSE) 
-
-write.csv(ed.pc.x.train[!colnames(ed.pc.x.train) %in% c("year")], paste0(data.directory,"edpc-x-train.csv"), row.names=FALSE) 
-write.csv(ed.pc.x.val[!colnames(ed.pc.x.val) %in% c("year")] , paste0(data.directory,"edpc-x-val.csv"), row.names=FALSE) 
-write.csv(ed.pc.x.test[!colnames(ed.pc.x.test) %in% c("year")] , paste0(data.directory,"edpc-x-test.csv"), row.names=FALSE) 
-write.csv(ed.pc.y.train[!colnames(ed.pc.y.train) %in% c("year")], paste0(data.directory,"edpc-y-train.csv"), row.names=FALSE) 
-write.csv(ed.pc.y.val[!colnames(ed.pc.y.val) %in% c("year")], paste0(data.directory,"edpc-y-val.csv"), row.names=FALSE) 
-write.csv(ed.pc.y.test[!colnames(ed.pc.y.test) %in% c("year")], paste0(data.directory,"edpc-y-test.csv"), row.names=FALSE) 
