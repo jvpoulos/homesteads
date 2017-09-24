@@ -275,7 +275,6 @@ funds.control <- funds[!is.na(funds$cat) & funds$cat=="Control",][c("state","yea
 
 rev.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
 exp.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
-ed.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
 
 # Labels
 
@@ -284,9 +283,6 @@ rev.pc.y <- rev.pc.y[!is.na(rev.pc.y$rev.pc.Treated),]
 
 exp.pc.y <- cats.funds.r[c("year", "exp.pc.Treated")]
 exp.pc.y <- exp.pc.y[!is.na(exp.pc.y$exp.pc.Treated),]
-
-ed.pc.y <- cats.funds.r[c("year", "ed.pc.Treated")]
-ed.pc.y <- ed.pc.y[!is.na(ed.pc.y$ed.pc.Treated),]
 
 # Splits
 
