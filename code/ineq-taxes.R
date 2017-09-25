@@ -1,5 +1,5 @@
 ############################################
-# State capacity vs. land inequality plots #
+# State capacity vs. railroad access plots #
 ############################################
 
 library(ggplot2)
@@ -39,12 +39,12 @@ LmEq <- function(m) {
   as.character(as.expression(eq));                 
 }
 
-ineq.capacity <- ggplot(ineq.funds, aes(aland.gini, value, color = factor(variable))) + 
+ineq.capacity <- ggplot(ineq.funds, aes(aland.gini, value, color = factor(category))) + 
   geom_point() +
-  geom_smooth(data=subset(ineq.funds, variable=="rev.pc"),se=TRUE, colour=wes_palette("Darjeeling")[1],size=1) +
-  annotate("text", x = 0.75, y = 7, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="rev.pc"))), colour=wes_palette("Darjeeling")[1], size = 4, parse=TRUE) +
-  geom_smooth(data=subset(ineq.funds, variable=="exp.pc"),se=TRUE, colour=wes_palette("Darjeeling")[2],size=1) +
-  annotate("text", x = 0.77, y = 5, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="exp.pc"))), colour=wes_palette("Darjeeling")[2], size = 4, parse=TRUE) +
+  geom_smooth(data=subset(ineq.funds, category=="rev.pc"),se=TRUE, colour=wes_palette("Darjeeling")[1],size=1) +
+  annotate("text", x = 0.75, y = 7, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, category=="rev.pc"))), colour=wes_palette("Darjeeling")[1], size = 4, parse=TRUE) +
+  geom_smooth(data=subset(ineq.funds, category=="exp.pc"),se=TRUE, colour=wes_palette("Darjeeling")[2],size=1) +
+  annotate("text", x = 0.77, y = 5, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, category=="exp.pc"))), colour=wes_palette("Darjeeling")[2], size = 4, parse=TRUE) +
   coord_cartesian(ylim=c(0,75)) +
   scale_colour_manual(name="State capacity measure",
                       values=c(exp.pc=wes_palette("Darjeeling")[2], rev.pc=wes_palette("Darjeeling")[1]),

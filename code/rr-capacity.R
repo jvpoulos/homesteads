@@ -47,12 +47,12 @@ LmEq <- function(m) {
   as.character(as.expression(eq));                 
 }
 
-rr.capacity <- ggplot(rr.funds, aes(track2, value, color = factor(category))) + 
+rr.capacity <- ggplot(rr.funds, aes(track2, value, color = factor(variable))) + 
   geom_point() +
-  geom_smooth(data=subset(rr.funds, category=="rev.pc"),se=TRUE, colour=wes_palette("FantasticFox")[3],size=1) +
-  annotate("text", x = 0.27, y = 4.8, label = LmEq(gam(value ~ track2, data=subset(rr.funds, category=="rev.pc"))), colour=wes_palette("FantasticFox")[3], size = 4, parse=TRUE) +
-  geom_smooth(data=subset(rr.funds, category=="exp.pc"),se=TRUE, colour=wes_palette("Moonrise3")[2],size=1) +
-  annotate("text", x = 0.25, y = 0.2, label = LmEq(gam(value ~ track2, data=subset(rr.funds, category=="exp.pc"))), colour=wes_palette("Moonrise3")[2], size = 4, parse=TRUE) +
+  geom_smooth(data=subset(rr.funds, variable=="rev.pc"),se=TRUE, colour=wes_palette("FantasticFox")[3],size=1) +
+  annotate("text", x = 0.27, y = 4.8, label = LmEq(gam(value ~ track2, data=subset(rr.funds, variable=="rev.pc"))), colour=wes_palette("FantasticFox")[3], size = 4, parse=TRUE) +
+  geom_smooth(data=subset(rr.funds, variable=="exp.pc"),se=TRUE, colour=wes_palette("Moonrise3")[2],size=1) +
+  annotate("text", x = 0.25, y = 0.2, label = LmEq(gam(value ~ track2, data=subset(rr.funds, variable=="exp.pc"))), colour=wes_palette("Moonrise3")[2], size = 4, parse=TRUE) +
   coord_cartesian(ylim=c(0,25)) +
   scale_colour_manual(name="State capacity measure",
                       values=c(exp.pc=wes_palette("Moonrise3")[2], rev.pc=wes_palette("FantasticFox")[3]),

@@ -40,11 +40,15 @@ source(paste0(code.directory,'dd-capacity.R'))
 
 source(paste0(code.directory,'dd-census.R')) 
 
-# Causal/DD estimates on railroads
+# DD estimates on railroads
 
 source(paste0(code.directory,'railroads.R')) 
 
 source(paste0(code.directory,'dd-railroads.R')) 
+
+# DD estimates on Rhode and Strumpf tax data
+
+source(paste0(code.directory,'taxes-revenues.R')) 
 
 # Descriptive plots, attention heatmaps, scatter plots
 
