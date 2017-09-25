@@ -53,13 +53,11 @@ TsPlotRevExp <- function(df, analysis, main = "") {
   # vertical line to indicate intervention
   
   if(analysis=='analysis-12'){
-    intervention <- geom_vline(xintercept=c(as.numeric(as.POSIXct("1866-06-01 06:00:00",tz="UTC")),
-                                            as.numeric(as.POSIXct("1876-06-01 06:00:00",tz="UTC"))), linetype=2)
+    intervention <- geom_vline(xintercept=c(as.numeric(as.POSIXct("1866-06-01 06:00:00",tz="UTC"))), linetype=2)
   } 
   
   if(analysis=='analysis-34'){
-    intervention <- geom_vline(xintercept= c(as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC")),
-                                             as.numeric(as.POSIXct("1899-03-01 06:00:00",tz="UTC"))), linetype=2)
+    intervention <- geom_vline(xintercept= c(as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC"))), linetype=2)
   }
   
   # horizontal ticks

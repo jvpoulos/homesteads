@@ -22,7 +22,25 @@ rr.inter.did$time <- NA
 rr.inter.did$time <- 0
 rr.inter.did$time[rr.inter.did$year >= 1866] <- 1
 
+rr.inter.did$did <- NA
+rr.inter.did$did <- rr.inter.did$treat* rr.inter.did$time
+
 # track2 
+
+track2.data <- data.frame(subset(rr.inter.did, !is.na(track2), select=c('time','treat','did','track2')))
+colnames(track2.data)<- c('time','treat','did','y')
+
+track2.est <- boot(track2.data,
+                  RunDiD, R=1000, 
+                  strata=track2.data$did, # stratify at time*treat
+                  parallel="multicore", ncpus = cores)
+
+track2.est[1]
+
+boot.ci(track2.est, conf=0.95, type=c("basic")) # nonparametric bootstrap CIs
+
+# LM sanity check
+
 did.track2 <- lm(track2 ~ treat*time, data = rr.inter.did)
 
 summary(did.track2)
@@ -50,7 +68,26 @@ rr.inter.did$year <- rr.inter.did$InOpBy
 rr.inter.did$time <- 0
 rr.inter.did$time[rr.inter.did$year >= 1889] <- 1
 
+rr.inter.did$did <- NA
+rr.inter.did$did <- rr.inter.did$treat* rr.inter.did$time
+
 # track2 
+
+track2.data <- data.frame(subset(rr.inter.did, !is.na(track2), select=c('time','treat','did','track2')))
+colnames(track2.data)<- c('time','treat','did','y')
+
+track2.est <- boot(track2.data,
+                   RunDiD, R=1000, 
+                   strata=track2.data$did, # stratify at time*treat
+                   parallel="multicore", ncpus = cores)
+
+track2.est[1]
+
+boot.ci(track2.est, conf=0.95, type=c("basic")) # nonparametric bootstrap CIs
+
+nrow(track2.data)
+
+# LM sanity check
 did.track2 <- lm(track2 ~ treat*time, data = rr.inter.did) # two-period DD
 
 summary(did.track2)

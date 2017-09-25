@@ -9,7 +9,7 @@ library(reshape)
 library(reshape2)
 library(tidyr)
 
-## Plot inequality time-series
+## Plot census time-series
 
 census.plot <- census.ts
 
@@ -28,12 +28,11 @@ census.plot$cat[census.plot$state.name %in% setdiff(state.land.states,southern.s
 cats.census.plot <- census.plot %>% 
   filter(!is.na(cat)) %>%  
   group_by(year,cat) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),aland.gini) %>%  
-  filter(!is.na(aland.gini)) 
+  summarise_each(funs(mean(., na.rm = TRUE)),aland.gini,output,tenancy,wages)
 
-# By time x region 
+# inequality
 
-aland.gini.state.time <- ggplot(cats.census.plot, aes( year, aland.gini ,color=cat )) + 
+aland.gini.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$aland.gini),], aes( year, aland.gini ,color=cat )) + 
   geom_line() +
   #geom_smooth(span=0.1, se = FALSE) +
   #coord_cartesian(xlim=c(1800,1975)) +
@@ -45,6 +44,45 @@ aland.gini.state.time <- ggplot(cats.census.plot, aes( year, aland.gini ,color=c
   scale_color_discrete("State type")
 
 ggsave(paste0(results.directory,"plots/aland-gini-state-time.png"), aland.gini.state.time, width=11, height=8.5)
+
+# output
+
+output.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$output),], aes( year, output ,color=cat )) + 
+  geom_line() +
+  #geom_smooth(span=0.1, se = FALSE) +
+  #coord_cartesian(xlim=c(1800,1975)) +
+  geom_vline(xintercept=1889, linetype=5) +  
+  scale_y_continuous(name="Farm output") +
+  xlab("") +
+  scale_color_discrete("State type")
+
+ggsave(paste0(results.directory,"plots/output-state-time.png"), output.state.time, width=11, height=8.5)
+
+wages.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$wages),], aes( year, wages ,color=cat )) + 
+  geom_line() +
+  #geom_smooth(span=0.1, se = FALSE) +
+  #coord_cartesian(xlim=c(1800,1975)) +
+  #geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
+  #geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
+  geom_vline(xintercept=1889, linetype=5) +  
+  scale_y_continuous(name="Farm wages") +
+  xlab("") +
+  scale_color_discrete("State type")
+
+ggsave(paste0(results.directory,"plots/wages-state-time.png"), wages.state.time, width=11, height=8.5)
+
+# tenancy
+
+tenancy.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$tenancy) & cats.census.plot$year<=1950,], aes( year, tenancy ,color=cat )) + 
+  geom_line() +
+  #geom_smooth(span=0.1, se = FALSE) +
+ # coord_cartesian(xlim=c(1880,1950)) +
+  geom_vline(xintercept=1889, linetype=5) +  
+  scale_y_continuous(name="Farm tenancy") +
+  xlab("") +
+  scale_color_discrete("State type")
+
+ggsave(paste0(results.directory,"plots/tenancy-state-time.png"), tenancy.state.time, width=11, height=8.5)
 
 
 ## Plot capacity time-series
