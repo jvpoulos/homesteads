@@ -57,6 +57,10 @@ funds.9728$state[funds.9728$state=="MIS"] <- "MS"
 funds.9728$state[funds.9728$state=="IO"] <- "IA" 
 funds.9728$state[funds.9728$state=="KA"] <- "KS" 
 
+# Clean MS revenue in 1843
+
+funds.9728$`1`[funds.9728$state=="MS" & funds.9728$year==1843] <- funds.9728$`1`[funds.9728$state=="MS" & funds.9728$year==1843]/10
+ 
 ## State and Local Government [United States]: Sources and Uses of Funds, State Financial Statistics, 1933-1937 (ICPSR 6306)
 
 # Set location of files
@@ -138,6 +142,7 @@ funds <- funds[with(funds, order(state, year)), ] # order by state and year
 # Rm Outliers
 
 funds <- subset(funds, !(funds$state=="WA" & funds$year>=1907 & funds$year<=1918))
+funds <- subset(funds, !(funds$state=="RI" & funds$year==1822))
 funds <- subset(funds, !(funds$state=="RI" & funds$year==1822))
 
 ## Make per-capita measures
