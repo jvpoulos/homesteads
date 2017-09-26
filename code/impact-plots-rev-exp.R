@@ -6,7 +6,7 @@ require(dplyr)
 require(zoo)
 require(matrixStats)
 
-analysis <- "analysis-12"
+analysis <- "analysis-34"
 
 type <- "treated"
 
@@ -198,6 +198,21 @@ if(analysis=="analysis-34"){
 }
 
 if(analysis=="analysis-12"){
+  
+# Calculate avg. pointwise impact during intervention period: >= 1866 & <= 1876
+  
+#rev.pc
+mean(ts.means.m$value[ts.means.m$variable=="Pointwise rev.pc" & (ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1876-12-31 19:00:00")])
+  
+mean(ts.means.m$pointwise.rev.pc.min[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1876-12-31 19:00:00")])
+mean(ts.means.m$pointwise.rev.pc.max[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1876-12-31 19:00:00")])
+  
+#exp.pc
+mean(ts.means.m$value[ts.means.m$variable=="Pointwise exp.pc" & (ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1876-12-31 19:00:00")])
+  
+mean(ts.means.m$pointwise.exp.pc.min[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1876-12-31 19:00:00")])
+mean(ts.means.m$pointwise.exp.pc.max[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1876-12-31 19:00:00")])
+
 # Calculate avg. pointwise impact during intervention/post-period: >= 1866 & <= 1928
 
 #rev.pc

@@ -24,6 +24,49 @@ funds.did$treat <- ifelse(funds.did$cat=="Treated",1,0)
 funds.did$did <- NA
 funds.did$did <- funds.did$treat* funds.did$time
 
+# DD Estimates (intervention period)
+
+# rev.pc 
+
+revpc.data <- data.frame(subset(funds.did, !is.na(rev.pc) & year <=1876, select=c('time','treat','did','rev.pc')))
+colnames(revpc.data)<- c('time','treat','did','y')
+
+revpc.est <- boot(revpc.data,
+                  RunDiD, R=1000, 
+                  strata=revpc.data$did, # stratify at time*treat
+                  parallel="multicore", ncpus = cores)
+
+revpc.est[1]
+
+boot.ci(revpc.est, conf=0.95, type=c("basic")) # nonparametric bootstrap CIs
+
+# LM sanity check
+did.rev.pc <- lm(rev.pc ~ treat*time, data = funds.did[funds.did$year <=1876,]) 
+
+summary(did.rev.pc)
+
+confint(did.rev.pc)[4,]
+
+# exp.pc 
+
+exppc.data <- data.frame(subset(funds.did, !is.na(exp.pc) & year <=1876, select=c('time','treat','did','exp.pc')))
+colnames(exppc.data)<- c('time','treat','did','y')
+
+exppc.est <- boot(exppc.data,
+                  RunDiD, R=1000, 
+                  strata=exppc.data$did, # stratify at time*treat
+                  parallel="multicore", ncpus = cores)
+
+exppc.est[1]
+boot.ci(exppc.est, conf=0.95, type=c("basic")) # nonparametric bootstrap CIs
+
+# LM sanity check
+did.exp.pc <- lm(exp.pc ~ treat*time, data = funds.did[funds.did$year <=1876,]) 
+
+summary(did.exp.pc)
+
+confint(did.exp.pc)[4,]
+
 # DD Estimates (pre-GD)
 
 # rev.pc 
