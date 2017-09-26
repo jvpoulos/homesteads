@@ -56,8 +56,10 @@ source(paste0(code.directory,'descriptive.R')) # Descriptive plots
 
 source(paste0(code.directory,'attention-plot-capacity.R')) # Attention heatmap
 
-source(paste0(code.directory,'attention-plot-patents.R')) # Attention heatmap
-
 source(paste0(code.directory,'rr-capacity.R')) # rr track vs. state capacity 
 
+source(paste0(code.directory,'rr-taxes.R')) # rr track vs. state capacity 
+
 source(paste0(code.directory,'ineq-capacity.R')) # inequality vs. state capacity 
+
+source(paste0(code.directory,'ineq-taxes.R')) # inequality vs. state capacity 

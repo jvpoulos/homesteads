@@ -8,6 +8,8 @@ library(dplyr)
 library(mgcv)
 library(wesanderson)
 
+source(paste0(code.directory,'LmEq.R')) 
+
 # Reshape funds
 
 funds.m <- melt(funds[c("state","year","rev.pc","exp.pc")], id.vars = c("state","year"),
@@ -31,21 +33,6 @@ rr.funds <- merge(rr.inter.m.state,
                   by.y = c("state","year"))
 
 # Scatter plot (each point state/year observation) 
-
-LmEq <- function(m) {
-  
-  l <- list(a = format(coef(m)[1], digits = 2),
-            b = format(abs(coef(m)[2]), digits = 2),
-            p.val = format(summary(m)[[4]][2], digits = 2));
-  
-  if (coef(m)[2] >= 0)  {
-    eq <- substitute(italic(y) == a + b %.% italic(x)*","~~italic(p)~"="~p.val,l)
-  } else {
-    eq <- substitute(italic(y) == a - b %.% italic(x)*","~~italic(p)~"="~p.val,l)    
-  }
-  
-  as.character(as.expression(eq));                 
-}
 
 rr.capacity <- ggplot(rr.funds, aes(track2, value, color = factor(variable))) + 
   geom_point() +

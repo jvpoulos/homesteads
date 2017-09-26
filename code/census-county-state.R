@@ -230,7 +230,7 @@ census.list <- list(census.county[[1]],census.county[[2]],census.county[[3]],cen
 
 census.ts <- do.call(rbind, census.list) 
 
-census.ts <- subset(census.ts, select=c("year","name","state", "county", "land.gini", "aland.gini","ns.pop","adultm","farms","farmsize","tenancy","wages","output"))
+census.ts <- subset(census.ts, select=c("year","name","state","county","fips","land.gini", "aland.gini","ns.pop","adultm","farms","farmsize","tenancy","wages","output"))
 
 # Rm inf in wages
 
