@@ -107,6 +107,8 @@ ggsave(paste0(results.directory,"plots/rr-1862.png"), rr.1862, width=11, height=
 
 ################### Load railraods.RData
 
+load("/Users/jason/Dropbox/github/land-reform/data/railroads.RData")
+
 detach("package:raster", unload=TRUE) # avoid dplyr select error
 
 # Intersect lines with polygons
@@ -138,11 +140,12 @@ rr.inter.m <- merge(rr.inter.m, county.map@data, by="ID_NUM") # merge back count
 
 rr.inter.m$state <- state.abb[match(rr.inter.m$STATE_TERR,state.name)] # state abbr
 
-# Create cumulative miles per sq mile measure
+# Create access measures
 rr.inter.m <- rr.inter.m %>% 
   filter(!is.na(state)) %>% # rm DC & territories
   arrange(ID_NUM,InOpBy)  %>% # sort by county/year
   group_by(ID_NUM) %>% 
   mutate(cumulative.track = cumsum(track), # cumulative sum of track miles by county
-         track2 = cumulative.track/AREA_SQMI) %>% # cumulative track miles per square mile
-  select(ID_NUM,InOpBy,FIPS,cumulative.track,track2,state,AREA_SQMI)
+         track2 = cumulative.track/AREA_SQMI, # cumulative track miles per square mile
+         access = ifelse(cumulative.track>0,1,0)) %>% 
+  select(ID_NUM,InOpBy,FIPS,cumulative.track,track2,access,state,AREA_SQMI)

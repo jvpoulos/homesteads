@@ -1,6 +1,7 @@
 data.directory <- "~/Dropbox/github/ok-lottery/data/"
 
 library(reshape2)
+library(readxl)
 
 ### Taxes and Revenues
 
@@ -425,3 +426,6 @@ taxpc <- taxpc[c("fips","State","County.Name","state.abb", "year", "taxpc2", "ta
 # clean
 
 taxpc$taxpc2[is.infinite(taxpc$taxpc2)] <- NA
+
+taxpc$taxpc1 <- log(taxpc$taxpc1+ .Machine$double.eps) # take logs of tax measures
+taxpc$taxpc2 <- log(taxpc$taxpc2+ .Machine$double.eps)

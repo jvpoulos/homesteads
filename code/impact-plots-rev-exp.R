@@ -5,6 +5,7 @@ require(reshape2)
 require(dplyr)
 require(zoo)
 require(matrixStats)
+require(tseries)
 
 analysis <- "analysis-34"
 
@@ -54,7 +55,7 @@ rev.pc.bind <- rbind(rbind(rev.pc.train,rev.pc.val),rev.pc.test)
 
 rev.pc.bopt <- b.star(rev.pc.bind["rev.pc.pred"][[1]],round=TRUE)[[1]]  # get optimal bootstrap lengths
 
-rev.pc.boot <- tsbootstrap(rev.pc.bind["rev.pc.pred"][[1]], nb=1000, b= rev.pc.bopt, type="stationary")  # stationary bootstrap with mean block length b according to Politis and Romano (1994)
+rev.pc.boot <- tsbootstrap(rev.pc.bind["rev.pc.pred"][[1]], nb=1000, b= rev.pc.bopt, type="block") 
 rev.pc.sd <- matrixStats::rowSds(as.matrix(rev.pc.boot))
 
 ## Expenditures data 
@@ -95,7 +96,7 @@ exp.pc.train <- cbind(exp.pc.y.train, exp.pc.train.pred)
 
 exp.pc.bind <- rbind(rbind(exp.pc.train,exp.pc.test),exp.pc.val)
 
-exp.pc.bopt <- b.star(exp.pc.bind["exp.pc.pred"][[1]],round=TRUE)[[1]]  # get optimal bootstrap lengths
+exp.pc.bopt <- b.star(exp.pc.bind["exp.pc.pred"][[1]],round=TRUE)[[1]]
 
 exp.pc.boot <- tsbootstrap(exp.pc.bind["exp.pc.pred"][[1]], nb=1000, b=exp.pc.bopt, type="stationary") # stationary bootstrap with mean block length b according to Politis and Romano (1994)
 exp.pc.sd <- matrixStats::rowSds(as.matrix(exp.pc.boot))
@@ -139,11 +140,12 @@ ts.means.m$year <- as.POSIXct(ts.means.m$year, tz="UTC")
 # Labels
 
 ts.means.m$series <- NA
-ts.means.m$series[ts.means.m$variable=="rev.pc.Treated" | ts.means.m$variable=="rev.pc.pred" | ts.means.m$variable=="exp.pc.Treated" | ts.means.m$variable=="exp.pc.pred"] <- "Time-series"
+ts.means.m$series[ts.means.m$variable=="rev.pc.Treated" | ts.means.m$variable=="rev.pc.pred"] <- "Revenues time-series"
+ts.means.m$series[ts.means.m$variable=="exp.pc.Treated" | ts.means.m$variable=="exp.pc.pred"] <- "Expenditures time-series"
 ts.means.m$series[ts.means.m$variable=="pointwise.rev.pc" | ts.means.m$variable=="pointwise.exp.pc"] <- "Pointwise impact"
 ts.means.m$series[ts.means.m$variable=="cumulative.rev.pc" | ts.means.m$variable=="cumulative.exp.pc"] <- "Cumulative impact"
 
-ts.means.m$series<- factor(ts.means.m$series, levels=c("Time-series","Pointwise impact", "Cumulative impact")) # reverse order
+ts.means.m$series<- factor(ts.means.m$series, levels=c("Revenues time-series", "Expenditures time-series","Pointwise impact", "Cumulative impact")) # reverse order
 
 levels(ts.means.m$variable) <- c("Observed rev.pc","Predicted rev.pc", "Observed exp.pc", "Predicted exp.pc",
                                  "Pointwise rev.pc", "Pointwise exp.pc", "Cumulative rev.pc",  "Cumulative exp.pc")
@@ -187,31 +189,74 @@ pred.vars <- c("rev.pc.pred", "rev.pc.sd", "pred.rev.pc.min", "pred.rev.pc.max",
 ts.means.m <- cbind(ts.means.m, sds[pred.vars])
 ts.means.m[pred.vars][ts.means.m$variable=="Observed",] <- NA
 
+if(analysis=="analysis-01"){
+  ts.plot <- TsPlotRevExp(ts.means.m[ts.means.m$series != "Cumulative impact",], analysis)
+  ggsave(paste0(results.directory,"plots/rev-exp-hsa-treat.png"), ts.plot, width=11, height=8.5)
+}
+
 if(analysis=="analysis-12"){
   ts.plot <- TsPlotRevExp(ts.means.m[ts.means.m$series != "Cumulative impact",], analysis)
-  ggsave(paste0(results.directory,"plots/rev-exp-south-treat.png"), ts.plot, width=11, height=8.5)
+  ggsave(paste0(results.directory,"plots/rev-exp-sha-treat.png"), ts.plot, width=11, height=8.5)
 }
 
 if(analysis=="analysis-34"){
   ts.plot <- TsPlotRevExp(ts.means.m[ts.means.m$series != "Cumulative impact",], analysis)
-  ggsave(paste0(results.directory,"plots/rev-exp-public-treat.png"), ts.plot, width=11, height=8.5)
+  ggsave(paste0(results.directory,"plots/rev-exp-89-treat.png"), ts.plot, width=11, height=8.5)
+}
+
+if(analysis=="analysis-41"){
+  ts.plot <- TsPlotRevExp(ts.means.m[ts.means.m$series != "Cumulative impact",], analysis)
+  ggsave(paste0(results.directory,"plots/rev-exp-89-treat-west.png"), ts.plot, width=11, height=8.5)
+}
+
+if(analysis=="analysis-01"){
+  
+  # Calculate avg. pointwise impact during intervention/post-period: >= 1862
+  
+  #rev.pc
+  mean(ts.means.m$value[ts.means.m$variable=="Pointwise rev.pc" & (ts.means.m$year>="1862-12-31 19:03:58")]) 
+  
+  mean(ts.means.m$pointwise.rev.pc.min[(ts.means.m$year>="1862-12-31 19:03:58")]) 
+  mean(ts.means.m$pointwise.rev.pc.max[(ts.means.m$year>="1862-12-31 19:03:58")]) 
+  
+  #exp.pc
+  mean(ts.means.m$value[ts.means.m$variable=="Pointwise exp.pc" & (ts.means.m$year>="1862-12-31 19:03:58")])
+  
+  mean(ts.means.m$pointwise.exp.pc.min[(ts.means.m$year>="1862-12-31 19:03:58")])
+  mean(ts.means.m$pointwise.exp.pc.max[(ts.means.m$year>="1862-12-31 19:03:58")])
+
+  
+  # Calculate avg. pointwise impact during intervention/post-period: pre-GD
+  
+  #rev.pc
+  mean(ts.means.m$value[ts.means.m$variable=="Pointwise rev.pc" & (ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  
+  mean(ts.means.m$pointwise.rev.pc.min[(ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  mean(ts.means.m$pointwise.rev.pc.max[(ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  
+  #exp.pc
+  mean(ts.means.m$value[ts.means.m$variable=="Pointwise exp.pc" & (ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  
+  mean(ts.means.m$pointwise.exp.pc.min[(ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  mean(ts.means.m$pointwise.exp.pc.max[(ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  
 }
 
 if(analysis=="analysis-12"){
   
-# Calculate avg. pointwise impact during intervention period: >= 1866 & <= 1876
+# Calculate avg. pointwise impact during intervention period: >= 1866
   
 #rev.pc
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise rev.pc" & (ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1876-12-31 19:00:00")])
+mean(ts.means.m$value[ts.means.m$variable=="Pointwise rev.pc" & (ts.means.m$year>="1866-12-31 19:03:58")])
   
-mean(ts.means.m$pointwise.rev.pc.min[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1876-12-31 19:00:00")])
-mean(ts.means.m$pointwise.rev.pc.max[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1876-12-31 19:00:00")])
+mean(ts.means.m$pointwise.rev.pc.min[(ts.means.m$year>="1866-12-31 19:03:58")])
+mean(ts.means.m$pointwise.rev.pc.max[(ts.means.m$year>="1866-12-31 19:03:58")])
   
 #exp.pc
-mean(ts.means.m$value[ts.means.m$variable=="Pointwise exp.pc" & (ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1876-12-31 19:00:00")])
+mean(ts.means.m$value[ts.means.m$variable=="Pointwise exp.pc" & (ts.means.m$year>="1866-12-31 19:03:58")])
   
-mean(ts.means.m$pointwise.exp.pc.min[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1876-12-31 19:00:00")])
-mean(ts.means.m$pointwise.exp.pc.max[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1876-12-31 19:00:00")])
+mean(ts.means.m$pointwise.exp.pc.min[(ts.means.m$year>="1866-12-31 19:03:58")])
+mean(ts.means.m$pointwise.exp.pc.max[(ts.means.m$year>="1866-12-31 19:03:58")])
 
 # Calculate avg. pointwise impact during intervention/post-period: >= 1866 & <= 1928
 
@@ -227,25 +272,24 @@ mean(ts.means.m$value[ts.means.m$variable=="Pointwise exp.pc" & (ts.means.m$year
 mean(ts.means.m$pointwise.exp.pc.min[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
 mean(ts.means.m$pointwise.exp.pc.max[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
 
-# Calculate cumulative impact during intervention/post-period: >= 1866 & <= 1928
-
-#rev.pc
-ts.means.m$value[ts.means.m$variable=="Cumulative rev.pc" & ts.means.m$year=="1914-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative rev.pc" & ts.means.m$year=="1866-12-31 19:03:58"]
-
-mean(ts.means.m$cumulative.rev.pc.min[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
-mean(ts.means.m$cumulative.rev.pc.max[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
-
-#exp.pc
-ts.means.m$value[ts.means.m$variable=="Cumulative exp.pc" & ts.means.m$year=="1914-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative exp.pc" & ts.means.m$year=="1866-12-31 19:03:58"]
-
-mean(ts.means.m$cumulative.exp.pc.min[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
-mean(ts.means.m$cumulative.exp.pc.max[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
-
 }
 
-if(analysis=="analysis-34"){
-  # Calculate avg. pointwise impact during intervention/post-period: >= 1889 & <= 1928
+if(analysis=="analysis-34" | analysis=="41"){
+  # Calculate avg. pointwise impact during intervention/post-period: >= 1889
   
+  #rev.pc
+  mean(ts.means.m$value[ts.means.m$variable=="Pointwise rev.pc" & (ts.means.m$year>="1889-12-31 19:00:00")])
+  
+  mean(ts.means.m$pointwise.rev.pc.min[(ts.means.m$year>="1889-12-31 19:00:00")])
+  mean(ts.means.m$pointwise.rev.pc.max[(ts.means.m$year>="1889-12-31 19:00:00")])
+  
+  #exp.pc
+  mean(ts.means.m$value[ts.means.m$variable=="Pointwise exp.pc" & (ts.means.m$year>="1889-12-31 19:00:00")])
+  
+  mean(ts.means.m$pointwise.exp.pc.min[(ts.means.m$year>="1889-12-31 19:00:00")])
+  mean(ts.means.m$pointwise.exp.pc.max[(ts.means.m$year>="1889-12-31 19:00:00")])
+  
+  # Calculate avg. pointwise impact during intervention/post-period: pre-GD
   #rev.pc
   mean(ts.means.m$value[ts.means.m$variable=="Pointwise rev.pc" & (ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
   
@@ -257,19 +301,5 @@ if(analysis=="analysis-34"){
   
   mean(ts.means.m$pointwise.exp.pc.min[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
   mean(ts.means.m$pointwise.exp.pc.max[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
-  
-  # Calculate cumulative impact during intervention/post-period: >= 1889 & <= 1928
-  
-  #rev.pc
-  ts.means.m$value[ts.means.m$variable=="Cumulative rev.pc" & ts.means.m$year=="1916-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative rev.pc" & ts.means.m$year=="1889-12-31 19:00:00"]
-  
-  mean(ts.means.m$cumulative.rev.pc.min[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
-  mean(ts.means.m$cumulative.rev.pc.max[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
-  
-  #exp.pc
-  ts.means.m$value[ts.means.m$variable=="Cumulative exp.pc" & ts.means.m$year=="1916-12-31 19:00:00"] - ts.means.m$value[ts.means.m$variable=="Cumulative exp.pc" & ts.means.m$year=="1889-12-31 19:00:00"]
-  
-  sds$cumulative.exp.pc.max[(sds$year==1916)] - sds$cumulative.exp.pc.max[(sds$year==1889)]
-  sds$cumulative.exp.pc.min[(sds$year==1916)] - sds$cumulative.exp.pc.min[(sds$year==1889)]
   
 }

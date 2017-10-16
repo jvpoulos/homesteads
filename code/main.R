@@ -24,9 +24,9 @@ state.land.states <- state.abb[!state.abb %in% pub.states] # 20 state land state
 southern.pub <- c("AL", "AR", "FL", "LA", "MS") # 5 southern public land states
 southern.state <- c("GA","NC","SC","TN","TX","VA") # 6 southern state land states
 
-# Causal estimates on state capacity
-
 source(paste0(code.directory,'census-county-state.R')) # get census data
+
+# Causal estimates on state capacity
 
 source(paste0(code.directory,'capacity-state.R'))  # load and export capacity data [need to run census-county-state.R before]
 
@@ -34,7 +34,17 @@ source(paste0(code.directory,'impact-plots-rev-exp.R')) # effects of 1866 SHA/18
 
 source(paste0(code.directory,'impact-plots-ed-exp.R')) # effects 866 SHA/1889 HSA restrictions treated (south) education
 
+source(paste0(code.directory,'attention-plot-capacity.R')) # Attention heatmap
+
 source(paste0(code.directory,'dd-capacity.R')) 
+
+# Causal estimates on land patents
+
+source(paste0(code.directory,'patents.R')) 
+
+source(paste0(code.directory,'impact-plots-patents.R')) 
+
+source(paste0(code.directory,'dd-patents.R')) 
 
 # DD estimates on inequality and tenancy
 
@@ -44,21 +54,21 @@ source(paste0(code.directory,'dd-census.R'))
 
 source(paste0(code.directory,'railroads.R')) 
 
+source(paste0(code.directory,'rr-impact.R')) 
+
+source(paste0(code.directory,'impact-plots.rr.R')) 
+
 source(paste0(code.directory,'dd-railroads.R')) 
 
 # DD estimates on Rhode and Strumpf tax data
 
 source(paste0(code.directory,'taxes-revenues.R')) 
 
+source(paste0(code.directory,'dd-taxes.R')) 
+
 # Descriptive plots, attention heatmaps, scatter plots
 
 source(paste0(code.directory,'descriptive.R')) # Descriptive plots
-
-source(paste0(code.directory,'attention-plot-capacity.R')) # Attention heatmap
-
-source(paste0(code.directory,'rr-capacity.R')) # rr track vs. state capacity 
-
-source(paste0(code.directory,'rr-taxes.R')) # rr track vs. state capacity 
 
 source(paste0(code.directory,'ineq-capacity.R')) # inequality vs. state capacity 
 
