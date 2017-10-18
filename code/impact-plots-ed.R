@@ -7,7 +7,7 @@ require(zoo)
 require(matrixStats)
 require(tseries)
 
-analysis <- "analysis-34"
+analysis <- "analysis-41"
 
 type <- "treated"
 
@@ -58,8 +58,6 @@ educ.pc.bopt <- b.star(educ.pc.bind["educ.pc.pred"][[1]],round=TRUE)[[1]]  # get
 educ.pc.boot <- tsbootstrap(educ.pc.bind["educ.pc.pred"][[1]], nb=1000, b= educ.pc.bopt, type="block")
 educ.pc.sd <- matrixStats::rowSds(as.matrix(educ.pc.boot))
 
-tsboot(educ.pc.bind["educ.pc.pred"][[1]], statistic, R)
-
 ## Create time series data
 setwd(code.directory)
 
@@ -69,19 +67,18 @@ ts.dat <- cbind(educ.pc.bind, educ.pc.sd)
 
 ts.means <- ts.dat  %>%
   mutate(pointwise.educ.pc = educ.pc.Treated-educ.pc.pred,
-         cumulative.educ.pc = NA)
+         cumulative.educ.pc = cumsum(pointwise.educ.pc))
 
 # cumulative.educ.pc = cumsum(pointwise.educ.pc),
 
 ts.means <- ts.means[with(ts.means, order(year)), ] # sort by year
 
-ts.means$cumulative.educ.pc <- NA
+# ts.means$cumulative.educ.pc <- NA
+# 
+# for (i in 1:nrow(ts.means)){
+#   ts.means$cumulative.educ.pc[i] <- rollmean(ts.means$pointwise.educ.pc,i, align='right')
+# }
 
-for (i in 1:nrow(ts.means)){
-  ts.means$cumulative.educ.pc[i] <- rollmean(ts.means$pointwise.educ.pc,i, align='right')
-}
-
-      
 ts.means.m <- melt(as.data.frame(ts.means)[!colnames(ts.means) %in% c("educ.pc.sd")], id.var=c("year"))
 
 # # Adjust year for plot
@@ -113,12 +110,12 @@ sds <- ts.dat  %>%
 
 sds <- sds[with(sds, order(year)), ] # sort by year
 
-for (i in 1:nrow(sds)){
-  sds$cumulative.educ.pc.min[i] <- rollmean(sds$pointwise.educ.pc.min,i, align='right')
-}
-for (i in 1:nrow(sds)){
-  sds$cumulative.educ.pc.max[i] <- rollmean(sds$pointwise.educ.pc.max,i, align='right')
-}
+# for (i in 1:nrow(sds)){
+#   sds$cumulative.educ.pc.min[i] <- rollmean(sds$pointwise.educ.pc.min,i, align='right')
+# }
+# for (i in 1:nrow(sds)){
+#   sds$cumulative.educ.pc.max[i] <- rollmean(sds$pointwise.educ.pc.max,i, align='right')
+# }
 
 pred.vars <- c("educ.pc.pred", "educ.pc.sd", "pred.educ.pc.min", "pred.educ.pc.max", "pointwise.educ.pc.min", "pointwise.educ.pc.max", "cumulative.educ.pc.min", "cumulative.educ.pc.max")
 ts.means.m <- cbind(ts.means.m, sds[pred.vars])
@@ -154,16 +151,16 @@ if(analysis=="analysis-01"){
   mean(ts.means.m$pointwise.educ.pc.min[(ts.means.m$year>="1862-12-31 19:03:58")]) 
   mean(ts.means.m$pointwise.educ.pc.max[(ts.means.m$year>="1862-12-31 19:03:58")]) 
   
-
-  # Calculate avg. pointwise impact during intervention/post-period: pre-GD
+  # Calculate avg. cumulative impact during intervention/post-period: >= 1862
   
   #educ.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise educ.pc" & (ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  ts.means.m$value[ts.means.m$variable=="Cumulative educ.pc" & (ts.means.m$year=="1941-12-31 19:00:00")] - ts.means.m$value[ts.means.m$variable=="Cumulative educ.pc" & (ts.means.m$year=="1862-12-31 19:03:58")]
   
-  mean(ts.means.m$pointwise.educ.pc.min[(ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
-  mean(ts.means.m$pointwise.educ.pc.max[(ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
-
+  ts.means.m$cumulative.educ.pc.min[(ts.means.m$year=="1941-12-31 19:00:00")][[1]] - ts.means.m$cumulative.educ.pc.min[(ts.means.m$year=="1862-12-31 19:03:58")][[1]]
+  ts.means.m$cumulative.educ.pc.max[(ts.means.m$year=="1941-12-31 19:00:00")][[1]] - ts.means.m$cumulative.educ.pc.max[(ts.means.m$year=="1862-12-31 19:03:58")][[1]]
   
+  # Calculate MAPE
+  mean(abs((educ.pc.val$educ.pc.Treated-educ.pc.val$educ.pc.pred)/educ.pc.val$educ.pc.Treated))*(100/3)
 }
 
 if(analysis=="analysis-12"){
@@ -177,13 +174,16 @@ if(analysis=="analysis-12"){
   mean(ts.means.m$pointwise.educ.pc.max[(ts.means.m$year>="1866-12-31 19:03:58")])
   
   
-  # Calculate avg. pointwise impact during intervention/post-period: >= 1866 & <= 1928
+  # Calculate avg. cumulative impact during intervention/post-period: >= 1866
   
   #educ.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise educ.pc" & (ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
+  ts.means.m$value[ts.means.m$variable=="Cumulative educ.pc" & (ts.means.m$year=="1941-12-31 19:00:00")] - ts.means.m$value[ts.means.m$variable=="Cumulative educ.pc" & (ts.means.m$year=="1866-12-31 19:03:58")]
   
-  mean(ts.means.m$pointwise.educ.pc.min[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
-  mean(ts.means.m$pointwise.educ.pc.max[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
+  ts.means.m$cumulative.educ.pc.min[(ts.means.m$year=="1941-12-31 19:00:00")][[1]] - ts.means.m$cumulative.educ.pc.min[(ts.means.m$year=="1866-12-31 19:03:58")][[1]]
+  ts.means.m$cumulative.educ.pc.max[(ts.means.m$year=="1941-12-31 19:00:00")][[1]] - ts.means.m$cumulative.educ.pc.max[(ts.means.m$year=="1866-12-31 19:03:58")][[1]]
+  
+  # Calculate MAPE
+  mean(abs((educ.pc.val$educ.pc.Treated-educ.pc.val$educ.pc.pred)/educ.pc.val$educ.pc.Treated))*(100/3)
   
   
 }
@@ -198,13 +198,16 @@ if(analysis=="analysis-34" | analysis=="analysis-41"){
   mean(ts.means.m$pointwise.educ.pc.max[(ts.means.m$year>="1889-12-31 19:00:00")])
   
   
-  # Calculate avg. pointwise impact during intervention/post-period: >= 1889 & <= 1928
+  # Calculate avg. cumulative impact during intervention/post-period: >= 1889
   
   #educ.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise educ.pc" & (ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  ts.means.m$value[ts.means.m$variable=="Cumulative educ.pc" & (ts.means.m$year=="1941-12-31 19:00:00")] - ts.means.m$value[ts.means.m$variable=="Cumulative educ.pc" & (ts.means.m$year=="1889-12-31 19:00:00")]
   
-  mean(ts.means.m$pointwise.educ.pc.min[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
-  mean(ts.means.m$pointwise.educ.pc.max[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  ts.means.m$cumulative.educ.pc.min[(ts.means.m$year=="1941-12-31 19:00:00")][[1]] - ts.means.m$cumulative.educ.pc.min[(ts.means.m$year=="1889-12-31 19:00:00")][[1]]
+  ts.means.m$cumulative.educ.pc.max[(ts.means.m$year=="1941-12-31 19:00:00")][[1]] - ts.means.m$cumulative.educ.pc.max[(ts.means.m$year=="1889-12-31 19:00:00")][[1]]
+  
+  # Calculate MAPE
+  mean(abs((educ.pc.val$educ.pc.Treated-educ.pc.val$educ.pc.pred)/educ.pc.val$educ.pc.Treated))*(100/3)
   
   
 }

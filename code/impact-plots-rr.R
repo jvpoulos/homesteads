@@ -7,7 +7,7 @@ require(zoo)
 require(matrixStats)
 require(tseries)
 
-analysis <- "analysis-34"
+analysis <- "analysis-41"
 
 type <- "treated"
 
@@ -96,18 +96,15 @@ ts.dat <- cbind(access.bind, access.sd)
 
 ts.means <- ts.dat  %>%
   mutate(pointwise.access = access.Treated-access.pred,
-         cumulative.access = NA)
-
-# cumulative.access = cumsum(pointwise.access),
+         cumulative.access = cumsum(pointwise.access))
 
 ts.means <- ts.means[with(ts.means, order(year)), ] # sort by year
 
-ts.means$cumulative.access <- NA
-
-for (i in 1:nrow(ts.means)){
-  ts.means$cumulative.access[i] <- rollmean(ts.means$pointwise.access,i, align='right')
-}
-
+# ts.means$cumulative.access <- NA
+# 
+# for (i in 1:nrow(ts.means)){
+#   ts.means$cumulative.access[i] <- rollmean(ts.means$pointwise.access,i, align='right')
+# }
 
 ts.means.m <- melt(as.data.frame(ts.means)[!colnames(ts.means) %in% c("access.sd")], id.var=c("year"))
 
@@ -140,12 +137,12 @@ sds <- ts.dat  %>%
 
 sds <- sds[with(sds, order(year)), ] # sort by year
 
-for (i in 1:nrow(sds)){
-  sds$cumulative.access.min[i] <- rollmean(sds$pointwise.access.min,i, align='right')
-}
-for (i in 1:nrow(sds)){
-  sds$cumulative.access.max[i] <- rollmean(sds$pointwise.access.max,i, align='right')
-}
+# for (i in 1:nrow(sds)){
+#   sds$cumulative.access.min[i] <- rollmean(sds$pointwise.access.min,i, align='right')
+# }
+# for (i in 1:nrow(sds)){
+#   sds$cumulative.access.max[i] <- rollmean(sds$pointwise.access.max,i, align='right')
+# }
 
 pred.vars <- c("access.pred", "access.sd", "pred.access.min", "pred.access.max", "pointwise.access.min", "pointwise.access.max", "cumulative.access.min", "cumulative.access.max")
 ts.means.m <- cbind(ts.means.m, sds[pred.vars])
@@ -181,6 +178,14 @@ if(analysis=="analysis-01"){
   mean(ts.means.m$pointwise.access.min[(ts.means.m$year>="1862-12-31 19:03:58")]) 
   mean(ts.means.m$pointwise.access.max[(ts.means.m$year>="1862-12-31 19:03:58")]) 
   
+  # Calculate cumulative impact during intervention/post-period: >= 1862
+  
+  #access
+  ts.means.m$value[ts.means.m$variable=="Cumulative access" & (ts.means.m$year=="1910-12-31 19:00:00")] - ts.means.m$value[ts.means.m$variable=="Cumulative access" & (ts.means.m$year=="1862-12-31 19:03:58")]
+  
+  ts.means.m$cumulative.access.min[(ts.means.m$year=="1910-12-31 19:00:00")][[1]] -ts.means.m$cumulative.access.min[(ts.means.m$year=="1862-12-31 19:03:58")][[1]]
+  ts.means.m$cumulative.access.max[(ts.means.m$year=="1910-12-31 19:00:00")][[1]]- ts.means.m$cumulative.access.max[(ts.means.m$year=="1862-12-31 19:03:58")][[1]]
+  
   
 }
 
@@ -193,6 +198,15 @@ if(analysis=="analysis-12"){
   
   mean(ts.means.m$pointwise.access.min[(ts.means.m$year>="1866-12-31 19:03:58")])
   mean(ts.means.m$pointwise.access.max[(ts.means.m$year>="1866-12-31 19:03:58")])
+  
+  # Calculate cumulative impact during intervention/post-period: >= 1866
+  
+  #access
+  ts.means.m$value[ts.means.m$variable=="Cumulative access" & (ts.means.m$year=="1910-12-31 19:00:00")] - ts.means.m$value[ts.means.m$variable=="Cumulative access" & (ts.means.m$year=="1866-12-31 19:03:58")]
+  
+  ts.means.m$cumulative.access.min[(ts.means.m$year=="1910-12-31 19:00:00")][[1]] -ts.means.m$cumulative.access.min[(ts.means.m$year=="1866-12-31 19:03:58")][[1]]
+  ts.means.m$cumulative.access.max[(ts.means.m$year=="1910-12-31 19:00:00")][[1]]- ts.means.m$cumulative.access.max[(ts.means.m$year=="1866-12-31 19:03:58")][[1]]
+  
 
   
 }
@@ -205,6 +219,15 @@ if(analysis=="analysis-34" | analysis=="analysis-41"){
   
   mean(ts.means.m$pointwise.access.min[(ts.means.m$year>="1889-12-31 19:00:00")])
   mean(ts.means.m$pointwise.access.max[(ts.means.m$year>="1889-12-31 19:00:00")])
+  
+  # Calculate cumulative impact during intervention/post-period: >= 1889
+  
+  #access
+  ts.means.m$value[ts.means.m$variable=="Cumulative access" & (ts.means.m$year=="1910-12-31 19:00:00")] - ts.means.m$value[ts.means.m$variable=="Cumulative access" & (ts.means.m$year=="1889-12-31 19:00:00")]
+  
+  ts.means.m$cumulative.access.min[(ts.means.m$year=="1910-12-31 19:00:00")][[1]] -ts.means.m$cumulative.access.min[(ts.means.m$year=="1889-12-31 19:00:00")][[1]]
+  ts.means.m$cumulative.access.max[(ts.means.m$year=="1910-12-31 19:00:00")][[1]]- ts.means.m$cumulative.access.max[(ts.means.m$year=="1889-12-31 19:00:00")][[1]]
+  
   
 
 }

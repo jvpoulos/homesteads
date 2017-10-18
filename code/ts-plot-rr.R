@@ -41,42 +41,42 @@ TsPlotRR <- function(df, analysis, main = "") {
   # vertical line to indicate intervention
   
   if(analysis=='analysis-01'){
-    intervention <- geom_vline(xintercept=c(as.numeric(as.POSIXct("1862-05-01 06:00:00",tz="UTC"))), linetype=2)
+    intervention <- geom_vline(xintercept=c(as.numeric(as.POSIXct("1862-01-01 00:00:00",tz="UTC"))), linetype=2)
   } 
   
   if(analysis=='analysis-12'){
-    intervention <- geom_vline(xintercept=c(as.numeric(as.POSIXct("1866-06-01 06:00:00",tz="UTC"))), linetype=2)
+    intervention <- geom_vline(xintercept=c(as.numeric(as.POSIXct("1866-01-01 00:00:00",tz="UTC"))), linetype=2)
   } 
   
   if(analysis=='analysis-34'){
-    intervention <- geom_vline(xintercept= c(as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC"))), linetype=2)
+    intervention <- geom_vline(xintercept= c(as.numeric(as.POSIXct("1889-01-01 00:00:00",tz="UTC"))), linetype=2)
   }
   
   if(analysis=='analysis-41'){
-    intervention <- geom_vline(xintercept= c(as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC"))), linetype=2)
+    intervention <- geom_vline(xintercept= c(as.numeric(as.POSIXct("1889-01-01 00:00:00",tz="UTC"))), linetype=2)
   }
   
   # horizontal ticks
   
   if(analysis=='analysis-01'){
-    ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"), 
+    ticks <- scale_x_datetime(date_breaks="6 years",labels=date_format("%Y"), 
                               time_trans(tz="UTC"),
-                              limits = c(as.POSIXct("1829-12-31 19:03:58"), as.POSIXct("1910-12-31 19:00:00")))
+                              limits = c(as.POSIXct("1830-12-31 19:03:58"), as.POSIXct("1910-12-31 19:00:00")))
   }  
   
   if(analysis=='analysis-12'){
-    ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"), 
+    ticks <- scale_x_datetime(date_breaks="8 years",labels=date_format("%Y"), 
                               time_trans(tz="UTC"),
-                              limits = c(as.POSIXct("1829-12-31 19:03:58"), as.POSIXct("1910-12-31 19:00:00")))
+                              limits = c(as.POSIXct("1830-12-31 19:03:58"), as.POSIXct("1910-12-31 19:00:00")))
   }  
   if(analysis=='analysis-34'){
-    ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"),
+    ticks <- scale_x_datetime(date_breaks="8 years",labels=date_format("%Y"),
                               time_trans(tz="UTC"),
                               limits = c(as.POSIXct("1829-12-31 19:03:58"), as.POSIXct("1910-12-31 19:00:00")))
   } 
   
   if(analysis=='analysis-41'){
-    ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"),
+    ticks <- scale_x_datetime(date_breaks="8 years",labels=date_format("%Y"),
                               time_trans(tz="UTC"),
                               limits = c(as.POSIXct("1829-12-31 19:03:58"), as.POSIXct("1910-12-31 19:00:00")))
   } 

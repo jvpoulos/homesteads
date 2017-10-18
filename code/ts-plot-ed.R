@@ -41,67 +41,67 @@ TsPlotEd <- function(df, analysis, main = "") {
   # vertical line to indicate intervention
   
   if(analysis=='analysis-01'){
-    intervention <- geom_vline(xintercept=c(as.numeric(as.POSIXct("1862-05-01 06:00:00",tz="UTC"))), linetype=2)
+    intervention <- geom_vline(xintercept=c(as.numeric(as.POSIXct("1862-01-01 00:00:00",tz="UTC"))), linetype=2)
   } 
   
   if(analysis=='analysis-12'){
-    intervention <- geom_vline(xintercept=c(as.numeric(as.POSIXct("1866-06-01 06:00:00",tz="UTC"))), linetype=2)
+    intervention <- geom_vline(xintercept=c(as.numeric(as.POSIXct("1866-01-01 00:00:00",tz="UTC"))), linetype=2)
   } 
   
   if(analysis=='analysis-34'){
-    intervention <- geom_vline(xintercept= c(as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC"))), linetype=2)
+    intervention <- geom_vline(xintercept= c(as.numeric(as.POSIXct("1889-01-01 00:00:00",tz="UTC"))), linetype=2)
   }
   if(analysis=='analysis-41'){
-    intervention <- geom_vline(xintercept= c(as.numeric(as.POSIXct("1889-03-01 06:00:00",tz="UTC"))), linetype=2)
+    intervention <- geom_vline(xintercept= c(as.numeric(as.POSIXct("1889-01-01 00:00:00",tz="UTC"))), linetype=2)
   }
   
   
   # horizontal ticks
   
   if(analysis=='analysis-01'){
-    ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"), 
+    ticks <- scale_x_datetime(date_breaks="6 years",labels=date_format("%Y"), 
                               time_trans(tz="UTC"),
-                              limits = c(as.POSIXct("1824-12-31 19:03:58"), as.POSIXct("1941-12-31 19:00:00")))
+                              limits = c(as.POSIXct("1825-12-31 19:03:58"), as.POSIXct("1941-12-31 19:00:00")))
   }  
   
   if(analysis=='analysis-12'){
-    ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"), 
+    ticks <- scale_x_datetime(date_breaks="6 years",labels=date_format("%Y"), 
                               time_trans(tz="UTC"),
-                              limits = c(as.POSIXct("1824-12-31 19:03:58"), as.POSIXct("1941-12-31 19:00:00")))
+                              limits = c(as.POSIXct("1823-12-31 19:03:58"), as.POSIXct("1941-12-31 19:00:00")))
   }  
   if(analysis=='analysis-34'){
-    ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"),
+    ticks <- scale_x_datetime(date_breaks="6 years",labels=date_format("%Y"), 
                               time_trans(tz="UTC"),
-                              limits = c(as.POSIXct("1824-12-31 19:03:58"), as.POSIXct("1941-12-31 19:00:00")))
+                              limits = c(as.POSIXct("1822-12-31 19:03:58"), as.POSIXct("1941-12-31 19:00:00")))
   } 
   if(analysis=='analysis-41'){
-    ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"),
+    ticks <- scale_x_datetime(date_breaks="6 years",labels=date_format("%Y"), 
                               time_trans(tz="UTC"),
-                              limits = c(as.POSIXct("1824-12-31 19:03:58"), as.POSIXct("1941-12-31 19:00:00")))
+                              limits = c(as.POSIXct("1822-12-31 19:03:58"), as.POSIXct("1941-12-31 19:00:00")))
   } 
   
   # annotation text
   
   if(analysis=='analysis-01'){
-    ann_text <- data.frame(year = c(as.POSIXlt("1850-01-01 EST"), as.POSIXlt("1871-01-01 EST"), as.POSIXlt("1895-01-01 EST")), value=1.5, 
+    ann_text <- data.frame(year = c(as.POSIXlt("1847-01-01 EST"), as.POSIXlt("1877-01-01 EST")), value=1.5, 
                            series = factor("Time-series", levels = c("Time-series","Pointwise impact","Cumulative impact")),
-                           lab = c("pre-intervention \n (train/validation)", "", "post-intervention \n (test)"))
+                           lab = c("pre-intervention \n (train/validation)", "post-intervention \n (test)"))
   }
   
   if(analysis=='analysis-12'){
-    ann_text <- data.frame(year = c(as.POSIXlt("1850-01-01 EST"), as.POSIXlt("1871-01-01 EST"), as.POSIXlt("1895-01-01 EST")), value=1, 
+    ann_text <- data.frame(year = c(as.POSIXlt("1847-01-01 EST"), as.POSIXlt("1877-01-01 EST")), value=1, 
                            series = factor("Time-series", levels = c("Time-series","Pointwise impact","Cumulative impact")),
-                           lab = c("pre-intervention \n (train/validation)", "", "post-intervention \n (test)"))
+                           lab = c("pre-intervention \n (train/validation)", "post-intervention \n (test)"))
   }
   if(analysis=='analysis-34'){
-    ann_text <- data.frame(year = c(as.POSIXlt("1870-01-01 EST"), as.POSIXlt("1894-01-01 EST"),as.POSIXlt("1915-01-01 EST")), value=-5, 
+    ann_text <- data.frame(year = c(as.POSIXlt("1874-01-01 EST"), as.POSIXlt("1904-01-01 EST")), value=1, 
                            series = factor("Time-series", levels = c("Time-series","Pointwise impact","Cumulative impact")),
-                           lab = c("pre-intervention \n (train/validation)", "", "post-intervention \n (test)"))
+                           lab = c("pre-intervention \n (train/validation)", "post-intervention \n (test)"))
   }
   if(analysis=='analysis-41'){
-    ann_text <- data.frame(year = c(as.POSIXlt("1870-01-01 EST"), as.POSIXlt("1894-01-01 EST"),as.POSIXlt("1915-01-01 EST")), value=-6, 
+    ann_text <- data.frame(year = c(as.POSIXlt("1874-01-01 EST"), as.POSIXlt("1904-01-01 EST")), value=1.5, 
                            series = factor("Time-series", levels = c("Time-series","Pointwise impact","Cumulative impact")),
-                           lab = c("pre-intervention \n (train/validation)", "", "post-intervention \n (test)"))
+                           lab = c("pre-intervention \n (train/validation)", "post-intervention \n (test)"))
   }
   
   # legend 

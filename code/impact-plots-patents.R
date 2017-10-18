@@ -7,7 +7,7 @@ require(zoo)
 require(matrixStats)
 require(tseries)
 
-analysis <- "analysis-34"
+analysis <- "analysis-01"
 
 type <- "treated"
 
@@ -111,24 +111,21 @@ ts.dat <- merge(cbind(sales.pc.bind, sales.pc.sd), cbind(homesteads.pc.bind, hom
 ts.means <- ts.dat  %>%
   mutate(pointwise.sales.pc = sales.pc.Treated-sales.pc.pred,
          pointwise.homesteads.pc = homesteads.pc.Treated-homesteads.pc.pred,
-         cumulative.sales.pc = NA,
-         cumulative.homesteads.pc = NA)
-
-# cumulative.sales.pc = cumsum(pointwise.sales.pc),
-# cumulative.homesteads.pc = cumsum(pointwise.homesteads.pc)) 
+         cumulative.sales.pc = cumsum(pointwise.sales.pc),
+         cumulative.homesteads.pc = cumsum(pointwise.homesteads.pc)) 
 
 ts.means <- ts.means[with(ts.means, order(year)), ] # sort by year
 
-ts.means$cumulative.sales.pc <- NA
-ts.means$cumulative.homesteads.pc <- NA
-
-for (i in 1:nrow(ts.means)){
-  ts.means$cumulative.sales.pc[i] <- rollmean(ts.means$pointwise.sales.pc,i, align='right')
-}
-
-for (i in 1:nrow(ts.means)){
-  ts.means$cumulative.homesteads.pc[i] <- rollmean(ts.means$pointwise.homesteads.pc,i, align='right')
-}         
+# ts.means$cumulative.sales.pc <- NA
+# ts.means$cumulative.homesteads.pc <- NA
+# 
+# for (i in 1:nrow(ts.means)){
+#   ts.means$cumulative.sales.pc[i] <- rollmean(ts.means$pointwise.sales.pc,i, align='right')
+# }
+# 
+# for (i in 1:nrow(ts.means)){
+#   ts.means$cumulative.homesteads.pc[i] <- rollmean(ts.means$pointwise.homesteads.pc,i, align='right')
+# }         
 
 ts.means.m <- melt(as.data.frame(ts.means)[!colnames(ts.means) %in% c("sales.pc.sd" , "homesteads.pc.sd" )], id.var=c("year"))
 
@@ -163,26 +160,24 @@ sds <- ts.dat  %>%
          pred.homesteads.pc.max = homesteads.pc.pred + homesteads.pc.sd*1.96,
          pointwise.homesteads.pc.min = homesteads.pc.Treated-pred.homesteads.pc.max,
          pointwise.homesteads.pc.max = homesteads.pc.Treated-pred.homesteads.pc.min,
-         cumulative.homesteads.pc.min = NA,
-         cumulative.homesteads.pc.max = NA)
-# cumulative.homesteads.pc.min = cumsum(pointwise.homesteads.pc.min),
-# cumulative.homesteads.pc.max = cumsum(pointwise.homesteads.pc.max))
+         cumulative.homesteads.pc.min = cumsum(pointwise.homesteads.pc.min),
+         cumulative.homesteads.pc.max = cumsum(pointwise.homesteads.pc.max))
 
 sds <- sds[with(sds, order(year)), ] # sort by year
 
-for (i in 1:nrow(sds)){
-  sds$cumulative.sales.pc.min[i] <- rollmean(sds$pointwise.sales.pc.min,i, align='right')
-}
-for (i in 1:nrow(sds)){
-  sds$cumulative.sales.pc.max[i] <- rollmean(sds$pointwise.sales.pc.max,i, align='right')
-}
-
-for (i in 1:nrow(sds)){
-  sds$cumulative.homesteads.pc.min[i] <- rollmean(sds$pointwise.homesteads.pc.min,i, align='right')
-}
-for (i in 1:nrow(sds)){
-  sds$cumulative.homesteads.pc.max[i] <- rollmean(sds$pointwise.homesteads.pc.max,i, align='right')
-}
+# for (i in 1:nrow(sds)){
+#   sds$cumulative.sales.pc.min[i] <- rollmean(sds$pointwise.sales.pc.min,i, align='right')
+# }
+# for (i in 1:nrow(sds)){
+#   sds$cumulative.sales.pc.max[i] <- rollmean(sds$pointwise.sales.pc.max,i, align='right')
+# }
+# 
+# for (i in 1:nrow(sds)){
+#   sds$cumulative.homesteads.pc.min[i] <- rollmean(sds$pointwise.homesteads.pc.min,i, align='right')
+# }
+# for (i in 1:nrow(sds)){
+#   sds$cumulative.homesteads.pc.max[i] <- rollmean(sds$pointwise.homesteads.pc.max,i, align='right')
+# }
 
 pred.vars <- c("sales.pc.pred", "sales.pc.sd", "pred.sales.pc.min", "pred.sales.pc.max", "pointwise.sales.pc.min", "pointwise.sales.pc.max", "cumulative.sales.pc.min", "cumulative.sales.pc.max",
                "homesteads.pc.pred", "homesteads.pc.sd", "pred.homesteads.pc.min", "pred.homesteads.pc.max", "pointwise.homesteads.pc.min", "pointwise.homesteads.pc.max", "cumulative.homesteads.pc.min", "cumulative.homesteads.pc.max")
@@ -226,19 +221,19 @@ if(analysis=="analysis-01"){
   mean(ts.means.m$pointwise.homesteads.pc.max[(ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year<="1976-12-31 19:03:58")])
   
   
-  # Calculate avg. pointwise impact during intervention/post-period: pre-GD
+  # Calculate cumulative impact during intervention/post-period: >= 1862 <=1976
   
   #sales.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales.pc" & (ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  ts.means.m$value[ts.means.m$variable=="Cumulative sales.pc" & (ts.means.m$year=="1976-12-31 19:00:00")] - ts.means.m$value[ts.means.m$variable=="Cumulative sales.pc" & (ts.means.m$year=="1862-12-31 19:03:58")]
   
-  mean(ts.means.m$pointwise.sales.pc.min[(ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
-  mean(ts.means.m$pointwise.sales.pc.max[(ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  ts.means.m$cumulative.sales.pc.min[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.sales.pc.min[(ts.means.m$year=="1862-12-31 19:03:58")][[1]]
+  ts.means.m$cumulative.sales.pc.max[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.sales.pc.max[(ts.means.m$year=="1862-12-31 19:03:58")][[1]] 
   
   #homesteads.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise homesteads.pc" & (ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  ts.means.m$value[ts.means.m$variable=="Cumulative homesteads.pc" & (ts.means.m$year=="1976-12-31 19:00:00")] - ts.means.m$value[ts.means.m$variable=="Cumulative homesteads.pc" & (ts.means.m$year=="1862-12-31 19:03:58")]
   
-  mean(ts.means.m$pointwise.homesteads.pc.min[(ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
-  mean(ts.means.m$pointwise.homesteads.pc.max[(ts.means.m$year>="1862-12-31 19:03:58" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  ts.means.m$cumulative.homesteads.pc.min[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.homesteads.pc.min[(ts.means.m$year=="1862-12-31 19:03:58")][[1]]
+  ts.means.m$cumulative.homesteads.pc.max[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.homesteads.pc.max[(ts.means.m$year=="1862-12-31 19:03:58")][[1]] 
   
 }
 
@@ -247,30 +242,31 @@ if(analysis=="analysis-12"){
   # Calculate avg. pointwise impact during intervention period: >= 1866
   
   #sales.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales.pc" & (ts.means.m$year>="1866-12-31 19:03:58")])
+  mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales.pc" & (ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year<="1976-12-31 19:00:00")])
   
-  mean(ts.means.m$pointwise.sales.pc.min[(ts.means.m$year>="1866-12-31 19:03:58")])
-  mean(ts.means.m$pointwise.sales.pc.max[(ts.means.m$year>="1866-12-31 19:03:58")])
+  mean(ts.means.m$pointwise.sales.pc.min[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year<="1976-12-31 19:00:00")])
+  mean(ts.means.m$pointwise.sales.pc.max[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year<="1976-12-31 19:00:00")])
   
   #homesteads.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise homesteads.pc" & (ts.means.m$year>="1866-12-31 19:03:58")])
+  mean(ts.means.m$value[ts.means.m$variable=="Pointwise homesteads.pc" & (ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year<="1976-12-31 19:00:00")])
   
-  mean(ts.means.m$pointwise.homesteads.pc.min[(ts.means.m$year>="1866-12-31 19:03:58")])
-  mean(ts.means.m$pointwise.homesteads.pc.max[(ts.means.m$year>="1866-12-31 19:03:58")])
+  mean(ts.means.m$pointwise.homesteads.pc.min[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year<="1976-12-31 19:00:00")])
+  mean(ts.means.m$pointwise.homesteads.pc.max[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year<="1976-12-31 19:00:00")])
   
-  # Calculate avg. pointwise impact during intervention/post-period: >= 1866 & <= 1928
+  # Calculate cumulative impact during intervention/post-period: >= 1866 <=1976
   
   #sales.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales.pc" & (ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
+  ts.means.m$value[ts.means.m$variable=="Cumulative sales.pc" & (ts.means.m$year=="1976-12-31 19:00:00")] - ts.means.m$value[ts.means.m$variable=="Cumulative sales.pc" & (ts.means.m$year=="1866-12-31 19:03:58")]
   
-  mean(ts.means.m$pointwise.sales.pc.min[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
-  mean(ts.means.m$pointwise.sales.pc.max[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
+  ts.means.m$cumulative.sales.pc.min[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.sales.pc.min[(ts.means.m$year=="1866-12-31 19:03:58")][[1]]
+  ts.means.m$cumulative.sales.pc.max[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.sales.pc.max[(ts.means.m$year=="1866-12-31 19:03:58")][[1]] 
   
   #homesteads.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise homesteads.pc" & (ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
+  ts.means.m$value[ts.means.m$variable=="Cumulative homesteads.pc" & (ts.means.m$year=="1976-12-31 19:00:00")] - ts.means.m$value[ts.means.m$variable=="Cumulative homesteads.pc" & (ts.means.m$year=="1866-12-31 19:03:58")]
   
-  mean(ts.means.m$pointwise.homesteads.pc.min[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
-  mean(ts.means.m$pointwise.homesteads.pc.max[(ts.means.m$year>="1866-12-31 19:03:58" & ts.means.m$year <= "1914-12-31 19:00:00")])
+  ts.means.m$cumulative.homesteads.pc.min[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.homesteads.pc.min[(ts.means.m$year=="1866-12-31 19:03:58")][[1]]
+  ts.means.m$cumulative.homesteads.pc.max[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.homesteads.pc.max[(ts.means.m$year=="1866-12-31 19:03:58")][[1]] 
+  
   
 }
 
@@ -278,28 +274,29 @@ if(analysis=="analysis-34" | analysis=="41"){
   # Calculate avg. pointwise impact during intervention/post-period: >= 1889
   
   #sales.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales.pc" & (ts.means.m$year>="1889-12-31 19:00:00")])
+  mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales.pc" & (ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year<="1976-12-31 19:00:00")])
   
-  mean(ts.means.m$pointwise.sales.pc.min[(ts.means.m$year>="1889-12-31 19:00:00")])
-  mean(ts.means.m$pointwise.sales.pc.max[(ts.means.m$year>="1889-12-31 19:00:00")])
+  mean(ts.means.m$pointwise.sales.pc.min[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year<="1976-12-31 19:00:00")])
+  mean(ts.means.m$pointwise.sales.pc.max[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year<="1976-12-31 19:00:00")])
   
   #homesteads.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise homesteads.pc" & (ts.means.m$year>="1889-12-31 19:00:00")])
+  mean(ts.means.m$value[ts.means.m$variable=="Pointwise homesteads.pc" & (ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year<="1976-12-31 19:00:00")])
   
-  mean(ts.means.m$pointwise.homesteads.pc.min[(ts.means.m$year>="1889-12-31 19:00:00")])
-  mean(ts.means.m$pointwise.homesteads.pc.max[(ts.means.m$year>="1889-12-31 19:00:00")])
+  mean(ts.means.m$pointwise.homesteads.pc.min[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year<="1976-12-31 19:00:00")])
+  mean(ts.means.m$pointwise.homesteads.pc.max[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year<="1976-12-31 19:00:00")])
   
-  # Calculate avg. pointwise impact during intervention/post-period: pre-GD
+  # Calculate cumulative impact during intervention/post-period: >= 1889 <=1976
+  
   #sales.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise sales.pc" & (ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  ts.means.m$value[ts.means.m$variable=="Cumulative sales.pc" & (ts.means.m$year=="1976-12-31 19:00:00")] - ts.means.m$value[ts.means.m$variable=="Cumulative sales.pc" & (ts.means.m$year=="1889-12-31 19:00:00")]
   
-  mean(ts.means.m$pointwise.sales.pc.min[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
-  mean(ts.means.m$pointwise.sales.pc.max[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  ts.means.m$cumulative.sales.pc.min[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.sales.pc.min[(ts.means.m$year=="1889-12-31 19:00:00")][[1]]
+  ts.means.m$cumulative.sales.pc.max[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.sales.pc.max[(ts.means.m$year=="1889-12-31 19:00:00")][[1]] 
   
   #homesteads.pc
-  mean(ts.means.m$value[ts.means.m$variable=="Pointwise homesteads.pc" & (ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  ts.means.m$value[ts.means.m$variable=="Cumulative homesteads.pc" & (ts.means.m$year=="1976-12-31 19:00:00")] - ts.means.m$value[ts.means.m$variable=="Cumulative homesteads.pc" & (ts.means.m$year=="1889-12-31 19:00:00")]
   
-  mean(ts.means.m$pointwise.homesteads.pc.min[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
-  mean(ts.means.m$pointwise.homesteads.pc.max[(ts.means.m$year>="1889-12-31 19:00:00" & ts.means.m$year <= "1916-12-31 19:00:00")])
+  ts.means.m$cumulative.homesteads.pc.min[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.homesteads.pc.min[(ts.means.m$year=="1889-12-31 19:00:00")][[1]]
+  ts.means.m$cumulative.homesteads.pc.max[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.homesteads.pc.max[(ts.means.m$year=="1889-12-31 19:00:00")][[1]] 
   
 }
