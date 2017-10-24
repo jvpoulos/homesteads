@@ -71,7 +71,7 @@ TsPlotPatents <- function(df, analysis, main = "") {
   # horizontal ticks
   
   if(analysis=='analysis-01'){
-    ticks <- scale_x_datetime(date_breaks="6 years",labels=date_format("%Y"), 
+    ticks <- scale_x_datetime(date_breaks="12 years",labels=date_format("%Y"), 
                               time_trans(tz="UTC"),
                               limits = c(as.POSIXct("1804-12-31 19:03:58"), as.POSIXct("1976-12-31 19:00:00")))
   }  

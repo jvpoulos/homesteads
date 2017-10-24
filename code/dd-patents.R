@@ -66,35 +66,6 @@ summary(did.homesteads.pc)
 
 confint(did.homesteads.pc)[4,]
 
-# DD Estimates (pre-GD)
-
-# sales.pc 
-
-sales.data <- data.frame(subset(patents.did, !is.na(sales.pc) & year>=1820 & year <1929, select=c('time','treat','did','sales.pc')))
-colnames(sales.data)<- c('time','treat','did','y')
-
-sales.est <- boot(sales.data,
-                  RunDiD, R=1000, 
-                  strata=sales.data$did, # stratify at time*treat
-                  parallel="multicore", ncpus = cores)
-
-sales.est[1]
-
-boot.ci(sales.est, conf=0.95, type=c("basic")) # nonparametric bootstrap CIs
-
-# homesteads.pc 
-
-homesteads.data <- data.frame(subset(patents.did, !is.na(homesteads.pc) & year>=1820 & year <1929, select=c('time','treat','did','homesteads.pc')))
-colnames(homesteads.data)<- c('time','treat','did','y')
-
-homesteads.est <- boot(homesteads.data,
-                  RunDiD, R=1000, 
-                  strata=homesteads.data$did, # stratify at time*treat
-                  parallel="multicore", ncpus = cores)
-
-homesteads.est[1]
-boot.ci(homesteads.est, conf=0.95, type=c("basic")) # nonparametric bootstrap CIs
-
 
 ## Analysis 1: Effect of SHA on treated (southern public land states), intervention: June 1866-June 1876-March 1889
 # controls are *western public land states*

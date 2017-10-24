@@ -7,7 +7,7 @@ require(zoo)
 require(matrixStats)
 require(tseries)
 
-analysis <- "analysis-41"
+analysis <- "analysis-01"
 
 type <- "treated"
 
@@ -160,7 +160,8 @@ if(analysis=="analysis-01"){
   ts.means.m$cumulative.educ.pc.max[(ts.means.m$year=="1941-12-31 19:00:00")][[1]] - ts.means.m$cumulative.educ.pc.max[(ts.means.m$year=="1862-12-31 19:03:58")][[1]]
   
   # Calculate MAPE
-  mean(abs((educ.pc.val$educ.pc.Treated-educ.pc.val$educ.pc.pred)/educ.pc.val$educ.pc.Treated))*(100/3)
+  
+  mean(abs(educ.pc.val$educ.pc.Treated-educ.pc.val$educ.pc.pred)/((abs(educ.pc.val$educ.pc.Treated) + abs(educ.pc.val$educ.pc.pred))/2))*100 #SMAPE
 }
 
 if(analysis=="analysis-12"){

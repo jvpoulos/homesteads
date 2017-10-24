@@ -235,6 +235,8 @@ if(analysis=="analysis-01"){
   ts.means.m$cumulative.homesteads.pc.min[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.homesteads.pc.min[(ts.means.m$year=="1862-12-31 19:03:58")][[1]]
   ts.means.m$cumulative.homesteads.pc.max[(ts.means.m$year=="1976-12-31 19:00:00")][[1]] - ts.means.m$cumulative.homesteads.pc.max[(ts.means.m$year=="1862-12-31 19:03:58")][[1]] 
   
+  # Calc. SMAPE
+  mean(abs(sales.pc.val$sales.pc.Treated-sales.pc.val$sales.pc.pred)/((abs(sales.pc.val$sales.pc.Treated) + abs(sales.pc.val$sales.pc.pred))/2))*100 #SMAPE
 }
 
 if(analysis=="analysis-12"){

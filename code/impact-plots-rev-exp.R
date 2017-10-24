@@ -7,7 +7,7 @@ require(zoo)
 require(matrixStats)
 require(tseries)
 
-analysis <- "analysis-41"
+analysis <- "analysis-01"
 
 type <- "treated"
 
