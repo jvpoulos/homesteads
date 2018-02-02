@@ -31,47 +31,21 @@ source(paste0(code.directory,'census-county-state.R'))
 source(paste0(homestead.code.directory,'patents-homestead.R'))
 source(paste0(homestead.code.directory,'prepare-homestead.R'))
 
-# # Causal estimates on state capacity
-# 
-# source(paste0(code.directory,'capacity-state.R'))  # load and export capacity data [need to run census-county-state.R before]
-# 
-# source(paste0(code.directory,'impact-plots-rev-exp.R')) # effects of 1866 SHA/1889 HSA restrictions on revenue and expenditure
-# 
-# source(paste0(code.directory,'impact-plots-ed-exp.R')) # effects 866 SHA/1889 HSA restrictions treated (south) education
-# 
-# source(paste0(code.directory,'attention-plot-capacity.R')) # Attention heatmap
-# 
-# source(paste0(code.directory,'dd-capacity.R')) 
-# 
-# # Causal estimates on land patents
-# 
-# source(paste0(code.directory,'patents.R')) 
-# 
-# source(paste0(code.directory,'impact-plots-patents.R')) 
-# 
-# source(paste0(code.directory,'dd-patents.R')) 
-# 
-# # DD estimates on inequality and tenancy
-# 
-# source(paste0(code.directory,'dd-census.R')) 
-# 
-# # DD estimates on railroads
-# 
-# source(paste0(code.directory,'railroads.R')) 
-# 
-# source(paste0(code.directory,'rr-impact.R')) 
-# 
-# source(paste0(code.directory,'impact-plots.rr.R')) 
-# 
-# source(paste0(code.directory,'dd-railroads.R')) 
-
-# DD estimates on Rhode and Strumpf tax data
+# Estimates on Rhode and Strumpf tax data
 
 source(paste0(code.directory,'taxes-revenues.R')) # prepare taxes data
 source(paste0(code.directory,'prepare-taxes.R')) # run homesteads first
 
 source(paste0(code.directory,'gbr-taxes.R')) 
 source(paste0(code.directory,'fe-taxes.R')) 
+
+# Estimates on RR access
+
+source(paste0(code.directory,'railroads.R'))  # rr.inter.m
+source(paste0(code.directory,'prepare-railroads.R'))
+
+source(paste0(code.directory,'gbr-rr.R')) 
+source(paste0(code.directory,'fe-rr.R')) 
 
 # Descriptive plots, scatter plots
 

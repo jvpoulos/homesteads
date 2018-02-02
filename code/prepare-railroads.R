@@ -1,0 +1,48 @@
+###################################
+#  Merge homesteads & railroads       #
+###################################
+
+library(tidyr)
+library(readr)
+
+rr.inter.m <- as.data.frame(rr.inter.m)
+
+## standardize FIPS county
+rr.inter.m$fips <- as.numeric(as.character(rr.inter.m$FIPS))
+
+census.ts.aland$fips <- census.ts.aland$state*1000 + census.ts.aland$county/10
+census.ts.wide$fips <- census.ts.wide$state*1000 + census.ts.wide$county/10
+
+rr.inter.m$year <- rr.inter.m$InOpBy
+
+## Calc railroad access for each decennial 
+
+decennial.homestead <- read_csv(paste0(homestead.data.directory, "decennial-homestead.csv"), 
+                                col_names = c("year","year2"))
+
+rr.sum <- merge(rr.inter.m, decennial.homestead, by="year", all.x=TRUE)
+
+rr.decennial <- rr.sum %>% # mean access for next decennial year
+  filter(!is.na(year2)) %>%
+  group_by(year2,fips) %>%
+  mutate(access.mean = mean(access)) %>%
+  arrange(fips, year2) %>% # sort
+  select(-year)%>%
+  select(-access)
+
+rr.decennial <- rr.decennial[!duplicated(rr.decennial[c("year2","fips")]),] # keep one county-decennial obs
+
+# Make wide
+
+rr.decennial.wide <- spread(rr.decennial[c("year2","state","fips","access.mean")], key = year2, value = access.mean, sep="rr")
+
+rr.decennial.wide <- as.data.frame(rr.decennial.wide)
+
+# merge to census datasets with homesteads data
+
+# wide datasets (for GBR test period sequence)
+homestead.rr.wide <- merge(census.ts.aland, rr.decennial.wide, by = c("fips"), all.x=TRUE)
+
+# long datasets (for FE and pooled analyses)
+homestead.rr.long <- merge(census.ts.wide, rr.decennial[c("fips", "year", "access.mean")], 
+                           by = c("fips", "year"), all.x=TRUE)
