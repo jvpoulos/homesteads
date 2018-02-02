@@ -47,10 +47,12 @@ source(paste0(code.directory,'prepare-railroads.R'))
 source(paste0(code.directory,'gbr-rr.R')) 
 source(paste0(code.directory,'fe-rr.R')) 
 
+# Estimates on farm tenancy/output/wages
+
+source(paste0(code.directory,'fe-farm.R')) 
+
 # Descriptive plots, scatter plots
 
 source(paste0(code.directory,'descriptive.R')) # Descriptive plots
 
-source(paste0(code.directory,'ineq-capacity.R')) # inequality vs. state capacity 
-
-source(paste0(code.directory,'ineq-taxes.R')) # inequality vs. state capacity 
+source(paste0(code.directory,'ineq-taxes.R')) # inequality vs. fiscal capacity 

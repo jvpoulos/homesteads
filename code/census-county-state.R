@@ -236,6 +236,12 @@ census.ts <- subset(census.ts, select=c("year","name","state","county","fips","l
 
 census.ts$wages[is.infinite(census.ts$wages)] <- NA
 
+# Make logs
+
+census.ts$output <- log(census.ts$output)
+census.ts$farmsize <- log(census.ts$farmsize)
+census.ts$wages <- log(census.ts$wages)
+
 # Fix county codes
 
 census.ts$county[census.ts$name=="Jackson"] <- 1570

@@ -44,5 +44,7 @@ rr.decennial.wide <- as.data.frame(rr.decennial.wide)
 homestead.rr.wide <- merge(census.ts.aland, rr.decennial.wide, by = c("fips"), all.x=TRUE)
 
 # long datasets (for FE and pooled analyses)
+rr.decennial$year <- rr.decennial$year2
+
 homestead.rr.long <- merge(census.ts.wide, rr.decennial[c("fips", "year", "access.mean")], 
                            by = c("fips", "year"), all.x=TRUE)
