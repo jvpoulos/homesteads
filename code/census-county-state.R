@@ -238,9 +238,12 @@ census.ts$wages[is.infinite(census.ts$wages)] <- NA
 
 # Make logs
 
-census.ts$output <- log(census.ts$output)
-census.ts$farmsize <- log(census.ts$farmsize)
-census.ts$wages <- log(census.ts$wages)
+census.ts$output <- log(census.ts$output+.Machine
+                        $double.eps)
+census.ts$farmsize <- log(census.ts$farmsize+.Machine
+                          $double.eps)
+census.ts$wages <- log(census.ts$wages+.Machine
+                       $double.eps)
 
 # Fix county codes
 

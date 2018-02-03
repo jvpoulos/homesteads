@@ -193,7 +193,7 @@ census.plot$cat[census.plot$state.name %in% setdiff(state.land.states,southern.s
 cats.census.plot <- census.plot %>% 
   filter(!is.na(cat)) %>%  
   group_by(year,cat) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),aland.gini,output,tenancy,wages)
+  summarise_each(funs(mean(., na.rm = TRUE)),aland.gini,output,tenancy,wages,farmsize)
 
 # inequality
 
@@ -217,7 +217,6 @@ tenancy.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$tenancy) &
   geom_line() +
   #geom_smooth(span=0.1, se = FALSE) +
  # coord_cartesian(xlim=c(1880,1950)) +
-  geom_vline(xintercept=1889, linetype=5) +  
   scale_y_continuous(name="Farm tenancy") +
   xlab("") +
   scale_color_discrete("State type")
@@ -226,11 +225,11 @@ ggsave(paste0(results.directory,"plots/tenancy-state-time.png"), tenancy.state.t
 
 # wages
 
-wages.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$wages) & cats.census.plot$year<=1950,], aes( year, wages ,color=cat )) + 
+wages.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$wages) & cats.census.plot$year<=1950,], 
+                           aes( year, wages ,color=cat )) + 
   geom_line() +
   # coord_cartesian(xlim=c(1880,1950)) +
-  geom_vline(xintercept=1889, linetype=5) +  
-  scale_y_continuous(name="Farm wages") +
+  scale_y_continuous(name="Farm wages (ln)") +
   xlab("") +
   scale_color_discrete("State type")
 
@@ -242,12 +241,23 @@ output.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$output) & c
   geom_line() +
   #geom_smooth(span=0.1, se = FALSE) +
   # coord_cartesian(xlim=c(1880,1950)) +
-  geom_vline(xintercept=1889, linetype=5) +  
-  scale_y_continuous(name="Farm output") +
+  scale_y_continuous(name="Farm output (ln)") +
   xlab("") +
   scale_color_discrete("State type")
 
 ggsave(paste0(results.directory,"plots/output-state-time.png"), output.state.time, width=11, height=8.5)
+
+# farmsize
+
+farmsize.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$farmsize) & cats.census.plot$year<=1950,], aes( year, farmsize ,color=cat )) + 
+  geom_line() +
+  #geom_smooth(span=0.1, se = FALSE) +
+  # coord_cartesian(xlim=c(1880,1950)) +
+  scale_y_continuous(name="Farm farmsize (ln)") +
+  xlab("") +
+  scale_color_discrete("State type")
+
+ggsave(paste0(results.directory,"plots/farmsize-state-time.png"), farmsize.state.time, width=11, height=8.5)
 
 ## Plot rev/exp time-series
 
