@@ -193,7 +193,7 @@ census.plot$cat <- NA
 census.plot$cat[census.plot$state.name %in% southern.pub] <- "Southern public land"
 census.plot$cat[census.plot$state.name %in% southern.state] <- "Southern state land"
 census.plot$cat[census.plot$state.name %in% setdiff(pub.states,southern.pub)] <- "Western public land"
-census.plot$cat[census.plot$state.name %in% setdiff(state.land.states,southern.state)] <- "Northeastern state land"
+census.plot$cat[census.plot$state.name %in% setdiff(state.land.states,southern.state)] <- "Eastern state land"
 
 cats.census.plot <- census.plot %>% 
   filter(!is.na(cat)) %>%  
@@ -208,7 +208,7 @@ aland.gini.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$aland.g
   #coord_cartesian(xlim=c(1800,1975)) +
   geom_vline(xintercept=1862, linetype=1) +  
   geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
-  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
+ # geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
   geom_vline(xintercept=1889, linetype=5) +  
   scale_y_continuous(name="Land inequality") +
   xlab("") +
