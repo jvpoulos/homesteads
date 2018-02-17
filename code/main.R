@@ -24,6 +24,7 @@ results.directory <-"~/Dropbox/github/land-reform/results/"
 pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
 state.land.states <- state.abb[!state.abb %in% pub.states] # 20 state land states
 southern.pub <- c("AL", "AR", "FL", "LA", "MS") # 5 southern public land states
+western.pub <- setdiff(pub.states,southern.pub)
 southern.state <- c("GA","NC","SC","TN","TX","VA") # 6 southern state land states
 
 # Get census and patents data
@@ -55,4 +56,8 @@ source(paste0(code.directory,'fe-farm.R'))
 
 source(paste0(code.directory,'descriptive.R')) # Descriptive plots
 
-source(paste0(code.directory,'ineq-taxes.R')) # inequality vs. fiscal capacity 
+source(paste0(code.directory,'ineq-taxes.R')) # inequality vs. fiscal capacity
+
+# Robustness: tax data 
+
+source(paste0(code.directory,'fe-taxes-robust.R')) 
