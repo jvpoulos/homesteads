@@ -48,7 +48,9 @@ source(paste0(code.directory,'prepare-railroads.R'))
 source(paste0(code.directory,'gbr-rr.R')) 
 source(paste0(code.directory,'fe-rr.R')) 
 
-# Estimates on farm tenancy/output/wages
+# Estimates on farm values
+
+source(paste0(code.directory,'prepare-farmval.R')) 
 
 source(paste0(code.directory,'fe-farm.R')) 
 
@@ -58,6 +60,6 @@ source(paste0(code.directory,'descriptive.R')) # Descriptive plots
 
 source(paste0(code.directory,'ineq-taxes.R')) # inequality vs. fiscal capacity
 
-# Robustness: tax data 
+# Robustness: taxes/inequality
 
-source(paste0(code.directory,'fe-taxes-robust.R')) 
+source(paste0(code.directory,'fe-robust.R')) 

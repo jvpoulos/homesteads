@@ -12,6 +12,63 @@ library(foreach)
 
 source(paste0(homestead.code.directory,"RunFE.R"))
 
+## Farm value
+
+f1 <- formula(farmval~ homesteads.pc.lag + id) 
+
+# Southern public land state counties 
+
+fe.south <- homestead.tax.long[homestead.tax.long$state.abb %in% c(southern.pub),]
+
+# All years
+farmval.south.fe <- boot(data=fe.south,
+                        statistic=RunFE,
+                        f1=f1,
+                        R=1000,
+                        parallel="multicore", ncpus = cores)
+
+farmval.south.fe.delta <- farmval.south.fe$t0
+farmval.south.fe.delta
+
+farmval.south.fe.CI <- boot.ci(farmval.south.fe, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
+farmval.south.fe.CI
+
+# Western public land state counties
+
+fe.west <- homestead.tax.long[homestead.tax.long$state.abb %in% c(western.pub),]
+
+# All years
+
+farmval.west.fe <- boot(data=fe.west,
+                       statistic=RunFE,
+                       f1=f1,
+                       R=1000,
+                       parallel="multicore", ncpus = cores)
+
+farmval.west.fe.delta <- farmval.west.fe$t0
+farmval.west.fe.delta
+
+farmval.west.fe.CI <- boot.ci(farmval.west.fe, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
+farmval.west.fe.CI
+
+# All public land states
+
+fe.all <- homestead.tax.long[homestead.tax.long$state.abb %in% c(pub.states),]
+
+# All years
+
+farmval.all.fe <- boot(data=fe.all,
+                      statistic=RunFE,
+                      f1=f1,
+                      R=1000,
+                      parallel="multicore", ncpus = cores)
+
+farmval.all.fe.delta <- farmval.all.fe$t0
+farmval.all.fe.delta
+
+farmval.all.fe.CI <- boot.ci(farmval.all.fe, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
+farmval.all.fe.CI
+
 ## Farm output
 
 f1 <- formula(output~ homesteads.pc.lag + id) 

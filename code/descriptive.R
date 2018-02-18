@@ -264,6 +264,31 @@ farmsize.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$farmsize)
 
 ggsave(paste0(results.directory,"plots/farmsize-state-time.png"), farmsize.state.time, width=11, height=8.5)
 
+## Avg. farm values
+
+census.plot <- homestead.tax.long
+
+census.plot$cat <- NA
+census.plot$cat[census.plot$state.abb %in% southern.pub] <- "Southern public land"
+census.plot$cat[census.plot$state.abb %in% southern.state] <- "Southern state land"
+census.plot$cat[census.plot$state.abb %in% setdiff(pub.states,southern.pub)] <- "Western public land"
+census.plot$cat[census.plot$state.abb %in% setdiff(state.land.states,southern.state)] <- "Eastern state land"
+
+cats.census.plot <- census.plot %>% 
+  filter(!is.na(cat)) %>%  
+  group_by(year,cat) %>% 
+  summarise_each(funs(mean(., na.rm = TRUE)),farmval)
+
+farmval.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$farmval) & cats.census.plot$year<=1950,], aes( year, farmval ,color=cat )) + 
+  geom_line() +
+  #geom_smooth(span=0.1, se = FALSE) +
+  # coord_cartesian(xlim=c(1880,1950)) +
+  scale_y_continuous(name="Farm value (ln)") +
+  xlab("") +
+  scale_color_discrete("State type")
+
+ggsave(paste0(results.directory,"plots/farmval-state-time.png"), farmval.state.time, width=11, height=8.5)
+
 ## Plot taxes time-series
 
 taxpc.plot <- taxpc
