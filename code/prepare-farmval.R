@@ -2,7 +2,6 @@
 ### Prepare average farm values        ###
 ##########################################
 
-
 farmval <- read.csv(paste0(census.data.directory,"census-county/farmval.csv"), stringsAsFactors=FALSE)
 
 farmval$year <- farmval$year +1000 # fix year
@@ -19,4 +18,7 @@ farmval <- farmval %>%
 
 # merge 
 homestead.tax.long <- merge(homestead.tax.long, farmval[c("fips","year","farmval","farmval.lag")], 
+                            by=c("fips","year"), all.x=TRUE)
+
+homestead.tax.long <- merge(homestead.tax.long, farmval[c("fips","year","farmval")], 
                             by=c("fips","year"), all.x=TRUE)
