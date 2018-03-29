@@ -25,7 +25,7 @@ patents.time <- ggplot(patents.tab, aes(x=Year,y=Sales)) +
   geom_smooth(aes(y=Homesteads,colour='Homesteads'),span=0.3) +
   geom_vline(xintercept=1862, linetype=1) +  
   geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
-  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
+#  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
   geom_vline(xintercept=1889, linetype=5) +  
  # coord_cartesian(xlim=as.POSIXct(c("01/01/1800","12/31/1950"), format="%m/%d/%Y",tz="UTC")) +
   scale_y_continuous(name="Log per-capita land patents") +
@@ -58,7 +58,7 @@ sales.state.time <- ggplot(cats.sums, aes( year, sales.pc ,color=cat )) +
 #  coord_cartesian(xlim=as.POSIXct(c("01/01/1800","12/31/1930"), format="%m/%d/%Y",tz="UTC")) +
   geom_vline(xintercept=1862, linetype=1) +  
   geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
-  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
+#  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
   geom_vline(xintercept=1889, linetype=5) +  
   scale_y_continuous(name="Log per-capita sales") +
   xlab("") +
@@ -75,7 +75,7 @@ homesteads.state.time <- ggplot(cats.sums, aes( year, homesteads.pc ,color=cat )
   #  coord_cartesian(xlim=as.POSIXct(c("01/01/1800","12/31/1930"), format="%m/%d/%Y",tz="UTC")) +
   geom_vline(xintercept=1862, linetype=1) +  
   geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
-  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
+ # geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
   geom_vline(xintercept=1889, linetype=5) +  
   scale_y_continuous(name="Log per-capita homesteads") +
   xlab("") +
@@ -150,7 +150,7 @@ sales.acres.time <- ggplot(cats.sums.acres.r, aes( Date, cumsum(Sales.Western.pu
   coord_cartesian(xlim=as.POSIXct(c("01/01/1800","12/31/1930"), format="%m/%d/%Y",tz="UTC")) +
   geom_vline(xintercept=1862, linetype=1) +  
   geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
-  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
+#  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
   geom_vline(xintercept=1889, linetype=5) +  
   scale_y_continuous(name="Cumulative total acres by cash entry", labels = scales::comma) +
   xlab("") +
@@ -168,7 +168,7 @@ homesteads.acres.time <- ggplot(cats.sums.acres.r, aes( Date, cumsum(Homesteads.
   coord_cartesian(xlim=as.POSIXct(c("01/01/1800","12/31/1930"), format="%m/%d/%Y",tz="UTC")) +
   geom_vline(xintercept=1862, linetype=1) +  
   geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
-  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
+#  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
   geom_vline(xintercept=1889, linetype=5) +  
   scale_y_continuous(name="Cumulative total acres by homestead", labels = scales::comma) +
   xlab("") +
@@ -356,7 +356,7 @@ track.state.time <- ggplot(cats.rr.plot, aes( year, access ,color=cat )) +
   geom_smooth(span=0.1, se = FALSE) +
   coord_cartesian(xlim=c(1826,1911)) +
   geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
-  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
+#  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
   geom_vline(xintercept=1889, linetype=5) +  
   scale_y_continuous(name="Railroad access") +
   xlab("") +

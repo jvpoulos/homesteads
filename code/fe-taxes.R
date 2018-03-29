@@ -14,7 +14,7 @@ source(paste0(homestead.code.directory,"RunFE.R"))
 
 # Tax1 
 
-f1 <- formula(taxpc1 ~ homesteads.pc.lag + id) 
+f1 <- formula(taxpc1 ~ homesteads.pc.lag + farmval.lag  + id) 
 
 # Southern public land state counties 
 
@@ -25,6 +25,7 @@ tax1.south.fe <- boot(data=fe.south,
                           statistic=RunFE,
                           f1=f1,
                           R=1000,
+                          strata=as.factor(fe.south$id), # stratify by id
                           parallel="multicore", ncpus = cores)
 
 tax1.south.fe.delta <- tax1.south.fe$t0
@@ -42,6 +43,7 @@ fe.west <- homestead.tax.long[homestead.tax.long$state.abb %in% c(western.pub),]
 tax1.west.fe <- boot(data=fe.west,
                        statistic=RunFE,
                        f1=f1,
+                       strata=as.factor(fe.west$id), # stratify by id
                        R=1000,
                        parallel="multicore", ncpus = cores)
 
@@ -51,27 +53,9 @@ tax1.west.fe.delta
 tax1.west.fe.CI <- boot.ci(tax1.west.fe, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
 tax1.west.fe.CI
 
-# All public land states
-
-fe.all <- homestead.tax.long[homestead.tax.long$state.abb %in% c(pub.states),]
-
-# All years
-
-tax1.all.fe <- boot(data=fe.all,
-                      statistic=RunFE,
-                      f1=f1,
-                      R=1000,
-                      parallel="multicore", ncpus = cores)
-
-tax1.all.fe.delta <- tax1.all.fe$t0
-tax1.all.fe.delta
-
-tax1.all.fe.CI <- boot.ci(tax1.all.fe, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-tax1.all.fe.CI
-
 # tax2 
 
-f1 <- formula(taxpc2 ~ homesteads.pc.lag + id) 
+f1 <- formula(taxpc2 ~ homesteads.pc.lag + farmval.lag  + id) 
 
 # Southern public land state counties 
 
@@ -81,6 +65,7 @@ fe.south <- homestead.tax.long[homestead.tax.long$state.abb %in% c(southern.pub)
 tax2.south.fe <- boot(data=fe.south,
                       statistic=RunFE,
                       f1=f1,
+                      strata=as.factor(fe.south$id), # stratify by id
                       R=1000,
                       parallel="multicore", ncpus = cores)
 
@@ -99,6 +84,7 @@ fe.west <- homestead.tax.long[homestead.tax.long$state.abb %in% c(western.pub),]
 tax2.west.fe <- boot(data=fe.west,
                      statistic=RunFE,
                      f1=f1,
+                     strata=as.factor(fe.west$id), # stratify by id
                      R=1000,
                      parallel="multicore", ncpus = cores)
 
@@ -107,21 +93,3 @@ tax2.west.fe.delta
 
 tax2.west.fe.CI <- boot.ci(tax2.west.fe, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
 tax2.west.fe.CI
-
-# All public land states
-
-fe.all <- homestead.tax.long[homestead.tax.long$state.abb %in% c(pub.states),]
-
-# All years
-
-tax2.all.fe <- boot(data=fe.all,
-                    statistic=RunFE,
-                    f1=f1,
-                    R=1000,
-                    parallel="multicore", ncpus = cores)
-
-tax2.all.fe.delta <- tax2.all.fe$t0
-tax2.all.fe.delta
-
-tax2.all.fe.CI <- boot.ci(tax2.all.fe, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-tax2.all.fe.CI

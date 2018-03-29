@@ -19,6 +19,3 @@ farmval <- farmval %>%
 # merge 
 homestead.tax.long <- merge(homestead.tax.long, farmval[c("fips","year","farmval","farmval.lag")], 
                             by=c("fips","year"), all.x=TRUE)
-
-homestead.tax.long <- merge(homestead.tax.long, farmval[c("fips","year","farmval")], 
-                            by=c("fips","year"), all.x=TRUE)

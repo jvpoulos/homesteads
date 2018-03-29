@@ -17,7 +17,7 @@ funds.did$time <- 0
 funds.did$time[(funds.did$year >= 1862)] <- 1
 
 funds.did$treat <- 0
-funds.did$treat <- funds.did$homesteads.pc # treat: homesteads.pc (ln)
+funds.did$treat <- funds.did$homesteads.pc.lag # treat: homesteads.pc.lag (ln)
 
 funds.did$did <- NA
 funds.did$did <- funds.did$treat* funds.did$time 
@@ -25,12 +25,6 @@ funds.did$did <- funds.did$treat* funds.did$time
 # DD Estimates
 
 # educ.pc
-educ.f1 <- formula(educ.pc ~ factor(state_code) + 
-                time + did)
-
-educ.f2 <- formula(educ.pc ~ factor(state_code) + 
-                farmval + 
-                time + did)
 
 # All years
 educ.pc.all.did <- boot(data=funds.did,
@@ -65,12 +59,6 @@ educ.pc.all.robust.did.CI
 #summary(lm(educ.f1, data=funds.did.south))
 
 # rev.pc
-rev.pc.f1 <- formula(rev.pc ~ factor(state_code) + 
-                     time + did)
-
-rev.pc.f2 <- formula(rev.pc ~ factor(state_code) + 
-                     farmval +
-                     time + did)
 
 # All years
 rev.pc.all.did <- boot(data=funds.did,
@@ -100,14 +88,8 @@ rev.pc.all.robust.did.delta
 rev.pc.all.robust.did.CI <- boot.ci(rev.pc.all.robust.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
 rev.pc.all.robust.did.CI
 
+
 # exp.pc
-exp.pc.f1 <- formula(exp.pc ~ factor(state_code) + 
-                       time + did)
-
-exp.pc.f2 <- formula(exp.pc ~ factor(state_code) + 
-                       farmval +
-                       time + did)
-
 # All years
 exp.pc.all.did <- boot(data=funds.did,
                        statistic=RunDiD,
@@ -147,7 +129,7 @@ funds.did.south$time <- 0
 funds.did.south$time[(funds.did.south$year >= 1866)] <- 1
 
 funds.did.south$treat <- 0
-funds.did.south$treat <- funds.did.south$homesteads.pc # treat: homesteads.pc (ln)
+funds.did.south$treat <- funds.did.south$homesteads.pc.lag # treat: homesteads.pc.lag (ln)
 
 funds.did.south$did <- NA
 funds.did.south$did <- funds.did.south$treat* funds.did.south$time 
@@ -292,9 +274,9 @@ ForestPlot2 <- function(d, xlab, ylab, title="", leglab, ylim=NULL){
 }
 
 plot.data.did$variable <- as.factor(plot.data.did$variable)
-summary.plot <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita homesteads",xlab="",title="DD estimates on state-level measures",leglab="Region")
+summary.plot <- ForestPlot2(plot.data.did,ylab="Estimated effect of lagged log per-capita homesteads",xlab="",title="DD estimates on state-level measures, with lagged treatment",leglab="Region")
 
-ggsave(paste0(results.directory,"plots/did-state.png"), summary.plot, width=11, height=8.5)
+ggsave(paste0(results.directory,"plots/did-state-lag.png"), summary.plot, width=11, height=8.5)
 
 ## Plot all estimates (robust)
 
@@ -325,6 +307,6 @@ plot.data.did <- data.frame(region=rep(c("West","South"),each=3),
 # Plot forest plots
 
 plot.data.did$variable <- as.factor(plot.data.did$variable)
-summary.plot <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita homesteads",xlab="",title="DD estimates on state-level measures",leglab="Region")
+summary.plot <- ForestPlot2(plot.data.did,ylab="Estimated effect of lagged log per-capita homesteads",xlab="",title="DD estimates on state-level measures, with lagged treatment",leglab="Region")
 
-ggsave(paste0(results.directory,"plots/did-state-robust.png"), summary.plot, width=11, height=8.5)
+ggsave(paste0(results.directory,"plots/did-state-robust-lag.png"), summary.plot, width=11, height=8.5)

@@ -39,13 +39,13 @@ source(paste0(code.directory,'capacity-state.R')) # state-level "rev.pc","exp.pc
 source(paste0(code.directory,'prepare-capacity.R')) # run homesteads first
 
 source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
+source(paste0(code.directory,'prepare-farmval.R')) # farm vals for counties
 
 source(paste0(code.directory,'taxes-revenues.R')) # county-level "tax1" and "tax2"
 source(paste0(code.directory,'prepare-taxes.R')) # run homesteads first
 
 source(paste0(code.directory,'dd-capacity.R')) # state-level capacity
-
-source(paste0(code.directory,'dd-taxes.R')) # county-level taxes
+source(paste0(code.directory,'dd-capacity-lag.R')) # lagged homesteads as treatment
 
 source(paste0(code.directory,'fe-taxes.R')) # county-level taxes
 
@@ -58,16 +58,12 @@ source(paste0(code.directory,'fe-rr.R'))
 
 # Estimates on farm values
 
-source(paste0(code.directory,'prepare-farmval.R')) # farm vals for counties
-
 source(paste0(code.directory,'fe-farm.R')) 
 
 # Descriptive plots, scatter plots
 
 source(paste0(code.directory,'descriptive.R')) # Descriptive plots
+source(paste0(code.directory,'funds-descriptive.R')) # state capacity plots
 
 source(paste0(code.directory,'ineq-taxes.R')) # inequality vs. fiscal capacity
-
-# Robustness: taxes/inequality
-
-source(paste0(code.directory,'fe-robust.R')) 
+source(paste0(code.directory,'ineq-capacity.R')) # inequality vs. state capacity

@@ -26,3 +26,13 @@ homestead.funds.long <- merge(patents.sum.state,
 homestead.funds.long$homesteads.pc <- log(homestead.funds.long$homesteads/homestead.funds.long$ns.pop)
 
 homestead.funds.long$homesteads.pc[is.na(homestead.funds.long$homesteads.pc)] <- 0
+
+# Lagged homesteads pc
+
+homestead.funds.long <- homestead.funds.long %>% 
+  group_by(state_code) %>% 
+  arrange(state_code, year) %>% 
+  mutate(homesteads.pc.lag=lag(homesteads.pc),
+         farmsize.lag=lag(farmsize),
+         farms.lag=lag(farms))
+
