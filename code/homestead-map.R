@@ -11,8 +11,13 @@ require(ggmap)
 require(sp)
 require(spdep)
 require(ifultools)
+require(tidyr)
+require(broom)
+require(maps)
 
 download.data <- FALSE
+
+patient <- FALSE
 
 data.directory <-"~/Dropbox/github/land-reform/data/"
 
@@ -62,9 +67,19 @@ fips.codes <- fips.codes[!duplicated(fips.codes$FIPS.State),][c("State","FIPS.St
 
 patents.d <- merge(patents.d, fips.codes, by.x =c("state"), by.y=c("State"), all.x=TRUE)
 
-colnames(patents.d)[9] <- 'county.fips'
+#colnames(patents.d)[9] <- 'county.fips'
 
-patents.d$fips <- as.numeric(patents.d$FIPS.State)*1000 + patents.d$county.fips
+patents.d$fips <- as.numeric(patents.d$FIPS.State)*1000 + patents.d$county_code/10
+
+# get state data
+state_map <- map_data("state")
+
+state_map$state_code <- setNames(state.abb, toupper(state.name))[toupper(state_map$region)] 
+
+state_map$homesteads.pc <- 0
+
+state_map$southern.pub <- ifelse(state_map$state_code %in% southern.pub, 1, 0)
+state_map$western.pub <- ifelse(state_map$state_code %in% western.pub, 1, 0)
 
 # 1870
 
@@ -79,7 +94,9 @@ homestead.70 <- ggplot(county.70, aes(long, lat, group = group, fill = homestead
                                                 panel.grid.major=element_blank()) +
  ggtitle("Log per-capita homesteads in 1870") +
  theme(plot.title = element_text(hjust = 0.5)) +
-  geom_map(aes(map_id = id, colour = 'black'), map = county.f) + scale_colour_manual(values=c('black'),guide=FALSE) + theme(legend.position="top") 
+  geom_map(aes(map_id = id, colour = 'black'), map = county.f) + scale_colour_manual(values=c('black'),guide=FALSE) + theme(legend.position="top") +
+geom_path( data = state_map[state_map$western.pub==1,] , colour = "purple", size=1.2) +
+  geom_path( data = state_map[state_map$southern.pub==1,] , colour = "green", size=1.2)
 
 ggsave(paste0(results.directory,"plots/homestead-1870.png"), homestead.70, width=11, height=8.5) 
 
@@ -96,6 +113,32 @@ homestead.00 <- ggplot(county.00, aes(long, lat, group = group, fill = homestead
                                                 panel.grid.major=element_blank()) +
   ggtitle("Log per-capita homesteads in 1900") +
   theme(plot.title = element_text(hjust = 0.5)) +
-  geom_map(aes(map_id = id, colour = 'black'), map = county.f) + scale_colour_manual(values=c('black'),guide=FALSE) + theme(legend.position="top") 
+  geom_map(aes(map_id = id, colour = 'black'), map = county.f) + scale_colour_manual(values=c('black'),guide=FALSE) + theme(legend.position="top") +
+  geom_path( data = state_map[state_map$western.pub==1,] , colour = "purple", size=1.2) +
+  geom_path( data = state_map[state_map$southern.pub==1,] , colour = "green", size=1.2)
 
 ggsave(paste0(results.directory,"plots/homestead-1900.png"), homestead.00, width=11, height=8.5) 
+
+# Plot all decennials for gif
+
+if(patient){
+  for(t in sort(unique(patents.d$year2))){
+    county.t <- merge(patents.d[patents.d$year2==t,],
+                       county.f, by.x="fips", by.y = "FIPS", all.y=TRUE) 
+    
+    homestead.t <- ggplot(county.t, aes(long, lat, group = group, fill = homesteads.pc)) + geom_polygon() + 
+      coord_equal()  + scale_fill_gradient(low = "red", high = "darkred", na.value = "white", guide=FALSE) + #labs(fill="Log per-capita homesteads in 1900") + 
+      theme(axis.ticks = element_blank(), axis.text.x = element_blank(), 
+            axis.text.y = element_blank(),axis.title.x = element_blank(),
+            axis.title.y = element_blank()) + theme(panel.grid.minor=element_blank(), 
+                                                    panel.grid.major=element_blank()) +
+      ggtitle(paste("Log per-capita homesteads in",t)) +
+      theme(plot.margin=grid::unit(c(0,0,0,0), "mm"),
+            plot.title = element_text(hjust = 0.5)) + #rm margins
+      geom_map(aes(map_id = id, colour = 'black'), map = county.f) + scale_colour_manual(values=c('black'),guide=FALSE) + theme(legend.position="top") +
+      geom_path( data = state_map[state_map$western.pub==1,] , colour = "purple", size=1.2) +
+      geom_path( data = state_map[state_map$southern.pub==1,] , colour = "green", size=1.2)
+    
+    ggsave(paste0(results.directory,"plots/homestead-plots/", t, '.png'), homestead.t, width=11, height=8.5) 
+  }
+}
