@@ -33,16 +33,19 @@ source(paste0(code.directory,'census-county-state.R'))
 source(paste0(homestead.code.directory,'patents-homestead.R'))
 source(paste0(homestead.code.directory,'prepare-homestead.R'))
 
-# Estimates on capacity data
+# Prepare state capacity data
 
 source(paste0(code.directory,'capacity-state.R')) # state-level "rev.pc","exp.pc","educ.pc"
 source(paste0(code.directory,'prepare-capacity.R')) # run homesteads first
 
 source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
-source(paste0(code.directory,'prepare-farmval.R')) # farm vals for counties
 
 source(paste0(code.directory,'taxes-revenues.R')) # county-level "tax1" and "tax2"
 source(paste0(code.directory,'prepare-taxes.R')) # run homesteads first
+
+source(paste0(code.directory,'prepare-farmval.R')) # farm vals for counties
+
+# Estimates on capacity data
 
 source(paste0(code.directory,'dd-capacity.R')) # state-level capacity
 source(paste0(code.directory,'dd-capacity-lag.R')) # lagged homesteads as treatment
