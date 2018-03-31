@@ -12,15 +12,27 @@ source(paste0(code.directory,'LmEq.R'))
 
 # Reshape funds
 
-funds.m <- melt(funds[c("state","year","rev.pc","exp.pc")], id.vars = c("state","year"),
-                              variable.name = "category",
+funds.m <- melt(funds[c("state","year","rev.pc","exp.pc", "educ.pc")], id.vars = c("state","year"),
+                              variable.name = "variable",
                               value.name = "value")
 
 funds.m$year <- (funds.m$year %/% 10) * 10  # floor year to decade 
 
+# Create ineq. lags
+
+TLag <- function(x, n = 1L, time) { 
+  index <- match(time - n, time, incomparables = NA)
+  x[index]
+}
+
+census.ts.lag <- census.ts.state %>%
+  filter(state %in% pub.states) %>% # pub land state counties only
+  group_by(state) %>% 
+  mutate(aland.gini.lag = TLag(aland.gini, 10, time = year))
+
 # merge funds with state-level census data (census.ts.state)
 
-ineq.funds <- merge(census.ts.state,  
+ineq.funds <- merge(census.ts.lag,  
                   funds.m, 
                   by = c("state","year"))
 
@@ -29,15 +41,20 @@ ineq.funds <- merge(census.ts.state,
 ineq.capacity <- ggplot(ineq.funds, aes(aland.gini, value, color = factor(variable))) + 
   geom_point(alpha=0.5) +
   geom_smooth(data=subset(ineq.funds, variable=="rev.pc"),se=TRUE, colour=wes_palette("Darjeeling")[1],size=1) +
-  annotate("text", x = 0.75, y = 2, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="rev.pc"))), colour=wes_palette("Darjeeling")[1], size = 4, parse=TRUE) +
+  annotate("text", x = 0.79, y = 2, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="rev.pc"))), colour=wes_palette("Darjeeling")[1], size = 4, parse=TRUE) +
   geom_smooth(data=subset(ineq.funds, variable=="exp.pc"),se=TRUE, colour=wes_palette("Darjeeling")[2],size=1) +
-  annotate("text", x = 0.8, y =-1, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="exp.pc"))), colour=wes_palette("Darjeeling")[2], size = 4, parse=TRUE) +
+  annotate("text", x = 0.73, y =1.4, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="exp.pc"))), colour=wes_palette("Darjeeling")[2], size = 4, parse=TRUE) +
+  geom_smooth(data=subset(ineq.funds, variable=="educ.pc"),se=TRUE, colour=wes_palette("Darjeeling")[3],size=1) +
+  annotate("text", x = 0.75, y =-2, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="educ.pc"))), colour=wes_palette("Darjeeling")[3], size = 4, parse=TRUE) +
   coord_cartesian(ylim=c(-6,6)) +
   scale_colour_manual(name="Measure",
-                      values=c(exp.pc=wes_palette("Darjeeling")[2], rev.pc=wes_palette("Darjeeling")[1]),
+                      values=c(educ.pc=wes_palette("Darjeeling")[3], exp.pc=wes_palette("Darjeeling")[2], rev.pc=wes_palette("Darjeeling")[1]),
                       label=c("Revenues",
-                              "Expenditures")) +
-  ylab("Log per-capita revenues and expenditures") +
-  xlab("Land inequality") 
+                              "Expenditures",
+                              "Education spending")) +
+  ggtitle("Land inequality vs. state capacity") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  ylab("Log per-capita measures") +
+  xlab("Lagged land inequality") 
 
 ggsave(paste0(results.directory,"plots/ineq-capacity.png"), ineq.capacity, width=11, height=8.5)
