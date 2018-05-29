@@ -36,7 +36,7 @@ source(paste0(homestead.code.directory,'prepare-homestead.R'))
 # Prepare state capacity data
 
 source(paste0(code.directory,'capacity-state.R')) # state-level "rev.pc","exp.pc","educ.pc"
-source(paste0(code.directory,'prepare-capacity.R')) # run homesteads first
+source(paste0(code.directory,'prepare-capacity.R')) # prepare for DD # run homesteads first
 
 source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 

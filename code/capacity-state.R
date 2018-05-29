@@ -10,8 +10,8 @@ require(weights)
 require(caret)
 require(zoo)
 require(tidyr)
-
-analysis <- 0
+require(readr)
+require(imputeTS)
 
 ## STATE-LEVEL DATA
 
@@ -148,6 +148,14 @@ funds <- subset(funds, !(funds$state=="WA" & funds$year>=1907 & funds$year<=1918
 funds <- subset(funds, !(funds$state=="RI" & funds$year==1822))
 funds <- subset(funds, !(funds$state=="RI" & funds$year==1822))
 
+# Get historical CPI
+
+USCPI_1783_1982 <- read_csv(paste0(data.directory,"USCPI_1783-1982.csv"))
+
+USCPI_1783_1982$adj_factor <- USCPI_1783_1982$`U.S. Consumer Price Index`/USCPI_1783_1982$`U.S. Consumer Price Index`[USCPI_1783_1982$Year == 1982] # adj. factor relative to 1982
+
+funds <- merge(funds, USCPI_1783_1982, by.x="year", by.y="Year")
+
 ## Make log per-capita measures
 
 funds$year2 <- signif(funds$year,3) # merge by nearest decennial
@@ -159,15 +167,122 @@ funds <- merge(funds, census.ts.state[c('year','state','ns.pop',"land.gini","ala
                by.x=c('year2','state'), by.y=c('year','state'),all.x=TRUE)
 
 funds["rev.pc"] <- NA
-funds["rev.pc"] <- log(funds["1"]/funds$ns.pop+ .Machine$double.eps)
+funds["rev.pc"] <- log((funds["1"]/funds$adj_factor)/funds$ns.pop+ .Machine$double.eps)
 
 funds["exp.pc"] <- NA
-funds["exp.pc"] <- log(funds["3"]/funds$ns.pop+ .Machine$double.eps)
+funds["exp.pc"] <- log((funds["3"]/funds$adj_factor)/funds$ns.pop+ .Machine$double.eps)
 
 funds["educ.pc"] <- NA
-funds["educ.pc"] <- log(funds["31"]/funds$ns.pop+ .Machine$double.eps)
+funds["educ.pc"] <- log((funds["31"]/funds$adj_factor)/funds$ns.pop+ .Machine$double.eps)
 
 # clean feature set
 funds <- funds[colnames(funds) %in% c("state","year","year2",
                                       'ns.pop',"land.gini","aland.gini","ns.pop","adultm","farms","farmsize","tenancy","wages","output",
                                       "rev.pc","exp.pc","educ.pc")]
+
+# reshape and split for RNNs
+
+# Summarize by category
+
+funds$cat <- NA
+funds$cat[funds$state %in% setdiff(pub.states,southern.pub)] <- "Treated.West"
+funds$cat[funds$state %in% setdiff(pub.states,western.pub)] <- "Treated.South"
+funds$cat[funds$state %in% state.land.states] <- "Control"
+
+# Create control and treated means
+cats.funds <- funds %>% 
+  filter(!is.na(cat)) %>% 
+  group_by(year,cat) %>% 
+  summarise_each(funs(mean(., na.rm = TRUE))) %>%
+  select(-state)
+
+cats.funds.r <- reshape(data.frame(cats.funds), idvar = "year", timevar = "cat", direction = "wide")
+
+funds.control <- funds[!is.na(funds$cat) & funds$cat=="Control",][c("state","year","rev.pc","exp.pc","educ.pc")] # discard treated since we have treated time-series
+
+rev.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
+exp.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
+educ.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
+
+#Labels
+
+# west
+rev.pc.y.west <- cats.funds.r[c("year", "rev.pc.Treated.West")]
+rev.pc.y.west <- rev.pc.y.west[!is.na(rev.pc.y.west$rev.pc.Treated.West),]
+
+exp.pc.y.west <- cats.funds.r[c("year", "exp.pc.Treated.West")]
+exp.pc.y.west <- exp.pc.y.west[!is.na(exp.pc.y.west$exp.pc.Treated.West),]
+
+educ.pc.y.west <- cats.funds.r[c("year", "educ.pc.Treated.West")]
+educ.pc.y.west <- educ.pc.y.west[!is.na(educ.pc.y.west$educ.pc.Treated.West),]
+
+# south
+rev.pc.y.south <- cats.funds.r[c("year", "rev.pc.Treated.South")]
+rev.pc.y.south <- rev.pc.y.south[!is.na(rev.pc.y.south$rev.pc.Treated.South),]
+
+exp.pc.y.south <- cats.funds.r[c("year", "exp.pc.Treated.South")]
+exp.pc.y.south <- exp.pc.y.south[!is.na(exp.pc.y.south$exp.pc.Treated.South),]
+
+educ.pc.y.south <- cats.funds.r[c("year", "educ.pc.Treated.South")]
+educ.pc.y.south <- educ.pc.y.south[!is.na(educ.pc.y.south$educ.pc.Treated.South),]
+
+# Splits
+
+rev.pc.years.west <- intersect(rev.pc$year,rev.pc.y.west$year) # common rev.pc years in treated and control
+rev.pc.years.south <- intersect(rev.pc$year,rev.pc.y.south$year) 
+
+rev.pc.x.west <- rev.pc[rev.pc$year %in% rev.pc.years.west,]
+rev.pc.x.south <- rev.pc[rev.pc$year %in% rev.pc.years.south,]
+
+rev.pc.y.west <- rev.pc.y.west[rev.pc.y.west$year %in% rev.pc.years.west,]
+rev.pc.y.south <- rev.pc.y.south[rev.pc.y.south$year %in% rev.pc.years.south,]
+
+exp.pc.years.west <- intersect(exp.pc$year,exp.pc.y.west$year) # common exp.pc years in treated and control
+exp.pc.years.south <- intersect(exp.pc$year,exp.pc.y.south$year) 
+
+exp.pc.x.west <- exp.pc[exp.pc$year %in% exp.pc.years.west,]
+exp.pc.x.south <- exp.pc[exp.pc$year %in% exp.pc.years.south,]
+
+exp.pc.y.west <- exp.pc.y.west[exp.pc.y.west$year %in% exp.pc.years.west,]
+exp.pc.y.south <- exp.pc.y.south[exp.pc.y.south$year %in% exp.pc.years.south,]
+
+educ.pc.years.west <- intersect(educ.pc$year,educ.pc.y.west$year) # common educ.pc years in treated and control
+educ.pc.years.south <- intersect(educ.pc$year,educ.pc.y.south$year) 
+
+educ.pc.x.west <- educ.pc[educ.pc$year %in% educ.pc.years.west,]
+educ.pc.x.south <- educ.pc[educ.pc$year %in% educ.pc.years.south,]
+
+educ.pc.y.west <- educ.pc.y.west[educ.pc.y.west$year %in% educ.pc.years.west,]
+educ.pc.y.south <- educ.pc.y.south[educ.pc.y.south$year %in% educ.pc.years.south,]
+
+# Impute missing control values via linear interpolation 
+
+rev.pc.x.west.imp <- na.interpolation(rev.pc.x.west, option = "linear")
+rev.pc.x.south.imp <- na.interpolation(rev.pc.x.south, option = "linear")
+
+exp.pc.x.west.imp <- na.interpolation(exp.pc.x.west, option = "linear")
+exp.pc.x.south.imp <- na.interpolation(exp.pc.x.south, option = "linear")
+
+educ.pc.x.west.imp <- na.interpolation(educ.pc.x.west, option = "linear")
+educ.pc.x.south.imp <- na.interpolation(educ.pc.x.south, option = "linear")
+
+# Export each as csv (labels, features)
+data.directory <- "~/Dropbox/github/land-reform/data/"
+
+write.csv(rev.pc.x.west.imp[!colnames(rev.pc.x.west.imp) %in% c("year")], paste0(data.directory,"funds/control-west/revpc-x.csv"), row.names=FALSE) 
+write.csv(rev.pc.x.south.imp[!colnames(rev.pc.x.south.imp) %in% c("year")], paste0(data.directory,"funds/control-south/revpc-x.csv"), row.names=FALSE) 
+
+write.csv(exp.pc.x.west.imp[!colnames(exp.pc.x.west.imp) %in% c("year")], paste0(data.directory,"funds/control-west/exppc-x.csv"), row.names=FALSE) 
+write.csv(exp.pc.x.south.imp[!colnames(exp.pc.x.south.imp) %in% c("year")], paste0(data.directory,"funds/control-south/exppc-x.csv"), row.names=FALSE) 
+
+write.csv(educ.pc.x.west.imp[!colnames(educ.pc.x.west.imp) %in% c("year")], paste0(data.directory,"funds/control-west/educpc-x.csv"), row.names=FALSE) 
+write.csv(educ.pc.x.south.imp[!colnames(educ.pc.x.south.imp) %in% c("year")], paste0(data.directory,"funds/control-south/educpc-x.csv"), row.names=FALSE) 
+
+write.csv(rev.pc.y.west[!colnames(rev.pc.y.west) %in% c("year")], paste0(data.directory,"funds/treated-west/revpc-y.csv"), row.names=FALSE) 
+write.csv(rev.pc.y.south[!colnames(rev.pc.y.south) %in% c("year")], paste0(data.directory,"funds/treated-south/revpc-y.csv"), row.names=FALSE) 
+
+write.csv(exp.pc.y.west[!colnames(exp.pc.y.west) %in% c("year")], paste0(data.directory,"funds/treated-west/exppc-y.csv"), row.names=FALSE) 
+write.csv(exp.pc.y.south[!colnames(exp.pc.y.south) %in% c("year")], paste0(data.directory,"funds/treated-south/exppc-y.csv"), row.names=FALSE) 
+
+write.csv(educ.pc.y.west[!colnames(educ.pc.y.west) %in% c("year")], paste0(data.directory,"funds/treated-west/educpc-y.csv"), row.names=FALSE) 
+write.csv(educ.pc.y.south[!colnames(educ.pc.y.south) %in% c("year")], paste0(data.directory,"funds/treated-south/educpc-y.csv"), row.names=FALSE) 
