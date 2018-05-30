@@ -22,7 +22,7 @@ rev.pc.state.time <- ggplot(cats.funds.plot, aes( year, rev.pc ,color=cat )) +
   geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
  # geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
 #  geom_vline(xintercept=1889, linetype=5) +  
-  scale_y_continuous(name="State government total revenue, per-capita (log)") +
+  scale_y_continuous(name="State government total revenue, log per-capita (1982$)") +
   xlab("") +
   scale_color_discrete("State type")
 
@@ -35,7 +35,7 @@ exp.pc.state.time <- ggplot(cats.funds.plot, aes( year, exp.pc ,color=cat )) +
   geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
 #  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
 #  geom_vline(xintercept=1889, linetype=5) +  
-  scale_y_continuous(name="State government total expenditure, per-capita (log)") +
+  scale_y_continuous(name="State government total expenditure, log per-capita (1982$)") +
   xlab("") +
   scale_color_discrete("State type")
 
@@ -48,7 +48,7 @@ educ.pc.state.time <- ggplot(cats.funds.plot, aes( year, educ.pc ,color=cat )) +
   geom_vline(xintercept=1866, linetype=2) + # Southern HSA signed
 #  geom_vline(xintercept=1876, linetype=2) + # Southern HSA repealed
  # geom_vline(xintercept=1889, linetype=5) +  
-  scale_y_continuous(name="State government education spending, per-capita (log)") +
+  scale_y_continuous(name="State government education spending, log per-capita (1982$)") +
   xlab("") +
   scale_color_discrete("State type")
 

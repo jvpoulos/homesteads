@@ -269,20 +269,20 @@ educ.pc.x.south.imp <- na.interpolation(educ.pc.x.south, option = "linear")
 # Export each as csv (labels, features)
 data.directory <- "~/Dropbox/github/land-reform/data/"
 
-write.csv(rev.pc.x.west.imp[!colnames(rev.pc.x.west.imp) %in% c("year")], paste0(data.directory,"funds/control-west/revpc-x.csv"), row.names=FALSE) 
-write.csv(rev.pc.x.south.imp[!colnames(rev.pc.x.south.imp) %in% c("year")], paste0(data.directory,"funds/control-south/revpc-x.csv"), row.names=FALSE) 
+write.csv(rev.pc.x.west.imp[!colnames(rev.pc.x.west.imp) %in% c("year")], paste0(data.directory,"funds/west-revpc-x.csv"), row.names=FALSE) 
+write.csv(rev.pc.x.south.imp[!colnames(rev.pc.x.south.imp) %in% c("year")], paste0(data.directory,"funds/south-revpc-x.csv"), row.names=FALSE) 
 
-write.csv(exp.pc.x.west.imp[!colnames(exp.pc.x.west.imp) %in% c("year")], paste0(data.directory,"funds/control-west/exppc-x.csv"), row.names=FALSE) 
-write.csv(exp.pc.x.south.imp[!colnames(exp.pc.x.south.imp) %in% c("year")], paste0(data.directory,"funds/control-south/exppc-x.csv"), row.names=FALSE) 
+write.csv(exp.pc.x.west.imp[!colnames(exp.pc.x.west.imp) %in% c("year")], paste0(data.directory,"funds/west-exppc-x.csv"), row.names=FALSE) 
+write.csv(exp.pc.x.south.imp[!colnames(exp.pc.x.south.imp) %in% c("year")], paste0(data.directory,"funds/south-exppc-x.csv"), row.names=FALSE) 
 
-write.csv(educ.pc.x.west.imp[!colnames(educ.pc.x.west.imp) %in% c("year")], paste0(data.directory,"funds/control-west/educpc-x.csv"), row.names=FALSE) 
-write.csv(educ.pc.x.south.imp[!colnames(educ.pc.x.south.imp) %in% c("year")], paste0(data.directory,"funds/control-south/educpc-x.csv"), row.names=FALSE) 
+write.csv(educ.pc.x.west.imp[!colnames(educ.pc.x.west.imp) %in% c("year")], paste0(data.directory,"funds/west-educpc-x.csv"), row.names=FALSE) 
+write.csv(educ.pc.x.south.imp[!colnames(educ.pc.x.south.imp) %in% c("year")], paste0(data.directory,"funds/south-educpc-x.csv"), row.names=FALSE) 
 
-write.csv(rev.pc.y.west[!colnames(rev.pc.y.west) %in% c("year")], paste0(data.directory,"funds/treated-west/revpc-y.csv"), row.names=FALSE) 
-write.csv(rev.pc.y.south[!colnames(rev.pc.y.south) %in% c("year")], paste0(data.directory,"funds/treated-south/revpc-y.csv"), row.names=FALSE) 
+write.csv(rev.pc.y.west[!colnames(rev.pc.y.west) %in% c("year")], paste0(data.directory,"funds/west-revpc-y.csv"), row.names=FALSE) 
+write.csv(rev.pc.y.south[!colnames(rev.pc.y.south) %in% c("year")], paste0(data.directory,"funds/south-revpc-y.csv"), row.names=FALSE) 
 
-write.csv(exp.pc.y.west[!colnames(exp.pc.y.west) %in% c("year")], paste0(data.directory,"funds/treated-west/exppc-y.csv"), row.names=FALSE) 
-write.csv(exp.pc.y.south[!colnames(exp.pc.y.south) %in% c("year")], paste0(data.directory,"funds/treated-south/exppc-y.csv"), row.names=FALSE) 
+write.csv(exp.pc.y.west[!colnames(exp.pc.y.west) %in% c("year")], paste0(data.directory,"funds/west-exppc-y.csv"), row.names=FALSE) 
+write.csv(exp.pc.y.south[!colnames(exp.pc.y.south) %in% c("year")], paste0(data.directory,"funds/south-exppc-y.csv"), row.names=FALSE) 
 
-write.csv(educ.pc.y.west[!colnames(educ.pc.y.west) %in% c("year")], paste0(data.directory,"funds/treated-west/educpc-y.csv"), row.names=FALSE) 
-write.csv(educ.pc.y.south[!colnames(educ.pc.y.south) %in% c("year")], paste0(data.directory,"funds/treated-south/educpc-y.csv"), row.names=FALSE) 
+write.csv(educ.pc.y.west[!colnames(educ.pc.y.west) %in% c("year")], paste0(data.directory,"funds/west-educpc-y.csv"), row.names=FALSE) 
+write.csv(educ.pc.y.south[!colnames(educ.pc.y.south) %in% c("year")], paste0(data.directory,"funds/south-educpc-y.csv"), row.names=FALSE) 
