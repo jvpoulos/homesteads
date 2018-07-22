@@ -11,6 +11,12 @@ farmval$farmval <- log(farmval$faval+.Machine
                         $double.eps)
 
 # Create lags
+
+TLag <- function(x, n = 1L, time) { 
+  index <- match(time - n, time, incomparables = NA)
+  x[index]
+}
+
 farmval <- farmval %>% 
   group_by(fips) %>% 
   mutate(farmval.lag = TLag(farmval, 10, time = year))

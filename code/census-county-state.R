@@ -6,7 +6,6 @@ library(reldist)
 library(dplyr)
 
 ## Load data
-census.data.directory <- "~/Dropbox/github/ok-lottery/data/"
 
 years <- c(seq(1790,1960,10),1962,1967,1970,1983) 
 

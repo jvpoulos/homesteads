@@ -17,5 +17,5 @@ farmval <- farmval %>%
   mutate(farmval.lag = TLag(farmval, 10, time = year))
 
 # merge 
-homestead.tax.long <- merge(homestead.tax.long, farmval[c("fips","year","farmval","farmval.lag")], 
+homestead.rr.long <- merge(homestead.rr.long, farmval[c("fips","year","farmval","farmval.lag")], 
                             by=c("fips","year"), all.x=TRUE)

@@ -49,19 +49,19 @@ rr.decennial$year <- rr.decennial$year2
 homestead.rr.long <- merge(census.ts.wide, rr.decennial[c("fips", "year", "access.mean")], 
                            by = c("fips", "year"), all.x=TRUE)
 
-# Merge to long dataset with tax data (for FE robust)
-
-homestead.tax.long <- merge(homestead.tax.long, homestead.rr.long[c("id", "year", "access.mean")], 
-                           by = c("id", "year"), all.x=TRUE)
-
-# Create lags
-TLag <- function(x, n = 1L, time) { 
-  index <- match(time - n, time, incomparables = NA)
-  x[index]
-}
-
-homestead.tax.long  <- homestead.tax.long %>% 
-  group_by(state.abb,county) %>% 
-  mutate(access.mean.lag = TLag(access.mean, 10, time = year),
-         output.lag = TLag(output, 10, time = year),
-         wages.lag = TLag(wages, 10, time = year))
+# # Merge to long dataset with tax data (for FE robust)
+# 
+# homestead.tax.long <- merge(homestead.tax.long, homestead.rr.long[c("id", "year", "access.mean")],
+#                            by = c("id", "year"), all.x=TRUE)
+# 
+# # Create lags
+# TLag <- function(x, n = 1L, time) {
+#   index <- match(time - n, time, incomparables = NA)
+#   x[index]
+# }
+# 
+# homestead.tax.long  <- homestead.tax.long %>%
+#   group_by(state.abb,county) %>%
+#   mutate(access.mean.lag = TLag(access.mean, 10, time = year),
+#          output.lag = TLag(output, 10, time = year),
+#          wages.lag = TLag(wages, 10, time = year))

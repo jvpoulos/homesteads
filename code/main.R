@@ -18,6 +18,7 @@ code.directory <-"~/Dropbox/github/land-reform/code/"
 homestead.data.directory <-"~/Dropbox/github/homestead/data/"
 homestead.code.directory <-"~/Dropbox/github/homestead/code/"
 results.directory <-"~/Dropbox/github/land-reform/results/"
+census.data.directory <- "~/Dropbox/github/ok-lottery/data/"
 
 # State groups
 
@@ -40,28 +41,21 @@ source(paste0(code.directory,'prepare-capacity.R')) # prepare for DD # run homes
 
 source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
-source(paste0(code.directory,'taxes-revenues.R')) # county-level "tax1" and "tax2"
-source(paste0(code.directory,'prepare-taxes.R')) # run homesteads first
-
-source(paste0(code.directory,'prepare-farmval.R')) # farm vals for counties
-
 # Estimates on capacity data
 
 source(paste0(code.directory,'dd-capacity.R')) # state-level capacity
-source(paste0(code.directory,'dd-capacity-lag.R')) # lagged homesteads as treatment
-
-source(paste0(code.directory,'fe-taxes.R')) # county-level taxes
 
 # Estimates on RR access
 
 source(paste0(code.directory,'railroads.R'))  # rr.inter.m
 source(paste0(code.directory,'prepare-railroads.R'))
+source(paste0(code.directory,'prepare-farmval.R')) # farm vals counties
 
-source(paste0(code.directory,'fe-rr.R')) 
+source(paste0(code.directory,'dd-railroads.R'))
 
-# Estimates on farm values
+# Estimates on inequality
 
-source(paste0(code.directory,'fe-farm.R')) 
+source(paste0(code.directory,'dd-inequality.R')) # run dd-railroads first
 
 # Descriptive plots, scatter plots
 
@@ -70,5 +64,4 @@ source(paste0(code.directory,'homestead-map.R')) # Map homesteads
 source(paste0(code.directory,'descriptive.R')) # Descriptive plots
 source(paste0(code.directory,'funds-descriptive.R')) # state capacity plots
 
-source(paste0(code.directory,'ineq-taxes.R')) # inequality vs. fiscal capacity
 source(paste0(code.directory,'ineq-capacity.R')) # inequality vs. state capacity
