@@ -17,7 +17,7 @@ patents.sum.state <- patents %>% # get a state-year sum of patents
 #   group_by(state_code) %>%
 #   mutate(cumulative.homesteads = cumsum(homesteads))  %>%
 #   arrange(state_code, year) %>%
-#   select(state_code, year, cumulative.homesteads)
+#   dplyr::select(state_code, year, cumulative.homesteads)
 
 homestead.funds.long <- merge(patents.sum.state, 
                               funds, by.x = c("state_code", "year"), 

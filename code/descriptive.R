@@ -216,57 +216,10 @@ aland.gini.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$aland.g
 
 ggsave(paste0(results.directory,"plots/aland-gini-state-time.png"), aland.gini.state.time, width=11, height=8.5)
 
-# tenancy
-
-tenancy.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$tenancy) & cats.census.plot$year<=1950,], aes( year, tenancy ,color=cat )) + 
-  geom_line() +
-  #geom_smooth(span=0.1, se = FALSE) +
- # coord_cartesian(xlim=c(1880,1950)) +
-  scale_y_continuous(name="Farm tenancy") +
-  xlab("") +
-  scale_color_discrete("State type")
-
-ggsave(paste0(results.directory,"plots/tenancy-state-time.png"), tenancy.state.time, width=11, height=8.5)
-
-# wages
-
-wages.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$wages) & cats.census.plot$year<=1950,], 
-                           aes( year, wages ,color=cat )) + 
-  geom_line() +
-  # coord_cartesian(xlim=c(1880,1950)) +
-  scale_y_continuous(name="Farm wages (ln)") +
-  xlab("") +
-  scale_color_discrete("State type")
-
-ggsave(paste0(results.directory,"plots/wages-state-time.png"), wages.state.time, width=11, height=8.5)
-
-# output
-
-output.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$output) & cats.census.plot$year<=1950,], aes( year, output ,color=cat )) + 
-  geom_line() +
-  #geom_smooth(span=0.1, se = FALSE) +
-  # coord_cartesian(xlim=c(1880,1950)) +
-  scale_y_continuous(name="Farm output (ln)") +
-  xlab("") +
-  scale_color_discrete("State type")
-
-ggsave(paste0(results.directory,"plots/output-state-time.png"), output.state.time, width=11, height=8.5)
-
-# farmsize
-
-farmsize.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$farmsize) & cats.census.plot$year<=1950,], aes( year, farmsize ,color=cat )) + 
-  geom_line() +
-  #geom_smooth(span=0.1, se = FALSE) +
-  # coord_cartesian(xlim=c(1880,1950)) +
-  scale_y_continuous(name="Farm farmsize (ln)") +
-  xlab("") +
-  scale_color_discrete("State type")
-
-ggsave(paste0(results.directory,"plots/farmsize-state-time.png"), farmsize.state.time, width=11, height=8.5)
 
 ## Avg. farm values
 
-census.plot <- homestead.tax.long
+census.plot <- homestead.rr.long
 
 census.plot$cat <- NA
 census.plot$cat[census.plot$state.abb %in% southern.pub] <- "Southern public land"
@@ -288,50 +241,6 @@ farmval.state.time <- ggplot(cats.census.plot[!is.na(cats.census.plot$farmval) &
   scale_color_discrete("State type")
 
 ggsave(paste0(results.directory,"plots/farmval-state-time.png"), farmval.state.time, width=11, height=8.5)
-
-## Plot taxes time-series
-
-taxpc.plot <- taxpc
-
-taxpc.plot$cat <- NA
-taxpc.plot$cat[taxpc.plot$state.abb %in% southern.pub] <- "Southern public land"
-taxpc.plot$cat[taxpc.plot$state.abb %in% southern.state] <- "Southern state land"
-taxpc.plot$cat[taxpc.plot$state.abb %in% setdiff(pub.states,southern.pub)] <- "Western public land"
-taxpc.plot$cat[taxpc.plot$state.abb %in% setdiff(state.land.states,southern.state)] <- "Northeastern state land"
-
-cats.taxpc.plot <- taxpc.plot %>% 
-  filter(!is.na(cat)) %>%  
-  group_by(year,cat) %>% 
-  summarise_each(funs(mean(., na.rm = TRUE)),taxpc2,taxpc1) 
-
-# cats.taxpc.plot.foo <- taxpc.plot %>% 
-#   filter(!is.na(cat)) %>%  
-#   group_by(cat) %>% 
-#   summarise_each(funs(mean(., na.rm = TRUE)),taxpc2,taxpc1) 
-
-# taxpc1
-
-taxpc1.state.time <- ggplot(cats.taxpc.plot[!is.na(cats.taxpc.plot$taxpc1),], aes( year, taxpc1 ,color=cat )) + 
-  geom_line() +
- # coord_cartesian(xlim=c(1800,1975)) +
- # geom_vline(xintercept=1889, linetype=5) +  
-  scale_y_continuous(name="Log per-capita taxes collected by counties (Tax 1)") +
-  xlab("") +
-  scale_color_discrete("State type")
-
-ggsave(paste0(results.directory,"plots/tax1-state-time.png"), taxpc1.state.time, width=11, height=8.5)
-
-# taxpc2
-
-taxpc2.state.time <- ggplot(cats.taxpc.plot[!is.na(cats.taxpc.plot$taxpc2),], aes( year, taxpc2 ,color=cat )) + 
-  geom_line() +
-  # coord_cartesian(xlim=c(1800,1975)) +
- # geom_vline(xintercept=1889, linetype=5) +  
-  scale_y_continuous(name="Log per-capita taxes collected by all local governments within the county (Tax 2)") +
-  xlab("") +
-  scale_color_discrete("State type")
-
-ggsave(paste0(results.directory,"plots/tax2-state-time.png"), taxpc2.state.time, width=11, height=8.5)
 
 ## Plot railroads time-series
 

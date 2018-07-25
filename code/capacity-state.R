@@ -194,7 +194,7 @@ cats.funds <- funds %>%
   filter(!is.na(cat)) %>% 
   group_by(year,cat) %>% 
   summarise_each(funs(mean(., na.rm = TRUE))) %>%
-  select(-state)
+  dplyr::select(-state)
 
 cats.funds.r <- reshape(data.frame(cats.funds), idvar = "year", timevar = "cat", direction = "wide")
 

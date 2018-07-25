@@ -34,6 +34,8 @@ source(paste0(code.directory,'census-county-state.R'))
 source(paste0(homestead.code.directory,'patents-homestead.R'))
 source(paste0(homestead.code.directory,'prepare-homestead.R'))
 
+source(paste0(code.directory,'patents.R'))
+
 # Prepare state capacity data
 
 source(paste0(code.directory,'capacity-state.R')) # state-level "rev.pc","exp.pc","educ.pc"

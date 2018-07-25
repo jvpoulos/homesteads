@@ -27,8 +27,8 @@ rr.decennial <- rr.sum %>% # mean access for next decennial year
   group_by(year2,fips) %>%
   mutate(access.mean = mean(access)) %>%
   arrange(fips, year2) %>% # sort
-  select(-year)%>%
-  select(-access)
+  dplyr::select(-year)%>%
+  dplyr::select(-access)
 
 rr.decennial <- rr.decennial[!duplicated(rr.decennial[c("year2","fips")]),] # keep one county-decennial obs
 

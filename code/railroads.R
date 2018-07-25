@@ -121,7 +121,7 @@ rr.inter <- county.rr.data[!is.na(county.rr.data$ID_NUM), ] # county-rail observ
 rr.inter <- rr.inter %>% 
   group_by(ID_NUM,InOpBy) %>% 
   summarise_each(funs(sum(., na.rm = TRUE)),track) %>% # county/year sums of track
-  select(ID_NUM,InOpBy,track)
+  dplyr::select(ID_NUM,InOpBy,track)
 
 # Get intersections for all years
 
@@ -147,4 +147,4 @@ rr.inter.m <- rr.inter.m %>%
   mutate(cumulative.track = cumsum(track), # cumulative sum of track miles by county
          track2 = cumulative.track/AREA_SQMI, # cumulative track miles per square mile
          access = ifelse(cumulative.track>0,1,0)) %>% 
-  select(ID_NUM,InOpBy,FIPS,cumulative.track,track2,access,state,AREA_SQMI)
+  dplyr::select(ID_NUM,InOpBy,FIPS,cumulative.track,track2,access,state,AREA_SQMI)

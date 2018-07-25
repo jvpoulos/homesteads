@@ -41,12 +41,12 @@ ineq.funds <- merge(census.ts.lag,
 ineq.capacity <- ggplot(ineq.funds, aes(aland.gini, value, color = factor(variable))) + 
   geom_point(alpha=0.5) +
   geom_smooth(data=subset(ineq.funds, variable=="rev.pc"),se=TRUE, colour=wes_palette("Darjeeling1")[1],size=1) +
-  annotate("text", x = 0.79, y = 3, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="rev.pc"))), colour=wes_palette("Darjeeling1")[1], size = 4, parse=TRUE) +
+#  annotate("text", x = 0.79, y = 3, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="rev.pc"))), colour=wes_palette("Darjeeling1")[1], size = 4, parse=TRUE) +
   geom_smooth(data=subset(ineq.funds, variable=="exp.pc"),se=TRUE, colour=wes_palette("Darjeeling1")[2],size=1) +
-  annotate("text", x = 0.73, y =2, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="exp.pc"))), colour=wes_palette("Darjeeling1")[2], size = 4, parse=TRUE) +
+#  annotate("text", x = 0.73, y =2, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="exp.pc"))), colour=wes_palette("Darjeeling1")[2], size = 4, parse=TRUE) +
   geom_smooth(data=subset(ineq.funds, variable=="educ.pc"),se=TRUE, colour=wes_palette("Darjeeling1")[3],size=1) +
-  annotate("text", x = 0.75, y =1.4, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="educ.pc"))), colour=wes_palette("Darjeeling1")[3], size = 4, parse=TRUE) +
-  coord_cartesian(ylim=c(-6,6)) +
+#  annotate("text", x = 0.75, y =1.4, label = LmEq(gam(value ~ aland.gini, data=subset(ineq.funds, variable=="educ.pc"))), colour=wes_palette("Darjeeling1")[3], size = 4, parse=TRUE) +
+  coord_cartesian(ylim=c(-6,6),xlim=c(0.68,0.99)) +
   scale_colour_manual(name="Measure",
                       values=c(educ.pc=wes_palette("Darjeeling1")[3], exp.pc=wes_palette("Darjeeling1")[2], rev.pc=wes_palette("Darjeeling1")[1]),
                       label=c("Revenues",

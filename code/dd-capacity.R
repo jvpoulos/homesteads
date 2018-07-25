@@ -60,10 +60,6 @@ educ.pc.all.robust.did.delta
 educ.pc.all.robust.did.CI <- boot.ci(educ.pc.all.robust.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
 educ.pc.all.robust.did.CI
 
-# Sanity check
-
-#summary(lm(educ.f1, data=funds.did.south))
-
 # rev.pc
 rev.pc.f1 <- formula(rev.pc ~ factor(state_code) + 
                      time + did)
