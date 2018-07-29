@@ -15,6 +15,7 @@ RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 # Set directories
 data.directory <-"~/Dropbox/github/land-reform/data/"
 code.directory <-"~/Dropbox/github/land-reform/code/"
+gans.code.directory <-"~/Dropbox/github/gans-causal/code/"
 homestead.data.directory <-"~/Dropbox/github/homestead/data/"
 homestead.code.directory <-"~/Dropbox/github/homestead/code/"
 results.directory <-"~/Dropbox/github/land-reform/results/"
@@ -43,11 +44,23 @@ source(paste0(code.directory,'prepare-capacity.R')) # prepare for DD # run homes
 
 source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
-# Estimates on capacity data
+# DD estimates on capacity data
 
 source(paste0(code.directory,'dd-capacity.R')) # state-level capacity
 
-# Estimates on RR access
+## Encoder-decoder estimates on capacity data
+
+source(paste0(gans.code.directory,'utils.R'))
+
+source(paste0(code.directory,'encoder-decoder-south-educpc.R')) 
+source(paste0(code.directory,'encoder-decoder-south-exppc.R')) 
+source(paste0(code.directory,'encoder-decoder-south-revpc.R')) 
+
+source(paste0(code.directory,'encoder-decoder-west-educpc.R')) 
+source(paste0(code.directory,'encoder-decoder-west-exppc.R')) 
+source(paste0(code.directory,'encoder-decoder-west-revpc.R')) 
+
+# DD estimates on RR access
 
 source(paste0(code.directory,'railroads.R'))  # rr.inter.m
 source(paste0(code.directory,'prepare-railroads.R'))
@@ -55,7 +68,7 @@ source(paste0(code.directory,'prepare-farmval.R')) # farm vals counties
 
 source(paste0(code.directory,'dd-railroads.R'))
 
-# Estimates on inequality
+# DD estimates on inequality
 
 source(paste0(code.directory,'dd-inequality.R')) # run dd-railroads first
 
