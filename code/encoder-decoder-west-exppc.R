@@ -118,6 +118,10 @@ encoder.decoder.plot.west.exppc <- ggplot(data=west.exppc.encoder.decoder.long, 
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-west-exppc.png"), encoder.decoder.plot.west.exppc, width=11, height=8.5)
 
+mean(west.exppc.encoder.decoder.long$value[west.exppc.encoder.decoder.long$variable=="X1"]) # get mean treatment effect
+mean(west.exppc.encoder.decoder.long$ymin[west.exppc.encoder.decoder.long$variable=="X1"]) 
+mean(west.exppc.encoder.decoder.long$ymax[west.exppc.encoder.decoder.long$variable=="X1"]) 
+
 # Plot p-values
 
 west.exppc.encoder.decoder.control <- data.frame(

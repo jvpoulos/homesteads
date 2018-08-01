@@ -63,7 +63,7 @@ sum(p.adjust(south.exppc.p.values.control, "bonferroni") <=0.05)/length(south.ex
 
 # CIs for treated
 
-south.exppc.CI.treated <- PermutationCI(south.exppc.control.forecast, south.exppc.control.true, south.exppc.t.stat, south.exppc.n.placebo, c.range=c(-9,3), np=10000, l=100)
+south.exppc.CI.treated <- PermutationCI(south.exppc.control.forecast, south.exppc.control.true, south.exppc.t.stat, south.exppc.n.placebo, c.range=c(-8,3), np=20000, l=1000)
 
 # Plot pointwise impacts
 
@@ -117,6 +117,10 @@ encoder.decoder.plot.south.exppc <- ggplot(data=south.exppc.encoder.decoder.long
   theme.blank + guides(colour=FALSE)
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-south-exppc.png"), encoder.decoder.plot.south.exppc, width=11, height=8.5)
+
+mean(south.exppc.encoder.decoder.long$value[south.exppc.encoder.decoder.long$variable=="X1"]) # get mean treatment effect
+mean(south.exppc.encoder.decoder.long$ymin[south.exppc.encoder.decoder.long$variable=="X1"]) 
+mean(south.exppc.encoder.decoder.long$ymax[south.exppc.encoder.decoder.long$variable=="X1"]) 
 
 # Plot p-values
 
