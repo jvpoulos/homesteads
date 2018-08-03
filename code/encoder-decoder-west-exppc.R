@@ -118,9 +118,13 @@ encoder.decoder.plot.west.exppc <- ggplot(data=west.exppc.encoder.decoder.long, 
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-west-exppc.png"), encoder.decoder.plot.west.exppc, width=11, height=8.5)
 
-mean(west.exppc.encoder.decoder.long$value[west.exppc.encoder.decoder.long$variable=="X1"]) # get mean treatment effect
-mean(west.exppc.encoder.decoder.long$ymin[west.exppc.encoder.decoder.long$variable=="X1"]) 
-mean(west.exppc.encoder.decoder.long$ymax[west.exppc.encoder.decoder.long$variable=="X1"]) 
+mean(west.exppc.encoder.decoder.long$value[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),]) # get mean % treatment effect
+mean(west.exppc.encoder.decoder.long$ymin[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])
+mean(west.exppc.encoder.decoder.long$ymax[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])
+
+exp(mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])*mean(west.exppc.encoder.decoder.long$value[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])) 
+exp(mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])*mean(west.exppc.encoder.decoder.long$ymin[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])) # mean in real terms
+exp(mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])*mean(west.exppc.encoder.decoder.long$ymax[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),]))
 
 # Plot p-values
 

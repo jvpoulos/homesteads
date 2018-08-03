@@ -118,9 +118,9 @@ encoder.decoder.plot.west.revpc <- ggplot(data=west.revpc.encoder.decoder.long, 
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-west-revpc.png"), encoder.decoder.plot.west.revpc, width=11, height=8.5)
 
-mean(west.revpc.encoder.decoder.long$value[west.revpc.encoder.decoder.long$variable=="X1"]) # get mean treatment effect
-mean(west.revpc.encoder.decoder.long$ymin[west.revpc.encoder.decoder.long$variable=="X1"]) 
-mean(west.revpc.encoder.decoder.long$ymax[west.revpc.encoder.decoder.long$variable=="X1"]) 
+mean(west.revpc.encoder.decoder.long$value[west.revpc.encoder.decoder.long$variable=="X1"])/mean(west.revpc.y[(west.revpc.n.pre+1):nrow(west.revpc.y),]) # get mean % treatment effect
+mean(west.revpc.encoder.decoder.long$ymin[west.revpc.encoder.decoder.long$variable=="X1"])/mean(west.revpc.y[(west.revpc.n.pre+1):nrow(west.revpc.y),])
+mean(west.revpc.encoder.decoder.long$ymax[west.revpc.encoder.decoder.long$variable=="X1"])/mean(west.revpc.y[(west.revpc.n.pre+1):nrow(west.revpc.y),])
 
 # Plot p-values
 

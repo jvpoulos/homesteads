@@ -118,9 +118,9 @@ encoder.decoder.plot.south.exppc <- ggplot(data=south.exppc.encoder.decoder.long
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-south-exppc.png"), encoder.decoder.plot.south.exppc, width=11, height=8.5)
 
-mean(south.exppc.encoder.decoder.long$value[south.exppc.encoder.decoder.long$variable=="X1"]) # get mean treatment effect
-mean(south.exppc.encoder.decoder.long$ymin[south.exppc.encoder.decoder.long$variable=="X1"]) 
-mean(south.exppc.encoder.decoder.long$ymax[south.exppc.encoder.decoder.long$variable=="X1"]) 
+mean(south.exppc.encoder.decoder.long$value[south.exppc.encoder.decoder.long$variable=="X1"])/mean(south.exppc.y[(south.exppc.n.pre+1):nrow(south.exppc.y),]) # get mean % treatment effect
+mean(south.exppc.encoder.decoder.long$ymin[south.exppc.encoder.decoder.long$variable=="X1"])/mean(south.exppc.y[(south.exppc.n.pre+1):nrow(south.exppc.y),])
+mean(south.exppc.encoder.decoder.long$ymax[south.exppc.encoder.decoder.long$variable=="X1"])/mean(south.exppc.y[(south.exppc.n.pre+1):nrow(south.exppc.y),])
 
 # Plot p-values
 

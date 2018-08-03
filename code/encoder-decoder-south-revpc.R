@@ -118,10 +118,9 @@ encoder.decoder.plot.south.revpc <- ggplot(data=south.revpc.encoder.decoder.long
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-south-revpc.png"), encoder.decoder.plot.south.revpc, width=11, height=8.5)
 
-mean(south.revpc.encoder.decoder.long$value[south.revpc.encoder.decoder.long$variable=="X1"]) # get mean treatment effect
-mean(south.revpc.encoder.decoder.long$ymin[south.revpc.encoder.decoder.long$variable=="X1"]) 
-mean(south.revpc.encoder.decoder.long$ymax[south.revpc.encoder.decoder.long$variable=="X1"]) 
-
+mean(south.revpc.encoder.decoder.long$value[south.revpc.encoder.decoder.long$variable=="X1"])/mean(south.revpc.y[(south.revpc.n.pre+1):nrow(south.revpc.y),]) # get mean % treatment effect
+mean(south.revpc.encoder.decoder.long$ymin[south.revpc.encoder.decoder.long$variable=="X1"])/mean(south.revpc.y[(south.revpc.n.pre+1):nrow(south.revpc.y),])
+mean(south.revpc.encoder.decoder.long$ymax[south.revpc.encoder.decoder.long$variable=="X1"])/mean(south.revpc.y[(south.revpc.n.pre+1):nrow(south.revpc.y),])
 # Plot p-values
 
 south.revpc.encoder.decoder.control <- data.frame(

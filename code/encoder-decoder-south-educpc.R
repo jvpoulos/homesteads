@@ -118,9 +118,9 @@ encoder.decoder.plot.south.educpc <- ggplot(data=south.educpc.encoder.decoder.lo
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-south-educpc.png"), encoder.decoder.plot.south.educpc, width=11, height=8.5)
 
-mean(south.educpc.encoder.decoder.long$value[south.educpc.encoder.decoder.long$variable=="X1"]) # get mean treatment effect
-mean(south.educpc.encoder.decoder.long$ymin[south.educpc.encoder.decoder.long$variable=="X1"]) 
-mean(south.educpc.encoder.decoder.long$ymax[south.educpc.encoder.decoder.long$variable=="X1"]) 
+mean(south.educpc.encoder.decoder.long$value[south.educpc.encoder.decoder.long$variable=="X1"])/mean(south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),]) # get mean % treatment effect
+mean(south.educpc.encoder.decoder.long$ymin[south.educpc.encoder.decoder.long$variable=="X1"])/mean(south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),])
+mean(south.educpc.encoder.decoder.long$ymax[south.educpc.encoder.decoder.long$variable=="X1"])/mean(south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),])
 
 # Plot p-values
 
