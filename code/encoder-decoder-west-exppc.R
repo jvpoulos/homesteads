@@ -110,11 +110,13 @@ encoder.decoder.plot.west.exppc <- ggplot(data=west.exppc.encoder.decoder.long, 
   theme_bw() + theme(legend.title = element_blank()) + 
   ylab("Treatment effects on log per-capita state government total expenditure (1982$)") + 
   xlab("Year") +
-  scale_alpha_manual(values=c(0.2, 0.9)) +
+  scale_x_continuous(breaks=seq(1860, 1980, 20)) +
+  scale_alpha_manual(values=c(0.1, 0.9)) +
   scale_size_manual(values=c(0.8, 2)) +
   geom_hline(yintercept=0, linetype=2) + 
-  ggtitle("Encoder-decoder treatment effects: Expenditure in West") +
-  theme.blank + guides(colour=FALSE)
+  coord_cartesian(ylim=c(-8, 8)) +
+ # ggtitle("Encoder-decoder treatment effects: Expenditure in West") +
+  theme.blank + guides(colour=FALSE) + theme(legend.position="none")
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-west-exppc.png"), encoder.decoder.plot.west.exppc, width=11, height=8.5)
 
@@ -155,8 +157,8 @@ encoder.decoder.plot.pvalues.west.exppc <- ggplot(data=west.exppc.encoder.decode
   scale_size_manual(values=c(0.8, 2)) +
   geom_hline(yintercept=0, linetype=1) + 
   geom_hline(yintercept=0.05, linetype=2, colour="red") + 
-  ggtitle("Encoder-decoder p-values: Expenditure in West") +
-  theme.blank + theme(legend.position = c(0.8,0.8)) + guides(colour=FALSE) 
+  #ggtitle("Encoder-decoder p-values: Expenditure in West") +
+  theme.blank + theme(legend.position = c(0.8,0.8)) + guides(colour=FALSE) + theme(legend.position="none")
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-pvalues-west-exppc.png"), encoder.decoder.plot.pvalues.west.exppc, width=11, height=8.5)
 
@@ -177,7 +179,7 @@ west.exppc.encoder.decoder.plot <- ggplot(data=west.exppc.encoder.decoder, aes(x
   geom_line(aes(y=west.exppc.encoder.decoder.preds[,1], colour = "Predicted treated outcome"), size=1.2, linetype=2) +
   theme_bw() + theme(legend.title = element_blank()) + ylab("Log per-capita state government total expenditure (1982$)") + xlab("") +
   geom_vline(xintercept=1862, linetype=2) + 
-  ggtitle(paste0("Encoder-decoder actual vs. counterfactual outcome: Expenditure in West")) +
-  theme.blank 
+  #ggtitle(paste0("Encoder-decoder actual vs. counterfactual outcome: Expenditure in West")) +
+  theme.blank + theme(legend.position="none")
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-west-exppc.png"), west.exppc.encoder.decoder.plot, width=11, height=8.5)

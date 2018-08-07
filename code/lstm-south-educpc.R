@@ -1,5 +1,5 @@
 #####################################
-### encoder.decoder ### 
+### lstm ### 
 #####################################
 
 library(dplyr)
@@ -20,29 +20,29 @@ south.educpc.y <- educ.pc.y.south[!colnames(educ.pc.y.south) %in% c("year")]
 
 # import predictions
 
-south.educpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/south-educpc/treated-gans/weights.50-0.240.hdf5-south-educpc-test.csv"), col_names = FALSE)
-south.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/south-educpc/control/weights.110-6.233.hdf5-south-educpc-test.csv"), col_names = FALSE)
+south.educpc.lstm.pred.treated <- read_csv(paste0(results.directory, "lstm/south-educpc/treated-gans/weights.2460-0.074.hdf5-south-educpc-test.csv"), col_names = FALSE)
+south.educpc.lstm.pred.control <- read_csv(paste0(results.directory, "lstm/south-educpc/control/weights.30-23.832.hdf5-south-educpc-test.csv"), col_names = FALSE)
 
 # Actual versus predicted
-south.educpc.encoder.decoder <- data.frame(
-  "y.pred" = rbind(matrix(NA, south.educpc.n.pre, south.educpc.n.placebo+1), as.matrix(cbind(south.educpc.encoder.decoder.pred.treated, south.educpc.encoder.decoder.pred.control))),
+south.educpc.lstm <- data.frame(
+  "y.pred" = rbind(matrix(NA, south.educpc.n.pre, south.educpc.n.placebo+1), as.matrix(cbind(south.educpc.lstm.pred.treated, south.educpc.lstm.pred.control))),
   "y.true" = cbind(south.educpc.y, south.educpc.x),
   "year" =  educ.pc.y.south$year
 )
 
 # Post-period MSE and MAPE (all controls)
 
-south.educpc.control.forecast <- as.matrix(south.educpc.encoder.decoder.pred.control)
+south.educpc.control.forecast <- as.matrix(south.educpc.lstm.pred.control)
 south.educpc.control.true <- as.matrix(south.educpc.x[(south.educpc.n.pre+1):nrow(south.educpc.x),])
 
-south.educpc.encoder.decoder.mse <- error(forecast=south.educpc.control.forecast, true=south.educpc.control.true, method = "mse") # post-intervention MSE
-south.educpc.encoder.decoder.mse
+south.educpc.lstm.mse <- error(forecast=south.educpc.control.forecast, true=south.educpc.control.true, method = "mse") # post-intervention MSE
+south.educpc.lstm.mse
 
-south.educpc.encoder.decoder.preds <- rbind(matrix(NA, south.educpc.n.pre, south.educpc.n.placebo+1), as.matrix(cbind(south.educpc.encoder.decoder.pred.treated, south.educpc.encoder.decoder.pred.control))) # pad pre-period for plot
+south.educpc.lstm.preds <- rbind(matrix(NA, south.educpc.n.pre, south.educpc.n.placebo+1), as.matrix(cbind(south.educpc.lstm.pred.treated, south.educpc.lstm.pred.control))) # pad pre-period for plot
 
 # Calculate real treated pooled intervention effect
 
-south.educpc.treat.forecast <-  as.matrix(south.educpc.encoder.decoder.pred.treated)
+south.educpc.treat.forecast <-  as.matrix(south.educpc.lstm.pred.treated)
 
 south.educpc.treat.true <- as.matrix(south.educpc.y[1][(south.educpc.n.pre+1):nrow(south.educpc.y),])
 
@@ -57,23 +57,23 @@ south.educpc.p.values.control <- sapply(1:south.educpc.n.placebo, function(c){
   PermutationTest(south.educpc.control.forecast[,-c], south.educpc.control.true[,-c], south.educpc.t.stat.control, south.educpc.n.placebo-1, np=10000)
 })
 
-encoder.decoder.south.educpc.fpr <- sum(south.educpc.p.values.control <=0.05)/length(south.educpc.p.values.control) #FPR
-encoder.decoder.south.educpc.fpr
+lstm.south.educpc.fpr <- sum(south.educpc.p.values.control <=0.05)/length(south.educpc.p.values.control) #FPR
+lstm.south.educpc.fpr
 sum(p.adjust(south.educpc.p.values.control, "bonferroni") <=0.05)/length(south.educpc.p.values.control) # adjusted
 
 # CIs for treated
 
-south.educpc.CI.treated <- PermutationCI(south.educpc.control.forecast, south.educpc.control.true, south.educpc.t.stat, south.educpc.n.placebo, c.range=c(-9,3), np=20000, l=1000)
+lstm.south.educpc.CI.treated <- PermutationCI(south.educpc.control.forecast, south.educpc.control.true, south.educpc.t.stat, south.educpc.n.placebo, c.range=c(-9,3), np=20000, l=1000)
 
 # Plot pointwise impacts
 
 # Pointwise impacts
-south.educpc.encoder.decoder.control <- data.frame(
+south.educpc.lstm.control <- data.frame(
   "pointwise.control" = south.educpc.x[(south.educpc.n.pre+1):nrow(south.educpc.x),]-south.educpc.control.forecast,
   "year" =  sort(educ.pc.x.south.imp$year)[sort(educ.pc.x.south.imp$year)>=1865] # x year isn't sorted
 )
 
-south.educpc.encoder.decoder.treat <- data.frame(
+south.educpc.lstm.treat <- data.frame(
   "pointwise.treat" = south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),]-south.educpc.treat.forecast, 
   "year" =  educ.pc.y.south$year[educ.pc.y.south$year>=1865]
 )
@@ -90,21 +90,21 @@ theme.blank <- theme(axis.text=element_text(size=14)
                      , legend.position = c(0.2,0.9)
                      , legend.justification = c(1,0))
 
-south.educpc.encoder.decoder.control.long <- melt(south.educpc.encoder.decoder.control, id="year")  # convert to long format
-south.educpc.encoder.decoder.control.long$group <- "Control"
+south.educpc.lstm.control.long <- melt(south.educpc.lstm.control, id="year")  # convert to long format
+south.educpc.lstm.control.long$group <- "Control"
 
-south.educpc.encoder.decoder.treat.long <- melt(south.educpc.encoder.decoder.treat, id="year")  # convert to long format
-south.educpc.encoder.decoder.treat.long$group <- "Treated"
+south.educpc.lstm.treat.long <- melt(south.educpc.lstm.treat, id="year")  # convert to long format
+south.educpc.lstm.treat.long$group <- "Treated"
 
-south.educpc.encoder.decoder.long <- rbind(south.educpc.encoder.decoder.treat.long, south.educpc.encoder.decoder.control.long)
+south.educpc.lstm.long <- rbind(south.educpc.lstm.treat.long, south.educpc.lstm.control.long)
 
-south.educpc.encoder.decoder.long$ymin <- NA
-south.educpc.encoder.decoder.long$ymax <- NA
+south.educpc.lstm.long$ymin <- NA
+south.educpc.lstm.long$ymax <- NA
 
-south.educpc.encoder.decoder.long$ymin[south.educpc.encoder.decoder.long$group=="Treated"] <- south.educpc.CI.treated[,1]
-south.educpc.encoder.decoder.long$ymax[south.educpc.encoder.decoder.long$group=="Treated"] <- south.educpc.CI.treated[,2]
+south.educpc.lstm.long$ymin[south.educpc.lstm.long$group=="Treated"] <- lstm.south.educpc.CI.treated[,1]
+south.educpc.lstm.long$ymax[south.educpc.lstm.long$group=="Treated"] <- lstm.south.educpc.CI.treated[,2]
 
-encoder.decoder.plot.south.educpc <- ggplot(data=south.educpc.encoder.decoder.long, aes(x=year, y=value, colour=variable, size=group, alpha=group)) +
+lstm.plot.south.educpc <- ggplot(data=south.educpc.lstm.long, aes(x=year, y=value, colour=variable, size=group, alpha=group)) +
   geom_line() +
   geom_ribbon(aes(ymin=ymin, ymax=ymax), fill="grey", alpha=0.5, size=0) +
   theme_bw() + theme(legend.title = element_blank()) + 
@@ -114,37 +114,37 @@ encoder.decoder.plot.south.educpc <- ggplot(data=south.educpc.encoder.decoder.lo
   scale_alpha_manual(values=c(0.1, 0.9)) +
   scale_size_manual(values=c(0.8, 2)) +
   geom_hline(yintercept=0, linetype=2) + 
-  coord_cartesian(ylim=c(-8, 8)) +
-  #ggtitle("Encoder-decoder treatment effects: Education spending in South") +
+  coord_cartesian(ylim=c(-40, 40)) +
+  #ggtitle("LSTM treatment effects: Education spending in South") +
   theme.blank + guides(colour=FALSE) + theme(legend.position="none")
 
-ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-south-educpc.png"), encoder.decoder.plot.south.educpc, width=11, height=8.5)
+ggsave(paste0(results.directory,"plots/lstm-plot-effects-south-educpc.png"), lstm.plot.south.educpc, width=11, height=8.5)
 
-mean(south.educpc.encoder.decoder.long$value[south.educpc.encoder.decoder.long$variable=="X1"])/mean(south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),]) # get mean % treatment effect
-mean(south.educpc.encoder.decoder.long$ymin[south.educpc.encoder.decoder.long$variable=="X1"])/mean(south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),])
-mean(south.educpc.encoder.decoder.long$ymax[south.educpc.encoder.decoder.long$variable=="X1"])/mean(south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),])
+mean(south.educpc.lstm.long$value[south.educpc.lstm.long$variable=="X1"])/mean(south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),]) # get mean % treatment effect
+mean(south.educpc.lstm.long$ymin[south.educpc.lstm.long$variable=="X1"])/mean(south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),])
+mean(south.educpc.lstm.long$ymax[south.educpc.lstm.long$variable=="X1"])/mean(south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),])
 
 # Plot p-values
 
-south.educpc.encoder.decoder.control <- data.frame(
+south.educpc.lstm.control <- data.frame(
   "p.values.control" = south.educpc.p.values.control,
   "year" =  educ.pc.y.south$year[educ.pc.y.south$year>=1865]
 )
 
-south.educpc.encoder.decoder.treat <- data.frame(
+south.educpc.lstm.treat <- data.frame(
   "p.values.treat" = south.educpc.p.values.treated,
   "year" =  educ.pc.y.south$year[educ.pc.y.south$year>=1865]
 )
 
-south.educpc.encoder.decoder.control.long <- melt(south.educpc.encoder.decoder.control, id="year")  # convert to long format
-south.educpc.encoder.decoder.control.long$group <- "Control"
+south.educpc.lstm.control.long <- melt(south.educpc.lstm.control, id="year")  # convert to long format
+south.educpc.lstm.control.long$group <- "Control"
 
-south.educpc.encoder.decoder.treat.long <- melt(south.educpc.encoder.decoder.treat, id="year")  # convert to long format
-south.educpc.encoder.decoder.treat.long$group <- "Treated"
+south.educpc.lstm.treat.long <- melt(south.educpc.lstm.treat, id="year")  # convert to long format
+south.educpc.lstm.treat.long$group <- "Treated"
 
-south.educpc.encoder.decoder.long <- rbind(south.educpc.encoder.decoder.treat.long, south.educpc.encoder.decoder.control.long)
+south.educpc.lstm.long <- rbind(south.educpc.lstm.treat.long, south.educpc.lstm.control.long)
 
-encoder.decoder.plot.pvalues.south.educpc <- ggplot(data=south.educpc.encoder.decoder.long, aes(x=year, y=value, colour=variable, size=group, alpha=group)) +
+lstm.plot.pvalues.south.educpc <- ggplot(data=south.educpc.lstm.long, aes(x=year, y=value, colour=variable, size=group, alpha=group)) +
   geom_point() +
   theme_bw() + theme(legend.title = element_blank()) + 
   ylab("p-value") + 
@@ -153,10 +153,10 @@ encoder.decoder.plot.pvalues.south.educpc <- ggplot(data=south.educpc.encoder.de
   scale_size_manual(values=c(0.8, 2)) +
   geom_hline(yintercept=0, linetype=1) + 
   geom_hline(yintercept=0.05, linetype=2, colour="red") + 
-  #ggtitle("Encoder-decoder p-values: Education spending in South") +
+  #ggtitle("LSTM p-values: Education spending in South") +
   theme.blank + theme(legend.position = c(0.8,0.8)) + guides(colour=FALSE) + theme(legend.position="none")
 
-ggsave(paste0(results.directory,"plots/encoder-decoder-plot-pvalues-south-educpc.png"), encoder.decoder.plot.pvalues.south.educpc, width=11, height=8.5)
+ggsave(paste0(results.directory,"plots/lstm-plot-pvalues-south-educpc.png"), lstm.plot.pvalues.south.educpc, width=11, height=8.5)
 
 # Plot actual versus predicted with credible intervals for the holdout period
 
@@ -170,12 +170,12 @@ theme.blank <- theme(axis.text=element_text(size=12)
                      , legend.position = c(0.25,0.85)
                      , legend.justification = c(1,0))
 
-south.educpc.encoder.decoder.plot <- ggplot(data=south.educpc.encoder.decoder, aes(x=year)) +
+south.educpc.lstm.plot <- ggplot(data=south.educpc.lstm, aes(x=year)) +
   geom_line(aes(y=south.educpc.y[[1]], colour = "Observed treated outcome"), size=1.2) +
-  geom_line(aes(y=south.educpc.encoder.decoder.preds[,1], colour = "Predicted treated outcome"), size=1.2, linetype=2) +
+  geom_line(aes(y=south.educpc.lstm.preds[,1], colour = "Predicted treated outcome"), size=1.2, linetype=2) +
   theme_bw() + theme(legend.title = element_blank()) + ylab("Log per-capita state government education spending (1982$)") + xlab("") +
   geom_vline(xintercept=1866, linetype=2) + 
-#  ggtitle(paste0("Encoder-decoder actual vs. counterfactual outcome: Education spending in South")) +
+#  ggtitle(paste0("LSTM actual vs. counterfactual outcome: Education spending in South")) +
   theme.blank + theme(legend.position="none")
 
-ggsave(paste0(results.directory,"plots/encoder-decoder-plot-south-educpc.png"), south.educpc.encoder.decoder.plot, width=11, height=8.5)
+ggsave(paste0(results.directory,"plots/lstm-plot-south-educpc.png"), south.educpc.lstm.plot, width=11, height=8.5)
