@@ -13,17 +13,19 @@ library(ftsa)
 # setup
 
 west.revpc.n.pre <- nrow(rev.pc.y.west[rev.pc.y.west$year<1862,])
-west.revpc.n.placebo <- ncol(rev.pc.x.west.imp[!colnames(rev.pc.x.west.imp) %in% c("year")])
 
-west.revpc.x <- rev.pc.x.west.imp[!colnames(rev.pc.x.west.imp) %in% c("year")]
+west.revpc.x.indices <- grep("rev.pc", colnames(rev.pc.x.west.imp))
+west.revpc.n.placebo <- ncol(rev.pc.x.west.imp[west.revpc.x.indices])
+
+west.revpc.x <- rev.pc.x.west.imp[west.revpc.x.indices]
 west.revpc.y <- rev.pc.y.west[!colnames(rev.pc.y.west) %in% c("year")]
 
 # import predictions
 
 west.revpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-revpc/treated-gans/weights.480-7.413.hdf5-west-revpc-test.csv"), col_names = FALSE)
-west.revpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-revpc/control/weights.880-2.382.hdf5-west-revpc-test.csv"), col_names = FALSE)
+west.revpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-revpc/control/weights.980-0.414.hdf5-west-revpc-test.csv"), col_names = FALSE)
 
-# Actual versus predicted
+# Actual versus predicted (for plot)
 west.revpc.encoder.decoder <- data.frame(
   "y.pred" = rbind(matrix(NA, west.revpc.n.pre, west.revpc.n.placebo+1), as.matrix(cbind(west.revpc.encoder.decoder.pred.treated, west.revpc.encoder.decoder.pred.control))),
   "y.true" = cbind(west.revpc.y, west.revpc.x),
@@ -63,7 +65,7 @@ sum(p.adjust(west.revpc.p.values.control, "bonferroni") <=0.05)/length(west.revp
 
 # CIs for treated
 
-west.revpc.CI.treated <- PermutationCI(west.revpc.control.forecast, west.revpc.control.true, west.revpc.t.stat, west.revpc.n.placebo, c.range=c(-6,6), np=10000, l=1000)
+west.revpc.CI.treated <- PermutationCI(west.revpc.control.forecast, west.revpc.control.true, west.revpc.t.stat, west.revpc.n.placebo, c.range=c(-10,10), np=10000, l=1000)
 
 # Plot pointwise impacts
 
@@ -120,9 +122,9 @@ encoder.decoder.plot.west.revpc <- ggplot(data=west.revpc.encoder.decoder.long, 
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-west-revpc.png"), encoder.decoder.plot.west.revpc, width=11, height=8.5)
 
-mean(west.revpc.encoder.decoder.long$value[west.revpc.encoder.decoder.long$variable=="X1"])/mean(west.revpc.y[(west.revpc.n.pre+1):nrow(west.revpc.y),]) # get mean % treatment effect
-mean(west.revpc.encoder.decoder.long$ymin[west.revpc.encoder.decoder.long$variable=="X1"])/mean(west.revpc.y[(west.revpc.n.pre+1):nrow(west.revpc.y),])
-mean(west.revpc.encoder.decoder.long$ymax[west.revpc.encoder.decoder.long$variable=="X1"])/mean(west.revpc.y[(west.revpc.n.pre+1):nrow(west.revpc.y),])
+mean(west.revpc.encoder.decoder.long$value[west.revpc.encoder.decoder.long$variable=="X1"])# get mean % treatment effect
+mean(west.revpc.encoder.decoder.long$ymin[west.revpc.encoder.decoder.long$variable=="X1"])
+mean(west.revpc.encoder.decoder.long$ymax[west.revpc.encoder.decoder.long$variable=="X1"])
 
 # Plot p-values
 

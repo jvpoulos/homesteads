@@ -13,15 +13,17 @@ library(ftsa)
 # setup
 
 west.educpc.n.pre <- nrow(educ.pc.y.west[educ.pc.y.west$year<1862,])
-west.educpc.n.placebo <- ncol(educ.pc.x.west.imp[!colnames(educ.pc.x.west.imp) %in% c("year")])
 
-west.educpc.x <- educ.pc.x.west.imp[!colnames(educ.pc.x.west.imp) %in% c("year")]
+west.educpc.x.indices <- grep("educ.pc", colnames(educ.pc.x.west.imp))
+west.educpc.n.placebo <- ncol(educ.pc.x.west.imp[west.educpc.x.indices])
+
+west.educpc.x <- educ.pc.x.west.imp[west.educpc.x.indices]
 west.educpc.y <- educ.pc.y.west[!colnames(educ.pc.y.west) %in% c("year")]
 
 # import predictions
 
 west.educpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-educpc/treated-gans/weights.110-0.586.hdf5-west-educpc-test.csv"), col_names = FALSE)
-west.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-educpc/control/weights.90-5.872.hdf5-west-educpc-test.csv"), col_names = FALSE)
+west.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-educpc/control/weights.130-3.754.hdf5-west-educpc-test.csv"), col_names = FALSE)
 
 # Actual versus predicted
 west.educpc.encoder.decoder <- data.frame(
@@ -63,7 +65,7 @@ sum(p.adjust(west.educpc.p.values.control, "bonferroni") <=0.05)/length(west.edu
 
 # CIs for treated
 
-west.educpc.CI.treated <- PermutationCI(west.educpc.control.forecast, west.educpc.control.true, west.educpc.t.stat, west.educpc.n.placebo, c.range=c(-9,3), np=20000, l=1000)
+west.educpc.CI.treated <- PermutationCI(west.educpc.control.forecast, west.educpc.control.true, west.educpc.t.stat, west.educpc.n.placebo, c.range=c(-10,10), np=20000, l=1000)
 
 # Plot pointwise impacts
 

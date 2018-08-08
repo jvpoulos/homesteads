@@ -13,17 +13,19 @@ library(ftsa)
 # setup
 
 west.exppc.n.pre <- nrow(exp.pc.y.west[exp.pc.y.west$year<1862,])
-west.exppc.n.placebo <- ncol(exp.pc.x.west.imp[!colnames(exp.pc.x.west.imp) %in% c("year")])
 
-west.exppc.x <- exp.pc.x.west.imp[!colnames(exp.pc.x.west.imp) %in% c("year")]
+west.exppc.x.indices <- grep("exp.pc", colnames(exp.pc.x.west.imp))
+west.exppc.n.placebo <- ncol(exp.pc.x.west.imp[west.exppc.x.indices])
+
+west.exppc.x <- exp.pc.x.west.imp[west.exppc.x.indices]
 west.exppc.y <- exp.pc.y.west[!colnames(exp.pc.y.west) %in% c("year")]
 
 # import predictions
 
-west.exppc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-exppc/treated-gans/weights.450-8.144.hdf5-west-exppc-test.csv"), col_names = FALSE)
-west.exppc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-exppc/control/weights.1000-2.424.hdf5-west-exppc-test.csv"), col_names = FALSE)
+west.exppc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-exppc/treated-gans/weights.880-6.073.hdf5-west-exppc-test.csv"), col_names = FALSE)
+west.exppc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-exppc/control/weights.430-0.402.hdf5-west-exppc-test.csv"), col_names = FALSE)
 
-# Actual versus predicted
+# Actual versus predicted (for plots)
 west.exppc.encoder.decoder <- data.frame(
   "y.pred" = rbind(matrix(NA, west.exppc.n.pre, west.exppc.n.placebo+1), as.matrix(cbind(west.exppc.encoder.decoder.pred.treated, west.exppc.encoder.decoder.pred.control))),
   "y.true" = cbind(west.exppc.y, west.exppc.x),
@@ -63,7 +65,7 @@ sum(p.adjust(west.exppc.p.values.control, "bonferroni") <=0.05)/length(west.expp
 
 # CIs for treated
 
-west.exppc.CI.treated <- PermutationCI(west.exppc.control.forecast, west.exppc.control.true, west.exppc.t.stat, west.exppc.n.placebo, c.range=c(-6,6), np=10000, l=1000)
+west.exppc.CI.treated <- PermutationCI(west.exppc.control.forecast, west.exppc.control.true, west.exppc.t.stat, west.exppc.n.placebo, c.range=c(-10,10), np=10000, l=1000)
 
 # Plot pointwise impacts
 
@@ -114,7 +116,7 @@ encoder.decoder.plot.west.exppc <- ggplot(data=west.exppc.encoder.decoder.long, 
   scale_alpha_manual(values=c(0.1, 0.9)) +
   scale_size_manual(values=c(0.8, 2)) +
   geom_hline(yintercept=0, linetype=2) + 
-  coord_cartesian(ylim=c(-8, 8)) +
+  coord_cartesian(ylim=c(-10, 10)) +
  # ggtitle("Encoder-decoder treatment effects: Expenditure in West") +
   theme.blank + guides(colour=FALSE) + theme(legend.position="none")
 
@@ -123,10 +125,6 @@ ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-west-exppc.p
 mean(west.exppc.encoder.decoder.long$value[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),]) # get mean % treatment effect
 mean(west.exppc.encoder.decoder.long$ymin[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])
 mean(west.exppc.encoder.decoder.long$ymax[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])
-
-exp(mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])*mean(west.exppc.encoder.decoder.long$value[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])) 
-exp(mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])*mean(west.exppc.encoder.decoder.long$ymin[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])) # mean in real terms
-exp(mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])*mean(west.exppc.encoder.decoder.long$ymax[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),]))
 
 # Plot p-values
 

@@ -13,15 +13,17 @@ library(ftsa)
 # setup
 
 south.educpc.n.pre <- nrow(educ.pc.y.south[educ.pc.y.south$year<1866,])-1
-south.educpc.n.placebo <- ncol(educ.pc.x.south.imp[!colnames(educ.pc.x.south.imp) %in% c("year")])
 
-south.educpc.x <- educ.pc.x.south.imp[!colnames(educ.pc.x.south.imp) %in% c("year")]
+south.educpc.x.indices <- grep("educ.pc", colnames(educ.pc.x.south.imp))
+south.educpc.n.placebo <- ncol(educ.pc.x.south.imp[south.educpc.x.indices])
+
+south.educpc.x <- educ.pc.x.south.imp[south.educpc.x.indices]
 south.educpc.y <- educ.pc.y.south[!colnames(educ.pc.y.south) %in% c("year")]
 
 # import predictions
 
 south.educpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/south-educpc/treated-gans/weights.50-0.240.hdf5-south-educpc-test.csv"), col_names = FALSE)
-south.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/south-educpc/control/weights.110-6.233.hdf5-south-educpc-test.csv"), col_names = FALSE)
+south.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/south-educpc/control/weights.160-4.091.hdf5-south-educpc-test.csv"), col_names = FALSE)
 
 # Actual versus predicted
 south.educpc.encoder.decoder <- data.frame(
@@ -63,7 +65,7 @@ sum(p.adjust(south.educpc.p.values.control, "bonferroni") <=0.05)/length(south.e
 
 # CIs for treated
 
-south.educpc.CI.treated <- PermutationCI(south.educpc.control.forecast, south.educpc.control.true, south.educpc.t.stat, south.educpc.n.placebo, c.range=c(-9,3), np=20000, l=1000)
+south.educpc.CI.treated <- PermutationCI(south.educpc.control.forecast, south.educpc.control.true, south.educpc.t.stat, south.educpc.n.placebo, c.range=c(-10,10), np=20000, l=1000)
 
 # Plot pointwise impacts
 

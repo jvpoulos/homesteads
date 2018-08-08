@@ -41,10 +41,8 @@ educ.pc.all.did <- boot(data=funds.did,
                         parallel="multicore", ncpus = cores)
 
 educ.pc.all.did.delta <- educ.pc.all.did$t0
-educ.pc.all.did.delta
 
 educ.pc.all.did.CI <- boot.ci(educ.pc.all.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-educ.pc.all.did.CI
 
 # All years
 educ.pc.all.robust.did <- boot(data=funds.did,
@@ -77,10 +75,8 @@ rev.pc.all.did <- boot(data=funds.did,
                         parallel="multicore", ncpus = cores)
 
 rev.pc.all.did.delta <- rev.pc.all.did$t0
-rev.pc.all.did.delta
 
 rev.pc.all.did.CI <- boot.ci(rev.pc.all.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-rev.pc.all.did.CI
 
 # All years
 rev.pc.all.robust.did <- boot(data=funds.did,
@@ -113,10 +109,8 @@ exp.pc.all.did <- boot(data=funds.did,
                        parallel="multicore", ncpus = cores)
 
 exp.pc.all.did.delta <- exp.pc.all.did$t0
-exp.pc.all.did.delta
 
 exp.pc.all.did.CI <- boot.ci(exp.pc.all.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-exp.pc.all.did.CI
 
 # All years
 exp.pc.all.robust.did <- boot(data=funds.did,
@@ -161,10 +155,8 @@ educ.pc.all.south.did <- boot(data=funds.did.south,
                         parallel="multicore", ncpus = cores)
 
 educ.pc.all.south.did.delta <- educ.pc.all.south.did$t0
-educ.pc.all.south.did.delta
 
 educ.pc.all.south.did.CI <- boot.ci(educ.pc.all.south.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-educ.pc.all.south.did.CI
 
 # All years
 educ.pc.all.south.robust.did <- boot(data=funds.did.south,
@@ -180,10 +172,6 @@ educ.pc.all.south.robust.did.delta
 educ.pc.all.south.robust.did.CI <- boot.ci(educ.pc.all.south.robust.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
 educ.pc.all.south.robust.did.CI
 
-# Sanity check
-
-#summary(lm(educ.f1, data=funds.did.south))
-
 # rev.pc
 
 # All years
@@ -195,10 +183,8 @@ rev.pc.all.south.did <- boot(data=funds.did.south,
                        parallel="multicore", ncpus = cores)
 
 rev.pc.all.south.did.delta <- rev.pc.all.south.did$t0
-rev.pc.all.south.did.delta
 
 rev.pc.all.south.did.CI <- boot.ci(rev.pc.all.south.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-rev.pc.all.south.did.CI
 
 # All years
 rev.pc.all.south.robust.did <- boot(data=funds.did.south,
@@ -225,10 +211,8 @@ exp.pc.all.south.did <- boot(data=funds.did.south,
                        parallel="multicore", ncpus = cores)
 
 exp.pc.all.south.did.delta <- exp.pc.all.south.did$t0
-exp.pc.all.south.did.delta
 
 exp.pc.all.south.did.CI <- boot.ci(exp.pc.all.south.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-exp.pc.all.south.did.CI
 
 # All years
 exp.pc.all.south.robust.did <- boot(data=funds.did.south,

@@ -60,7 +60,7 @@ source(paste0(code.directory,'encoder-decoder-west-educpc.R'))
 source(paste0(code.directory,'encoder-decoder-west-exppc.R')) 
 source(paste0(code.directory,'encoder-decoder-west-revpc.R')) 
 
-source(paste0(code.directory,'mspe-funds.R')) # Get MSPE sds
+source(paste0(code.directory,'mspe-funds-encoder-decoder.R')) # Get MSPE sds
 
 # DD estimates on RR access
 

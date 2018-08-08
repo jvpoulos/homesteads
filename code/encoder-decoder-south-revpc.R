@@ -13,15 +13,17 @@ library(ftsa)
 # setup
 
 south.revpc.n.pre <- nrow(rev.pc.y.south[rev.pc.y.south$year<1866,])-1
-south.revpc.n.placebo <- ncol(rev.pc.x.south.imp[!colnames(rev.pc.x.south.imp) %in% c("year")])
 
-south.revpc.x <- rev.pc.x.south.imp[!colnames(rev.pc.x.south.imp) %in% c("year")]
+south.revpc.x.indices <- grep("rev.pc", colnames(rev.pc.x.south.imp))
+south.revpc.n.placebo <- ncol(rev.pc.x.south.imp[south.revpc.x.indices])
+
+south.revpc.x <- rev.pc.x.south.imp[south.revpc.x.indices]
 south.revpc.y <- rev.pc.y.south[!colnames(rev.pc.y.south) %in% c("year")]
 
 # import predictions
 
 south.revpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/south-revpc/treated-gans/weights.390-4.797.hdf5-south-revpc-test.csv"), col_names = FALSE)
-south.revpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/south-revpc/control/weights.320-2.759.hdf5-south-revpc-test.csv"), col_names = FALSE)
+south.revpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/south-revpc/control/weights.880-0.375.hdf5-south-revpc-test.csv"), col_names = FALSE)
 
 # Actual versus predicted
 south.revpc.encoder.decoder <- data.frame(
@@ -63,7 +65,7 @@ sum(p.adjust(south.revpc.p.values.control, "bonferroni") <=0.05)/length(south.re
 
 # CIs for treated
 
-south.revpc.CI.treated <- PermutationCI(south.revpc.control.forecast, south.revpc.control.true, south.revpc.t.stat, south.revpc.n.placebo, c.range=c(-9,3), np=10000, l=1000)
+south.revpc.CI.treated <- PermutationCI(south.revpc.control.forecast, south.revpc.control.true, south.revpc.t.stat, south.revpc.n.placebo, c.range=c(-10,10), np=10000, l=1000)
 
 # Plot pointwise impacts
 
@@ -114,7 +116,7 @@ encoder.decoder.plot.south.revpc <- ggplot(data=south.revpc.encoder.decoder.long
   scale_alpha_manual(values=c(0.1, 0.9)) +
   scale_size_manual(values=c(0.8, 2)) +
   geom_hline(yintercept=0, linetype=2) + 
-  coord_cartesian(ylim=c(-8, 8)) +
+  coord_cartesian(ylim=c(-10, 10)) +
   #ggtitle("Encoder-decoder treatment effects: Revenue in South") +
   theme.blank + guides(colour=FALSE) + theme(legend.position="none")
 
