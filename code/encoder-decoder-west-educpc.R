@@ -22,8 +22,8 @@ west.educpc.y <- educ.pc.y.west[!colnames(educ.pc.y.west) %in% c("year")]
 
 # import predictions
 
-west.educpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-educpc/treated-gans/weights.110-0.586.hdf5-west-educpc-test.csv"), col_names = FALSE)
-west.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-educpc/control/weights.130-3.754.hdf5-west-educpc-test.csv"), col_names = FALSE)
+west.educpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-educpc/treated-gans/weights.170-0.014.hdf5-west-educpc-test.csv"), col_names = FALSE)
+west.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-educpc/control/weights.1870-3.433.hdf5-west-educpc-test.csv"), col_names = FALSE)
 
 # Actual versus predicted
 west.educpc.encoder.decoder <- data.frame(
@@ -65,14 +65,14 @@ sum(p.adjust(west.educpc.p.values.control, "bonferroni") <=0.05)/length(west.edu
 
 # CIs for treated
 
-west.educpc.CI.treated <- PermutationCI(west.educpc.control.forecast, west.educpc.control.true, west.educpc.t.stat, west.educpc.n.placebo, c.range=c(-10,10), np=20000, l=1000)
+west.educpc.CI.treated <- PermutationCI(west.educpc.control.forecast, west.educpc.control.true, west.educpc.t.stat, west.educpc.n.placebo, c.range=c(-10,10), np=10000, l=1000)
 
 # Plot pointwise impacts
 
 # Pointwise impacts
 west.educpc.encoder.decoder.control <- data.frame(
   "pointwise.control" = west.educpc.x[(west.educpc.n.pre+1):nrow(west.educpc.x),]-west.educpc.control.forecast,
-  "year" =  sort(educ.pc.x.west.imp$year)[sort(educ.pc.x.west.imp$year)>=1862] # x year isn't sorted
+  "year" =  educ.pc.x.west.imp$year
 )
 
 west.educpc.encoder.decoder.treat <- data.frame(
@@ -122,9 +122,13 @@ encoder.decoder.plot.west.educpc <- ggplot(data=west.educpc.encoder.decoder.long
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-west-educpc.png"), encoder.decoder.plot.west.educpc, width=11, height=8.5)
 
-mean(west.educpc.encoder.decoder.long$value[west.educpc.encoder.decoder.long$variable=="X1"])/mean(west.educpc.y[(west.educpc.n.pre+1):nrow(west.educpc.y),]) # get mean % treatment effect
-mean(west.educpc.encoder.decoder.long$ymin[west.educpc.encoder.decoder.long$variable=="X1"])/mean(west.educpc.y[(west.educpc.n.pre+1):nrow(west.educpc.y),])
-mean(west.educpc.encoder.decoder.long$ymax[west.educpc.encoder.decoder.long$variable=="X1"])/mean(west.educpc.y[(west.educpc.n.pre+1):nrow(west.educpc.y),])
+# mean(west.educpc.treat.true)-mean(as.matrix(west.educpc.y[1][1:(west.educpc.n.pre),])) # 1st diff (treated post-pre)
+# 
+# mean(west.educpc.treat.forecast)-mean(as.matrix(west.educpc.y[1][1:(west.educpc.n.pre),])) # 2nd diff (counterfactual post-pre)
+
+mean(west.educpc.encoder.decoder.long$value[west.educpc.encoder.decoder.long$variable=="X1"])
+mean(west.educpc.encoder.decoder.long$ymin[west.educpc.encoder.decoder.long$variable=="X1"])
+mean(west.educpc.encoder.decoder.long$ymax[west.educpc.encoder.decoder.long$variable=="X1"])
 
 # Plot p-values
 

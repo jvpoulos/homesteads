@@ -22,7 +22,7 @@ west.exppc.y <- exp.pc.y.west[!colnames(exp.pc.y.west) %in% c("year")]
 
 # import predictions
 
-west.exppc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-exppc/treated-gans/weights.880-6.073.hdf5-west-exppc-test.csv"), col_names = FALSE)
+west.exppc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-exppc/treated-gans/weights.1460-0.003.hdf5-west-exppc-test.csv"), col_names = FALSE)
 west.exppc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-exppc/control/weights.430-0.402.hdf5-west-exppc-test.csv"), col_names = FALSE)
 
 # Actual versus predicted (for plots)
@@ -72,7 +72,7 @@ west.exppc.CI.treated <- PermutationCI(west.exppc.control.forecast, west.exppc.c
 # Pointwise impacts
 west.exppc.encoder.decoder.control <- data.frame(
   "pointwise.control" = west.exppc.x[(west.exppc.n.pre+1):nrow(west.exppc.x),]-west.exppc.control.forecast,
-  "year" =  sort(exp.pc.x.west.imp$year)[sort(exp.pc.x.west.imp$year)>=1862] # x year isn't sorted
+  "year" = exp.pc.x.west.imp$year
 )
 
 west.exppc.encoder.decoder.treat <- data.frame(
@@ -122,9 +122,9 @@ encoder.decoder.plot.west.exppc <- ggplot(data=west.exppc.encoder.decoder.long, 
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-west-exppc.png"), encoder.decoder.plot.west.exppc, width=11, height=8.5)
 
-mean(west.exppc.encoder.decoder.long$value[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),]) # get mean % treatment effect
-mean(west.exppc.encoder.decoder.long$ymin[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])
-mean(west.exppc.encoder.decoder.long$ymax[west.exppc.encoder.decoder.long$variable=="X1"])/mean(west.exppc.y[(west.exppc.n.pre+1):nrow(west.exppc.y),])
+mean(west.exppc.encoder.decoder.long$value[west.exppc.encoder.decoder.long$variable=="X1"]) # get mean % treatment effect
+mean(west.exppc.encoder.decoder.long$ymin[west.exppc.encoder.decoder.long$variable=="X1"])
+mean(west.exppc.encoder.decoder.long$ymax[west.exppc.encoder.decoder.long$variable=="X1"])
 
 # Plot p-values
 

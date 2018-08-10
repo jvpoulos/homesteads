@@ -22,8 +22,8 @@ south.educpc.y <- educ.pc.y.south[!colnames(educ.pc.y.south) %in% c("year")]
 
 # import predictions
 
-south.educpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/south-educpc/treated-gans/weights.50-0.240.hdf5-south-educpc-test.csv"), col_names = FALSE)
-south.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/south-educpc/control/weights.160-4.091.hdf5-south-educpc-test.csv"), col_names = FALSE)
+south.educpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/south-educpc/treated-gans/weights.50-0.188.hdf5-south-educpc-test.csv"), col_names = FALSE)
+south.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/south-educpc/control/weights.1910-3.522.hdf5-south-educpc-test.csv"), col_names = FALSE)
 
 # Actual versus predicted
 south.educpc.encoder.decoder <- data.frame(
@@ -65,14 +65,14 @@ sum(p.adjust(south.educpc.p.values.control, "bonferroni") <=0.05)/length(south.e
 
 # CIs for treated
 
-south.educpc.CI.treated <- PermutationCI(south.educpc.control.forecast, south.educpc.control.true, south.educpc.t.stat, south.educpc.n.placebo, c.range=c(-10,10), np=20000, l=1000)
+south.educpc.CI.treated <- PermutationCI(south.educpc.control.forecast, south.educpc.control.true, south.educpc.t.stat, south.educpc.n.placebo, c.range=c(-10,10), np=10000, l=1000)
 
 # Plot pointwise impacts
 
 # Pointwise impacts
 south.educpc.encoder.decoder.control <- data.frame(
   "pointwise.control" = south.educpc.x[(south.educpc.n.pre+1):nrow(south.educpc.x),]-south.educpc.control.forecast,
-  "year" =  sort(educ.pc.x.south.imp$year)[sort(educ.pc.x.south.imp$year)>=1865] # x year isn't sorted
+  "year" =  educ.pc.x.south.imp$year
 )
 
 south.educpc.encoder.decoder.treat <- data.frame(
@@ -122,9 +122,9 @@ encoder.decoder.plot.south.educpc <- ggplot(data=south.educpc.encoder.decoder.lo
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-south-educpc.png"), encoder.decoder.plot.south.educpc, width=11, height=8.5)
 
-mean(south.educpc.encoder.decoder.long$value[south.educpc.encoder.decoder.long$variable=="X1"])/mean(south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),]) # get mean % treatment effect
-mean(south.educpc.encoder.decoder.long$ymin[south.educpc.encoder.decoder.long$variable=="X1"])/mean(south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),])
-mean(south.educpc.encoder.decoder.long$ymax[south.educpc.encoder.decoder.long$variable=="X1"])/mean(south.educpc.y[(south.educpc.n.pre+1):nrow(south.educpc.y),])
+mean(south.educpc.encoder.decoder.long$value[south.educpc.encoder.decoder.long$variable=="X1"])
+mean(south.educpc.encoder.decoder.long$ymin[south.educpc.encoder.decoder.long$variable=="X1"])
+mean(south.educpc.encoder.decoder.long$ymax[south.educpc.encoder.decoder.long$variable=="X1"])
 
 # Plot p-values
 

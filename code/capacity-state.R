@@ -235,13 +235,17 @@ rev.pc.x.west <- rev.pc[rev.pc$year %in% rev.pc.years.west,]
 rev.pc.x.south <- rev.pc[rev.pc$year %in% rev.pc.years.south,]
 
 rev.pc.y.west <- rev.pc.y.west[rev.pc.y.west$year %in% rev.pc.years.west,]
+rev.pc.x.west <- rev.pc.x.west[order(rev.pc.x.west$year),] # reorder
 rev.pc.y.south <- rev.pc.y.south[rev.pc.y.south$year %in% rev.pc.years.south,]
+rev.pc.x.south <- rev.pc.x.south[order(rev.pc.x.south$year),] # reorder
 
 exp.pc.years.west <- intersect(exp.pc$year,exp.pc.y.west$year) # common exp.pc years in treated and control
 exp.pc.years.south <- intersect(exp.pc$year,exp.pc.y.south$year) 
 
 exp.pc.x.west <- exp.pc[exp.pc$year %in% exp.pc.years.west,]
+exp.pc.x.west <- exp.pc.x.west[order(exp.pc.x.west$year),] # reorder
 exp.pc.x.south <- exp.pc[exp.pc$year %in% exp.pc.years.south,]
+exp.pc.x.south <- exp.pc.x.south[order(exp.pc.x.south$year),] # reorder
 
 exp.pc.y.west <- exp.pc.y.west[exp.pc.y.west$year %in% exp.pc.years.west,]
 exp.pc.y.south <- exp.pc.y.south[exp.pc.y.south$year %in% exp.pc.years.south,]
@@ -250,7 +254,9 @@ educ.pc.years.west <- intersect(educ.pc$year,educ.pc.y.west$year) # common educ.
 educ.pc.years.south <- intersect(educ.pc$year,educ.pc.y.south$year) 
 
 educ.pc.x.west <- educ.pc[educ.pc$year %in% educ.pc.years.west,]
+educ.pc.x.west <- educ.pc.x.west[order(educ.pc.x.west$year),] # reorder
 educ.pc.x.south <- educ.pc[educ.pc$year %in% educ.pc.years.south,]
+educ.pc.x.south <- educ.pc.x.south[order(educ.pc.x.south$year),] # reorder
 
 educ.pc.y.west <- educ.pc.y.west[educ.pc.y.west$year %in% educ.pc.years.west,]
 educ.pc.y.south <- educ.pc.y.south[educ.pc.y.south$year %in% educ.pc.years.south,]

@@ -3,8 +3,8 @@
 ###################################
 
 # Setup parallel processing 
-require(parallel)
-require(doParallel)
+library(parallel)
+library(doParallel)
 
 cores <- detectCores() # specify number of cores to use
 

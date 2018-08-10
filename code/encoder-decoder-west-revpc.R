@@ -22,7 +22,7 @@ west.revpc.y <- rev.pc.y.west[!colnames(rev.pc.y.west) %in% c("year")]
 
 # import predictions
 
-west.revpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-revpc/treated-gans/weights.480-7.413.hdf5-west-revpc-test.csv"), col_names = FALSE)
+west.revpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-revpc/treated-gans/weights.820-0.002.hdf5-west-revpc-test.csv"), col_names = FALSE)
 west.revpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-revpc/control/weights.980-0.414.hdf5-west-revpc-test.csv"), col_names = FALSE)
 
 # Actual versus predicted (for plot)
@@ -72,7 +72,7 @@ west.revpc.CI.treated <- PermutationCI(west.revpc.control.forecast, west.revpc.c
 # Pointwise impacts
 west.revpc.encoder.decoder.control <- data.frame(
   "pointwise.control" = west.revpc.x[(west.revpc.n.pre+1):nrow(west.revpc.x),]-west.revpc.control.forecast,
-  "year" =  sort(rev.pc.x.west.imp$year)[sort(rev.pc.x.west.imp$year)>=1862] # x year isn't sorted
+  "year" =  rev.pc.x.west.imp$year
 )
 
 west.revpc.encoder.decoder.treat <- data.frame(
@@ -127,6 +127,7 @@ mean(west.revpc.encoder.decoder.long$ymin[west.revpc.encoder.decoder.long$variab
 mean(west.revpc.encoder.decoder.long$ymax[west.revpc.encoder.decoder.long$variable=="X1"])
 
 # Plot p-values
+
 
 west.revpc.encoder.decoder.control <- data.frame(
   "p.values.control" = west.revpc.p.values.control,
