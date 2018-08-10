@@ -15,15 +15,17 @@ library(ftsa)
 west.exppc.n.pre <- nrow(exp.pc.y.west[exp.pc.y.west$year<1862,])
 
 west.exppc.x.indices <- grep("exp.pc", colnames(exp.pc.x.west.imp))
-west.exppc.n.placebo <- ncol(exp.pc.x.west.imp[west.exppc.x.indices])
+west.exppc.n.placebo <- ncol(exp.pc.x.west.imp[west.exppc.x.indices][-c(13)]) # rm ME
 
-west.exppc.x <- exp.pc.x.west.imp[west.exppc.x.indices]
+west.exppc.x <- exp.pc.x.west.imp[west.exppc.x.indices][-c(13)]
 west.exppc.y <- exp.pc.y.west[!colnames(exp.pc.y.west) %in% c("year")]
 
 # import predictions
 
 west.exppc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-exppc/treated-gans/weights.1460-0.003.hdf5-west-exppc-test.csv"), col_names = FALSE)
-west.exppc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-exppc/control/weights.430-0.402.hdf5-west-exppc-test.csv"), col_names = FALSE)
+west.exppc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-exppc/control/weights.250-0.129.hdf5-west-exppc-test.csv"), col_names = FALSE)
+
+west.exppc.encoder.decoder.pred.control <- west.exppc.encoder.decoder.pred.control[-c(13)]
 
 # Actual versus predicted (for plots)
 west.exppc.encoder.decoder <- data.frame(
@@ -65,14 +67,14 @@ sum(p.adjust(west.exppc.p.values.control, "bonferroni") <=0.05)/length(west.expp
 
 # CIs for treated
 
-west.exppc.CI.treated <- PermutationCI(west.exppc.control.forecast, west.exppc.control.true, west.exppc.t.stat, west.exppc.n.placebo, c.range=c(-10,10), np=10000, l=1000)
+west.exppc.CI.treated <- PermutationCI(west.exppc.control.forecast, west.exppc.control.true, west.exppc.t.stat, west.exppc.n.placebo, c.range=c(-10,10), np=20000, l=1000)
 
 # Plot pointwise impacts
 
 # Pointwise impacts
 west.exppc.encoder.decoder.control <- data.frame(
   "pointwise.control" = west.exppc.x[(west.exppc.n.pre+1):nrow(west.exppc.x),]-west.exppc.control.forecast,
-  "year" = exp.pc.x.west.imp$year
+  "year" = exp.pc.x.west.imp$year[exp.pc.x.west.imp$year>=1862]
 )
 
 west.exppc.encoder.decoder.treat <- data.frame(

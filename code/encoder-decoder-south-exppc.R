@@ -15,9 +15,9 @@ library(ftsa)
 south.exppc.n.pre <- nrow(exp.pc.y.south[exp.pc.y.south$year<1866,])-1
 
 south.exppc.x.indices <- grep("exp.pc", colnames(exp.pc.x.south.imp))
-south.exppc.n.placebo <- ncol(exp.pc.x.south.imp[south.exppc.x.indices])
+south.exppc.n.placebo <- ncol(exp.pc.x.south.imp[south.exppc.x.indices][-c(13)])
 
-south.exppc.x <- exp.pc.x.south.imp[south.exppc.x.indices]
+south.exppc.x <- exp.pc.x.south.imp[south.exppc.x.indices][-c(13)]
 south.exppc.y <- exp.pc.y.south[!colnames(exp.pc.y.south) %in% c("year")]
 
 # import predictions
@@ -25,6 +25,8 @@ south.exppc.y <- exp.pc.y.south[!colnames(exp.pc.y.south) %in% c("year")]
 south.exppc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/south-exppc/treated-gans/weights.1030-0.005.hdf5-south-exppc-test.csv"), col_names = FALSE)
 south.exppc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/south-exppc/control/weights.1990-0.443.hdf5-south-exppc-test.csv"), col_names = FALSE)
 
+south.exppc.encoder.decoder.pred.control <- south.exppc.encoder.decoder.pred.control[-c(13)]
+  
 # Actual versus predicted
 south.exppc.encoder.decoder <- data.frame(
   "y.pred" = rbind(matrix(NA, south.exppc.n.pre, south.exppc.n.placebo+1), as.matrix(cbind(south.exppc.encoder.decoder.pred.treated, south.exppc.encoder.decoder.pred.control))),
@@ -72,7 +74,7 @@ south.exppc.CI.treated <- PermutationCI(south.exppc.control.forecast, south.expp
 # Pointwise impacts
 south.exppc.encoder.decoder.control <- data.frame(
   "pointwise.control" = south.exppc.x[(south.exppc.n.pre+1):nrow(south.exppc.x),]-south.exppc.control.forecast,
-  "year" =  exp.pc.x.south.imp$year
+  "year" =  exp.pc.x.south.imp$year[exp.pc.x.south.imp$year>=1865]
 )
 
 south.exppc.encoder.decoder.treat <- data.frame(

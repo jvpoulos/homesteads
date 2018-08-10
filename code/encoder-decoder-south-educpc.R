@@ -15,16 +15,17 @@ library(ftsa)
 south.educpc.n.pre <- nrow(educ.pc.y.south[educ.pc.y.south$year<1866,])-1
 
 south.educpc.x.indices <- grep("educ.pc", colnames(educ.pc.x.south.imp))
-south.educpc.n.placebo <- ncol(educ.pc.x.south.imp[south.educpc.x.indices])
+south.educpc.n.placebo <- ncol(educ.pc.x.south.imp[south.educpc.x.indices][-c(13,18)])
 
-south.educpc.x <- educ.pc.x.south.imp[south.educpc.x.indices]
+south.educpc.x <- educ.pc.x.south.imp[south.educpc.x.indices][-c(13,18)]
 south.educpc.y <- educ.pc.y.south[!colnames(educ.pc.y.south) %in% c("year")]
 
 # import predictions
 
 south.educpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/south-educpc/treated-gans/weights.50-0.188.hdf5-south-educpc-test.csv"), col_names = FALSE)
-south.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/south-educpc/control/weights.1910-3.522.hdf5-south-educpc-test.csv"), col_names = FALSE)
+south.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/south-educpc/control/weights.450-0.359.hdf5-south-educpc-test.csv"), col_names = FALSE)
 
+south.educpc.encoder.decoder.pred.control <- south.educpc.encoder.decoder.pred.control[-c(13,18)]
 # Actual versus predicted
 south.educpc.encoder.decoder <- data.frame(
   "y.pred" = rbind(matrix(NA, south.educpc.n.pre, south.educpc.n.placebo+1), as.matrix(cbind(south.educpc.encoder.decoder.pred.treated, south.educpc.encoder.decoder.pred.control))),
@@ -72,7 +73,7 @@ south.educpc.CI.treated <- PermutationCI(south.educpc.control.forecast, south.ed
 # Pointwise impacts
 south.educpc.encoder.decoder.control <- data.frame(
   "pointwise.control" = south.educpc.x[(south.educpc.n.pre+1):nrow(south.educpc.x),]-south.educpc.control.forecast,
-  "year" =  educ.pc.x.south.imp$year
+  "year" =  educ.pc.x.south.imp$year[educ.pc.x.south.imp$year>=1865]
 )
 
 south.educpc.encoder.decoder.treat <- data.frame(
@@ -116,7 +117,7 @@ encoder.decoder.plot.south.educpc <- ggplot(data=south.educpc.encoder.decoder.lo
   scale_alpha_manual(values=c(0.1, 0.9)) +
   scale_size_manual(values=c(0.8, 2)) +
   geom_hline(yintercept=0, linetype=2) + 
-  coord_cartesian(ylim=c(-8, 8)) +
+  coord_cartesian(ylim=c(-10, 10)) +
   #ggtitle("Encoder-decoder treatment effects: Education spending in South") +
   theme.blank + guides(colour=FALSE) + theme(legend.position="none")
 

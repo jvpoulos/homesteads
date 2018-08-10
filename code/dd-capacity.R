@@ -305,6 +305,6 @@ plot.data.did <- data.frame(region=rep(c("West","South"),each=3),
 # Plot forest plots
 
 plot.data.did$variable <- as.factor(plot.data.did$variable)
-summary.plot <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita homesteads",xlab="",title="DD estimates on state-level measures, including farm values",leglab="Region")
+summary.plot <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita homesteads",xlab="",title="DD estimates on state capacity",leglab="Region")
 
 ggsave(paste0(results.directory,"plots/did-state-robust.png"), summary.plot, width=11, height=8.5)

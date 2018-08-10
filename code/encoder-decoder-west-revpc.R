@@ -14,16 +14,18 @@ library(ftsa)
 
 west.revpc.n.pre <- nrow(rev.pc.y.west[rev.pc.y.west$year<1862,])
 
-west.revpc.x.indices <- grep("rev.pc", colnames(rev.pc.x.west.imp))
-west.revpc.n.placebo <- ncol(rev.pc.x.west.imp[west.revpc.x.indices])
+west.revpc.x.indices <- c(grep("rev.pc", colnames(rev.pc.x.west.imp)))
+west.revpc.n.placebo <- ncol(rev.pc.x.west.imp[west.revpc.x.indices][-c(13)])
 
-west.revpc.x <- rev.pc.x.west.imp[west.revpc.x.indices]
+west.revpc.x <- rev.pc.x.west.imp[west.revpc.x.indices][-c(13)]
 west.revpc.y <- rev.pc.y.west[!colnames(rev.pc.y.west) %in% c("year")]
 
 # import predictions
 
 west.revpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-revpc/treated-gans/weights.820-0.002.hdf5-west-revpc-test.csv"), col_names = FALSE)
-west.revpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-revpc/control/weights.980-0.414.hdf5-west-revpc-test.csv"), col_names = FALSE)
+west.revpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-revpc/control/weights.1910-0.504.hdf5-west-revpc-test.csv"), col_names = FALSE)
+
+west.revpc.encoder.decoder.pred.control <- west.revpc.encoder.decoder.pred.control[-c(13)]
 
 # Actual versus predicted (for plot)
 west.revpc.encoder.decoder <- data.frame(
@@ -72,7 +74,7 @@ west.revpc.CI.treated <- PermutationCI(west.revpc.control.forecast, west.revpc.c
 # Pointwise impacts
 west.revpc.encoder.decoder.control <- data.frame(
   "pointwise.control" = west.revpc.x[(west.revpc.n.pre+1):nrow(west.revpc.x),]-west.revpc.control.forecast,
-  "year" =  rev.pc.x.west.imp$year
+  "year" =  rev.pc.x.west.imp$year[rev.pc.x.west.imp$year>=1862]
 )
 
 west.revpc.encoder.decoder.treat <- data.frame(
@@ -116,18 +118,21 @@ encoder.decoder.plot.west.revpc <- ggplot(data=west.revpc.encoder.decoder.long, 
   scale_alpha_manual(values=c(0.1, 0.9)) +
   scale_size_manual(values=c(0.8, 2)) +
   geom_hline(yintercept=0, linetype=2) + 
-  coord_cartesian(ylim=c(-8, 8)) +
+  coord_cartesian(ylim=c(-10, 10)) +
   #ggtitle("Encoder-decoder treatment effects: Revenue in West") +
   theme.blank + guides(colour=FALSE) + theme(legend.position="none")
 
 ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-west-revpc.png"), encoder.decoder.plot.west.revpc, width=11, height=8.5)
+
+# mean(west.revpc.treat.true)-mean(as.matrix(west.revpc.y[1][1:(west.revpc.n.pre),])) # 1st diff (treated post-pre)
+#  
+# mean(west.revpc.treat.forecast)-mean(as.matrix(west.revpc.y[1][1:(west.revpc.n.pre),])) # 2nd diff (counterfactual post-pre)
 
 mean(west.revpc.encoder.decoder.long$value[west.revpc.encoder.decoder.long$variable=="X1"])# get mean % treatment effect
 mean(west.revpc.encoder.decoder.long$ymin[west.revpc.encoder.decoder.long$variable=="X1"])
 mean(west.revpc.encoder.decoder.long$ymax[west.revpc.encoder.decoder.long$variable=="X1"])
 
 # Plot p-values
-
 
 west.revpc.encoder.decoder.control <- data.frame(
   "p.values.control" = west.revpc.p.values.control,

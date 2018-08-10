@@ -15,16 +15,17 @@ library(ftsa)
 west.educpc.n.pre <- nrow(educ.pc.y.west[educ.pc.y.west$year<1862,])
 
 west.educpc.x.indices <- grep("educ.pc", colnames(educ.pc.x.west.imp))
-west.educpc.n.placebo <- ncol(educ.pc.x.west.imp[west.educpc.x.indices])
+west.educpc.n.placebo <- ncol(educ.pc.x.west.imp[west.educpc.x.indices][-c(13)])
 
-west.educpc.x <- educ.pc.x.west.imp[west.educpc.x.indices]
+west.educpc.x <- educ.pc.x.west.imp[west.educpc.x.indices][-c(13)]
 west.educpc.y <- educ.pc.y.west[!colnames(educ.pc.y.west) %in% c("year")]
 
 # import predictions
 
 west.educpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-educpc/treated-gans/weights.170-0.014.hdf5-west-educpc-test.csv"), col_names = FALSE)
-west.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-educpc/control/weights.1870-3.433.hdf5-west-educpc-test.csv"), col_names = FALSE)
+west.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-educpc/control/weights.1650-0.206.hdf5-west-educpc-test.csv"), col_names = FALSE)
 
+west.educpc.encoder.decoder.pred.control <- west.educpc.encoder.decoder.pred.control[-c(13)]
 # Actual versus predicted
 west.educpc.encoder.decoder <- data.frame(
   "y.pred" = rbind(matrix(NA, west.educpc.n.pre, west.educpc.n.placebo+1), as.matrix(cbind(west.educpc.encoder.decoder.pred.treated, west.educpc.encoder.decoder.pred.control))),
@@ -72,7 +73,7 @@ west.educpc.CI.treated <- PermutationCI(west.educpc.control.forecast, west.educp
 # Pointwise impacts
 west.educpc.encoder.decoder.control <- data.frame(
   "pointwise.control" = west.educpc.x[(west.educpc.n.pre+1):nrow(west.educpc.x),]-west.educpc.control.forecast,
-  "year" =  educ.pc.x.west.imp$year
+  "year" =  educ.pc.x.west.imp$year[educ.pc.x.west.imp$year>=1862]
 )
 
 west.educpc.encoder.decoder.treat <- data.frame(
@@ -116,7 +117,7 @@ encoder.decoder.plot.west.educpc <- ggplot(data=west.educpc.encoder.decoder.long
   scale_alpha_manual(values=c(0.1, 0.9)) +
   scale_size_manual(values=c(0.8, 2)) +
   geom_hline(yintercept=0, linetype=2) + 
-  coord_cartesian(ylim=c(-8, 8)) +
+  coord_cartesian(ylim=c(-10, 10)) +
  # ggtitle("Encoder-decoder treatment effects: Education spending in West") +
   theme.blank + guides(colour=FALSE) + theme(legend.position="none")
 

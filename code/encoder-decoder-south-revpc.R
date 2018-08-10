@@ -15,15 +15,17 @@ library(ftsa)
 south.revpc.n.pre <- nrow(rev.pc.y.south[rev.pc.y.south$year<1866,])-1
 
 south.revpc.x.indices <- grep("rev.pc", colnames(rev.pc.x.south.imp))
-south.revpc.n.placebo <- ncol(rev.pc.x.south.imp[south.revpc.x.indices])
+south.revpc.n.placebo <- ncol(rev.pc.x.south.imp[south.revpc.x.indices][-c(13)])
 
-south.revpc.x <- rev.pc.x.south.imp[south.revpc.x.indices]
+south.revpc.x <- rev.pc.x.south.imp[south.revpc.x.indices][-c(13)]
 south.revpc.y <- rev.pc.y.south[!colnames(rev.pc.y.south) %in% c("year")]
 
 # import predictions
 
 south.revpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/south-revpc/treated-gans/weights.1290-0.001.hdf5-south-revpc-test.csv"), col_names = FALSE)
-south.revpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/south-revpc/control/weights.1140-0.347.hdf5-south-revpc-test.csv"), col_names = FALSE)
+south.revpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/south-revpc/control/weights.1320-0.172.hdf5-south-revpc-test.csv"), col_names = FALSE)
+
+south.revpc.encoder.decoder.pred.control <- south.revpc.encoder.decoder.pred.control[-c(13)]
 
 # Actual versus predicted
 south.revpc.encoder.decoder <- data.frame(
@@ -65,14 +67,14 @@ sum(p.adjust(south.revpc.p.values.control, "bonferroni") <=0.05)/length(south.re
 
 # CIs for treated
 
-south.revpc.CI.treated <- PermutationCI(south.revpc.control.forecast, south.revpc.control.true, south.revpc.t.stat, south.revpc.n.placebo, c.range=c(-10,10), np=20000, l=1000)
+south.revpc.CI.treated <- PermutationCI(south.revpc.control.forecast, south.revpc.control.true, south.revpc.t.stat, south.revpc.n.placebo, c.range=c(-10,10), np=10000, l=1000)
 
 # Plot pointwise impacts
 
 # Pointwise impacts
 south.revpc.encoder.decoder.control <- data.frame(
   "pointwise.control" = south.revpc.x[(south.revpc.n.pre+1):nrow(south.revpc.x),]-south.revpc.control.forecast,
-  "year" =  rev.pc.x.south.imp$year
+  "year" =  rev.pc.x.south.imp$year[rev.pc.x.south.imp$year>=1865]
 )
 
 south.revpc.encoder.decoder.treat <- data.frame(
