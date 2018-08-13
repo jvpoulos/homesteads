@@ -2,8 +2,7 @@
 # Get high and low MSPEs (no time dimension)
 
 CollectMSPE <-function(n.pre, forecast, true, x){
-  library(ftsa)
-  return(error(forecast=as.matrix(forecast)[,x], true=as.matrix(true[(n.pre+1):nrow(true),])[,x], method = "mse"))
+  return(mean((as.matrix(true[(n.pre+1):nrow(true),])[,x]-as.matrix(forecast)[,x])**2))
 }
 
 

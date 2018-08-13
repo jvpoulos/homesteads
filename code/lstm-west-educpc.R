@@ -1,5 +1,5 @@
 #####################################
-### encoder.decoder ### 
+### lstm ### 
 #####################################
 
 library(dplyr)
@@ -21,29 +21,29 @@ west.educpc.y <- educ.pc.y.west[!colnames(educ.pc.y.west) %in% c("year")]
 
 # import predictions
 
-west.educpc.encoder.decoder.pred.treated <- read_csv(paste0(results.directory, "encoder-decoder/west-educpc/treated-gans/weights.20-0.837.hdf5-west-educpc-test.csv"), col_names = FALSE)
-west.educpc.encoder.decoder.pred.control <- read_csv(paste0(results.directory, "encoder-decoder/west-educpc/control/weights.500-0.650.hdf5-west-educpc-test.csv"), col_names = FALSE)
+west.educpc.lstm.pred.treated <- read_csv(paste0(results.directory, "lstm/west-educpc/treated-gans/weights.140-0.122.hdf5-west-educpc-test.csv"), col_names = FALSE)
+west.educpc.lstm.pred.control <- read_csv(paste0(results.directory, "lstm/west-educpc/control/weights.1680-0.910.hdf5-west-educpc-test.csv"), col_names = FALSE)
 
 # Actual versus predicted
-west.educpc.encoder.decoder <- data.frame(
-  "y.pred" = rbind(matrix(NA, west.educpc.n.pre, west.educpc.n.placebo+1), as.matrix(cbind(west.educpc.encoder.decoder.pred.treated, west.educpc.encoder.decoder.pred.control))),
+west.educpc.lstm <- data.frame(
+  "y.pred" = rbind(matrix(NA, west.educpc.n.pre, west.educpc.n.placebo+1), as.matrix(cbind(west.educpc.lstm.pred.treated, west.educpc.lstm.pred.control))),
   "y.true" = cbind(west.educpc.y, west.educpc.x),
   "year" =  educ.pc.y.west$year
 )
 
 # Post-period MSE and MAPE (all controls)
 
-west.educpc.control.forecast <- as.matrix(west.educpc.encoder.decoder.pred.control)
+west.educpc.control.forecast <- as.matrix(west.educpc.lstm.pred.control)
 west.educpc.control.true <- as.matrix(west.educpc.x[(west.educpc.n.pre+1):nrow(west.educpc.x),])
 
-west.educpc.encoder.decoder.mse <- mean((west.educpc.control.true-west.educpc.control.forecast)**2) # post-intervention MSE
-west.educpc.encoder.decoder.mse
+west.educpc.lstm.mse <- mean((west.educpc.control.true-west.educpc.control.forecast)**2) # post-intervention MSE
+west.educpc.lstm.mse
 
-west.educpc.encoder.decoder.preds <- rbind(matrix(NA, west.educpc.n.pre, west.educpc.n.placebo+1), as.matrix(cbind(west.educpc.encoder.decoder.pred.treated, west.educpc.encoder.decoder.pred.control))) # pad pre-period for plot
+west.educpc.lstm.preds <- rbind(matrix(NA, west.educpc.n.pre, west.educpc.n.placebo+1), as.matrix(cbind(west.educpc.lstm.pred.treated, west.educpc.lstm.pred.control))) # pad pre-period for plot
 
 # Calculate real treated pooled intervention effect
 
-west.educpc.treat.forecast <-  as.matrix(west.educpc.encoder.decoder.pred.treated)
+west.educpc.treat.forecast <-  as.matrix(west.educpc.lstm.pred.treated)
 
 west.educpc.treat.true <- as.matrix(west.educpc.y[1][(west.educpc.n.pre+1):nrow(west.educpc.y),])
 
@@ -58,8 +58,8 @@ west.educpc.p.values.control <- sapply(1:west.educpc.n.placebo, function(c){
   PermutationTest(west.educpc.control.forecast[,-c], west.educpc.control.true[,-c], west.educpc.t.stat.control, west.educpc.n.placebo-1, np=10000)
 })
 
-encoder.decoder.west.educpc.fpr <- sum(west.educpc.p.values.control <=0.05)/length(west.educpc.p.values.control) #FPR
-encoder.decoder.west.educpc.fpr
+lstm.west.educpc.fpr <- sum(west.educpc.p.values.control <=0.05)/length(west.educpc.p.values.control) #FPR
+lstm.west.educpc.fpr
 sum(p.adjust(west.educpc.p.values.control, "bonferroni") <=0.05)/length(west.educpc.p.values.control) # adjusted
 
 # CIs for treated
@@ -69,12 +69,12 @@ west.educpc.CI.treated <- PermutationCI(west.educpc.control.forecast, west.educp
 # Plot pointwise impacts
 
 # Pointwise impacts
-west.educpc.encoder.decoder.control <- data.frame(
+west.educpc.lstm.control <- data.frame(
   "pointwise.control" = west.educpc.x[(west.educpc.n.pre+1):nrow(west.educpc.x),]-west.educpc.control.forecast,
   "year" =  educ.pc.x.west.imp$year[educ.pc.x.west.imp$year>=1862]
 )
 
-west.educpc.encoder.decoder.treat <- data.frame(
+west.educpc.lstm.treat <- data.frame(
   "pointwise.treat" = west.educpc.y[(west.educpc.n.pre+1):nrow(west.educpc.y),]-west.educpc.treat.forecast, 
   "year" =  educ.pc.y.west$year[educ.pc.y.west$year>=1862]
 )
@@ -91,21 +91,21 @@ theme.blank <- theme(axis.text=element_text(size=14)
                      , legend.position = c(0.2,0.9)
                      , legend.justification = c(1,0))
 
-west.educpc.encoder.decoder.control.long <- melt(west.educpc.encoder.decoder.control, id="year")  # convert to long format
-west.educpc.encoder.decoder.control.long$group <- "Control"
+west.educpc.lstm.control.long <- melt(west.educpc.lstm.control, id="year")  # convert to long format
+west.educpc.lstm.control.long$group <- "Control"
 
-west.educpc.encoder.decoder.treat.long <- melt(west.educpc.encoder.decoder.treat, id="year")  # convert to long format
-west.educpc.encoder.decoder.treat.long$group <- "Treated"
+west.educpc.lstm.treat.long <- melt(west.educpc.lstm.treat, id="year")  # convert to long format
+west.educpc.lstm.treat.long$group <- "Treated"
 
-west.educpc.encoder.decoder.long <- rbind(west.educpc.encoder.decoder.treat.long, west.educpc.encoder.decoder.control.long)
+west.educpc.lstm.long <- rbind(west.educpc.lstm.treat.long, west.educpc.lstm.control.long)
 
-west.educpc.encoder.decoder.long$ymin <- NA
-west.educpc.encoder.decoder.long$ymax <- NA
+west.educpc.lstm.long$ymin <- NA
+west.educpc.lstm.long$ymax <- NA
 
-west.educpc.encoder.decoder.long$ymin[west.educpc.encoder.decoder.long$group=="Treated"] <- west.educpc.CI.treated[,1]
-west.educpc.encoder.decoder.long$ymax[west.educpc.encoder.decoder.long$group=="Treated"] <- west.educpc.CI.treated[,2]
+west.educpc.lstm.long$ymin[west.educpc.lstm.long$group=="Treated"] <- west.educpc.CI.treated[,1]
+west.educpc.lstm.long$ymax[west.educpc.lstm.long$group=="Treated"] <- west.educpc.CI.treated[,2]
 
-encoder.decoder.plot.west.educpc <- ggplot(data=west.educpc.encoder.decoder.long, aes(x=year, y=value, colour=variable, size=group, alpha=group)) +
+lstm.plot.west.educpc <- ggplot(data=west.educpc.lstm.long, aes(x=year, y=value, colour=variable, size=group, alpha=group)) +
   geom_line() +
   geom_ribbon(aes(ymin=ymin, ymax=ymax), fill="grey", alpha=0.5, size=0) +
   theme_bw() + theme(legend.title = element_blank()) + 
@@ -115,41 +115,41 @@ encoder.decoder.plot.west.educpc <- ggplot(data=west.educpc.encoder.decoder.long
   scale_alpha_manual(values=c(0.1, 0.9)) +
   scale_size_manual(values=c(0.8, 2)) +
   geom_hline(yintercept=0, linetype=2) + 
-  coord_cartesian(ylim=c(-8, 8)) +
- # ggtitle("Encoder-decoder treatment effects: Education spending in West") +
+  coord_cartesian(ylim=c(-10, 10)) +
+ # ggtitle("lstm treatment effects: Education spending in West") +
   theme.blank + guides(colour=FALSE) + theme(legend.position="none")
 
-ggsave(paste0(results.directory,"plots/encoder-decoder-plot-effects-west-educpc.png"), encoder.decoder.plot.west.educpc, width=11, height=8.5)
+ggsave(paste0(results.directory,"plots/lstm-plot-effects-west-educpc.png"), lstm.plot.west.educpc, width=11, height=8.5)
 
 # mean(west.educpc.treat.true)-mean(as.matrix(west.educpc.y[1][1:(west.educpc.n.pre),])) # 1st diff (treated post-pre)
 # 
 # mean(west.educpc.treat.forecast)-mean(as.matrix(west.educpc.y[1][1:(west.educpc.n.pre),])) # 2nd diff (counterfactual post-pre)
 
-mean(west.educpc.encoder.decoder.long$value[west.educpc.encoder.decoder.long$variable=="X1"])
-mean(west.educpc.encoder.decoder.long$ymin[west.educpc.encoder.decoder.long$variable=="X1"])
-mean(west.educpc.encoder.decoder.long$ymax[west.educpc.encoder.decoder.long$variable=="X1"])
+mean(west.educpc.lstm.long$value[west.educpc.lstm.long$variable=="X1"])
+mean(west.educpc.lstm.long$ymin[west.educpc.lstm.long$variable=="X1"])
+mean(west.educpc.lstm.long$ymax[west.educpc.lstm.long$variable=="X1"])
 
 # Plot p-values
 
-west.educpc.encoder.decoder.control <- data.frame(
+west.educpc.lstm.control <- data.frame(
   "p.values.control" = west.educpc.p.values.control,
   "year" =  educ.pc.y.west$year[educ.pc.y.west$year>=1862]
 )
 
-west.educpc.encoder.decoder.treat <- data.frame(
+west.educpc.lstm.treat <- data.frame(
   "p.values.treat" = west.educpc.p.values.treated,
   "year" =  educ.pc.y.west$year[educ.pc.y.west$year>=1862]
 )
 
-west.educpc.encoder.decoder.control.long <- melt(west.educpc.encoder.decoder.control, id="year")  # convert to long format
-west.educpc.encoder.decoder.control.long$group <- "Control"
+west.educpc.lstm.control.long <- melt(west.educpc.lstm.control, id="year")  # convert to long format
+west.educpc.lstm.control.long$group <- "Control"
 
-west.educpc.encoder.decoder.treat.long <- melt(west.educpc.encoder.decoder.treat, id="year")  # convert to long format
-west.educpc.encoder.decoder.treat.long$group <- "Treated"
+west.educpc.lstm.treat.long <- melt(west.educpc.lstm.treat, id="year")  # convert to long format
+west.educpc.lstm.treat.long$group <- "Treated"
 
-west.educpc.encoder.decoder.long <- rbind(west.educpc.encoder.decoder.treat.long, west.educpc.encoder.decoder.control.long)
+west.educpc.lstm.long <- rbind(west.educpc.lstm.treat.long, west.educpc.lstm.control.long)
 
-encoder.decoder.plot.pvalues.west.educpc <- ggplot(data=west.educpc.encoder.decoder.long, aes(x=year, y=value, colour=variable, size=group, alpha=group)) +
+lstm.plot.pvalues.west.educpc <- ggplot(data=west.educpc.lstm.long, aes(x=year, y=value, colour=variable, size=group, alpha=group)) +
   geom_point() +
   theme_bw() + theme(legend.title = element_blank()) + 
   ylab("p-value") + 
@@ -158,10 +158,10 @@ encoder.decoder.plot.pvalues.west.educpc <- ggplot(data=west.educpc.encoder.deco
   scale_size_manual(values=c(0.8, 2)) +
   geom_hline(yintercept=0, linetype=1) + 
   geom_hline(yintercept=0.05, linetype=2, colour="red") + 
- # ggtitle("Encoder-decoder p-values: Education spending in West") +
+ # ggtitle("lstm p-values: Education spending in West") +
   theme.blank + theme(legend.position = c(0.8,0.8)) + guides(colour=FALSE) + theme(legend.position="none")
 
-ggsave(paste0(results.directory,"plots/encoder-decoder-plot-pvalues-west-educpc.png"), encoder.decoder.plot.pvalues.west.educpc, width=11, height=8.5)
+ggsave(paste0(results.directory,"plots/lstm-plot-pvalues-west-educpc.png"), lstm.plot.pvalues.west.educpc, width=11, height=8.5)
 
 # Plot actual versus predicted with credible intervals for the holdout period
 
@@ -175,12 +175,12 @@ theme.blank <- theme(axis.text=element_text(size=12)
                      , legend.position = c(0.25,0.85)
                      , legend.justification = c(1,0))
 
-west.educpc.encoder.decoder.plot <- ggplot(data=west.educpc.encoder.decoder, aes(x=year)) +
+west.educpc.lstm.plot <- ggplot(data=west.educpc.lstm, aes(x=year)) +
   geom_line(aes(y=west.educpc.y[[1]], colour = "Observed treated outcome"), size=1.2) +
-  geom_line(aes(y=west.educpc.encoder.decoder.preds[,1], colour = "Predicted treated outcome"), size=1.2, linetype=2) +
+  geom_line(aes(y=west.educpc.lstm.preds[,1], colour = "Predicted treated outcome"), size=1.2, linetype=2) +
   theme_bw() + theme(legend.title = element_blank()) + ylab("Log per-capita state government education spending (1982$)") + xlab("") +
   geom_vline(xintercept=1862, linetype=2) + 
- # ggtitle(paste0("Encoder-decoder actual vs. counterfactual outcome: Education spending in West")) +
+ # ggtitle(paste0("lstm actual vs. counterfactual outcome: Education spending in West")) +
   theme.blank + theme(legend.position="none")
 
-ggsave(paste0(results.directory,"plots/encoder-decoder-plot-west-educpc.png"), west.educpc.encoder.decoder.plot, width=11, height=8.5)
+ggsave(paste0(results.directory,"plots/lstm-plot-west-educpc.png"), west.educpc.lstm.plot, width=11, height=8.5)

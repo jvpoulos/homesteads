@@ -61,6 +61,12 @@ funds.9728$state[funds.9728$state=="KA"] <- "KS"
 # Clean MS revenue in 1843
 
 funds.9728$`1`[funds.9728$state=="MS" & funds.9728$year==1843] <- funds.9728$`1`[funds.9728$state=="MS" & funds.9728$year==1843]/10
+
+# ME data is in thousands
+
+funds.9728$`1`[funds.9728$state=="ME"] <- funds.9728$`1`[funds.9728$state=="ME"]*1000
+funds.9728$`3`[funds.9728$state=="ME"] <- funds.9728$`3`[funds.9728$state=="ME"]*1000
+funds.9728$`31`[funds.9728$state=="ME"] <- funds.9728$`31`[funds.9728$state=="ME"]*1000
  
 ## State and Local Government [United States]: Sources and Uses of Funds, State Financial Statistics, 1933-1937 (ICPSR 6306)
 
@@ -123,6 +129,8 @@ funds.6304 <- funds.6304[funds.6304$iso %in% c(iso.funds, 3100),]
 
 funds.6304$iso[funds.6304$iso ==3100] <- 31 # for consitency
 
+funds.6304$value[funds.6304$year>=1932] <- funds.6304$value[funds.6304$year>=1932]*1000 # 1932 to 1982 census are reported in thousands of dollars
+
 # Make data wide
 
 funds.6304$row <- 1:nrow(funds.6304)
@@ -142,11 +150,14 @@ funds <- rbind(rbind(funds.9728,funds.6306),funds.6304) %>%
 
 funds <- funds[with(funds, order(state, year)), ] # order by state and year
 
-# Rm Outliers
+# Make 0 or negative values missing
 
-funds <- subset(funds, !(funds$state=="WA" & funds$year>=1907 & funds$year<=1918))
-funds <- subset(funds, !(funds$state=="RI" & funds$year==1822))
-funds <- subset(funds, !(funds$state=="RI" & funds$year==1822))
+funds$`1`[funds$`1`<=0] <- NA
+funds$`3`[funds$`3`<=0] <- NA
+funds$`31`[funds$`31`<=0] <- NA
+
+# Make outliers NA
+funds[(funds$state=="WA" & funds$year>=1907 & funds$year<=1918),] <- NA
 
 # Get historical CPI
 
@@ -200,9 +211,9 @@ cats.funds.r <- reshape(data.frame(cats.funds), idvar = "year", timevar = "cat",
 
 funds.control <- funds[!is.na(funds$cat) & funds$cat=="Control",][c("state","year","rev.pc","exp.pc","educ.pc")] # discard treated since we have treated time-series
 
-rev.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
-exp.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
-educ.pc <- reshape(data.frame(funds.control), idvar = "year", timevar = "state", direction = "wide")
+rev.pc <- reshape(data.frame(funds.control[c("state","year","rev.pc")]), idvar = "year", timevar = "state", direction = "wide")
+exp.pc <- reshape(data.frame(funds.control[c("state","year","exp.pc")]), idvar = "year", timevar = "state", direction = "wide")
+educ.pc <- reshape(data.frame(funds.control[c("state","year","educ.pc")]), idvar = "year", timevar = "state", direction = "wide")
 
 #Labels
 
