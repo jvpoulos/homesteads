@@ -17,7 +17,7 @@ rr.did$time <- 0
 rr.did$time[(rr.did$year >= 1862)] <- 1
 
 rr.did$treat <- 0
-rr.did$treat <- rr.did$homesteads.pc # treat: homesteads.pc (ln)
+rr.did$treat <- rr.did$homesteads.pc 
 
 rr.did$did <- NA
 rr.did$did <- rr.did$treat* rr.did$time 
@@ -40,10 +40,8 @@ access.did <- boot(data=rr.did,
                         parallel="multicore", ncpus = cores)
 
 access.did.delta <- access.did$t0
-access.did.delta
 
 access.did.CI <- boot.ci(access.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-access.did.CI
 
 # All years
 access.robust.did <- boot(data=rr.did,
@@ -70,7 +68,7 @@ rr.did.south$time <- 0
 rr.did.south$time[(rr.did.south$year >= 1866)] <- 1
 
 rr.did.south$treat <- 0
-rr.did.south$treat <- rr.did.south$homesteads.pc # treat: homesteads.pc (ln)
+rr.did.south$treat <- rr.did.south$homesteads.pc 
 
 rr.did.south$did <- NA
 rr.did.south$did <- rr.did.south$treat* rr.did.south$time 
@@ -85,10 +83,8 @@ access.south.did <- boot(data=rr.did.south,
                         parallel="multicore", ncpus = cores)
 
 access.south.did.delta <- access.south.did$t0
-access.south.did.delta
 
 access.south.did.CI <- boot.ci(access.south.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-access.south.did.CI
 
 # All years
 access.south.robust.did <- boot(data=rr.did.south,

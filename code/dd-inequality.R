@@ -40,10 +40,8 @@ aland.gini.did <- boot(data=ineq.did,
                         parallel="multicore", ncpus = cores)
 
 aland.gini.did.delta <- aland.gini.did$t0
-aland.gini.did.delta
 
 aland.gini.did.CI <- boot.ci(aland.gini.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-aland.gini.did.CI
 
 # All years
 aland.gini.robust.did <- boot(data=ineq.did,
@@ -85,10 +83,8 @@ aland.gini.south.did <- boot(data=ineq.did.south,
                         parallel="multicore", ncpus = cores)
 
 aland.gini.south.did.delta <- aland.gini.south.did$t0
-aland.gini.south.did.delta
 
 aland.gini.south.did.CI <- boot.ci(aland.gini.south.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-aland.gini.south.did.CI
 
 # All years
 aland.gini.south.robust.did <- boot(data=ineq.did.south,

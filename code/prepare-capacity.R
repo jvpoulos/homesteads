@@ -12,18 +12,18 @@ patents.sum.state <- patents %>% # get a state-year sum of patents
   summarise_each(funs(sum),homesteads) %>%
   arrange(state_code, year) # sort
 
-# # *cumulative* homesteads by state
-# homesteads.cumsum.state <- patents.sum.state %>% 
-#   group_by(state_code) %>%
-#   mutate(cumulative.homesteads = cumsum(homesteads))  %>%
-#   arrange(state_code, year) %>%
-#   dplyr::select(state_code, year, cumulative.homesteads)
+# *cumulative* homesteads by state
+homesteads.cumsum.state <- patents.sum.state %>%
+  group_by(state_code) %>%
+  mutate(cumulative.homesteads = cumsum(homesteads))  %>%
+  arrange(state_code, year) %>%
+  dplyr::select(state_code, year, cumulative.homesteads)
 
-homestead.funds.long <- merge(patents.sum.state, 
+homestead.funds.long <- merge(homesteads.cumsum.state, 
                               funds, by.x = c("state_code", "year"), 
                             by.y = c("state", "year"), all.y=TRUE) 
 
-homestead.funds.long$homesteads.pc <- log(homestead.funds.long$homesteads/homestead.funds.long$ns.pop)
+homestead.funds.long$homesteads.pc <- log(homestead.funds.long$cumulative.homesteads/homestead.funds.long$ns.pop) # log cumulative homesteads pc
 
 homestead.funds.long$homesteads.pc[is.na(homestead.funds.long$homesteads.pc)] <- 0
 

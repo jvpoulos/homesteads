@@ -92,7 +92,7 @@ homestead.70 <- ggplot(county.70, aes(long, lat, group = group, fill = homestead
         axis.text.y = element_blank(),axis.title.x = element_blank(),
         axis.title.y = element_blank()) + theme(panel.grid.minor=element_blank(), 
                                                 panel.grid.major=element_blank()) +
- ggtitle("Log per-capita homesteads in 1870") +
+ ggtitle("Log per-capita cumulative homesteads in 1870") +
  theme(plot.title = element_text(hjust = 0.5)) +
   geom_map(aes(map_id = id, colour = 'black'), map = county.f) + scale_colour_manual(values=c('black'),guide=FALSE) + theme(legend.position="top") +
 geom_path( data = state_map[state_map$western.pub==1,] , colour = "purple", size=1.2) +
@@ -111,7 +111,7 @@ homestead.00 <- ggplot(county.00, aes(long, lat, group = group, fill = homestead
         axis.text.y = element_blank(),axis.title.x = element_blank(),
         axis.title.y = element_blank()) + theme(panel.grid.minor=element_blank(), 
                                                 panel.grid.major=element_blank()) +
-  ggtitle("Log per-capita homesteads in 1900") +
+  ggtitle("Log per-capita cumulative homesteads in 1900") +
   theme(plot.title = element_text(hjust = 0.5)) +
   geom_map(aes(map_id = id, colour = 'black'), map = county.f) + scale_colour_manual(values=c('black'),guide=FALSE) + theme(legend.position="top") +
   geom_path( data = state_map[state_map$western.pub==1,] , colour = "purple", size=1.2) +
@@ -132,7 +132,7 @@ if(patient){
             axis.text.y = element_blank(),axis.title.x = element_blank(),
             axis.title.y = element_blank()) + theme(panel.grid.minor=element_blank(), 
                                                     panel.grid.major=element_blank()) +
-      ggtitle(paste("Log per-capita homesteads in",t)) +
+      ggtitle(paste("Log per-capita cumulative homesteads in",t)) +
       theme(plot.margin=grid::unit(c(0,0,0,0), "mm"),
             plot.title = element_text(hjust = 0.5)) + #rm margins
       geom_map(aes(map_id = id, colour = 'black'), map = county.f) + scale_colour_manual(values=c('black'),guide=FALSE) + theme(legend.position="top") +

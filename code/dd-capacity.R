@@ -17,7 +17,7 @@ funds.did$time <- 0
 funds.did$time[(funds.did$year >= 1862)] <- 1
 
 funds.did$treat <- 0
-funds.did$treat <- funds.did$homesteads.pc # treat: homesteads.pc (ln)
+funds.did$treat <- funds.did$homesteads.pc 
 
 funds.did$did <- NA
 funds.did$did <- funds.did$treat* funds.did$time 
@@ -272,7 +272,7 @@ ForestPlot2 <- function(d, xlab, ylab, title="", leglab, ylim=NULL){
 }
 
 plot.data.did$variable <- as.factor(plot.data.did$variable)
-did.state <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita homesteads",xlab="",title="",leglab="Region")
+did.state <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita cumulative homesteads",xlab="",title="",leglab="Region")
 
 ggsave(paste0(results.directory,"plots/did-state.png"), did.state, width=11, height=8.5)
 
@@ -305,6 +305,6 @@ plot.data.did <- data.frame(region=rep(c("West","South"),each=3),
 # Plot forest plots
 
 plot.data.did$variable <- as.factor(plot.data.did$variable)
-did.state.robust <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita homesteads",xlab="",title="",leglab="Region")
+did.state.robust <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita cumulative homesteads",xlab="",title="",leglab="Region")
 
 ggsave(paste0(results.directory,"plots/did-state-robust.png"), did.state.robust, width=11, height=8.5)
