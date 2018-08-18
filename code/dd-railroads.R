@@ -40,8 +40,10 @@ access.did <- boot(data=rr.did,
                         parallel="multicore", ncpus = cores)
 
 access.did.delta <- access.did$t0
+access.did.delta
 
 access.did.CI <- boot.ci(access.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
+access.did.CI
 
 # All years
 access.robust.did <- boot(data=rr.did,
@@ -83,8 +85,10 @@ access.south.did <- boot(data=rr.did.south,
                         parallel="multicore", ncpus = cores)
 
 access.south.did.delta <- access.south.did$t0
+access.south.did.delta
 
 access.south.did.CI <- boot.ci(access.south.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
+access.south.did.CI
 
 # All years
 access.south.robust.did <- boot(data=rr.did.south,

@@ -257,12 +257,12 @@ plot.data.did <- data.frame(region=rep(c("West","South"),each=3),
 # Plot forest plots
 
 ForestPlot2 <- function(d, xlab, ylab, title="", leglab, ylim=NULL){
-  p <- ggplot(d, aes(x=variable, y = y, ymin=y.lo, ymax=y.hi,colour=region)) +
+  p <- ggplot(d, aes(x=variable, y = y, ymin=y.lo, ymax=y.hi,colour=region, shape=region)) +
     geom_pointrange(size=1, alpha=0.6) +
     #  coord_flip() +
     geom_hline(data=data.frame(x=0, y = 1), aes(x=x, yintercept=0), colour="black", lty=2) +
  #     scale_y_continuous(labels = scales::percent) +
-    labs(colour = leglab) +
+ #   labs(colour = leglab, shape=region) +
     ggtitle(title) +
     theme(plot.title = element_text(hjust = 0.5)) +
     coord_cartesian(ylim=ylim) +
@@ -272,7 +272,7 @@ ForestPlot2 <- function(d, xlab, ylab, title="", leglab, ylim=NULL){
 }
 
 plot.data.did$variable <- as.factor(plot.data.did$variable)
-did.state <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita cumulative homesteads",xlab="",title="",leglab="Region")
+did.state <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita cumulative homesteads",xlab="",title="",leglab="Region") + theme(legend.position="none")
 
 ggsave(paste0(results.directory,"plots/did-state.png"), did.state, width=11, height=8.5)
 
@@ -305,6 +305,6 @@ plot.data.did <- data.frame(region=rep(c("West","South"),each=3),
 # Plot forest plots
 
 plot.data.did$variable <- as.factor(plot.data.did$variable)
-did.state.robust <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita cumulative homesteads",xlab="",title="",leglab="Region")
+did.state.robust <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita cumulative homesteads",xlab="",title="",leglab="Region")  + theme(legend.position="none")
 
 ggsave(paste0(results.directory,"plots/did-state-robust.png"), did.state.robust, width=11, height=8.5)
