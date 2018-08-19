@@ -4,7 +4,7 @@
 library(dplyr)
 library(boot)
 
-source(paste0(code.directory,"RunDid.R"))
+source(paste0(code.directory,"RunDiD.R"))
 
 ## Western public land states
 

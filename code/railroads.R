@@ -106,7 +106,7 @@ require(caret)
 
 ################### Load railraods.RData
 
-load("/Users/jason/Dropbox/github/land-reform/data/railroads.RData")
+load("/home/jason/Dropbox/github/land-reform/data/railroads.RData")
 
 detach("package:raster", unload=TRUE) # avoid dplyr select error
 

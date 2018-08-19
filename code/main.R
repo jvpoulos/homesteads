@@ -13,13 +13,13 @@ registerDoParallel(cores) # register cores
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Set directories
-data.directory <-"~/Dropbox/github/land-reform/data/"
-code.directory <-"~/Dropbox/github/land-reform/code/"
-gans.code.directory <-"~/Dropbox/github/gans-causal/code/"
-homestead.data.directory <-"~/Dropbox/github/homestead/data/"
-homestead.code.directory <-"~/Dropbox/github/homestead/code/"
-results.directory <-"~/Dropbox/github/land-reform/results/"
-census.data.directory <- "~/Dropbox/github/ok-lottery/data/"
+data.directory <-"/home/jason/Dropbox/github/land-reform/data/"
+code.directory <-"/home/jason/Dropbox/github/land-reform/code/"
+gans.code.directory <-"/home/jason/Dropbox/github/gans-causal/code/"
+homestead.data.directory <-"/home/jason/Dropbox/github/homestead/data/"
+homestead.code.directory <-"/home/jason/Dropbox/github/homestead/code/"
+results.directory <-"/home/jason/Dropbox/github/land-reform/results/"
+census.data.directory <- "/home/jason/Dropbox/github/ok-lottery/data/"
 
 # State groups
 
