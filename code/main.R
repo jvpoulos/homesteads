@@ -39,14 +39,18 @@ source(paste0(code.directory,'patents.R'))
 
 # Prepare state capacity data
 
-source(paste0(code.directory,'capacity-state.R')) # state-level "rev.pc","exp.pc","educ.pc"
+source(paste0(code.directory,'capacity-state.R')) # prepare for mc
 source(paste0(code.directory,'prepare-capacity.R')) # prepare for DD # run homesteads first
 
 source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
-# DD estimates on capacity data
+# MC estimates on state capacity data
 
-source(paste0(code.directory,'dd-capacity.R')) # state-level capacity
+source(paste0(code.directory,'mc-capacity.R'))
+
+# DD estimates on state capacity data
+
+source(paste0(code.directory,'dd-capacity.R')) 
 
 ## Encoder-decoder estimates on capacity data
 
