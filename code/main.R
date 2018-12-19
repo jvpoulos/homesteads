@@ -13,13 +13,13 @@ registerDoParallel(cores) # register cores
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Set directories
-data.directory <-"/home/jason/Dropbox/github/land-reform/data/"
-code.directory <-"/home/jason/Dropbox/github/land-reform/code/"
-gans.code.directory <-"/home/jason/Dropbox/github/gans-causal/code/"
-homestead.data.directory <-"/home/jason/Dropbox/github/homestead/data/"
-homestead.code.directory <-"/home/jason/Dropbox/github/homestead/code/"
-results.directory <-"/home/jason/Dropbox/github/land-reform/results/"
-census.data.directory <- "/home/jason/Dropbox/github/ok-lottery/data/"
+data.directory <-"/media/jason/Dropbox/github/land-reform/data/"
+code.directory <-"/media/jason/Dropbox/github/land-reform/code/"
+gans.code.directory <-"/media/jason/Dropbox/github/gans-causal/code/"
+homestead.data.directory <-"/media/jason/Dropbox/github/homestead/data/"
+homestead.code.directory <-"/media/jason/Dropbox/github/homestead/code/"
+results.directory <-"/media/jason/Dropbox/github/land-reform/results/"
+census.data.directory <- "/media/jason/Dropbox/github/ok-lottery/data/"
 
 # State groups
 
@@ -46,15 +46,16 @@ source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
 # MC estimates on state capacity data
 
-source(paste0(code.directory,'mc-capacity.R'))
+source(paste0(gans.code.directory,'utils.R'))
+#save.image(paste0(data.directory, "capacity-state.RData"))
+
+source(paste0(code.directory,'mc-educpc-west.R'))
 
 # DD estimates on state capacity data
 
 source(paste0(code.directory,'dd-capacity.R')) 
 
 ## Encoder-decoder estimates on capacity data
-
-source(paste0(gans.code.directory,'utils.R'))
 
 source(paste0(code.directory,'encoder-decoder-south-educpc.R')) 
 source(paste0(code.directory,'encoder-decoder-south-exppc.R')) 
