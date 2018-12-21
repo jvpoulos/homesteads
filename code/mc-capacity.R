@@ -1,5 +1,5 @@
 ###################################
-# MC Estimation:   #
+# MC Estimation  #
 ###################################
 
 ## Loading Source files
@@ -8,26 +8,28 @@ library(glmnet)
 library(ggplot2)
 library(latex2exp)
 
+#load(paste0(data.directory, "capacity-state.RData"))
+
 ## Reading data
-Y <- educ.pc.M.west # NxT
-treat <- educ.pc.mask.west # NxT masked matrix 
-years <- unique(educ.pc.imp$year) # T-length
+Y <- dfList[['educ.pc']]$M # NxT
+treat <- dfList[['educ.pc']]$mask # NxT masked matrix 
+years <- colnames(dfList[['educ.pc']]$M) # T-length 
 
 ## Treated 
-treat_y <- Y[rownames(Y)%in%western.pub,] 
+treat_y <- Y[rownames(Y)%in%c(western.pub,southern.pub),] 
 
 ## Working with the rest of matrix
 treat <- treat[!rownames(treat)%in%rownames(treat_y),]
-Y <- Y[!rownames(treat)%in%rownames(treat_y),]
+Y <- Y[!rownames(Y)%in%rownames(treat_y),]
 
 ## Setting up the configuration
 N <- nrow(treat)
 T <- ncol(treat)
 number_T0 <- 5
 T0 <- ceiling(T*((1:number_T0)*2-1)/(2*number_T0))
-N_t <- 35
+N_t <- N # no. treated units desired <=N
 num_runs <- 10
-is_simul <- 1 ## Whether to simulate Simultaneus Adoption or Staggered Adoption
+is_simul <- 0 ## Whether to simulate Simultaneus Adoption or Staggered Adoption
 to_save <- 1 ## Whether to save the plot or not
 
 ## Matrices for saving RMSE values
@@ -45,13 +47,12 @@ for(i in c(1:num_runs)){
   ## Fix the treated units in the whole run for a better comparison
   treat_indices <- sample(1:N, N_t)
   for (j in c(1:length(T0))){
-    treat_mat <- matrix(1L, N, T);
+    treat_mat <- matrix(1L, N, T) # masked matrix, 1= control units and treated units before treatment and 0 = treated units after treatment
     t0 <- T0[j]
     ## Simultaneuous (simul_adapt) or Staggered adoption (stag_adapt)
     if(is_simul == 1){
       treat_mat <- simul_adapt(Y, N_t, t0, treat_indices)
-    }
-    else{
+    }else{
       treat_mat <- stag_adapt(Y, N_t, t0, treat_indices)
     }
     Y_obs <- Y * treat_mat
@@ -71,7 +72,7 @@ for(i in c(1:num_runs)){
     ##      Change num_alpha to a larger number, if you are willing to wait a little longer.
     ## -----
     
-    est_model_EN <- en_mp_rows(Y_obs, treat_mat, num_alpha = 1)
+    est_model_EN <- t(en_mp_rows(t(Y_obs), t(treat_mat), num_alpha = 1))
     est_model_EN_msk_err <- (est_model_EN - Y)*(1-treat_mat)
     est_model_EN_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_EN_msk_err^2))
     EN_RMSE_test[i,j] <- est_model_EN_test_RMSE
@@ -89,7 +90,7 @@ for(i in c(1:num_runs)){
     ## DID
     ## -----
     
-    est_model_DID <- DID(Y_obs, treat_mat)
+    est_model_DID <- t(DID(t(Y_obs), t(treat_mat)))
     est_model_DID_msk_err <- (est_model_DID - Y)*(1-treat_mat)
     est_model_DID_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_DID_msk_err^2))
     DID_RMSE_test[i,j] <- est_model_DID_test_RMSE
@@ -170,13 +171,13 @@ print(p)
 
 ##
 if(to_save == 1){
-  filename<-paste0(paste0(paste0(paste0(paste0(paste0("california_data_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".png")
+  filename<-paste0(paste0(paste0(paste0(paste0(paste0("educ_pc_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".png")
   ggsave(filename, plot = last_plot(), device="png", dpi=600)
   df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, EN_RMSE_test, ENT_RMSE_test, MCPanel_RMSE_test, ADH_RMSE_test)
   colnames(df2)<-c("N", "T", "N_t", "is_simul", replicate(length(T0), "DID"),
                    replicate(length(T0), "EN"), replicate(length(T0), "ENT"),
                    replicate(length(T0), "MC-NNM"), replicate(length(T0),"SC-ADH"))
   
-  filename<-paste0(paste0(paste0(paste0(paste0(paste0("california_data_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".rds")
+  filename<-paste0(paste0(paste0(paste0(paste0(paste0("educ_pc_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".rds")
   save(df1, df2, file = filename)
 }

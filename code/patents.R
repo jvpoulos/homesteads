@@ -63,7 +63,7 @@ library(tidyr)
 
 #############################################
 
-data.directory <-"~/Dropbox/github/land-reform/data/"
+data.directory <-"/media/jason/Dropbox/github/land-reform/data/"
 load(paste0(data.directory, "patents/patents.RData"))
 
 # Summarize by date/county/state

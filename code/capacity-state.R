@@ -208,77 +208,35 @@ colnames(exp.pc) <- sub("exp.pc.","", colnames(exp.pc))
 educ.pc <- reshape(data.frame(funds[c("state","year","educ.pc")]), idvar = "year", timevar = "state", direction = "wide")
 colnames(educ.pc) <- sub("educ.pc.","", colnames(educ.pc))
 
-# Impute missing values via linear interpolation
+dfList <- list("rev.pc"=rev.pc,"exp.pc"=exp.pc, "educ.pc"=educ.pc)
 
-rev.pc.imp <- rev.pc
-rev.pc.imp <- na.interpolation(rev.pc.imp, option = "linear")
+dfList <- lapply(dfList, function(df) {
+  print(df)
+  # Impute missing values via linear interpolation
+  df.imp <- df
+  df.imp <- na.interpolation(df.imp, option = "linear")
+  
+  # Matrix of observed entries (N x T)
+  df.M <- t(as.matrix(df.imp[!colnames(df.imp) %in% c("year")]))
+  colnames(df.M) <- unique(df.imp$year)
+  df.M[is.nan(df.M )] <- NA
+  
+  # Masked matrix which is 0 for control units and treated units before treatment and 1 for treated units after treatment.
 
-exp.pc.imp <- exp.pc
-exp.pc.imp <- na.interpolation(exp.pc.imp, option = "linear")
+  df.mask <- matrix(0, nrow = nrow(df.M), 
+                        ncol= ncol(df.M),
+                        dimnames = list(rownames(df.M), colnames(df.M)))
+  
+  df.mask[,colnames(df.mask)>=1869][rownames(df.mask)%in%western.pub,] <- 1 # earliest WPL 
+  df.mask[,colnames(df.mask)>=1870][rownames(df.mask)%in%c("IL","NV"),] <- 1 
+  df.mask[,colnames(df.mask)>=1871][rownames(df.mask)%in%c("ID"),] <- 1 
+  df.mask[,colnames(df.mask)>=1872][rownames(df.mask)%in%c("MT","ND","UT","AL","MS"),] <- 1 # earliest SPL 
+  df.mask[,colnames(df.mask)>=1873][rownames(df.mask)%in%c("AR","FL","LA"),] <- 1 
+  df.mask[,colnames(df.mask)>=1875][rownames(df.mask)%in%c("IN","NM","WY"),] <- 1 
+  df.mask[,colnames(df.mask)>=1878][rownames(df.mask)%in%c("AZ"),] <- 1 
+  df.mask[,colnames(df.mask)>=1890][rownames(df.mask)%in%c("OK"),] <- 1 
+  df.mask[,colnames(df.mask)>=1902][rownames(df.mask)%in%c("AK"),] <- 1 
+  return(list("M"=df.M, "mask"=df.mask))
+  })
 
-educ.pc.imp <- educ.pc
-educ.pc.imp <- na.interpolation(educ.pc.imp, option = "linear")
-
-# Matrix of observed entries (N x T)
-
-rev.pc.M <- t(as.matrix(rev.pc.imp[!colnames(rev.pc.imp) %in% c("year")]))
-colnames(rev.pc.M) <- unique(rev.pc.imp$year)
-rev.pc.M[is.nan(rev.pc.M )] <- NA
-
-rev.pc.M.west <- rev.pc.M[rownames(rev.pc.M) %in% c(western.pub,setdiff(state.land.states,southern.state)),] # subset to western states
-rev.pc.M.south <- rev.pc.M[rownames(rev.pc.M) %in% c(southern.pub,southern.state),] # subset to southern states
-
-exp.pc.M <- t(as.matrix(exp.pc.imp[!colnames(exp.pc.imp) %in% c("year")]))
-colnames(exp.pc.M) <- unique(exp.pc.imp$year)
-exp.pc.M[is.nan(exp.pc.M )] <- NA
-
-exp.pc.M.west <- exp.pc.M[rownames(exp.pc.M) %in% c(western.pub,setdiff(state.land.states,southern.state)),] # subset to western states
-exp.pc.M.south <- exp.pc.M[rownames(exp.pc.M) %in% c(southern.pub,southern.state),] # subset to southern states
-
-educ.pc.M <- t(as.matrix(educ.pc.imp[!colnames(educ.pc.imp) %in% c("year")]))
-colnames(educ.pc.M) <- unique(educ.pc.imp$year)
-educ.pc.M[is.nan(educ.pc.M )] <- NA
-
-educ.pc.M.west <- educ.pc.M[rownames(educ.pc.M) %in% c(western.pub,setdiff(state.land.states,southern.state)),] # subset to western states
-educ.pc.M.south <- educ.pc.M[rownames(educ.pc.M) %in% c(southern.pub,southern.state),] # subset to southern states
-
-# Masked matrix which is 0 for control units and treated units before treatment and 1 for treated units after treatment.
-
-#rev.pc
-rev.pc.mask.west <- matrix(0, nrow = nrow(rev.pc.M.west), 
-                      ncol= ncol(rev.pc.M.west),
-                      dimnames = list(rownames(rev.pc.M.west), colnames(rev.pc.M.west)))
-
-rev.pc.mask.west[,colnames(rev.pc.mask.west)>1862][rownames(rev.pc.mask.west)%in%western.pub,] <- 1 # western public land states > 1862
-
-rev.pc.mask.south <- matrix(0, nrow = nrow(rev.pc.M.south), 
-                           ncol= ncol(rev.pc.M.south),
-                           dimnames = list(rownames(rev.pc.M.south), colnames(rev.pc.M.south)))
-
-rev.pc.mask.south[,colnames(rev.pc.mask.south)>1862][rownames(rev.pc.mask.south)%in%southern.pub,] <- 1 # southern public land states > 1866
-
-#exp.pc
-exp.pc.mask.west <- matrix(0, nrow = nrow(exp.pc.M.west), 
-                           ncol= ncol(exp.pc.M.west),
-                           dimnames = list(rownames(exp.pc.M.west), colnames(exp.pc.M.west)))
-
-exp.pc.mask.west[,colnames(exp.pc.mask.west)>1862][rownames(exp.pc.mask.west)%in%western.pub,] <- 1 # western public land states > 1862
-
-exp.pc.mask.south <- matrix(0, nrow = nrow(exp.pc.M.south), 
-                            ncol= ncol(exp.pc.M.south),
-                            dimnames = list(rownames(exp.pc.M.south), colnames(exp.pc.M.south)))
-
-exp.pc.mask.south[,colnames(exp.pc.mask.south)>1862][rownames(exp.pc.mask.south)%in%southern.pub,] <- 1 # southern public land states > 1866
-
-#educ.pc
-educ.pc.mask.west <- matrix(0, nrow = nrow(educ.pc.M.west), 
-                           ncol= ncol(educ.pc.M.west),
-                           dimnames = list(rownames(educ.pc.M.west), colnames(educ.pc.M.west)))
-
-educ.pc.mask.west[,colnames(educ.pc.mask.west)>1862][rownames(educ.pc.mask.west)%in%western.pub,] <- 1 # western public land states > 1862
-
-educ.pc.mask.south <- matrix(0, nrow = nrow(educ.pc.M.south), 
-                            ncol= ncol(educ.pc.M.south),
-                            dimnames = list(rownames(educ.pc.M.south), colnames(educ.pc.M.south)))
-
-educ.pc.mask.south[,colnames(educ.pc.mask.south)>1862][rownames(educ.pc.mask.south)%in%southern.pub,] <- 1 # southern public land states > 1866
+setwd(data.directory) # reset dir
