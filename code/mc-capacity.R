@@ -8,6 +8,8 @@ library(glmnet)
 library(ggplot2)
 library(latex2exp)
 
+code.directory <-"/media/jason/Dropbox/github/land-reform/code/"
+data.directory <-"/media/jason/Dropbox/github/land-reform/data/"
 setwd(data.directory)
 load(paste0(data.directory, "capacity-state.RData"))
 
@@ -26,7 +28,7 @@ Y <- Y[!rownames(Y)%in%rownames(treat_y),]
 ## Setting up the configuration
 N <- nrow(treat)
 T <- ncol(treat)
-number_T0 <- 5
+number_T0 <- 4
 T0 <- ceiling(T*((1:number_T0)*2-1)/(2*number_T0))
 N_t <- 15 # no. treated units desired <=N
 num_runs <- 10
@@ -71,7 +73,7 @@ for(i in c(1:num_runs)){
     ## EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
     ##      Change num_alpha to a larger number, if you are willing to wait a little longer.
     ## -----
-    source("/media/jason/Dropbox/github/MCPanel/R/EN.R")
+    source(paste0(code.directory,"EN.R"))
     
     est_model_EN <- t(en_mp_rows(t(Y_obs), t(treat_mat)))
     est_model_EN_msk_err <- (est_model_EN - Y)*(1-treat_mat)
@@ -110,8 +112,6 @@ DID_std_error <- apply(DID_RMSE_test,2,sd)/sqrt(num_runs)
 ADH_avg_RMSE <- apply(ADH_RMSE_test,2,mean)
 ADH_std_error <- apply(ADH_RMSE_test,2,sd)/sqrt(num_runs)
 
-save(paste0(data.directory, "capacity-state.RData"))
-
 ## Creating plots
 
 df1 <-
@@ -125,12 +125,9 @@ df1 <-
       "Method" = c(replicate(length(T0),"DID"), replicate(length(T0),"EN"),
                  replicate(length(T0),"MC-NNM"), replicate(length(T0),"SC-ADH")),
       "Marker" = c(replicate(length(T0),1), replicate(length(T0),2),
-                 replicate(length(T0),3),replicate(length(T0),5))
+                 replicate(length(T0),3),replicate(length(T0),4))
       
   )
-
-Marker <- c(1,2,3,4)
-
 
 p <- ggplot(data = df1, aes(x, y, color = Method, shape = Marker)) +
   geom_point(size = 2, position=position_dodge(width=0.1)) +
@@ -144,7 +141,7 @@ p <- ggplot(data = df1, aes(x, y, color = Method, shape = Marker)) +
   theme_bw() +
   xlab(TeX('$T_0/T$')) +
   ylab("Average RMSE") +
-  coord_cartesian(ylim=c(5, 50)) +
+ # coord_cartesian(ylim=c(5, 50)) +
   theme(axis.title=element_text(family="Times", size=14)) +
   theme(axis.text=element_text(family="Times", size=12)) +
   theme(legend.text=element_text(family="Times", size = 12)) +
