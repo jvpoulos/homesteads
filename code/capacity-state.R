@@ -236,6 +236,7 @@ dfList <- lapply(dfList, function(df) {
   df.mask[,colnames(df.mask)>=1878][rownames(df.mask)%in%c("AZ"),] <- 1 
   df.mask[,colnames(df.mask)>=1890][rownames(df.mask)%in%c("OK"),] <- 1 
   df.mask[,colnames(df.mask)>=1902][rownames(df.mask)%in%c("AK"),] <- 1 
+  
   return(list("M"=df.M, "mask"=df.mask))
   })
 
