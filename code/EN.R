@@ -12,7 +12,7 @@ en_predict <- function(M, mask, best_lam, best_alpha){
     intc = 0
   }
   else{
-    A = glmnet(t(Z_train), M_new[nrow(M_new),control_cols],'gaussian', lambda=best_lam, alpha=best_alpha, thresh=1e-4)
+    A = glmnet(t(Z_train), M_new[nrow(M_new),control_cols],'gaussian', lambda=best_lam, alpha=best_alpha, thresh=1e-4, standardize=FALSE)
     weights <- unname(A$beta[,1])
     intc <- unname(A$a0[1])
   }
@@ -66,7 +66,8 @@ en_single_row <- function(M, mask){
   M_new[nrow(M),] <- M[treated_row,]
 
   Z_train <- M_new[1:(nrow(M_new)-1),control_cols]
-  A <- glmnet(t(Z_train), M_new[nrow(M_new),control_cols], family = 'gaussian', alpha = 1,  thresh=1e-4) # not cv on alpha
+  A <- cv.glmnet(t(Z_train), M_new[nrow(M_new),control_cols], family = 'gaussian', alpha = 1, standardize=FALSE, 
+                 thresh=1e-4, nfolds=5, lambda=exp(seq(log(0.001), log(5), length.out=100))) # 5-fold cv on lambda
   best_lam <- A$lambda.min
   best_alpha <-1
   

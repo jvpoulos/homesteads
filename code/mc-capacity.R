@@ -64,7 +64,7 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       ## MC-NNM
       ## ------
       
-      est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1)
+      est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5, is_quiet = 0)
       est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
       est_model_MCPanel$msk_err <- (est_model_MCPanel$Mhat - Y)*(1-treat_mat)
       est_model_MCPanel$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_MCPanel$msk_err^2))
@@ -72,7 +72,6 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       
       ## -----
       ## EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
-      ##      Change num_alpha to a larger number, if you are willing to wait a little longer.
       ## -----
       source(paste0(code.directory,"EN.R"))
       

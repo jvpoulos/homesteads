@@ -40,7 +40,7 @@ source(paste0(code.directory,'patents.R'))
 # Prepare state capacity data
 
 source(paste0(code.directory,'capacity-state.R')) # prepare for mc
-save.image(paste0(data.directory, "capacity-state.RData"))
+#save.image(paste0(data.directory, "capacity-state.RData"))
 
 source(paste0(code.directory,'prepare-capacity.R')) # prepare for DD # run homesteads first
 
@@ -50,7 +50,7 @@ source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
 source(paste0(gans.code.directory,'utils.R'))
 
-source(paste0(code.directory,'mc-educpc.R'))
+source(paste0(code.directory,'mc-capacity.R'))
 
 # DD estimates on state capacity data
 
