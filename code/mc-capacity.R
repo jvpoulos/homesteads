@@ -28,9 +28,9 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
   ## Setting up the configuration
   N <- nrow(treat)
   T <- ncol(treat)
-  number_T0 <- 5
+  number_T0 <-10
   T0 <- ceiling(T*((1:number_T0)*2-1)/(2*number_T0))
-  N_t <- 15 # no. treated units desired <=N
+  N_t <- 16 # no. treated units desired <=N
   num_runs <- 10
   is_simul <- 0 ## Whether to simulate Simultaneus Adoption or Staggered Adoption
   to_save <- 1 ## Whether to save the plot or not
@@ -78,8 +78,9 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       treat_mat_SVD <- treat_mat
       treat_mat_SVD[treat_mat==0] <- NA
       
-      est_model_SVD <- softImpute(Y_obs*treat_mat_SVD, type="svd")
-      est_model_SVD$Mhat <- complete(Y_obs*treat_mat_SVD,est_model_SVD)
+      SVD_xc <- biScale(Y_obs*treat_mat_SVD,col.scale=FALSE,row.scale=FALSE)
+      est_model_SVD <- softImpute(SVD_xc, rank.max=3,lambda=1, type="svd")
+      est_model_SVD$Mhat <- complete(Y_obs*treat_mat_SVD,est_model_SVD, unscale = TRUE)
       est_model_SVD$msk_err <- (est_model_SVD$Mhat - Y)*(1-treat_mat)
       est_model_SVD$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_SVD$msk_err^2))
       SVD_RMSE_test[i,j] <- est_model_SVD$test_RMSE
@@ -88,8 +89,9 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       ## ALS
       ## ------
       
-      est_model_ALS <- softImpute(Y_obs*treat_mat_SVD, type="als")
-      est_model_ALS$Mhat <- complete(Y_obs*treat_mat_SVD,est_model_ALS)
+      ALS_xc <- biScale(Y_obs*treat_mat_SVD,col.scale=FALSE,row.scale=FALSE)
+      est_model_ALS <- softImpute(ALS_xc, rank.max=3,lambda=1, type="als")
+      est_model_ALS$Mhat <- complete(Y_obs*treat_mat_SVD,est_model_ALS, unscale = TRUE)
       est_model_ALS$msk_err <- (est_model_ALS$Mhat - Y)*(1-treat_mat)
       est_model_ALS$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ALS$msk_err^2))
       ALS_RMSE_test[i,j] <- est_model_ALS$test_RMSE
@@ -148,7 +150,8 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
   df1 <-
     data.frame(
       "y" =  c(DID_avg_RMSE, EN_avg_RMSE, MCPanel_avg_RMSE, SVD_avg_RMSE, ALS_avg_RMSE, ADH_avg_RMSE),
-      "lb" = c(DID_avg_RMSE - 1.96*DID_std_error, EN_avg_RMSE - 1.96*EN_std_error,
+      "lb" = c(DID_avg_RMSE - 1.96*DID_std_error, 
+               EN_avg_RMSE - 1.96*EN_std_error,
                MCPanel_avg_RMSE - 1.96*MCPanel_std_error, 
                SVD_avg_RMSE - 1.96*SVD_std_error, 
                ALS_avg_RMSE - 1.96*ALS_std_error,
@@ -158,7 +161,7 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
                SVD_avg_RMSE + 1.96*SVD_std_error, 
                ALS_avg_RMSE + 1.96*ALS_std_error,
                ADH_avg_RMSE + 1.96*ADH_std_error),
-      "x" = c(T0/T, T0/T ,T0/T, T0/T),
+      "x" = c(T0/T, T0/T ,T0/T, T0/T, T0/T, T0/T),
       "Method" = c(replicate(length(T0),"DID"), replicate(length(T0),"VT-EN"),
                    replicate(length(T0),"MC-NNM"), replicate(length(T0),"MC-SVD"), replicate(length(T0),"MC-ALS"), replicate(length(T0),"SC-ADH")),
       "Marker" = c(replicate(length(T0),1), replicate(length(T0),2),

@@ -67,7 +67,7 @@ en_single_row <- function(M, mask){
 
   Z_train <- M_new[1:(nrow(M_new)-1),control_cols]
   A <- cv.glmnet(t(Z_train), M_new[nrow(M_new),control_cols], family = 'gaussian', alpha = 1, standardize=FALSE, 
-                 thresh=1e-4, nfolds=5, lambda=exp(seq(log(0.001), log(5), length.out=100))) # 5-fold cv on lambda
+                 thresh=1e-4, nfolds=3, lambda=exp(seq(log(0.001), log(5), length.out=100))) # 5-fold cv on lambda
   best_lam <- A$lambda.min
   best_alpha <-1
   
