@@ -210,32 +210,37 @@ colnames(educ.pc) <- sub("educ.pc.","", colnames(educ.pc))
 
 dfList <- list("rev.pc"=rev.pc,"exp.pc"=exp.pc, "educ.pc"=educ.pc)
 
-dfList <- lapply(dfList, function(df) {
-  print(df)
+dfList <- lapply(dfList, function(d) {
   # Impute missing values via linear interpolation
-  df.imp <- df
-  df.imp <- na.interpolation(df.imp, option = "linear")
+  d.imp <- d
+  d.imp <- na.interpolation(d.imp, option = "linear")
   
   # Matrix of observed entries (N x T)
-  df.M <- t(as.matrix(df.imp[!colnames(df.imp) %in% c("year")]))
-  colnames(df.M) <- unique(df.imp$year)
-  df.M[is.nan(df.M )] <- NA
+  d.M <- t(as.matrix(d.imp[!colnames(d.imp) %in% c("year")]))
+  colnames(d.M) <- unique(d.imp$year)
+  d.M[is.nan(d.M )] <- NA
+  
+  # Masked matrix for which 1=missing/imputed
+  d.M.missing <- t(as.matrix(d[!colnames(d) %in% c("year")]))
+  colnames(d.M.missing) <- unique(d$year)
+  d.M.missing[is.nan(d.M.missing)] <- NA
+  d.M.missing[is.na(d.M.missing)] <-1
   
   # Masked matrix which is 0 for control units and treated units before treatment and 1 for treated units after treatment.
 
-  df.mask <- matrix(0, nrow = nrow(df.M), 
-                        ncol= ncol(df.M),
-                        dimnames = list(rownames(df.M), colnames(df.M)))
+  d.mask <- matrix(0, nrow = nrow(d.M), 
+                        ncol= ncol(d.M),
+                        dimnames = list(rownames(d.M), colnames(d.M)))
   
-  df.mask[,colnames(df.mask)>=1869][rownames(df.mask)%in%western.pub,] <- 1 # earliest WPL 
-  df.mask[,colnames(df.mask)>=1870][rownames(df.mask)%in%c("IL","NV"),] <- 1 
-  df.mask[,colnames(df.mask)>=1871][rownames(df.mask)%in%c("ID"),] <- 1 
-  df.mask[,colnames(df.mask)>=1872][rownames(df.mask)%in%c("MT","ND","UT","AL","MS"),] <- 1 # earliest SPL 
-  df.mask[,colnames(df.mask)>=1873][rownames(df.mask)%in%c("AR","FL","LA"),] <- 1 
-  df.mask[,colnames(df.mask)>=1875][rownames(df.mask)%in%c("IN","NM","WY"),] <- 1 
-  df.mask[,colnames(df.mask)>=1878][rownames(df.mask)%in%c("AZ"),] <- 1 
-  df.mask[,colnames(df.mask)>=1890][rownames(df.mask)%in%c("OK"),] <- 1 
-  df.mask[,colnames(df.mask)>=1902][rownames(df.mask)%in%c("AK"),] <- 1 
+  d.mask[,colnames(d.mask)>=1869][rownames(d.mask)%in%western.pub,] <- 1 # earliest WPL 
+  d.mask[,colnames(d.mask)>=1870][rownames(d.mask)%in%c("IL","NV"),] <- 1 
+  d.mask[,colnames(d.mask)>=1871][rownames(d.mask)%in%c("ID"),] <- 1 
+  d.mask[,colnames(d.mask)>=1872][rownames(d.mask)%in%c("MT","ND","UT","AL","MS"),] <- 1 # earliest SPL 
+  d.mask[,colnames(d.mask)>=1873][rownames(d.mask)%in%c("AR","FL","LA"),] <- 1 
+  d.mask[,colnames(d.mask)>=1875][rownames(d.mask)%in%c("IN","NM","WY"),] <- 1 
+  d.mask[,colnames(d.mask)>=1878][rownames(d.mask)%in%c("AZ"),] <- 1 
+  d.mask[,colnames(d.mask)>=1890][rownames(d.mask)%in%c("OK"),] <- 1 
+  d.mask[,colnames(d.mask)>=1902][rownames(d.mask)%in%c("AK"),] <- 1 
   
-  return(list("M"=df.M, "mask"=df.mask))
+  return(list("M"=d.M, "M.missing"=d.M.missing, "mask"=d.mask))
   })

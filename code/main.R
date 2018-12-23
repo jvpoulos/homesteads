@@ -46,7 +46,7 @@ source(paste0(code.directory,'prepare-capacity.R')) # prepare for DD # run homes
 
 source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
-save.image(paste0(data.directory, "capacity-state.RData"))
+#save.image(paste0(data.directory, "capacity-state.RData"))
 # MC estimates on state capacity data
 
 source(paste0(gans.code.directory,'utils.R'))
