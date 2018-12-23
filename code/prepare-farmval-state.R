@@ -8,7 +8,7 @@ farmval$year <- farmval$year +1000 # fix year
 
 # Make logs
 farmval$farmval <- log(farmval$faval+.Machine
-                        $double.eps)
+                       $double.eps)
 
 # Create lags
 
@@ -19,7 +19,7 @@ TLag <- function(x, n = 1L, time) {
 
 farmval <- farmval %>% 
   group_by(fips) %>% 
-  mutate(farmval.lag = TLag(farmval, 10, time = year))
+  mutate(faval.lag = TLag(faval, 10, time = year))
 
 # keep states
 farmval <- farmval[farmval$county==0,]
@@ -28,6 +28,6 @@ farmval <- farmval[farmval$county==0,]
 farmval$state.abb <- setNames(state.abb, state.name)[farmval$state]
 
 # merge 
-homestead.funds.long <- merge(homestead.funds.long, farmval[c("state.abb","year","farmval","farmval.lag")], 
+homestead.funds.long <- merge(homestead.funds.long, farmval[c("state.abb","year","faval","faval.lag")], 
                             by.x=c("state_code","year2"),
                             by.y=c("state.abb","year"), all.x=TRUE)

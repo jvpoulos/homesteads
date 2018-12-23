@@ -11,60 +11,52 @@ library(caret)
 library(zoo)
 library(tidyr)
 
-# # Set location of files
-# setwd(paste0(data.directory, "patents"))
-# 
-# # Import glo files 
-# 
-# patent.files <- list.files(pattern = "*_Patent.csv", recursive = TRUE)
-# 
-# county.files <- list.files(pattern = "*County.csv", recursive = TRUE)
-# 
-# patents <- do.call(rbind,lapply(patent.files,read.csv, 
-#                                 header=T,
-#                                 sep = ",",
-#                                 stringsAsFactors=FALSE))
-# 
-# counties <- do.call(rbind,lapply(county.files,read.csv, 
-#                                        header=T,
-#                                        sep = ",",
-#                                        stringsAsFactors=FALSE))
-# 
-# 
-# # Merge patents with counties
-# counties <- counties[!duplicated(counties$accession_nr),] # keep 1 county record/accession
-# 
-# patents <- merge(patents, counties[c("accession_nr","county_code")], by= c("accession_nr"),all.x=TRUE)
-# 
-# # Fix county code
-# patents$county_code <- as.numeric(patents$county_code)
-# 
-# patents <- patents[!is.na(patents$county_code),] # rm obs w missing county codes
-# 
-# patents$county_code <- patents$county_code*10 # make county code consistent with ICPSR
-# 
-# # Codes, etc. to numeric
-# 
-# patents$sales <- 0
-# patents$sales[patents$authority_code==272002] <- 1
-# 
-# patents$homesteads <- 0
-# patents$homesteads[patents$authority_code==251101] <- 1
-# 
-# # Date to time
-# 
-# patents$date <-as.Date(patents$signature_date, format="%m/%d/%Y") # convert to date
-# patents$year <- as.numeric(format(patents$date ,"%Y")) # extract year
-# 
-# patents <- patents[!is.na(patents$year) & !patents$year>2017,] # subset to non-missing and valid dates
-# 
-# # Save workspace
-# save.image(paste0(data.directory, "patents/patents.RData"))
+# Set location of files
+setwd(paste0(data.directory, "patents"))
 
-#############################################
+# Import glo files
 
-data.directory <-"/media/jason/Dropbox/github/land-reform/data/"
-load(paste0(data.directory, "patents/patents.RData"))
+patent.files <- list.files(pattern = "*_Patent.csv", recursive = TRUE)
+
+county.files <- list.files(pattern = "*County.csv", recursive = TRUE)
+
+patents <- do.call(rbind,lapply(patent.files,read.csv,
+                                header=T,
+                                sep = ",",
+                                stringsAsFactors=FALSE))
+
+counties <- do.call(rbind,lapply(county.files,read.csv,
+                                       header=T,
+                                       sep = ",",
+                                       stringsAsFactors=FALSE))
+
+
+# Merge patents with counties
+counties <- counties[!duplicated(counties$accession_nr),] # keep 1 county record/accession
+
+patents <- merge(patents, counties[c("accession_nr","county_code")], by= c("accession_nr"),all.x=TRUE)
+
+# Fix county code
+patents$county_code <- as.numeric(patents$county_code)
+
+patents <- patents[!is.na(patents$county_code),] # rm obs w missing county codes
+
+patents$county_code <- patents$county_code*10 # make county code consistent with ICPSR
+
+# Codes, etc. to numeric
+
+patents$sales <- 0
+patents$sales[patents$authority_code==272002] <- 1
+
+patents$homesteads <- 0
+patents$homesteads[patents$authority_code==251101] <- 1
+
+# Date to time
+
+patents$date <-as.Date(patents$signature_date, format="%m/%d/%Y") # convert to date
+patents$year <- as.numeric(format(patents$date ,"%Y")) # extract year
+
+patents <- patents[!is.na(patents$year) & !patents$year>2017,] # subset to non-missing and valid dates
 
 # Summarize by date/county/state
 

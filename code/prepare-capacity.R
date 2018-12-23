@@ -23,7 +23,7 @@ homestead.funds.long <- merge(homesteads.cumsum.state,
                               funds, by.x = c("state_code", "year"), 
                             by.y = c("state", "year"), all.y=TRUE) 
 
-homestead.funds.long$homesteads.pc <- log(homestead.funds.long$cumulative.homesteads/homestead.funds.long$ns.pop) # log cumulative homesteads pc
+homestead.funds.long$homesteads.pc <- homestead.funds.long$cumulative.homesteads/homestead.funds.long$ns.pop # cumulative homesteads pc
 
 homestead.funds.long$homesteads.pc[is.na(homestead.funds.long$homesteads.pc)] <- 0
 

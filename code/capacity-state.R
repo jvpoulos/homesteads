@@ -189,7 +189,7 @@ funds["educ.pc"] <- log((funds["31"]/funds$adj_factor)/funds$ns.pop+ .Machine$do
 
 # clean feature set
 funds <- funds[colnames(funds) %in% c("state","year","year2",
-                                      'ns.pop',"land.gini","aland.gini","ns.pop","adultm","farms","farmsize","tenancy","wages","output",
+                                      "land.gini","aland.gini","ns.pop","adultm","farms","farmsize","tenancy","wages","output",
                                       "rev.pc","exp.pc","educ.pc")]
 
 # setup for MC
@@ -239,5 +239,3 @@ dfList <- lapply(dfList, function(df) {
   
   return(list("M"=df.M, "mask"=df.mask))
   })
-
-setwd(data.directory) # reset dir

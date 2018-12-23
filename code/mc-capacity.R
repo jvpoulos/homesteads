@@ -7,10 +7,9 @@ library(MCPanel)
 library(glmnet)
 library(ggplot2)
 library(latex2exp)
+library(softImpute)
 
-code.directory <-"/media/jason/Dropbox/github/land-reform/code/"
-data.directory <-"/media/jason/Dropbox/github/land-reform/data/"
-setwd(data.directory)
+setwd(paste0(results.directory,"mc"))
 load(paste0(data.directory, "capacity-state.RData"))
 
 ## Reading data
@@ -29,7 +28,7 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
   ## Setting up the configuration
   N <- nrow(treat)
   T <- ncol(treat)
-  number_T0 <- 8
+  number_T0 <- 5
   T0 <- ceiling(T*((1:number_T0)*2-1)/(2*number_T0))
   N_t <- 15 # no. treated units desired <=N
   num_runs <- 10
@@ -39,6 +38,8 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
   ## Matrices for saving RMSE values
   
   MCPanel_RMSE_test <- matrix(0L,num_runs,length(T0))
+  SVD_RMSE_test <- matrix(0L,num_runs,length(T0))
+  ALS_RMSE_test <- matrix(0L,num_runs,length(T0))
   EN_RMSE_test <- matrix(0L,num_runs,length(T0))
   DID_RMSE_test <- matrix(0L,num_runs,length(T0))
   ADH_RMSE_test <- matrix(0L,num_runs,length(T0))
@@ -64,14 +65,38 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       ## MC-NNM
       ## ------
       
-      est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5, is_quiet = 0)
+      est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
       est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
       est_model_MCPanel$msk_err <- (est_model_MCPanel$Mhat - Y)*(1-treat_mat)
       est_model_MCPanel$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_MCPanel$msk_err^2))
       MCPanel_RMSE_test[i,j] <- est_model_MCPanel$test_RMSE
       
+      ## ------
+      ## SVD
+      ## ------
+      
+      treat_mat_SVD <- treat_mat
+      treat_mat_SVD[treat_mat==0] <- NA
+      
+      est_model_SVD <- softImpute(Y_obs*treat_mat_SVD, type="svd")
+      est_model_SVD$Mhat <- complete(Y_obs*treat_mat_SVD,est_model_SVD)
+      est_model_SVD$msk_err <- (est_model_SVD$Mhat - Y)*(1-treat_mat)
+      est_model_SVD$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_SVD$msk_err^2))
+      SVD_RMSE_test[i,j] <- est_model_SVD$test_RMSE
+      
+      ## ------
+      ## ALS
+      ## ------
+      
+      est_model_ALS <- softImpute(Y_obs*treat_mat_SVD, type="als")
+      est_model_ALS$Mhat <- complete(Y_obs*treat_mat_SVD,est_model_ALS)
+      est_model_ALS$msk_err <- (est_model_ALS$Mhat - Y)*(1-treat_mat)
+      est_model_ALS$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ALS$msk_err^2))
+      ALS_RMSE_test[i,j] <- est_model_ALS$test_RMSE
+      
+      
       ## -----
-      ## EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
+      ## VT-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
       ## -----
       source(paste0(code.directory,"EN.R"))
       
@@ -103,6 +128,12 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
   MCPanel_avg_RMSE <- apply(MCPanel_RMSE_test,2,mean)
   MCPanel_std_error <- apply(MCPanel_RMSE_test,2,sd)/sqrt(num_runs)
   
+  SVD_avg_RMSE <- apply(SVD_RMSE_test,2,mean)
+  SVD_std_error <- apply(SVD_RMSE_test,2,sd)/sqrt(num_runs)
+  
+  ALS_avg_RMSE <- apply(ALS_RMSE_test,2,mean)
+  ALS_std_error <- apply(ALS_RMSE_test,2,sd)/sqrt(num_runs)
+  
   EN_avg_RMSE <- apply(EN_RMSE_test,2,mean)
   EN_std_error <- apply(EN_RMSE_test,2,sd)/sqrt(num_runs)
   
@@ -116,18 +147,26 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
   
   df1 <-
     data.frame(
-      "y" =  c(DID_avg_RMSE, EN_avg_RMSE, MCPanel_avg_RMSE, ADH_avg_RMSE),
+      "y" =  c(DID_avg_RMSE, EN_avg_RMSE, MCPanel_avg_RMSE, SVD_avg_RMSE, ALS_avg_RMSE, ADH_avg_RMSE),
       "lb" = c(DID_avg_RMSE - 1.96*DID_std_error, EN_avg_RMSE - 1.96*EN_std_error,
-               MCPanel_avg_RMSE - 1.96*MCPanel_std_error, ADH_avg_RMSE - 1.96*ADH_std_error),
+               MCPanel_avg_RMSE - 1.96*MCPanel_std_error, 
+               SVD_avg_RMSE - 1.96*SVD_std_error, 
+               ALS_avg_RMSE - 1.96*ALS_std_error,
+               ADH_avg_RMSE - 1.96*ADH_std_error),
       "ub" = c(DID_avg_RMSE + 1.96*DID_std_error, EN_avg_RMSE + 1.96*EN_std_error,
-               MCPanel_avg_RMSE + 1.96*MCPanel_std_error, ADH_avg_RMSE + 1.96*ADH_std_error),
+               MCPanel_avg_RMSE + 1.96*MCPanel_std_error, 
+               SVD_avg_RMSE + 1.96*SVD_std_error, 
+               ALS_avg_RMSE + 1.96*ALS_std_error,
+               ADH_avg_RMSE + 1.96*ADH_std_error),
       "x" = c(T0/T, T0/T ,T0/T, T0/T),
-      "Method" = c(replicate(length(T0),"DID"), replicate(length(T0),"EN"),
-                   replicate(length(T0),"MC-NNM"), replicate(length(T0),"SC-ADH")),
+      "Method" = c(replicate(length(T0),"DID"), replicate(length(T0),"VT-EN"),
+                   replicate(length(T0),"MC-NNM"), replicate(length(T0),"MC-SVD"), replicate(length(T0),"MC-ALS"), replicate(length(T0),"SC-ADH")),
       "Marker" = c(replicate(length(T0),1), replicate(length(T0),2),
-                   replicate(length(T0),3),replicate(length(T0),4))
+                   replicate(length(T0),3),replicate(length(T0),4),replicate(length(T0),5),replicate(length(T0),6))
       
     )
+  
+  Marker = c(1:6)
   
   p <- ggplot(data = df1, aes(x, y, color = Method, shape = Marker)) +
     geom_point(size = 2, position=position_dodge(width=0.1)) +
@@ -152,9 +191,11 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
   if(to_save == 1){
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".png")
     ggsave(filename, plot = last_plot(), device="png", dpi=600)
-    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, EN_RMSE_test, MCPanel_RMSE_test, ADH_RMSE_test)
+    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, EN_RMSE_test, MCPanel_RMSE_test, SVD_RMSE_test, ALS_RMSE_test, ADH_RMSE_test)
     colnames(df2)<-c("N", "T", "N_t", "is_simul", replicate(length(T0), "DID"),
-                     replicate(length(T0), "EN"), replicate(length(T0), "MC-NNM"), replicate(length(T0),"SC-ADH"))
+                     replicate(length(T0), "VT-EN"), replicate(length(T0), "MC-NNM"), 
+                     replicate(length(T0),"MC-SVD"), replicate(length(T0),"MC-ALS"), 
+                     replicate(length(T0),"SC-ADH"))
     
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".rds")
     save(df1, df2, file = filename)
