@@ -220,11 +220,11 @@ dfList <- lapply(dfList, function(d) {
   colnames(d.M) <- unique(d.imp$year)
   d.M[is.nan(d.M )] <- NA
   
-  # Masked matrix for which 1=missing/imputed
+  # Masked matrix for which 1=observed, NA=missing/imputed
   d.M.missing <- t(as.matrix(d[!colnames(d) %in% c("year")]))
   colnames(d.M.missing) <- unique(d$year)
   d.M.missing[is.nan(d.M.missing)] <- NA
-  d.M.missing[is.na(d.M.missing)] <-1
+  d.M.missing[!is.na(d.M.missing)] <-1
   
   # Masked matrix which is 0 for control units and treated units before treatment and 1 for treated units after treatment.
 
