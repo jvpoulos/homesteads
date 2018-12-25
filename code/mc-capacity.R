@@ -9,8 +9,7 @@ library(ggplot2)
 library(softImpute)
 library(missForest)
 
-setwd(paste0(results.directory,"mc"))
-load(paste0(data.directory, "capacity-state.RData"))
+load("capacity-state.RData")
 
 ## Reading data
 for(sim in c(0,1)){
@@ -113,7 +112,7 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       ## VT-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
       ## -----
       
-      source(paste0(code.directory,"EN.R"))
+      source("EN.R")
       
       est_model_ENT <- t(en_mp_rows(t(Y_obs), t(treat_mat)))
       est_model_ENT_msk_err <- (est_model_ENT - Y*missing)*(1-treat_mat)
