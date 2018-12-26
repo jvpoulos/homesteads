@@ -8,6 +8,7 @@ library(glmnet)
 library(ggplot2)
 library(softImpute)
 library(missForest)
+library(latex2exp)
 
 # Setup parallel processing 
 library(parallel)
