@@ -76,8 +76,8 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       # ## SVD
       # ## ------
       # 
-      # treat_mat_SVD <- treat_mat
-      # treat_mat_SVD[treat_mat==0] <- NA
+      treat_mat_SVD <- treat_mat
+      treat_mat_SVD[treat_mat==0] <- NA
       # 
       # SVD_xc <- biScale(Y_obs*treat_mat_SVD,col.scale=FALSE,row.scale=FALSE)
       # est_model_SVD <- softImpute(SVD_xc, rank.max=3,lambda=1, type="svd")
