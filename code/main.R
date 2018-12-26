@@ -50,7 +50,7 @@ source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
 source(paste0(gans.code.directory,'utils.R'))
 
-#source(paste0(code.directory,'mc-capacity.R')) # mc-capacity.sh 
+# mc-capacity.sh --> mc-capacity.R 
 
 # DD estimates on state capacity data
 

@@ -26,9 +26,8 @@ load("capacity-state.RData")
 ## Reading data
 for(sim in c(0,1)){
 for(d in c('rev.pc','exp.pc','educ.pc')){
-  Y <- dfList[[d]]$M # NxT
-  treat <- dfList[[d]]$mask # NxT masked matrix 
-  missing <- dfList[[d]]$M.missing # NxT masked matrix
+  Y <- dfList[[d]]$M[,18:ncol(dfList[[d]]$M)] # NxT
+  treat <- dfList[[d]]$mask[,18:ncol(dfList[[d]]$mask)]  # NxT masked matrix 
   years <- colnames(Y) # T-length 
   
   ## Treated 
@@ -36,7 +35,6 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
   
   ## Working with the rest of matrix
   treat <- treat[!rownames(treat)%in%rownames(treat_y),]
-  missing<- missing[!rownames(missing)%in%rownames(treat_y),]
   Y <- Y[!rownames(Y)%in%rownames(treat_y),]
   
   ## Setting up the configuration
@@ -52,7 +50,10 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
   ## Matrices for saving RMSE values
   
   MCPanel_RMSE_test <- matrix(0L,num_runs,length(T0))
+  SVD_RMSE_test <- matrix(0L,num_runs,length(T0))
+  ALS_RMSE_test <- matrix(0L,num_runs,length(T0))
   RF_RMSE_test <- matrix(0L,num_runs,length(T0))
+  EN_RMSE_test <- matrix(0L,num_runs,length(T0))
   ENT_RMSE_test <- matrix(0L,num_runs,length(T0))
   DID_RMSE_test <- matrix(0L,num_runs,length(T0))
   ADH_RMSE_test <- matrix(0L,num_runs,length(T0))
@@ -72,6 +73,9 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       }else{
         treat_mat <- stag_adapt(Y, N_t, t0, treat_indices)
       }
+      treat_mat_NA <- treat_mat
+      treat_mat_NA[treat_mat==0] <- NA
+      
       Y_obs <- Y * treat_mat
 
       ## ------
@@ -80,52 +84,49 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       
       est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
       est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
-      est_model_MCPanel$msk_err <- (est_model_MCPanel$Mhat - Y*missing)*(1-treat_mat) # use nonimputed matrix for error calc.
+      est_model_MCPanel$msk_err <- (est_model_MCPanel$Mhat - Y)*(1-treat_mat) 
       est_model_MCPanel$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_MCPanel$msk_err^2, na.rm = TRUE))
       MCPanel_RMSE_test[i,j] <- est_model_MCPanel$test_RMSE
       
-      # ## ------
-      # ## SVD
-      # ## ------
-      # 
-      treat_mat_SVD <- treat_mat
-      treat_mat_SVD[treat_mat==0] <- NA
-      # 
-      # SVD_xc <- biScale(Y_obs*treat_mat_SVD,col.scale=FALSE,row.scale=FALSE)
-      # est_model_SVD <- softImpute(SVD_xc, rank.max=3,lambda=1, type="svd")
-      # est_model_SVD$Mhat <- complete(Y_obs*treat_mat_SVD,est_model_SVD, unscale = TRUE)
-      # est_model_SVD$msk_err <- (est_model_SVD$Mhat - Y*missing)*(1-treat_mat)
-      # est_model_SVD$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_SVD$msk_err^2, na.rm=TRUE))
-      # SVD_RMSE_test[i,j] <- est_model_SVD$test_RMSE
-      # 
-      # ## ------
-      # ## ALS
-      # ## ------
-      # 
-      # ALS_xc <- biScale(Y_obs*treat_mat_SVD,col.scale=FALSE,row.scale=FALSE)
-      # est_model_ALS <- softImpute(ALS_xc, rank.max=3,lambda=1, type="als")
-      # est_model_ALS$Mhat <- complete(Y_obs*treat_mat_SVD,est_model_ALS, unscale = TRUE)
-      # est_model_ALS$msk_err <- (est_model_ALS$Mhat - Y*missing)*(1-treat_mat)
-      # est_model_ALS$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ALS$msk_err^2, na.rm=TRUE))
-      # ALS_RMSE_test[i,j] <- est_model_ALS$test_RMSE
+      ## ------
+      ## SVD
+      ## ------
+
+      SVD_xc <- biScale(Y_obs*treat_mat_NA,col.scale=FALSE,row.scale=FALSE)
+      est_model_SVD <- softImpute(SVD_xc, rank.max=3,lambda=1, type="svd")
+      est_model_SVD$Mhat <- complete(Y_obs*treat_mat_NA,est_model_SVD, unscale = TRUE)
+      est_model_SVD$msk_err <- (est_model_SVD$Mhat - Y)*(1-treat_mat)
+      est_model_SVD$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_SVD$msk_err^2, na.rm=TRUE))
+      SVD_RMSE_test[i,j] <- est_model_SVD$test_RMSE
+
+      ## ------
+      ## ALS
+      ## ------
+
+      ALS_xc <- biScale(Y_obs*treat_mat_NA,col.scale=FALSE,row.scale=FALSE)
+      est_model_ALS <- softImpute(ALS_xc, rank.max=3,lambda=1, type="als")
+      est_model_ALS$Mhat <- complete(Y_obs*treat_mat_NA,est_model_ALS, unscale = TRUE)
+      est_model_ALS$msk_err <- (est_model_ALS$Mhat - Y)*(1-treat_mat)
+      est_model_ALS$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ALS$msk_err^2, na.rm=TRUE))
+      ALS_RMSE_test[i,j] <- est_model_ALS$test_RMSE
       
-      # ## -----
-      # ## HR-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
-      # ## -----
-      # 
-      # est_model_EN <- en_mp_rows(Y_obs, treat_mat)
-      # est_model_EN_msk_err <- (est_model_EN - Y*missing)*(1-treat_mat)
-      # est_model_EN_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_EN_msk_err^2, na.rm = TRUE))
-      # EN_RMSE_test[i,j] <- est_model_EN_test_RMSE
+      ## -----
+      ## HR-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
+      ## -----
+      
+      source("EN.R")
+      
+      est_model_EN <- en_mp_rows(Y_obs, treat_mat)
+      est_model_EN_msk_err <- (est_model_EN - Y)*(1-treat_mat)
+      est_model_EN_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_EN_msk_err^2, na.rm = TRUE))
+      EN_RMSE_test[i,j] <- est_model_EN_test_RMSE
       
       ## -----
       ## VT-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
       ## -----
       
-      source("EN.R")
-      
       est_model_ENT <- t(en_mp_rows(t(Y_obs), t(treat_mat)))
-      est_model_ENT_msk_err <- (est_model_ENT - Y*missing)*(1-treat_mat)
+      est_model_ENT_msk_err <- (est_model_ENT - Y)*(1-treat_mat)
       est_model_ENT_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ENT_msk_err^2, na.rm = TRUE))
       ENT_RMSE_test[i,j] <- est_model_ENT_test_RMSE
       
@@ -133,9 +134,9 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       ## RF
       ## ------
       
-      est_model_RF <- missForest(Y_obs*treat_mat_SVD, maxiter=2, parallelize = "variables")
+      est_model_RF <- missForest(Y_obs*treat_mat_NA, maxiter=2, parallelize = "variables")
       est_model_RF$Mhat <- est_model_RF$ximp
-      est_model_RF$msk_err <- (est_model_RF$Mhat - Y*missing)*(1-treat_mat) # use nonimputed matrix for error calc.
+      est_model_RF$msk_err <- (est_model_RF$Mhat - Y)*(1-treat_mat) # use nonimputed matrix for error calc.
       est_model_RF$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_RF$msk_err^2, na.rm = TRUE))
       RF_RMSE_test[i,j] <- est_model_RF$test_RMSE
       
@@ -144,7 +145,7 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       ## -----
       
       est_model_DID <- t(DID(t(Y_obs), t(treat_mat)))
-      est_model_DID_msk_err <- (est_model_DID - Y*missing)*(1-treat_mat)
+      est_model_DID_msk_err <- (est_model_DID - Y)*(1-treat_mat)
       est_model_DID_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_DID_msk_err^2, na.rm = TRUE))
       DID_RMSE_test[i,j] <- est_model_DID_test_RMSE
       
@@ -152,7 +153,7 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       ## ADH
       ## -----
       est_model_ADH <- adh_mp_rows(Y_obs, treat_mat)
-      est_model_ADH_msk_err <- (est_model_ADH - Y*missing)*(1-treat_mat)
+      est_model_ADH_msk_err <- (est_model_ADH - Y)*(1-treat_mat)
       est_model_ADH_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ADH_msk_err^2, na.rm = TRUE))
       ADH_RMSE_test[i,j] <- est_model_ADH_test_RMSE
     }
@@ -161,6 +162,15 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
   ## Computing means and standard errors
   MCPanel_avg_RMSE <- apply(MCPanel_RMSE_test,2,mean)
   MCPanel_std_error <- apply(MCPanel_RMSE_test,2,sd)/sqrt(num_runs)
+  
+  SVD_avg_RMSE <- apply(SVD_RMSE_test,2,mean)
+  SVD_std_error <- apply(SVD_RMSE_test,2,sd)/sqrt(num_runs)
+  
+  ALS_avg_RMSE <- apply(ALS_RMSE_test,2,mean)
+  ALS_std_error <- apply(ALS_RMSE_test,2,sd)/sqrt(num_runs)
+  
+  EN_avg_RMSE <- apply(EN_RMSE_test,2,mean)
+  EN_std_error <- apply(EN_RMSE_test,2,sd)/sqrt(num_runs)
   
   ENT_avg_RMSE <- apply(ENT_RMSE_test,2,mean)
   ENT_std_error <- apply(ENT_RMSE_test,2,sd)/sqrt(num_runs)
@@ -178,32 +188,44 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
   
   df1 <-
     data.frame(
-      "y" =  c(DID_avg_RMSE, ENT_avg_RMSE, RF_avg_RMSE, MCPanel_avg_RMSE, ADH_avg_RMSE),
+      "y" =  c(DID_avg_RMSE, EN_avg_RMSE, ENT_avg_RMSE, RF_avg_RMSE, MCPanel_avg_RMSE, SVD_avg_RMSE, ALS_avg_RMSE, ADH_avg_RMSE),
       "lb" = c(DID_avg_RMSE - 1.96*DID_std_error, 
+               EN_avg_RMSE - 1.96*EN_std_error,
                ENT_avg_RMSE - 1.96*ENT_std_error,
                RF_avg_RMSE - 1.96*RF_std_error,
                MCPanel_avg_RMSE - 1.96*MCPanel_std_error, 
+               SVD_avg_RMSE - 1.96*SVD_std_error, 
+               ALS_avg_RMSE - 1.96*ALS_std_error, 
                ADH_avg_RMSE - 1.96*ADH_std_error),
       "ub" = c(DID_avg_RMSE + 1.96*DID_std_error, 
+               EN_avg_RMSE + 1.96*EN_std_error,
                ENT_avg_RMSE + 1.96*ENT_std_error,
                RF_avg_RMSE + 1.96*RF_std_error,
                MCPanel_avg_RMSE + 1.96*MCPanel_std_error, 
+               SVD_avg_RMSE + 1.96*SVD_std_error, 
+               ALS_avg_RMSE + 1.96*ALS_std_error, 
                ADH_avg_RMSE + 1.96*ADH_std_error),
-      "x" = c(T0/T, T0/T ,T0/T, T0/T, T0/T),
+      "x" = c(T0/T, T0/T ,T0/T, T0/T, T0/T, T0/T, T0/T, T0/T),
       "Method" = c(replicate(length(T0),"DID"), 
+                   replicate(length(T0),"HR-EN"),
                    replicate(length(T0),"VT-EN"),
                    replicate(length(T0),"RF"),
                    replicate(length(T0),"MC-NNM"), 
+                   replicate(length(T0),"SOFT-SVD"), 
+                   replicate(length(T0),"SOFT-ALS"), 
                    replicate(length(T0),"SC-ADH")),
       "Marker" = c(replicate(length(T0),1), 
                    replicate(length(T0),2),
                    replicate(length(T0),3),
                    replicate(length(T0),4),
-                   replicate(length(T0),5))
+                   replicate(length(T0),5),
+                   replicate(length(T0),6),
+                   replicate(length(T0),7),
+                   replicate(length(T0),8))
       
     )
   
-  Marker = c(1:5)
+  Marker = c(1:8)
   
   p <- ggplot(data = df1, aes(x, y, color = Method, shape = Marker)) +
     geom_point(size = 2, position=position_dodge(width=0.1)) +
@@ -217,7 +239,6 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
     theme_bw() +
     xlab(TeX('$T_0/T$')) +
     ylab("Average RMSE") +
-    # coord_cartesian(ylim=c(5, 50)) +
     theme(axis.title=element_text(family="Times", size=14)) +
     theme(axis.text=element_text(family="Times", size=12)) +
     theme(legend.text=element_text(family="Times", size = 12)) +
@@ -228,12 +249,15 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
   if(to_save == 1){
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".png")
     ggsave(filename, plot = last_plot(), device="png", dpi=600)
-    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, ENT_RMSE_test, RF_RMSE_test, MCPanel_RMSE_test, ADH_RMSE_test)
+    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, EN_RMSE_test, ENT_RMSE_test, RF_RMSE_test, MCPanel_RMSE_test, SVD_RMSE_test, ALS_RMSE_test, ADH_RMSE_test)
     colnames(df2)<-c("N", "T", "N_t", "is_simul", 
                      replicate(length(T0), "DID"), 
+                     replicate(length(T0), "HR-EN"), 
                      replicate(length(T0), "VT-EN"), 
                      replicate(length(T0), "RF"), 
                      replicate(length(T0), "MC-NNM"), 
+                     replicate(length(T0),"SOFT-SVD"), 
+                     replicate(length(T0),"SOFT-ALS"), 
                      replicate(length(T0),"SC-ADH"))
     
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".rds")
