@@ -13,9 +13,9 @@ library(missForest)
 library(parallel)
 library(doParallel)
 
-cores <- detectCores() # specify number of cores to use
+detectCores() # specify number of cores to use
 
-registerDoParallel(cores) # register cores
+registerDoParallel(14) # register cores
 
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
