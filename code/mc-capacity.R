@@ -52,7 +52,7 @@ for(d in c('rev.pc','exp.pc')){
   MCPanel_RMSE_test <- matrix(0L,num_runs,length(T0))
   SVD_RMSE_test <- matrix(0L,num_runs,length(T0))
   SVT_RMSE_test <- matrix(0L,num_runs,length(T0))
-  KNN_RMSE_test <- matrix(0L,num_runs,length(T0))
+  kNN_RMSE_test <- matrix(0L,num_runs,length(T0))
   RF_RMSE_test <- matrix(0L,num_runs,length(T0))
   ENT_RMSE_test <- matrix(0L,num_runs,length(T0))
   DID_RMSE_test <- matrix(0L,num_runs,length(T0))
@@ -108,7 +108,7 @@ for(d in c('rev.pc','exp.pc')){
       SVT_RMSE_test[i,j] <- SVT_test_RMSE
       
       # ## ------
-      # ## KNN
+      # ## kNN
       # ## ------
       
       k.star <- cv.kNNImpute(t(Y_obs*treat_mat_NA), parallel = TRUE)$k
@@ -196,8 +196,8 @@ for(d in c('rev.pc','exp.pc')){
   SVT_avg_RMSE <- apply(SVT_RMSE_test,2,mean)
   SVT_std_error <- apply(SVT_RMSE_test,2,sd)/sqrt(num_runs)
   
-  KNN_avg_RMSE <- apply(KNN_RMSE_test,2,mean)
-  KNN_std_error <- apply(KNN_RMSE_test,2,sd)/sqrt(num_runs)
+  kNN_avg_RMSE <- apply(kNN_RMSE_test,2,mean)
+  kNN_std_error <- apply(kNN_RMSE_test,2,sd)/sqrt(num_runs)
   
   ENT_avg_RMSE <- apply(ENT_RMSE_test,2,mean)
   ENT_std_error <- apply(ENT_RMSE_test,2,sd)/sqrt(num_runs)
@@ -215,14 +215,14 @@ for(d in c('rev.pc','exp.pc')){
   
   df1 <-
     data.frame(
-      "y" =  c(DID_avg_RMSE, ENT_avg_RMSE, RF_avg_RMSE, MCPanel_avg_RMSE, SVD_avg_RMSE, SVT_avg_RMSE, KNN_avg_RMSE, ADH_avg_RMSE),
+      "y" =  c(DID_avg_RMSE, ENT_avg_RMSE, RF_avg_RMSE, MCPanel_avg_RMSE, SVD_avg_RMSE, SVT_avg_RMSE, kNN_avg_RMSE, ADH_avg_RMSE),
       "lb" = c(DID_avg_RMSE - 1.96*DID_std_error, 
                ENT_avg_RMSE - 1.96*ENT_std_error,
                RF_avg_RMSE - 1.96*RF_std_error,
                MCPanel_avg_RMSE - 1.96*MCPanel_std_error, 
                SVD_avg_RMSE - 1.96*SVD_std_error, 
                SVT_avg_RMSE - 1.96*SVT_std_error, 
-               KNN_avg_RMSE - 1.96*KNN_std_error, 
+               kNN_avg_RMSE - 1.96*kNN_std_error, 
                ADH_avg_RMSE - 1.96*ADH_std_error),
       "ub" = c(DID_avg_RMSE + 1.96*DID_std_error, 
                ENT_avg_RMSE + 1.96*ENT_std_error,
@@ -230,7 +230,7 @@ for(d in c('rev.pc','exp.pc')){
                MCPanel_avg_RMSE + 1.96*MCPanel_std_error, 
                SVD_avg_RMSE + 1.96*SVD_std_error, 
                SVT_avg_RMSE + 1.96*SVT_std_error, 
-               KNN_avg_RMSE + 1.96*KNN_std_error, 
+               kNN_avg_RMSE + 1.96*kNN_std_error, 
                ADH_avg_RMSE + 1.96*ADH_std_error),
       "x" = c(T0/T, T0/T ,T0/T, T0/T, T0/T, T0/T, T0/T, T0/T),
       "Method" = c(replicate(length(T0),"DID"), 
@@ -264,7 +264,7 @@ for(d in c('rev.pc','exp.pc')){
   if(to_save == 1){
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".png")
     ggsave(filename, plot = last_plot(), device="png", dpi=600)
-    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, ENT_RMSE_test, RF_RMSE_test, MCPanel_RMSE_test, SVD_RMSE_test, SVT_RMSE_test, KNN_RMSE_test, ADH_RMSE_test)
+    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, ENT_RMSE_test, RF_RMSE_test, MCPanel_RMSE_test, SVD_RMSE_test, SVT_RMSE_test, kNN_RMSE_test, ADH_RMSE_test)
     colnames(df2)<-c("N", "T", "N_t", "is_simul", 
                      replicate(length(T0), "DID"), 
                      replicate(length(T0), "VT-EN"), 
