@@ -9,6 +9,17 @@ library(ggplot2)
 library(softImpute)
 library(missForest)
 
+# Setup parallel processing 
+library(parallel)
+library(doParallel)
+
+cores <- detectCores() # specify number of cores to use
+
+registerDoParallel(cores) # register cores
+
+RNGkind("L'Ecuyer-CMRG") # ensure random number generation
+
+# Load data
 load("capacity-state.RData")
 
 ## Reading data

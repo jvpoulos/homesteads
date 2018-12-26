@@ -12,7 +12,6 @@ registerDoParallel(cores) # register cores
 
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
-
 # Set directories
 data.directory <-"/media/jason/Dropbox/github/land-reform/data/"
 code.directory <-"/media/jason/Dropbox/github/land-reform/code/"
@@ -51,7 +50,7 @@ source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
 source(paste0(gans.code.directory,'utils.R'))
 
-source(paste0(code.directory,'mc-capacity.R'))
+#source(paste0(code.directory,'mc-capacity.R')) # mc-capacity.sh 
 
 # DD estimates on state capacity data
 
