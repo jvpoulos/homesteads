@@ -25,24 +25,24 @@ load("capacity-state.RData")
 
 ## Reading data
 for(sim in c(0,1)){
-for(d in c('rev.pc','exp.pc','educ.pc')){
-  Y <- dfList[[d]]$M[,18:ncol(dfList[[d]]$M)] # NxT
-  treat <- dfList[[d]]$mask[,18:ncol(dfList[[d]]$mask)]  # NxT masked matrix 
+for(d in c('rev.pc','exp.pc')){
+  Y <- dfList[[d]]$M[,48:ncol(dfList[[d]]$M)] # NxT # start at 1830
+  treat <- dfList[[d]]$mask[,48:ncol(dfList[[d]]$mask)]  # NxT masked matrix 
   years <- colnames(Y) # T-length 
   
   ## Treated 
   treat_y <- Y[rownames(Y)%in%c(western.pub,southern.pub),] 
   
   ## Working with the rest of matrix
-  treat <- treat[!rownames(treat)%in%rownames(treat_y),]
-  Y <- Y[!rownames(Y)%in%rownames(treat_y),]
+  treat <- treat[!rownames(treat)%in%c(rownames(treat_y), "GA", "TX","TN","WV","VT","NJ"),] # exclude 
+  Y <- Y[!rownames(Y)%in%c(rownames(treat_y), "GA", "TX","TN","WV","VT","NJ"),] 
   
   ## Setting up the configuration
   N <- nrow(treat)
   T <- ncol(treat)
-  number_T0 <-5
+  number_T0 <-8
   T0 <- ceiling(T*((1:number_T0)*2-1)/(2*number_T0))
-  N_t <- 10 # no. treated units desired <=N
+  N_t <- 5 # no. treated units desired <=N
   num_runs <- 10
   is_simul <- sim ## Whether to simulate Simultaneus Adoption or Staggered Adoption
   to_save <- 1 ## Whether to save the plot or not
@@ -81,13 +81,13 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       ## ------
       ## MC-NNM
       ## ------
-      
+
       est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
       est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
-      est_model_MCPanel$msk_err <- (est_model_MCPanel$Mhat - Y)*(1-treat_mat) 
+      est_model_MCPanel$msk_err <- (est_model_MCPanel$Mhat - Y)*(1-treat_mat)
       est_model_MCPanel$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_MCPanel$msk_err^2, na.rm = TRUE))
       MCPanel_RMSE_test[i,j] <- est_model_MCPanel$test_RMSE
-      
+
       ## ------
       ## SVD
       ## ------
@@ -124,7 +124,7 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       ## -----
       ## VT-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
       ## -----
-      
+
       est_model_ENT <- t(en_mp_rows(t(Y_obs), t(treat_mat)))
       est_model_ENT_msk_err <- (est_model_ENT - Y)*(1-treat_mat)
       est_model_ENT_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ENT_msk_err^2, na.rm = TRUE))
@@ -133,22 +133,22 @@ for(d in c('rev.pc','exp.pc','educ.pc')){
       ## ------
       ## RF
       ## ------
-      
+
       est_model_RF <- missForest(Y_obs*treat_mat_NA, maxiter=2, parallelize = "variables")
       est_model_RF$Mhat <- est_model_RF$ximp
       est_model_RF$msk_err <- (est_model_RF$Mhat - Y)*(1-treat_mat) # use nonimputed matrix for error calc.
       est_model_RF$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_RF$msk_err^2, na.rm = TRUE))
       RF_RMSE_test[i,j] <- est_model_RF$test_RMSE
-      
+
       ## -----
       ## DID
       ## -----
-      
+
       est_model_DID <- t(DID(t(Y_obs), t(treat_mat)))
       est_model_DID_msk_err <- (est_model_DID - Y)*(1-treat_mat)
       est_model_DID_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_DID_msk_err^2, na.rm = TRUE))
       DID_RMSE_test[i,j] <- est_model_DID_test_RMSE
-      
+
       ## -----
       ## ADH
       ## -----
