@@ -6,9 +6,9 @@
 library(MCPanel)
 library(glmnet)
 library(ggplot2)
-library(softImpute)
 library(missForest)
 library(latex2exp)
+library(imputation)
 
 # Setup parallel processing 
 library(parallel)
@@ -51,9 +51,9 @@ for(d in c('rev.pc','exp.pc')){
   
   MCPanel_RMSE_test <- matrix(0L,num_runs,length(T0))
   SVD_RMSE_test <- matrix(0L,num_runs,length(T0))
-  ALS_RMSE_test <- matrix(0L,num_runs,length(T0))
+  SVT_RMSE_test <- matrix(0L,num_runs,length(T0))
+  KNN_RMSE_test <- matrix(0L,num_runs,length(T0))
   RF_RMSE_test <- matrix(0L,num_runs,length(T0))
-  EN_RMSE_test <- matrix(0L,num_runs,length(T0))
   ENT_RMSE_test <- matrix(0L,num_runs,length(T0))
   DID_RMSE_test <- matrix(0L,num_runs,length(T0))
   ADH_RMSE_test <- matrix(0L,num_runs,length(T0))
@@ -88,43 +88,70 @@ for(d in c('rev.pc','exp.pc')){
       est_model_MCPanel$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_MCPanel$msk_err^2, na.rm = TRUE))
       MCPanel_RMSE_test[i,j] <- est_model_MCPanel$test_RMSE
 
-      ## ------
-      ## SVD
-      ## ------
-
-      SVD_xc <- biScale(Y_obs*treat_mat_NA,col.scale=FALSE,row.scale=FALSE)
-      est_model_SVD <- softImpute(SVD_xc, rank.max=3,lambda=1, type="svd")
-      est_model_SVD$Mhat <- complete(Y_obs*treat_mat_NA,est_model_SVD, unscale = TRUE)
-      est_model_SVD$msk_err <- (est_model_SVD$Mhat - Y)*(1-treat_mat)
-      est_model_SVD$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_SVD$msk_err^2, na.rm=TRUE))
-      SVD_RMSE_test[i,j] <- est_model_SVD$test_RMSE
-
-      ## ------
-      ## ALS
-      ## ------
-
-      ALS_xc <- biScale(Y_obs*treat_mat_NA,col.scale=FALSE,row.scale=FALSE)
-      est_model_ALS <- softImpute(ALS_xc, rank.max=3,lambda=1, type="als")
-      est_model_ALS$Mhat <- complete(Y_obs*treat_mat_NA,est_model_ALS, unscale = TRUE)
-      est_model_ALS$msk_err <- (est_model_ALS$Mhat - Y)*(1-treat_mat)
-      est_model_ALS$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ALS$msk_err^2, na.rm=TRUE))
-      ALS_RMSE_test[i,j] <- est_model_ALS$test_RMSE
+      # ## ------
+      # ## SVD
+      # ## ------
       
-      ## -----
-      ## HR-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
-      ## -----
+      rk.star <- cv.SVDImpute(t(Y_obs*treat_mat_NA), parallel = TRUE)$k
+      SVD_Mhat <- t(SVDImpute(t(Y_obs*treat_mat_NA), k=rk.star, verbose = FALSE)$x)
+      SVD_msk_err <- (SVD_Mhat - Y)*(1-treat_mat)
+      SVD_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(SVD_msk_err^2, na.rm=TRUE))
+      SVD_RMSE_test[i,j] <- SVD_test_RMSE
       
-      source("EN.R")
+      # ## ------
+      # ## SVT
+      # ## ------
       
-      est_model_EN <- en_mp_rows(Y_obs, treat_mat)
-      est_model_EN_msk_err <- (est_model_EN - Y)*(1-treat_mat)
-      est_model_EN_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_EN_msk_err^2, na.rm = TRUE))
-      EN_RMSE_test[i,j] <- est_model_EN_test_RMSE
+      SVT_Mhat <- t(SVTImpute(t(Y_obs*treat_mat_NA), lambda=10, verbose = FALSE)$x)
+      SVT_msk_err <- (SVT_Mhat - Y)*(1-treat_mat)
+      SVT_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(SVT_msk_err^2, na.rm=TRUE))
+      SVT_RMSE_test[i,j] <- SVT_test_RMSE
+      
+      # ## ------
+      # ## KNN
+      # ## ------
+      
+      k.star <- cv.kNNImpute(t(Y_obs*treat_mat_NA), parallel = TRUE)$k
+      kNN_Mhat <- t(kNNImpute(t(Y_obs*treat_mat_NA), k=k.star, verbose = FALSE)$x)
+      kNN_msk_err <- (kNN_Mhat - Y)*(1-treat_mat)
+      kNN_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(kNN_msk_err^2, na.rm=TRUE))
+      kNN_RMSE_test[i,j] <- kNN_test_RMSE
+      
+      #library(softImpute)
+      #
+      # SVD_xc <- biScale(Y_obs*treat_mat_NA,col.scale=FALSE,row.scale=FALSE)
+      # est_model_SVD <- softImpute(SVD_xc, rank.max=3,lambda=1, type="svd")
+      # est_model_SVD$Mhat <- complete(Y_obs*treat_mat_NA,est_model_SVD, unscale = TRUE)
+      # est_model_SVD$msk_err <- (est_model_SVD$Mhat - Y)*(1-treat_mat)
+      # est_model_SVD$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_SVD$msk_err^2, na.rm=TRUE))
+      # SVD_RMSE_test[i,j] <- est_model_SVD$test_RMSE
+      # 
+      # ## ------
+      # ## ALS
+      # ## ------
+      # 
+      # ALS_xc <- biScale(Y_obs*treat_mat_NA,col.scale=FALSE,row.scale=FALSE)
+      # est_model_ALS <- softImpute(ALS_xc, rank.max=3,lambda=1, type="als")
+      # est_model_ALS$Mhat <- complete(Y_obs*treat_mat_NA,est_model_ALS, unscale = TRUE)
+      # est_model_ALS$msk_err <- (est_model_ALS$Mhat - Y)*(1-treat_mat)
+      # est_model_ALS$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ALS$msk_err^2, na.rm=TRUE))
+      # ALS_RMSE_test[i,j] <- est_model_ALS$test_RMSE
+      
+      # ## -----
+      # ## HR-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
+      # ## -----
+      # 
+      # est_model_EN <- en_mp_rows(Y_obs, treat_mat)
+      # est_model_EN_msk_err <- (est_model_EN - Y)*(1-treat_mat)
+      # est_model_EN_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_EN_msk_err^2, na.rm = TRUE))
+      # EN_RMSE_test[i,j] <- est_model_EN_test_RMSE
       
       ## -----
       ## VT-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
       ## -----
 
+      source("EN.R")
+      
       est_model_ENT <- t(en_mp_rows(t(Y_obs), t(treat_mat)))
       est_model_ENT_msk_err <- (est_model_ENT - Y)*(1-treat_mat)
       est_model_ENT_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ENT_msk_err^2, na.rm = TRUE))
@@ -134,7 +161,7 @@ for(d in c('rev.pc','exp.pc')){
       ## RF
       ## ------
 
-      est_model_RF <- missForest(Y_obs*treat_mat_NA, maxiter=2, parallelize = "variables")
+      est_model_RF <- missForest(Y_obs*treat_mat_NA, maxiter=5, ntree=250, mtry=8, parallelize = "variables")
       est_model_RF$Mhat <- est_model_RF$ximp
       est_model_RF$msk_err <- (est_model_RF$Mhat - Y)*(1-treat_mat) # use nonimputed matrix for error calc.
       est_model_RF$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_RF$msk_err^2, na.rm = TRUE))
@@ -166,11 +193,11 @@ for(d in c('rev.pc','exp.pc')){
   SVD_avg_RMSE <- apply(SVD_RMSE_test,2,mean)
   SVD_std_error <- apply(SVD_RMSE_test,2,sd)/sqrt(num_runs)
   
-  ALS_avg_RMSE <- apply(ALS_RMSE_test,2,mean)
-  ALS_std_error <- apply(ALS_RMSE_test,2,sd)/sqrt(num_runs)
+  SVT_avg_RMSE <- apply(SVT_RMSE_test,2,mean)
+  SVT_std_error <- apply(SVT_RMSE_test,2,sd)/sqrt(num_runs)
   
-  EN_avg_RMSE <- apply(EN_RMSE_test,2,mean)
-  EN_std_error <- apply(EN_RMSE_test,2,sd)/sqrt(num_runs)
+  KNN_avg_RMSE <- apply(KNN_RMSE_test,2,mean)
+  KNN_std_error <- apply(KNN_RMSE_test,2,sd)/sqrt(num_runs)
   
   ENT_avg_RMSE <- apply(ENT_RMSE_test,2,mean)
   ENT_std_error <- apply(ENT_RMSE_test,2,sd)/sqrt(num_runs)
@@ -188,54 +215,42 @@ for(d in c('rev.pc','exp.pc')){
   
   df1 <-
     data.frame(
-      "y" =  c(DID_avg_RMSE, EN_avg_RMSE, ENT_avg_RMSE, RF_avg_RMSE, MCPanel_avg_RMSE, SVD_avg_RMSE, ALS_avg_RMSE, ADH_avg_RMSE),
+      "y" =  c(DID_avg_RMSE, ENT_avg_RMSE, RF_avg_RMSE, MCPanel_avg_RMSE, SVD_avg_RMSE, SVT_avg_RMSE, KNN_avg_RMSE, ADH_avg_RMSE),
       "lb" = c(DID_avg_RMSE - 1.96*DID_std_error, 
-               EN_avg_RMSE - 1.96*EN_std_error,
                ENT_avg_RMSE - 1.96*ENT_std_error,
                RF_avg_RMSE - 1.96*RF_std_error,
                MCPanel_avg_RMSE - 1.96*MCPanel_std_error, 
                SVD_avg_RMSE - 1.96*SVD_std_error, 
-               ALS_avg_RMSE - 1.96*ALS_std_error, 
+               SVT_avg_RMSE - 1.96*SVT_std_error, 
+               KNN_avg_RMSE - 1.96*KNN_std_error, 
                ADH_avg_RMSE - 1.96*ADH_std_error),
       "ub" = c(DID_avg_RMSE + 1.96*DID_std_error, 
-               EN_avg_RMSE + 1.96*EN_std_error,
                ENT_avg_RMSE + 1.96*ENT_std_error,
                RF_avg_RMSE + 1.96*RF_std_error,
                MCPanel_avg_RMSE + 1.96*MCPanel_std_error, 
                SVD_avg_RMSE + 1.96*SVD_std_error, 
-               ALS_avg_RMSE + 1.96*ALS_std_error, 
+               SVT_avg_RMSE + 1.96*SVT_std_error, 
+               KNN_avg_RMSE + 1.96*KNN_std_error, 
                ADH_avg_RMSE + 1.96*ADH_std_error),
       "x" = c(T0/T, T0/T ,T0/T, T0/T, T0/T, T0/T, T0/T, T0/T),
       "Method" = c(replicate(length(T0),"DID"), 
-                   replicate(length(T0),"HR-EN"),
                    replicate(length(T0),"VT-EN"),
                    replicate(length(T0),"RF"),
-                   replicate(length(T0),"MC-NNM"), 
                    replicate(length(T0),"SOFT-SVD"), 
-                   replicate(length(T0),"SOFT-ALS"), 
-                   replicate(length(T0),"SC-ADH")),
-      "Marker" = c(replicate(length(T0),1), 
-                   replicate(length(T0),2),
-                   replicate(length(T0),3),
-                   replicate(length(T0),4),
-                   replicate(length(T0),5),
-                   replicate(length(T0),6),
-                   replicate(length(T0),7),
-                   replicate(length(T0),8))
-      
-    )
+                   replicate(length(T0),"SVD"), 
+                   replicate(length(T0),"SVT"), 
+                   replicate(length(T0),"kNN"), 
+                   replicate(length(T0),"SC-ADH")))
   
-  Marker = c(1:8)
-  
-  p <- ggplot(data = df1, aes(x, y, color = Method, shape = Marker)) +
+  p <- ggplot(data = df1, aes(x, y, color = Method, shape = Method)) +
     geom_point(size = 2, position=position_dodge(width=0.1)) +
     geom_errorbar(
       aes(ymin = lb, ymax = ub),
       width = 0.1,
       linetype = "solid",
       position=position_dodge(width=0.1)) +
-    scale_shape_identity() +
-    guides(color = guide_legend(override.aes = list(shape = Marker))) +
+    scale_shape_manual("Method",values=c(1:8)) +
+    scale_color_discrete("Method")+
     theme_bw() +
     xlab(TeX('$T_0/T$')) +
     ylab("Average RMSE") +
@@ -249,15 +264,15 @@ for(d in c('rev.pc','exp.pc')){
   if(to_save == 1){
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".png")
     ggsave(filename, plot = last_plot(), device="png", dpi=600)
-    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, EN_RMSE_test, ENT_RMSE_test, RF_RMSE_test, MCPanel_RMSE_test, SVD_RMSE_test, ALS_RMSE_test, ADH_RMSE_test)
+    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, ENT_RMSE_test, RF_RMSE_test, MCPanel_RMSE_test, SVD_RMSE_test, SVT_RMSE_test, KNN_RMSE_test, ADH_RMSE_test)
     colnames(df2)<-c("N", "T", "N_t", "is_simul", 
                      replicate(length(T0), "DID"), 
-                     replicate(length(T0), "HR-EN"), 
                      replicate(length(T0), "VT-EN"), 
                      replicate(length(T0), "RF"), 
-                     replicate(length(T0), "MC-NNM"), 
-                     replicate(length(T0),"SOFT-SVD"), 
-                     replicate(length(T0),"SOFT-ALS"), 
+                     replicate(length(T0), "SOFT-SVD"), 
+                     replicate(length(T0),"SVD"), 
+                     replicate(length(T0),"SVT"), 
+                     replicate(length(T0),"kNN"), 
                      replicate(length(T0),"SC-ADH"))
     
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".rds")
