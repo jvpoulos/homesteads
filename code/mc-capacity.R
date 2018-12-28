@@ -14,9 +14,9 @@ library(softImpute)
 library(parallel)
 library(doParallel)
 
-detectCores() # specify number of cores to use
+detectCores()
 
-registerDoParallel(110) # register cores (<p)
+registerDoParallel(28) # register cores (<p)
 
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
