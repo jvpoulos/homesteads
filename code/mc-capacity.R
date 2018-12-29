@@ -16,7 +16,7 @@ library(doParallel)
 
 detectCores()
 
-registerDoParallel(28) # register cores (<p)
+registerDoParallel(14) # register cores (<p)
 
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
@@ -149,10 +149,7 @@ for(d in c('rev.pc','exp.pc')){
         return(cv_model_RF$test_RMSE )
       })
       
-      est_model_RF <- missForest(Y_obs*treat_mat_NA, maxiter=5, 
-                                 ntree=rf.grid[which.min(rf_cv_rmse),]$ntree, 
-                                 mtry=rf.grid[which.min(rf_cv_rmse),]$mtry, 
-                                 parallelize = "forests")
+      est_model_RF <- missForest(Y_obs*treat_mat_NA, ntree=500, mtry=8, parallelize = "variables")
       est_model_RF$Mhat <- est_model_RF$ximp
       est_model_RF$msk_err <- (est_model_RF$Mhat - Y)*(1-treat_mat) 
       est_model_RF$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_RF$msk_err^2, na.rm = TRUE))
