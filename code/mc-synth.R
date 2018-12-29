@@ -21,6 +21,7 @@ registerDoParallel(14) # register cores (<p)
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Load data
+readRDS("synth-data")
 
 ## Reading data
 for(d in c('basque','germany','california')){

@@ -19,4 +19,4 @@ dfList <- lapply(dfList, function(d) {
   return(list("M"=d.M, "mask"=d.mask))
 })
 
-saveRDS(dfList, "/media/jason/Dropbox/github/land-reform/data/synth-data.rds")
+saveRDS(dfList, "/media/jason/Dropbox/github/land-reform/data/synth-data")
