@@ -53,6 +53,8 @@ source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
 # MC experiments on synth data
 
+source(paste0(code.directory,'prepare-synth.R')) 
+
 # mc-synth.sh --> mc-synth.R 
 
 # MC causal estimates on state capacity data

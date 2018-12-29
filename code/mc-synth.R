@@ -21,22 +21,12 @@ registerDoParallel(14) # register cores (<p)
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Load data
-load("capacity-state.RData")
 
 ## Reading data
-for(sim in c(0,1)){
-for(d in c('rev.pc','exp.pc')){
-  Y <- dfList[[d]]$M[,48:ncol(dfList[[d]]$M)] # NxT # start at 1830
-  treat <- dfList[[d]]$mask[,48:ncol(dfList[[d]]$mask)]  # NxT masked matrix 
+for(d in c('basque','germany','california')){
+  Y <- dfList[[d]]$M # NxT 
+  treat <- dfList[[d]]$mask # NxT masked matrix 
   years <- colnames(Y) # T-length 
-  
-  ## Treated 
-  treat_y <- Y[rownames(Y)%in%c(western.pub,southern.pub),] 
-  
-  ## Working with the rest of matrix
-  exclude.treat <- c("GA", "TX","TN","WV","VT","NJ")
-  treat <- treat[!rownames(treat)%in%c(rownames(treat_y), exclude.treat),] 
-  Y <- Y[!rownames(Y)%in%c(rownames(treat_y), exclude.treat),] 
   
   ## Setting up the configuration
   N <- nrow(treat)
@@ -45,7 +35,7 @@ for(d in c('rev.pc','exp.pc')){
   T0 <- ceiling(T*((1:number_T0)*2-1)/(2*number_T0))
   N_t <- 5 # no. treated units desired <=N
   num_runs <- 10
-  is_simul <- sim ## Whether to simulate Simultaneus Adoption or Staggered Adoption
+  is_simul <- 1 ## Whether to simulate Simultaneus Adoption or Staggered Adoption
   to_save <- 1 ## Whether to save the plot or not
   
   ## Matrices for saving RMSE values
@@ -245,5 +235,4 @@ for(d in c('rev.pc','exp.pc')){
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".rds")
     save(df1, df2, file = filename)
   }
-}
 }
