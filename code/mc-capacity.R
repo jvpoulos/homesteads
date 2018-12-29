@@ -23,10 +23,6 @@ RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 # Load data
 load("capacity-state.RData")
 
-# Grid for RF parameter selection
-rf.grid <- expand.grid("mtry" = c(1, 2, 4, 8, 16),
-                       "ntree" = c(100, 250, 500, 1000, 1500))
-
 ## Reading data
 for(sim in c(0,1)){
 for(d in c('rev.pc','exp.pc')){
@@ -138,16 +134,6 @@ for(d in c('rev.pc','exp.pc')){
       ## ------
       ## RF
       ## ------
-      
-      rf_cv_rows <- sample(1:nrow(Y_obs), floor(nrow(Y_obs))/2) # sample half of Y
-  
-      rf_cv_rmse <- sapply(1:nrow(rf.grid), function(i){
-        cv_model_RF <- missForest(Y_obs[rf_cv_rows,]*treat_mat_NA[rf_cv_rows,], maxiter=1, ntree=rf.grid[i,]$ntree, mtry=rf.grid[i,]$mtry, parallelize = "forests")
-        cv_model_RF$Mhat <- cv_model_RF$ximp
-        cv_model_RF$msk_err <- (cv_model_RF$Mhat - Y[rf_cv_rows,])*(1-treat_mat[rf_cv_rows,]) 
-        cv_model_RF$test_RMSE <- sqrt((1/sum(1-treat_mat[rf_cv_rows,])) * sum(cv_model_RF$msk_err^2, na.rm = TRUE))
-        return(cv_model_RF$test_RMSE )
-      })
       
       est_model_RF <- missForest(Y_obs*treat_mat_NA, ntree=500, mtry=8, parallelize = "variables")
       est_model_RF$Mhat <- est_model_RF$ximp
