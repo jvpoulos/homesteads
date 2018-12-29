@@ -21,7 +21,7 @@ registerDoParallel(14) # register cores (<p)
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Load data
-readRDS("synth-data")
+dfList <- readRDS("synth-data")
 
 ## Reading data
 for(d in c('basque','germany','california')){
@@ -115,7 +115,7 @@ for(d in c('basque','germany','california')){
       ## VT-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
       ## -----
 
-      source("EN.R")
+      #source("EN.R")
       
       est_model_ENT <- t(en_mp_rows(t(Y_obs), t(treat_mat)))
       est_model_ENT_msk_err <- (est_model_ENT - Y)*(1-treat_mat)
