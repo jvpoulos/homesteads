@@ -46,39 +46,22 @@ source(paste0(code.directory,'prepare-capacity.R')) # prepare for DD # run homes
 source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
 #save.image(paste0(data.directory, "capacity-state.RData"))
-# MC estimates on state capacity data
 
-source(paste0(gans.code.directory,'utils.R'))
+# MC experiments on state capacity data
 
 # mc-capacity.sh --> mc-capacity.R 
+
+# MC experiments on synth data
+
+# mc-synth.sh --> mc-synth.R 
+
+# MC causal estimates on state capacity data
+
+source(paste0(gans.code.directory,'utils.R'))
 
 # DD estimates on state capacity data
 
 source(paste0(code.directory,'dd-capacity.R')) 
-
-## Encoder-decoder estimates on capacity data
-
-source(paste0(code.directory,'encoder-decoder-south-educpc.R')) 
-source(paste0(code.directory,'encoder-decoder-south-exppc.R')) 
-source(paste0(code.directory,'encoder-decoder-south-revpc.R')) 
-
-source(paste0(code.directory,'encoder-decoder-west-educpc.R')) 
-source(paste0(code.directory,'encoder-decoder-west-exppc.R')) 
-source(paste0(code.directory,'encoder-decoder-west-revpc.R')) 
-
-source(paste0(code.directory,'mspe-funds-encoder-decoder.R')) # Get MSPE sds
-
-## LSTM estimates on capacity data
-
-source(paste0(code.directory,'lstm-south-educpc.R')) 
-source(paste0(code.directory,'lstm-south-exppc.R')) 
-source(paste0(code.directory,'lstm-south-revpc.R')) 
-
-source(paste0(code.directory,'lstm-west-educpc.R')) 
-source(paste0(code.directory,'lstm-west-exppc.R')) 
-source(paste0(code.directory,'lstm-west-revpc.R')) 
-
-source(paste0(code.directory,'mspe-funds-lstm.R')) # Get MSPE sds
 
 # DD estimates on RR access
 
