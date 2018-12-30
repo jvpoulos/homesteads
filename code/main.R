@@ -45,7 +45,7 @@ source(paste0(code.directory,'prepare-capacity.R')) # prepare for DD # run homes
 
 source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
-#save.image(paste0(data.directory, "capacity-state.RData"))
+save.image(paste0(data.directory, "capacity-state.RData"))
 
 # MC experiments on state capacity data
 
@@ -57,9 +57,11 @@ source(paste0(code.directory,'prepare-synth.R'))
 
 # mc-synth.sh --> mc-synth.R 
 
-# MC causal estimates on state capacity data
+# RF causal estimates on state capacity data
 
 source(paste0(gans.code.directory,'utils.R'))
+
+source(paste0(code.directory,'mc-capacity-estimates.R')) 
 
 # DD estimates on state capacity data
 
