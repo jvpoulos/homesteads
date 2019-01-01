@@ -203,35 +203,40 @@ funds <- funds[with(funds, order(treat, year)), ] # order by treatment status + 
 
 rev.pc <- reshape(data.frame(funds[c("state","year","rev.pc")]), idvar = "year", timevar = "state", direction = "wide")
 colnames(rev.pc) <- sub("rev.pc.","", colnames(rev.pc))
+rownames(rev.pc) <- rev.pc$year
+rev.pc <- rev.pc[!colnames(rev.pc)%in% "year"]
+
 exp.pc <- reshape(data.frame(funds[c("state","year","exp.pc")]), idvar = "year", timevar = "state", direction = "wide")
 colnames(exp.pc) <- sub("exp.pc.","", colnames(exp.pc))
+rownames(exp.pc) <- exp.pc$year
+exp.pc <- exp.pc[!colnames(exp.pc)%in% "year"]
+
 educ.pc <- reshape(data.frame(funds[c("state","year","educ.pc")]), idvar = "year", timevar = "state", direction = "wide")
 colnames(educ.pc) <- sub("educ.pc.","", colnames(educ.pc))
+rownames(educ.pc) <- educ.pc$year
+educ.pc <- educ.pc[!colnames(educ.pc)%in% "year"]
 
 dfList <- list("rev.pc"=rev.pc,"exp.pc"=exp.pc, "educ.pc"=educ.pc)
 
-dfList <- lapply(dfList, function(d) {
+returnMatrices <- function(d) {
   # Impute missing values via linear interpolation
-  d.imp <- d
-  d.imp <- na.interpolation(d.imp, option = "linear")
+  d.imp <- na.interpolation(d, option = "linear")
   
   # Matrix of observed entries (N x T)
-  d.M <- t(as.matrix(d.imp[!colnames(d.imp) %in% c("year")]))
-  colnames(d.M) <- unique(d.imp$year)
+  d.M <- t(as.matrix(d.imp))
   d.M[is.nan(d.M )] <- NA
   
   # Masked matrix for which 1=observed, NA=missing/imputed
-  d.M.missing <- t(as.matrix(d[!colnames(d) %in% c("year")]))
-  colnames(d.M.missing) <- unique(d$year)
+  d.M.missing <- t(as.matrix(d))
   d.M.missing[is.nan(d.M.missing)] <- NA
   d.M.missing[!is.na(d.M.missing)] <-1
   d.M.missing[is.na(d.M.missing)] <- 0
   
   # Masked matrix which is 0 for control units and treated units before treatment and 1 for treated units after treatment.
-
+  
   d.mask <- matrix(0, nrow = nrow(d.M), 
-                        ncol= ncol(d.M),
-                        dimnames = list(rownames(d.M), colnames(d.M)))
+                   ncol= ncol(d.M),
+                   dimnames = list(rownames(d.M), colnames(d.M)))
   
   d.mask[,colnames(d.mask)>=1869][rownames(d.mask)%in%western.pub,] <- 1 # earliest WPL 
   d.mask[,colnames(d.mask)>=1870][rownames(d.mask)%in%c("IL","NV"),] <- 1 
@@ -244,4 +249,6 @@ dfList <- lapply(dfList, function(d) {
   d.mask[,colnames(d.mask)>=1902][rownames(d.mask)%in%c("AK"),] <- 1 
   
   return(list("M"=d.M, "M.missing"=d.M.missing, "mask"=d.mask))
-  })
+}
+
+dfList <- lapply(dfList, returnMatrices)
