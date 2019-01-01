@@ -13,13 +13,14 @@ library(tseries)
 library(boot)
 
 source("PolitisWhite.R")
+source("naInterpolation.R")
 
 # Setup parallel processing 
 library(parallel)
 library(doParallel)
 
 detectCores()
-cores <- 8
+cores <- 14
 
 registerDoParallel(cores) # register cores (<p)
 
