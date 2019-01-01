@@ -20,7 +20,7 @@ library(parallel)
 library(doParallel)
 
 detectCores()
-cores <- 14
+cores <- 140
 
 registerDoParallel(cores) # register cores (<p)
 
@@ -30,7 +30,7 @@ RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 load("capacity-state.RData")
 
 MCEst <- function(x) {
-  matrixList <- returnMatrices(x)
+  matrixList <- returnMatrices(t(x))
   
   Y <- matrixList$M # NxT 
   treat <-matrixList$mask # NxT masked matrix 
@@ -50,8 +50,6 @@ MCEst <- function(x) {
   treat_mat_NA <- treat_mat
   treat_mat_NA[treat_mat==0] <- NA
   
-  missing_mat <- matrixList$M.missing
-  
   Y_obs <- Y * treat_mat
   
   ## ------
@@ -60,23 +58,35 @@ MCEst <- function(x) {
   
   est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
   est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
-  est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y*missing_mat) # use non-imputed Y
+  est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y) 
   return(est_model_MCPanel$impact)
 }
 
 # # Get NxT matrix of point estimates
-#mc.est <- mclapply(list("rev.pc"=rev.pc, "exp.pc"=exp.pc), MCEst, mc.cores=cores)
+mc.est <- mclapply(list("rev.pc"=t(rev.pc), "exp.pc"=t(exp.pc)), MCEst, mc.cores=cores)
 
 # Get nonparametric bootstrap CIs
+# mc.boot <- mclapply(list("rev.pc"=rev.pc, "exp.pc"=exp.pc), function(x){
+#   print(x)
+#   if(rev.pc){
+#     bopt <- b.star(dfList$rev.pc$M,round=TRUE)[[1]]  # get optimal bootstrap lengths
+#   } else{
+#     bopt <- b.star(dfList$exp.pc$M,round=TRUE)[[1]]  # get optimal bootstrap lengths
+#   }
+#   return(tsboot(ts(x), MCEst, R= 2, parallel = "multicore", l =bopt, 
+#                 sim = "fixed")) # block resampling with fixed block lengths of length l
+# }, mc.cores=cores)
+
 bopt.rev.pc <- b.star(dfList$rev.pc$M,round=TRUE)[[1]]  # get optimal bootstrap lengths
 bopt.exp.pc <- b.star(dfList$exp.pc$M,round=TRUE)[[1]]  
 
-rev.pc.boot <- tsboot(ts(rev.pc), MCEst, R= 1000, parallel = "multicore", l =bopt.rev.pc, 
+rev.pc.boot <- tsboot(t(rev.pc), MCEst, R= 1000, parallel = "multicore", l =bopt.rev.pc, 
                   sim = "fixed") # block resampling with fixed block lengths of length l)
-exp.pc.boot <- tsboot(ts(exp.pc), MCEst, R= 1000, parallel = "multicore", l = bopt.exp.pc, 
+exp.pc.boot <- tsboot(t(exp.pc), MCEst, R= 1000, parallel = "multicore", l = bopt.exp.pc, 
                       sim = "fixed")
 
 saveRDS(rev.pc.boot, "rev-pc-boot.rds")
 saveRDS(exp.pc.boot, "exp-pc-boot.rds")
 
-#matrix(apply(mc.boot$t, 2, sd), nrow=49, ncol=159)
+rev.pc.boot$t0
+#matrix(apply(rev.pc.boot$t, 2, sd), nrow=49, ncol=159, byrow=TRUE)
