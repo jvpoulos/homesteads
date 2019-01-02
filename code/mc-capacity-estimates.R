@@ -59,12 +59,13 @@ MCEst <- function(x) {
   est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
   est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
   est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y) 
-  return(est_model_MCPanel$impact)
+  return(list("impact" = est_model_MCPanel$impact, "Mhat" = est_model_MCPanel$Mhat))
 }
 
 # # Get NxT matrix of point estimates
 mc.est <- mclapply(list("rev.pc"=t(rev.pc), "exp.pc"=t(exp.pc)), MCEst, mc.cores=cores)
 
+# 
 # Get nonparametric bootstrap CIs
 # mc.boot <- mclapply(list("rev.pc"=rev.pc, "exp.pc"=exp.pc), function(x){
 #   print(x)

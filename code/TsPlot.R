@@ -12,20 +12,20 @@ TsPlot <- function(df, main = "") {
     theme(strip.text= element_text(size = 12, family = "serif", face='bold')) +
     
     # line colours
-    geom_line(data = subset(df, variable == "Observed impact"), aes(y = value, colour = "Observed impact", linetype="Observed impact"), show.legend = TRUE, size=0.5) +
+    geom_line(data = subset(df, variable == "observed.wpl"), aes(y = value, colour = "observed.wpl", linetype="observed.wpl"), show.legend = TRUE, size=0.5) +
     
-    geom_line(data = subset(df, variable == "Predicted impact"), aes(y = value, colour = "Predicted impact", linetype="Predicted impact"), show.legend = FALSE, size=0.5) +
+    geom_line(data = subset(df, variable == "predicted.wpl"), aes(y = value, colour = "predicted.wpl", linetype="predicted.wpl"), show.legend = FALSE, size=0.5) +
     
-    geom_line(data = subset(df, variable == "Pointwise impact"), aes(y = value, colour = "Predicted impact", linetype="Predicted impact"), show.legend = FALSE, size=0.5) +
+    geom_line(data = subset(df, variable == "pointwise.wpl"), aes(y = value, colour = "predicted.wpl", linetype="predicted.wpl"), show.legend = FALSE, size=0.5) +
     
-    geom_line(data = subset(df, variable == "Cumulative impact"), aes(y = value ,colour = "Predicted impact", linetype="Predicted impact"), show.legend = FALSE, size=1) +
+    geom_line(data = subset(df, variable == "cumulative.wpl"), aes(y = value ,colour = "predicted.wpl", linetype="predicted.wpl"), show.legend = FALSE, size=1) +
     
     # intervals
-    geom_ribbon(data = subset(df, variable == "Predicted impact"), aes(ymin = pred.impact.min, ymax=pred.impact.max, colour="Predicted impact"), alpha=.2, size=1, show.legend = FALSE) +
+   # geom_ribbon(data = subset(df, variable == "predicted.wpl"), aes(ymin = pred.impact.min, ymax=pred.impact.max, colour="predicted.wpl"), alpha=.2, size=1, show.legend = FALSE) +
     
-    geom_ribbon(data = subset(df, variable == "Pointwise impact"), aes(ymin = pointwise.impact.min, ymax=pointwise.impact.max, colour="Predicted impact"), alpha=.2, size=1, show.legend = FALSE) +
+  #  geom_ribbon(data = subset(df, variable == "pointwise.wpl"), aes(ymin = pointwise.impact.min, ymax=pointwise.impact.max, colour="predicted.wpl"), alpha=.2, size=1, show.legend = FALSE) +
     
-    geom_ribbon(data = subset(df, variable == "Cumulative impact"), aes(ymin = cumulative.impact.min, ymax=cumulative.impact.max, colour="Predicted impact"), alpha=.2, size=1, show.legend = FALSE) +   
+  #  geom_ribbon(data = subset(df, variable == "cumulative.wpl"), aes(ymin = cumulative.impact.min, ymax=cumulative.impact.max, colour="predicted.wpl"), alpha=.2, size=1, show.legend = FALSE) +   
     
     # horizontal line to indicate zero values
     geom_hline(yintercept = 0, size = 0.5, colour = "black") +
@@ -41,19 +41,19 @@ TsPlot <- function(df, main = "") {
   
   # vertical line to indicate intervention
   
-  intervention <- geom_vline(xintercept=c(as.numeric(as.POSIXct("2005-12-31 00:00:00",tz="UTC")),
-                                          as.numeric(as.POSIXct("2006-12-31 00:00:00",tz="UTC"))), linetype=2)
+  intervention <- geom_vline(xintercept=c(as.numeric(as.POSIXct("1869-12-31 00:00:00",tz="UTC")),
+                                          as.numeric(as.POSIXct("1872-12-31 00:00:00",tz="UTC"))), linetype=2)
   
   # horizontal ticks
   
   ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"), 
                             time_trans(tz="UTC"),
-                            limits = c(as.POSIXct("1948-12-30 19:00:00"), as.POSIXct("2007-12-30 19:00:00")))
+                            limits = c(as.POSIXct("1783-12-30 19:00:00"), as.POSIXct("1982-12-30 19:00:00")))
   
   # annotation text
   
-  ann_text <- data.frame(year = c(as.POSIXlt("1980-01-01 EST"), as.POSIXlt("2006-12-31 EST")), value=80, 
-                         series = factor("Observed time-series", levels = c("Observed time-series","Pointwise impact","Cumulative impact")),
+  ann_text <- data.frame(year = c(as.POSIXlt("1980-01-01 EST"), as.POSIXlt("2006-12-31 EST")), value=8, 
+                         series = factor("Observed time-series", levels = c("Observed time-series","pointwise.wpl","cumulative.wpl")),
                          lab = c("pre-period", "post-period"))
   
   # legend 
@@ -72,11 +72,11 @@ TsPlot <- function(df, main = "") {
            , axis.ticks.y=element_blank()
            , legend.text=element_text(size=12, family = "serif")
            , legend.box = "horizontal" # not working?)
-    ) + geom_text(data = ann_text,aes(y = value, label =lab), family="serif", fontface="italic",  size=5) +
+    ) + #geom_text(data = ann_text,aes(y = value, label =lab), family="serif", fontface="italic",  size=5) +
     scale_y_continuous(name="Log per-capita state government total expenditure or revenue (1982$)") +
-    scale_colour_manual(name="", values = c("Observed impact" = wes_palette("Darjeeling")[5], "Predicted impact" = wes_palette("Darjeeling")[5]),
+    scale_colour_manual(name="", values = c("observed.wpl" = wes_palette("Darjeeling1")[5], "predicted.wpl" = wes_palette("Darjeeling1")[5]),
                         labels=c("Observed time-series", "Predicted time-series")) +
-    scale_linetype_manual(name="", values = c("Predicted impact" = "dashed", "Observed impact" = "solid"),
+    scale_linetype_manual(name="", values = c("predicted.wpl" = "dashed", "observed.wpl" = "solid"),
                           labels=c("Observed time-series", "Predicted time-series"))  + 
     theme(legend.key.width=unit(3,"line")) 
   return(gg.xts)
