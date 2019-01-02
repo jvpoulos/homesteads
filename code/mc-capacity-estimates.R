@@ -87,6 +87,3 @@ exp.pc.boot <- tsboot(t(exp.pc), MCEst, R= 1000, parallel = "multicore", l = bop
 
 saveRDS(rev.pc.boot, "rev-pc-boot.rds")
 saveRDS(exp.pc.boot, "exp-pc-boot.rds")
-
-rev.pc.boot$t0
-#matrix(apply(rev.pc.boot$t, 2, sd), nrow=49, ncol=159, byrow=TRUE)

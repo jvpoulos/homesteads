@@ -63,6 +63,8 @@ source(paste0(gans.code.directory,'utils.R'))
 
 source(paste0(code.directory,'mc-capacity-estimates.R')) 
 
+source(paste0(code.directory,'mc-capacity-plots.R')) 
+
 # DD estimates on state capacity data
 
 source(paste0(code.directory,'dd-capacity.R')) 
