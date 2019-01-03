@@ -17,8 +17,8 @@ exp.pc.boot <- readRDS(paste0(results.directory, "mc/exp-pc-boot.rds"))
 pointwise <- rev.pc.boot$t0
 pointwise.se <- matrix(apply(rev.pc.boot$t, 2, sd), nrow=49, ncol=159, byrow=TRUE)
 
-cumulative <-t(rollmeanr(t(pointwise), 3, fill=0))
-cumulative.se <-t(rollmeanr(t(pointwise.se), 3, fill=0))
+cumulative <-t(rollmeanr(t(pointwise), 10, fill=0))
+cumulative.se <-t(rollmeanr(t(pointwise.se), 10, fill=0))
 
 ## Plot time series 
 
@@ -39,11 +39,19 @@ cumulative.se.mean <- aggregate(cumulative.se, list(treat.status), mean)[-1]
 ts.means <- cbind(t(observed.mean), t(predicted.mean), t(pointwise.mean), t(cumulative.mean))
 colnames(ts.means) <- c("observed.wpl","observed.spl","observed.wsl","observed.ssl","predicted.wpl","predicted.spl","predicted.wsl","predicted.ssl","pointwise.wpl","pointwise.spl","pointwise.wsl","pointwise.ssl","cumulative.wpl","cumulative.spl","cumulative.wsl","cumulative.ssl")
 ts.means <- cbind(ts.means, "year"=as.numeric(rownames(ts.means)))
+ts.means.m <- melt(data.frame(ts.means), id.var=c("year"))
 
 ts.se.means <- cbind(t(pointwise.se.mean), t(cumulative.se.mean))
-colnames(ts.se.means) <- c("pointwise.se.wpl","pointwise.se.spl","pointwise.se.wsl","pointwise.se.ssl","cumulative.se.wpl","cumulative.se.spl","cumulative.se.wsl","cumulative.se.ssl")
-  
-ts.means.m <- melt(data.frame(cbind(ts.means, ts.se.means)), id.var=c("year"))
+colnames(ts.se.means) <- c("pointwise.wpl","pointwise.spl","pointwise.wsl","pointwise.ssl","cumulative.wpl","cumulative.spl","cumulative.wsl","cumulative.ssl")
+ts.se.means <- cbind(ts.se.means, "year"=as.numeric(rownames(ts.means)))
+ts.se.means.m <- melt(data.frame(ts.se.means), id.var=c("year"))
+
+ts.means.m <- merge(ts.means.m, ts.se.means.m, by=c("year","variable"), all.x=TRUE) # bind std. error
+colnames(ts.means.m) <- c("year", "variable", "value", "se")
+
+ts.means.m <- ts.means.m %>%
+  mutate(upper = value - se*1.96,
+         lower = value + se*1.96)
 
 # # Adjust year for plot
 ts.means.m$year <- as.Date(as.yearmon(ts.means.m$year) + 11/12, frac = 1) # end of year

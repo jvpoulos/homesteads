@@ -12,13 +12,13 @@ TsPlot <- function(df, main = "") {
     theme(strip.text= element_text(size = 12, family = "serif", face='bold')) +
     
     # line colours
-    geom_line(data = subset(df, variable == "observed.wpl"), aes(y = value, colour = "observed.wpl", linetype="observed.wpl"), show.legend = TRUE, size=0.5) +
+    geom_line(data = subset(df, variable == "observed.wpl"), aes(y = value, colour = "observed.wpl", linetype="observed.wpl"), show.legend = TRUE, size=1) +
     
-    geom_line(data = subset(df, variable == "predicted.wpl"), aes(y = value, colour = "predicted.wpl", linetype="predicted.wpl"), show.legend = FALSE, size=0.5) +
+    geom_line(data = subset(df, variable == "predicted.wpl"), aes(y = value, colour = "predicted.wpl", linetype="predicted.wpl"), show.legend = FALSE, size=1) +
     
-    geom_line(data = subset(df, variable == "pointwise.wpl"), aes(y = value, colour = "predicted.wpl", linetype="predicted.wpl"), show.legend = FALSE, size=0.5) +
+    geom_line(data = subset(df, variable == "pointwise.wpl"), aes(y = value, colour = "observed.wpl", linetype="observed.wpl"), show.legend = FALSE, size=1) +
     
-    geom_line(data = subset(df, variable == "cumulative.wpl"), aes(y = value ,colour = "predicted.wpl", linetype="predicted.wpl"), show.legend = FALSE, size=1) +
+    geom_line(data = subset(df, variable == "cumulative.wpl"), aes(y = value ,colour = "observed.wpl", linetype="observed.wpl"), show.legend = FALSE, size=1) +
     
     # intervals
    # geom_ribbon(data = subset(df, variable == "predicted.wpl"), aes(ymin = pred.impact.min, ymax=pred.impact.max, colour="predicted.wpl"), alpha=.2, size=1, show.legend = FALSE) +
@@ -46,7 +46,7 @@ TsPlot <- function(df, main = "") {
   
   # horizontal ticks
   
-  ticks <- scale_x_datetime(date_breaks="10 years",labels=date_format("%Y"), 
+  ticks <- scale_x_datetime(date_breaks="19 years",labels=date_format("%Y"), 
                             time_trans(tz="UTC"),
                             limits = c(as.POSIXct("1783-12-30 19:00:00"), as.POSIXct("1982-12-30 19:00:00")))
   
@@ -75,9 +75,9 @@ TsPlot <- function(df, main = "") {
     ) + #geom_text(data = ann_text,aes(y = value, label =lab), family="serif", fontface="italic",  size=5) +
     scale_y_continuous(name="Log per-capita state government total expenditure or revenue (1982$)") +
     scale_colour_manual(name="", values = c("observed.wpl" = wes_palette("Darjeeling1")[5], "predicted.wpl" = wes_palette("Darjeeling1")[5]),
-                        labels=c("Observed time-series", "Predicted time-series")) +
-    scale_linetype_manual(name="", values = c("predicted.wpl" = "dashed", "observed.wpl" = "solid"),
-                          labels=c("Observed time-series", "Predicted time-series"))  + 
+                        labels=c("Observed time-series", "Prediction")) +
+    scale_linetype_manual(name="", values = c("observed.wpl" = "solid", "predicted.wpl" = "dotted"),
+                          labels=c("Observed time-series", "Prediction"))  + 
     theme(legend.key.width=unit(3,"line")) 
   return(gg.xts)
 }
