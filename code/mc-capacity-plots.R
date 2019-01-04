@@ -14,11 +14,18 @@ source(paste0(code.directory,"TsPlot.R"))
 rev.pc.boot <- readRDS(paste0(results.directory, "mc/rev-pc-boot.rds"))
 exp.pc.boot <- readRDS(paste0(results.directory, "mc/exp-pc-boot.rds"))
 
+observed <- dfList$rev.pc$M
+
+predicted <- mc.est$rev.pc$Mhat
+
 pointwise <- rev.pc.boot$t0
-pointwise.se <- matrix(apply(rev.pc.boot$t, 2, sd), nrow=49, ncol=159, byrow=TRUE)
+pointwise.se <- matrix(apply(rev.pc.boot$t, 2, sd), nrow=49, ncol=159, byrow=FALSE)
 
 cumulative <-t(rollmeanr(t(pointwise), 10, fill=0))
 cumulative.se <-t(rollmeanr(t(pointwise.se), 10, fill=0))
+
+#cumulative <-t(rowCumsums(t(pointwise)))
+#cumulative.se <-t(rowCumsums(t(pointwise.se)))
 
 ## Plot time series 
 
@@ -29,8 +36,8 @@ treat.status[rownames(pointwise) %in% setdiff(state.land.states, southern.state)
 treat.status[rownames(pointwise) %in% southern.state] <- 4 # "SSL"
 treat.status <- matrix(treat.status, dimnames=list(NULL, "status"))
 
-observed.mean <-  aggregate(dfList$rev.pc$M, list(treat.status), mean)[-1]
-predicted.mean <-  aggregate(mc.est$rev.pc$Mhat, list(treat.status), mean)[-1]
+observed.mean <-  aggregate(observed, list(treat.status), mean)[-1]
+predicted.mean <-  aggregate(predicted, list(treat.status), mean)[-1]
 pointwise.mean <- aggregate(pointwise, list(treat.status), mean)[-1]
 pointwise.se.mean <- aggregate(pointwise.se, list(treat.status), mean)[-1]
 cumulative.mean <- aggregate(cumulative, list(treat.status), mean)[-1]
@@ -50,8 +57,8 @@ ts.means.m <- merge(ts.means.m, ts.se.means.m, by=c("year","variable"), all.x=TR
 colnames(ts.means.m) <- c("year", "variable", "value", "se")
 
 ts.means.m <- ts.means.m %>%
-  mutate(upper = value - se*1.96,
-         lower = value + se*1.96)
+  mutate(upper = value + se*1.96,
+         lower = value - se*1.96)
 
 # # Adjust year for plot
 ts.means.m$year <- as.Date(as.yearmon(ts.means.m$year) + 11/12, frac = 1) # end of year

@@ -21,11 +21,11 @@ TsPlot <- function(df, main = "") {
     geom_line(data = subset(df, variable == "cumulative.wpl"), aes(y = value ,colour = "observed.wpl", linetype="observed.wpl"), show.legend = FALSE, size=1) +
     
     # intervals
-   # geom_ribbon(data = subset(df, variable == "predicted.wpl"), aes(ymin = pred.impact.min, ymax=pred.impact.max, colour="predicted.wpl"), alpha=.2, size=1, show.legend = FALSE) +
+    geom_ribbon(data = subset(df, variable == "predicted.wpl"), aes(ymin = lower, ymax=upper, colour="predicted.wpl"), alpha=.2, size=1, show.legend = FALSE) +
     
-  #  geom_ribbon(data = subset(df, variable == "pointwise.wpl"), aes(ymin = pointwise.impact.min, ymax=pointwise.impact.max, colour="predicted.wpl"), alpha=.2, size=1, show.legend = FALSE) +
+    geom_ribbon(data = subset(df, variable == "pointwise.wpl"), aes(ymin = lower, ymax=upper, colour="predicted.wpl"), alpha=.2, size=1, show.legend = FALSE) +
     
-  #  geom_ribbon(data = subset(df, variable == "cumulative.wpl"), aes(ymin = cumulative.impact.min, ymax=cumulative.impact.max, colour="predicted.wpl"), alpha=.2, size=1, show.legend = FALSE) +   
+    geom_ribbon(data = subset(df, variable == "cumulative.wpl"), aes(ymin = lower, ymax=upper, colour="predicted.wpl"), alpha=.2, size=1, show.legend = FALSE) +   
     
     # horizontal line to indicate zero values
     geom_hline(yintercept = 0, size = 0.5, colour = "black") +
