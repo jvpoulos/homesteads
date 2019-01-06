@@ -23,8 +23,21 @@ predicted <- mc.est$rev.pc$Mhat
 pointwise <- rev.pc.boot$t0
 pointwise.se <- matrix(apply(rev.pc.boot$t, 2, sd), nrow=49, ncol=159, byrow=FALSE)
 
-cumulative <-t(rollmeanr(t(pointwise), 10, fill=0))
-cumulative.se <-t(rollmeanr(t(pointwise.se), 10, fill=0))
+
+m <- which(colnames(observed)=="1982")
+n <- which(colnames(observed)=="1869")-1
+
+cumulative <- sapply((n+1):m, function(t){
+ (1/(t-n))*rowSums(pointwise[,n:t])
+})
+
+cumulative <- cbind(matrix(0, ncol=ncol(pointwise)-ncol(cumulative), nrow = nrow(pointwise)), cumulative)
+
+cumulative.se <- sapply((n+1):m, function(t){
+  (1/(t-n))*rowSums(pointwise.se[,n:t])
+})
+
+cumulative.se <- cbind(matrix(0, ncol=ncol(pointwise.se)-ncol(cumulative.se), nrow = nrow(pointwise.se)), cumulative.se)
 
 ## Plot time series 
 
