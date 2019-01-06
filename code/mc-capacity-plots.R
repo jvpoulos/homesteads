@@ -6,6 +6,7 @@ require(zoo)
 require(matrixStats)
 require(tseries)
 require(caTools)
+library(TTR)
 
 source(paste0(code.directory,"TsPlot.R"))
 
@@ -13,6 +14,7 @@ source(paste0(code.directory,"TsPlot.R"))
 
 rev.pc.boot <- readRDS(paste0(results.directory, "mc/rev-pc-boot.rds"))
 exp.pc.boot <- readRDS(paste0(results.directory, "mc/exp-pc-boot.rds"))
+educ.pc.boot <-readRDS(paste0(results.directory, "mc/exp-pc-boot.rds"))
 
 observed <- dfList$rev.pc$M
 
@@ -23,9 +25,6 @@ pointwise.se <- matrix(apply(rev.pc.boot$t, 2, sd), nrow=49, ncol=159, byrow=FAL
 
 cumulative <-t(rollmeanr(t(pointwise), 10, fill=0))
 cumulative.se <-t(rollmeanr(t(pointwise.se), 10, fill=0))
-
-#cumulative <-t(rowCumsums(t(pointwise)))
-#cumulative.se <-t(rowCumsums(t(pointwise.se)))
 
 ## Plot time series 
 

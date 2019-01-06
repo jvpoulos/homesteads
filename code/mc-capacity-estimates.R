@@ -59,23 +59,24 @@ MCEst <- function(x) {
   est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
   est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
   est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y) 
-  return(est_model_MCPanel$impact) #  return(list("impact" = est_model_MCPanel$impact, "Mhat" = est_model_MCPanel$Mhat))
+  #return(est_model_MCPanel$impact) 
+  return(list("impact" = est_model_MCPanel$impact, "Mhat" = est_model_MCPanel$Mhat))
 }
 
 # # Get NxT matrix of point estimates
-# mc.est <- mclapply(list("rev.pc"=t(rev.pc), "exp.pc"=t(exp.pc)), MCEst, mc.cores=cores)
+mc.est <- mclapply(list("rev.pc"=t(rev.pc), "exp.pc"=t(exp.pc), "educ.pc"=t(educ.pc)), MCEst, mc.cores=cores)
 
-# bopt.rev.pc <- b.star(dfList$rev.pc$M,round=TRUE)[[1]]  # get optimal bootstrap lengths
-# bopt.exp.pc <- b.star(dfList$exp.pc$M,round=TRUE)[[1]]  
+bopt.rev.pc <- b.star(dfList$rev.pc$M,round=TRUE)[[1]]  # get optimal bootstrap lengths
+bopt.exp.pc <- b.star(dfList$exp.pc$M,round=TRUE)[[1]]  
 bopt.educ.pc <- b.star(dfList$educ.pc$M,round=TRUE)[[1]]  
 
-# rev.pc.boot <- tsboot(t(rev.pc), MCEst, R= 1000, parallel = "multicore", l =bopt.rev.pc, 
-#                   sim = "fixed") # block resampling with fixed block lengths of length l)
-# exp.pc.boot <- tsboot(t(exp.pc), MCEst, R= 1000, parallel = "multicore", l = bopt.exp.pc, 
-#                       sim = "fixed")
+rev.pc.boot <- tsboot(t(rev.pc), MCEst, R= 1000, parallel = "multicore", l =bopt.rev.pc, 
+                   sim = "fixed") # block resampling with fixed block lengths of length l)
+exp.pc.boot <- tsboot(t(exp.pc), MCEst, R= 1000, parallel = "multicore", l = bopt.exp.pc, 
+                       sim = "fixed")
 educ.pc.boot <- tsboot(t(educ.pc), MCEst, R= 1000, parallel = "multicore", l = bopt.educ.pc, 
                       sim = "fixed")
 
-# saveRDS(rev.pc.boot, "rev-pc-boot.rds")
-# saveRDS(exp.pc.boot, "exp-pc-boot.rds")
+saveRDS(rev.pc.boot, "rev-pc-boot.rds")
+saveRDS(exp.pc.boot, "exp-pc-boot.rds")
 saveRDS(educ.pc.boot, "educ-pc-boot.rds")
