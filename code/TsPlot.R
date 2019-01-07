@@ -77,7 +77,7 @@ TsPlot <- function(df, main = "") {
            , legend.text=element_text(size=12, family = "serif")
            , legend.box = "horizontal" # not working?)
     ) + #geom_text(data = ann_text,aes(y = value, label =lab), family="serif", fontface="italic",  size=5) +
-    scale_y_continuous(name="Log per-capita state government total revenue (1982$)") +
+    scale_y_continuous(name="Log per-capita state government capacity (1982$)") +
     scale_colour_manual(name="", values = c(  "observed.spl" = wes_palette("Darjeeling1")[3], 
                                               "observed.wpl" = wes_palette("Darjeeling1")[5], 
                                               "predicted.spl" = wes_palette("Darjeeling1")[3],
