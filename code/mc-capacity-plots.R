@@ -5,7 +5,6 @@ require(dplyr)
 require(zoo)
 require(matrixStats)
 require(tseries)
-require(caTools)
 
 source(paste0(code.directory,"TsPlot.R"))
 
@@ -18,7 +17,8 @@ PlotMCCapacity <- function(x){
   
   predicted <- mc.est[[x]]$Mhat
   
-  pointwise <- boot$t0
+  pointwise <- mc.est[[x]]$impact # boot$t0
+
   pointwise.se <- matrix(apply(boot$t, 2, sd), nrow=49, ncol=159, byrow=FALSE)
   
   m <- which(colnames(observed)=="1982")
@@ -66,8 +66,8 @@ PlotMCCapacity <- function(x){
   colnames(ts.means.m) <- c("year", "variable", "value", "se")
   
   ts.means.m <- ts.means.m %>%
-    mutate(upper = value + se*1.96,
-           lower = value - se*1.96)
+    mutate(upper = value + (se*1.96),
+           lower = value - (se*1.96))
   
   # # Adjust year for plot
   ts.means.m$year <- as.Date(as.yearmon(ts.means.m$year) + 11/12, frac = 1) # end of year
