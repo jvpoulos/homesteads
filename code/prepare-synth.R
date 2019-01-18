@@ -15,7 +15,7 @@ control.outcomes <- list("basque"=basque,"germany"=germany, "california"=califor
 treat.covars <- list("basque.yz"=basque.yz, "germany.yz"=germany.yz, "california.yz"=california.yz)
 control.covars <- list("basque.xz"=basque.xz, "germany.xz"=germany.xz, "california.xz"=california.xz)
 
-controls.outcomes <- lapply(control.outcomes, function(d) {
+synth.control.outcomes <- lapply(control.outcomes, function(d) {
 
   # Matrix of observed entries (N x T)
   d.M <- t(as.matrix(d))
@@ -30,30 +30,25 @@ controls.outcomes <- lapply(control.outcomes, function(d) {
   return(list("M"=d.M, "mask"=d.mask))
 })
 
-treat.covars <- lapply(treat.covars, function(d) {
-  
-  # Matrix containing unit-related covariates (N x T)
-  d.X <- t(as.matrix(d))
-  d.X[is.nan(d.X)] <- NA
+synth.treat.covars <- lapply(treat.covars, function(d) {
   
   # Matrix containing time-related covariates (T x N)
-  d.Z <- t(as.matrix(d))
+  d.Z <- as.matrix(d)
   d.Z[is.nan(d.Z)] <- NA
   
-  return(list("X"=d.X, "Z"=d.Z))
+  return(d.Z)
 })
 
-control.covars <- lapply(control.covars, function(d) {
-    # Matrix containing unit-related covariates (N x T)
-    d.X <- t(as.matrix(d[[x]]))
-    d.X[is.nan(d.X)] <- NA
-  
+synth.control.covars <- lapply(control.covars, function(d) {
+  lapply(1:length(d), function(x) {
+
     # Matrix containing time-related covariates (T x N)
-    d.Z <- t(as.matrix(d[[x]]))
+    d.Z <- as.matrix(d[[x]])
     d.Z[is.nan(d.Z)] <- NA
-  return(list("X"=d.X, "Z"=d.Z))
+    return(d.Z)
+  })
 })
 
-saveRDS(controls.outcomes, "/media/jason/Dropbox/github/land-reform/data/synth-control-outcomes.rds")
-saveRDS(treat.covars, "/media/jason/Dropbox/github/land-reform/data/treat-covars.rds")
-saveRDS(control.covars, "/media/jason/Dropbox/github/land-reform/data/control-covars.rds")
+saveRDS(synth.control.outcomes, "/media/jason/Dropbox/github/land-reform/data/synth-control-outcomes.rds")
+saveRDS(synth.treat.covars, "/media/jason/Dropbox/github/land-reform/data/synth-treat-covars.rds")
+saveRDS(synth.control.covars, "/media/jason/Dropbox/github/land-reform/data/synth-control-covars.rds")
