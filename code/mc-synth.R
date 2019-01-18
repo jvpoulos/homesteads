@@ -9,6 +9,7 @@ library(ggplot2)
 library(missForest)
 library(latex2exp)
 library(softImpute)
+library(recommenderlab)
 
 # Setup parallel processing 
 library(parallel)
