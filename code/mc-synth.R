@@ -7,12 +7,13 @@ library(MCPanel)
 library(glmnet)
 library(ggplot2)
 library(latex2exp)
+library(missMDA)
 
 # Setup parallel processing 
 library(parallel)
 library(doParallel)
 
-cores <- detectCores()
+cores <- 14 #detectCores()
 
 cl <- parallel::makeForkCluster(cores)
 
@@ -21,11 +22,13 @@ doParallel::registerDoParallel(cores) # register cores (<p)
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Load data
-control.outcomes <- readRDS("/media/jason/Dropbox/github/land-reform/data/synth-control-outcomes.rds")
-control.covars <- readRDS("/media/jason/Dropbox/github/land-reform/data/synth-control-covars.rds")
+# control.outcomes <- readRDS("/media/jason/Dropbox/github/land-reform/data/synth-control-outcomes.rds")
+# control.covars <- readRDS("/media/jason/Dropbox/github/land-reform/data/synth-control-covars.rds")
+control.outcomes <- readRDS("synth-control-outcomes.rds")
+control.covars <- readRDS("synth-control-covars.rds")
 
 ## Reading data
-SynthSim <- function(outcomes,d,sim){
+SynthSim <- function(outcomes,covars,d,sim){
   Y <- outcomes[[d]]$M # NxT 
   treat <- outcomes[[d]]$mask # NxT masked matrix 
 
@@ -43,6 +46,7 @@ SynthSim <- function(outcomes,d,sim){
   
   MCPanel_RMSE_test <- matrix(0L,num_runs,length(T0))
   MCPanel_w_RMSE_test <- matrix(0L,num_runs,length(T0))
+  PCA_RMSE_test <- matrix(0L,num_runs,length(T0))
   EN_RMSE_test <- matrix(0L,num_runs,length(T0))
   ENT_RMSE_test <- matrix(0L,num_runs,length(T0))
   DID_RMSE_test <- matrix(0L,num_runs,length(T0))
@@ -68,7 +72,7 @@ SynthSim <- function(outcomes,d,sim){
       
       Y_obs <- Y * treat_mat
       
-      covars.list <- control.covars[[paste0(d,".xz")]]#[treat_indices] 
+      covars.list <- covars[[paste0(d,".xz")]]#[treat_indices] 
       X <- t(mapply(rowMeans, covars.list)) # unit-related covariates 
       Z <- Reduce("+", covars.list ) / length(covars.list) # time-related covariates: take # element-wise mean
       
@@ -81,41 +85,32 @@ SynthSim <- function(outcomes,d,sim){
       est_model_MCPanel$msk_err <- (est_model_MCPanel$Mhat - Y)*(1-treat_mat)
       est_model_MCPanel$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_MCPanel$msk_err^2, na.rm = TRUE))
       MCPanel_RMSE_test[i,j] <- est_model_MCPanel$test_RMSE
-      
+
       ## ------
-      ## MC-NNM-W 
+      ## MC-NNM-W
       ## ------
-      
+
       est_model_MCPanel_w <- mcnnm_wc_cv(M=Y_obs, X, Z, mask=treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 2, num_lam_L=10, num_lam_H=10)
       est_model_MCPanel_w$Mhat <- est_model_MCPanel_w$L + replicate(T,est_model_MCPanel_w$u) + t(replicate(N,est_model_MCPanel_w$v))
       est_model_MCPanel_w$msk_err <- (est_model_MCPanel_w$Mhat - Y)*(1-treat_mat)
       est_model_MCPanel_w$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_MCPanel_w$msk_err^2, na.rm = TRUE))
       MCPanel_w_RMSE_test[i,j] <- est_model_MCPanel_w$test_RMSE
 
+      ## ------
+      ## PCA
+      ## ------
 
-      # SVD_xc <- biScale(Y_obs*treat_mat_NA,col.scale=FALSE,row.scale=FALSE)
-      # SVD_lambda <- lambda0(SVD_xc) # compute the smallest lambda with a zero solution
-      #   
-      # est_model_SVD <- softImpute(SVD_xc, rank.max=3,lambda=SVD_lambda, type="svd", maxit=500)
-      # est_model_SVD$Mhat <- complete(Y_obs*treat_mat_NA,est_model_SVD, unscale = TRUE)
-      # est_model_SVD$msk_err <- (est_model_SVD$Mhat - Y)*(1-treat_mat)
-      # est_model_SVD$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_SVD$msk_err^2, na.rm=TRUE))
-      # SVD_RMSE_test[i,j] <- est_model_SVD$test_RMSE
+      nb <- estim_ncpPCA(data.frame(Y_obs*treat_mat_NA),ncp.max=5) # cv num components
 
-      # ## ------
-      # ## ALS
-      # ## ------
-      # 
-      # est_model_ALS <- softImpute(SVD_xc, rank.max=3,lambda=SVD_lambda, type="als", warm.start = est_model_SVD, maxit=500)
-      # est_model_ALS$Mhat <- complete(Y_obs*treat_mat_NA,est_model_ALS, unscale = TRUE)
-      # est_model_ALS$msk_err <- (est_model_ALS$Mhat - Y)*(1-treat_mat)
-      # est_model_ALS$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ALS$msk_err^2, na.rm=TRUE))
-      # ALS_RMSE_test[i,j] <- est_model_ALS$test_RMSE
+      PCA_Mhat <- imputePCA(data.frame(Y_obs*treat_mat_NA), nb$ncp)$completeObs # regularized iterative PCA
+      PCA_msk_err <- (PCA_Mhat - Y)*(1-treat_mat)
+      PCA_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(PCA_msk_err^2, na.rm=TRUE))
+      PCA_RMSE_test[i,j] <- PCA_test_RMSE
       
       ## -----
       ## HR-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
       ## -----
-
+      
       est_model_EN <- en_mp_rows(Y_obs, treat_mat)
       est_model_EN_msk_err <- (est_model_EN - Y)*(1-treat_mat)
       est_model_EN_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_EN_msk_err^2, na.rm = TRUE))
@@ -130,16 +125,6 @@ SynthSim <- function(outcomes,d,sim){
       est_model_ENT_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ENT_msk_err^2, na.rm = TRUE))
       ENT_RMSE_test[i,j] <- est_model_ENT_test_RMSE
       
-      # ## ------
-      # ## RF
-      # ## ------
-      # 
-      # est_model_RF <- missForest(Y_obs*treat_mat_NA, ntree=500, mtry=8, parallelize = "variables")
-      # est_model_RF$Mhat <- est_model_RF$ximp
-      # est_model_RF$msk_err <- (est_model_RF$Mhat - Y)*(1-treat_mat) 
-      # est_model_RF$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_RF$msk_err^2, na.rm = TRUE))
-      # RF_RMSE_test[i,j] <- est_model_RF$test_RMSE
-
       ## -----
       ## DID
       ## -----
@@ -166,8 +151,11 @@ SynthSim <- function(outcomes,d,sim){
   MCPanel_w_avg_RMSE <- apply(MCPanel_w_RMSE_test,2,mean)
   MCPanel_w_std_error <- apply(MCPanel_w_RMSE_test,2,sd)/sqrt(num_runs)
   
-  EN_avg_RMSE <- apply(ENT_RMSE_test,2,mean)
-  EN_std_error <- apply(ENT_RMSE_test,2,sd)/sqrt(num_runs)
+  PCA_avg_RMSE <- apply(PCA_RMSE_test,2,mean)
+  PCA_std_error <- apply(PCA_RMSE_test,2,sd)/sqrt(num_runs)
+  
+  EN_avg_RMSE <- apply(EN_RMSE_test,2,mean)
+  EN_std_error <- apply(EN_RMSE_test,2,sd)/sqrt(num_runs)
   
   ENT_avg_RMSE <- apply(ENT_RMSE_test,2,mean)
   ENT_std_error <- apply(ENT_RMSE_test,2,sd)/sqrt(num_runs)
@@ -182,25 +170,28 @@ SynthSim <- function(outcomes,d,sim){
   
   df1 <-
     data.frame(
-      "y" =  c(DID_avg_RMSE, EN_avg_RMSE, ENT_avg_RMSE, MCPanel_avg_RMSE, MCPanel_w_avg_RMSE, ADH_avg_RMSE),
+      "y" =  c(DID_avg_RMSE, EN_avg_RMSE, ENT_avg_RMSE, MCPanel_avg_RMSE, MCPanel_w_avg_RMSE, PCA_avg_RMSE, ADH_avg_RMSE),
       "lb" = c(DID_avg_RMSE - 1.96*DID_std_error, 
                EN_avg_RMSE - 1.96*ENT_std_error,
                ENT_avg_RMSE - 1.96*ENT_std_error,
                MCPanel_avg_RMSE - 1.96*MCPanel_std_error, 
                MCPanel_w_avg_RMSE - 1.96*MCPanel_w_std_error, 
+               PCA_avg_RMSE - 1.96*PCA_std_error, 
                ADH_avg_RMSE - 1.96*ADH_std_error),
       "ub" = c(DID_avg_RMSE + 1.96*DID_std_error, 
                EN_avg_RMSE + 1.96*ENT_std_error,
                ENT_avg_RMSE + 1.96*ENT_std_error,
                MCPanel_avg_RMSE + 1.96*MCPanel_std_error, 
                MCPanel_w_avg_RMSE + 1.96*MCPanel_w_std_error, 
+               PCA_avg_RMSE + 1.96*PCA_std_error, 
                ADH_avg_RMSE + 1.96*ADH_std_error),
-      "x" = c(T0/T, T0/T ,T0/T, T0/T, T0/T, T0/T),
+      "x" = c(T0/T, T0/T ,T0/T, T0/T, T0/T, T0/T, T0/T),
       "Method" = c(replicate(length(T0),"DID"), 
                    replicate(length(T0),"HR-EN"),
                    replicate(length(T0),"VT-EN"),
                    replicate(length(T0),"MC-NNM"), 
-                   replicate(length(T0),"MC-WC-NNM"), 
+                   replicate(length(T0),"MC-NNM+"), 
+                   replicate(length(T0),"PCA"), 
                    replicate(length(T0),"SC-ADH")))
   
   p <- ggplot(data = df1, aes(x, y, color = Method, shape = Method)) +
@@ -225,13 +216,14 @@ SynthSim <- function(outcomes,d,sim){
   if(to_save == 1){
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".png")
     ggsave(filename, plot = last_plot(), device="png", dpi=600)
-    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, EN_RMSE_test, ENT_RMSE_test, MCPanel_RMSE_test, MCPanel_w_RMSE_test, ADH_RMSE_test)
+    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, EN_RMSE_test, ENT_RMSE_test, MCPanel_RMSE_test, MCPanel_w_RMSE_test, PCA_RMSE_test, ADH_RMSE_test)
     colnames(df2)<-c("N", "T", "N_t", "is_simul", 
                      replicate(length(T0), "DID"), 
                      replicate(length(T0), "HR-EN"), 
                      replicate(length(T0), "VT-EN"), 
                      replicate(length(T0), "MC-NNM"), 
-                     replicate(length(T0),"MC-WC-NNM"), 
+                     replicate(length(T0),"MC-NNM+"), 
+                     replicate(length(T0),"PCA"), 
                      replicate(length(T0),"SC-ADH"))
     
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".rds")
@@ -239,8 +231,9 @@ SynthSim <- function(outcomes,d,sim){
   }
 }
 
+
 foreach(d = c('basque','germany','california')) %dopar% {
   foreach(sim = c(0,1)) %dopar% {
-    SynthSim(control.outcomes,sim)
+    SynthSim(control.outcomes,control.covars,d,sim)
   }
 }
