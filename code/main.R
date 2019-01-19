@@ -53,6 +53,10 @@ source(paste0(code.directory,'prepare-synth.R'))
 
 # mc-synth.sh --> mc-synth.R 
 
+# MC experiments on capacity data
+
+# mc-capacity.sh --> mc-capacity.R 
+
 # RF causal estimates on state capacity data
 
 source(paste0(gans.code.directory,'utils.R'))

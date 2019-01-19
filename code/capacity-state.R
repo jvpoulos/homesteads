@@ -13,6 +13,7 @@ require(tidyr)
 require(readr)
 require(imputeTS)
 require(MCPanel)
+require(softImpute)
 
 ## STATE-LEVEL DATA
 
@@ -201,6 +202,7 @@ funds$treat[funds$state %in% state.land.states] <- "Control"
 
 funds <- funds[with(funds, order(treat, year)), ] # order by treatment status + year
 
+#Outcomes
 rev.pc <- reshape(data.frame(funds[c("state","year","rev.pc")]), idvar = "year", timevar = "state", direction = "wide")
 colnames(rev.pc) <- sub("rev.pc.","", colnames(rev.pc))
 rownames(rev.pc) <- rev.pc$year
@@ -216,9 +218,15 @@ colnames(educ.pc) <- sub("educ.pc.","", colnames(educ.pc))
 rownames(educ.pc) <- educ.pc$year
 educ.pc <- educ.pc[!colnames(educ.pc)%in% "year"]
 
-dfList <- list("rev.pc"=rev.pc,"exp.pc"=exp.pc, "educ.pc"=educ.pc)
+# Covariates - farm values
+faval <- reshape(data.frame(farmval[c("state.abb","year","faval")]), idvar = "year", timevar = "state.abb", direction = "wide")
+colnames(faval) <- sub("faval.","", colnames(faval))
+rownames(faval) <- faval$year
+faval <- faval[!colnames(faval)%in% "year"]
 
-returnMatrices <- function(d) {
+capacity.outcomes <- list("rev.pc"=rev.pc,"exp.pc"=exp.pc, "educ.pc"=educ.pc)
+
+returnMatrices <- function(d, outcomes=TRUE) {
   # Impute missing values via linear interpolation
   d.imp <- na.interpolation(d, option = "linear")
   
@@ -226,29 +234,38 @@ returnMatrices <- function(d) {
   d.M <- t(as.matrix(d.imp))
   d.M[is.nan(d.M )] <- NA
   
-  # Masked matrix for which 1=observed, NA=missing/imputed
-  d.M.missing <- t(as.matrix(d))
-  d.M.missing[is.nan(d.M.missing)] <- NA
-  d.M.missing[!is.na(d.M.missing)] <-1
-  d.M.missing[is.na(d.M.missing)] <- 0
-  
-  # Masked matrix which is 0 for control units and treated units before treatment and 1 for treated units after treatment.
-  
-  d.mask <- matrix(0, nrow = nrow(d.M), 
-                   ncol= ncol(d.M),
-                   dimnames = list(rownames(d.M), colnames(d.M)))
-  
-  d.mask[,colnames(d.mask)>=1869][rownames(d.mask)%in%western.pub,] <- 1 # earliest WPL 
-  d.mask[,colnames(d.mask)>=1870][rownames(d.mask)%in%c("IL","NV"),] <- 1 
-  d.mask[,colnames(d.mask)>=1871][rownames(d.mask)%in%c("ID"),] <- 1 
-  d.mask[,colnames(d.mask)>=1872][rownames(d.mask)%in%c("MT","ND","UT","AL","MS"),] <- 1 # earliest SPL 
-  d.mask[,colnames(d.mask)>=1873][rownames(d.mask)%in%c("AR","FL","LA"),] <- 1 
-  d.mask[,colnames(d.mask)>=1875][rownames(d.mask)%in%c("IN","NM","WY"),] <- 1 
-  d.mask[,colnames(d.mask)>=1878][rownames(d.mask)%in%c("AZ"),] <- 1 
-  d.mask[,colnames(d.mask)>=1890][rownames(d.mask)%in%c("OK"),] <- 1 
-  d.mask[,colnames(d.mask)>=1902][rownames(d.mask)%in%c("AK"),] <- 1 
+  if(outcomes){
+    # Masked matrix for which 1=observed, NA=missing/imputed
+    d.M.missing <- t(as.matrix(d))
+    d.M.missing[is.nan(d.M.missing)] <- NA
+    d.M.missing[!is.na(d.M.missing)] <-1
+    d.M.missing[is.na(d.M.missing)] <- 0
+    
+    # Masked matrix which is 0 for control units and treated units before treatment and 1 for treated units after treatment.
+    
+    d.mask <- matrix(0, nrow = nrow(d.M), 
+                     ncol= ncol(d.M),
+                     dimnames = list(rownames(d.M), colnames(d.M)))
+    
+    d.mask[,colnames(d.mask)>=1869][rownames(d.mask)%in%western.pub,] <- 1 # earliest WPL 
+    d.mask[,colnames(d.mask)>=1870][rownames(d.mask)%in%c("IL","NV"),] <- 1 
+    d.mask[,colnames(d.mask)>=1871][rownames(d.mask)%in%c("ID"),] <- 1 
+    d.mask[,colnames(d.mask)>=1872][rownames(d.mask)%in%c("MT","ND","UT","AL","MS"),] <- 1 # earliest SPL 
+    d.mask[,colnames(d.mask)>=1873][rownames(d.mask)%in%c("AR","FL","LA"),] <- 1 
+    d.mask[,colnames(d.mask)>=1875][rownames(d.mask)%in%c("IN","NM","WY"),] <- 1 
+    d.mask[,colnames(d.mask)>=1878][rownames(d.mask)%in%c("AZ"),] <- 1 
+    d.mask[,colnames(d.mask)>=1890][rownames(d.mask)%in%c("OK"),] <- 1 
+    d.mask[,colnames(d.mask)>=1902][rownames(d.mask)%in%c("AK"),] <- 1 
   
   return(list("M"=d.M, "M.missing"=d.M.missing, "mask"=d.mask))
+  } else{
+    return(list("Z"=d.M))
+  }
+  
 }
 
-dfList <- lapply(dfList, returnMatrices)
+capacity.outcomes <- lapply(capacity.outcomes, returnMatrices, outcomes=TRUE)
+capacity.covariates <- sapply(faval, returnMatrices, outcomes=TRUE)
+
+saveRDS(capacity.outcomes, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes.rds")
+saveRDS(capacity.covariates, "/media/jason/Dropbox/github/land-reform/data/capacity-covariates.rds")
