@@ -45,8 +45,6 @@ source(paste0(code.directory,'prepare-capacity.R')) # prepare for DD # run homes
 
 source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
-save.image(paste0(data.directory, "capacity-state.RData"))
-
 # MC experiments on synth data
 
 source(paste0(code.directory,'prepare-synth.R')) 

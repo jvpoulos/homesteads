@@ -15,6 +15,8 @@ require(imputeTS)
 require(MCPanel)
 require(softImpute)
 
+source(paste0(gans.code.directory,'utils.R'))
+
 ## STATE-LEVEL DATA
 
 iso.funds <- c(1,3,31) # target iso codes
@@ -226,20 +228,56 @@ faval <- faval[!colnames(faval)%in% "year"]
 
 capacity.outcomes <- list("rev.pc"=rev.pc,"exp.pc"=exp.pc, "educ.pc"=educ.pc)
 
-returnMatrices <- function(d, outcomes=TRUE) {
-  # Impute missing values via linear interpolation
-  d.imp <- na.interpolation(d, option = "linear")
+CapacityMatrices <- function(d, outcomes=TRUE) {
   
-  # Matrix of observed entries (N x T)
-  d.M <- t(as.matrix(d.imp))
-  d.M[is.nan(d.M )] <- NA
+  # Masked matrix for which 1=observed, NA=missing/imputed
+  d.M.missing <- t(as.matrix(d))
+  d.M.missing[is.nan(d.M.missing)] <- NA
+  d.M.missing[!is.na(d.M.missing)] <-1
+  
+  # impute missing covars for treated
+  if(outcomes){
+    y.fits <- softImpute(d[colnames(d)%in%pub.states][1:which(rownames(d)=="1868"),], rank.max=3, lambda=1, trace=FALSE, type="svd") # fit on pre-treatment
+  } else{
+    y.fits <- softImpute(d[colnames(d)%in%pub.states][1:which(rownames(d)=="1870"),], rank.max=2, lambda=1, trace=FALSE, type="svd") # fit on pre-treatment
+  }
+  
+  d[colnames(d)%in%pub.states] <- softImpute::complete(d[colnames(d)%in%pub.states], y.fits ) # complete on full matrix
+  
+  # impute missing covars for controls
+  
+  x.fits <- softImpute(d[colnames(d)%in%state.land.states], rank.max=3, lambda=1, trace=FALSE, type="svd") # fit on all periods
+  
+  d[colnames(d)%in%state.land.states] <- softImpute::complete(d[colnames(d)%in%state.land.states], x.fits ) # complete on full matrix
+  
+  # cubic polynomial detrend estimated on pre-treatment period for treated
   
   if(outcomes){
-    # Masked matrix for which 1=observed, NA=missing/imputed
-    d.M.missing <- t(as.matrix(d))
-    d.M.missing[is.nan(d.M.missing)] <- NA
-    d.M.missing[!is.na(d.M.missing)] <-1
-    d.M.missing[is.na(d.M.missing)] <- 0
+    d.detrend <- matrix(unlist(sapply(1:ncol(d), function (x){
+    if(x%in%which(colnames(d)%in%pub.states)){
+      PolyDetrend(d[,x], deg=3, which(rownames(d)=="1868"))
+    }else{
+      PolyDetrend(d[,x], deg=3)
+    }
+  })), nrow=nrow(d), ncol=ncol(d))
+  } else{
+    d.detrend <- matrix(unlist(sapply(1:ncol(d), function (x){
+      if(x%in%which(colnames(d)%in%pub.states)){
+        PolyDetrend(d[,x], deg=2, which(rownames(d)=="1870"))
+      }else{
+        PolyDetrend(d[,x], deg=2)
+      }
+    })), nrow=nrow(d), ncol=ncol(d))
+  }
+  
+  # Matrix of observed entries (N x T)
+  d.M <- t(as.matrix(d.detrend))
+  d.M[is.nan(d.M )] <- NA
+  
+  rownames(d.M) <- colnames(d)
+  colnames(d.M) <- rownames(d)
+  
+  if(outcomes){
     
     # Masked matrix which is 0 for control units and treated units before treatment and 1 for treated units after treatment.
     
@@ -259,13 +297,13 @@ returnMatrices <- function(d, outcomes=TRUE) {
   
   return(list("M"=d.M, "M.missing"=d.M.missing, "mask"=d.mask))
   } else{
-    return(list("Z"=d.M))
+    return(list("Z"=d.M, "Z.missing"=d.M.missing))
   }
   
 }
 
-capacity.outcomes <- lapply(capacity.outcomes, returnMatrices, outcomes=TRUE)
-capacity.covariates <- sapply(faval, returnMatrices, outcomes=TRUE)
+capacity.outcomes <- lapply(capacity.outcomes, CapacityMatrices, outcomes=TRUE)
+capacity.covariates <- CapacityMatrices(faval, outcomes=FALSE)
 
 saveRDS(capacity.outcomes, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes.rds")
 saveRDS(capacity.covariates, "/media/jason/Dropbox/github/land-reform/data/capacity-covariates.rds")

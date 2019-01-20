@@ -1,5 +1,5 @@
 ###################################
-# MC Estimation  #
+# MC Simulations #
 ###################################
 
 ## Loading Source files
@@ -22,8 +22,6 @@ doParallel::registerDoParallel(cores) # register cores (<p)
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Load data
-# control.outcomes <- readRDS("/media/jason/Dropbox/github/land-reform/data/synth-control-outcomes.rds")
-# control.covars <- readRDS("/media/jason/Dropbox/github/land-reform/data/synth-control-covars.rds")
 control.outcomes <- readRDS("synth-control-outcomes.rds")
 control.covars <- readRDS("synth-control-covars.rds")
 
@@ -35,10 +33,10 @@ SynthSim <- function(outcomes,covars,d,sim){
   ## Setting up the configuration
   N <- nrow(treat)
   T <- ncol(treat)
-  number_T0 <- 8
+  number_T0 <- 5
   T0 <- ceiling(T*((1:number_T0)*2-1)/(2*number_T0))
-  N_t <- ceiling(N*0.6) # no. treated units desired <=N
-  num_runs <- 10
+  N_t <- ceiling(N*0.5) # no. treated units desired <=N
+  num_runs <- 20
   is_simul <- sim ## Whether to simulate Simultaneus Adoption or Staggered Adoption
   to_save <- 1 ## Whether to save the plot or not
   
@@ -72,7 +70,7 @@ SynthSim <- function(outcomes,covars,d,sim){
       
       Y_obs <- Y * treat_mat
       
-      covars.list <- covars[[paste0(d,".xz")]]#[treat_indices] 
+      covars.list <- covars[[paste0(d,".xz")]]
       X <- t(mapply(rowMeans, covars.list)) # unit-related covariates 
       Z <- Reduce("+", covars.list ) / length(covars.list) # time-related covariates: take # element-wise mean
       
