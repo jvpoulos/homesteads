@@ -22,8 +22,8 @@ doParallel::registerDoParallel(cores) # register cores (<p)
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Load data
-control.outcomes <- readRDS( "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes.rds")
-control.covars <- readRDS("/media/jason/Dropbox/github/land-reform/data/capacity-covariates.rds")
+control.outcomes <- readRDS("capacity-outcomes.rds")
+control.covars <- readRDS("capacity-covariates.rds")
 
 ## Reading data
 SynthCapacity <- function(outcomes,covars,d,sim){
