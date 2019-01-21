@@ -33,6 +33,10 @@ SynthCapacity <- function(outcomes,covars,d,sim){
   treat <- outcomes[[d]]$mask # NxT masked matrix 
   
   ## Treated 
+  pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
+  state.land.states <- state.abb[!state.abb %in% pub.states] # 20 state land states
+  southern.pub <- c("AL", "AR", "FL", "LA", "MS") # 5 southern public land states
+  western.pub <- setdiff(pub.states,southern.pub)
   treat_y <- Y[rownames(Y)%in%c(western.pub,southern.pub),] 
   
   ## Working with the rest of matrix
