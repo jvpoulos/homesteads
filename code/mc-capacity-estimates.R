@@ -25,12 +25,14 @@ RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes.rds"))
 capacity.covars <- readRDS(paste0(data.directory,"capacity-covariates.rds"))
 
-MCEst <- function(outcomes,covars,d,sim=FALSE,wc=FALSE) {
+MCEst <- function(outcomes,d,sim=FALSE,covars=NULL,pca=FALSE) {
   Y <- outcomes[[d]]$M # NxT 
   Y.missing <- outcomes[[d]]$M.missing # NxT 
   
-  Z <- rbind(covars$Z,"AK"=rep(0,ncol(covars$Z))) # NxT # missing AK
-  Z <- Z[row.names(Y),]  # reorder
+  if(!is.null(covars)){
+    Z <- rbind(covars$Z,"AK"=rep(0,ncol(covars$Z))) # NxT # missing AK
+    Z <- Z[row.names(Y),]  # reorder
+  }
   
   treat <- outcomes[[d]]$mask # NxT masked matrix 
 
@@ -54,16 +56,34 @@ MCEst <- function(outcomes,covars,d,sim=FALSE,wc=FALSE) {
   
   Y_obs <- Y * treat_mat
   
-  if(wc){
+  if(!is.null(covars)){
     ## ------
     ## MC-NNM-W
     ## ------
     
     est_model_MCPanel_w <- mcnnm_wc_cv(M=Y_obs, X = Z, Z=matrix(0L,0,0), mask=treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 2, num_lam_L=10, num_lam_H=10)
     est_model_MCPanel_w$Mhat <- est_model_MCPanel_w$L + replicate(T,est_model_MCPanel_w$u) + t(replicate(N,est_model_MCPanel_w$v))
-    est_model_MCPanel_w$impact <- (est_model_MCPanel_w$Mhat - Y*Y.missing)
+    est_model_MCPanel_w$impact <- (est_model_MCPanel_w$Mhat - Y*Y.missing)*(1-treat_mat)
     
     return(list("impact" = est_model_MCPanel_w$impact, "Mhat" = est_model_MCPanel_w$Mhat))
+  } 
+  
+  if(pca){
+    
+    treat_mat_NA <- treat_mat
+    treat_mat_NA[treat_mat==0] <- NA
+    
+    ## ------
+    ## PCA
+    ## ------
+    
+    nb <- estim_ncpPCA(data.frame(Y_obs*treat_mat_NA),ncp.max=5) # cv num components
+    
+    PCA_Mhat <- imputePCA(data.frame(Y_obs*treat_mat_NA), nb$ncp)$completeObs # regularized iterative PCA
+    PCA_impact <- (PCA_Mhat - Y*Y.missing)*(1-treat_mat)
+    
+    return(list("impact" = PCA_impact, "Mhat" = PCA_Mhat))
+    
   } else{
     ## ------
     ## MC-NNM
@@ -71,12 +91,13 @@ MCEst <- function(outcomes,covars,d,sim=FALSE,wc=FALSE) {
     
     est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
     est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
-    est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y*Y.missing)
+    est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y*Y.missing)*(1-treat_mat)
     
     return(list("impact" = est_model_MCPanel$impact, "Mhat" = est_model_MCPanel$Mhat))
   }
 }
 
 # # Get NxT matrix of point estimates
-mc.est <- mclapply(list("rev.pc","exp.pc","educ.pc"), MCEst, outcomes=capacity.outcomes ,covars=capacity.covars, mc.cores=cores)
+mc.stag.est <- mclapply(list("rev.pc","exp.pc","educ.pc"), MCEst, outcomes=capacity.outcomes,sim=FALSE,mc.cores=cores)
 
+pca.stag.est <- mclapply(list("rev.pc","exp.pc","educ.pc"), MCEst, outcomes=capacity.outcomes,sim=FALSE,pca=TRUE,mc.cores=cores)
