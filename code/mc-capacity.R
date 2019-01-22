@@ -22,11 +22,11 @@ doParallel::registerDoParallel(cores) # register cores (<p)
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Load data
-control.outcomes <- readRDS("capacity-outcomes.rds")
-control.covars <- readRDS("capacity-covariates.rds")
+capacity.outcomes <- readRDS("capacity-outcomes.rds")
+capacity.covars <- readRDS("capacity-covariates.rds")
 
 ## Reading data
-SynthCapacity <- function(outcomes,covars,d,sim){
+CapacitySim <- function(outcomes,covars,d,sim){
   Y <- outcomes[[d]]$M # NxT 
   Y.missing <- outcomes[[d]]$M.missing # NxT 
   Z <- covars$Z # NxT
@@ -51,7 +51,7 @@ SynthCapacity <- function(outcomes,covars,d,sim){
   number_T0 <- 5
   T0 <- ceiling(T*((1:number_T0)*2-1)/(2*number_T0))
   N_t <- ceiling(N*0.5) # no. treated units desired <=N
-  num_runs <- 20
+  num_runs <- 5
   is_simul <- sim ## Whether to simulate Simultaneus Adoption or Staggered Adoption
   to_save <- 1 ## Whether to save the plot or not
   
@@ -242,6 +242,6 @@ SynthCapacity <- function(outcomes,covars,d,sim){
 
 foreach(d = c('rev.pc','exp.pc','educ.pd')) %dopar% {
   foreach(sim = c(0,1)) %dopar% {
-    SynthCapacity(control.outcomes,control.covars,d,sim)
+    CapacitySim(capacity.outcomes,capacity.covars,d,sim)
   }
 }

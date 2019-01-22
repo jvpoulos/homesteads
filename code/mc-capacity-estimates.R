@@ -1,39 +1,39 @@
 ###################################
-# MC Estimation  #
+# MC estimates #
 ###################################
 
 ## Loading Source files
 library(MCPanel)
 library(glmnet)
 library(ggplot2)
-library(missForest)
 library(latex2exp)
-library(softImpute)
-library(tseries)
-library(boot)
-
-source("PolitisWhite.R")
-source("naInterpolation.R")
+library(missMDA)
 
 # Setup parallel processing 
 library(parallel)
 library(doParallel)
 
-detectCores()
-cores <- 140
+cores <- 4 #detectCores()
 
-registerDoParallel(cores) # register cores (<p)
+cl <- parallel::makeForkCluster(cores)
+
+doParallel::registerDoParallel(cores) # register cores (<p)
 
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Load data
-load("capacity-state.RData")
+capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes.rds"))
+capacity.covars <- readRDS(paste0(data.directory,"capacity-covariates.rds"))
 
-MCEst <- function(x) {
-  matrixList <- returnMatrices(t(x))
+MCEst <- function(outcomes,covars,d,sim=FALSE,wc=FALSE) {
+  Y <- outcomes[[d]]$M # NxT 
+  Y.missing <- outcomes[[d]]$M.missing # NxT 
   
-  Y <- matrixList$M # NxT 
-  treat <-matrixList$mask # NxT masked matrix 
+  Z <- rbind(covars$Z,"AK"=rep(0,ncol(covars$Z))) # NxT # missing AK
+  Z <- Z[row.names(Y),]  # reorder
+  
+  treat <- outcomes[[d]]$mask # NxT masked matrix 
+
   N <- nrow(treat)
   T <- ncol(treat)
   
@@ -43,40 +43,40 @@ MCEst <- function(x) {
   treat_indices <- as.numeric(indices[order(match(indices[,2], treat_indices_order))][1:length(treat_indices_order)]) # sort indices increasingly based on T0
   
   N_t <- length(treat_indices) # Number of treated units desired
-  T0 <- 87 # which(colnames(Y)=="1869")# The first treatment time
+  T0 <- which(colnames(Y)=="1869")# The first treatment time
   
-  treat_mat <- stag_adapt(Y, N_t, T0, treat_indices)
-  
-  treat_mat_NA <- treat_mat
-  treat_mat_NA[treat_mat==0] <- NA
+  ## Simultaneuous (simul_adapt) or Staggered adoption (stag_adapt)
+  if(sim){
+    treat_mat <- simul_adapt(Y, N_t, T0, treat_indices)
+  }else{
+    treat_mat <- stag_adapt(Y, N_t, T0, treat_indices)
+  }
   
   Y_obs <- Y * treat_mat
   
-  ## ------
-  ## MC-NNM
-  ## ------
-  
-  est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
-  est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
-  est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y) 
-  #return(est_model_MCPanel$impact) 
-  return(list("impact" = est_model_MCPanel$impact, "Mhat" = est_model_MCPanel$Mhat))
+  if(wc){
+    ## ------
+    ## MC-NNM-W
+    ## ------
+    
+    est_model_MCPanel_w <- mcnnm_wc_cv(M=Y_obs, X = Z, Z=matrix(0L,0,0), mask=treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 2, num_lam_L=10, num_lam_H=10)
+    est_model_MCPanel_w$Mhat <- est_model_MCPanel_w$L + replicate(T,est_model_MCPanel_w$u) + t(replicate(N,est_model_MCPanel_w$v))
+    est_model_MCPanel_w$impact <- (est_model_MCPanel_w$Mhat - Y*Y.missing)
+    
+    return(list("impact" = est_model_MCPanel_w$impact, "Mhat" = est_model_MCPanel_w$Mhat))
+  } else{
+    ## ------
+    ## MC-NNM
+    ## ------
+    
+    est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
+    est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
+    est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y*Y.missing)
+    
+    return(list("impact" = est_model_MCPanel$impact, "Mhat" = est_model_MCPanel$Mhat))
+  }
 }
 
 # # Get NxT matrix of point estimates
-mc.est <- mclapply(list("rev.pc"=t(rev.pc), "exp.pc"=t(exp.pc), "educ.pc"=t(educ.pc)), MCEst, mc.cores=cores)
+mc.est <- mclapply(list("rev.pc","exp.pc","educ.pc"), MCEst, outcomes=capacity.outcomes ,covars=capacity.covars, mc.cores=cores)
 
-bopt.rev.pc <- b.star(dfList$rev.pc$M,round=TRUE)[[1]]  # get optimal bootstrap lengths
-bopt.exp.pc <- b.star(dfList$exp.pc$M,round=TRUE)[[1]]  
-bopt.educ.pc <- b.star(dfList$educ.pc$M,round=TRUE)[[1]]  
-
-rev.pc.boot <- tsboot(t(rev.pc), MCEst, R= 1000, parallel = "multicore", l =bopt.rev.pc, 
-                   sim = "fixed") # block resampling with fixed block lengths of length l)
-exp.pc.boot <- tsboot(t(exp.pc), MCEst, R= 1000, parallel = "multicore", l = bopt.exp.pc, 
-                       sim = "fixed")
-educ.pc.boot <- tsboot(t(educ.pc), MCEst, R= 1000, parallel = "multicore", l = bopt.educ.pc, 
-                      sim = "fixed")
-
-saveRDS(rev.pc.boot, "rev-pc-boot.rds")
-saveRDS(exp.pc.boot, "exp-pc-boot.rds")
-saveRDS(educ.pc.boot, "educ-pc-boot.rds")
