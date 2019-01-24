@@ -25,16 +25,16 @@ RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes.rds"))
 capacity.covars <- readRDS(paste0(data.directory,"capacity-covariates.rds"))
 
-MCEst <- function(outcomes,d,sim=FALSE,covars=NULL,pca=FALSE) {
-  Y <- outcomes[[d]]$M # NxT 
-  Y.missing <- outcomes[[d]]$M.missing # NxT 
+MCEst <- function(outcomes,sim=FALSE,covars=NULL,pca=FALSE) {
+  Y <- outcomes$M # NxT 
+  Y.missing <- outcomes$M.missing # NxT 
   
   if(!is.null(covars)){
     Z <- rbind(covars$Z,"AK"=rep(0,ncol(covars$Z))) # NxT # missing AK
     Z <- Z[row.names(Y),]  # reorder
   }
   
-  treat <- outcomes[[d]]$mask # NxT masked matrix 
+  treat <- outcomes$mask # NxT masked matrix 
 
   N <- nrow(treat)
   T <- ncol(treat)
@@ -97,7 +97,13 @@ MCEst <- function(outcomes,d,sim=FALSE,covars=NULL,pca=FALSE) {
   }
 }
 
-# # Get NxT matrix of point estimates
-mc.stag.est <- mclapply(list("rev.pc","exp.pc","educ.pc"), MCEst, outcomes=capacity.outcomes,sim=FALSE,mc.cores=cores)
+# Get NxT matrix of point estimates
+mc.stag.est <- mclapply(list(capacity.outcomes[["rev.pc"]],capacity.outcomes[["exp.pc"]],capacity.outcomes[["educ.pc"]]),
+                        MCEst, sim=FALSE,mc.cores=cores)
 
-pca.stag.est <- mclapply(list("rev.pc","exp.pc","educ.pc"), MCEst, outcomes=capacity.outcomes,sim=FALSE,pca=TRUE,mc.cores=cores)
+# Get NxT matrix of confidence intervals
+source("ChernoTest.R")
+pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
+ChernoTest(outcomes,  ns=10, treated.indices=pub.states, permtype="iid.block") # move real t stat outside of fn
+
+ChernoCI(t_star, l=10, outcomes, d, ns=10, q=1, permtype="iid.block")
