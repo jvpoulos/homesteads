@@ -4,15 +4,15 @@
 ##, permuting {û_t } is equivalent to permuting {Z_t }.
 ## modified from https://github.com/ebenmichael/ents
 
-ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, m=NULL, treated.indices,
-                        permtype=c("iid", "moving.block", "iid.block")) {
+ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
+                        permtype=c("iid", "moving.block", "iid.block"),sim=FALSE,covars=NULL,pca=FALSE) {
   
   t0 <- which(colnames(outcomes$M)=="1869")-1 # n pre-treatment periods
   t_final <- ncol(outcomes$M) # all periods
   t_star <- t_final-t0
   
   if(permtype == "iid") {
-    teststats <- matrix(0, nrow=ns, ncol=length(q))
+    teststats <- matrix(NA, nrow=ns, ncol=length(q))
     
     for(i in 1:ns) {
       
@@ -27,7 +27,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, m=NULL, treated.indi
         new_mc_data[[x]] <- new_mc_data[[x]][,reorder,drop=FALSE]
       }, simplify = FALSE,USE.NAMES = TRUE)
       
-      mc.fit <-  MCEst(new_mc_data)
+      mc.fit <-  MCEst(new_mc_data,sim=FALSE,covars=NULL,pca=FALSE)
       
       ## get treatment effect estimates
       
@@ -36,7 +36,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, m=NULL, treated.indi
       teststats[i,] <- ((1/sqrt(t_star)) * sum(abs(att)^q,na.rm=TRUE))^(1/q)   
     }
   } else if(permtype=="moving.block") {
-    teststats <- matrix(0, nrow=t_final, ncol=length(q))
+    teststats <- matrix(NA, nrow=t_final, ncol=length(q))
     
     for(i in 1:t_final) {
       ## increment time by one step and wrap
@@ -50,7 +50,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, m=NULL, treated.indi
         new_mc_data[[x]] <- new_mc_data[[x]][,reorder,drop=FALSE]
       }, simplify = FALSE,USE.NAMES = TRUE)
       
-      mc.fit <-  MCEst(new_mc_data)
+      mc.fit <-  MCEst(new_mc_data,sim=FALSE,covars=NULL,pca=FALSE)
       
       ## get treatment effect estimates
       
@@ -60,12 +60,9 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, m=NULL, treated.indi
     }
   } else if(permtype=="iid.block") {
     
-    if(is.null(m)){
- #     source("PolitisWhite.R")
-      m <- b.star(outcomes$M,round=TRUE)[[1]]  # get optimal bootstrap lengths
-    }
-
-    teststats <- matrix(0, nrow=t_final, ncol=length(q))
+    source("PolitisWhite.R")
+    m <- b.star(outcomes$M,round=TRUE)[[1]]  # get optimal bootstrap lengths
+    teststats <- matrix(NA, nrow=t_final, ncol=length(q))
     
     for(i in 1:t_final) {
       ## permute by blocks
@@ -80,7 +77,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, m=NULL, treated.indi
         new_mc_data[[x]] <- new_mc_data[[x]][,reorder,drop=FALSE]
       }, simplify = FALSE,USE.NAMES = TRUE)
       
-      mc.fit <-  MCEst(new_mc_data)
+      mc.fit <-  MCEst(new_mc_data,sim=FALSE,covars=NULL,pca=FALSE)
       
       ## get treatment effect estimates
       
@@ -92,25 +89,25 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, m=NULL, treated.indi
     stop("permtype must be one of c('iid', 'moving.block', 'iid.block')")
   }
   ## compute test stat for actual data
-
-  mc.fit.actual <-  MCEst(outcomes)
   
   if(!is.null(t.stat)){
     real_att <- t.stat
   } else{
+    mc.fit.actual <-  MCEst(outcomes,sim=FALSE,covars=NULL,pca=FALSE)
     real_att <- as.matrix(colMeans(mc.fit.actual$impact[,(t0+1):t_final,drop=FALSE][rownames(mc.fit.actual$impact) %in% treated.indices,], na.rm=TRUE)) # get mean post-period impact on treated
   }
   
   real_teststat <- ((1/sqrt(t_star)) * sum(abs(real_att)^q,na.rm = TRUE))^(1/q)
   
-  pvals <- 1- ((1/length(teststats) * sum(abs(teststats) < abs(real_teststat), na.rm=TRUE)))
+  pval <- 1- ((1/length(teststats) * sum(abs(teststats) < abs(real_teststat), na.rm=TRUE)))
   
-  return(pvals)
+  return(pval)
 }
 
 ## Invert for CIs
 
-ChernoCI <- function(t_star,c.range=c(-2,2), alpha=0.025, l=10, prec=1e-05, outcomes, ns=1000, q=1, m=NULL, permtype="iid") {
+ChernoCI <- function(t_star,c.range=c(-2,2), alpha=0.025, l=100, prec=1e-02, outcomes, ns=1000, q=1, treated.indices, 
+                     permtype="iid",sim=FALSE,covars=NULL,pca=FALSE) {
   require(matrixStats)
   # Calculate randomization test confidence interval.
   #
@@ -118,7 +115,7 @@ ChernoCI <- function(t_star,c.range=c(-2,2), alpha=0.025, l=10, prec=1e-05, outc
   #   c.range: Range of constant treatment effects. Default is c(-1,1).
   #   alpha: Two-sided significance level. Default is 0.025.
   #   l: Number of constant treatment effects. Default is 100.
-  #   prec: Level of precision in constant treatment effects. Default is 1e-05.
+  #   prec: Level of precision in constant treatment effects. Default is 1e-02.
   #
   # Returns:
   #   Vector of per-time-step randomization confidence interval
@@ -129,12 +126,12 @@ ChernoCI <- function(t_star,c.range=c(-2,2), alpha=0.025, l=10, prec=1e-05, outc
     # Sample sequence of treatment effects under the null
     delta.c <- sample(seq(c.range[1],c.range[2],by=prec),t_star,replace=FALSE, prob=p.weights)
     # Run permuation test
-    results <- ChernoTest(outcomes, ns, q, t.stat=delta.c, m, permtype)
+    results <- ChernoTest(outcomes, ns, q, t.stat=delta.c, treated.indices, permtype,sim=FALSE,covars=NULL,pca=FALSE)
     # If result not significant, delta.c is in confidence interval
     if(results>(2*alpha)){
       CI[,i] <- delta.c
     }else{
-      CI[,i] <- NAF
+      CI[,i] <- NA
     }
   }
   return(rowRanges(CI,na.rm=TRUE))

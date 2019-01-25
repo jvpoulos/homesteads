@@ -55,11 +55,9 @@ source(paste0(code.directory,'prepare-synth.R'))
 
 # mc-capacity.sh --> mc-capacity.R 
 
-# RF causal estimates on state capacity data
+# MC causal estimates on state capacity data
 
-source(paste0(gans.code.directory,'utils.R'))
-
-source(paste0(code.directory,'mc-capacity-estimates.R')) 
+# mc-capacity-estimates.sh --> mc-capacity-estimates.R 
 
 source(paste0(code.directory,'mc-capacity-plots.R')) 
 

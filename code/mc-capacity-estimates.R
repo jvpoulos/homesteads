@@ -13,7 +13,7 @@ library(missMDA)
 library(parallel)
 library(doParallel)
 
-cores <- 4 #detectCores()
+cores <- 14 #detectCores()
 
 cl <- parallel::makeForkCluster(cores)
 
@@ -22,8 +22,10 @@ doParallel::registerDoParallel(cores) # register cores (<p)
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Load data
-capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes.rds"))
-capacity.covars <- readRDS(paste0(data.directory,"capacity-covariates.rds"))
+capacity.outcomes <- readRDS("capacity-outcomes.rds")
+capacity.covars <- readRDS("capacity-covariates.rds")
+
+capacity.outcomes.list <- list("rev.pc"=capacity.outcomes[["rev.pc"]],"exp.pc"=capacity.outcomes[["exp.pc"]],"educ.pc"=capacity.outcomes[["educ.pc"]])
 
 MCEst <- function(outcomes,sim=FALSE,covars=NULL,pca=FALSE) {
   Y <- outcomes$M # NxT 
@@ -63,7 +65,7 @@ MCEst <- function(outcomes,sim=FALSE,covars=NULL,pca=FALSE) {
     
     est_model_MCPanel_w <- mcnnm_wc_cv(M=Y_obs, X = Z, Z=matrix(0L,0,0), mask=treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 2, num_lam_L=10, num_lam_H=10)
     est_model_MCPanel_w$Mhat <- est_model_MCPanel_w$L + replicate(T,est_model_MCPanel_w$u) + t(replicate(N,est_model_MCPanel_w$v))
-    est_model_MCPanel_w$impact <- (est_model_MCPanel_w$Mhat - Y*Y.missing)*(1-treat_mat)
+    est_model_MCPanel_w$impact <- (est_model_MCPanel_w$Mhat - Y)
     
     return(list("impact" = est_model_MCPanel_w$impact, "Mhat" = est_model_MCPanel_w$Mhat))
   } 
@@ -80,7 +82,7 @@ MCEst <- function(outcomes,sim=FALSE,covars=NULL,pca=FALSE) {
     nb <- estim_ncpPCA(data.frame(Y_obs*treat_mat_NA),ncp.max=5) # cv num components
     
     PCA_Mhat <- imputePCA(data.frame(Y_obs*treat_mat_NA), nb$ncp)$completeObs # regularized iterative PCA
-    PCA_impact <- (PCA_Mhat - Y*Y.missing)*(1-treat_mat)
+    PCA_impact <- (PCA_Mhat - Y)
     
     return(list("impact" = PCA_impact, "Mhat" = PCA_Mhat))
     
@@ -91,19 +93,29 @@ MCEst <- function(outcomes,sim=FALSE,covars=NULL,pca=FALSE) {
     
     est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
     est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
-    est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y*Y.missing)*(1-treat_mat)
+    est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y)
     
     return(list("impact" = est_model_MCPanel$impact, "Mhat" = est_model_MCPanel$Mhat))
   }
 }
 
 # Get NxT matrix of point estimates
-mc.stag.est <- mclapply(list(capacity.outcomes[["rev.pc"]],capacity.outcomes[["exp.pc"]],capacity.outcomes[["educ.pc"]]),
-                        MCEst, sim=FALSE,mc.cores=cores)
+
+#mc.est <- mclapply(capacity.outcomes.list,
+#                        MCEst,sim=FALSE, covars=NULL,pca=FALSE,mc.cores=cores)
 
 # Get NxT matrix of confidence intervals
 source("ChernoTest.R")
-pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
-ChernoTest(outcomes,  ns=10, treated.indices=pub.states, permtype="iid.block") # move real t stat outside of fn
 
-ChernoCI(t_star, l=10, outcomes, d, ns=10, q=1, permtype="iid.block")
+t0 <- which(colnames(capacity.outcomes[["rev.pc"]]$M)=="1869")-1 # n pre-treatment periods
+t_final <- ncol(capacity.outcomes[["rev.pc"]]$M) # all periods
+t_star <- t_final-t0
+
+pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
+
+mc.ci <-  mclapply(c("rev.pc","exp.pc","educ.pc"),
+                       function(x){
+                         ChernoCI(t_star, c.range=c(-5,5), alpha=0.025, l=100, prec=1e-02, capacity.outcomes[[x]], ns=1000, q=1, treated.indices=pub.states, permtype="iid",sim=FALSE,covars=NULL,pca=FALSE)
+                       }, mc.cores=cores) 
+
+saveRDS(mc.ci,"mc-ci.rds")
