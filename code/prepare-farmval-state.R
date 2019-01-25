@@ -28,6 +28,6 @@ farmval <- farmval[farmval$county==0,]
 farmval$state.abb <- setNames(state.abb, state.name)[tools::toTitleCase(tolower(farmval$name))]
 
 # merge 
-homestead.funds.long <- merge(homestead.funds.long, farmval[c("state.abb","year","faval","faval.lag")], 
-                            by.x=c("state_code","year2"),
-                            by.y=c("state.abb","year"), all.x=TRUE)
+#homestead.funds.long <- merge(homestead.funds.long, farmval[c("state.abb","year","faval","faval.lag")], 
+#                            by.x=c("state_code","year2"),
+#                            by.y=c("state.abb","year"), all.x=TRUE)

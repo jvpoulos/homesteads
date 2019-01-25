@@ -15,8 +15,6 @@ require(imputeTS)
 require(MCPanel)
 require(softImpute)
 
-source(paste0(gans.code.directory,'utils.R'))
-
 ## STATE-LEVEL DATA
 
 iso.funds <- c(1,3,31) # target iso codes
@@ -250,28 +248,8 @@ CapacityMatrices <- function(d, outcomes=TRUE) {
   
   d[colnames(d)%in%state.land.states] <- softImpute::complete(d[colnames(d)%in%state.land.states], x.fits ) # complete on full matrix
   
-  # cubic polynomial detrend estimated on pre-treatment period for treated
-  
-  if(outcomes){
-    d.detrend <- matrix(unlist(sapply(1:ncol(d), function (x){
-    if(x%in%which(colnames(d)%in%pub.states)){
-      PolyDetrend(d[,x], deg=3, which(rownames(d)=="1868"))
-    }else{
-      PolyDetrend(d[,x], deg=3)
-    }
-  })), nrow=nrow(d), ncol=ncol(d))
-  } else{
-    d.detrend <- matrix(unlist(sapply(1:ncol(d), function (x){
-      if(x%in%which(colnames(d)%in%pub.states)){
-        PolyDetrend(d[,x], deg=2, which(rownames(d)=="1870"))
-      }else{
-        PolyDetrend(d[,x], deg=2)
-      }
-    })), nrow=nrow(d), ncol=ncol(d))
-  }
-  
   # Matrix of observed entries (N x T)
-  d.M <- t(as.matrix(d.detrend))
+  d.M <- t(as.matrix(d))
   d.M[is.nan(d.M )] <- NA
   
   rownames(d.M) <- colnames(d)
