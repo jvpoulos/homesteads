@@ -47,7 +47,7 @@ MCEst <- function(outcomes,sim=FALSE,covars=NULL,pca=FALSE) {
   treat_indices <- as.numeric(indices[order(match(indices[,2], treat_indices_order))][1:length(treat_indices_order)]) # sort indices increasingly based on T0
   
   N_t <- length(treat_indices) # Number of treated units desired
-  T0 <- which(colnames(Y)=="1869")# The first treatment time
+  T0 <- 87 #which(colnames(Y)=="1869")# The first treatment time
   
   ## Simultaneuous (simul_adapt) or Staggered adoption (stag_adapt)
   if(sim){
@@ -113,9 +113,9 @@ t_star <- t_final-t0
 
 pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
 
-mc.ci <-  mclapply(c("rev.pc","exp.pc","educ.pc"),
+mc.ci.stag <-  mclapply(c("rev.pc","exp.pc","educ.pc"),
                        function(x){
                          ChernoCI(t_star, c.range=c(-5,5), alpha=0.025, l=100, prec=1e-02, capacity.outcomes[[x]], ns=1000, q=1, treated.indices=pub.states, permtype="iid",sim=FALSE,covars=NULL,pca=FALSE)
                        }, mc.cores=cores) 
 
-saveRDS(mc.ci,"mc-ci.rds")
+saveRDS(mc.ci.stag,"mc-ci-stag.rds")
