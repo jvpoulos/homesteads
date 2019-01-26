@@ -8,6 +8,7 @@ library(glmnet)
 library(ggplot2)
 library(latex2exp)
 library(missMDA)
+library(bcv)
 
 # Setup parallel processing 
 library(parallel)
@@ -26,9 +27,16 @@ capacity.outcomes <- readRDS("capacity-outcomes.rds")
 
 ## Reading data
 CapacitySim <- function(outcomes,d,sim){
-  Y <- outcomes[[d]]$M # NxT 
-  Y.missing <- outcomes[[d]]$M.missing # NxT 
-  treat <- outcomes[[d]]$mask # NxT masked matrix 
+  if(d=='educ.pc'){
+    Y <- outcomes[[d]]$M # NxT 
+    treat <- outcomes[[d]]$mask # NxT masked matrix 
+    
+    Y <- Y[,1:(ncol(Y)-3)] # discard last 3 years
+    treat <- treat[,1:(ncol(treat)-3)] # discard last 3 years
+  }else{
+    Y <- outcomes[[d]]$M # NxT 
+    treat <- outcomes[[d]]$mask # NxT masked matrix 
+  }
   
   ## Treated 
   pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
@@ -40,7 +48,6 @@ CapacitySim <- function(outcomes,d,sim){
   ## Working with the rest of matrix
   treat <- treat[!rownames(treat)%in%rownames(treat_y),] 
   Y <- Y[!rownames(Y)%in%rownames(treat_y),] 
-  Y.missing <- Y.missing[!rownames(Y.missing)%in%rownames(treat_y),] 
   
   ## Setting up the configuration
   N <- nrow(treat)
@@ -55,6 +62,7 @@ CapacitySim <- function(outcomes,d,sim){
   ## Matrices for saving RMSE values
   
   MCPanel_RMSE_test <- matrix(0L,num_runs,length(T0))
+  SVD_RMSE_test <- matrix(0L,num_runs,length(T0))
   PCA_RMSE_test <- matrix(0L,num_runs,length(T0))
   EN_RMSE_test <- matrix(0L,num_runs,length(T0))
   ENT_RMSE_test <- matrix(0L,num_runs,length(T0))
@@ -87,18 +95,30 @@ CapacitySim <- function(outcomes,d,sim){
       
       est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
       est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
-      est_model_MCPanel$msk_err <- (est_model_MCPanel$Mhat - Y*Y.missing)*(1-treat_mat)
+      est_model_MCPanel$msk_err <- (est_model_MCPanel$Mhat - Y)*(1-treat_mat)
       est_model_MCPanel$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_MCPanel$msk_err^2, na.rm = TRUE))
       MCPanel_RMSE_test[i,j] <- est_model_MCPanel$test_RMSE
+      
+      ## ------
+      ## SVD
+      ## ------
+      
+      k.cv <- cv.svd.wold(Y_obs, k = 5, maxrank = 5) # cv rank
+      k.min <- as.numeric(colnames(k$msep)[which.min(colMeans(k$msep))])
+      
+      SVD_Mhat <- impute.svd(Y_obs*treat_mat_NA, k.min)$x
+      SVD_msk_err <- (SVD_Mhat - Y)*(1-treat_mat)
+      SVD_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(SVD_msk_err^2, na.rm=TRUE))
+      SVD_RMSE_test[i,j] <- SVD_test_RMSE
       
       ## ------
       ## PCA
       ## ------
       
-      nb <- estim_ncpPCA(data.frame(Y_obs*treat_mat_NA),ncp.max=5) # cv num components
+      nb <- estim_ncpPCA(data.frame(Y_obs*treat_mat_NA), ncp.max=5, method="Regularized", method.cv="Kfold", nbsim =5, verbose = FALSE) # cv num components
       
       PCA_Mhat <- imputePCA(data.frame(Y_obs*treat_mat_NA), nb$ncp)$completeObs # regularized iterative PCA
-      PCA_msk_err <- (PCA_Mhat - Y*Y.missing)*(1-treat_mat)
+      PCA_msk_err <- (PCA_Mhat - Y)*(1-treat_mat)
       PCA_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(PCA_msk_err^2, na.rm=TRUE))
       PCA_RMSE_test[i,j] <- PCA_test_RMSE
       
@@ -107,7 +127,7 @@ CapacitySim <- function(outcomes,d,sim){
       ## -----
       
       est_model_EN <- en_mp_rows(Y_obs, treat_mat)
-      est_model_EN_msk_err <- (est_model_EN - Y*Y.missing)*(1-treat_mat)
+      est_model_EN_msk_err <- (est_model_EN - Y)*(1-treat_mat)
       est_model_EN_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_EN_msk_err^2, na.rm = TRUE))
       EN_RMSE_test[i,j] <- est_model_EN_test_RMSE
       
@@ -116,7 +136,7 @@ CapacitySim <- function(outcomes,d,sim){
       ## -----
       
       est_model_ENT <- t(en_mp_rows(t(Y_obs), t(treat_mat)))
-      est_model_ENT_msk_err <- (est_model_ENT - Y*Y.missing)*(1-treat_mat)
+      est_model_ENT_msk_err <- (est_model_ENT - Y)*(1-treat_mat)
       est_model_ENT_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ENT_msk_err^2, na.rm = TRUE))
       ENT_RMSE_test[i,j] <- est_model_ENT_test_RMSE
       
@@ -125,7 +145,7 @@ CapacitySim <- function(outcomes,d,sim){
       ## -----
       
       est_model_DID <- t(DID(t(Y_obs), t(treat_mat)))
-      est_model_DID_msk_err <- (est_model_DID - Y*Y.missing)*(1-treat_mat)
+      est_model_DID_msk_err <- (est_model_DID - Y)*(1-treat_mat)
       est_model_DID_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_DID_msk_err^2, na.rm = TRUE))
       DID_RMSE_test[i,j] <- est_model_DID_test_RMSE
       
@@ -133,7 +153,7 @@ CapacitySim <- function(outcomes,d,sim){
       ## ADH
       ## -----
       est_model_ADH <- adh_mp_rows(Y_obs, treat_mat)
-      est_model_ADH_msk_err <- (est_model_ADH - Y*Y.missing)*(1-treat_mat)
+      est_model_ADH_msk_err <- (est_model_ADH - Y)*(1-treat_mat)
       est_model_ADH_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ADH_msk_err^2, na.rm = TRUE))
       ADH_RMSE_test[i,j] <- est_model_ADH_test_RMSE
     }
@@ -142,6 +162,9 @@ CapacitySim <- function(outcomes,d,sim){
   ## Computing means and standard errors
   MCPanel_avg_RMSE <- apply(MCPanel_RMSE_test,2,mean)
   MCPanel_std_error <- apply(MCPanel_RMSE_test,2,sd)/sqrt(num_runs)
+  
+  SVD_avg_RMSE <- apply(SVD_RMSE_test,2,mean)
+  SVD_std_error <- apply(SVD_RMSE_test,2,sd)/sqrt(num_runs)
   
   PCA_avg_RMSE <- apply(PCA_RMSE_test,2,mean)
   PCA_std_error <- apply(PCA_RMSE_test,2,sd)/sqrt(num_runs)
@@ -162,24 +185,27 @@ CapacitySim <- function(outcomes,d,sim){
   
   df1 <-
     data.frame(
-      "y" =  c(DID_avg_RMSE, EN_avg_RMSE, ENT_avg_RMSE, MCPanel_avg_RMSE, PCA_avg_RMSE, ADH_avg_RMSE),
+      "y" =  c(DID_avg_RMSE, EN_avg_RMSE, ENT_avg_RMSE, MCPanel_avg_RMSE, SVD_avg_RMSE, PCA_avg_RMSE, ADH_avg_RMSE),
       "lb" = c(DID_avg_RMSE - 1.96*DID_std_error, 
                EN_avg_RMSE - 1.96*ENT_std_error,
                ENT_avg_RMSE - 1.96*ENT_std_error,
                MCPanel_avg_RMSE - 1.96*MCPanel_std_error, 
+               SVD_avg_RMSE - 1.96*SVD_std_error, 
                PCA_avg_RMSE - 1.96*PCA_std_error, 
                ADH_avg_RMSE - 1.96*ADH_std_error),
       "ub" = c(DID_avg_RMSE + 1.96*DID_std_error, 
                EN_avg_RMSE + 1.96*ENT_std_error,
                ENT_avg_RMSE + 1.96*ENT_std_error,
                MCPanel_avg_RMSE + 1.96*MCPanel_std_error, 
+               SVD_avg_RMSE + 1.96*SVD_std_error, 
                PCA_avg_RMSE + 1.96*PCA_std_error, 
                ADH_avg_RMSE + 1.96*ADH_std_error),
-      "x" = c(T0/T, T0/T ,T0/T, T0/T, T0/T, T0/T),
+      "x" = c(T0/T, T0/T ,T0/T, T0/T, T0/T, T0/T, T0/T),
       "Method" = c(replicate(length(T0),"DID"), 
                    replicate(length(T0),"HR-EN"),
                    replicate(length(T0),"VT-EN"),
                    replicate(length(T0),"MC-NNM"), 
+                   replicate(length(T0),"SVD"), 
                    replicate(length(T0),"PCA"), 
                    replicate(length(T0),"SC-ADH")))
   
@@ -205,12 +231,13 @@ CapacitySim <- function(outcomes,d,sim){
   if(to_save == 1){
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".png")
     ggsave(filename, plot = last_plot(), device="png", dpi=600)
-    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, EN_RMSE_test, ENT_RMSE_test, MCPanel_RMSE_test, PCA_RMSE_test, ADH_RMSE_test)
+    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, EN_RMSE_test, ENT_RMSE_test, MCPanel_RMSE_test, SVD_RMSE_test, PCA_RMSE_test, ADH_RMSE_test)
     colnames(df2)<-c("N", "T", "N_t", "is_simul", 
                      replicate(length(T0), "DID"), 
                      replicate(length(T0), "HR-EN"), 
                      replicate(length(T0), "VT-EN"), 
                      replicate(length(T0), "MC-NNM"), 
+                     replicate(length(T0),"SVD"), 
                      replicate(length(T0),"PCA"), 
                      replicate(length(T0),"SC-ADH"))
     
