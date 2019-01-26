@@ -85,7 +85,7 @@ SynthSim <- function(outcomes,d,sim){
       ## ------
       
       k.cv <- cv.svd.wold(Y_obs, k = 5, maxrank = 5) # cv rank
-      k.min <- as.numeric(colnames(k$msep)[which.min(colMeans(k$msep))])
+      k.min <- as.numeric(colnames(k.cv$msep)[which.min(colMeans(k.cv$msep))])
       
       SVD_Mhat <- impute.svd(Y_obs*treat_mat_NA, k.min)$x
       SVD_msk_err <- (SVD_Mhat - Y)*(1-treat_mat)
