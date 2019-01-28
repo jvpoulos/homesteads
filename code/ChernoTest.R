@@ -27,7 +27,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
         new_mc_data[[x]] <- new_mc_data[[x]][,reorder,drop=FALSE]
       }, simplify = FALSE,USE.NAMES = TRUE)
       
-      mc.fit <-  MCEst(new_mc_data,sim=FALSE,covars=NULL,pca=FALSE)
+      mc.fit <-  MCEst(new_mc_data)
       
       ## get treatment effect estimates
       
@@ -50,7 +50,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
         new_mc_data[[x]] <- new_mc_data[[x]][,reorder,drop=FALSE]
       }, simplify = FALSE,USE.NAMES = TRUE)
       
-      mc.fit <-  MCEst(new_mc_data,sim=FALSE,covars=NULL,pca=FALSE)
+      mc.fit <-  MCEst(new_mc_data)
       
       ## get treatment effect estimates
       
@@ -77,7 +77,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
         new_mc_data[[x]] <- new_mc_data[[x]][,reorder,drop=FALSE]
       }, simplify = FALSE,USE.NAMES = TRUE)
       
-      mc.fit <-  MCEst(new_mc_data,sim=FALSE,covars=NULL,pca=FALSE)
+      mc.fit <-  MCEst(new_mc_data)
       
       ## get treatment effect estimates
       
@@ -126,7 +126,7 @@ ChernoCI <- function(t_star,c.range=c(-2,2), alpha=0.025, l=100, prec=1e-02, out
     # Sample sequence of treatment effects under the null
     delta.c <- sample(seq(c.range[1],c.range[2],by=prec),t_star,replace=FALSE, prob=p.weights)
     # Run permuation test
-    results <- ChernoTest(outcomes, ns, q, t.stat=delta.c, treated.indices, permtype,sim=FALSE,covars=NULL,pca=FALSE)
+    results <- ChernoTest(outcomes, ns, q, t.stat=delta.c, treated.indices, permtype, sim=FALSE, covars=NULL, pca=FALSE)
     # If result not significant, delta.c is in confidence interval
     if(results>(2*alpha)){
       CI[,i] <- delta.c
