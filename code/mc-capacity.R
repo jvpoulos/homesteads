@@ -14,7 +14,7 @@ library(bcv)
 library(parallel)
 library(doParallel)
 
-cores <- 14 #detectCores()
+cores <- 18 #detectCores()
 
 cl <- parallel::makeForkCluster(cores)
 
@@ -27,15 +27,16 @@ capacity.outcomes <- readRDS("capacity-outcomes.rds")
 
 ## Reading data
 CapacitySim <- function(outcomes,d,sim){
+  Y <- outcomes[[d]]$M # NxT 
+  treat <- outcomes[[d]]$mask # NxT masked matrix 
+  
   if(d=='educ.pc'){
-    Y <- outcomes[[d]]$M # NxT 
-    treat <- outcomes[[d]]$mask # NxT masked matrix 
-    
-    Y <- Y[,1:(ncol(Y)-3)] # discard last 3 years
-    treat <- treat[,1:(ncol(treat)-3)] # discard last 3 years
-  }else{
-    Y <- outcomes[[d]]$M # NxT 
-    treat <- outcomes[[d]]$mask # NxT masked matrix 
+    Y <- Y[,1:(ncol(Y)-3)] # discard last 3 years (no variance)
+    treat <- treat[,1:(ncol(treat)-3)] 
+  }
+  if(d=='rev.pc'){
+    Y <- Y[,-which(colnames(Y)=="1931")] # discard 1931 (no variance)
+    treat <- treat[,-which(colnames(treat)=="1931")] 
   }
   
   ## Treated 
@@ -106,7 +107,7 @@ CapacitySim <- function(outcomes,d,sim){
       k.cv <- cv.svd.wold(Y_obs, k = 5, maxrank = 5) # cv rank
       k.min <- as.numeric(colnames(k.cv$msep)[which.min(colMeans(k.cv$msep))])
       
-      SVD_Mhat <- impute.svd(Y_obs*treat_mat_NA, k.min)$x
+      SVD_Mhat <- suppressWarnings(impute.svd(Y_obs*treat_mat_NA, k.min)$x)
       SVD_msk_err <- (SVD_Mhat - Y)*(1-treat_mat)
       SVD_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(SVD_msk_err^2, na.rm=TRUE))
       SVD_RMSE_test[i,j] <- SVD_test_RMSE
@@ -115,8 +116,7 @@ CapacitySim <- function(outcomes,d,sim){
       ## PCA
       ## ------
       
-      nb <- estim_ncpPCA(data.frame(Y_obs*treat_mat_NA), ncp.max=5, method="Regularized", method.cv="Kfold", nbsim =5, verbose = FALSE) # cv num components
-      
+      nb <- estim_ncpPCA(data.frame(Y_obs*treat_mat_NA), ncp.max=5, method="Regularized", method.cv="Kfold", scale=TRUE, nbsim =5, verbose = FALSE) # cv num components
       PCA_Mhat <- imputePCA(data.frame(Y_obs*treat_mat_NA), nb$ncp)$completeObs # regularized iterative PCA
       PCA_msk_err <- (PCA_Mhat - Y)*(1-treat_mat)
       PCA_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(PCA_msk_err^2, na.rm=TRUE))
@@ -246,7 +246,7 @@ CapacitySim <- function(outcomes,d,sim){
   }
 }
 
-foreach(d = c('rev.pc','educ.pc')) %dopar% {
+foreach(d = c('rev.pc')) %dopar% {
   foreach(sim = c(0,1)) %dopar% {
     CapacitySim(capacity.outcomes,d,sim)
   }
