@@ -107,7 +107,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
 ## Invert for CIs
 
 ChernoCI <- function(t_star,c.range=c(-2,2), alpha=0.025, l=100, prec=1e-02, outcomes, ns=1000, q=1, treated.indices, 
-                     permtype="iid",sim=FALSE,covars=NULL,pca=FALSE) {
+                     permtype=c("iid", "moving.block", "iid.block"),sim=FALSE,covars=NULL,pca=FALSE) {
   require(matrixStats)
   # Calculate randomization test confidence interval.
   #

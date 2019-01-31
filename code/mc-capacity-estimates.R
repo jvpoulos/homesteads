@@ -13,7 +13,7 @@ library(missMDA)
 library(parallel)
 library(doParallel)
 
-cores <- 28 #detectCores()
+cores <- 28#detectCores()
 
 cl <- parallel::makeForkCluster(cores)
 
@@ -23,7 +23,15 @@ RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Load data
 capacity.outcomes <- readRDS("capacity-outcomes.rds")
-capacity.covars <- readRDS("capacity-covariates.rds")
+#capacity.covars <- readRDS("capacity-covariates.rds")
+
+capacity.outcomes$educ.pc$M <- capacity.outcomes$educ.pc$M[,1:(ncol(capacity.outcomes$educ.pc$M)-3)] # discard last 3 years (no variance)
+capacity.outcomes$educ.pc$M.missing <- capacity.outcomes$educ.pc$M.missing[,1:(ncol(capacity.outcomes$educ.pc$M.missing)-3)]
+capacity.outcomes$educ.pc$mask <- capacity.outcomes$educ.pc$mask[,1:(ncol(capacity.outcomes$educ.pc$mask)-3)] 
+
+capacity.outcomes$rev.pc$M <- capacity.outcomes$rev.pc$M[,-which(colnames(capacity.outcomes$rev.pc$M)=="1931")] # discard 1931 (no variance)
+capacity.outcomes$rev.pc$M.missing <- capacity.outcomes$rev.pc$M.missing[,-which(colnames(capacity.outcomes$rev.pc$M.missing)=="1931")]
+capacity.outcomes$rev.pc$mask <- capacity.outcomes$rev.pc$mask[,-which(colnames(capacity.outcomes$rev.pc$mask)=="1931")] 
 
 capacity.outcomes.list <- list("rev.pc"=capacity.outcomes[["rev.pc"]],"exp.pc"=capacity.outcomes[["exp.pc"]],"educ.pc"=capacity.outcomes[["educ.pc"]])
 
@@ -65,7 +73,7 @@ MCEst <- function(outcomes,sim=FALSE,covars=NULL,pca=FALSE) {
     
     est_model_MCPanel_w <- mcnnm_wc_cv(M=Y_obs, X = Z, Z=matrix(0L,0,0), mask=treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 2, num_lam_L=10, num_lam_H=10)
     est_model_MCPanel_w$Mhat <- est_model_MCPanel_w$L + replicate(T,est_model_MCPanel_w$u) + t(replicate(N,est_model_MCPanel_w$v))
-    est_model_MCPanel_w$impact <- (est_model_MCPanel_w$Mhat - Y)
+    est_model_MCPanel_w$impact <- (est_model_MCPanel_w$Mhat - Y*Y.missing) # calc on non-imputed values)
     
     return(list("impact" = est_model_MCPanel_w$impact, "Mhat" = est_model_MCPanel_w$Mhat))
   } 
@@ -82,7 +90,7 @@ MCEst <- function(outcomes,sim=FALSE,covars=NULL,pca=FALSE) {
     nb <- estim_ncpPCA(data.frame(Y_obs*treat_mat_NA),ncp.max=5) # cv num components
     
     PCA_Mhat <- imputePCA(data.frame(Y_obs*treat_mat_NA), nb$ncp)$completeObs # regularized iterative PCA
-    PCA_impact <- (PCA_Mhat - Y)
+    PCA_impact <- (PCA_Mhat - Y*Y.missing) # calc on non-imputed values
     
     return(list("impact" = PCA_impact, "Mhat" = PCA_Mhat))
     
@@ -93,7 +101,7 @@ MCEst <- function(outcomes,sim=FALSE,covars=NULL,pca=FALSE) {
     
     est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
     est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
-    est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y)
+    est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y*Y.missing) # calc on non-imputed values
     
     return(list("impact" = est_model_MCPanel$impact, "Mhat" = est_model_MCPanel$Mhat))
   }
@@ -101,8 +109,8 @@ MCEst <- function(outcomes,sim=FALSE,covars=NULL,pca=FALSE) {
 
 # Get NxT matrix of point estimates
 
-#mc.est <- mclapply(capacity.outcomes.list,
-#                        MCEst,sim=FALSE, covars=NULL,pca=FALSE,mc.cores=cores)
+# mc.est <- mclapply(capacity.outcomes.list,
+#                         MCEst,sim=FALSE, covars=NULL,pca=FALSE,mc.cores=cores)
 
 # Get NxT matrix of confidence intervals
 source("ChernoTest.R")
@@ -115,7 +123,7 @@ pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA"
 
 mc.ci.stag <-  mclapply(c("rev.pc","exp.pc","educ.pc"),
                        function(x){
-                         ChernoCI(t_star, c.range=c(-50,50), alpha=0.025, l=100, prec=1e-02, capacity.outcomes[[x]], treated.indices=pub.states, permtype="iid.block",sim=FALSE,covars=NULL,pca=FALSE)
+                         ChernoCI(t_star, c.range=c(-10,10), alpha=0.025, l=75, prec=1e-02, capacity.outcomes[[x]], treated.indices=pub.states, permtype="moving.block",sim=FALSE,covars=NULL,pca=FALSE)
                        }, mc.cores=cores) 
 
 saveRDS(mc.ci.stag,"mc-ci-stag.rds")
