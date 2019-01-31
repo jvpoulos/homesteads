@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/dev/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: land-reform-sm.aux
+The style file: chicago.bst
+Database file #1: references.bib
+You've used 7 entries,
+            2861 wiz_defined-function locations,
+            650 strings with 6350 characters,
+and the built_in function-call counts, 4110 in all, are:
+= -- 350
+> -- 276
+< -- 0
++ -- 76
+- -- 91
+* -- 344
+:= -- 775
+add.period$ -- 21
+call.type$ -- 7
+change.case$ -- 48
+chr.to.int$ -- 6
+cite$ -- 7
+duplicate$ -- 112
+empty$ -- 255
+format.name$ -- 102
+if$ -- 746
+int.to.chr$ -- 2
+int.to.str$ -- 0
+missing$ -- 3
+newline$ -- 38
+num.names$ -- 68
+pop$ -- 31
+preamble$ -- 1
+purify$ -- 88
+quote$ -- 0
+skip$ -- 116
+stack$ -- 0
+substring$ -- 218
+swap$ -- 37
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 136
+warning$ -- 0
+while$ -- 63
+width$ -- 0
+write$ -- 93

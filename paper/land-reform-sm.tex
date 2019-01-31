@@ -1,0 +1,279 @@
+\title{Supporting materials for\\
+	``Building State Capacity through Public Land Disposal: An Application of Matrix Completion for Counterfactual Prediction''}
+
+\date{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set document class
+\documentclass[12pt]{article}
+
+% Define packages
+\usepackage{hyperref, url} 
+\usepackage{graphicx,amsfonts,psfrag,layout,subcaption,array,longtable,lscape,booktabs,dcolumn,amsmath,amssymb,amssymb,amsthm,setspace,epigraph,chronology,color,colortbl,caption,wasysym,diagbox,natbib,colortbl}
+\usepackage[]{graphicx}\usepackage[]{color}
+\usepackage[page]{appendix}
+\usepackage[section]{placeins}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage[margin={1in}]{geometry} %1 inch margins
+
+% Reference labels in the online appendix
+\usepackage{xr}
+\externaldocument{land-reform}
+
+% Footnotes stick at the bottom
+\usepackage[bottom]{footmisc}
+
+% New footnote characters
+\usepackage{footmisc}
+\DefineFNsymbols{mySymbols}{{\ensuremath\dagger}{\ensuremath\ddagger}\S\P
+   *{**}{\ensuremath{\dagger\dagger}}{\ensuremath{\ddagger\ddagger}}}
+\setfnsymbol{mySymbols}
+
+% New tabular environment
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\raggedleft\arraybackslash}X}% raggedleft column X
+
+% Define appendix 
+\renewcommand*\appendixpagename{Appendix}
+\renewcommand*\appendixtocname{Appendix}
+
+% Position floats
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.95}
+\renewcommand{\floatpagefraction}{0.35}
+\setcounter{totalnumber}{5}
+
+% Colors for highlighting tables
+\definecolor{Gray}{gray}{0.9}
+
+% Different font in captions
+\newcommand{\captionfonts}{\scriptsize}
+
+\makeatletter  % Allow the use of @ in command names
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{{\captionfonts #1: #2}}%
+  \ifdim \wd\@tempboxa >\hsize
+    {\captionfonts #1: #2\par}
+  \else
+    \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+%\makeatother   % Cancel the effect of \makeatletter
+ 
+% Set Spacing
+%\singlespacing
+%\doublespacing
+
+% Number assumptions
+\newtheorem*{assumption*}{\assumptionnumber}
+\providecommand{\assumptionnumber}{}
+\makeatletter
+\newenvironment{assumption}[2]
+ {%
+  \renewcommand{\assumptionnumber}{Assumption #1}%
+  \begin{assumption*}%
+  \protected@edef\@currentlabel{#1}%
+ }
+ {%
+  \end{assumption*}
+ }
+\makeatother
+
+% Macros
+\newcommand{\Adv}{{\mathbf{Adv}}}       
+\newcommand{\prp}{{\mathrm{prp}}}                  % How to define new commands 
+\newcommand{\calK}{{\cal K}}
+\newcommand{\outputs}{{\Rightarrow}}                
+\newcommand{\getsr}{{\:\stackrel{{\scriptscriptstyle\hspace{0.2em}\$}}{\leftarrow}\:}}
+\newcommand{\andthen}{{\::\;\;}}    %  \: \; for thinspace, medspace, thickspace
+\newcommand{\Rand}[1]{{\mathrm{Rand}[{#1}]}}       % A command with one argument
+\newcommand{\Perm}[1]{{\mathrm{Perm}[{#1}]}}       
+\newcommand{\Randd}[2]{{\mathrm{Rand}[{#1},{#2}]}} % and with two arguments
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator*{\plim}{plim}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\possessivecite}[1]{\citeauthor{#1}'s [\citeyear{#1}]} 
+
+\renewcommand*\contentsname{Table of contents}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{singlespacing}
+\maketitle \thispagestyle{empty}
+\tableofcontents \thispagestyle{empty}
+\end{singlespacing}
+
+\pagenumbering{roman}% Roman-numbered pages (start from i)
+
+\pagebreak
+\pagenumbering{arabic}% Arabic-numbered pages (start from 1)
+
+\section{Simulations} \label{sims-sm}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_1.png}
+		\caption{Simultaneous adoption} 
+	\end{subfigure}
+	~ 
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png}
+		\caption{Staggered adoption}
+	\end{subfigure}
+	\caption{Basque Country Data, $N_t = 8$. \label{basque}} 
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_1.png}
+		\caption{Simultaneous adoption} 
+	\end{subfigure}
+	~ 
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png}
+		\caption{Staggered adoption}
+	\end{subfigure}
+	\caption{West German Reunification Data, $N_t = 8$. \label{germany}} 
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_1.png}
+		\caption{Simultaneous adoption} 
+	\end{subfigure}
+	~ 
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_0.png}
+		\caption{Staggered adoption}
+	\end{subfigure}
+	\caption{State Government Education Spending Data, $N_t = 10$. \label{exp-pc}} 
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_1.png}
+		\caption{Simultaneous adoption} 
+	\end{subfigure}
+	~ 
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_0.png}
+		\caption{Staggered adoption}
+	\end{subfigure}
+	\caption{State Government Expenditures Data, $N_t = 10$. \label{exp-pc}} 
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_1.png}
+		\caption{Simultaneous adoption} 
+	\end{subfigure}
+	~ 
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png}
+		\caption{Staggered adoption}
+	\end{subfigure}
+	\caption{State Government Revenues Data, $N_t = 10$. \label{exp-pc}} 
+\end{figure}
+
+\pagebreak
+\section{Exploratory data analysis} \label{eda}
+
+\begin{table}[htbp]
+	\caption{Definitions and sources of variables.}
+	\label{dv-table}
+	\let\center\empty
+	\let\endcenter\relax
+	\centering
+	\resizebox{.45\width}{!}{\input{dv-table}}
+\end{table}
+
+\begin{figure}[htbp]
+		\includegraphics[width=0.85\textwidth]{plots/homestead-1870.png} 
+		\includegraphics[width=0.85\textwidth]{plots/homestead-1900.png} 
+	\caption{Log per-capita cumulative homesteads in 1870 and 1900, overlaid on 1911 county borders. Darker-colored counties have higher values than lighter-colored counties, and white-colored counties have missing values. States bordered in green are southern public land states and those bordered in purple are western public land states. County border data from \citet{long1995atlas}. \label{homestead-map}} 
+\end{figure}
+
+\begin{figure}[htbp]
+	\includegraphics[width=0.85\textwidth]{plots/gini-1870.png} 
+	\includegraphics[width=0.85\textwidth]{plots/gini-1900.png} 
+	\caption{Adjusted land inequality in 1870 and 1900, overlaid on 1911 county borders. See notes to Fig. \ref{homestead-map}.\label{gini-map}} 
+\end{figure}	
+
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width=\textwidth]{plots/acres-time.png}
+	\end{center}
+	\caption{Cumulative total acres (by patent type) disbursed in public land states, 1800 - 1950. \label{acres-time}} 
+\end{figure}
+
+\pagebreak
+\section{Estimates}
+
+
+\begin{figure}[htbp]
+\begin{center}
+		\includegraphics[width=\textwidth]{plots/did-state.png}
+\end{center}
+\caption{DD estimates of log per-capita cumulative homesteads on log per-capita state government finance, without including average farm values in the regression. See notes to Fig.~\ref{fig:did-state-robust}. \label{fig:did-state}}
+\end{figure}	
+
+\pagebreak
+\section{Causal mechanisms}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width=1\textwidth]{plots/ineq-capacity.png} 
+	\end{center}
+	\caption{Land inequality vs. log per-capita revenues and expenditures at the state-level, 1860-1950. Each point is a state-year observation. Lines represent generalized additive model (GAM) fits to the data and shaded regions represent corresponding 95\% confidence intervals.   \label{fig:ineq-capacity}}
+\end{figure} 
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{plots/rr-1862.png} \\
+		\includegraphics[width=0.7\textwidth]{plots/rr-1911.png} \\
+	\end{center}
+	\caption{Railroad lines in 1862 and 1911, overlaid on 1911 county borders. Railroad data from \cite{atack2013use} and county border data from \cite{long1995atlas}. \label{rr-map}} 
+\end{figure}
+
+\begin{table}[htbp]
+	\begin{center}
+				\caption{DD estimates: Impact of log per-capita cumulative homesteads (county-level). \label{dd-mechanisms}}
+		\resizebox{.8\width}{!}{\input{dd-mechanisms}}
+\end{center}
+	\footnotesize{Note: Values in brackets represent 95\% confidence intervals constructed using 1,000 state-stratified bootstrap samples.}
+\end{table}
+
+\pagebreak
+
+%Bibliography
+\bibliographystyle{chicago}
+\bibliography{references}
+%\begin{thebibliography}{}
+%\end{thebibliography}
+
+
+\itemize
+\end{document}

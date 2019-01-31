@@ -1,0 +1,373 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set document class
+\documentclass[12pt]{article}
+
+% Define packages
+\usepackage{hyperref, url} 
+\usepackage{graphicx,amsfonts,psfrag,layout,subcaption,array,longtable,lscape,booktabs,dcolumn,amsmath,amssymb,amssymb,amsthm,setspace,epigraph,chronology,color,colortbl,caption,wasysym,diagbox,natbib,colortbl,authblk}
+\usepackage[]{graphicx}\usepackage[]{color}
+\usepackage[page]{appendix}
+\usepackage[section]{placeins}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage[margin={1in}]{geometry} %1 inch margins
+
+\title{Building State Capacity through Public Land Disposal: An Application of Matrix Completion for Counterfactual Prediction} 
+\author[ ]{Jason Poulos\thanks{\emph{Address for correspondence:} Department of Political Science, 210 Barrows Hall \#1950, Berkeley, CA 94720-1950. \emph{Email:} \href{mailto:poulos@berkeley.edu}{\nolinkurl{poulos@berkeley.edu}}. The online Supplementary Material is available at \url{http://jvpoulos.github.io/papers/land-reform-sm.pdf}. I thank Sean Gailmard, Eric Schickler, Ross Mattheis, and Shom Mazumder for helpful comments. I acknowledge support of the National Science Foundation Graduate Research Fellowship (DGE 1106400). This work used the computer resources of Stampede2 at the Texas Advanced Computing Center (TACC) under an Extreme Science and Engineering Discovery Environment (XSEDE) startup allocation (TG-SES180010).}}
+\affil[ ]{University of California, Berkeley}
+\date{}
+\setcounter{Maxaffil}{0}
+\renewcommand\Affilfont{\itshape\small}
+
+% Reference labels in the online appendix
+\usepackage{xr}
+\externaldocument{land-reform-sm}
+
+% Footnotes stick at the bottom
+\usepackage[bottom]{footmisc}
+
+% Multicolumns for references
+
+\usepackage{multicol}
+
+% New footnote characters
+\usepackage{footmisc}
+\DefineFNsymbols{mySymbols}{{\ensuremath\dagger}{\ensuremath\ddagger}\S\P
+   *{**}{\ensuremath{\dagger\dagger}}{\ensuremath{\ddagger\ddagger}}}
+\setfnsymbol{mySymbols}
+
+%Rm thanks dagger
+\renewcommand\footnotemark{}
+%\renewcommand\footnoterule{}
+
+% New tabular environment
+\usepackage{tabularx}
+\newcolumntype{Y}{>{\raggedleft\arraybackslash}X}% raggedleft column X
+
+% Define appendix 
+\renewcommand*\appendixpagename{Appendix}
+\renewcommand*\appendixtocname{Appendix}
+
+% Position floats
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.95}
+\renewcommand{\floatpagefraction}{0.35}
+\setcounter{totalnumber}{5}
+
+% Colors for highlighting tables
+\definecolor{Gray}{gray}{0.9}
+
+% Different font in captions
+\newcommand{\captionfonts}{\scriptsize}
+
+\makeatletter  % Allow the use of @ in command names
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{{\captionfonts #1: #2}}%
+  \ifdim \wd\@tempboxa >\hsize
+    {\captionfonts #1: #2\par}
+  \else
+    \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+%\makeatother   % Cancel the effect of \makeatletter
+ 
+% Set Spacing
+\doublespacing
+
+% Number assumptions
+\newtheorem*{assumption*}{\assumptionnumber}
+\providecommand{\assumptionnumber}{}
+\makeatletter
+\newenvironment{assumption}[2]
+ {%
+  \renewcommand{\assumptionnumber}{Assumption #1}%
+  \begin{assumption*}%
+  \protected@edef\@currentlabel{#1}%
+ }
+ {%
+  \end{assumption*}
+ }
+\makeatother
+
+% Macros
+\newcommand{\Adv}{{\mathbf{Adv}}}       
+\newcommand{\prp}{{\mathrm{prp}}}                  % How to define new commands 
+\newcommand{\calK}{{\cal K}}
+\newcommand{\outputs}{{\Rightarrow}}                
+\newcommand{\getsr}{{\:\stackrel{{\scriptscriptstyle\hspace{0.2em}\$}}{\leftarrow}\:}}
+\newcommand{\andthen}{{\::\;\;}}    %  \: \; for thinspace, medspace, thickspace
+\newcommand{\Rand}[1]{{\mathrm{Rand}[{#1}]}}       % A command with one argument
+\newcommand{\Perm}[1]{{\mathrm{Perm}[{#1}]}}       
+\newcommand{\Randd}[2]{{\mathrm{Rand}[{#1},{#2}]}} % and with two arguments
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator*{\plim}{plim}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\newcommand{\possessivecite}[1]{\citeauthor{#1}'s (\citeyear{#1})} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document} 
+ 
+\begin{singlespacing}
+\maketitle  
+\end{singlespacing}
+
+\thispagestyle{empty}
+%\pagenumbering{roman}% Roman-numbered pages (start from i)
+
+%\pagebreak % abstract/keywords get own page 
+\begin{abstract}  
+\noindent
+How would the frontier have evolved in the absence of mid-nineteenth century homestead acts? I propose using recurrent neural networks (RNNs) to predict the counterfactual time-series of frontier state capacity had there been no homestead acts. Time-specific estimates signify that homestead acts positively impacted state government finances 50 years following their implementation. Exploiting variation in the intensity of homestead entries aggregated from 1.46 million individual land patents, difference-in-differences estimates imply that homesteads significantly increased state government revenue and education spending over a period extending into the twentieth century.\\
+%\vspace{10mm}
+%\emph{Keywords:} causal inference; machine learning; state capacity; synthetic control method; time-series prediction
+\end{abstract}	
+
+%Move introduction to second page
+\pagebreak
+\pagenumbering{arabic}% Arabic-numbered pages (start from 1)
+
+Political scientists are increasingly interested in patterns of state development across time and place. Several scholars \citep[e.g.,][]{bensel1990,murtazashvili2013political,frymer2014rush} theorize a relationship between mid-nineteenth century public land laws and the development of the national government. It is argued that laws designed to transfer public land to private individuals increased the bureaucratic capacity of the federal government to administer land and also reduced enforcement costs. 
+
+I argue that public land laws had long-lasting impacts on state capacity, or the ability of state governments to finance and implement policies \citep{besley2010state}. I explore the role of two major land policies in shaping state capacity: the Homestead Act (HSA) of 1862, which opened for settlement hundreds of millions of acres of western frontier land, and the Southern Homestead Act (SHA) of 1866, which opened over 46 million acres of land for homesteading.\footnote{I use the terminology of ``frontier" states interchangeably with ``public land states" throughout the paper. Public land states are states created out of the public domain. In the South, these states include Alabama, Arkansas, Florida, Louisiana, and Mississippi. Western public land states include the 25 states that comprise the Midwestern, Southwestern, and Western U.S. (except Hawaii).} I provide evidence that homesteads authorized under these laws had long-run positive impacts on the capacity of frontier state governments. 
+
+The view that the western frontier had long-lasting impacts on the evolution of democratic institutions can be traced to \citet{turner1956significance}. Turner's ``frontier thesis" posited that homestead laws acted as a ``safety valve'' for relieving pressure from congested urban labor markets in eastern states. The view of the frontier as a ``safety valve'' has been explored by \citet{ferrie1997migration}, who finds evidence in a linked census sample of substantial migration to the frontier by unskilled workers and considerable gains in wealth for these migrant workers. Homestead laws not only offered greater economic opportunities to eastern migrants, but also the scarcity of people on the western frontier meant that state and local governments competed with each other to attract migrants in order to lower labor costs for businesses and to increase land values and tax revenues \citep{engerman2005evolution}. Frontier governments offered migrants broad access to cheap land and property rights, unrestricted voting rights, and a more generous provision of schooling and other public goods. As \citet{engerman2005evolution} notes, the commitment of frontier state governments to offer greater political and economic opportunities for migrants was more prevalent in western states than in the South. 
+
+\citet{garcia2009myth} test the frontier thesis in a global context and conclude that the economic effect of the frontier depends on the quality of political institutions at the time of frontier expansion: frontier expansion promoted equitable outcomes only when societies were initially democratic; however, when institutional quality is weak, the existence of frontier land can yield worse development outcomes because non-democratic political elites can consolidate frontier lands for themselves. Historical institutional quality as a function of fiscal capacity and newspaper entry was considerably lower in southern public land states compared to southern border states and northern states \citep{grosjean2014}. Regional differences in institutional quality may explain the empirical findings of the present paper: estimates from a difference-in-differences (DD) model that leverages variation in both the timing and intensity of homesteads show that homesteads significantly lowered land inequality in western frontier counties, but had no significant impact on land inequality in southern counties. 
+
+%Articulate a clear theory from which empirical implications are drawn.
+	%Is this a story of sectoral redistribution, policy capture, rent-seeking by bureaucrats?
+
+The political economy literature is largely in agreement that inequality and state capacity are inversely related. State capacity refers not only to the ability to raise revenue, but also the state’s ability to implement policies such as public education through redistributive spending \citep{besley2010state}. The canonical model of \citet{meltzer1981rational} predicts a positive relationship between inequality and redistribution because greater inequality implies the median voter is poorer than the average voter, which in turn increases demand for redistribution in majority-rule elections. However, models that allow for differences in political influence across economic groups predict an inverse relationship. In \possessivecite{benabou2000unequal} model, the pivotal voter is wealthier than the median and has the power to block redistribution as inequality increases. In \possessivecite{besley2009origins} framework, greater economic power of the ruling class reduces investment in state capacity. Landed elites might choose an inefficient organization of the state in order to create inefficiencies in tax collection \citep{acemoglu2011emergence} or ``hollow-out'' tax institutions in order to constrain the state's ability to tax in the future \citep{suryanarayan2017hollowing}. Similarly, \citet{galor2009inequality} propose a model where wealthy landowners block education reforms because education favors industrial labor productivity and decreases the value in farm rents. Inequality in this context can be thought of as a proxy for the amount of \emph{de facto} political influence elites have to block reforms and limit the capacity of the state \citep{acemoglu2008persistence}.\footnote{The inverse relationship between land inequality and state capacity has been empirically demonstrated in the context of taxes, revenues, and public school spending at the county-level in 1890 and 1930 (\citep{ramcharan2010inequality}; \citep{vollrath2013inequality}).}
+
+%Inequality is thought to be influential in shaping redistributive policies; although, the expected direction of its influence is not conclusive. The canonical model of \citet{meltzer1981rational} predicts a positive relationship between inequality and redistribution, because greater inequality implies the median voter is poorer than the average voter, which in turn increases demand for redistribution in democratic societies with majority-rule elections. However, models that allow for differences in political influence across economic groups yield a nonlinearity in the relationship between inequality and redistribution.\footnote{Economic differences in political influence can arise from the comparative advantage of economic elites in solving collective action problems and benefitting from political intervention \citep{acemoglu2008persistence}. Elites have higher education attainment and earnings abilities \citep{bourguignon2000oligarchy}, and their resource advantage and common interests enable them work toward similar policy goals \citep{winters2009}.} In \possessivecite{benabou2000unequal} model, for instance, the pivotal voter is wealthier than the median and has the power to block redistribution as inequality increases. But when inequality is too high, the poor can impose redistribution on elites through `universal' majority voting \citep{perotti1993political,saint1993education}. 
+
+%\citet{galor2009inequality}, for instance, propose a model where landlords have the incentive to block human-capital enhancing education reforms in order to preserve a relatively cheap labor force. The model implies education reforms will not occur where land is abundant and unequally distributed, and thereby delay the transition from an agricultural to an industrial economy. However, land reforms that sufficiently reduce land inequality diminishes the economic incentives of landowners to block education reforms.\footnote{Qualitative evidence in the U.S. South points to the fact that southern governments did not prioritize early education reforms such as universal public schooling because of the inability of rural planters to capture the returns to human capital investment. Eight of the 11 states of the former Confederacy invested less than 50\% of the national average in per-pupil education expenditures as recently as 1940 \citep{wright1986old}[pp. 79-80]. According to \citet{wright1986old}, the South's historically low priority in education investment cannot be explained by its relative income position.} 
+
+%\citet{mares2015non} argue that higher levels of land inequality increases the likelihood of adopting new taxes in order to give the landed elite the ability to design a tax structure that shifts the tax burden from the agricultural sector to the manufacturing sector. The authors show empirically that countries with high levels of land inequality are more likely to adopt the income tax. 
+
+%Consistent with the findings of \citet{mares2015non}, I show that land inequality is positively related to state capacity, especially at higher levels of inequality. This finding is in contrast to several empirical studies that establish a negative relationship between land inequality and state capacity. These studies are based on analyses over shorter time periods. \citet{ramcharan2010inequality}, for instance, finds an inverse relationship between land inequality and county-level property tax revenues in 1890. The authors find that the negative relationship is especially large in rural counties, where landownership tends to be more concentrated. \citet{vollrath2013inequality} establish a negative relationship between land inequality and local property tax revenues in 1890 in northern rural counties, but not in southern rural counties. 
+
+The paper makes a methodological contribution in applying an alternative to the synthetic control method (SCM) \citep{abadie2010synthetic} for inferring the effect of a policy intervention on observational time-series data. Building on a new literature that uses machine learning algorithms such as L1-regularized linear regression \citep{doudchenko2016balancing} or deep neural networks \citep{2017arXiv171203553P} for counterfactual prediction, the proposed method applies the matrix completion method (MCM) proposed by \citet{athey2017matrix} to predict the treated unit time-series in the absence of the intervention. I perform placebo tests and find that the matrix completion method outperforms the SCM in terms of minimizing prediction error. 
+
+The paper proceeds as follows: in the section below, I overview the historical context of homestead laws and their relationship to state capacity and two potential causal mechanisms: land inequality and railroad development; Section~\ref{estimation} describes the proposed method of RNN-based counterfactual time-series prediction. Section~\ref{eval} proposes a method of statistical inference and evaluates the proposed method against the SCM. In Section~\ref{state-capacity}, I use the proposed method to estimate the long-run impacts of homestead acts on state capacity. Section~\ref{DD} reports DD estimates of the effect of cumulative homesteads on state capacity, land inequality, and railroad access. Section~\ref{discussion} concludes. 
+
+\setcounter{section}{1} % intro is 1
+\section{Historical background} \label{history}
+
+The 1862 HSA opened up hundreds of millions of acres of western public land for settlement. The HSA provides that any adult citizen --- including women, immigrants who had applied for citizenship, and freed slaves following the passage of the Fourteenth Amendment---  could apply for a homestead grant of 160 acres of frontier land. Applicants were required to live and make improvements on the land for five years before filing to claim a homestead land grant. Under the HSA, the bulk of newly surveyed land on the western frontier was reserved for homesteads, although the law did not end sales of public land. The explicit goal of the HSA was to liberalize the homesteading requirements set by the Preemption Act of 1841, which permitted individuals already inhabiting public land to purchase up to 160 acres at \$1.25 per acre before the land was put up for sale. The implicit goal was to promote rapid settlement on the western frontier and reduce federal government's enforcement costs \citep{allen1991homesteading}.
+
+In the pre-Reconstruction South, public land was not open to homestead but rather unrestricted cash entry, which permitted the direct sale of public land to private individuals of 80 acres or more for at least \$1.25 an acre. The 1866 SHA restricted cash entry and reserved for homesteading over 46 million acres of public land, or about one-third of the total land area in the five southern public land states \citep[pp. 13]{lanza1999agrarianism}. Similar to the HSA, homesteaders could patent up to 160 acres after five years of inhabiting and improving the land, but unlike the HSA, could not commute homestead entries to cash entry after six months. Congress repealed the cash entry restriction in 1876, and sharply reversed policy in 1889 by ending cash entry in all public land states except for Missouri \citep{gates1940federal}. In sum, the SHA followed the same application procedures as the HSA but differed in that it restricted cash sales of public land for the decade after its passage. 
+
+%Why HSA/SHA - upfront with timing 
+
+\subsection{Land monopolization and inequality} 
+
+About 150 million acres of public land, or about 7\% of the total area of frontier states, had already been sold by the time of the passage of the HSA.\footnote{Source: author's estimates using land patent data described in Section~\ref{state-capacity}.} By the turn of the twentieth century, 250 million acres (11\% of total land area) had been sold, while 100 million acres (4\% of total land area) had been claimed by homestead. In the South, about 50 million acres of public land, or about 31\% of the states' total acreage, had already been sold by before the passage of the SHA. A substantial rise in the number and total acreage, respectively, of homestead entries in the South and West occurred after the 1889 cash-entry restriction.
+
+Homestead policy may have failed to create a more equitable land distribution in part due to the accumulation of public land by speculators and corporations through corrupt practices, such as the use of dummy entry-men, which is the practice of paying individuals to stake out a homestead in order to extract resources from the land with no intention of filing for the final patent. In the South, dummy entry-men were used by timber and mining companies to extract resources while the cash entry restriction of the SHA was in effect. When the restriction was removed, there was no need for fraudulent filings because the larger companies could buy land in unlimited amounts at a nominal price \citep{gates1940federal, gates1979federal}. The same pattern of fraudulent filings existed in the West, where \citet[pps. 216-218]{murtazashvili2013political} argues that speculators benefited disproportionately from land laws because the economic balance of power tilted toward the wealthy.% \citet{gates1942role} characterizes western speculators who bought land in bulk prior to the 1889 restriction as being influential in state and local governments, resistant to paying taxes, and opposed to expenditures except for transportation facilities close to their land. 
+
+%Who are these landed elites in the Southern frontier that speculate with land titles, perverting the spirit of the Homestead Acts. How did these elites advance their interest? 
+	%This connects to the reference to Mares and Queralt 2015. 
+	%In that piece, landed elites legislated in favor of income taxes to shift tax burden away from the agricultural sector. 
+	%How did landed elites advance their interest in the public land states?
+	
+%In practice, public land laws were exploited by land speculators, ranchers, miners, and loggers, to accumulate public land and extract natural resources during the early stages of capitalist development \citep[pp. 217]{murtazashvili2013political}. 
+
+\subsection{What the railroad will bring us: More revenue}
+
+%From 1790 to the 1840s, state governments were the most active level of government in terms of public goods provision \citep{wallis2000american}. After 1842, infrastructure investments at the local level began to outpace state investments, ushering in an era of growth in local government investments built upon a broadening property tax base that lasted until the early 1930s. 
+
+Frontier states prioritized spending on banking and transportation projects in order to raise land values and attract more settlers \citep{sylla1998anatomy}. The promise of increasing land values and future tax revenues led frontier states to sharply increase borrowing in the mid-1830s by selling long-term bonds to finance transportation and banking investments. Frontier states in the Midwest (e.g., Illinois, Indiana, and Michigan) borrowed to invest in canals and railroads, while those in the South (e.g, Arkansas, Florida, and Mississippi) borrowed in order to charter state banks. Indiana, for instance, passed an 1836 act that added \$10 million in debt spending for transportation projects such as the Wabash and Erie Canal. The state also changed its property tax structure from a flat tax on land to an \emph{ad valorem} tax on all wealth in order to capture the expected increase in land values that would result from the projects \citep{wallis2004sovereign}.
+
+Because railroads expanded commerce by making it cheaper to trade, railroad access is theoretically expected to increase returns to farm land, and in turn increase the property tax base. \citet{donaldson2016railroads}, for instance, find that average farm values increased substantially as the railroad network expanded from 1870 to 1890, and estimate that the absence of railroads would have decreased farm land values by 60\%. \citet{atack2011impact} attribute two-thirds of the increase in improved farm acreage in Midwestern states to the expansion of railroad access in the decade prior to the Civil War. As evidence that railroad access increases the property tax base through higher land values, \citet{atack2012impact} find school attendance rates increased in counties that gained access to the rail network between 1850 and 1860. 
+
+%Speculators and railroad companies worked together to secure state, county, and municipal grants for local railroads. In \possessivecite{gates1939land} study of Indiana counties, for example, speculators fought county governments subsidizing railroads --- despite possibly benefiting from the lines --- and the speculators' land reduced the tax base of the area, so that counties could not sell bonds to finance railroad subsidies. 
+
+%The large-scale transfer of public land to railroad companies may have accelerated the increase in frontier land inequality. Land near railroad tracks were often high quality and railroad companies sold excess land to speculators \citep[pp. 216-7]{murtazashvili2013political}. Railroad companies were granted nearly 130 million acres of land between 1862 and 1871 by federal and state governments. About 20\% of the public domain was granted to states or sold or granted to railroads or other corporations, which is comparable to the amount of land granted or sold to homesteaders \citep{shanks2005homestead}. Thus, railroad access and land inequality on the frontier may have coevolved and worked jointly to increase state capacity.
+
+\section{Matrix completion for counterfactual prediction} \label{estimation}
+
+An important problem in the social sciences is estimating the effect of a binary intervention on an outcome over time. When interventions take place at an aggregate level (e.g., a state), researchers make causal inferences by comparing the post-intervention outcomes of affected (``treated'') units against the outcomes of unaffected  (``control'') units. In the current application, public land states are the treated units and state land states --- i.e., states that were not crafted from the public domain and were therefore not directly affected by the homestead acts --- serve as control units.\footnote{The control group includes states of the original 13 colonies, Maine, Tennessee, Texas, Vermont, and West Virginia.} A common approach to the problem is the SCM, which predicts the counterfactual outcomes for treated units by finding a convex combination of control units that match the treated units in term of lagged outcomes. The SCM predicts patterns across units that are assumed to remain constant over time. 
+
+This paper applies the MCM proposed by \citet{athey2017matrix} to predict counterfactual outcomes in a setting where multiple treated units are exposed to a binary intervention and the date of initial exposure to treatment may vary between treated units. Let $\mathbf{Y}$ denote a $N \times T$ matrix of outcomes for each unit $i, \ldots, N$ at time $t = 1, \ldots, T$. $\mathbf{Y}$ is incomplete because we observe each element $Y_{it}$ for only the control units and the treated units prior to first treatment exposure. Let $\mathbf{Y_{\mathrm{obs}}}$ define observed values of $Y$ and $\mathbf{Y_{\mathrm{mis}}}$ define missing values. Define the $N \times T$ binary matrix $\mathbf{M}$, where $M_{it} =1 $ if $Y_{it}$ is missing and $M_{it} = 0$ if $M_{it}$ is nonmissing.\footnote{The process that generates $\mathbf{M}$ is referred to the assignment mechanism in the causal inference literature \citep{imbens2015causal} and the missing data mechanism in missing data analysis \citep{little2014}.} This setup is motivated by the fundamental problem of causal inference \citep{holland1986statistics} in that we cannot directly observe counterfactual outcomes and we instead wish to predict missing values in $\mathbf{Y}$ for treated units with $M_{it}$. 
+
+In an observational setting, units are part of the assignment mechanism that generates $\mathbf{M}$ and patterns of missing data follow one of two specific structures. In the case of simultaneous adoption of treatment, a subset of units are exposed to treatment at time $T_0$ and every subsequent period. The second structure arises from staggered adoption \citep{athey2018design}, which differs from simultaneous adoption in that $T_0$ may vary across treated units. In either case, there are selection biases the missing values in $\mathbf{Y}$ are missing not at random (MNAR) because the probability of missingness may depend on the unobserved data, $f(\mathbf{M} | \mathbf{Y}, \phi) = f(\mathbf{M} | \mathbf{Y_{\mathrm{mis}}}, \phi)$ for all $\mathbf{Y_{\mathrm{mis}}}, \phi$, where $\phi$ denotes unknown parameters \citep{little2014}. Selection bias in the staggered adoption setting can occur, for example, if public land states are exposed to treatment (i.e., settled homesteads) earlier because they have higher quality land. Selection bias can occur in the simultaneous adoption setting due to latent characteristics of public land states that may be correlated with their outcomes. The goal is to accurately estimate the effect of a policy intervention despite incomplete and biased data due to selection bias. 
+
+The connection between the matrix completion problem and the problem of inferring the effect of a policy intervention on observational data has previously been explored for evaluating recommender systems under selection biases \citep{schnabel2016recommendations} and in the context of domain adaptation and covariate shift, where training and test data are drawn from different distributions (i.e, sample selection bias) \citep{huang2007correcting,cortes2008sample,bickel2009discriminative,cortes2010learning,sugiyama2012machine}. In both problems, weighting approaches are used to solve for selection bias. Weighting approaches would not apply in the setting considered because we cannot assume that the assignment mechanism is probabilistic.
+
+\subsection{Matrix completion and imputation methods}
+
+Imputation and matrix completion are two widely-used methods for reconstructing missing data. Imputation methods reconstruct missing data by capturing synchronous relationships among observed values at the same time across different outcomes but ignore the temporal relationships within outcomes. Commonly used imputation methods include prediction model imputation, which replaces missing values with the predicted values from a regression of $\mathbf{Y_{\mathrm{mis}}}$ on $\mathbf{Y_{\mathrm{obs}}}$. L1-regularized linear models (i.e., Lasso regression) \citep{tibshirani2012strong} are particularly useful for settings where $\mathbf{Y}$ is a fat matrix with $N \ll T$ due to its variable selection property: it tends to shrink all but one of the coefficients of correlated outcomes to zero. These methods rely on modeling assumptions about the nature of the data-generating process and assume that the missing values in $\mathbf{Y}$ are missing at random (MAR), or $f(\mathbf{M} | \mathbf{Y}, \phi) = f(\mathbf{M} | \mathbf{Y_{\mathrm{obs}}}, \phi)$ for all $\mathbf{Y_{\mathrm{mis}}}, \phi$. The MAR assumption mitigates the identifiability problems of MNAR because the probability of missingness depends only on the observed data \citep[Chap.~6]{tsiatis2007}. However, the MAR assumption is easily violated when considering the problem of counterfactual prediction due to the specific structure of treatment regimes and hence the structure of missing data. 
+
+Matrix completion methods \citep[e.g.,][]{candes2009exact, mazumder2010spectral,cai2010singular,recht2011simpler,chatterjee2015matrix,hastie2015matrix} exploit relationships within and across outcomes but treat $\mathbf{Y}$ as static and thus ignores the temporal component of the data. Matrix completion methods also typically assume the missing values in $\mathbf{Y}$ are MAR and sampled uniformly at random. Incorrect assumptions about missing data can yield biased predictions in probabilistic models like regularized matrix factorization \citep{marlin2009collaborative}. 
+
+% MC Methods:
+% candes2010matrix, recht2011simpler- NNM
+
+% eigenvalue methods --- e.g., singular value decomposition (SVD) and principal component analysis (PCA) - ilin2010practical
+
+%amjad2018robust - Robust Synthetic Control 
+%increases robustness by “de-noising” using matrix completion methods, and then using linear regression on the de-noised matrix, instead of relying on matrix norm regularizations
+
+\subsection{Inference}
+
+%SETUP: chernozhukov2017exact - An exact and robust conformal inference method for counterfactual and synthetic controls
+%	propose an alternative permutation approach that permutes the time periods rather than the treatment assignment
+%	The key assumption for the validity of this approach is unbiasedness of the estimator single treated unit set-up
+%   Inference challenges: 
+%	1 data typically exhibit dynamics and serial dependence
+%	2 because there is only one treated unit and the number of post-treatment periods, T∗, is typically small, treatment effects 	cannot be consistently estimated,
+%	even if the number of pre-treatment periods, T0, is very large
+%	3 the number of (potential) control units, J, is often of the same order as T0, which leads to a need for some regularizati
+
+% chernozhukov2018exact
+
+% chernozhukov2018inference
+
+%Potential outcomes framework + assumptions: ben2018augmented - The Augmented Synthetic Control Method
+%state land states not appropriate control units because their governments and markets had already been well-developed by the time of the passage of the homestead laws. Additionally, it is likely that state land states were indirectly affected by the out-migration of homesteaders from frontier states. 
+
+% Conformal inference: lei2018distribution
+
+% hahn2017synthetic - Synthetic control and inference
+
+The counterfactual time-series of public land states can simply be modeled as an autoregressive process in which $\mathbf{y}^{(t)}$ is linearly related to values at $p$ previous time-steps and a series of imperfectly predictable shocks \citep[pp. 246][]{little2014statistical}:
+
+\begin{equation}
+(\mathbf{y}^{(t)} |  \mathbf{y}^{(1)}, \mathbf{y}^{(2)}, \ldots, \mathbf{y}^{(t-1)}, \theta) \sim \mathcal{N}(\alpha + \beta_1 \mathbf{y}^{(t-1)} + \ldots + \beta_p \mathbf{y}^{(t-p)}, \sigma^2), \label{eq:ar}
+\end{equation}
+
+where $\theta$ is a set of estimable parameters consisting of constant term $\alpha$, regression coefficients $\beta_1, \beta_2, \ldots, \beta_p$, and error variance $\sigma^2$. Least squares estimates of the parameters can be recovered by regressing 
+
+\begin{equation}
+\mathbf{y}^{(t)} = \mathbf{x}^{(t)} = (\mathbf{y}^{(t-1)}, \mathbf{y}^{(t-2)}, \ldots, \mathbf{y}^{(t-p)}) \hspace{10mm} \forall \, t = p, p+1, \ldots, \tau-1. \label{eq:ar-pre}
+\end{equation}
+
+The estimated parameters are then used to predict the counterfactual time-series of treated unit outcomes: 
+
+\begin{equation}
+\mathbf{\hat{y}}^{(t)} = \mathbf{x}^{(t)} \hspace{10mm} \forall \, t = n+1, \ldots, \tau, \label{eq:ar-post}
+\end{equation} 
+
+where $n < \tau$ denotes the last time-step prior to a discrete intervention. The key assumption of this approach is that the relationship between controls $\mathbf{x}^{(t)}$ and the treated time-series $\mathbf{y}^{(t)}$ modeled prior to the intervention persists after the intervention. Under this assumption, the inferred causal effect of the intervention on the treated group is the difference between the observed time-series of the treated units and the counterfactual time-series that would have been observed in the absence of the intervention:
+
+\begin{equation}
+\mathbf{\hat{\phi}}^{(t)} = \mathbf{y}^{(t)} - \mathbf{\hat{y}}^{(t)} \hspace{10mm} \forall \, t = n+1, \ldots, \tau. \label{eq:pointwise}
+\end{equation}
+
+This treatment effect is calculated at every post-period time-step and is thus useful for understanding the temporal evolution of the causal effect.
+
+%\section{Model evaluation and statistical inference} \label{eval}
+
+When the counterfactual time-series is known, RNNs can be evaluated in terms of the MSPE between the predicted and actual post-intervention time-series among control units. Specifically, I calculate:
+
+\begin{equation}
+\text{MSPE} = \frac{1}{\tau-n} \sum_{n+1: \tau}^{\tau} \left(\hat{\phi}^{(t)} \right)^2, \label{mspe}
+\end{equation} where $\hat{\phi}^{(t)}$ is defined in Eq.~\ref{eq:pointwise}. 
+
+Eq.~\ref{mspe} measures the accuracy of the estimated treatment effect but does not tell us anything about the statistical significance of the estimates. \citet{abadie2010synthetic} propose a randomization inference approach for calculating the exact distribution of placebo effects under the null hypothesis. Following \citet{cavallo2013catastrophic}, I extend this method to the case of multiple placebo treated units by constructing a distribution of \emph{average} placebo effects according to the procedure described in SM-Section~\ref{oa-inference}.
+
+\subsection{Simulations} \label{sims}
+
+% troyanskaya2001missing - SVD
+% josse2012handling - (regularized) iterative PCA
+
+I evaluate the proposed RNN-based approach on three datasets common to the SCM literature: \possessivecite{abadie2003economic} study of the economic impact of terrorism in the Basque Country during the late 1960s ($J=16$); \possessivecite{abadie2010synthetic} study of the effects of a large-scale tobacco control program implemented in California in 1988 ($J=38$); and \possessivecite{abadie2015comparative} study of the economic impact of the 1990 German reunification on West Germany ($J=16$). In each dataset, I remove the actual treated unit and evaluate the models on their ability to produce low error rates on control units; i.e., estimating treatment effects of zero.\footnote{I also calculate a single false positive rate by $\text{FPR} = \frac{\text{FP}}{(\tau-n) \times J}$, where $\text{FP}$ is the number of false positives defined as the number of $p$-values less than or equal to $\alpha=0.5$ and $J$ is the number of placebo treated units.} Table~\ref{fig:benchmark-table} reports the results of the placebo tests and shows that either encoder-decoder networks or LSTM outperform SCM on each of the three datasets in terms of having the lowest MSPE, with false positive rates comparable to SCM. 
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_1.png}
+		\caption{Simultaneous adoption} 
+	\end{subfigure}
+	~ 
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png}
+		\caption{Staggered adoption}
+	\end{subfigure}
+	\caption{California Smoking Data, $N_t = 19$. \label{california}} 
+\end{figure}
+
+\section{Impact of homestead acts on state capacity} \label{state-capacity}
+
+%Mention frontier states with pre-treatment obs
+%The staggered adoption setting is appropriate for the current application due to the fact the lag in time between passage of the homestead acts and the time at which the first homesteads were settled varies across public land states.
+
+Did homestead acts impact state capacity over the long-run? I estimate the causal impacts of homestead acts on frontier state capacity as measured by state government finances.\footnote{Variables and data sources are described in detail in Fig. SM-\ref{dv-table}.} State-level measures of total revenue and expenditure are drawn from the records of 48 state governments during the period of 1790 to 1915 and the records of 16 state governments during the period of 1933 to 1937 \citep{sylla1993sources,sylla1995sourcesa,sylla1995sourcesb}. In addition, I draw directly from U.S. census reports information on state government revenue and expenditure for the years 1902, 1913, 1932, 1942, 1962, 1972, and 1982  \citep{haines2010}. I also create from the state government expenditure sub-classifications an additional state-level measure of state government education spending. I calculate per-capita measures of state government finances by taking the ratio of each measure to the total free population, which is provided in the decennial census \citep{haines2010} and take the mean of each measure  across southern or western public land states to form treated unit time-series.
+
+For each outcome, I train a separate encoder-decoder network to predict the counterfactual time-series of public land states, using only their previous history to generate predictions. Similar to the placebo tests on the SCM datasets, I evaluate the models two ways: first, I monitor the loss over 2,000 training epochs and save the model weights with the lowest error on a validation set consisting of the final 10\% of the time-series.\footnote{The models use both dropout and L2 regularization to control for overfitting on the training set. Figs. SM-\ref{encoder-decoder-loss-capacity-south} and SM-\ref{encoder-decoder-loss-capacity-west} record the training history of each model.} Second, I calculate MSPE (Eq.~\ref{mspe}) on $J=18$ state land states that serve as placebo treated units. Encoder-decoder networks outperform the baseline LSTM in terms of minimizing the MSPE in placebo tests (Tables SM-\ref{encoder-decoder-mpse} and SM-\ref{lstm-mpse}).
+
+Fig.~\ref{state-capacity-plot} plots the observed and counterfactual time-series for each outcome and region. Counterfactual predictions of state government finances in the absence of homestead acts generally tracks the observed time-series until the turn of the century, at which the counterfactual flattens and diverges from the increasing observed time-series. This delay can potentially be explained by the facts that homesteaders were required to make improvements on land for five years before filing a grant and homestead entries did not substantially accumulate until after the 1889 cash-entry restriction (Figs. SM-\ref{homestead-map} and SM-\ref{acres-time}). 
+
+Taking the difference between the observed and predicted time-series (Eq.~\ref{eq:pointwise}) yields time-specific estimates of treatment effects. Fig.~\ref{state-capacity-plot-effects} plots the temporal evolution of treatment effect estimates over the entire post-period and 95\% randomization confidence intervals that are constructed by inverting the randomization test described in the previous section.\footnote{Fig. SM-\ref{state-capacity-plot-pvalues} plots the time-specific estimates of randomization $p$-values inferred from the exact distribution of average placebo effects under the null hypothesis.} Fifty years after its passage, the estimated impact of the HSA on western state government education spending and revenue is 0.005 log points [-0.16, 0.19], and 0.61 log points [-0.19, 1.53], respectively. The confidence intervals surrounding these time-specific estimates contain zero, which implies that the estimated impacts are not significantly more extreme than the placebo treated effects estimated at the same time-step. The confidence interval on the estimated impact of the HSA on western state government expenditure in 1912, an increase of 0.17 log points [0.004, 0.3], does not contains zero, which implies that the estimated impact is significantly more extreme than the placebo treated effects. 
+
+An important characteristic of the estimates plotted in Fig.~\ref{state-capacity-plot-effects} is the progressive widening of confidence intervals. Intuitively, counterfactual predictions become more uncertain as we move farther into the future. In the present application, confidence intervals may become implausibly wide because the post-period extends well into the twentieth century. In order to compare with the DD estimates described in the section below, I average over the entire post-period and find no evidence that the HSA impacted western state government education spending, 0.07 [-0.32, 0.46], expenditure, 0.16 [-0.21, 0.57], or revenue, 0.05 [-0.33, 0.46]. Estimates on the impact of the SHA on state capacity in the South are in the same direction and similar magnitudes. 
+
+\section{DD estimates} \label{DD}
+
+The proposed method estimates the impact of a discrete event on a continuous outcome. However, in this application a continuous form of treatment is available: homestead entries. I derive information on homestead entries from land patent records, which provide information on the initial transfer of land titles from the federal government, including the patentee's name, issue date, number of acres, and location of the land title. The land patent records describe over 5 million transfers of land from the U.S. government to states, firms, and individuals. Since the records are organized by authorization, it is possible to extract information from the approximately 1.46 million records authorized under the HSA.\footnote{Land patent records are collected by the General Land Office (GLO) and are accessible online: \url{https://glorecords.blm.gov}. Land patents issued in southern public land states under the HSA authorization are presumed to be due to the SHA.}
+
+I estimate the following DD model, where the first difference is the change in patterns of state capacity before and after implementation of the HSA or SHA, and the second difference comes from the intensity of homestead entries across frontier states:
+
+\begin{equation} 
+y_{s, t} =  \text{states}_s + \gamma \, d_t + X'_{s,t} \, \beta_t + \delta \, (d_t \cdot \text{homesteads}_s) + \epsilon_{s, t}. \label{eq:dd} 
+\end{equation} On the left-hand-side, $y_{s, t}$ is an outcome measured in state $s = 1, \ldots, N$, during period $t$. On the right-hand-side, $\text{states}_s$ is a vector of states dummies to control for unobserved heterogeneity across states; $d_t$ is a binary variable that takes the value of 1 after the enactment of the SHA in 1866 or the HSA in 1866, and 0 otherwise; and $\text{homesteads}_{s, t}$ is the log per-capita cumulative number of homestead entries up to period $t$. The estimated impact of the intervention is $\hat{\delta}$, which corresponds to the interaction term.\footnote{I use state-stratified bootstrapped samples to construct nonparametric confidence intervals for $\hat{\delta}$. \citet{bertrand2004much} show that stratified bootstrap can be used to compute consistent standard errors when the number of groups is sufficiently large.} $X'_{s,t}$ is the log average value of farm land, which is included to ensure that $\hat{\delta}$ is not biased by parallel trends in agricultural productivity. In theory, we would expect that homesteaders migrate to more valuable land and thus excluding average farm values from the regression would result in overestimating the actual impact of homesteads. 
+
+I apply the DD estimator on two unbalanced state-year panel datasets: the panel of southern public land states spans  from 1823 to 1982 and has 38 observations prior to the enactment of the SHA. The panel of western public land states spans from 1810 to 1982 and has 52 pre-intervention years. The treatment effect estimates, summarized in Fig.~\ref{fig:did-state-robust}, indicate that per-capita cumulative homesteads significantly increase per-capita revenue in western states by 0.02 log points [0.0007, 0.04] and has a nonsignificant impact on revenue in southern states. Estimates on per-capita expenditure in the South and West are also nonsignificant. Per-capita cumulative homesteads significantly raise education spending in the South by 0.17 log points [0.03, 0.28], while having no impact on education spending in the West. As expected, withholding average farm values from the DD specification biases treatment effect estimates upwards (Fig.~SM-\ref{fig:did-state-robust}).
+
+It should be emphasized that the DD estimator faces major disadvantages. First, the parallel trends assumption is highly restrictive and cannot be empirically verified. Second, the model assumes i.i.d. errors, which ignores the temporal aspect of the design and understates the standard errors for $\hat{\delta}$ when the regression errors are serially correlated, or $\mathrm{Corr} (\epsilon_{s, t}, \epsilon_{s, t-1}) \neq 0$, which can arise when the time-series lengths are not sufficiently long to reliably estimate the data generating process \citep{bertrand2004much}. Lastly, the DD estimator returns only a single estimate of the treatment effect and thus does not allow researchers to chart the temporal evolution of the treatment effect. 
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width=\textwidth]{/media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.png}
+	\end{center}
+	\caption{DD estimates of log per-capita cumulative homesteads on log per-capita state government finances. Lines represent 95\% confidence intervals are constructed using 1,000 state-stratified bootstrap samples. Lines with triangles represent western public land state estimates and lines with circles represent southern public land state estimates.  \label{fig:did-state-robust}}
+\end{figure}
+
+%+Farm values *cumulative*
+%south-educpc: 0.17 [0.03, 0.28]
+%south-exppc: 0.03 [-0.03, 0.09]
+%south-revpc: 0.03 [-0.03, 0.09]
+%
+%west-educpc: -0.005 [-0.04, 0.03]
+%west-exppc: 0.01 [-0.007, 0.03]
+%west-revpc: 0.02 [0.0007, 0.04]
+
+\subsection{Mechanisms: Inequality and railroads}  \label{mechanisms}
+
+What are the channels through which homesteads affect state capacity? Land inequality is expected to influence state capacity, although the direction of influence is theoretically ambiguous. To test whether homesteads affected future land inequality in frontier counties, I calculate a commonly-used measure of land inequality based on the Gini coefficient of census farm sizes. Gini-based land inequality measures are commonly used as proxy for the \emph{de facto} bargaining power of landed elites \citep[e.g.,][]{boix2003democracy,ziblatt2008does,ansell2015}.\footnote{The Gini coefficient will underestimate land inequality in counties with high shares of propertyless farmers because tenant farms are included in the farm size data, which is problematic because farms can be operated by different tenants but owned by the same landlord. Following the procedure of \citet{vollrath2013inequality}, I correct for this problem by adjusting the farm Gini coefficient $G$ by the ratio of farms to adult males, $p$. The adjusted coefficient is calculated as $G^A = p G + (1-p)$.}% In Fig. SM-\ref{fig:ineq-capacity}, a bivariate regression model yields a positive relationship between land inequality and state government finances during the period of 1860 to 1950, especially at higher levels of inequality. This relationship points to inequality as a potential mechanism underlying the positive impacts on state capacity attributable to homesteads, although this relationship is subject to reverse causality because state policies determining expenditures and revenue can also shape the distribution of landownership. 
+
+Table SM-\ref{dd-mechanisms} presents DD estimates of the impact of log per-capita cumulative homesteads on land inequality or railroad access during the period of 1860 to 1950.\footnote{Since railroad access is measured every year, I take the mean of railroad access to the nearest decennial year; e.g., $y_{s, 1870}$ is the mean of the access measure between 1862 and 1870 in county $s$.} Farm values are included in the regression as a proxy for agricultural productivity, which might be associated with farm sizes approaching ideal scale and therefore land inequality. I estimate that homesteads significantly decreased land inequality in western frontier state counties: a 10\% increase in log per-capita cumulative homesteads is expected to lower land inequality by -0.0004 [-0.0005, -0.0002] points. The estimated impact on land inequality in the South is in the same direction, but not significant. 
+
+Railroad access is theoretically expected to increase the capacity of county and state governments by increasing the returns to farm land. I create the railroad access measure using digitized railroad maps provided by \citet{atack2013use}, which contain information on the year that each rail line was built. I overlay the railroad track map over historical county borders and calculate a binary variable indicating whether railroad access existed within a county for each year. Using these data, I estimate that 29\% of counties had railroad access in 1862 and 91\% had access by 1911 (Fig. SM-\ref{rr-map}).\footnote{The railroad access measure defines access with respect to county boundaries, which \citet{atack2012impact} point out has limitations because a county without access might be adjacent to one with access and county boundaries frequently changed over time.} DD estimates of the effect of log per-capita cumulative homesteads on railroad access (value between 0 and 1) can be interpreted as follows: a 10\% increase in log per-capita cumulative homesteads is expected to increase railroad access in southern counties by 0.003 [0.001, 0.005] points and by 0.009 [0.007, 0.01] points in western counties. I include farm values in the specification as a proxy for economic development, which is expected to increase state capacity and correlate with other measures of development like railroad access. 
+
+\section{Conclusion} \label{discussion} 
+
+Which historical processes are responsible for present-day differences in the capacity of state governments? For example, there exists considerable variation in both the amount and revenue sources of state and local government funding for public education: New York spent almost twice the national average per-pupil, primarily using local (54\%) and state (41\%) revenue sources, while Idaho spent about 60\% of the national average from a combination of state (63\%), local (26\%) and federal (11\%) sources.\footnote{Source: 2014 Annual Survey of School System Finances, U.S. Census Bureau. \url{https://www.census.gov/programs-surveys/school-finances.html}.}
+
+The findings of this paper signify that mid-nineteenth century homestead acts had positive impacts on frontier state government finances that can help explain contemporary differences in state capacity. RNN estimates imply that the HSA had a significant and positive impact on western state government expenditure about 50 years following its implementation. The delayed impacts can be explained by the facts that settlers were required to make improvements on land for five years before filing a grant and also homesteads did not substantially accumulate until after the 1889 cash-entry restriction. I find no evidence that the homestead acts had a significant impact on the state capacity of frontier states on average over the entire-post period that extends into the twentieth century. The inability to identify a significant average impact can be attributed to the progressive widening of confidence intervals over the post-period: the uncertainty of making counterfactual predictions based on the previous histories of (placebo) treated units increases as we move farther from the intervention year. 
+
+I also estimate a DD model that leverages variation in both the timing and the intensity of cumulative homesteads across public land states and find significant positive impacts on state capacity. I include in the DD specification average farm values in order to control for homesteaders seeking more productive lands. The DD estimates imply that per-capita cumulative homesteads significantly increase per-capita revenue in western states by 0.02 log points and raise education spending in the South by 0.17 log points. The DD estimates are of similar magnitude and direction than the RNN estimates averaged over the post-period, although the confidence intervals around the DD estimates are considerably more narrow and possibly overoptimistic due to serial correlation in the DD regression errors.
+
+I explore land inequality and railroad access as possible causal mechanisms underlying the relationship between land reform and state capacity. DD estimates reveal that per-capita cumulative homesteads lowered land inequality in western counties, but did not significantly alter the distribution of land ownership in southern counties. Railroad access is theoretically expected to expand the property tax bases of state governments by increasing the returns to agricultural land. I find that cumulative homesteads significantly increased railroad access in frontier counties over a period extending into the twentieth century. 
+
+This paper makes a methodological contribution in proposing a novel alternative to SCM for estimating the effect of a policy intervention on an outcome over time in settings where appropriate control units are unavailable. In placebo tests, RNN-based models outperform SCM in terms of predictive accuracy while yielding a comparable proportion of false positives. RNNs have advantages over SCM in that they are structured for sequential data and can learn nonconvex combinations of predictors, which is useful when the data-generating process underlying the outcome depends nonlinearly on the history of predictors.% Future work might formalize a set of assumptions necessary for the approach to be valid and provide further proof of consistency of the estimator under these assumptions.
+
+\newpage
+
+%Bibliography
+\bibliographystyle{chicago}
+\bibliography{references}
+%\begin{thebibliography}{}
+%\end{thebibliography}
+
+
+\itemize
+\end{document}

@@ -1,0 +1,4 @@
+\contentsline {section}{\numberline {1}Simulations}{1}{section.1}
+\contentsline {section}{\numberline {2}Exploratory data analysis}{3}{section.2}
+\contentsline {section}{\numberline {3}Estimates}{7}{section.3}
+\contentsline {section}{\numberline {4}Causal mechanisms}{8}{section.4}
