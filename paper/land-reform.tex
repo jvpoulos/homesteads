@@ -202,13 +202,11 @@ In an observational setting, units are part of the assignment mechanism that gen
 
 \subsection{Matrix completion and imputation methods}
 
-Imputation and matrix completion are two widely-used methods for reconstructing missing data. Imputation methods reconstruct missing data by capturing synchronous relationships among observed values at the same time across different outcomes but ignore the temporal relationships within outcomes. Commonly used imputation methods include prediction model imputation, which replaces missing values with the predicted values from a regression of $\mathbf{Y_{\mathrm{mis}}}$ on $\mathbf{Y_{\mathrm{obs}}}$. These methods rely on modeling assumptions about the nature of the data-generating process and assume that the probability of missingness depends only on the observed data, $f(\mathbf{M} | \mathbf{Y}, \phi) = f(\mathbf{M} | \mathbf{Y_{\mathrm{obs}}}, \phi)$ for all $\mathbf{Y_{\mathrm{mis}}}, \phi$. This missing at random (MAR) assumption is easily violated when considering the problem of counterfactual prediction due to the dependency structure in $\mathbf{M}$. 
+Imputation and matrix completion are two widely-used methods for reconstructing missing data. Imputation methods reconstruct missing data by capturing synchronous relationships among observed values at the same time across different outcomes but ignore the temporal relationships within outcomes. Commonly used imputation methods include prediction model imputation, which replaces missing values with the predicted values from a regression of $\mathbf{Y_{\mathrm{mis}}}$ on $\mathbf{Y_{\mathrm{obs}}}$, and data analysis techniques such as principal component analysis (PCA) \citep{ilin2010practical}. These methods rely on modeling assumptions about the nature of the data-generating process and assume that the probability of missingness depends only on the observed data, $f(\mathbf{M} | \mathbf{Y}, \phi) = f(\mathbf{M} | \mathbf{Y_{\mathrm{obs}}}, \phi)$ for all $\mathbf{Y_{\mathrm{mis}}}, \phi$. This missing at random (MAR) assumption is easily violated when considering the problem of counterfactual prediction due to the dependency structure in $\mathbf{M}$. 
 
 Matrix completion methods can accurately predict $\mathbf{Y_{\mathrm{mis}}}$ by solving a convex optimization problem via nuclear norm minimization (NNM), when the full matrix $\mathbf{Y}$ is low-rank and relatively few entries are observed \citep[e.g.,][]{candes2009exact,candes2010matrix, mazumder2010spectral}.\footnote{Low-rank matrices arise in the present context when only a few factors contribute to the outcomes. \citet{candes2009exact} observe that $\mathbf{Y_{\mathrm{obs}}}$ cannot be mostly equal to zero.} These methods exploit relationships within and across outcomes by treating $\mathbf{Y}$ as static and typically assume the missing values in $\mathbf{Y}$ are MAR and sampled uniformly at random.\footnote{Incorrect assumptions about missing data can yield biased predictions in probabilistic models like regularized matrix factorization \citep{marlin2009collaborative}.} The method of matrix completion via NNM (MC-NNM) proposed by \citet{athey2017matrix} allows for dependency structures in $\mathbf{M}$ that arise from simultaneous or staggered adoption.%\footnote{\citet{athey2017matrix} remark that their estimator penalize the error terms for each unit-time observation equally without regard to the fact that the probability of missingness (i.e., the propensity score), $\Pr (M_{it} = 1 | \mathbf{Y_{\mathrm{obs}}}, \phi)$, increases with $t$. The authors show that the estimator can be modified by using a loss function weighted by the propensity score, which is a solution akin to the importance weighting scheme proposed by \citet{cortes2008sample} for the problem of covariate shift.}
 
-
-
-\subsection{Inference}
+% MC-NNM ESTIMATOR HERE
 
 %amjad2018robust - Robust Synthetic Control 
 %increases robustness by “de-noising” using matrix completion methods, and then using linear regression on the de-noised matrix, instead of relying on matrix norm regularizations
@@ -233,46 +231,9 @@ Matrix completion methods can accurately predict $\mathbf{Y_{\mathrm{mis}}}$ by 
 
 % hahn2017synthetic - Synthetic control and inference
 
-The counterfactual time-series of public land states can simply be modeled as an autoregressive process in which $\mathbf{y}^{(t)}$ is linearly related to values at $p$ previous time-steps and a series of imperfectly predictable shocks \citep[pp. 246][]{little2014statistical}:
-
-\begin{equation}
-(\mathbf{y}^{(t)} |  \mathbf{y}^{(1)}, \mathbf{y}^{(2)}, \ldots, \mathbf{y}^{(t-1)}, \theta) \sim \mathcal{N}(\alpha + \beta_1 \mathbf{y}^{(t-1)} + \ldots + \beta_p \mathbf{y}^{(t-p)}, \sigma^2), \label{eq:ar}
-\end{equation}
-
-where $\theta$ is a set of estimable parameters consisting of constant term $\alpha$, regression coefficients $\beta_1, \beta_2, \ldots, \beta_p$, and error variance $\sigma^2$. Least squares estimates of the parameters can be recovered by regressing 
-
-\begin{equation}
-\mathbf{y}^{(t)} = \mathbf{x}^{(t)} = (\mathbf{y}^{(t-1)}, \mathbf{y}^{(t-2)}, \ldots, \mathbf{y}^{(t-p)}) \hspace{10mm} \forall \, t = p, p+1, \ldots, \tau-1. \label{eq:ar-pre}
-\end{equation}
-
-The estimated parameters are then used to predict the counterfactual time-series of treated unit outcomes: 
-
-\begin{equation}
-\mathbf{\hat{y}}^{(t)} = \mathbf{x}^{(t)} \hspace{10mm} \forall \, t = n+1, \ldots, \tau, \label{eq:ar-post}
-\end{equation} 
-
-where $n < \tau$ denotes the last time-step prior to a discrete intervention. The key assumption of this approach is that the relationship between controls $\mathbf{x}^{(t)}$ and the treated time-series $\mathbf{y}^{(t)}$ modeled prior to the intervention persists after the intervention. Under this assumption, the inferred causal effect of the intervention on the treated group is the difference between the observed time-series of the treated units and the counterfactual time-series that would have been observed in the absence of the intervention:
-
-\begin{equation}
-\mathbf{\hat{\phi}}^{(t)} = \mathbf{y}^{(t)} - \mathbf{\hat{y}}^{(t)} \hspace{10mm} \forall \, t = n+1, \ldots, \tau. \label{eq:pointwise}
-\end{equation}
-
-This treatment effect is calculated at every post-period time-step and is thus useful for understanding the temporal evolution of the causal effect.
-
-%\section{Model evaluation and statistical inference} \label{eval}
-
-When the counterfactual time-series is known, RNNs can be evaluated in terms of the MSPE between the predicted and actual post-intervention time-series among control units. Specifically, I calculate:
-
-\begin{equation}
-\text{MSPE} = \frac{1}{\tau-n} \sum_{n+1: \tau}^{\tau} \left(\hat{\phi}^{(t)} \right)^2, \label{mspe}
-\end{equation} where $\hat{\phi}^{(t)}$ is defined in Eq.~\ref{eq:pointwise}. 
-
-Eq.~\ref{mspe} measures the accuracy of the estimated treatment effect but does not tell us anything about the statistical significance of the estimates. \citet{abadie2010synthetic} propose a randomization inference approach for calculating the exact distribution of placebo effects under the null hypothesis. Following \citet{cavallo2013catastrophic}, I extend this method to the case of multiple placebo treated units by constructing a distribution of \emph{average} placebo effects according to the procedure described in SM-Section~\ref{oa-inference}.
-
 \subsection{Simulations} \label{sims}
 
-%singular value decomposition (SVD) and principal component analysis (PCA) 
-%\citep{ilin2010practical}
+%singular value decomposition (SVD)
 % troyanskaya2001missing - SVD
 % josse2012handling - (regularized) iterative PCA
 

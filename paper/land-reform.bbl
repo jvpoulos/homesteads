@@ -107,23 +107,10 @@ Besley, T. and T.~Persson (2010).
 \newblock State capacity, conflict, and development.
 \newblock {\em Econometrica\/}~{\em 78\/}(1), 1--34.
 
-\bibitem[\protect\citeauthoryear{Bickel, Br{\"u}ckner, and Scheffer}{Bickel
-  et~al.}{2009}]{bickel2009discriminative}
-Bickel, S., M.~Br{\"u}ckner, and T.~Scheffer (2009).
-\newblock Discriminative learning under covariate shift.
-\newblock {\em Journal of Machine Learning Research\/}~{\em 10\/}(Sep),
-  2137--2155.
-
 \bibitem[\protect\citeauthoryear{Boix}{Boix}{2003}]{boix2003democracy}
 Boix, C. (2003).
 \newblock {\em Democracy and Redistribution}.
 \newblock New York, NY: Cambridge University Press.
-
-\bibitem[\protect\citeauthoryear{Cai, Cand{\`e}s, and Shen}{Cai
-  et~al.}{2010}]{cai2010singular}
-Cai, J.-F., E.~J. Cand{\`e}s, and Z.~Shen (2010).
-\newblock A {S}ingular {V}alue {T}hresholding algorithm for matrix completion.
-\newblock {\em SIAM Journal on Optimization\/}~{\em 20\/}(4), 1956--1982.
 
 \bibitem[\protect\citeauthoryear{Candes and Plan}{Candes and
   Plan}{2010}]{candes2010matrix}
@@ -136,25 +123,6 @@ Candes, E.~J. and Y.~Plan (2010).
 Cand{\`e}s, E.~J. and B.~Recht (2009).
 \newblock Exact matrix completion via convex optimization.
 \newblock {\em Foundations of Computational mathematics\/}~{\em 9\/}(6), 717.
-
-\bibitem[\protect\citeauthoryear{Cavallo, Galiani, Noy, and Pantano}{Cavallo
-  et~al.}{2013}]{cavallo2013catastrophic}
-Cavallo, E., S.~Galiani, I.~Noy, and J.~Pantano (2013).
-\newblock Catastrophic natural disasters and economic growth.
-\newblock {\em Review of Economics and Statistics\/}~{\em 95\/}(5), 1549--1561.
-
-\bibitem[\protect\citeauthoryear{Chatterjee et~al.}{Chatterjee
-  et~al.}{2015}]{chatterjee2015matrix}
-Chatterjee, S. et~al. (2015).
-\newblock Matrix estimation by {U}niversal {S}ingular {V}alue {T}hresholding.
-\newblock {\em The Annals of Statistics\/}~{\em 43\/}(1), 177--214.
-
-\bibitem[\protect\citeauthoryear{Cortes, Mohri, Riley, and Rostamizadeh}{Cortes
-  et~al.}{2008}]{cortes2008sample}
-Cortes, C., M.~Mohri, M.~Riley, and A.~Rostamizadeh (2008).
-\newblock Sample selection bias correction theory.
-\newblock In {\em International Conference on Algorithmic Learning Theory},
-  pp.\  38--53. Springer.
 
 \bibitem[\protect\citeauthoryear{Donaldson and Hornbeck}{Donaldson and
   Hornbeck}{2016}]{donaldson2016railroads}
@@ -222,19 +190,19 @@ Haines, M.~R. (2010).
 \newblock Ann Arbor, MI: Inter-university Consortium for Political and Social
   Research [distributor], 2010-05-21. \url{doi.org/10.3886/ICPSR02896.v3}.
 
-\bibitem[\protect\citeauthoryear{Hastie, Mazumder, Lee, and Zadeh}{Hastie
-  et~al.}{2015}]{hastie2015matrix}
-Hastie, T., R.~Mazumder, J.~D. Lee, and R.~Zadeh (2015).
-\newblock Matrix completion and low-rank {SVD} via fast alternating least
-  squares.
-\newblock {\em The Journal of Machine Learning Research\/}~{\em 16\/}(1),
-  3367--3402.
-
 \bibitem[\protect\citeauthoryear{Holland}{Holland}{1986}]{holland1986statistics}
 Holland, P.~W. (1986).
 \newblock Statistics and causal inference.
 \newblock {\em Journal of the American statistical Association\/}~{\em
   81\/}(396), 945--960.
+
+\bibitem[\protect\citeauthoryear{Ilin and Raiko}{Ilin and
+  Raiko}{2010}]{ilin2010practical}
+Ilin, A. and T.~Raiko (2010).
+\newblock Practical approaches to principal component analysis in the presence
+  of missing values.
+\newblock {\em Journal of Machine Learning Research\/}~{\em 11\/}(Jul),
+  1957--2000.
 
 \bibitem[\protect\citeauthoryear{Imbens and Rubin}{Imbens and
   Rubin}{2015}]{imbens2015causal}
@@ -293,12 +261,6 @@ Ramcharan, R. (2010).
 \newblock {\em The Review of Economics and Statistics\/}~{\em 92\/}(4),
   729--744.
 
-\bibitem[\protect\citeauthoryear{Recht}{Recht}{2011}]{recht2011simpler}
-Recht, B. (2011).
-\newblock A simpler approach to matrix completion.
-\newblock {\em Journal of Machine Learning Research\/}~{\em 12\/}(Dec),
-  3413--3430.
-
 \bibitem[\protect\citeauthoryear{Schnabel, Swaminathan, Singh, Chandak, and
   Joachims}{Schnabel et~al.}{2016}]{schnabel2016recommendations}
 Schnabel, T., A.~Swaminathan, A.~Singh, N.~Chandak, and T.~Joachims (2016).
@@ -341,19 +303,6 @@ Sylla, R.~E., J.~B. Legler, and J.~Wallis (1995b).
   {U}ses of {F}unds, {S}tate {F}inancial {S}tatistics, 1933-1937.
 \newblock Ann Arbor, MI: Inter-university Consortium for Political and Social
   Research, 2017-05-21. http://doi.org/10.3886/ICPSR06306.v1.
-
-\bibitem[\protect\citeauthoryear{Tibshirani, Bien, Friedman, Hastie, Simon,
-  Taylor, and Tibshirani}{Tibshirani et~al.}{2012}]{tibshirani2012strong}
-Tibshirani, R., J.~Bien, J.~Friedman, T.~Hastie, N.~Simon, J.~Taylor, and R.~J.
-  Tibshirani (2012).
-\newblock Strong rules for discarding predictors in lasso-type problems.
-\newblock {\em Journal of the Royal Statistical Society: Series B (Statistical
-  Methodology)\/}~{\em 74\/}(2), 245--266.
-
-\bibitem[\protect\citeauthoryear{Tsiatis}{Tsiatis}{2007}]{tsiatis2007}
-Tsiatis, A. (2007).
-\newblock {\em Semiparametric Theory and Missing Data}.
-\newblock Springer Science \& Business Media.
 
 \bibitem[\protect\citeauthoryear{Turner}{Turner}{1956}]{turner1956significance}
 Turner, F.~J. (1956).

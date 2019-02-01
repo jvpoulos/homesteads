@@ -3,7 +3,6 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: land-reform.aux
 The style file: chicago.bst
 Database file #1: references.bib
-Warning--I didn't find a database entry for "little2014statistical"
 Warning--empty note in atack2012impact
 Warning--page numbers missing in atack2011impact
 Warning--no number and no volume in athey2017matrix
@@ -20,45 +19,45 @@ Warning--page numbers missing in 2017arXiv171203553P
 Warning--no number and no volume in schnabel2016recommendations
 Warning--page numbers missing in schnabel2016recommendations
 Warning--empty note in suryanarayan2017hollowing
-You've used 60 entries,
+You've used 52 entries,
             2861 wiz_defined-function locations,
-            950 strings with 14870 characters,
-and the built_in function-call counts, 39753 in all, are:
-= -- 3317
-> -- 2895
-< -- 2
-+ -- 868
-- -- 1005
-* -- 3538
-:= -- 7352
-add.period$ -- 177
-call.type$ -- 60
-change.case$ -- 418
-chr.to.int$ -- 59
-cite$ -- 76
-duplicate$ -- 1057
-empty$ -- 2395
-format.name$ -- 1152
-if$ -- 7253
+            901 strings with 13396 characters,
+and the built_in function-call counts, 33395 in all, are:
+= -- 2813
+> -- 2358
+< -- 1
++ -- 702
+- -- 835
+* -- 2904
+:= -- 6203
+add.period$ -- 152
+call.type$ -- 52
+change.case$ -- 353
+chr.to.int$ -- 51
+cite$ -- 68
+duplicate$ -- 901
+empty$ -- 2033
+format.name$ -- 962
+if$ -- 6063
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 60
-newline$ -- 298
-num.names$ -- 598
-pop$ -- 299
+missing$ -- 51
+newline$ -- 258
+num.names$ -- 518
+pop$ -- 248
 preamble$ -- 1
-purify$ -- 785
+purify$ -- 671
 quote$ -- 0
-skip$ -- 1139
+skip$ -- 991
 stack$ -- 0
-substring$ -- 2111
-swap$ -- 341
-text.length$ -- 2
+substring$ -- 1749
+swap$ -- 288
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1106
+type$ -- 956
 warning$ -- 16
-while$ -- 595
+while$ -- 524
 width$ -- 0
-write$ -- 776
-(There were 17 warnings)
+write$ -- 670
+(There were 16 warnings)
