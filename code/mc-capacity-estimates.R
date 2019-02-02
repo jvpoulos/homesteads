@@ -121,9 +121,9 @@ t_star <- t_final-t0
 
 pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
 
-mc.ci.stag <-  mclapply(c("rev.pc","exp.pc","educ.pc"),
-                       function(x){
-                         ChernoCI(t_star, c.range=c(-10,10), alpha=0.025, l=75, prec=1e-02, capacity.outcomes[[x]], treated.indices=pub.states, permtype="moving.block",sim=FALSE,covars=NULL,pca=FALSE)
-                       }, mc.cores=cores) 
+foreach(x = c("rev.pc","exp.pc","educ.pc")) %dopar% {
+  mc.ci.x <- ChernoCI(t_star, c.range=c(-10,10), alpha=0.025, l=50, prec=1e-02, capacity.outcomes[[x]], treated.indices=pub.states, permtype="moving.block",sim=FALSE,covars=NULL,pca=FALSE)
+  saveRDS(mc.ci.x,paste0("mc-ci-",x,".rds"))
+}
 
-saveRDS(mc.ci.stag,"mc-ci-stag.rds")
+parallel::stopCluster(cl)
