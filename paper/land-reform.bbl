@@ -39,6 +39,13 @@ Allen, D.~W. (1991).
 \newblock Homesteading and property rights; or, ``how the west was really won".
 \newblock {\em The Journal of Law and Economics\/}~{\em 34\/}(1), 1--23.
 
+\bibitem[\protect\citeauthoryear{Amjad, Shah, and Shen}{Amjad
+  et~al.}{2018}]{amjad2018robust}
+Amjad, M., D.~Shah, and D.~Shen (2018).
+\newblock Robust synthetic control.
+\newblock {\em The Journal of Machine Learning Research\/}~{\em 19\/}(1),
+  802--852.
+
 \bibitem[\protect\citeauthoryear{Ansell and Samuels}{Ansell and
   Samuels}{2015}]{ansell2015}
 Ansell, B. and D.~J. Samuels (2015).
@@ -124,6 +131,13 @@ Cand{\`e}s, E.~J. and B.~Recht (2009).
 \newblock Exact matrix completion via convex optimization.
 \newblock {\em Foundations of Computational mathematics\/}~{\em 9\/}(6), 717.
 
+\bibitem[\protect\citeauthoryear{Cortes, Mohri, Riley, and Rostamizadeh}{Cortes
+  et~al.}{2008}]{cortes2008sample}
+Cortes, C., M.~Mohri, M.~Riley, and A.~Rostamizadeh (2008).
+\newblock Sample selection bias correction theory.
+\newblock In {\em International Conference on Algorithmic Learning Theory},
+  pp.\  38--53. Springer.
+
 \bibitem[\protect\citeauthoryear{Donaldson and Hornbeck}{Donaldson and
   Hornbeck}{2016}]{donaldson2016railroads}
 Donaldson, D. and R.~Hornbeck (2016).
@@ -195,14 +209,6 @@ Holland, P.~W. (1986).
 \newblock Statistics and causal inference.
 \newblock {\em Journal of the American statistical Association\/}~{\em
   81\/}(396), 945--960.
-
-\bibitem[\protect\citeauthoryear{Ilin and Raiko}{Ilin and
-  Raiko}{2010}]{ilin2010practical}
-Ilin, A. and T.~Raiko (2010).
-\newblock Practical approaches to principal component analysis in the presence
-  of missing values.
-\newblock {\em Journal of Machine Learning Research\/}~{\em 11\/}(Jul),
-  1957--2000.
 
 \bibitem[\protect\citeauthoryear{Imbens and Rubin}{Imbens and
   Rubin}{2015}]{imbens2015causal}
