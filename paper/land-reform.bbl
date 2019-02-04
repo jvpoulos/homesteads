@@ -210,12 +210,28 @@ Holland, P.~W. (1986).
 \newblock {\em Journal of the American statistical Association\/}~{\em
   81\/}(396), 945--960.
 
+\bibitem[\protect\citeauthoryear{Ilin and Raiko}{Ilin and
+  Raiko}{2010}]{ilin2010practical}
+Ilin, A. and T.~Raiko (2010).
+\newblock Practical approaches to principal component analysis in the presence
+  of missing values.
+\newblock {\em Journal of Machine Learning Research\/}~{\em 11\/}(Jul),
+  1957--2000.
+
 \bibitem[\protect\citeauthoryear{Imbens and Rubin}{Imbens and
   Rubin}{2015}]{imbens2015causal}
 Imbens, G.~W. and D.~B. Rubin (2015).
 \newblock {\em Causal inference in statistics, social, and biomedical
   sciences}.
 \newblock Cambridge University Press.
+
+\bibitem[\protect\citeauthoryear{Josse and Husson}{Josse and
+  Husson}{2012}]{josse2012handling}
+Josse, J. and F.~Husson (2012).
+\newblock Handling missing values in exploratory multivariate data analysis
+  methods.
+\newblock {\em Journal de la Soci{\'e}t{\'e} Fran{\c{c}}aise de
+  Statistique\/}~{\em 153\/}(2), 79--99.
 
 \bibitem[\protect\citeauthoryear{Lanza}{Lanza}{1999}]{lanza1999agrarianism}
 Lanza, M.~L. (1999).
@@ -309,6 +325,14 @@ Sylla, R.~E., J.~B. Legler, and J.~Wallis (1995b).
   {U}ses of {F}unds, {S}tate {F}inancial {S}tatistics, 1933-1937.
 \newblock Ann Arbor, MI: Inter-university Consortium for Political and Social
   Research, 2017-05-21. http://doi.org/10.3886/ICPSR06306.v1.
+
+\bibitem[\protect\citeauthoryear{Troyanskaya, Cantor, Sherlock, Brown, Hastie,
+  Tibshirani, Botstein, and Altman}{Troyanskaya
+  et~al.}{2001}]{troyanskaya2001missing}
+Troyanskaya, O., M.~Cantor, G.~Sherlock, P.~Brown, T.~Hastie, R.~Tibshirani,
+  D.~Botstein, and R.~B. Altman (2001).
+\newblock Missing value estimation methods for {DNA} microarrays.
+\newblock {\em Bioinformatics\/}~{\em 17\/}(6), 520--525.
 
 \bibitem[\protect\citeauthoryear{Turner}{Turner}{1956}]{turner1956significance}
 Turner, F.~J. (1956).

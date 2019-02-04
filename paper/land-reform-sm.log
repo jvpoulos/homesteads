@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  29 JAN 2019 07:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  4 FEB 2019 13:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1113,6 +1113,9 @@ Package: tabularx 2016/02/03 v2.11b `tabularx' package (DPC)
 
 LaTeX Warning: Label `exp-pc' multiply defined.
 
+
+LaTeX Warning: Label `exp-pc' multiply defined.
+
 )
 \openout1 = `land-reform-sm.aux'.
 
@@ -1264,7 +1267,7 @@ ic file (type png)
 Package pdftex.def Info: plots/basque_N_16_T_43_numruns_20_num_treated_8_simult
 aneuous_0.png  used on input line 130.
 (pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
-<plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_1.png, id=37, 5
+<plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_1.png, id=38, 5
 05.76955pt x 505.76955pt>
 File: plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_1.png Grap
 hic file (type png)
@@ -1272,7 +1275,7 @@ hic file (type png)
 Package pdftex.def Info: plots/germany_N_16_T_44_numruns_20_num_treated_8_simul
 taneuous_1.png  used on input line 140.
 (pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
-<plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png, id=38, 5
+<plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png, id=39, 5
 05.76955pt x 505.76955pt>
 File: plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png Grap
 hic file (type png)
@@ -1280,29 +1283,13 @@ hic file (type png)
 Package pdftex.def Info: plots/germany_N_16_T_44_numruns_20_num_treated_8_simul
 taneuous_0.png  used on input line 146.
 (pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
-<plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_1.png, id=39, 
-505.76955pt x 505.76955pt>
-File: plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_1.png Gra
-phic file (type png)
-<use plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_1.png>
-Package pdftex.def Info: plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simu
-ltaneuous_1.png  used on input line 156.
-(pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
-<plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_0.png, id=40, 
-505.76955pt x 505.76955pt>
-File: plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_0.png Gra
-phic file (type png)
-<use plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_0.png>
-Package pdftex.def Info: plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simu
-ltaneuous_0.png  used on input line 162.
-(pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
 <plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_1.png, id=41,
  505.76955pt x 505.76955pt>
 File: plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_1.png Gr
 aphic file (type png)
 <use plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_1.png>
 Package pdftex.def Info: plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_sim
-ultaneuous_1.png  used on input line 172.
+ultaneuous_1.png  used on input line 156.
 (pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
 <plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_0.png, id=42,
  505.76955pt x 505.76955pt>
@@ -1310,118 +1297,155 @@ File: plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_0.png Gr
 aphic file (type png)
 <use plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_0.png>
 Package pdftex.def Info: plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_sim
-ultaneuous_0.png  used on input line 178.
+ultaneuous_0.png  used on input line 162.
+(pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
+<plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_1.png, id=44, 
+505.76955pt x 505.76955pt>
+File: plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_1.png Gra
+phic file (type png)
+<use plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_1.png>
+Package pdftex.def Info: plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simu
+ltaneuous_1.png  used on input line 172.
+(pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
+<plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_0.png, id=45, 
+505.76955pt x 505.76955pt>
+File: plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_0.png Gra
+phic file (type png)
+<use plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_0.png>
+Package pdftex.def Info: plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simu
+ltaneuous_0.png  used on input line 178.
+(pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
+<plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_1.png, id=47, 
+505.76955pt x 505.76955pt>
+File: plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_1.png Gra
+phic file (type png)
+<use plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_1.png>
+Package pdftex.def Info: plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simu
+ltaneuous_1.png  used on input line 188.
+(pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
+<plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png, id=48, 
+505.76955pt x 505.76955pt>
+File: plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png Gra
+phic file (type png)
+<use plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png>
+Package pdftex.def Info: plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simu
+ltaneuous_0.png  used on input line 194.
 (pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
  [1 <./plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_1.png (PNG
  copy)> <./plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png 
 (PNG copy)> <./plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_1
 .png (PNG copy)> <./plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneu
 ous_0.png (PNG copy)>]
-[2 <./plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_1.png (PN
-G copy)> <./plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_0.p
-ng (PNG copy)> <./plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneu
-ous_1.png (PNG copy)> <./plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_sim
-ultaneuous_0.png (PNG copy)>] (./dv-table.tex)
-<plots/homestead-1870.png, id=75, 794.97pt x 614.295pt>
+[2 <./plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_1.png (P
+NG copy)> <./plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_0
+.png (PNG copy)> <./plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultane
+uous_1.png (PNG copy)> <./plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_sim
+ultaneuous_0.png (PNG copy)>] [3 <./plots/rev_pc_N_19_T_158_numruns_20_num_trea
+ted_10_simultaneuous_1.png (PNG copy)> <./plots/rev_pc_N_19_T_158_numruns_20_nu
+m_treated_10_simultaneuous_0.png (PNG copy)>] (./dv-table.tex)
+<plots/homestead-1870.png, id=88, 794.97pt x 614.295pt>
 File: plots/homestead-1870.png Graphic file (type png)
 <use plots/homestead-1870.png>
-Package pdftex.def Info: plots/homestead-1870.png  used on input line 197.
+Package pdftex.def Info: plots/homestead-1870.png  used on input line 213.
 (pdftex.def)             Requested size: 399.29463pt x 308.55275pt.
-<plots/homestead-1900.png, id=76, 794.97pt x 614.295pt>
+<plots/homestead-1900.png, id=89, 794.97pt x 614.295pt>
 File: plots/homestead-1900.png Graphic file (type png)
 <use plots/homestead-1900.png>
-Package pdftex.def Info: plots/homestead-1900.png  used on input line 198.
+Package pdftex.def Info: plots/homestead-1900.png  used on input line 214.
 (pdftex.def)             Requested size: 399.29463pt x 308.55275pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 197--199
+Underfull \hbox (badness 10000) in paragraph at lines 213--215
 [][]
  []
 
 
-LaTeX Warning: Float too large for page by 15.67549pt on input line 200.
+LaTeX Warning: Float too large for page by 15.67549pt on input line 216.
 
-<plots/gini-1870.png, id=81, 794.97pt x 614.295pt>
+<plots/gini-1870.png, id=94, 794.97pt x 614.295pt>
 File: plots/gini-1870.png Graphic file (type png)
 <use plots/gini-1870.png>
-Package pdftex.def Info: plots/gini-1870.png  used on input line 203.
+Package pdftex.def Info: plots/gini-1870.png  used on input line 219.
 (pdftex.def)             Requested size: 399.29463pt x 308.55275pt.
-<plots/gini-1900.png, id=82, 794.97pt x 614.295pt>
+<plots/gini-1900.png, id=95, 794.97pt x 614.295pt>
 File: plots/gini-1900.png Graphic file (type png)
 <use plots/gini-1900.png>
-Package pdftex.def Info: plots/gini-1900.png  used on input line 204.
+Package pdftex.def Info: plots/gini-1900.png  used on input line 220.
 (pdftex.def)             Requested size: 399.29463pt x 308.55275pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 203--205
+Underfull \hbox (badness 10000) in paragraph at lines 219--221
 [][]
  []
 
-<plots/acres-time.png, id=84, 794.97pt x 614.295pt>
+<plots/acres-time.png, id=97, 794.97pt x 614.295pt>
 File: plots/acres-time.png Graphic file (type png)
 <use plots/acres-time.png>
-Package pdftex.def Info: plots/acres-time.png  used on input line 211.
+Package pdftex.def Info: plots/acres-time.png  used on input line 227.
 (pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
-[3] [4 <./plots/homestead-1870.png (PNG copy)> <./plots/homestead-1900.png (PNG
- copy)>] [5 <./plots/gini-1870.png (PNG copy)> <./plots/gini-1900.png (PNG copy
-)>] [6 <./plots/acres-time.png (PNG copy)>]
-<plots/did-state.png, id=113, 794.97pt x 614.295pt>
+[4] [5 <./plots/homestead-1870.png (PNG copy)> <./plots/homestead-1900.png (PNG
+ copy)>] [6 <./plots/gini-1870.png (PNG copy)> <./plots/gini-1900.png (PNG copy
+)>] [7 <./plots/acres-time.png (PNG copy)>]
+<plots/did-state.png, id=126, 794.97pt x 614.295pt>
 File: plots/did-state.png Graphic file (type png)
 <use plots/did-state.png>
-Package pdftex.def Info: plots/did-state.png  used on input line 222.
+Package pdftex.def Info: plots/did-state.png  used on input line 238.
 (pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
- [7 <./plots/did-state.png (PNG copy)>]
-<plots/ineq-capacity.png, id=121, 794.97pt x 614.295pt>
+ [8 <./plots/did-state.png (PNG copy)>]
+<plots/ineq-capacity.png, id=134, 794.97pt x 614.295pt>
 File: plots/ineq-capacity.png Graphic file (type png)
 <use plots/ineq-capacity.png>
-Package pdftex.def Info: plots/ineq-capacity.png  used on input line 232.
+Package pdftex.def Info: plots/ineq-capacity.png  used on input line 248.
 (pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
-<plots/rr-1862.png, id=122, 3312.375pt x 2559.5625pt>
+<plots/rr-1862.png, id=135, 3312.375pt x 2559.5625pt>
 File: plots/rr-1862.png Graphic file (type png)
 <use plots/rr-1862.png>
-Package pdftex.def Info: plots/rr-1862.png  used on input line 239.
+Package pdftex.def Info: plots/rr-1862.png  used on input line 255.
 (pdftex.def)             Requested size: 328.82707pt x 254.05751pt.
-<plots/rr-1911.png, id=124, 3312.375pt x 2559.5625pt>
+<plots/rr-1911.png, id=137, 3312.375pt x 2559.5625pt>
 File: plots/rr-1911.png Graphic file (type png)
 <use plots/rr-1911.png>
-Package pdftex.def Info: plots/rr-1911.png  used on input line 240.
+Package pdftex.def Info: plots/rr-1911.png  used on input line 256.
 (pdftex.def)             Requested size: 328.82707pt x 254.05751pt.
- (./dd-mechanisms.tex) [8 <./plots/ineq-capacity.png (PNG copy)>] [9 <./plots/r
-r-1862.png> <./plots/rr-1911.png>] (./land-reform-sm.bbl) [10]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 263.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 263.
+ (./dd-mechanisms.tex) [9 <./plots/ineq-capacity.png (PNG copy)>] [10 <./plots/
+rr-1862.png> <./plots/rr-1911.png>] (./land-reform-sm.bbl) [11]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 279.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 279.
 
 (./land-reform-sm.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 263.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 263.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 279.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 279.
 Package rerunfilecheck Info: File `land-reform-sm.out' has not changed.
 (rerunfilecheck)             Checksum: 66EF2DED6313EFFDA465DAF00CA25676;202.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 263.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 279.
  ) 
 Here is how much of TeX's memory you used:
- 29867 strings out of 492641
- 552353 string characters out of 6131787
- 640630 words of memory out of 5000000
- 33250 multiletter control sequences out of 15000+600000
+ 29879 strings out of 492641
+ 553106 string characters out of 6131787
+ 640617 words of memory out of 5000000
+ 33257 multiletter control sequences out of 15000+600000
  543750 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,18n,65p,984b,496s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmtt12.pfb>
-Output written on land-reform-sm.pdf (11 pages, 9252276 bytes).
+pdfTeX warning (dest): name{figure.caption.1} has been referenced but does no
+t exist, replaced by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmtt12.pfb>
+Output written on land-reform-sm.pdf (12 pages, 9718855 bytes).
 PDF statistics:
- 203 PDF objects out of 1000 (max. 8388607)
- 152 compressed objects within 2 object streams
- 37 named destinations out of 1000 (max. 500000)
- 130 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 216 PDF objects out of 1000 (max. 8388607)
+ 162 compressed objects within 2 object streams
+ 40 named destinations out of 1000 (max. 500000)
+ 140 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -246,7 +246,7 @@ CapacitySim <- function(outcomes,d,sim){
   }
 }
 
-foreach(d = c('rev.pc')) %dopar% {
+foreach(d = c('rev.pc','exp.pc','educ.pc')) %dopar% {
   foreach(sim = c(0,1)) %dopar% {
     CapacitySim(capacity.outcomes,d,sim)
   }

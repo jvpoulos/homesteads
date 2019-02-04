@@ -12,7 +12,7 @@
 \usepackage[margin={1in}]{geometry} %1 inch margins
 
 \title{Building State Capacity through Public Land Disposal: An Application of Matrix Completion for Counterfactual Prediction} 
-\author[ ]{Jason Poulos\thanks{\emph{Address for correspondence:} Department of Political Science, 210 Barrows Hall \#1950, Berkeley, CA 94720-1950. \emph{Email:} \href{mailto:poulos@berkeley.edu}{\nolinkurl{poulos@berkeley.edu}}. The online Supplementary Material is available at \url{http://jvpoulos.github.io/papers/land-reform-sm.pdf}. I thank Sean Gailmard, Eric Schickler, Ross Mattheis, and Shom Mazumder for helpful comments. I acknowledge support of the National Science Foundation Graduate Research Fellowship (DGE 1106400). This work used the computer resources of Stampede2 at the Texas Advanced Computing Center (TACC) under an Extreme Science and Engineering Discovery Environment (XSEDE) startup allocation (TG-SES180010).}}
+\author[ ]{Jason Poulos\thanks{\emph{Address for correspondence:} Department of Political Science, 210 Barrows Hall \#1950, Berkeley, CA 94720-1950. \emph{Email:} \href{mailto:poulos@berkeley.edu}{\nolinkurl{poulos@berkeley.edu}}. I thank Sean Gailmard, Eric Schickler, Ross Mattheis, and Shom Mazumder for helpful comments. I acknowledge support of the National Science Foundation Graduate Research Fellowship (DGE 1106400). This work used the computer resources of Stampede2 at the Texas Advanced Computing Center (TACC) under an Extreme Science and Engineering Discovery Environment (XSEDE) startup allocation (TG-SES180010).}}
 \affil[ ]{University of California, Berkeley}
 \date{}
 \setcounter{Maxaffil}{0}
@@ -204,7 +204,7 @@ In an observational setting, units are part of the assignment mechanism that gen
 
 Matrix completion methods can accurately predict missing values by solving a convex optimization problem via nuclear norm minimization (NNM), even when relatively few values are observed in the full matrix $\mathbf{Y}$ \citep[e.g.,][]{candes2009exact,candes2010matrix}.\footnote{Low-rank matrices arise in the present context when only a few factors contribute to the outcomes. \citet{candes2009exact} observe that the observed values in $\mathbf{Y}$ cannot be mostly equal to zero.} These methods exploit relationships within and across outcomes by treating $\mathbf{Y}$ as static and typically assume the missing values in $\mathbf{Y}$ are sampled uniformly at random. Incorrect assumptions about missing data can yield biased predictions in probabilistic models including regularized matrix factorization \citep{marlin2009collaborative}. 
 
-The method of matrix completion via NNM (MC-NNM) proposed by \citet{athey2017matrix} allows for patterns of missing data in $\mathbf{Y}$ to have a time-series dependency structure that arise from simultaneous or staggered adoption. $\mathbf{Y}$ can be decomposed as $\mathbf{Y} = \mathbf{L^{*}} + \epsilon$, where $\mathbf{L^{*}}$ is the matrix to be estimated. The two identifying conditions are that $\E[\epsilon | \mathbf{L^{*}} = 0]$ and that the error term $\epsilon$ is independent across rows (units), conditional on $\mathbf{L^{*}}$. The MC-NNM estimator for $\mathbf{L^{*}}$ minimizes the sum of squared reconstruction errors $(Y_{it} - L_{it})$ for values with $M_{it} = 0$ via nuclear norm regularized least squares, with the regularization term chosen by cross-validation.\footnote{\citet{athey2017matrix} note two drawbacks of the MC-NNM estimator: first, it penalizes the errors for each observed value equally without regard to the fact that the probability of missingness (i.e., the propensity score) increases with $t$. Second, the estimator does not account for time-series dependencies in the observed data and therefore it is likely that the columns of $\epsilon$ are autocorrelated.}\footnote{\citet{amjad2018robust} propose an alternative approach of approximating $\mathbf{L^{*}}$ via matrix estimation, and then using linear regression on the ``de-noised'' matrix, rather than relying on matrix norm regularizations.} The algorithm for calculating the estimator iteratively replaces missing values with those recovered from a singular value decomposition (SVD) \citep{mazumder2010spectral}. The estimator is evaluated in terms of its root-mean squared error (RMSE), $\|\mathbf{L^{*}}-\hat{\mathbf{L}}\|_F / \sqrt{NT}$, where $F$ is the Fröbenius Norm.\footnote{\citet{athey2017matrix} prove that, as $N$ and $T$ increase, the RMSE converges to zero when $\mathbf{L^{*}}$ is low-rank and the fraction of control units is sufficiently large.}
+The method of matrix completion via NNM (MC-NNM) proposed by \citet{athey2017matrix} allows for patterns of missing data in $\mathbf{Y}$ to have a time-series dependency structure that arise from simultaneous or staggered adoption. $\mathbf{Y}$ can be decomposed as $\mathbf{Y} = \mathbf{L^{*}} + \epsilon$, where $\mathbf{L^{*}}$ is the matrix to be estimated. The two identifying conditions are that $\E[\epsilon | \mathbf{L^{*}} = 0]$ and that the error term $\epsilon$ is independent across rows (units), conditional on $\mathbf{L^{*}}$. The MC-NNM estimator for $\mathbf{L^{*}}$ minimizes the sum of squared reconstruction errors $(Y_{it} - L_{it})$ for values with $M_{it} = 0$ via nuclear norm regularized least squares, with the regularization term chosen by cross-validation.\footnote{\citet{athey2017matrix} note two drawbacks of the MC-NNM estimator: first, it penalizes the errors for each observed value equally without regard to the fact that the probability of missingness (i.e., the propensity score) increases with $t$. Second, the estimator does not account for time-series dependencies in the observed data and therefore it is likely that the columns of $\epsilon$ are autocorrelated.}\footnote{\citet{amjad2018robust} propose an alternative approach of approximating $\mathbf{L^{*}}$ via matrix estimation, and then using linear regression on the ``de-noised'' matrix, rather than relying on matrix norm regularizations.} The algorithm for calculating the estimator iteratively replaces missing values with those recovered from a singular value decomposition (SVD) \citep{mazumder2010spectral}. The estimator is evaluated in terms of its root-mean squared error (RMSE), $\|\mathbf{L^{*}} -\hat{\mathbf{L}}\|_F / \sqrt{NT}$, where $F$ is the Fröbenius Norm.\footnote{\citet{athey2017matrix} prove that, as $N$ and $T$ increase, the RMSE converges to zero when $\mathbf{L^{*}}$ is low-rank and the fraction of control units is sufficiently large.}
 
 \subsection{Hypothesis testing}
 
@@ -241,12 +241,21 @@ for permutations $\pi \in \Pi$.
 
 \subsection{Simulations} \label{sims}
 
-% troyanskaya2001missing - SVD
-% josse2012handling - (regularized) iterative PCA
+I evaluate the accuracy of the MC-NNM estimator on three datasets common to the SCM literature, with the actual treated unit removed from each dataset: \possessivecite{abadie2003economic} study of the economic impact of terrorism in the Basque Country during the late 1960s ($N=16$, $T=43$); \possessivecite{abadie2010synthetic} study of the effects of a large-scale tobacco control program implemented in California in 1988 ($N=38$, $T=31$); and \possessivecite{abadie2015comparative} study of the economic impact of the 1990 German reunification on West Germany ($N=16$, $T=44$). For each simulation run, I randomly select half of the control units to be treated and predict their values for time periods following a randomly selected initial treatment time $T_0$ and calculate the RMSE by comparing the predicted values to the observed values. I consider both simultaneous and staggered adoption settings and report the average RMSE for different ratios $T_0/T$ and benchmark MC-NNM against the following estimators:
 
-%The variable selection property of L1-regularized linear models (i.e., Lasso regression) \citep{tibshirani2012strong} is particularly useful in settings where $\mathbf{Y}$ has dimensions $N \ll T$. Lasso tends to shrink all but one of the coefficients of correlated outcomes to zero.
+\begin{description}
+	{\setlength\itemindent{1mm}
+	\item[DID] Difference-in-differences estimator with unit and time fixed effects \citep{athey2018design}
+	\item[HR-EN] Horizontal regression with elastic net regularization \citep{athey2017matrix} 
+	\item[PCA] Regularized iterative Principal Components Analysis (PCA) \citep{ilin2010practical,josse2012handling}
+	\item[SC-ADH] SCM approached via exponentiated gradient descent \citep{abadie2010synthetic}
+	\item[SVD] Low-rank SVD approximation estimated by expectation maximization \citep{troyanskaya2001missing}
+	\item[VT-EN] The same as HR-EN, but $\mathbf{Y}$ is transposed.
+}
+\end{description}
 
-I evaluate the proposed RNN-based approach on three datasets common to the SCM literature: \possessivecite{abadie2003economic} study of the economic impact of terrorism in the Basque Country during the late 1960s ($J=16$); \possessivecite{abadie2010synthetic} study of the effects of a large-scale tobacco control program implemented in California in 1988 ($J=38$); and \possessivecite{abadie2015comparative} study of the economic impact of the 1990 German reunification on West Germany ($J=16$). In each dataset, I remove the actual treated unit and evaluate the models on their ability to produce low error rates on control units; i.e., estimating treatment effects of zero.\footnote{I also calculate a single false positive rate by $\text{FPR} = \frac{\text{FP}}{(\tau-n) \times J}$, where $\text{FP}$ is the number of false positives defined as the number of $p$-values less than or equal to $\alpha=0.5$ and $J$ is the number of placebo treated units.} Table~\ref{fig:benchmark-table} reports the results of the placebo tests and shows that either encoder-decoder networks or LSTM outperform SCM on each of the three datasets in terms of having the lowest MSPE, with false positive rates comparable to SCM. 
+Fig. \ref{california} reports the average RMSE on the California smoking data for each estimator across five different ratios $T_0/T$ under the two treatment regimes. Intuitively, the average RMSE decreases and confidence bands narrow as $T_0/T$ approaches one because the estimators have more information to generate counterfactual predictions. The MC-NNM 
+tends to outperform the two other matrix estimators (i.e., PCA and SVD), and performs comparatively well against the regression-based estimators, which can be attributed to the fact that it is capable of using additional information in the form of pre-intervention observations of the treated units, whereas the regression-based estimators rely only on the pre-treatment observations of control units to predict counterfactuals. 
 
 \begin{figure}[htbp]
 	\centering
@@ -261,14 +270,17 @@ I evaluate the proposed RNN-based approach on three datasets common to the SCM l
 		\includegraphics[width=\textwidth]{plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png}
 		\caption{Staggered adoption}
 	\end{subfigure}
-	\caption{California Smoking Data, $N_t = 19$. \label{california}} 
+	\caption{California smoking dataset, $N_t = 19$. Error bars represent 95\% confidence intervals calculated using the standard deviation of the prediction distribution for 20 simulation runs. Note that the estimates are jittered horizontally to reduce overlap. \label{california}} 
 \end{figure}
+
+I present the simulation results on the Basque Country and West German reunification datasets in figures SM-\ref{basque} -- \ref{germany} in the Supporting Materials (SM). The MC-NNM estimator outperforms all other estimators in the staggered adoption setting for both datasets. 
 
 \section{Impact of homestead acts on state capacity} \label{state-capacity}
 
 %% Graph of treatment adoption
 
-% Checking assumptions: unbiasedness of MC-MNN, placebo test, MC-MNN assumptions 
+% Checking assumptions: unbiasedness of MC-MNN (pre-intervention /treated ), placebo test, MC-MNN assumptions 
+% Figs. SM-\ref{educ-pc} -- \ref{rev-pc}
 
 %Mention frontier states with pre-treatment obs
 %The staggered adoption setting is appropriate for the current application due to the fact the lag in time between passage of the homestead acts and the time at which the first homesteads were settled varies across public land states.
