@@ -131,12 +131,12 @@ Cand{\`e}s, E.~J. and B.~Recht (2009).
 \newblock Exact matrix completion via convex optimization.
 \newblock {\em Foundations of Computational mathematics\/}~{\em 9\/}(6), 717.
 
-\bibitem[\protect\citeauthoryear{Cortes, Mohri, Riley, and Rostamizadeh}{Cortes
-  et~al.}{2008}]{cortes2008sample}
-Cortes, C., M.~Mohri, M.~Riley, and A.~Rostamizadeh (2008).
-\newblock Sample selection bias correction theory.
-\newblock In {\em International Conference on Algorithmic Learning Theory},
-  pp.\  38--53. Springer.
+\bibitem[\protect\citeauthoryear{Chernozhukov, Wuthrich, and Zhu}{Chernozhukov
+  et~al.}{2017}]{chernozhukov2017exact}
+Chernozhukov, V., K.~Wuthrich, and Y.~Zhu (2017).
+\newblock An exact and robust conformal inference method for counterfactual and
+  synthetic controls.
+\newblock {\em arXiv preprint arXiv:1712.09089\/}.
 
 \bibitem[\protect\citeauthoryear{Donaldson and Hornbeck}{Donaldson and
   Hornbeck}{2016}]{donaldson2016railroads}

@@ -194,44 +194,50 @@ Because railroads expanded commerce by making it cheaper to trade, railroad acce
 
 An important problem in the social sciences is estimating the effect of a binary intervention on an outcome over time. When interventions take place at an aggregate level (e.g., a state), researchers make causal inferences by comparing the post-intervention outcomes of affected (``treated'') units against the outcomes of unaffected  (``control'') units. In the current application, public land states are the treated units and state land states --- i.e., states that were not crafted from the public domain and were therefore not directly affected by the homestead acts --- serve as control units.\footnote{The control group includes states of the original 13 colonies, Maine, Tennessee, Texas, Vermont, and West Virginia.} A common approach to the problem is the SCM, which predicts the counterfactual outcomes for treated units by finding a convex combination of control units that match the treated units in term of lagged outcomes. The SCM predicts patterns across units that are assumed to remain constant over time. 
 
-This paper applies the method of matrix completion proposed by \citet{athey2017matrix} to predict counterfactual outcomes in a setting where multiple treated units are exposed to a binary intervention and the date of initial exposure to treatment may vary between treated units. Let $\mathbf{Y}$ denote a $N \times T$ matrix of outcomes for each unit $i, \ldots, N$ at time $t = 1, \ldots, T$. $\mathbf{Y}$ is incomplete because we observe each element $Y_{it}$ for only the control units and the treated units prior to first treatment exposure. Let $\mathbf{Y_{\mathrm{obs}}}$ define observed values of $Y$ and $\mathbf{Y_{\mathrm{mis}}}$ define missing values. Define the $N \times T$ binary matrix $\mathbf{M}$, where $M_{it} =1 $ if $Y_{it}$ is missing and $M_{it} = 0$ if $M_{it}$ is nonmissing.\footnote{The process that generates $\mathbf{M}$ is referred to the assignment mechanism in the causal inference literature \citep{imbens2015causal} and the missing data mechanism in missing data analysis \citep[Chap.~1]{little2014}.} This setup is motivated by the fundamental problem of causal inference \citep{holland1986statistics} in that we cannot directly observe counterfactual outcomes and we instead wish to predict missing values in $\mathbf{Y}$ for treated units with $M_{it}=1$. 
+This paper applies the method of matrix completion proposed by \citet{athey2017matrix} to predict counterfactual outcomes in a setting where multiple treated units are exposed to a binary intervention and the date of initial exposure to treatment may vary between treated units. Let $\mathbf{Y}$ denote a $N \times T$ matrix of outcomes for each unit $i, \ldots, N$ at time $t = 1, \ldots, T$. $\mathbf{Y}$ is incomplete because we observe each element $Y_{it}$ for only the control units and the treated units prior to first treatment exposure. Define the $N \times T$ binary matrix $\mathbf{M}$, where $M_{it} =1 $ if $Y_{it}$ is missing and $M_{it} = 0$ if $M_{it}$ is nonmissing.\footnote{The process that generates $\mathbf{M}$ is referred to the assignment mechanism in the causal inference literature \citep{imbens2015causal} and the missing data mechanism in missing data analysis \citep[Chap.~1]{little2014}.} This setup is motivated by the fundamental problem of causal inference \citep{holland1986statistics} in that we cannot directly observe counterfactual outcomes and we instead wish to predict missing values in $\mathbf{Y}$ for treated units with $M_{it}=1$. 
 
-In an observational setting, units are part of the assignment mechanism that generates $\mathbf{M}$ and patterns of missing data follow one of two specific structures. In the case of simultaneous adoption of treatment, a subset of units are exposed to treatment at time $T_0$ and every subsequent period. The second structure arises from staggered adoption \citep{athey2018design}, which differs from simultaneous adoption in that $T_0$ may vary across treated units. In either case, there are selection biases the missing values in $\mathbf{Y}$ are missing not at random (MNAR) because the probability of missingness may depend on the unobserved data, $f(\mathbf{M} | \mathbf{Y}, \phi) = f(\mathbf{M} | \mathbf{Y_{\mathrm{mis}}}, \phi)$ for all $\mathbf{Y_{\mathrm{mis}}}, \phi$, where $\phi$ denotes unknown parameters \citep[Chap.~1]{little2014}. Selection bias in the staggered adoption setting can occur, for example, if public land states are exposed to treatment (i.e., settled homesteads) earlier because they have higher quality land. Selection bias can occur in the simultaneous adoption setting due to latent characteristics of public land states that may be correlated with their outcomes. The goal is to accurately estimate the effect of a policy intervention despite incomplete and biased data due to selection bias. 
+In an observational setting, units are part of the assignment mechanism that generates $\mathbf{M}$ and patterns of missing data follow one of two specific structures. In the case of simultaneous adoption of treatment, a subset of units are exposed to treatment at time $T_0$ and every subsequent period. The second structure arises from staggered adoption \citep{athey2018design}, which differs from simultaneous adoption in that $T_0$ may vary across treated units. In either case, there are selection biases because the probability of missingness may depend on the unobserved data. Selection bias in the staggered adoption setting can occur, for example, if public land states are exposed to treatment (i.e., settled homesteads) earlier because they have higher quality land. Selection bias can occur in the simultaneous adoption setting due to latent characteristics of public land states that may be correlated with their outcomes. The goal is to accurately estimate the effect of a policy intervention despite incomplete and biased data due to selection bias. 
 
 \citet{schnabel2016recommendations} first connected the matrix completion problem with causal inference in an observational setting in the context of recommender systems under selection bias and propose a weighted matrix factorization method based on propensity scoring under the assumption that the assignment mechanism is probabilistic.
 
 \subsection{Matrix completion estimator}
 
-%Imputation and matrix completion are two widely-used methods for reconstructing missing data. Imputation methods reconstruct missing data by capturing synchronous relationships among observed values at the same time across different outcomes but ignore the temporal relationships within outcomes. Commonly used imputation methods include prediction model imputation, which replaces missing values with the predicted values from a regression of $\mathbf{Y_{\mathrm{mis}}}$ on $\mathbf{Y_{\mathrm{obs}}}$, and data analysis techniques such as principal component analysis (PCA) \citep{ilin2010practical}. These methods rely on modeling assumptions about the nature of the data-generating process and assume that the probability of missingness depends only on the observed data, $f(\mathbf{M} | \mathbf{Y}, \phi) = f(\mathbf{M} | \mathbf{Y_{\mathrm{obs}}}, \phi)$ for all $\mathbf{Y_{\mathrm{mis}}}, \phi$. This missing at random (MAR) assumption is easily violated when considering the problem of counterfactual prediction due to the dependency structure in $\mathbf{M}$. 
+Matrix completion methods can accurately predict missing values by solving a convex optimization problem via nuclear norm minimization (NNM), even when relatively few values are observed in the full matrix $\mathbf{Y}$ \citep[e.g.,][]{candes2009exact,candes2010matrix}.\footnote{Low-rank matrices arise in the present context when only a few factors contribute to the outcomes. \citet{candes2009exact} observe that the observed values in $\mathbf{Y}$ cannot be mostly equal to zero.} These methods exploit relationships within and across outcomes by treating $\mathbf{Y}$ as static and typically assume the missing values in $\mathbf{Y}$ are sampled uniformly at random. Incorrect assumptions about missing data can yield biased predictions in probabilistic models including regularized matrix factorization \citep{marlin2009collaborative}. 
 
-Matrix completion methods can accurately predict $\mathbf{Y_{\mathrm{mis}}}$ by solving a convex optimization problem via nuclear norm minimization (NNM), when the full matrix $\mathbf{Y}$ is low-rank and relatively few entries are observed \citep[e.g.,][]{candes2009exact,candes2010matrix}.\footnote{Low-rank matrices arise in the present context when only a few factors contribute to the outcomes. \citet{candes2009exact} observe that $\mathbf{Y_{\mathrm{obs}}}$ cannot be mostly equal to zero.} These methods exploit relationships within and across outcomes by treating $\mathbf{Y}$ as static and typically assume the missing values in $\mathbf{Y}$ are sampled uniformly at random. Incorrect assumptions about missing data can yield biased predictions in probabilistic models including regularized matrix factorization \citep{marlin2009collaborative}. 
+The method of matrix completion via NNM (MC-NNM) proposed by \citet{athey2017matrix} allows for patterns of missing data in $\mathbf{Y}$ to have a time-series dependency structure that arise from simultaneous or staggered adoption. $\mathbf{Y}$ can be decomposed as $\mathbf{Y} = \mathbf{L^{*}} + \epsilon$, where $\mathbf{L^{*}}$ is the matrix to be estimated. The two identifying conditions are that $\E[\epsilon | \mathbf{L^{*}} = 0]$ and that the error term $\epsilon$ is independent across rows (units), conditional on $\mathbf{L^{*}}$. The MC-NNM estimator for $\mathbf{L^{*}}$ minimizes the sum of squared reconstruction errors $(Y_{it} - L_{it})$ for values with $M_{it} = 0$ via nuclear norm regularized least squares, with the regularization term chosen by cross-validation.\footnote{\citet{athey2017matrix} note two drawbacks of the MC-NNM estimator: first, it penalizes the errors for each observed value equally without regard to the fact that the probability of missingness (i.e., the propensity score) increases with $t$. Second, the estimator does not account for time-series dependencies in the observed data and therefore it is likely that the columns of $\epsilon$ are autocorrelated.}\footnote{\citet{amjad2018robust} propose an alternative approach of approximating $\mathbf{L^{*}}$ via matrix estimation, and then using linear regression on the ``de-noised'' matrix, rather than relying on matrix norm regularizations.} The algorithm for calculating the estimator iteratively replaces missing values with those recovered from a singular value decomposition (SVD) \citep{mazumder2010spectral}. The estimator is evaluated in terms of its root-mean squared error (RMSE), $\|\mathbf{L^{*}}-\hat{\mathbf{L}}\|_F / \sqrt{NT}$, where $F$ is the Fröbenius Norm.\footnote{\citet{athey2017matrix} prove that, as $N$ and $T$ increase, the RMSE converges to zero when $\mathbf{L^{*}}$ is low-rank and the fraction of control units is sufficiently large.}
 
-The method of matrix completion via NNM (MC-NNM) proposed by \citet{athey2017matrix} allows for patterns of missing data in $\mathbf{Y}$ to have a time-series dependency structure that arise from simultaneous or staggered adoption. $\mathbf{Y}$ can be decomposed as $\mathbf{Y} = \mathbf{L^{*}} + \epsilon$, where it is assumed that the conditional expectation of the noise term $\epsilon$ given the matrix to be estimated, $\mathbf{L^{*}}$, is equal to zero. The MC-NNM estimator for $\mathbf{L^{*}}$ minimizes the sum of squared reconstruction errors $(Y_{it} - L_{it})$ for values with $M_{it} = 0$ via nuclear norm regularized least squares, with the regularization term chosen by cross-validation.\footnote{\citet{amjad2018robust} propose an alternative approach of approximating $\mathbf{L^{*}}$ via matrix estimation, and then using linear regression on the ``de-noised'' matrix, rather than relying on matrix norm regularizations.}\footnote{\citet{athey2017matrix} note that their estimator penalizes the errors for each observed value equally without regard to the fact that the probability of missingness (i.e., the propensity score), $\Pr (M_{it} = 1 | \mathbf{Y_{\mathrm{obs}}}, \phi)$, increases with $t$. The authors suggest weighting the loss function by the propensity score, which is similar to the importance weighting scheme proposed by \citet{cortes2008sample} to address the problem of covariate shift.} The algorithm for calculating the estimator iteratively replaces missing values with those recovered from a singular value decomposition (SVD) \citep{mazumder2010spectral}.\footnote{The root-mean squared error (RMSE) of the estimator is given by $\|\mathbf{L^{*}}-\hat{\mathbf{L}}\|_F / \sqrt{NT}$, where $F$ is the Fröbenius Norm. \citet{athey2017matrix} prove that, as $N$ and $T$ increase, the RMSE converges to zero when $\mathbf{L^{*}}$ is low-rank and the number of control units is sufficiently large.}
+\subsection{Hypothesis testing}
 
-\subsection{Inference}
+Consider a setup with $J$ control units indexed by $i=1, \ldots, J$ and $L$ treated units indexed by $i = J+1, \ldots, L+N$. The MC-NNM estimator imputes the missing post-intervention treated unit outcomes:
+%
+\begin{align}
+\hat{Y}_{it} = \hat{L}_{it}, \hspace{10mm} J+1 \leq i \leq N, \, \hspace{5mm} \, T_0+1 \leq t \leq T, \label{eq:mc-post}
+\end{align} 
+%
+where $T_0$ denotes the number of pre-intervention periods. The inferred causal effect of the intervention on the treated group is the difference between the observed outcomes of the treated units and the counterfactual outcomes that would have been observed in the absence of the intervention:
+%
+\begin{align}
+\hat{\alpha}_{it} &= Y_{it} - \hat{Y}_{it}, \hspace{10mm} J+1 \leq i \leq N, \, \hspace{5mm} \, T_0+1 \leq t \leq T \\ 
+\hat{\bar{\alpha}}_{t} & = \frac{1}{L} \sum^{N}_{i=J+1} \hat{\alpha}_{it},  \label{eq:avg-pointwise}
+\end{align}
+%
+where $\hat{\bar{\alpha}}_{t}$ corresponds to the estimated average causal effect across treated units. 
 
-%. Define the counterfactual means for the treatment unit as
-%For each time instance t ∈ [T ], compute the model uncertainty (variance) as
- 
+\citet{chernozhukov2017exact} propose a randomization inference approach for testing the sharp null hypothesis; i.e., $\hat{\bar{\alpha}}_{t} = \bar{\alpha}^{o}_{t}$ for $T_0+1 \leq t \leq T$, where $\left\{\bar{\alpha}^{o}_{t}\right\}_{t=T_0}^T$ is a trajectory of average effects under the null. The key assumption for the validity of this approach is unbiasedness of the MC-NNM estimator, which can be verified by placebo tests.\footnote{The data under the null must also satisfy the two identifying conditions of the estimator.} 
 
-%SETUP: chernozhukov2017exact - An exact and robust conformal inference method for counterfactual and synthetic controls
-%	propose an alternative permutation approach that permutes the time periods rather than the treatment assignment
-%	The key assumption for the validity of this approach is unbiasedness of the estimator single treated unit set-up
-%   Inference challenges: 
-%	1 data typically exhibit dynamics and serial dependence
-%	2 because there is only one treated unit and the number of post-treatment periods, T∗, is typically small, treatment effects 	cannot be consistently estimated,
-%	even if the number of pre-treatment periods, T0, is very large
-%	3 the number of (potential) control units, J, is often of the same order as T0, which leads to a need for some regularization
-
-% chernozhukov2018inference
-
-
-%Potential outcomes framework + assumptions: ben2018augmented - The Augmented Synthetic Control Method
-%state land states not appropriate control units because their governments and markets had already been well-developed by the time of the passage of the homestead laws. Additionally, it is likely that state land states were indirectly affected by the out-migration of homesteaders from frontier states. 
-
-% Conformal inference: lei2018distribution
-
-% hahn2017synthetic - Synthetic control and inference
+The relevant test statistic is 
+%
+\begin{equation}
+S (\hat{\bar{\alpha}}_{t}) = \frac{1}{\sqrt{T_\star}} \sum_{t=T_0 +1}^{T} |\hat{\bar{\alpha}}_{t}|,
+\end{equation}
+%
+where $T_\star = T-T_0$ is the number of post-intervention periods. $p$-values are obtained by permuting $\mathbf{Y}$ across the time dimension and calculating the following test statistic under the null:
+%
+\begin{equation}
+\hat{p} = 1 - \frac{1}{\Pi} \sum_{\pi \in \Pi} \textbf{1} \left\{S (\hat{\bar{\alpha}}_{\pi}) < S (\hat{\bar{\alpha}}_{t}) \right\}, 
+\end{equation}
+%
+for permutations $\pi \in \Pi$. 
 
 \subsection{Simulations} \label{sims}
 
@@ -259,6 +265,10 @@ I evaluate the proposed RNN-based approach on three datasets common to the SCM l
 \end{figure}
 
 \section{Impact of homestead acts on state capacity} \label{state-capacity}
+
+%% Graph of treatment adoption
+
+% Checking assumptions: unbiasedness of MC-MNN, placebo test, MC-MNN assumptions 
 
 %Mention frontier states with pre-treatment obs
 %The staggered adoption setting is appropriate for the current application due to the fact the lag in time between passage of the homestead acts and the time at which the first homesteads were settled varies across public land states.

@@ -10,6 +10,8 @@ Warning--page numbers missing in athey2017matrix
 Warning--no number and no volume in athey2018design
 Warning--page numbers missing in athey2018design
 Warning--no number and no volume in benabou2000unequal
+Warning--no number and no volume in chernozhukov2017exact
+Warning--page numbers missing in chernozhukov2017exact
 Warning--no number and no volume in doudchenko2016balancing
 Warning--page numbers missing in doudchenko2016balancing
 Warning--empty note in ferrie1997migration
@@ -21,43 +23,43 @@ Warning--page numbers missing in schnabel2016recommendations
 Warning--empty note in suryanarayan2017hollowing
 You've used 53 entries,
             2861 wiz_defined-function locations,
-            907 strings with 13554 characters,
-and the built_in function-call counts, 34334 in all, are:
-= -- 2885
-> -- 2445
-< -- 2
-+ -- 728
-- -- 857
-* -- 3001
-:= -- 6363
-add.period$ -- 156
+            906 strings with 13557 characters,
+and the built_in function-call counts, 34069 in all, are:
+= -- 2858
+> -- 2428
+< -- 1
++ -- 724
+- -- 851
+* -- 2982
+:= -- 6328
+add.period$ -- 155
 call.type$ -- 53
-change.case$ -- 363
+change.case$ -- 362
 chr.to.int$ -- 52
-cite$ -- 69
-duplicate$ -- 931
-empty$ -- 2085
-format.name$ -- 988
-if$ -- 6255
+cite$ -- 71
+duplicate$ -- 917
+empty$ -- 2065
+format.name$ -- 982
+if$ -- 6189
 int.to.chr$ -- 2
 int.to.str$ -- 0
 missing$ -- 52
 newline$ -- 263
 num.names$ -- 528
-pop$ -- 260
+pop$ -- 254
 preamble$ -- 1
-purify$ -- 687
+purify$ -- 686
 quote$ -- 0
-skip$ -- 1013
+skip$ -- 1003
 stack$ -- 0
-substring$ -- 1787
-swap$ -- 300
-text.length$ -- 2
+substring$ -- 1765
+swap$ -- 293
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 976
-warning$ -- 16
-while$ -- 529
+warning$ -- 18
+while$ -- 526
 width$ -- 0
-write$ -- 685
-(There were 16 warnings)
+write$ -- 683
+(There were 18 warnings)
