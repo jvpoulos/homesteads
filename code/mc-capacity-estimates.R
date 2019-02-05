@@ -110,7 +110,7 @@ MCEst <- function(outcomes,sim=FALSE,covars=NULL,pca=FALSE) {
 # Get NxT matrix of point estimates
 
 # mc.est <- mclapply(capacity.outcomes.list,
-#                         MCEst,sim=FALSE, covars=NULL,pca=FALSE,mc.cores=cores)
+#                          MCEst,sim=FALSE, covars=NULL,pca=FALSE,mc.cores=cores)
 
 # Get NxT matrix of confidence intervals
 source("ChernoTest.R")
@@ -121,11 +121,11 @@ t_star <- t_final-t0
 
 pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
 
-foreach(x = c("rev.pc","exp.pc","educ.pc")) %dopar% {
-  print(paste("Starting",x))
-  mc.ci.x <- ChernoCI(t_star, c.range=c(-10,10), alpha=0.025, l=50, prec=1e-02, capacity.outcomes[[x]], ns=100, treated.indices=pub.states, permtype="iid",sim=FALSE,covars=NULL,pca=FALSE)
-  print(paste("Saving",x))
-  saveRDS(mc.ci.x,paste0("mc-ci-",x,".rds"))
-}
+rev.pc.iid <- ChernoCI(t_star, c.range=c(-10,10), alpha=0.025, l=100, prec=1e-02, capacity.outcomes[["rev.pc"]], ns=100, treated.indices=pub.states, permtype="iid",sim=FALSE,covars=NULL,pca=FALSE)
+saveRDS(rev.pc.iid,"rev_pc_iid.rds")
 
-parallel::stopCluster(cl)
+exp.pc.iid <- ChernoCI(t_star, c.range=c(-10,10), alpha=0.025, l=100, prec=1e-02, capacity.outcomes[["exp.pc"]], ns=100, treated.indices=pub.states, permtype="iid",sim=FALSE,covars=NULL,pca=FALSE)
+saveRDS(exp.pc.iid,"exp_pc_iid.rds")
+
+educ.pc.iid <- ChernoCI(t_star, c.range=c(-10,10), alpha=0.025, l=100, prec=1e-02, capacity.outcomes[["educ.pc"]], ns=100, treated.indices=pub.states, permtype="iid",sim=FALSE,covars=NULL,pca=FALSE)
+saveRDS(educ.pc.iid,"educ_pc_iid.rds")

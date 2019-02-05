@@ -112,7 +112,7 @@ ChernoCI <- function(t_star,c.range=c(-2,2), alpha=0.025, l=100, prec=1e-02, out
   # Calculate randomization test confidence interval.
   #
   # Args:
-  #   c.range: Range of constant treatment effects. Default is c(-1,1).
+  #   c.range: Range of constant treatment effects. Default is c(-2,2).
   #   alpha: Two-sided significance level. Default is 0.025.
   #   l: Number of constant treatment effects. Default is 100.
   #   prec: Level of precision in constant treatment effects. Default is 1e-02.
@@ -120,7 +120,7 @@ ChernoCI <- function(t_star,c.range=c(-2,2), alpha=0.025, l=100, prec=1e-02, out
   # Returns:
   #   Vector of per-time-step randomization confidence interval
   # Create vector to store CIs
-  p.weights <- abs(log(abs(seq(c.range[1],c.range[2],by=prec) + .Machine$double.eps))) # penalize larger effects
+  p.weights <- dnorm(seq(c.range[1],c.range[2],by=prec), 0, 1/2) # penalize larger effects
   CI <- matrix(NA, t_star, l)
   for(i in 1:l){
     # Sample sequence of treatment effects under the null
