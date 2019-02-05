@@ -99,7 +99,7 @@ MCEst <- function(outcomes,sim=FALSE,covars=NULL,pca=FALSE) {
     ## MC-NNM
     ## ------
     
-    est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
+    est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 2, num_lam_L=10, niter = 100) # reduce computation
     est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
     est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y*Y.missing) # calc on non-imputed values
     
@@ -122,7 +122,9 @@ t_star <- t_final-t0
 pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
 
 foreach(x = c("rev.pc","exp.pc","educ.pc")) %dopar% {
-  mc.ci.x <- ChernoCI(t_star, c.range=c(-10,10), alpha=0.025, l=50, prec=1e-02, capacity.outcomes[[x]], treated.indices=pub.states, permtype="moving.block",sim=FALSE,covars=NULL,pca=FALSE)
+  print(paste("Starting",x))
+  mc.ci.x <- ChernoCI(t_star, c.range=c(-10,10), alpha=0.025, l=50, prec=1e-02, capacity.outcomes[[x]], ns=100, treated.indices=pub.states, permtype="iid",sim=FALSE,covars=NULL,pca=FALSE)
+  print(paste("Saving",x))
   saveRDS(mc.ci.x,paste0("mc-ci-",x,".rds"))
 }
 
