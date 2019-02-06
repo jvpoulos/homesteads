@@ -47,6 +47,8 @@ source(paste0(code.directory,'prepare-synth.R'))
 
 # MC causal estimates on state capacity data
 
+# mc-capacity-placebo.sh --> mc-capacity-placebo.R  # placebo tests
+
 # mc-capacity-estimates.sh --> mc-capacity-estimates.R 
 
 source(paste0(code.directory,'mc-capacity-plots.R')) 
