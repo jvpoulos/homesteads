@@ -18,7 +18,7 @@ MCEst <- function(outcomes,t0,sim=FALSE,covars=NULL,pca=FALSE) {
   treat_indices <- as.numeric(indices[order(match(indices[,2], treat_indices_order))][1:length(treat_indices_order)]) # sort indices increasingly based on T0
   
   N_t <- length(treat_indices) # Number of treated units desired
-  T0 <- 87 #which(colnames(Y)=="1869")# The first treatment time
+  T0 <- t0 #which(colnames(Y)=="1869")# The first treatment time
   
   ## Simultaneuous (simul_adapt) or Staggered adoption (stag_adapt)
   if(sim){
