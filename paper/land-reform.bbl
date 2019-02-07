@@ -271,6 +271,12 @@ Murtazashvili, I. (2013).
 \newblock {\em The Political Economy of the American Frontier}.
 \newblock New York, NY: Cambridge University Press.
 
+\bibitem[\protect\citeauthoryear{Politis and White}{Politis and
+  White}{2004}]{politis2004automatic}
+Politis, D.~N. and H.~White (2004).
+\newblock Automatic block-length selection for the dependent bootstrap.
+\newblock {\em Econometric Reviews\/}~{\em 23\/}(1), 53--70.
+
 \bibitem[\protect\citeauthoryear{{Poulos}}{{Poulos}}{2017}]{2017arXiv171203553P}
 {Poulos}, J. (2017, December).
 \newblock {RNN-Based Counterfactual Time-Series Prediction}.

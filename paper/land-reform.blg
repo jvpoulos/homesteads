@@ -21,45 +21,45 @@ Warning--page numbers missing in 2017arXiv171203553P
 Warning--no number and no volume in schnabel2016recommendations
 Warning--page numbers missing in schnabel2016recommendations
 Warning--empty note in suryanarayan2017hollowing
-You've used 56 entries,
+You've used 57 entries,
             2861 wiz_defined-function locations,
-            925 strings with 14197 characters,
-and the built_in function-call counts, 36737 in all, are:
-= -- 3072
-> -- 2678
+            931 strings with 14342 characters,
+and the built_in function-call counts, 37461 in all, are:
+= -- 3138
+> -- 2730
 < -- 1
-+ -- 804
-- -- 939
-* -- 3256
-:= -- 6816
-add.period$ -- 164
-call.type$ -- 56
-change.case$ -- 389
-chr.to.int$ -- 55
-cite$ -- 74
-duplicate$ -- 971
-empty$ -- 2197
-format.name$ -- 1082
-if$ -- 6676
++ -- 820
+- -- 959
+* -- 3321
+:= -- 6946
+add.period$ -- 167
+call.type$ -- 57
+change.case$ -- 396
+chr.to.int$ -- 56
+cite$ -- 75
+duplicate$ -- 989
+empty$ -- 2239
+format.name$ -- 1106
+if$ -- 6809
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 55
-newline$ -- 278
-num.names$ -- 558
-pop$ -- 272
+missing$ -- 56
+newline$ -- 283
+num.names$ -- 568
+pop$ -- 276
 preamble$ -- 1
-purify$ -- 731
+purify$ -- 744
 quote$ -- 0
-skip$ -- 1064
+skip$ -- 1086
 stack$ -- 0
-substring$ -- 1900
-swap$ -- 311
+substring$ -- 1939
+swap$ -- 317
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1036
+type$ -- 1056
 warning$ -- 18
-while$ -- 558
+while$ -- 570
 width$ -- 0
-write$ -- 722
+write$ -- 735
 (There were 18 warnings)
