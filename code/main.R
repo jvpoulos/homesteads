@@ -72,6 +72,7 @@ source(paste0(code.directory,'dd-inequality.R')) # run dd-railroads first
 # Descriptive plots, scatter plots
 
 source(paste0(code.directory,'homestead-map.R')) # Map homesteads
+source(paste0(code.directory,'homestead-heatmapmap.R')) # Homesteads heatmap
 
 source(paste0(code.directory,'descriptive.R')) # Descriptive plots
 source(paste0(code.directory,'funds-descriptive.R')) # state capacity plots

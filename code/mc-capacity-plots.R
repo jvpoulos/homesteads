@@ -8,21 +8,20 @@ require(tseries)
 
 source(paste0(code.directory,"TsPlot.R"))
 
-PlotMCCapacity <- function(x){
+PlotMCCapacity <- function(permtype){
   ## Create time series data
   
-  boot <- readRDS(paste0(results.directory, "mc/", gsub('\\.', '-', x), "-boot.rds"))
+  pointwise.ci <- readRDS(paste0(results.directory, "mc/", permtype,".rds"))[[x]]
+  
+  observed <- capacity.outcomes[[x]]$M
+  
+  predicted <- capacity.outcomes[[x]]$Mhat
+  
+  pointwise <- mc.est[[x]]$impact 
 
-  observed <- dfList[[x]]$M
-  
-  predicted <- mc.est[[x]]$Mhat
-  
-  pointwise <- mc.est[[x]]$impact # boot$t0
-
-  pointwise.se <- matrix(apply(boot$t, 2, sd), nrow=49, ncol=159, byrow=FALSE)
-  
-  m <- which(colnames(observed)=="1982")
-  n <- which(colnames(observed)=="1869")-1
+  m <- t_final
+  n <- t0
+  t <- t_star
   
   cumulative <- sapply((n+1):m, function(t){
     (1/(t-n))*rowSums(pointwise[,n:t])
@@ -30,11 +29,11 @@ PlotMCCapacity <- function(x){
   
   cumulative <- cbind(matrix(0, ncol=ncol(pointwise)-ncol(cumulative), nrow = nrow(pointwise)), cumulative)
   
-  cumulative.se <- sapply((n+1):m, function(t){
-    (1/(t-n))*rowSums(pointwise.se[,n:t])
+  cumulative.ci <- sapply((n+1):m, function(t){
+    (1/(t-n))*rowSums(pointwise.ci[,n:t])
   })
   
-  cumulative.se <- cbind(matrix(0, ncol=ncol(pointwise.se)-ncol(cumulative.se), nrow = nrow(pointwise.se)), cumulative.se)
+  cumulative.ci <- cbind(matrix(0, ncol=ncol(pointwise.ci)-ncol(cumulative.ci), nrow = nrow(pointwise.ci)), cumulative.ci)
   
   ## Plot time series 
   
@@ -48,21 +47,21 @@ PlotMCCapacity <- function(x){
   observed.mean <-  aggregate(observed, list(treat.status), mean)[-1]
   predicted.mean <-  aggregate(predicted, list(treat.status), mean)[-1]
   pointwise.mean <- aggregate(pointwise, list(treat.status), mean)[-1]
-  pointwise.se.mean <- aggregate(pointwise.se, list(treat.status), mean)[-1]
+  pointwise.ci.mean <- aggregate(pointwise.ci, list(treat.status), mean)[-1]
   cumulative.mean <- aggregate(cumulative, list(treat.status), mean)[-1]
-  cumulative.se.mean <- aggregate(cumulative.se, list(treat.status), mean)[-1]
+  cumulative.ci.mean <- aggregate(cumulative.ci, list(treat.status), mean)[-1]
   
   ts.means <- cbind(t(observed.mean), t(predicted.mean), t(pointwise.mean), t(cumulative.mean))
   colnames(ts.means) <- c("observed.wpl","observed.spl","observed.wsl","observed.ssl","predicted.wpl","predicted.spl","predicted.wsl","predicted.ssl","pointwise.wpl","pointwise.spl","pointwise.wsl","pointwise.ssl","cumulative.wpl","cumulative.spl","cumulative.wsl","cumulative.ssl")
   ts.means <- cbind(ts.means, "year"=as.numeric(rownames(ts.means)))
   ts.means.m <- melt(data.frame(ts.means), id.var=c("year"))
   
-  ts.se.means <- cbind(t(pointwise.se.mean), t(cumulative.se.mean))
-  colnames(ts.se.means) <- c("pointwise.wpl","pointwise.spl","pointwise.wsl","pointwise.ssl","cumulative.wpl","cumulative.spl","cumulative.wsl","cumulative.ssl")
-  ts.se.means <- cbind(ts.se.means, "year"=as.numeric(rownames(ts.means)))
-  ts.se.means.m <- melt(data.frame(ts.se.means), id.var=c("year"))
+  ts.ci.means <- cbind(t(pointwise.ci.mean), t(cumulative.ci.mean))
+  colnames(ts.ci.means) <- c("pointwise.wpl","pointwise.spl","pointwise.wsl","pointwise.ssl","cumulative.wpl","cumulative.spl","cumulative.wsl","cumulative.ssl")
+  ts.ci.means <- cbind(ts.ci.means, "year"=as.numeric(rownames(ts.means)))
+  ts.ci.means.m <- melt(data.frame(ts.ci.means), id.var=c("year"))
   
-  ts.means.m <- merge(ts.means.m, ts.se.means.m, by=c("year","variable"), all.x=TRUE) # bind std. error
+  ts.means.m <- merge(ts.means.m, ts.ci.means.m, by=c("year","variable"), all.x=TRUE) # bind std. error
   colnames(ts.means.m) <- c("year", "variable", "value", "se")
   
   ts.means.m <- ts.means.m %>%

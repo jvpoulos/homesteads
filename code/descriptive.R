@@ -4,10 +4,36 @@
 
 library(scales)
 library(ggplot2)
+library(plyr)
 library(dplyr)
 library(reshape)
 library(reshape2)
 library(tidyr)
+
+## Heatmap of staggered treatment adoption
+
+## Heatmap of homestead entries: state x year
+
+homesteads.state <- patents.sum %>%
+  filter(state_code %in% pub.states) %>% # only public land states
+  filter(year %in% c(1862:1940)) %>% 
+  group_by(state_code,year) %>%
+  summarise_each(funs(sum),homesteads)
+
+homesteads.state.m <- melt(data.frame(homesteads.state), id.vars = c("state_code","year"))
+homesteads.state.m <- ddply(homesteads.state.m, .(variable), transform,
+                      rescale = rescale(value))
+
+p <- ggplot(homesteads.state.m, aes(year,state_code)) + geom_tile(aes(fill = value),
+                                                            colour = "white") + scale_fill_gradient(low = "white",
+                                                                                                          high = "steelblue")
+base_size <- 9
+
+p <- p + theme_grey(base_size=base_size)
+p <- p + labs(x="", y="")
+p <- p + scale_x_discrete(expand = c(0,0))
+p <- p + theme(legend.position="none", axis.ticks=element_blank(), axis.text.x=element_text(size=base_size*0.8, angle=330, hjust = 0, colour="grey50"))
+p
 
 ## Plot per-capita patents time series
 
