@@ -109,7 +109,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
 
 ## Invert for CIs
 
-ChernoCI <- function(t_star,c.range=c(-2,2), alpha=0.025, l=100, prec=1e-02, outcomes, ns=1000, q=1, treated.indices, 
+ChernoCI <- function(t_star,c.range=c(-2,2), sd=1, alpha=0.025, l=100, prec=1e-02, outcomes, ns=1000, q=1, treated.indices, 
                      permtype=c("iid", "moving.block", "iid.block"),t0,sim=FALSE,covars=NULL,pca=FALSE) {
   require(matrixStats)
   # Calculate randomization test confidence interval.
@@ -123,7 +123,7 @@ ChernoCI <- function(t_star,c.range=c(-2,2), alpha=0.025, l=100, prec=1e-02, out
   # Returns:
   #   Vector of per-time-step randomization confidence interval
   # Create vector to store CIs
-  p.weights <- dnorm(seq(c.range[1],c.range[2],by=prec), 0, 5) # penalize larger effects
+  p.weights <- dnorm(seq(c.range[1],c.range[2],by=prec), 0, sd) # penalize larger effects
   CI <- matrix(NA, t_star, l)
   for(i in 1:l){
     # Sample sequence of treatment effects under the null

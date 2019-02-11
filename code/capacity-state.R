@@ -163,11 +163,12 @@ funds[(funds$state=="WA" & funds$year>=1907 & funds$year<=1918),] <- NA
 
 USCPI_1783_1982 <- read_csv(paste0(data.directory,"USCPI_1783-1982.csv"))
 
-USCPI_1783_1982$adj_factor <- USCPI_1783_1982$`U.S. Consumer Price Index`/USCPI_1783_1982$`U.S. Consumer Price Index`[USCPI_1783_1982$Year == 1982] # adj. factor relative to 1982
+USCPI_1783_1982$adj_factor_82 <- USCPI_1783_1982$`U.S. Consumer Price Index`/USCPI_1783_1982$`U.S. Consumer Price Index`[USCPI_1783_1982$Year == 1982] # adj. factor relative to 1982
+USCPI_1783_1982$adj_factor_42 <- USCPI_1783_1982$`U.S. Consumer Price Index`/USCPI_1783_1982$`U.S. Consumer Price Index`[USCPI_1783_1982$Year == 1942]
 
 funds <- merge(funds, USCPI_1783_1982, by.x="year", by.y="Year")
 
-## Make per-capita measures
+## Make log per-capita measures
 
 funds$year2 <- signif(funds$year,3) # merge by nearest decennial
 funds$year2[funds$year<=1785] <- 1790 # VA
@@ -178,13 +179,13 @@ funds <- merge(funds, census.ts.state[c('year','state','ns.pop',"land.gini","ala
                by.x=c('year2','state'), by.y=c('year','state'),all.x=TRUE)
 
 funds["rev.pc"] <- NA
-funds["rev.pc"] <- (funds["1"]/funds$adj_factor)/funds$ns.pop
+funds["rev.pc"] <- log((funds["1"]/funds$adj_factor_82)/funds$ns.pop)
 
 funds["exp.pc"] <- NA
-funds["exp.pc"] <- (funds["3"]/funds$adj_factor)/funds$ns.pop
+funds["exp.pc"] <- log((funds["3"]/funds$adj_factor_82)/funds$ns.pop)
 
 funds["educ.pc"] <- NA
-funds["educ.pc"] <- (funds["31"]/funds$adj_factor)/funds$ns.pop
+funds["educ.pc"] <- log((funds["31"]/funds$adj_factor_42)/funds$ns.pop)
 
 # clean feature set
 funds <- funds[colnames(funds) %in% c("state","year","year2",
@@ -238,10 +239,24 @@ CapacityMatrices <- function(d, outcomes=TRUE) {
   d.M.missing[is.nan(d.M.missing)] <- NA
   d.M.missing[!is.na(d.M.missing)] <-1
   
-  d <- na.interpolation(d, "linear") # impute missing values by linear interpolation
+  # impute missing for treated
+  d.imp <- d
+  if(outcomes){
+    y.fits <- softImpute(d[1:which(rownames(d)=="1868"),], rank.max=3, lambda=1, maxit=200, trace.it=TRUE, type="svd") # fit on pre-treatment for treated and control
+  } else{
+    y.fits <- softImpute(d[1:which(rownames(d)=="1870"),], rank.max=2, lambda=1, maxit=200, trace.it=TRUE, type="svd") 
+  }
+  
+  d.imp[colnames(d.imp)%in%pub.states] <- softImpute::complete(d[colnames(d)%in%pub.states], y.fits) # complete missing treated entries in full matrix
+  
+  # impute missing for controls
+  
+  x.fits <- softImpute(as.matrix(d), rank.max=3, lambda=1, maxit=200, trace.it=TRUE, type="svd") # fit on all periods of original matrix
+  
+  d.imp[colnames(d.imp)%in%state.land.states] <- softImpute::complete(d[colnames(d)%in%state.land.states], x.fits) # complete missing control entries in full matrix
   
   # Matrix of observed entries (N x T)
-  d.M <- t(as.matrix(d))
+  d.M <- t(as.matrix(d.imp))
   d.M[is.nan(d.M )] <- NA
   
   rownames(d.M) <- colnames(d)

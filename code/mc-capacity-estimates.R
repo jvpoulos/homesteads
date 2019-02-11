@@ -35,8 +35,9 @@ t_star <- t_final-t0
 
 # Get NxT matrix of point estimates
 
-# mc.est <- mclapply(capacity.outcomes.list,
-#                            MCEst,t0=t0,sim=FALSE, covars=NULL,pca=FALSE,mc.cores=cores)
+mc.est <- mclapply(capacity.outcomes.list,
+                            MCEst,t0=t0,sim=FALSE, covars=NULL,pca=FALSE,mc.cores=cores)
+saveRDS(mc.est,"mc_est.rds")
 
 # Get NxT matrix of confidence intervals
 source("ChernoTest.R")
@@ -44,13 +45,13 @@ source("ChernoTest.R")
 pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
 
 iid <- mclapply(capacity.outcomes.list, 
-            ChernoCI, t_star=t_star, c.range=c(-10,10), alpha=0.025, l=1000, prec=1e-02, ns=100, treated.indices=pub.states, permtype="iid",t0=t0,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+            ChernoCI, t_star=t_star, c.range=c(-10,10), sd=5, alpha=0.025, l=1000, prec=1e-03, ns=500, treated.indices=pub.states, permtype="iid",t0=t0,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(iid,"iid.rds")
 
 moving.block <- mclapply(capacity.outcomes.list, 
-           ChernoCI, t_star=t_star, c.range=c(-10,10), alpha=0.025, l=1000, prec=1e-02, ns=100, treated.indices=pub.states, permtype="moving.block",t0=t0,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+           ChernoCI, t_star=t_star, c.range=c(-10,10), sd=5, alpha=0.025, l=1000, prec=1e-03, ns=500, treated.indices=pub.states, permtype="moving.block",t0=t0,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(moving.block,"moving_block.rds")
 
 iid.block <- mclapply(capacity.outcomes.list, 
-           ChernoCI, t_star=t_star, c.range=c(-10,10), alpha=0.025, l=1000, prec=1e-02, ns=100, treated.indices=pub.states, permtype="iid.block",t0=t0,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+           ChernoCI, t_star=t_star, c.range=c(-10,10), sd=5, alpha=0.025, l=1000, prec=1e-03, ns=500, treated.indices=pub.states, permtype="iid.block",t0=t0,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(iid.block,"iid_block.rds")
