@@ -30,7 +30,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
       
       ## get treatment effect estimates
       
-      att <- as.matrix(colMeans(mc.fit$impact[,(t0+1):t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,], na.rm=TRUE)) # get mean post-period impact on treated
+      att <- as.matrix(colMeans(mc.fit$impact[,t0:t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,], na.rm=TRUE)) # get mean post-period impact on treated
       
       teststats[i,] <- ((1/sqrt(t_star)) * sum(abs(att)^q,na.rm=TRUE))^(1/q)   
     }
@@ -53,7 +53,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
       
       ## get treatment effect estimates
       
-      att <- as.matrix(colMeans(mc.fit$impact[,(t0+1):t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,], na.rm=TRUE)) # get mean post-period impact on treated
+      att <- as.matrix(colMeans(mc.fit$impact[,t0:t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,], na.rm=TRUE)) # get mean post-period impact on treated
       
       teststats[i,] <-((1/sqrt(t_star)) * sum(abs(att)^q,na.rm=TRUE))^(1/q)        
     }
@@ -86,7 +86,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
       
       ## get treatment effect estimates
       
-      att <- as.matrix(colMeans(mc.fit$impact[,(t0+1):t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,], na.rm=TRUE)) # get mean post-period impact on treated
+      att <- as.matrix(colMeans(mc.fit$impact[,t0:t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,], na.rm=TRUE)) # get mean post-period impact on treated
       
       teststats[i,] <-((1/sqrt(t_star)) * sum(abs(att)^q,na.rm=TRUE))^(1/q)   
     }
@@ -99,7 +99,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
     real_att <- t.stat
   } else{
     mc.fit.actual <-  MCEst(outcomes,t0,sim=FALSE,covars=NULL,pca=FALSE)
-    real_att <- as.matrix(colMeans(mc.fit.actual$impact[,(t0+1):t_final,drop=FALSE][rownames(mc.fit.actual$impact) %in% treated.indices,], na.rm=TRUE)) # get mean post-period impact on treated
+    real_att <- as.matrix(colMeans(mc.fit.actual$impact[,t0:t_final,drop=FALSE][rownames(mc.fit.actual$impact) %in% treated.indices,], na.rm=TRUE)) # get mean post-period impact on treated
   }
   real_teststat <- ((1/sqrt(t_star)) * sum(abs(real_att)^q,na.rm = TRUE))^(1/q)
   pval <- 1- ((1/length(teststats) * sum(teststats < real_teststat, na.rm=TRUE)))
@@ -123,7 +123,7 @@ ChernoCI <- function(t_star,c.range=c(-2,2), alpha=0.025, l=100, prec=1e-02, out
   # Returns:
   #   Vector of per-time-step randomization confidence interval
   # Create vector to store CIs
-  p.weights <- dnorm(seq(c.range[1],c.range[2],by=prec), 0, 1/2) # penalize larger effects
+  p.weights <- dnorm(seq(c.range[1],c.range[2],by=prec), 0, 1) # penalize larger effects
   CI <- matrix(NA, t_star, l)
   for(i in 1:l){
     # Sample sequence of treatment effects under the null

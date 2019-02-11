@@ -1,4 +1,4 @@
-TsPlot <- function(df, main = "") {
+Tslsot <- function(df, main = "",y.title="") {
   library(ggplot2)
   library(zoo)
   library(scales)
@@ -12,24 +12,22 @@ TsPlot <- function(df, main = "") {
     theme(strip.text= element_text(size = 12, family = "serif", face='bold')) +
     
     # line colours
-    geom_line(data = subset(df, variable == "observed.wpl"), aes(y = value, colour = "observed.wpl", linetype="observed.wpl"), show.legend = TRUE, size=1) +
-    geom_line(data = subset(df, variable == "predicted.wpl"), aes(y = value, colour = "predicted.wpl", linetype="predicted.wpl"), show.legend = FALSE, size=1) +
-    geom_line(data = subset(df, variable == "pointwise.wpl"), aes(y = value, colour = "observed.wpl", linetype="observed.wpl"), show.legend = FALSE, size=1) +
-    geom_line(data = subset(df, variable == "cumulative.wpl"), aes(y = value ,colour = "observed.wpl", linetype="observed.wpl"), show.legend = FALSE, size=1) +
+    geom_line(data = subset(df, variable == "observed.pls"), aes(y = value, colour = "observed.pls", linetype="observed.pls"), show.legend = TRUE, size=1) +
+    geom_line(data = subset(df, variable == "predicted.pls"), aes(y = value, colour = "predicted.pls", linetype="predicted.pls"), show.legend = FALSE, size=1) +
+    geom_line(data = subset(df, variable == "pointwise.pls"), aes(y = value, colour = "observed.pls", linetype="observed.pls"), show.legend = FALSE, size=1) +
+    geom_line(data = subset(df, variable == "cumulative.pls"), aes(y = value ,colour = "observed.pls", linetype="observed.pls"), show.legend = FALSE, size=1) +
     
-    geom_line(data = subset(df, variable == "observed.spl"), aes(y = value, colour = "observed.spl", linetype="observed.spl"), show.legend = TRUE, size=1) +
-    geom_line(data = subset(df, variable == "predicted.spl"), aes(y = value, colour = "predicted.spl", linetype="predicted.spl"), show.legend = FALSE, size=1) +
-    geom_line(data = subset(df, variable == "pointwise.spl"), aes(y = value, colour = "observed.spl", linetype="observed.spl"), show.legend = FALSE, size=1) +
-    geom_line(data = subset(df, variable == "cumulative.spl"), aes(y = value ,colour = "observed.spl", linetype="observed.spl"), show.legend = FALSE, size=1) +
+    geom_line(data = subset(df, variable == "observed.sls"), aes(y = value, colour = "observed.sls", linetype="observed.sls"), show.legend = TRUE, size=1) +
+  #  geom_line(data = subset(df, variable == "predicted.sls"), aes(y = value, colour = "predicted.sls", linetype="predicted.sls"), show.legend = FALSE, size=1) +
+  #  geom_line(data = subset(df, variable == "pointwise.sls"), aes(y = value, colour = "observed.sls", linetype="observed.sls"), show.legend = FALSE, size=1) +
+  #  geom_line(data = subset(df, variable == "cumulative.sls"), aes(y = value ,colour = "observed.sls", linetype="observed.sls"), show.legend = FALSE, size=1) +
     
     # intervals
-    geom_ribbon(data = subset(df, variable == "predicted.wpl"), aes(ymin = lower, ymax=upper, colour="predicted.wpl"), alpha=.1, size=0.5, show.legend = FALSE) +
-    geom_ribbon(data = subset(df, variable == "pointwise.wpl"), aes(ymin = lower, ymax=upper, colour="predicted.wpl"), alpha=.1, size=0.5, show.legend = FALSE) +
-    geom_ribbon(data = subset(df, variable == "cumulative.wpl"), aes(ymin = lower, ymax=upper, colour="predicted.wpl"), alpha=.1, size=0.5, show.legend = FALSE) +   
+    geom_ribbon(data = subset(df, variable == "pointwise.pls"), aes(ymin = pointwise.lo, ymax=pointwise.hi, colour="predicted.pls"), alpha=.1, size=0.5, show.legend = FALSE) +
+    geom_ribbon(data = subset(df, variable == "cumulative.pls"), aes(ymin = cumulative.lo, ymax=cumulative.hi, colour="predicted.pls"), alpha=.1, size=0.5, show.legend = FALSE) +   
     
-    geom_ribbon(data = subset(df, variable == "predicted.spl"), aes(ymin = lower, ymax=upper, colour="predicted.spl"), alpha=.1, size=0.5, show.legend = FALSE) +
-    geom_ribbon(data = subset(df, variable == "pointwise.spl"), aes(ymin = lower, ymax=upper, colour="predicted.spl"), alpha=.1, size=0.5, show.legend = FALSE) +
-    geom_ribbon(data = subset(df, variable == "cumulative.spl"), aes(ymin = lower, ymax=upper, colour="predicted.spl"), alpha=.1, size=0.5, show.legend = FALSE) +   
+   # geom_ribbon(data = subset(df, variable == "pointwise.sls"), aes(ymin = pointwise.lo, ymax=pointwise.hi, colour="predicted.sls"), alpha=.1, size=0.5, show.legend = FALSE) +
+  #  geom_ribbon(data = subset(df, variable == "cumulative.sls"), aes(ymin = cumulative.lo, ymax=cumulative.hi, colour="predicted.sls"), alpha=.1, size=0.5, show.legend = FALSE) +   
     
     # horizontal line to indicate zero values
     geom_hline(yintercept = 0, size = 0.5, colour = "black") +
@@ -56,9 +54,9 @@ TsPlot <- function(df, main = "") {
   
   # annotation text
   
-  ann_text <- data.frame(year = c(as.POSIXlt("1980-01-01 EST"), as.POSIXlt("2006-12-31 EST")), value=8, 
-                         series = factor("Observed time-series", levels = c("Observed time-series","pointwise.wpl","cumulative.wpl")),
-                         lab = c("pre-period", "post-period"))
+  # ann_text <- data.frame(year = c(as.POSIXlt("1980-01-01 EST"), as.POSIXlt("2006-12-31 EST")), value=8, 
+  #                        series = factor("Observed time-series", levels = c("Observed time-series","pointwise.pls","cumulative.pls")),
+  #                        lab = c("pre-period", "post-period"))
   
   # legend 
   
@@ -66,7 +64,7 @@ TsPlot <- function(df, main = "") {
     intervention +
     ticks +
     theme( legend.title = element_blank()
-           , legend.position = c(0.28,0.88)
+           , legend.position = c(0.2,0.9)
            , legend.justification = c(1,0)
            #  , legend.position = "top"
            , legend.background = element_rect()
@@ -77,19 +75,17 @@ TsPlot <- function(df, main = "") {
            , legend.text=element_text(size=12, family = "serif")
            , legend.box = "horizontal" # not working?)
     ) + #geom_text(data = ann_text,aes(y = value, label =lab), family="serif", fontface="italic",  size=5) +
-    scale_y_continuous(name="Log per-capita state government capacity (1982$)") +
-    scale_colour_manual(name="", values = c(  "observed.spl" = wes_palette("Darjeeling1")[3], 
-                                              "observed.wpl" = wes_palette("Darjeeling1")[5], 
-                                              "predicted.spl" = wes_palette("Darjeeling1")[3],
-                                              "predicted.wpl" = wes_palette("Darjeeling1")[5]),
-                        labels=c("Observed: southern PLS", "Observed: western PLS", 
-                                 "Predicted: southern PLS", "Predicted: western PLS")) +
-    scale_linetype_manual(name="", values = c("observed.spl" = "longdash", 
-                                              "observed.wpl" = "solid", 
-                                              "predicted.spl" = "dotted",
-                                              "predicted.wpl" = "dotdash"),
-                          labels=c("Observed: southern PLS", "Observed: western PLS", 
-                                   "Predicted: southern PLS", "Predicted: western PLS")) +
+    scale_y_continuous(name=y.title) +
+    scale_colour_manual(name="", values = c(  "observed.pls" = wes_palette("Darjeeling1")[5], 
+                                              "observed.sls" = wes_palette("Darjeeling1")[1], 
+                                              "predicted.pls" = wes_palette("Darjeeling1")[5]),
+                        labels=c("Observed PLS", "Observed SLS", 
+                                 "Predicted PLS")) +
+    scale_linetype_manual(name="", values = c("observed.pls" = "solid", 
+                                              "observed.sls" = "longdash", 
+                                              "predicted.pls" = "dotted"),
+                          labels=c("Observed PLS", "Observed SLS", 
+                                   "Predicted PLS")) +
     theme(legend.key.width=unit(3,"line")) 
   return(gg.xts)
 }

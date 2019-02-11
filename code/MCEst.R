@@ -34,9 +34,9 @@ MCEst <- function(outcomes,t0,sim=FALSE,covars=NULL,pca=FALSE) {
     ## MC-NNM-W
     ## ------
     
-    est_model_MCPanel_w <- mcnnm_wc_cv(M=Y_obs, X = Z, Z=matrix(0L,0,0), mask=treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 2, num_lam_L=10, num_lam_H=10)
+    est_model_MCPanel_w <- mcnnm_wc_fit(M=Y_obs, X = Z, Z=matrix(0L,0,0), mask=treat_mat, lambda_L=1, to_estimate_u = 1, to_estimate_v = 1)
     est_model_MCPanel_w$Mhat <- est_model_MCPanel_w$L + replicate(T,est_model_MCPanel_w$u) + t(replicate(N,est_model_MCPanel_w$v))
-    est_model_MCPanel_w$impact <- (est_model_MCPanel_w$Mhat - Y*Y.missing) # calc on non-imputed values)
+    est_model_MCPanel_w$impact <- (est_model_MCPanel_w$Mhat - Y)
     
     return(list("impact" = est_model_MCPanel_w$impact, "Mhat" = est_model_MCPanel_w$Mhat))
   } 
@@ -53,7 +53,7 @@ MCEst <- function(outcomes,t0,sim=FALSE,covars=NULL,pca=FALSE) {
     nb <- estim_ncpPCA(data.frame(Y_obs*treat_mat_NA),ncp.max=5) # cv num components
     
     PCA_Mhat <- imputePCA(data.frame(Y_obs*treat_mat_NA), nb$ncp)$completeObs # regularized iterative PCA
-    PCA_impact <- (PCA_Mhat - Y*Y.missing) # calc on non-imputed values
+    PCA_impact <- (PCA_Mhat - Y) 
     
     return(list("impact" = PCA_impact, "Mhat" = PCA_Mhat))
     
@@ -62,9 +62,9 @@ MCEst <- function(outcomes,t0,sim=FALSE,covars=NULL,pca=FALSE) {
     ## MC-NNM
     ## ------
     
-    est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 2) # reduce n folds
+    est_model_MCPanel <- mcnnm_fit(Y_obs, treat_mat, lambda_L=1, to_estimate_u = 1, to_estimate_v = 1) 
     est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
-    est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y*Y.missing) # calc on non-imputed values
+    est_model_MCPanel$impact <- (est_model_MCPanel$Mhat - Y) 
     
     return(list("impact" = est_model_MCPanel$impact, "Mhat" = est_model_MCPanel$Mhat))
   }

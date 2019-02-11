@@ -12,13 +12,11 @@ require(zoo)
 require(tidyr)
 require(readr)
 require(imputeTS)
-require(MCPanel)
 require(softImpute)
 
 ## STATE-LEVEL DATA
 
 iso.funds <- c(1,3,31) # target iso codes
-names.funds <- c("total.rev",'total.exp')
 
 ## Sources and Uses of Funds in State and Local Governments, 1790-1915 (ICPSR 9728)
 ## preliminary  financial  data on  state government revenues and expenditures for 48 states during the period 1790-1915, 
@@ -169,7 +167,7 @@ USCPI_1783_1982$adj_factor <- USCPI_1783_1982$`U.S. Consumer Price Index`/USCPI_
 
 funds <- merge(funds, USCPI_1783_1982, by.x="year", by.y="Year")
 
-## Make log per-capita measures
+## Make per-capita measures
 
 funds$year2 <- signif(funds$year,3) # merge by nearest decennial
 funds$year2[funds$year<=1785] <- 1790 # VA
@@ -180,13 +178,13 @@ funds <- merge(funds, census.ts.state[c('year','state','ns.pop',"land.gini","ala
                by.x=c('year2','state'), by.y=c('year','state'),all.x=TRUE)
 
 funds["rev.pc"] <- NA
-funds["rev.pc"] <- log((funds["1"]/funds$adj_factor)/funds$ns.pop+ .Machine$double.eps)
+funds["rev.pc"] <- (funds["1"]/funds$adj_factor)/funds$ns.pop
 
 funds["exp.pc"] <- NA
-funds["exp.pc"] <- log((funds["3"]/funds$adj_factor)/funds$ns.pop+ .Machine$double.eps)
+funds["exp.pc"] <- (funds["3"]/funds$adj_factor)/funds$ns.pop
 
 funds["educ.pc"] <- NA
-funds["educ.pc"] <- log((funds["31"]/funds$adj_factor)/funds$ns.pop+ .Machine$double.eps)
+funds["educ.pc"] <- (funds["31"]/funds$adj_factor)/funds$ns.pop
 
 # clean feature set
 funds <- funds[colnames(funds) %in% c("state","year","year2",
@@ -196,8 +194,7 @@ funds <- funds[colnames(funds) %in% c("state","year","year2",
 # setup for MC
 
 funds$treat <- NA
-funds$treat[funds$state %in% setdiff(pub.states,southern.pub)] <- "Treated.West"
-funds$treat[funds$state %in% setdiff(pub.states,western.pub)] <- "Treated.South"
+funds$treat[funds$state %in% pub.states] <- "Treated"
 funds$treat[funds$state %in% state.land.states] <- "Control"
 
 funds <- funds[with(funds, order(treat, year)), ] # order by treatment status + year
@@ -208,15 +205,23 @@ colnames(rev.pc) <- sub("rev.pc.","", colnames(rev.pc))
 rownames(rev.pc) <- rev.pc$year
 rev.pc <- rev.pc[!colnames(rev.pc)%in% "year"]
 
+rev.pc <- rev.pc[-which(rownames(rev.pc)=="1931"),] # discard 1931 (no variance)
+rev.pc[apply(rev.pc,2,is.nan)] <- NA # replace NaN with NA
+
 exp.pc <- reshape(data.frame(funds[c("state","year","exp.pc")]), idvar = "year", timevar = "state", direction = "wide")
 colnames(exp.pc) <- sub("exp.pc.","", colnames(exp.pc))
 rownames(exp.pc) <- exp.pc$year
 exp.pc <- exp.pc[!colnames(exp.pc)%in% "year"]
 
+exp.pc[apply(exp.pc,2,is.nan)] <- NA # replace NaN with NA
+
 educ.pc <- reshape(data.frame(funds[c("state","year","educ.pc")]), idvar = "year", timevar = "state", direction = "wide")
 colnames(educ.pc) <- sub("educ.pc.","", colnames(educ.pc))
 rownames(educ.pc) <- educ.pc$year
 educ.pc <- educ.pc[!colnames(educ.pc)%in% "year"]
+
+educ.pc <- educ.pc[1:(nrow(educ.pc)-3),] # discard last 3 years (no variance)
+educ.pc[apply(educ.pc,2,is.nan)] <- NA # replace NaN with NA
 
 # Covariates - farm values
 faval <- reshape(data.frame(farmval[c("state.abb","year","faval")]), idvar = "year", timevar = "state.abb", direction = "wide")
@@ -233,20 +238,7 @@ CapacityMatrices <- function(d, outcomes=TRUE) {
   d.M.missing[is.nan(d.M.missing)] <- NA
   d.M.missing[!is.na(d.M.missing)] <-1
   
-  # impute missing covars for treated
-  if(outcomes){
-    y.fits <- softImpute(d[colnames(d)%in%pub.states][1:which(rownames(d)=="1868"),], rank.max=3, lambda=1, trace=FALSE, type="svd") # fit on pre-treatment
-  } else{
-    y.fits <- softImpute(d[colnames(d)%in%pub.states][1:which(rownames(d)=="1870"),], rank.max=2, lambda=1, trace=FALSE, type="svd") # fit on pre-treatment
-  }
-  
-  d[colnames(d)%in%pub.states] <- softImpute::complete(d[colnames(d)%in%pub.states], y.fits ) # complete on full matrix
-  
-  # impute missing covars for controls
-  
-  x.fits <- softImpute(d[colnames(d)%in%state.land.states], rank.max=3, lambda=1, trace=FALSE, type="svd") # fit on all periods
-  
-  d[colnames(d)%in%state.land.states] <- softImpute::complete(d[colnames(d)%in%state.land.states], x.fits ) # complete on full matrix
+  d <- na.interpolation(d, "linear") # impute missing values by linear interpolation
   
   # Matrix of observed entries (N x T)
   d.M <- t(as.matrix(d))
@@ -277,7 +269,6 @@ CapacityMatrices <- function(d, outcomes=TRUE) {
   } else{
     return(list("Z"=d.M, "Z.missing"=d.M.missing))
   }
-  
 }
 
 capacity.outcomes <- lapply(capacity.outcomes, CapacityMatrices, outcomes=TRUE)

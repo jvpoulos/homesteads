@@ -31,17 +31,6 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
   Y.missing <- outcomes[[d]]$M.missing # NxT 
   treat <- outcomes[[d]]$mask # NxT masked matrix 
   
-  if(d=='educ.pc'){
-    Y <- Y[,1:(ncol(Y)-3)] # discard last 3 years (no variance)
-    Y.missing <- Y[,1:(ncol(Y.missing)-3)] 
-    treat <- treat[,1:(ncol(treat)-3)] 
-  }
-  if(d=='rev.pc'){
-    Y <- Y[,-which(colnames(Y)=="1931")] # discard 1931 (no variance)
-    Y.missing <- Y.missing[,-which(colnames(Y.missing)=="1931")] 
-    treat <- treat[,-which(colnames(treat)=="1931")] 
-  }
-  
   ## Treated 
   treat_y <- Y[rownames(Y)%in%treated.indices,] 
   
@@ -96,7 +85,7 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
       
       est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, num_folds = 5)
       est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
-      est_model_MCPanel$msk_err <- (est_model_MCPanel$Mhat - Y*Y.missing)*(1-treat_mat) # calculate on non-imputed outcomes
+      est_model_MCPanel$msk_err <- (est_model_MCPanel$Mhat - Y)*(1-treat_mat) 
       est_model_MCPanel$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_MCPanel$msk_err^2, na.rm = TRUE))
       MCPanel_RMSE_test[i,j] <- est_model_MCPanel$test_RMSE
       
@@ -108,7 +97,7 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
       k.min <- as.numeric(colnames(k.cv$msep)[which.min(colMeans(k.cv$msep))])
       
       SVD_Mhat <- suppressWarnings(impute.svd(Y_obs*treat_mat_NA, k.min)$x)
-      SVD_msk_err <- (SVD_Mhat - Y*Y.missing)*(1-treat_mat)
+      SVD_msk_err <- (SVD_Mhat - Y)*(1-treat_mat)
       SVD_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(SVD_msk_err^2, na.rm=TRUE))
       SVD_RMSE_test[i,j] <- SVD_test_RMSE
       
@@ -118,7 +107,7 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
       
       nb <- estim_ncpPCA(data.frame(Y_obs*treat_mat_NA), ncp.max=5, method="Regularized", method.cv="Kfold", scale=TRUE, nbsim =5, verbose = FALSE) # cv num components
       PCA_Mhat <- imputePCA(data.frame(Y_obs*treat_mat_NA), nb$ncp)$completeObs # regularized iterative PCA
-      PCA_msk_err <- (PCA_Mhat - Y*Y.missing)*(1-treat_mat)
+      PCA_msk_err <- (PCA_Mhat - Y)*(1-treat_mat)
       PCA_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(PCA_msk_err^2, na.rm=TRUE))
       PCA_RMSE_test[i,j] <- PCA_test_RMSE
       
@@ -127,7 +116,7 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
       ## -----
       
       est_model_EN <- en_mp_rows(Y_obs, treat_mat)
-      est_model_EN_msk_err <- (est_model_EN - Y*Y.missing)*(1-treat_mat)
+      est_model_EN_msk_err <- (est_model_EN - Y)*(1-treat_mat)
       est_model_EN_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_EN_msk_err^2, na.rm = TRUE))
       EN_RMSE_test[i,j] <- est_model_EN_test_RMSE
       
@@ -136,7 +125,7 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
       ## -----
       
       est_model_ENT <- t(en_mp_rows(t(Y_obs), t(treat_mat)))
-      est_model_ENT_msk_err <- (est_model_ENT - Y*Y.missing)*(1-treat_mat)
+      est_model_ENT_msk_err <- (est_model_ENT - Y)*(1-treat_mat)
       est_model_ENT_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ENT_msk_err^2, na.rm = TRUE))
       ENT_RMSE_test[i,j] <- est_model_ENT_test_RMSE
       
@@ -145,7 +134,7 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
       ## -----
       
       est_model_DID <- t(DID(t(Y_obs), t(treat_mat)))
-      est_model_DID_msk_err <- (est_model_DID - Y*Y.missing)*(1-treat_mat)
+      est_model_DID_msk_err <- (est_model_DID - Y)*(1-treat_mat)
       est_model_DID_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_DID_msk_err^2, na.rm = TRUE))
       DID_RMSE_test[i,j] <- est_model_DID_test_RMSE
       
@@ -153,7 +142,7 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
       ## ADH
       ## -----
       est_model_ADH <- adh_mp_rows(Y_obs, treat_mat)
-      est_model_ADH_msk_err <- (est_model_ADH - Y*Y.missing)*(1-treat_mat)
+      est_model_ADH_msk_err <- (est_model_ADH - Y)*(1-treat_mat)
       est_model_ADH_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_ADH_msk_err^2, na.rm = TRUE))
       ADH_RMSE_test[i,j] <- est_model_ADH_test_RMSE
     }
