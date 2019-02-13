@@ -8,6 +8,15 @@ require(tseries)
 
 source(paste0(code.directory,"TsPlot.R"))
 
+
+mc_est <- readRDS(paste0(results.directory, "mc/mc_est.rds"))
+
+iid <- readRDS(paste0(results.directory, "mc/iid.rds"))
+
+iid_block <- readRDS(paste0(results.directory, "mc/iid_block.rds"))
+
+moving_block <- readRDS(paste0(results.directory, "mc/moving_block.rds"))
+
 PlotMCCapacity <- function(x,permtype){
   ## Create time series data
   

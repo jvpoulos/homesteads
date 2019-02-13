@@ -67,19 +67,19 @@ iid.placebo <- foreach(tau = taus) %dopar% {
        t0_placebo <- t_final_placebo-(tau+1) # n pre-treatment periods
        t_star_placebo <- t_final_placebo-t0_placebo
        mclapply(capacity.outcomes.list, 
-                ChernoCI, t_star=t_star_placebo, c.range=c(-10,10), sd=5, alpha=0.025, l=1000, prec=1e-03, ns=500, treated.indices=pub.states, permtype="iid",t0=t0_placebo,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
+                ChernoCI, t_star=t_star_placebo, c.range=c(-6,6), sd=0.5, alpha=0.025, l=5000, prec=1e-02, ns=100, treated.indices=pub.states, permtype="iid",t0=t0_placebo,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
 saveRDS(iid.placebo,"iid_placebo.rds")
 
 moving.block.placebo <- foreach(tau = taus) %dopar% {
   t0_placebo <- t_final_placebo-(tau+1) # n pre-treatment periods
   t_star_placebo <- t_final_placebo-t0_placebo
   mclapply(capacity.outcomes.list, 
-           ChernoCI, t_star=t_star_placebo, c.range=c(-10,10), sd=5, alpha=0.025, l=1000, prec=1e-03, ns=500, treated.indices=pub.states, permtype="moving.block",t0=t0_placebo,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
+           ChernoCI, t_star=t_star_placebo, c.range=c(-6,6), sd=0.5, alpha=0.025, l=5000, prec=1e-02, ns=100, treated.indices=pub.states, permtype="moving.block",t0=t0_placebo,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
 saveRDS(moving.block.placebo,"moving_block_placebo.rds")
 
 iid.block.placebo <- foreach(tau = taus) %dopar% {
   t0_placebo <- t_final_placebo-(tau+1) # n pre-treatment periods
   t_star_placebo <- t_final_placebo-t0_placebo
   mclapply(capacity.outcomes.list, 
-           ChernoCI, t_star=t_star_placebo, c.range=c(-10,10), sd=5, alpha=0.025, l=1000, prec=1e-03, ns=500, treated.indices=pub.states, permtype="iid.block",t0=t0_placebo,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
+           ChernoCI, t_star=t_star_placebo, c.range=c(-6,6), sd=0.5, alpha=0.025, l=5000, prec=1e-02, ns=100, treated.indices=pub.states, permtype="iid.block",t0=t0_placebo,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
 saveRDS(iid.block.placebo,"iid_block_placebo.rds")

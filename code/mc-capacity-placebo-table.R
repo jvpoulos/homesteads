@@ -1,5 +1,6 @@
 # Table for placebo tests
 
+mc_est_placebo <- readRDS(paste0(results.directory, "mc/mc_est_placebo.rds"))
 
 iid_placebo <- readRDS(paste0(results.directory, "mc/iid_placebo.rds"))
 
