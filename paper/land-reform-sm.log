@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  4 FEB 2019 13:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  12 FEB 2019 19:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1109,14 +1109,7 @@ Package: tabularx 2016/02/03 v2.11b `tabularx' package (DPC)
 \TX@cols=\count366
 \TX@ftn=\toks45
 )
-(./land-reform-sm.aux
-
-LaTeX Warning: Label `exp-pc' multiply defined.
-
-
-LaTeX Warning: Label `exp-pc' multiply defined.
-
-)
+(./land-reform-sm.aux)
 \openout1 = `land-reform-sm.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 106.
@@ -1135,7 +1128,8 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 106.
 LaTeX Font Info:    ... okay on input line 106.
 \AtBeginShipoutBox=\box69
 Package hyperref Info: Link coloring OFF on input line 106.
- (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -1415,17 +1409,13 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 279.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 279.
 Package rerunfilecheck Info: File `land-reform-sm.out' has not changed.
 (rerunfilecheck)             Checksum: 66EF2DED6313EFFDA465DAF00CA25676;202.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 279.
  ) 
 Here is how much of TeX's memory you used:
- 29879 strings out of 492641
- 553106 string characters out of 6131787
- 640617 words of memory out of 5000000
- 33257 multiletter control sequences out of 15000+600000
+ 29881 strings out of 492641
+ 553126 string characters out of 6131787
+ 640951 words of memory out of 5000000
+ 33259 multiletter control sequences out of 15000+600000
  543750 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,18n,65p,984b,496s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1442,7 +1432,7 @@ e1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmtt12.pfb>
-Output written on land-reform-sm.pdf (12 pages, 9718855 bytes).
+Output written on land-reform-sm.pdf (12 pages, 9708075 bytes).
 PDF statistics:
  216 PDF objects out of 1000 (max. 8388607)
  162 compressed objects within 2 object streams

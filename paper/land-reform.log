@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  7 FEB 2019 14:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  13 FEB 2019 13:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -941,6 +941,10 @@ Package: authblk 2001/02/27 1.3 (PWD)
 \c@authors=\count352
 \c@affil=\count353
 )
+(/usr/share/texlive/texmf-dist/tex/latex/commath/commath.sty
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+))
 (/usr/share/texlive/texmf-dist/tex/latex/appendix/appendix.sty
 Package: appendix 2009/09/02 v1.2b extra appendix facilities
 \c@@pps=\count354
@@ -1307,95 +1311,108 @@ l.139
 LaTeX Warning: Reference `eval' on page 3 undefined on input line 157.
 
 [3] [4] [5] [6] [7] [8] [9]
-<plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_1.png, id=3
-07, 505.76955pt x 505.76955pt>
-File: plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_1.png 
-Graphic file (type png)
-<use plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_1.png>
-Package pdftex.def Info: plots/california_N_38_T_31_numruns_20_num_treated_19_s
-imultaneuous_1.png  used on input line 237.
+<plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png, id=305, 5
+05.76955pt x 505.76955pt>
+File: plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png Graph
+ic file (type png)
+<use plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png>
+Package pdftex.def Info: plots/basque_N_16_T_43_numruns_20_num_treated_8_simult
+aneuous_0.png  used on input line 240.
 (pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
 <plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png, id=3
-08, 505.76955pt x 505.76955pt>
+06, 505.76955pt x 505.76955pt>
 File: plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png 
 Graphic file (type png)
 <use plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png>
 Package pdftex.def Info: plots/california_N_38_T_31_numruns_20_num_treated_19_s
-imultaneuous_0.png  used on input line 243.
+imultaneuous_0.png  used on input line 246.
 (pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
- [10 <./plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_1.pn
-g (PNG copy)> <./plots/california_N_38_T_31_numruns_20_num_treated_19_simultane
-uous_0.png (PNG copy)>] [11] [12]
+<plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png, id=307, 
+505.76955pt x 505.76955pt>
+File: plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png Grap
+hic file (type png)
+<use plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png>
+Package pdftex.def Info: plots/germany_N_16_T_44_numruns_20_num_treated_8_simul
+taneuous_0.png  used on input line 252.
+(pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
+ [10 <./plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png (PN
+G copy)> <./plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_
+0.png (PNG copy)> <./plots/germany_N_16_T_44_numruns_20_num_treated_8_simultane
+uous_0.png (PNG copy)>]
+
+LaTeX Warning: Reference `synth-sim' on page 11 undefined on input line 264.
+
+[11] [12]
 
 LaTeX Warning: Reference `encoder-decoder-loss-capacity-south' on page 13 undef
-ined on input line 299.
+ined on input line 305.
 
 
 LaTeX Warning: Reference `encoder-decoder-loss-capacity-west' on page 13 undefi
-ned on input line 299.
+ned on input line 305.
 
 
-LaTeX Warning: Reference `mspe' on page 13 undefined on input line 299.
+LaTeX Warning: Reference `mspe' on page 13 undefined on input line 305.
 
 
 LaTeX Warning: Reference `encoder-decoder-mpse' on page 13 undefined on input l
-ine 299.
+ine 305.
 
 
-LaTeX Warning: Reference `lstm-mpse' on page 13 undefined on input line 299.
+LaTeX Warning: Reference `lstm-mpse' on page 13 undefined on input line 305.
 
 
 LaTeX Warning: Reference `state-capacity-plot' on page 13 undefined on input li
-ne 301.
-
-
-LaTeX Warning: Reference `eq:pointwise' on page 13 undefined on input line 303.
-
-
-
-LaTeX Warning: Reference `state-capacity-plot-effects' on page 13 undefined on 
-input line 303.
-
-
-LaTeX Warning: Reference `state-capacity-plot-pvalues' on page 13 undefined on 
-input line 303.
+ne 307.
 
 [13]
 
+LaTeX Warning: Reference `eq:pointwise' on page 14 undefined on input line 309.
+
+
+
 LaTeX Warning: Reference `state-capacity-plot-effects' on page 14 undefined on 
-input line 305.
+input line 309.
+
+
+LaTeX Warning: Reference `state-capacity-plot-pvalues' on page 14 undefined on 
+input line 309.
+
+
+LaTeX Warning: Reference `state-capacity-plot-effects' on page 14 undefined on 
+input line 311.
 
 [14] [15]
 </media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.png, id
-=403, 794.97pt x 614.295pt>
+=401, 794.97pt x 614.295pt>
 File: /media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.pn
 g Graphic file (type png)
 <use /media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.png
 >
 Package pdftex.def Info: /media/jason/Dropbox/github/land-reform/results/plots/
-did-state-robust.png  used on input line 323.
+did-state-robust.png  used on input line 329.
 (pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
  [16] [17 </media/jason/Dropbox/github/land-reform/results/plots/did-state-robu
 st.png (PNG copy)>] [18] [19] [20] (./land-reform.bbl [21] [22]
 [23]) [24]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 369.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 369.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 375.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 375.
  (./land-reform.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 369.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 369.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 375.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 375.
 Package rerunfilecheck Info: File `land-reform.out' has not changed.
-(rerunfilecheck)             Checksum: C7E7A5C6F7BCF95587204C9115D02EE9;903.
+(rerunfilecheck)             Checksum: 3D3BFEE937E70725EDBF9E2E12BD48D7;903.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 369.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 375.
  ) 
 Here is how much of TeX's memory you used:
- 30262 strings out of 492641
- 558166 string characters out of 6131787
- 647902 words of memory out of 5000000
- 33560 multiletter control sequences out of 15000+600000
+ 30372 strings out of 492641
+ 559434 string characters out of 6131787
+ 651808 words of memory out of 5000000
+ 33663 multiletter control sequences out of 15000+600000
  548933 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,12n,65p,2024b,562s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1432,17 +1449,14 @@ pdfTeX warning (dest): name{figure.caption.10} has been referenced but does not
 pdfTeX warning (dest): name{figure.caption.8} has been referenced but does not 
 exist, replaced by a fixed one
 
-pdfTeX warning (dest): name{Hfootnote.11} has been referenced but does not exis
-t, replaced by a fixed one
-
 pdfTeX warning (dest): name{table.caption.7} has been referenced but does not e
 xist, replaced by a fixed one
 
-pdfTeX warning (dest): name{Hfootnote.10} has been referenced but does not exis
+pdfTeX warning (dest): name{Hfootnote.11} has been referenced but does not exis
 t, replaced by a fixed one
 
-pdfTeX warning (dest): name{figure.caption.3} has been referenced but does not 
-exist, replaced by a fixed one
+pdfTeX warning (dest): name{Hfootnote.10} has been referenced but does not exis
+t, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.9} has been referenced but does not exist
 , replaced by a fixed one
@@ -1473,10 +1487,10 @@ pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
 
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
@@ -1491,10 +1505,10 @@ type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmtt12.pfb>
-Output written on land-reform.pdf (25 pages, 869007 bytes).
+Output written on land-reform.pdf (25 pages, 1091308 bytes).
 PDF statistics:
- 577 PDF objects out of 1000 (max. 8388607)
- 520 compressed objects within 6 object streams
- 129 named destinations out of 1000 (max. 500000)
- 132 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 575 PDF objects out of 1000 (max. 8388607)
+ 517 compressed objects within 6 object streams
+ 128 named destinations out of 1000 (max. 500000)
+ 137 words of extra memory for PDF output out of 10000 (max. 10000000)
 

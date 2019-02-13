@@ -138,6 +138,13 @@ Chernozhukov, V., K.~Wuthrich, and Y.~Zhu (2017).
   synthetic controls.
 \newblock {\em arXiv preprint arXiv:1712.09089\/}.
 
+\bibitem[\protect\citeauthoryear{Chernozhukov, Wuthrich, and Zhu}{Chernozhukov
+  et~al.}{2018}]{chernozhukov2018exact}
+Chernozhukov, V., K.~Wuthrich, and Y.~Zhu (2018).
+\newblock Exact and robust conformal inference methods for predictive machine
+  learning with dependent data.
+\newblock {\em arXiv preprint arXiv:1802.06300\/}.
+
 \bibitem[\protect\citeauthoryear{Donaldson and Hornbeck}{Donaldson and
   Hornbeck}{2016}]{donaldson2016railroads}
 Donaldson, D. and R.~Hornbeck (2016).
@@ -244,13 +251,6 @@ Lanza, M.~L. (1999).
 Little, R.~J. and D.~B. Rubin (2014).
 \newblock {\em Statistical Analysis with Missing Data}.
 \newblock John Wiley \& Sons.
-
-\bibitem[\protect\citeauthoryear{Marlin and Zemel}{Marlin and
-  Zemel}{2009}]{marlin2009collaborative}
-Marlin, B.~M. and R.~S. Zemel (2009).
-\newblock Collaborative prediction and ranking with non-random missing data.
-\newblock In {\em Proceedings of the Third ACM Conference on Recommender
-  Systems}, pp.\  5--12. ACM.
 
 \bibitem[\protect\citeauthoryear{Mazumder, Hastie, and Tibshirani}{Mazumder
   et~al.}{2010}]{mazumder2010spectral}
