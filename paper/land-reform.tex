@@ -299,7 +299,16 @@ Did homestead acts impact state capacity over the long-run? I estimate the causa
 
 \subsection{Placebo tests} \label{placebo-tests}
 %
-% Figures SM-\ref{exp-pc} and SM-\ref{rev-pc}
+% Figures SM-\ref{educ-pc} -- SM-\ref{rev-pc}
+
+\begin{table}[htbp]
+	\caption{Placebo tests.}
+	\label{placebo-tests}
+	\let\center\empty
+	\let\endcenter\relax
+	\centering
+	\resizebox{.65\width}{!}{\input{placebo-tests}}
+\end{table}
 
 \subsection{Causal estimates}
 For each outcome, I train a separate encoder-decoder network to predict the counterfactual time-series of public land states, using only their previous history to generate predictions. Similar to the placebo tests on the SCM datasets, I evaluate the models two ways: first, I monitor the loss over 2,000 training epochs and save the model weights with the lowest error on a validation set consisting of the final 10\% of the time-series.\footnote{The models use both dropout and L2 regularization to control for overfitting on the training set. Figs. SM-\ref{encoder-decoder-loss-capacity-south} and SM-\ref{encoder-decoder-loss-capacity-west} record the training history of each model.} Second, I calculate MSPE (Eq.~\ref{mspe}) on $J=18$ state land states that serve as placebo treated units. Encoder-decoder networks outperform the baseline LSTM in terms of minimizing the MSPE in placebo tests (Tables SM-\ref{encoder-decoder-mpse} and SM-\ref{lstm-mpse}).
