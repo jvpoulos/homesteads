@@ -12,7 +12,6 @@ require(zoo)
 require(tidyr)
 require(readr)
 require(imputeTS)
-require(softImpute)
 
 ## STATE-LEVEL DATA
 
@@ -179,13 +178,13 @@ funds <- merge(funds, census.ts.state[c('year','state','ns.pop',"land.gini","ala
                by.x=c('year2','state'), by.y=c('year','state'),all.x=TRUE)
 
 funds["rev.pc"] <- NA
-funds["rev.pc"] <- log((funds["1"]/funds$adj_factor_82)/funds$ns.pop)
+funds["rev.pc"] <- (funds["1"]/funds$adj_factor_82)/funds$ns.pop
 
 funds["exp.pc"] <- NA
-funds["exp.pc"] <- log((funds["3"]/funds$adj_factor_82)/funds$ns.pop)
+funds["exp.pc"] <- (funds["3"]/funds$adj_factor_82)/funds$ns.pop
 
 funds["educ.pc"] <- NA
-funds["educ.pc"] <- log((funds["31"]/funds$adj_factor_42)/funds$ns.pop)
+funds["educ.pc"] <- (funds["31"]/funds$adj_factor_42)/funds$ns.pop
 
 # clean feature set
 funds <- funds[colnames(funds) %in% c("state","year","year2",
@@ -239,22 +238,9 @@ CapacityMatrices <- function(d, outcomes=TRUE) {
   d.M.missing[is.nan(d.M.missing)] <- NA
   d.M.missing[!is.na(d.M.missing)] <-1
   
-  # impute missing for treated
-  d.imp <- d
-  if(outcomes){
-    y.fits <- softImpute(d[1:which(rownames(d)=="1868"),], rank.max=3, lambda=1, maxit=200, trace.it=TRUE, type="svd") # fit on pre-treatment for treated and control
-  } else{
-    y.fits <- softImpute(d[1:which(rownames(d)=="1870"),], rank.max=2, lambda=1, maxit=200, trace.it=TRUE, type="svd") 
-  }
-  
-  d.imp[colnames(d.imp)%in%pub.states] <- softImpute::complete(d[colnames(d)%in%pub.states], y.fits) # complete missing treated entries in full matrix
-  
-  # impute missing for controls
-  
-  x.fits <- softImpute(as.matrix(d), rank.max=3, lambda=1, maxit=200, trace.it=TRUE, type="svd") # fit on all periods of original matrix
-  
-  d.imp[colnames(d.imp)%in%state.land.states] <- softImpute::complete(d[colnames(d)%in%state.land.states], x.fits) # complete missing control entries in full matrix
-  
+  # impute missing 
+  d.imp <- log(na.interpolation(d, option="linear")) # take log
+
   # Matrix of observed entries (N x T)
   d.M <- t(as.matrix(d.imp))
   d.M[is.nan(d.M )] <- NA

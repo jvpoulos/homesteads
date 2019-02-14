@@ -8,6 +8,11 @@ require(tseries)
 
 source(paste0(code.directory,"TsPlot.R"))
 
+capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes.rds"))
+
+t0 <- which(colnames(capacity.outcomes[["rev.pc"]]$M)=="1869") # first treatment time 
+t_final <- ncol(capacity.outcomes[["rev.pc"]]$M) # all periods
+t_star <- t_final-t0
 
 mc_est <- readRDS(paste0(results.directory, "mc/mc_est.rds"))
 
@@ -17,16 +22,16 @@ iid_block <- readRDS(paste0(results.directory, "mc/iid_block.rds"))
 
 moving_block <- readRDS(paste0(results.directory, "mc/moving_block.rds"))
 
-PlotMCCapacity <- function(x,permtype){
+PlotMCCapacity <- function(x,permtype,y.title){
   ## Create time series data
   
   pointwise.ci <- t(readRDS(paste0(results.directory, "mc/", permtype,".rds"))[[x]])
   
   observed <- capacity.outcomes[[x]]$M
   
-  predicted <- mc.est[[x]]$Mhat
+  predicted <- mc_est[[x]]$Mhat
   
-  pointwise <- mc.est[[x]]$impact 
+  pointwise <- mc_est[[x]]$impact 
 
   m <- ncol(observed)
   n <- t0
@@ -62,13 +67,13 @@ PlotMCCapacity <- function(x,permtype){
   pointwise.mean <- aggregate(pointwise, list(treat.status), mean, na.rm=TRUE)[-1]
   cumulative.mean <- aggregate(cumulative, list(treat.status), mean, na.rm=TRUE)[-1]
   
-  ts.means <- cbind(t(observed.mean), t(predicted.mean), t(pointwise.mean), t(cumulative.mean))
-  colnames(ts.means) <- c("observed.pls","observed.sls","predicted.pls","predicted.sls","pointwise.pls","pointwise.sls","cumulative.pls","cumulative.sls")
+  ts.means <- cbind(t(observed.mean), t(predicted.mean), t(pointwise.mean))
+  colnames(ts.means) <- c("observed.pls","observed.sls","predicted.pls","predicted.sls","pointwise.pls","pointwise.sls")
   ts.means <- cbind(ts.means, "year"=as.numeric(rownames(ts.means)))
   ts.means.m <- melt(data.frame(ts.means), id.var=c("year"))
   
-  ts.ci.means <- cbind(t(pointwise.ci), t(cumulative.ci))
-  colnames(ts.ci.means) <- c("pointwise.lo","pointwise.hi","cumulative.lo","cumulative.hi")
+  ts.ci.means <- t(pointwise.ci)
+  colnames(ts.ci.means) <- c("pointwise.lo","pointwise.hi")
   ts.ci.means <- cbind(ts.ci.means, "year"=as.numeric(rownames(ts.means)))
   
   ts.means.m <- merge(ts.means.m, ts.ci.means, by=c("year"), all.x=TRUE) # bind cis
@@ -84,18 +89,26 @@ PlotMCCapacity <- function(x,permtype){
   ts.means.m$series[grep("observed.", ts.means.m$variable)] <- "Time-series"
   ts.means.m$series[grep("predicted.", ts.means.m$variable)] <- "Time-series"
   ts.means.m$series[grep("pointwise.", ts.means.m$variable)] <- "Per-period impact"
-  ts.means.m$series[grep("cumulative.", ts.means.m$variable)] <- "Cumulative impact"
+#  ts.means.m$series[grep("cumulative.", ts.means.m$variable)] <- "Cumulative impact"
   
-  ts.means.m$series<- factor(ts.means.m$series, levels=c("Time-series", "Per-period impact", "Cumulative impact")) # reverse order
+  ts.means.m$series<- factor(ts.means.m$series, levels=c("Time-series", "Per-period impact")) # reverse order
   
   ts.plot <- TsPlot(df=ts.means.m,y.title)
   
   return(ts.plot)
 }
 
-mc.rev.pc.iid <- PlotMCCapacity(x='rev.pc',y.title="Log per-capita state government revenue (1982$)")
+mc.rev.pc.iid <- PlotMCCapacity(x='rev.pc',permtype='iid',y.title="Log per-capita state government revenue (1982$)")
+mc.exp.pc.iid <- PlotMCCapacity(x='exp.pc',permtype='iid',y.title="Log per-capita state government expenditure (1982$)")
+mc.educ.pc.iid <- PlotMCCapacity(x='educ.pc',permtype='iid',y.title="Log per-capita state government education spending (1942$)")
 
-mc.plots <- mclapply(list("rev.pc", "exp.pc", "educ.pc"), PlotMCCapacity, mc.cores=8)
+mc.rev.pc.iid.block <- PlotMCCapacity(x='rev.pc',permtype='iid_block',y.title="Log per-capita state government revenue (1982$)")
+mc.exp.pc.iid.block <- PlotMCCapacity(x='exp.pc',permtype='iid_block',y.title="Log per-capita state government expenditure (1982$)")
+mc.educ.pc.iid.block <- PlotMCCapacity(x='educ.pc',permtype='iid_block',y.title="Log per-capita state government education spending (1942$)")
+
+mc.rev.pc.moving.block <- PlotMCCapacity(x='rev.pc',permtype='moving_block',y.title="Log per-capita state government revenue (1982$)")
+mc.exp.pc.moving.block <- PlotMCCapacity(x='exp.pc',permtype='moving_block',y.title="Log per-capita state government expenditure (1982$)")
+mc.educ.pc.moving.block <- PlotMCCapacity(x='educ.pc',permtype='moving_block',y.title="Log per-capita state government education spending (1942$)")
 
 ggsave(paste0(results.directory,"plots/mc-rev-pc.png"), mc.plots[[1]], width=11, height=8.5)
 ggsave(paste0(results.directory,"plots/mc-exp-pc.png"), mc.plots[[2]], width=11, height=8.5)
