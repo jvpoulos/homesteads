@@ -77,5 +77,6 @@ MCCapacityPlacebo <- function(x,taus,permtype){
 }
 
 taus <- c(10,20,30)
+mc.iid.placebo <- lapply(list("rev.pc", "exp.pc", "educ.pc"), MCCapacityPlacebo, taus, "iid")
 mc.iid.block.placebo <- lapply(list("rev.pc", "exp.pc", "educ.pc"), MCCapacityPlacebo, taus, "iid_block")
 mc.moving.block.placebo <- lapply(list("rev.pc", "exp.pc", "educ.pc"), MCCapacityPlacebo, taus, "moving_block")
