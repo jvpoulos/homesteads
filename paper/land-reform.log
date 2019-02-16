@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  15 FEB 2019 11:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  16 FEB 2019 08:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1343,29 +1343,35 @@ taneuous_0.png  used on input line 254.
 g (PNG copy)> <./plots/california_N_38_T_31_numruns_20_num_treated_19_simultane
 uous_0.png (PNG copy)> <./plots/germany_N_16_T_44_numruns_20_num_treated_8_simu
 ltaneuous_0.png (PNG copy)>] [12]
-(./placebo-tests.tex)
+(./placebo-tests.tex) [13]
 
-LaTeX Warning: Reference `encoder-decoder-loss-capacity-south' on page 13 undef
+LaTeX Warning: Reference `encoder-decoder-loss-capacity-south' on page 14 undef
 ined on input line 308.
 
 
-LaTeX Warning: Reference `encoder-decoder-loss-capacity-west' on page 13 undefi
+LaTeX Warning: Reference `encoder-decoder-loss-capacity-west' on page 14 undefi
 ned on input line 308.
 
 
-LaTeX Warning: Reference `mspe' on page 13 undefined on input line 308.
+LaTeX Warning: Reference `mspe' on page 14 undefined on input line 308.
 
 
-LaTeX Warning: Reference `encoder-decoder-mpse' on page 13 undefined on input l
+LaTeX Warning: Reference `encoder-decoder-mpse' on page 14 undefined on input l
 ine 308.
 
 
-LaTeX Warning: Reference `lstm-mpse' on page 13 undefined on input line 308.
+LaTeX Warning: Reference `lstm-mpse' on page 14 undefined on input line 308.
 
-[13]
 
 LaTeX Warning: Reference `state-capacity-plot' on page 14 undefined on input li
 ne 310.
+
+
+LaTeX Warning: Reference `homestead-map' on page 14 undefined on input line 310
+.
+
+
+LaTeX Warning: Reference `acres-time' on page 14 undefined on input line 310.
 
 
 LaTeX Warning: Reference `eq:pointwise' on page 14 undefined on input line 312.
@@ -1386,7 +1392,7 @@ input line 314.
 
 [15] [16]
 </media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.png, id
-=407, 794.97pt x 614.295pt>
+=402, 794.97pt x 614.295pt>
 File: /media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.pn
 g Graphic file (type png)
 <use /media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.png
@@ -1394,16 +1400,19 @@ g Graphic file (type png)
 Package pdftex.def Info: /media/jason/Dropbox/github/land-reform/results/plots/
 did-state-robust.png  used on input line 332.
 (pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
- [17 </media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.pn
-g (PNG copy)>] [18] [19] [20] (./land-reform.bbl [21] [22] [23])
-[24]
+ [17] [18 </media/jason/Dropbox/github/land-reform/results/plots/did-state-robu
+st.png (PNG copy)>]
+
+LaTeX Warning: Reference `rr-map' on page 19 undefined on input line 352.
+
+[19] [20] [21] (./land-reform.bbl [22] [23] [24]) [25]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 378.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 378.
  (./land-reform.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 378.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 378.
 Package rerunfilecheck Info: File `land-reform.out' has not changed.
-(rerunfilecheck)             Checksum: 3D3BFEE937E70725EDBF9E2E12BD48D7;903.
+(rerunfilecheck)             Checksum: C7E7A5C6F7BCF95587204C9115D02EE9;903.
 
 
 LaTeX Warning: There were undefined references.
@@ -1414,10 +1423,10 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 378.
  ) 
 Here is how much of TeX's memory you used:
- 30376 strings out of 492641
- 559513 string characters out of 6131787
- 654756 words of memory out of 5000000
- 33662 multiletter control sequences out of 15000+600000
+ 30370 strings out of 492641
+ 559430 string characters out of 6131787
+ 654796 words of memory out of 5000000
+ 33659 multiletter control sequences out of 15000+600000
  548933 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,12n,65p,2024b,562s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1427,14 +1436,11 @@ ist, replaced by a fixed one
 pdfTeX warning (dest): name{Hfootnote.17} has been referenced but does not exis
 t, replaced by a fixed one
 
-pdfTeX warning (dest): name{figure.caption.12} has been referenced but does not
- exist, replaced by a fixed one
-
 pdfTeX warning (dest): name{Hfootnote.16} has been referenced but does not exis
 t, replaced by a fixed one
 
-pdfTeX warning (dest): name{table.caption.13} has been referenced but does not 
-exist, replaced by a fixed one
+pdfTeX warning (dest): name{table.caption.8} has been referenced but does not e
+xist, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.15} has been referenced but does not exis
 t, replaced by a fixed one
@@ -1448,17 +1454,8 @@ t, replaced by a fixed one
 pdfTeX warning (dest): name{Hfootnote.12} has been referenced but does not exis
 t, replaced by a fixed one
 
-pdfTeX warning (dest): name{figure.caption.9} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.7} has been referenced but does not 
-exist, replaced by a fixed one
-
 pdfTeX warning (dest): name{Hfootnote.11} has been referenced but does not exis
 t, replaced by a fixed one
-
-pdfTeX warning (dest): name{table.caption.6} has been referenced but does not e
-xist, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.10} has been referenced but does not exis
 t, replaced by a fixed one
@@ -1513,10 +1510,10 @@ type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmtt12.pfb>
-Output written on land-reform.pdf (25 pages, 1092258 bytes).
+Output written on land-reform.pdf (26 pages, 1092842 bytes).
 PDF statistics:
- 576 PDF objects out of 1000 (max. 8388607)
- 518 compressed objects within 6 object streams
- 130 named destinations out of 1000 (max. 500000)
+ 573 PDF objects out of 1000 (max. 8388607)
+ 514 compressed objects within 6 object streams
+ 127 named destinations out of 1000 (max. 500000)
  137 words of extra memory for PDF output out of 10000 (max. 10000000)
 
