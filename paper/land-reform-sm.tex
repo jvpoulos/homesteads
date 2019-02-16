@@ -117,8 +117,6 @@
 
 \section{Simulations} \label{sims-sm}
 
-
-
 \begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
@@ -130,7 +128,7 @@
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_1.png}
-		\caption{alifornia smoking ban data, $N_t = 19$}
+		\caption{California smoking ban data, $N_t = 19$}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\textwidth}
@@ -190,38 +188,6 @@
 \end{figure}
 
 \pagebreak
-\section{Exploratory data analysis} \label{eda}
-
-\begin{table}[htbp]
-	\caption{Definitions and sources of variables.}
-	\label{dv-table}
-	\let\center\empty
-	\let\endcenter\relax
-	\centering
-	\resizebox{.45\width}{!}{\input{dv-table}}
-\end{table}
-
-\begin{figure}[htbp]
-		\includegraphics[width=0.85\textwidth]{plots/homestead-1870.png} 
-		\includegraphics[width=0.85\textwidth]{plots/homestead-1900.png} 
-	\caption{Log per-capita cumulative homesteads in 1870 and 1900, overlaid on 1911 county borders. Darker-colored counties have higher values than lighter-colored counties, and white-colored counties have missing values. States bordered in green are southern public land states and those bordered in purple are western public land states. County border data from \citet{long1995atlas}. \label{homestead-map}} 
-\end{figure}
-
-\begin{figure}[htbp]
-	\includegraphics[width=0.85\textwidth]{plots/gini-1870.png} 
-	\includegraphics[width=0.85\textwidth]{plots/gini-1900.png} 
-	\caption{Adjusted land inequality in 1870 and 1900, overlaid on 1911 county borders. See notes to Fig. \ref{homestead-map}.\label{gini-map}} 
-\end{figure}	
-
-
-\begin{figure}[htbp]
-	\begin{center}
-		\includegraphics[width=\textwidth]{plots/acres-time.png}
-	\end{center}
-	\caption{Cumulative total acres (by patent type) disbursed in public land states, 1800 - 1950. \label{acres-time}} 
-\end{figure}
-
-\pagebreak
 \section{Estimates}
 
 
@@ -241,14 +207,6 @@
 	\end{center}
 	\caption{Land inequality vs. log per-capita revenues and expenditures at the state-level, 1860-1950. Each point is a state-year observation. Lines represent generalized additive model (GAM) fits to the data and shaded regions represent corresponding 95\% confidence intervals.   \label{fig:ineq-capacity}}
 \end{figure} 
-
-\begin{figure}[htbp]
-	\begin{center}
-		\includegraphics[width=0.7\textwidth]{plots/rr-1862.png} \\
-		\includegraphics[width=0.7\textwidth]{plots/rr-1911.png} \\
-	\end{center}
-	\caption{Railroad lines in 1862 and 1911, overlaid on 1911 county borders. Railroad data from \cite{atack2013use} and county border data from \cite{long1995atlas}. \label{rr-map}} 
-\end{figure}
 
 \begin{table}[htbp]
 	\begin{center}

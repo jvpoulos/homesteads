@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  14 FEB 2019 09:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  15 FEB 2019 11:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1321,7 +1321,7 @@ File: plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png Graph
 ic file (type png)
 <use plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png>
 Package pdftex.def Info: plots/basque_N_16_T_43_numruns_20_num_treated_8_simult
-aneuous_0.png  used on input line 240.
+aneuous_0.png  used on input line 242.
 (pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
 <plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png, id=3
 06, 505.76955pt x 505.76955pt>
@@ -1329,7 +1329,7 @@ File: plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png
 Graphic file (type png)
 <use plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png>
 Package pdftex.def Info: plots/california_N_38_T_31_numruns_20_num_treated_19_s
-imultaneuous_0.png  used on input line 246.
+imultaneuous_0.png  used on input line 248.
 (pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
 <plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png, id=307, 
 505.76955pt x 505.76955pt>
@@ -1337,53 +1337,54 @@ File: plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png Grap
 hic file (type png)
 <use plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png>
 Package pdftex.def Info: plots/germany_N_16_T_44_numruns_20_num_treated_8_simul
-taneuous_0.png  used on input line 252.
+taneuous_0.png  used on input line 254.
 (pdftex.def)             Requested size: 211.38832pt x 211.38762pt.
- [10 <./plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png (PN
-G copy)> <./plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_
-0.png (PNG copy)> <./plots/germany_N_16_T_44_numruns_20_num_treated_8_simultane
-uous_0.png (PNG copy)>] [11] [12]
+ [10] [11 <./plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.pn
+g (PNG copy)> <./plots/california_N_38_T_31_numruns_20_num_treated_19_simultane
+uous_0.png (PNG copy)> <./plots/germany_N_16_T_44_numruns_20_num_treated_8_simu
+ltaneuous_0.png (PNG copy)>] [12]
 (./placebo-tests.tex)
 
 LaTeX Warning: Reference `encoder-decoder-loss-capacity-south' on page 13 undef
-ined on input line 314.
+ined on input line 308.
 
 
 LaTeX Warning: Reference `encoder-decoder-loss-capacity-west' on page 13 undefi
-ned on input line 314.
+ned on input line 308.
 
 
-LaTeX Warning: Reference `mspe' on page 13 undefined on input line 314.
+LaTeX Warning: Reference `mspe' on page 13 undefined on input line 308.
 
 
 LaTeX Warning: Reference `encoder-decoder-mpse' on page 13 undefined on input l
-ine 314.
+ine 308.
 
 
-LaTeX Warning: Reference `lstm-mpse' on page 13 undefined on input line 314.
+LaTeX Warning: Reference `lstm-mpse' on page 13 undefined on input line 308.
 
 [13]
 
 LaTeX Warning: Reference `state-capacity-plot' on page 14 undefined on input li
-ne 316.
+ne 310.
 
 
-LaTeX Warning: Reference `eq:pointwise' on page 14 undefined on input line 318.
+LaTeX Warning: Reference `eq:pointwise' on page 14 undefined on input line 312.
 
 
 
 LaTeX Warning: Reference `state-capacity-plot-effects' on page 14 undefined on 
-input line 318.
+input line 312.
 
 
 LaTeX Warning: Reference `state-capacity-plot-pvalues' on page 14 undefined on 
-input line 318.
+input line 312.
 
+[14]
 
-LaTeX Warning: Reference `state-capacity-plot-effects' on page 14 undefined on 
-input line 320.
+LaTeX Warning: Reference `state-capacity-plot-effects' on page 15 undefined on 
+input line 314.
 
-[14] [15] [16]
+[15] [16]
 </media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.png, id
 =407, 794.97pt x 614.295pt>
 File: /media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.pn
@@ -1391,16 +1392,16 @@ g Graphic file (type png)
 <use /media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.png
 >
 Package pdftex.def Info: /media/jason/Dropbox/github/land-reform/results/plots/
-did-state-robust.png  used on input line 338.
+did-state-robust.png  used on input line 332.
 (pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
  [17 </media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.pn
-g (PNG copy)>] [18] [19] [20] (./land-reform.bbl [21] [22]
-[23]) [24]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 384.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 384.
+g (PNG copy)>] [18] [19] [20] (./land-reform.bbl [21] [22] [23])
+[24]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 378.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 378.
  (./land-reform.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 384.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 384.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 378.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 378.
 Package rerunfilecheck Info: File `land-reform.out' has not changed.
 (rerunfilecheck)             Checksum: 3D3BFEE937E70725EDBF9E2E12BD48D7;903.
 
@@ -1410,12 +1411,12 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 384.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 378.
  ) 
 Here is how much of TeX's memory you used:
  30376 strings out of 492641
  559513 string characters out of 6131787
- 652756 words of memory out of 5000000
+ 654756 words of memory out of 5000000
  33662 multiletter control sequences out of 15000+600000
  548933 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1512,7 +1513,7 @@ type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmtt12.pfb>
-Output written on land-reform.pdf (25 pages, 1092194 bytes).
+Output written on land-reform.pdf (25 pages, 1092258 bytes).
 PDF statistics:
  576 PDF objects out of 1000 (max. 8388607)
  518 compressed objects within 6 object streams
