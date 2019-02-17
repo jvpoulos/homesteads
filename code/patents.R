@@ -65,11 +65,11 @@ patents.sum <- patents %>%
   group_by(year,county_code,state_code) %>%
   summarise_each(funs(sum),sales,homesteads)
 
-## Make log per-capita measures
+## Make per-capita measures
 
 patents.sum$year2 <- NA
 patents.sum$year2 <- signif(patents.sum$year,3) # merge by nearest decennial
-patents.sum$year2[patents.sum$year<=1785] <- 1790 
+patents.sum$year2[patents.sum$year<=1785] <- 1790
 patents.sum$year2[patents.sum$year2<1880 & patents.sum$state_code=="AK"] <- 1880
 patents.sum$year2[patents.sum$year2>=1975] <- 1983 # non-slave population (1790-1970,1983)
 
@@ -78,7 +78,7 @@ patents.sum <- merge(patents.sum, census.ts.state[c('year','state','ns.pop')], b
 patents.sum  <- patents.sum  %>% group_by(county_code, state_code) %>% fill(ns.pop, .direction="up") # fill missing
 
 patents.sum$sales.pc <- NA
-patents.sum$sales.pc <- log(patents.sum$sales/patents.sum$ns.pop+ .Machine$double.eps)
+patents.sum$sales.pc <- patents.sum$sales/patents.sum$ns.pop
 
 patents.sum$homesteads.pc <- NA
-patents.sum$homesteads.pc <- log(patents.sum$homesteads/patents.sum$ns.pop+ .Machine$double.eps)
+patents.sum$homesteads.pc <- patents.sum$homesteads/patents.sum$ns.pop

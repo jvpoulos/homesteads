@@ -167,7 +167,7 @@ USCPI_1783_1982$adj_factor_42 <- USCPI_1783_1982$`U.S. Consumer Price Index`/USC
 
 funds <- merge(funds, USCPI_1783_1982, by.x="year", by.y="Year")
 
-## Make log per-capita measures
+## Make per-capita measures
 
 funds$year2 <- signif(funds$year,3) # merge by nearest decennial
 funds$year2[funds$year<=1785] <- 1790 # VA
