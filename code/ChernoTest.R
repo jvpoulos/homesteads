@@ -109,21 +109,26 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
 
 ## Invert for CIs
 
-ChernoCI <- function(t_star,c.range=c(-2,2), sd=1, alpha=0.025, l=100, prec=1e-02, outcomes, ns=1000, q=1, treated.indices, 
+ChernoCI <- function(t_star, sd=1, alpha=0.025, l=1000, prec=1e-02, outcomes, ns=100, q=1, treated.indices, 
                      permtype=c("iid", "moving.block", "iid.block"),t0,sim=FALSE,covars=NULL,pca=FALSE) {
   require(matrixStats)
   # Calculate randomization test confidence interval.
   #
   # Args:
-  #   c.range: Range of constant treatment effects. Default is c(-2,2).
   #   alpha: Two-sided significance level. Default is 0.025.
-  #   l: Number of constant treatment effects. Default is 100.
-  #   prec: Level of precision in constant treatment effects. Default is 1e-02.
+  #   l: Number of constant treatment effects. Default is 1000.
   #
   # Returns:
   #   Vector of per-time-step randomization confidence interval
+  # Get observed average treatment effects
+  mc.est <- MCEst(outcomes, t0=t0,sim=FALSE, covars=NULL,pca=FALSE)
+  pointwise <- mc.est$impact 
+  
+  real.att <- colMeans(pointwise[rownames(pointwise)%in%treated.indices,])
+  c.range <- round(range(real.att),2)*2
+  
   # Create vector to store CIs
-  p.weights <- dnorm(seq(c.range[1],c.range[2],by=prec), 0, sd) # penalize larger effects
+  p.weights <- dnorm(seq(c.range[1],c.range[2],by=prec), mean(c.range), sd) # penalize larger effects
   CI <- matrix(NA, t_star, l)
   for(i in 1:l){
     # Sample sequence of treatment effects under the null
