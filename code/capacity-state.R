@@ -256,7 +256,7 @@ CapacityMatrices <- function(d, outcomes=TRUE) {
                      ncol= ncol(d.M),
                      dimnames = list(rownames(d.M), colnames(d.M)))
     
-    d.mask[,colnames(d.mask)>=1869][rownames(d.mask)%in%western.pub,] <- 1 # earliest WPL 
+    d.mask[,colnames(d.mask)>=1869][rownames(d.mask)%in%c("CA","CO","IA","KS","MI","MN","MO","NE","OH","OR","SD","WA","WI"),] <- 1 # earliest WPL 
     d.mask[,colnames(d.mask)>=1870][rownames(d.mask)%in%c("IL","NV"),] <- 1 
     d.mask[,colnames(d.mask)>=1871][rownames(d.mask)%in%c("ID"),] <- 1 
     d.mask[,colnames(d.mask)>=1872][rownames(d.mask)%in%c("MT","ND","UT","AL","MS"),] <- 1 # earliest SPL 
