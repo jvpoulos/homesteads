@@ -115,6 +115,16 @@
 \pagebreak
 \pagenumbering{arabic}% Arabic-numbered pages (start from 1)
 
+\section{Exploratory data analysis} \label{eda}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width=\textwidth]{/media/jason/Dropbox/github/land-reform/results/plots/homestead-heatmap.png}
+	\end{center}
+	\caption{Cumulative sum of land patents authorized under the HSA in public land states, 1862-1942. \label{fig:homestead-heatmap}}
+\end{figure}
+
+\pagebreak
 \section{Simulations} \label{sims-sm}
 
 \begin{figure}[htbp]
@@ -143,49 +153,66 @@
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_1.png}
-		\caption{Simultaneous adoption} 
-	\end{subfigure}
-	~ 
-	\begin{subfigure}[t]{0.45\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_0.png}
-		\caption{Staggered adoption}
-	\end{subfigure}
-	\caption{State government education spending data, $N_t = 10$. See footnotes to Fig. \ref{california}. \label{educ-pc}} 
-\end{figure}
-
-\begin{figure}[htbp]
-	\centering
-	\begin{subfigure}[t]{0.45\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_1.png}
-		\caption{Simultaneous adoption} 
-	\end{subfigure}
-	~ 
-	\begin{subfigure}[t]{0.45\textwidth}
-		\centering
 		\includegraphics[width=\textwidth]{plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_0.png}
-		\caption{Staggered adoption}
-	\end{subfigure}
-	\caption{State government expenditures data, $N_t = 10$. See footnotes to Fig. \ref{california}. \label{exp-pc}} 
-\end{figure}
-
-\begin{figure}[htbp]
-	\centering
-	\begin{subfigure}[t]{0.45\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_1.png}
-		\caption{Simultaneous adoption} 
+		\caption{State government expenditures data, $N_t = 10$} 
 	\end{subfigure}
 	~ 
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png}
-		\caption{Staggered adoption}
+		\caption{State government revenues data, $N_t = 10$}
 	\end{subfigure}
-	\caption{State government revenues data, $N_t = 10$. See footnotes to Fig. \ref{california}. \label{rev-pc}} 
+	\caption{Placebo tests under staggered adoption. See footnotes to Fig. \ref{synth-stag}. \label{mc-stag}} 
 \end{figure}
+
+
+%\begin{figure}[htbp]
+%	\centering
+%	\begin{subfigure}[t]{0.45\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_1.png}
+%		\caption{Simultaneous adoption} 
+%	\end{subfigure}
+%	~ 
+%	\begin{subfigure}[t]{0.45\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_0.png}
+%		\caption{Staggered adoption}
+%	\end{subfigure}
+%	\caption{State government education spending data, $N_t = 10$. See footnotes to Fig. \ref{california}. \label{educ-pc}} 
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\begin{subfigure}[t]{0.45\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_1.png}
+%		\caption{Simultaneous adoption} 
+%	\end{subfigure}
+%	~ 
+%	\begin{subfigure}[t]{0.45\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{plots/exp_pc_N_19_T_159_numruns_20_num_treated_10_simultaneuous_0.png}
+%		\caption{Staggered adoption}
+%	\end{subfigure}
+%	\caption{State government expenditures data, $N_t = 10$. See footnotes to Fig. \ref{california}. \label{exp-pc}} 
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\begin{subfigure}[t]{0.45\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_1.png}
+%		\caption{Simultaneous adoption} 
+%	\end{subfigure}
+%	~ 
+%	\begin{subfigure}[t]{0.45\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png}
+%		\caption{Staggered adoption}
+%	\end{subfigure}
+%	\caption{State government revenues data, $N_t = 10$. See footnotes to Fig. \ref{california}. \label{rev-pc}} 
+%\end{figure}
 
 \pagebreak
 \section{Estimates}
