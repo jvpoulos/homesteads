@@ -237,7 +237,7 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
 
 pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
 
-foreach(d = c('rev.pc','exp.pc','educ.pc')) %dopar% {
+foreach(d = c('rev.pc','educ.pc')) %dopar% {
   foreach(sim = c(0,1)) %dopar% {
     CapacitySim(capacity.outcomes,d,sim,treated.indices = pub.states)
   }
