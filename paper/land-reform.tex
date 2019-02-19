@@ -196,7 +196,8 @@ An important problem in the social sciences is estimating the effect of a binary
 
 This paper applies the method of matrix completion proposed by \citet{athey2017matrix} to predict counterfactual outcomes in a setting where multiple treated units are exposed to a binary intervention and the date of initial exposure to treatment may vary between treated units. Let $\mathbf{Y}$ denote a $N \times T$ matrix of outcomes for each unit $i, \ldots, N$ at time $t = 1, \ldots, T$. $\mathbf{Y}$ is incomplete because we observe each element $Y_{it}$ for only the control units and the treated units prior to first treatment exposure. Let $\mathcal{O}$ denote the set of $(i,t)$ values that are observed and $\mathcal{M}$ the set of missing values. Define the $N \times T$ complete matrix $\mathbf{M}$, where $M_{it} =1 $ if $(i,t) \in \mathcal{M}$ and $M_{it} = 0$ if $(i,t) \in \mathcal{O}$ is nonmissing.\footnote{The process that generates $\mathbf{M}$ is referred to the assignment mechanism in the causal inference literature \citep{imbens2015causal} and the missing data mechanism in missing data analysis \citep[Chap.~1]{little2014}.} This setup is motivated by the fundamental problem of causal inference \citep{holland1986statistics} in that we cannot directly observe counterfactual outcomes and we instead wish to impute missing values in $\mathbf{Y}$ for treated units with $M_{it}=1$. 
 
-In an observational setting, units are part of the assignment mechanism that generates $\mathbf{M}$ and patterns of missing data follow one of two specific structures. In the case of simultaneous adoption of treatment, a subset of units are exposed to treatment at time $T_0$ and every subsequent period. The second structure arises from staggered adoption \citep{athey2018design}, which differs from simultaneous adoption in that $T_0$ may vary across treated units. In either case, there are selection biases because the probability of missingness may depend on the unobserved data. Selection bias in the staggered adoption setting can occur, for example, if public land states are exposed to treatment (i.e., settled homesteads) earlier because they have higher quality land. Selection bias can occur in the simultaneous adoption setting due to latent characteristics of public land states that may be correlated with their outcomes. The goal is to accurately estimate the effect of a policy intervention despite incomplete and biased data due to selection bias. 
+In an observational setting, units are part of the assignment mechanism that generates $\mathbf{M}$ and patterns of missing data follow one of two specific structures. In the case of simultaneous adoption of treatment, a subset of units are exposed to treatment at time $T_0$ and every subsequent period. The second structure arises from staggered adoption \citep{athey2018design}, which differs from simultaneous adoption in that $T_0$ may vary across treated units. In either case, there are selection biases because the probability of missingness may depend on the unobserved data. Selection bias in the staggered adoption setting can occur, for example, if public land states are exposed to treatment (i.e., settled homesteads) earlier because they have higher quality land. The goal is to accurately estimate the effect of a policy intervention despite incomplete and biased data due to selection bias. 
+%Selection bias can occur in the simultaneous adoption setting due to latent characteristics of public land states that may be correlated with their outcomes.
 
 \citet{schnabel2016recommendations} first connected the matrix completion problem with causal inference in an observational setting in the context of recommender systems under selection bias and propose a weighted matrix factorization method based on propensity scoring under the assumption that the assignment mechanism is probabilistic.
 
@@ -224,7 +225,7 @@ I benchmarks the MC-NNM estimator against the following previously used estimato
 
 \begin{description}
 	{\setlength\itemindent{1mm}
-		\item[DID] DID estimator with unit and time fixed effects \citep{athey2018design}
+		\item[DID] Horizontal regression of $\mathbf{Y}$ on unit and time fixed effects and a binary treatment variable \citep{athey2017matrix}
 		\item[HR-EN] Horizontal regression with elastic net regularization \citep{athey2017matrix} 
 		\item[PCA] Regularized iterative Principal Components Analysis (PCA) \citep{ilin2010practical,josse2012handling}
 		\item[SC-ADH] SCM approached via exponentiated gradient descent \citep{abadie2010synthetic}
@@ -276,11 +277,11 @@ where $\hat{\bar{\alpha}}_{t}$ corresponds to the per-period estimated average c
 %
 where $\left\{\bar{\alpha}^{o}_{t}\right\}_{t=T_0}^T$ is a trajectory of per-period average effects under the null. The test statistic suggested by \citet{chernozhukov2017exact} summarizes the trajectory of causal effects over $T_\star = T-T_0$ post-periods:
 %
-\begin{equation}
+\begin{equation} \label{tstat}
 S (\hat{\bar{\alpha}}_{t}) = \frac{1}{\sqrt{T_\star}} \sum_{t=T_0 +1}^{T} |\hat{\bar{\alpha}}_{t}|.
 \end{equation}
 %
-$p$-values are obtained by generating $\pi \in \Pi$ permutations of $\mathbf{Y}$ across the time dimension and estimating the proportion of test statics calculated on the permuted data under the null that are more extreme than the observed test statistic:
+I estimate $p$-values by creating $\pi \in \Pi$ permutations of $\mathbf{Y}$ across the time dimension and calculating the proportion of test statics calculated on the permuted data under the null that are more extreme than the observed test statistic:
 %
 \begin{equation}
 \hat{p} (\hat{\bar{\alpha}}_{t}) = \frac{1}{\Pi} \sum_{\pi \in \Pi} \textbf{1} \left\{S (\hat{\bar{\alpha}}_{\pi}) > S (\hat{\bar{\alpha}}_{t}) \right\}, \label{pvalue}
@@ -301,10 +302,10 @@ The staggered adoption setting is appropriate for the current application due to
 Prior to presenting the main results, I assess the validity of the key assumption underlying the approach by discarding post-period observations from the data and testing the null hypothesis 
 
 \begin{equation} \label{h0-placebo}
-\text{H}_0: \frac{1}{\tau +1} \sum_{T_0 - \tau +1}^{T_0} \hat{\bar{\alpha}}_{t} = 0,
+\text{H}_0: S (\hat{\bar{\alpha}}_{t}) = 0  \, \hspace{5mm} \,  \text{for} \, \hspace{2mm} T_0 - \tau +1 \leq t \leq T_0,
 \end{equation}
-%
-for $\tau \in \left\{10, 20, 30\right\}$. Equation (\ref{h0-placebo}) is tested by the same procedure described in Section \ref{hyp-test}, treating $\left\{1, \ldots, T_0 - \tau\right\}$ as the pre-period and $\left\{T_0 - \tau +1, \ldots, T_0\right\}$ as the post-period.
+%\frac{1}{\tau +1} \sum_{T_0 - \tau +1}^{T_0} \hat{\bar{\alpha}}_{t} 
+where $\tau \in \left\{10, 20, 30\right\}$. Equation (\ref{h0-placebo}) is tested by the same procedure described in Section \ref{hyp-test}, treating $\left\{1, \ldots, T_0 - \tau\right\}$ as the pre-period.
 
 Table \ref{placebo-tests} reports the average treatment effect over the placebo post-period and 95\% randomization confidence intervals for the null hypothesis test. We cannot reject the placebo null hypothesis for each of the three outcomes and three permutation structures, since all the intervals contain zero. This provides evidence that the estimator is consistent. 
 
@@ -313,7 +314,7 @@ Table \ref{placebo-tests} reports the average treatment effect over the placebo 
 	\begin{center}
 	\resizebox{.65\width}{!}{\input{placebo-tests}}
 	\end{center}
-	\footnotesize{Notes: Mean $\hat{\bar{\alpha}}_{t}$ corresponds to quantity on the left-hand-side of Equation (\ref{h0-placebo}). Values in brackets represent 95\% confidence intervals constructed by inverting the randomization test described in Section \ref{hyp-test} on $|\mathcal{A}_t| = 2,500$ null trajectories. Confidence intervals based on i.i.d. permutations are calculated using $|\Pi| = 1,000$ permutations.}
+	\footnotesize{Notes: $S (\hat{\bar{\alpha}}_{t})$ corresponds to quantity on the left-hand-side of Equation (\ref{h0-placebo}). Values in brackets represent 95\% confidence intervals constructed by inverting the randomization test described in Section \ref{hyp-test} on $|\mathcal{A}_t| = 2,500$ null trajectories. Confidence intervals based on i.i.d. permutations are calculated using $|\Pi| = 1,000$ permutations.}
 \end{table}
 
 \subsection{Causal estimates}
@@ -326,15 +327,17 @@ Taking the difference between the observed and predicted time-series (Eq.~\ref{e
 
 An important characteristic of the estimates plotted in Fig.~\ref{state-capacity-plot-effects} is the progressive widening of confidence intervals. Intuitively, counterfactual predictions become more uncertain as we move farther into the future. In the present application, confidence intervals may become implausibly wide because the post-period extends well into the twentieth century. In order to compare with the DID estimates described in the section below, I average over the entire post-period and find no evidence that the HSA impacted western state government education spending, 0.07 [-0.32, 0.46], expenditure, 0.16 [-0.21, 0.57], or revenue, 0.05 [-0.33, 0.46]. Estimates on the impact of the SHA on state capacity in the South are in the same direction and similar magnitudes. 
 
-\section{DID estimates} \label{DID}
+\section{Continuous DID estimates} \label{DID}
 
-The proposed method estimates the impact of a discrete event on a continuous outcome. However, in this application a continuous form of treatment is available in the form of homestead entries aggregated from individual land patent records.
-
-I estimate the following DID model, where the first difference is the change in patterns of state capacity before and after implementation of the HSA or SHA, and the second difference comes from the intensity of homestead entries across frontier states:
+The matrix completion approach estimates the impact of a discrete event on a continuous outcome. However, in this application a continuous form of treatment is available in the form of homestead entries. Equation (\ref{eq:dd}) estimates a continuous version of the DID estimator described in Section \ref{sims}. Similar to the case of binary treatment, the continuous DID estimator is adapted to a setting of staggered adoption because the initial date of exposure to homesteads varies across public land states. The first difference comes from variation in the date of initial exposure to homesteads, and the second difference comes from variation in the intensity of homestead entries.
 
 \begin{equation} 
-y_{s, t} =  \text{states}_s + \gamma \, d_t + X'_{s,t} \, \beta_t + \delta \, (d_t \cdot \text{homesteads}_s) + \epsilon_{s, t}. \label{eq:dd} 
-\end{equation} On the left-hand-side, $y_{s, t}$ is an outcome measured in state $s = 1, \ldots, N$, during period $t$. On the right-hand-side, $\text{states}_s$ is a vector of states dummies to control for unobserved heterogeneity across states; $d_t$ is a binary variable that takes the value of 1 after the enactment of the SHA in 1866 or the HSA in 1866, and 0 otherwise; and $\text{homesteads}_{s, t}$ is the log per-capita cumulative number of homestead entries up to period $t$. The estimated impact of the intervention is $\hat{\delta}$, which corresponds to the interaction term.\footnote{I use state-stratified bootstrapped samples to construct nonparametric confidence intervals for $\hat{\delta}$. \citet{bertrand2004much} show that stratified bootstrap can be used to compute consistent standard errors when the number of groups is sufficiently large.} $X'_{s,t}$ is the log average value of farm land, which is included to ensure that $\hat{\delta}$ is not biased by parallel trends in agricultural productivity. In theory, we would expect that homesteaders migrate to more valuable land and thus excluding average farm values from the regression would result in overestimating the actual impact of homesteads. 
+Y_{i, t} =  \text{states}_i + \gamma \, d_t + X'_{i,t} \, \beta_t + \delta \, (d_t \cdot \text{homesteads}_i) + \epsilon_{i, t}, \label{eq:dd} 
+\end{equation}
+%
+where $\text{states}_i$ is a vector of states dummies to control for unobserved heterogeneity across states; $d_t$ is a binary variable that takes the value of 1 at $t \geq T_0$ and after; and $\text{homesteads}_{i, t}$ is the per-capita cumulative number of homestead entries up to period $t$.
+
+The coefficient corresponding to the interaction term, $\hat{\delta}$, is the estimated average causal effect of exposure to homesteads. I use unit-stratified bootstrapped samples to construct nonparametric confidence intervals for $\hat{\delta}$.\footnote{\citet{bertrand2004much} show that the stratified bootstrap can be used to compute consistent standard errors when the number of units is sufficiently large.} $X'_{i,t}$ is the average value of farm land, which is included to ensure that $\hat{\delta}$ is not biased by parallel trends in agricultural productivity. In theory, we would expect that homesteaders migrate to more valuable land and thus excluding average farm values from the regression would result in overestimating the actual impact of homesteads. 
 
 I apply the DID estimator on two unbalanced state-year panel datasets: the panel of southern public land states spans  from 1823 to 1982 and has 38 observations prior to the enactment of the SHA. The panel of western public land states spans from 1810 to 1982 and has 52 pre-intervention years. The treatment effect estimates, summarized in Fig.~\ref{fig:did-state-robust}, indicate that per-capita cumulative homesteads significantly increase per-capita revenue in western states by 0.02 log points [0.0007, 0.04] and has a nonsignificant impact on revenue in southern states. Estimates on per-capita expenditure in the South and West are also nonsignificant. Per-capita cumulative homesteads significantly raise education spending in the South by 0.17 log points [0.03, 0.28], while having no impact on education spending in the West. As expected, withholding average farm values from the DID specification biases treatment effect estimates upwards (Fig.~SM-\ref{fig:did-state-robust}).
 
