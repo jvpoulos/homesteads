@@ -4,7 +4,7 @@
 ##, permuting {û_t } is equivalent to permuting {Z_t }.
 ## modified from https://github.com/ebenmichael/ents
 
-ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
+ChernoTest <- function(outcomes, ns=1000, q=2, t.stat=NULL, treated.indices,
                         permtype=c("iid", "moving.block", "iid.block"),t0,sim=FALSE,covars=NULL,pca=FALSE) {
   
   t_final <- ncol(outcomes$M) # all periods
@@ -109,7 +109,7 @@ ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
 
 ## Invert for CIs
 
-ChernoCI <- function(t_star, sd=1, alpha=0.025, l=1000, prec=1e-02, outcomes, ns=100, q=1, treated.indices, 
+ChernoCI <- function(t_star, alpha=0.025, l=1000, prec=1e-02, outcomes, ns=500, q=2, treated.indices, 
                      permtype=c("iid", "moving.block", "iid.block"),t0,sim=FALSE,covars=NULL,pca=FALSE) {
   require(matrixStats)
   # Calculate randomization test confidence interval.
@@ -125,14 +125,13 @@ ChernoCI <- function(t_star, sd=1, alpha=0.025, l=1000, prec=1e-02, outcomes, ns
   pointwise <- mc.est$impact 
   
   real.att <- colMeans(pointwise[rownames(pointwise)%in%treated.indices,])
-  c.range <- round(range(real.att),2)*2
+  c.range <- round(range(real.att),2)
   
   # Create vector to store CIs
-  p.weights <- dnorm(seq(c.range[1],c.range[2],by=prec), mean(c.range), sd) # penalize larger effects
   CI <- matrix(NA, t_star, l)
   for(i in 1:l){
     # Sample sequence of treatment effects under the null
-    delta.c <- sample(seq(c.range[1],c.range[2],by=prec),t_star,replace=FALSE, prob=p.weights)
+    delta.c <- sample(seq(c.range[1],c.range[2],by=prec),t_star,replace=FALSE)
     # Run permuation test
     results <- ChernoTest(outcomes, ns, q, t.stat=delta.c, treated.indices, permtype, t0, sim=FALSE, covars=NULL, pca=FALSE)
     # If result not significant, delta.c is in confidence interval

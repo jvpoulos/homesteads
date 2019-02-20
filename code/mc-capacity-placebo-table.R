@@ -8,7 +8,7 @@ iid_block_placebo <- readRDS(paste0(results.directory, "mc/iid_block_placebo.rds
 
 moving_block_placebo <- readRDS(paste0(results.directory, "mc/moving_block_placebo.rds"))
 
-MCCapacityPlacebo <- function(x,taus,permtype){
+MCCapacityPlacebo <- function(x,taus,permtype,q=1){
   ## Create time series data
   
   ts.means.tau <- lapply(1:length(taus), function(t){
@@ -54,13 +54,18 @@ MCCapacityPlacebo <- function(x,taus,permtype){
     
     pointwise.mean.post <- rowMeans(pointwise.mean[1,][(n+1):m])[[1]] # mean of pointwise effects in post-period for PLS
     
+    real_teststat <- ((1/sqrt(m-n)) * sum(abs(pointwise.mean.post)^q))^(1/q)
+    
     if(!is.numeric(pointwise.ci)){
       pointwise.mean.ci.post <-c(NA,NA)
     }else{
       pointwise.mean.ci.post <- rowMeans(pointwise.ci)
     }
     
-    return(list("period"= range(as.numeric(colnames(pointwise.mean[(n+1):m]))),"pointwise.mean"=pointwise.mean.post, "pointwise.ci"=pointwise.mean.ci.post))
+    return(list("period"= range(as.numeric(colnames(pointwise.mean[(n+1):m]))),
+                "t.stat"=real_teststat,
+                "pointwise.mean"=pointwise.mean.post, 
+                "pointwise.ci"=pointwise.mean.ci.post))
     
  #    ts.means <- cbind(t(predicted.mean), t(pointwise.mean), t(cumulative.mean))
  #    colnames(ts.means) <- c("predicted.pls","predicted.sls","pointwise.pls","pointwise.sls","cumulative.pls","cumulative.sls")
