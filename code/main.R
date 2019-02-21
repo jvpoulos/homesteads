@@ -51,6 +51,8 @@ source(paste0(code.directory,'prepare-synth.R'))
 
 # mc-capacity-estimates.sh --> mc-capacity-estimates.R 
 
+source(paste0(code.directory,'mc-boot.R')) 
+
 source(paste0(code.directory,'mc-capacity-plots.R')) 
 
 # DD estimates on state capacity data

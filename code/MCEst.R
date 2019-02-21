@@ -1,7 +1,8 @@
 MCEst <- function(outcomes,t0,sim=FALSE,covars=NULL,pca=FALSE) {
+  
   Y <- outcomes$M # NxT 
   Y.missing <- outcomes$M.missing # NxT 
-  
+
   if(!is.null(covars)){
     Z <- rbind(covars$Z,"AK"=rep(0,ncol(covars$Z))) # NxT # missing AK
     Z <- Z[row.names(Y),]  # reorder
