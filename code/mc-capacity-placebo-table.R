@@ -64,7 +64,6 @@ MCCapacityPlacebo <- function(x,taus,permtype,q=1){
     
     return(list("period"= range(as.numeric(colnames(pointwise.mean[(n+1):m]))),
                 "t.stat"=real_teststat,
-                "pointwise.mean"=pointwise.mean.post, 
                 "pointwise.ci"=pointwise.mean.ci.post))
     
  #    ts.means <- cbind(t(predicted.mean), t(pointwise.mean), t(cumulative.mean))
