@@ -8,7 +8,7 @@ iid_block_placebo <- readRDS(paste0(results.directory, "mc/iid_block_placebo.rds
 
 moving_block_placebo <- readRDS(paste0(results.directory, "mc/moving_block_placebo.rds"))
 
-MCCapacityPlacebo <- function(x,taus,permtype,q=1){
+MCCapacityPlacebo <- function(x,taus,permtype,q=2){
   ## Create time series data
   
   ts.means.tau <- lapply(1:length(taus), function(t){

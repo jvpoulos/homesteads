@@ -109,7 +109,7 @@ ChernoTest <- function(outcomes, ns=1000, q=2, t.stat=NULL, treated.indices,
 
 ## Invert for CIs
 
-ChernoCI <- function(t_star, alpha=0.025, l=1000, prec=1e-02, outcomes, ns=500, q=2, treated.indices, 
+ChernoCI <- function(alpha=0.025, l=1000, prec=1e-02, outcomes, ns=500, q=2, treated.indices, 
                      permtype=c("iid", "moving.block", "iid.block"),t0,sim=FALSE,covars=NULL,pca=FALSE) {
   require(matrixStats)
   # Calculate randomization test confidence interval.
@@ -126,6 +126,9 @@ ChernoCI <- function(t_star, alpha=0.025, l=1000, prec=1e-02, outcomes, ns=500, 
   
   real.att <- colMeans(pointwise[rownames(pointwise)%in%treated.indices,])
   c.range <- round(range(real.att),2)
+  
+  t_final <- ncol(outcomes$M) # all periods
+  t_star <- t_final-t0
   
   # Create vector to store CIs
   CI <- matrix(NA, t_star, l)
