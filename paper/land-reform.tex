@@ -278,7 +278,7 @@ where $\hat{\bar{\alpha}}_{t}$ corresponds to the per-period estimated average c
 where $\left\{\bar{\alpha}^{o}_{t}\right\}_{t=T_0}^T$ is a trajectory of per-period average effects under the null. The test statistic suggested by \citet{chernozhukov2017exact} summarizes the trajectory of causal effects over $T_\star = T-T_0$ post-periods:
 %
 \begin{equation} \label{tstat}
-S (\hat{\bar{\alpha}}_{t}) = \left(\frac{1}{\sqrt{T_\star}} \sum_{t=T_0 +1}^{T} |\hat{\bar{\alpha}}_{t}|^2\right)^2.
+S (\hat{\bar{\alpha}}_{t}) = \frac{1}{\sqrt{T_\star}} \sum_{t=T_0 +1}^{T} |\hat{\bar{\alpha}}_{t}|.
 \end{equation}
 %
 I estimate $p$-values by creating $\pi \in \Pi$ permutations of $\mathbf{Y}$ across the time dimension and calculating the proportion of test statics calculated on the permuted data under the null that are more extreme than the observed test statistic:
@@ -315,7 +315,7 @@ Further evidence of the consistency of the estimator is demonstrated in Figure S
 	\captionsetup{font=normalsize}
 	\caption{Placebo tests.\label{placebo-tests}}
 	\begin{center}
-	\resizebox{.65\width}{!}{\input{placebo-tests}}
+	\resizebox{.75\width}{!}{\input{placebo-tests}}
 	\end{center}
 	\footnotesize{\emph{Notes:} $S (\hat{\bar{\alpha}}_{t})$ corresponds to the test statistic described in Equation (\ref{tstat}) and each value beneath is the 95\% $p$-value corresponding to each permutation structure. i.i.d. and i.i.d. block permutations are calculated using $|\Pi| = 1,000$ permutations. Moving block confidence intervals are based on $|\Pi| = T-1$ permutations.}
 \end{table}

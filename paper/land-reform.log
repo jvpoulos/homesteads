@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  21 FEB 2019 16:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  21 FEB 2019 18:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1347,25 +1347,29 @@ g (PNG copy)> <./plots/california_N_38_T_31_numruns_20_num_treated_19_simultane
 uous_0.png (PNG copy)> <./plots/germany_N_16_T_44_numruns_20_num_treated_8_simu
 ltaneuous_0.png (PNG copy)>] [12] [13]
 (./placebo-tests.tex)
+Overfull \hbox (24.33199pt too wide) in paragraph at lines 318--319
+ [] 
+ []
 
-LaTeX Warning: Reference `encoder-decoder-loss-capacity-south' on page 14 undef
+[14]
+
+LaTeX Warning: Reference `encoder-decoder-loss-capacity-south' on page 15 undef
 ined on input line 325.
 
 
-LaTeX Warning: Reference `encoder-decoder-loss-capacity-west' on page 14 undefi
+LaTeX Warning: Reference `encoder-decoder-loss-capacity-west' on page 15 undefi
 ned on input line 325.
 
 
-LaTeX Warning: Reference `mspe' on page 14 undefined on input line 325.
+LaTeX Warning: Reference `mspe' on page 15 undefined on input line 325.
 
 
-LaTeX Warning: Reference `encoder-decoder-mpse' on page 14 undefined on input l
+LaTeX Warning: Reference `encoder-decoder-mpse' on page 15 undefined on input l
 ine 325.
 
 
-LaTeX Warning: Reference `lstm-mpse' on page 14 undefined on input line 325.
+LaTeX Warning: Reference `lstm-mpse' on page 15 undefined on input line 325.
 
-[14]
 
 LaTeX Warning: Reference `state-capacity-plot' on page 15 undefined on input li
 ne 327.
@@ -1533,7 +1537,7 @@ type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmtt12.pfb>
-Output written on land-reform.pdf (28 pages, 2179203 bytes).
+Output written on land-reform.pdf (28 pages, 2178500 bytes).
 PDF statistics:
  591 PDF objects out of 1000 (max. 8388607)
  527 compressed objects within 6 object streams
