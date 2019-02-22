@@ -11,7 +11,7 @@ library(boot)
 library(parallel)
 library(doParallel)
 
-cores <- 2#detectCores()
+cores <- 4#detectCores()
 
 cl <- parallel::makeForkCluster(cores)
 

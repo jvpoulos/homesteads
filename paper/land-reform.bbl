@@ -138,13 +138,6 @@ Chernozhukov, V., K.~Wuthrich, and Y.~Zhu (2017).
   synthetic controls.
 \newblock {\em arXiv preprint arXiv:1712.09089\/}.
 
-\bibitem[\protect\citeauthoryear{Chernozhukov, Wuthrich, and Zhu}{Chernozhukov
-  et~al.}{2018}]{chernozhukov2018exact}
-Chernozhukov, V., K.~Wuthrich, and Y.~Zhu (2018).
-\newblock Exact and robust conformal inference methods for predictive machine
-  learning with dependent data.
-\newblock {\em arXiv preprint arXiv:1802.06300\/}.
-
 \bibitem[\protect\citeauthoryear{Donaldson and Hornbeck}{Donaldson and
   Hornbeck}{2016}]{donaldson2016railroads}
 Donaldson, D. and R.~Hornbeck (2016).
