@@ -4,11 +4,10 @@
 ##, permuting {û_t } is equivalent to permuting {Z_t }.
 ## modified from https://github.com/ebenmichael/ents
 
-ChernoTest <- function(outcomes, ns=1000, q=2, t.stat=NULL, treated.indices,
+ChernoTest <- function(outcomes, ns=1000, q=1, t.stat=NULL, treated.indices,
                         permtype=c("iid", "moving.block", "iid.block"),t0,sim=FALSE,covars=NULL,pca=FALSE) {
   
   t_final <- ncol(outcomes$M) # all periods
-  t_star <- t_final-t0
   
   if(permtype == "iid") {
     teststats <- matrix(NA, nrow=ns, ncol=length(q))
@@ -32,7 +31,7 @@ ChernoTest <- function(outcomes, ns=1000, q=2, t.stat=NULL, treated.indices,
       
       att <- as.matrix(colMeans(mc.fit$impact[,t0:t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,])) # get mean post-period impact on treated
       
-      teststats[i,] <- ((1/sqrt(t_star)) * sum(abs(att)^q))^(1/q)   
+      teststats[i,] <- ((1/sqrt(length(att))) * sum(abs(att)^q))^(1/q)   
     }
   } else if(permtype=="moving.block") {
     teststats <- matrix(NA, nrow=(t_final-1), ncol=length(q)) # exclude real order
@@ -55,7 +54,7 @@ ChernoTest <- function(outcomes, ns=1000, q=2, t.stat=NULL, treated.indices,
       
       att <- as.matrix(colMeans(mc.fit$impact[,t0:t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,])) # get mean post-period impact on treated
       
-      teststats[i,] <-((1/sqrt(t_star)) * sum(abs(att)^q))^(1/q)        
+      teststats[i,] <-((1/sqrt(length(att))) * sum(abs(att)^q))^(1/q)        
     }
   } else if(permtype=="iid.block") {
     
@@ -88,7 +87,7 @@ ChernoTest <- function(outcomes, ns=1000, q=2, t.stat=NULL, treated.indices,
       
       att <- as.matrix(colMeans(mc.fit$impact[,t0:t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,])) # get mean post-period impact on treated
       
-      teststats[i,] <-((1/sqrt(t_star)) * sum(abs(att)^q))^(1/q)   
+      teststats[i,] <-((1/sqrt(length(att))) * sum(abs(att)^q))^(1/q)   
     }
   }else {
     stop("permtype must be one of c('iid', 'moving.block', 'iid.block')")
@@ -101,48 +100,8 @@ ChernoTest <- function(outcomes, ns=1000, q=2, t.stat=NULL, treated.indices,
     mc.fit.actual <-  MCEst(outcomes,t0,sim=FALSE,covars=NULL,pca=FALSE)
     real_att <- as.matrix(colMeans(mc.fit.actual$impact[,t0:t_final,drop=FALSE][rownames(mc.fit.actual$impact) %in% treated.indices,])) # get mean post-period impact on treated
   }
-  real_teststat <- ((1/sqrt(t_star)) * sum(abs(real_att)^q))^(1/q)
+  real_teststat <- ((1/sqrt(length(real_att))) * sum(abs(real_att)^q))^(1/q)
   pval <- 1- ((1/length(teststats) * sum(teststats < real_teststat)))
   
   return(pval)
-}
-
-## Invert for CIs
-
-ChernoCI <- function(alpha=0.025, l=1000, prec=1e-02, outcomes, ns=500, q=2, treated.indices, 
-                     permtype=c("iid", "moving.block", "iid.block"),t0,sim=FALSE,covars=NULL,pca=FALSE) {
-  require(matrixStats)
-  # Calculate randomization test confidence interval.
-  #
-  # Args:
-  #   alpha: Two-sided significance level. Default is 0.025.
-  #   l: Number of constant treatment effects. Default is 1000.
-  #
-  # Returns:
-  #   Vector of per-time-step randomization confidence interval
-  # Get observed average treatment effects
-  mc.est <- MCEst(outcomes, t0=t0,sim=FALSE, covars=NULL,pca=FALSE)
-  pointwise <- mc.est$impact 
-  
-  real.att <- colMeans(pointwise[rownames(pointwise)%in%treated.indices,])
-  c.range <- round(range(real.att),2)
-  
-  t_final <- ncol(outcomes$M) # all periods
-  t_star <- t_final-t0
-  
-  # Create vector to store CIs
-  CI <- matrix(NA, t_star, l)
-  for(i in 1:l){
-    # Sample sequence of treatment effects under the null
-    delta.c <- sample(seq(c.range[1],c.range[2],by=prec),t_star,replace=FALSE)
-    # Run permuation test
-    results <- ChernoTest(outcomes, ns, q, t.stat=delta.c, treated.indices, permtype, t0, sim=FALSE, covars=NULL, pca=FALSE)
-    # If result not significant, delta.c is in confidence interval
-    if(results>(2*alpha)){
-      CI[,i] <- delta.c
-    }else{
-      CI[,i] <- NA
-    }
-  }
-  return(rowRanges(CI,na.rm=TRUE))
 }
