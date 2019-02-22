@@ -46,10 +46,10 @@ source("MCEst.R")
 
 t_final_placebo <- ncol(capacity.outcomes[["rev.pc"]]$M) # all periods - same for each outcome
 
-taus <- c(10,20,30)
+taus <- c(20,40,60)
 
 mc.est.placebo <- foreach(tau = taus) %dopar% {
-      t0_placebo <- t_final_placebo-(tau+1) # n pre-treatment periods
+      t0_placebo <- t_final_placebo-(tau) # n pre-treatment periods
       mclapply(capacity.outcomes.list,
                               MCEst,t0=t0_placebo,sim=FALSE, covars=NULL,pca=FALSE,mc.cores=cores)}
 saveRDS(mc.est.placebo,"mc_est_placebo.rds")
@@ -60,19 +60,19 @@ source("ChernoTest.R")
 pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
 
 iid.placebo <- foreach(tau = taus) %dopar% {
-       t0_placebo <- t_final_placebo-(tau+1) # n pre-treatment periods
+       t0_placebo <- t_final_placebo-tau # n pre-treatment periods
        mclapply(capacity.outcomes.list, 
                 ChernoTest, ns=10000, treated.indices=pub.states, permtype="iid",t0=t0_placebo,imputed=TRUE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
 saveRDS(iid.placebo,"iid_placebo_p.rds")
 
 moving.block.placebo <- foreach(tau = taus) %dopar% {
-  t0_placebo <- t_final_placebo-(tau+1) # n pre-treatment periods
+  t0_placebo <- t_final_placebo-tau # n pre-treatment periods
   mclapply(capacity.outcomes.list,
            ChernoTest, ns=10000, treated.indices=pub.states, permtype="moving.block",t0=t0_placebo,imputed=TRUE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
 saveRDS(moving.block.placebo,"moving_block_placebo_p.rds")
 
 iid.block.placebo <- foreach(tau = taus) %dopar% {
-  t0_placebo <- t_final_placebo-(tau+1) # n pre-treatment periods
+  t0_placebo <- t_final_placebo-tau # n pre-treatment periods
   mclapply(capacity.outcomes.list,
            ChernoTest, ns=10000, treated.indices=pub.states, permtype="iid.block",t0=t0_placebo,imputed=TRUE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
 saveRDS(iid.block.placebo,"iid_block_placebo_p.rds")
