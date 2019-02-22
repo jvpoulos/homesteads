@@ -30,6 +30,9 @@ ChernoTest <- function(outcomes, ns=1000, q=c(2,1), t.stat=NULL, treated.indices
       ## get treatment effect estimates
       
       att <- as.matrix(colMeans(mc.fit$impact[,t0:t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,], na.rm = TRUE)) # get mean post-period impact on treated
+      if(imputed){
+        att <- na.omit(att)
+      }
       
       teststats[i,] <- sapply(1:length(q),
                               function(j) ((1/sqrt(length(att))) * sum(abs(att)^q[j]))^(1/q[j]) )
@@ -53,7 +56,10 @@ ChernoTest <- function(outcomes, ns=1000, q=c(2,1), t.stat=NULL, treated.indices
       
       ## get treatment effect estimates
       
-      att <- as.matrix(colMeans(mc.fit$impact[,t0:t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,])) # get mean post-period impact on treated
+      att <- as.matrix(colMeans(mc.fit$impact[,t0:t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,], na.rm = TRUE)) # get mean post-period impact on treated
+      if(imputed){
+        att <- na.omit(att)
+      }
       
       teststats[i,] <-((1/sqrt(length(att))) * sum(abs(att)^q))^(1/q)        
     }
@@ -86,8 +92,11 @@ ChernoTest <- function(outcomes, ns=1000, q=c(2,1), t.stat=NULL, treated.indices
       
       ## get treatment effect estimates
       
-      att <- as.matrix(colMeans(mc.fit$impact[,t0:t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,])) # get mean post-period impact on treated
-      
+      att <- as.matrix(colMeans(mc.fit$impact[,t0:t_final,drop=FALSE][rownames(mc.fit$impact) %in% treated.indices,], na.rm = TRUE)) # get mean post-period impact on treated
+      if(imputed){
+        att <- na.omit(att)
+      }
+    
       teststats[i,] <-((1/sqrt(length(att))) * sum(abs(att)^q))^(1/q)   
     }
   }else {
@@ -100,9 +109,12 @@ ChernoTest <- function(outcomes, ns=1000, q=c(2,1), t.stat=NULL, treated.indices
   } else{
     mc.fit.actual <-  MCEst(outcomes,t0,imputed=TRUE,sim=FALSE,covars=NULL,pca=FALSE)
     real_att <- as.matrix(colMeans(mc.fit.actual$impact[,t0:t_final,drop=FALSE][rownames(mc.fit.actual$impact) %in% treated.indices,], na.rm = TRUE)) # get mean post-period impact on treated
+    if(imputed){
+      real_att <- na.omit(real_att)
+    }
   }
   real_teststat <- sapply(1:length(q),
                           function(j) ((1/sqrt(length(real_att))) * sum(abs(real_att)^q[j]))^(1/q[j]))
-  pval <- sapply(1:length(q), function(i) 1- ((1/length(teststats[,i]) * sum(teststats[,i] < real_teststat[i], na.rm=TRUE))))
+  pval <- sapply(1:length(q), function(i) 1- ((1/length(teststats[,i]) * sum(teststats[,i] < real_teststat[i]))))
   return(list("q"=q, "s"=real_teststat, "real_att" = real_att[,1],"p"=pval))
 }
