@@ -275,13 +275,13 @@ where $\hat{\bar{\alpha}}_{t}$ corresponds to the per-period estimated average c
 \text{H}_0: \hat{\bar{\alpha}}_{t} = \bar{\alpha}^{o}_{t} \, \hspace{5mm} \,  \text{for} \, \hspace{2mm} T_0+1 \leq t \leq T,
 \end{equation}
 %
-where $\left\{\bar{\alpha}^{o}_{t}\right\}_{t=T_0}^T$ is a trajectory of per-period average effects under the null. The test statistic suggested by \citet{chernozhukov2017exact} summarizes the trajectory of causal effects over $T_\star = T-T_0$ post-periods:
+where $\left\{\bar{\alpha}^{o}_{t}\right\}_{t=T_0}^T$ is a trajectory of per-period average effects under the null. The test statistic suggested by \citet{chernozhukov2017exact} summarizes the trajectory of causal effects over the post-period:
 %
 \begin{equation} \label{tstat}
-S (\hat{\bar{\alpha}}_{t}) = \frac{1}{\sqrt{T_\star}} \sum_{t=T_0 +1}^{T} |\hat{\bar{\alpha}}_{t}|.
+S (\hat{\bar{\alpha}}_{t}) = \left(\frac{1}{\sqrt{T_\star}} \sum_{t=T_0 +1}^{T} |\hat{\bar{\alpha}}_{t}|^q\right)^q,
 \end{equation}
 %
-I estimate $p$-values by creating $\pi \in \Pi$ permutations of $\mathbf{Y}$ across the time dimension and calculating the proportion of test statics calculated on the permuted data under the null that are more extreme than the observed test statistic:
+where $T_\star = T-T_0$ and $q \in \left\{1, 2\right\}$ in the applications. I estimate $p$-values by creating $\pi \in \Pi$ permutations of $\mathbf{Y}$ across the time dimension and calculating the proportion of test statics calculated on the permuted data under the null that are more extreme than the observed test statistic:
 %
 \begin{equation}
 \hat{p} = \frac{1}{\Pi} \sum_{\pi \in \Pi} \textbf{1} \left\{S (\hat{\bar{\alpha}}_{\pi}) > S (\hat{\bar{\alpha}}_{t}) \right\}, \label{pvalue}
@@ -305,7 +305,7 @@ Prior to presenting the main results, I assess the validity of the key assumptio
 \text{H}_0: S (\hat{\bar{\alpha}}_{t}) = 0  \, \hspace{5mm} \,  \text{for} \, \hspace{2mm} T_0 - \tau +1 \leq t \leq T_0,
 \end{equation}
 %\frac{1}{\tau +1} \sum_{T_0 - \tau +1}^{T_0} \hat{\bar{\alpha}}_{t} 
-where $\tau \in \left\{10, 20, 30\right\}$. Equation (\ref{h0-placebo}) is tested by the same procedure described in Section \ref{hyp-test}, treating $\left\{1, \ldots, T_0 - \tau\right\}$ as the pre-period.
+where $\tau \in \left\{20, 40, 60\right\}$. Equation (\ref{h0-placebo}) is tested by the same procedure described in Section \ref{hyp-test}, treating $\left\{1, \ldots, T_0 - \tau\right\}$ as the pre-period.
 
 Table \ref{placebo-tests} reports the average treatment effect over the placebo post-period and 95\% randomization confidence intervals for the null hypothesis test. For each outcome and post-period length $\tau$, the confidence intervals tend to be very similar regardless of permutation structure. The results of the placebo tests provide evidence that the MC-NNM estimator is consistent because none of the intervals contain zero. 
 
@@ -317,7 +317,7 @@ Further evidence of the consistency of the estimator is demonstrated in Figure S
 	\begin{center}
 	\resizebox{.75\width}{!}{\input{placebo-tests}}
 	\end{center}
-	\footnotesize{\emph{Notes:} $S (\hat{\bar{\alpha}}_{t})$ corresponds to the test statistic described in Equation (\ref{tstat}) and each value beneath is the 95\% $p$-value corresponding to each permutation structure. i.i.d. and i.i.d. block permutations are calculated using $|\Pi| = 1,000$ permutations. Moving block confidence intervals are based on $|\Pi| = T-1$ permutations.}
+	\footnotesize{\emph{Notes:} $S (\hat{\bar{\alpha}}_{t})$ corresponds to the test statistic described in Equation (\ref{tstat}) and each value beneath is the 95\% $p$-value corresponding to each permutation structure. i.i.d. and i.i.d. block permutations are calculated using $|\Pi| = 10,000$ permutations. Moving block confidence intervals are based on $|\Pi| = T-1$ permutations.}
 \end{table}
 
 \subsection{Causal estimates}
@@ -356,9 +356,9 @@ An important characteristic of the estimates plotted in Fig.~\ref{state-capacity
 	\captionsetup{font=normalsize}
 	\caption{Causal estimates.\label{mc-estimates}}
 	\begin{center}
-		\resizebox{.65\width}{!}{\input{mc-estimates}}
+		\input{mc-estimates}
 	\end{center}
-	\footnotesize{\emph{Notes:} See Table \ref{placebo-tests} footnotes.}
+\hspace{20mm}	\footnotesize{\emph{Notes:} See Table \ref{placebo-tests} footnotes.}
 \end{table}
 
 \section{Continuous DID estimates} \label{DID}

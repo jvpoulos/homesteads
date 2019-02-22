@@ -36,16 +36,16 @@ saveRDS(mc.est,"mc_est.rds")
 # Get NxT matrix of confidence intervals
 source("ChernoTest.R")
 
-pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
+treat_indices_order <- c("CA", "CO", "IA", "KS", "MI", "MN", "MO", "NE", "OH", "OR", "SD", "WA", "WI", "IL", "NV", "ID", "MT", "ND",  "UT", "AL", "MS", "AR", "FL", "LA", "IN", "NM", "WY", "AZ", "OK", "AK")
 
 iid <- mclapply(capacity.outcomes.list, 
-                ChernoTest, ns=10000, treated.indices=pub.states, permtype="iid",t0=t0,imputed=TRUE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                ChernoTest, ns=10000, treated.indices=treat_indices_order, permtype="iid",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(iid,"iid.rds")
 
 moving.block <- mclapply(capacity.outcomes.list, 
-                         ChernoTest, ns=10000, treated.indices=pub.states, permtype="moving.block",t0=t0,imputed=TRUE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                         ChernoTest, ns=10000, treated.indices=treat_indices_order, permtype="moving.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(moving.block,"moving_block.rds")
 
 iid.block <- mclapply(capacity.outcomes.list, 
-                      ChernoTest, ns=10000, treated.indices=pub.states, permtype="iid.block",t0=t0,imputed=TRUE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                      ChernoTest, ns=10000, treated.indices=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(iid.block,"iid_block.rds")

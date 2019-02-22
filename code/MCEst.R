@@ -1,4 +1,4 @@
-MCEst <- function(outcomes,t0,imputed=TRUE,sim=FALSE,covars=NULL,pca=FALSE) {
+MCEst <- function(outcomes,t0,treat_indices_order,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE) {
   
   Y <- outcomes$M # NxT 
   Y.missing <- outcomes$M.missing # NxT 
@@ -15,7 +15,6 @@ MCEst <- function(outcomes,t0,imputed=TRUE,sim=FALSE,covars=NULL,pca=FALSE) {
   
   ## Treated indices
   indices <- cbind("id"=1:nrow(Y), "name"=rownames(Y))
-  treat_indices_order <- c("CA", "CO", "IA", "KS", "MI", "MN", "MO", "NE", "OH", "OR", "SD", "WA", "WI", "IL", "NV", "ID", "MT", "ND",  "UT", "AL", "MS", "AR", "FL", "LA", "IN", "NM", "WY", "AZ", "OK", "AK")
   treat_indices <- as.numeric(indices[order(match(indices[,2], treat_indices_order))][1:length(treat_indices_order)]) # sort indices increasingly based on T0
   
   N_t <- length(treat_indices) # Number of treated units desired
