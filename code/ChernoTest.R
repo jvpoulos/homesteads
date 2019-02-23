@@ -4,7 +4,7 @@
 ##, permuting {û_t } is equivalent to permuting {Z_t }.
 ## modified from https://github.com/ebenmichael/ents
 
-ChernoTest <- function(outcomes, ns=1000, q=c(2,1), t.stat=NULL, treat_indices_order,permtype=c("iid", "moving.block", "iid.block"),t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE) {
+ChernoTest <- function(outcomes, ns=1000, q=c(1,2), t.stat=NULL, treat_indices_order,permtype=c("iid", "moving.block", "iid.block"),t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE) {
   
   t_final <- ncol(outcomes$M) # all periods
   
@@ -33,10 +33,8 @@ ChernoTest <- function(outcomes, ns=1000, q=c(2,1), t.stat=NULL, treat_indices_o
         att <- na.omit(att)
       }
       
-      # teststats[i,] <- sapply(1:length(q),
-      #                         function(j) ((1/sqrt(length(att))) * sum(abs(att)^q[j]))^(1/q[j]) )
-      teststats[i,] <- sapply(1:length(q),
-                              function(j) mean(abs(att)^q[j])^(1/q[j]))
+      teststats[i,] <- sapply(q,
+                               function(j) ((1/sqrt(length(att))) * sum(abs(att)^q[j]))^(1/q[j]) )
     }
   } else if(permtype=="moving.block") {
     teststats <- matrix(NA, nrow=(t_final-1), ncol=length(q)) # exclude real order
@@ -62,7 +60,8 @@ ChernoTest <- function(outcomes, ns=1000, q=c(2,1), t.stat=NULL, treat_indices_o
         att <- na.omit(att)
       }
       
-      teststats[i,] <-((1/sqrt(length(att))) * sum(abs(att)^q))^(1/q)        
+      teststats[i,] <- sapply(q,
+                              function(j) ((1/sqrt(length(att))) * sum(abs(att)^q[j]))^(1/q[j]) )      
     }
   } else if(permtype=="iid.block") {
     
@@ -98,7 +97,8 @@ ChernoTest <- function(outcomes, ns=1000, q=c(2,1), t.stat=NULL, treat_indices_o
         att <- na.omit(att)
       }
     
-      teststats[i,] <-((1/sqrt(length(att))) * sum(abs(att)^q))^(1/q)   
+      teststats[i,] <- sapply(q,
+                              function(j) ((1/sqrt(length(att))) * sum(abs(att)^q[j]))^(1/q[j]) )   
     }
   }else {
     stop("permtype must be one of c('iid', 'moving.block', 'iid.block')")
@@ -114,8 +114,8 @@ ChernoTest <- function(outcomes, ns=1000, q=c(2,1), t.stat=NULL, treat_indices_o
       real_att <- na.omit(real_att)
     }
   }
-  real_teststat <- sapply(1:length(q),
+  real_teststat <- sapply(q,
                            function(j) ((1/sqrt(length(real_att))) * sum(abs(real_att)^q[j]))^(1/q[j]))
-  pval <- sapply(1:length(q), function(i) 1- ((1/length(teststats[,i]) * sum(teststats[,i] < real_teststat[i]))))
+  pval <- sapply(q, function(i) 1- ((1/length(teststats[,i]) * sum(teststats[,i] < real_teststat[i]))))
   return(list("q"=q, "s"=real_teststat, "real_att" = real_att[,1],"p"=pval))
 }
