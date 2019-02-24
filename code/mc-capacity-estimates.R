@@ -39,13 +39,13 @@ saveRDS(mc.est,"mc_est.rds")
 source("ChernoTest.R")
 
 iid <- mclapply(capacity.outcomes.list, 
-                ChernoTest, ns=10000, treat_indices_order=treat_indices_order, permtype="iid",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                ChernoTest, ns=20000, treat_indices_order=treat_indices_order, permtype="iid",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(iid,"iid.rds")
 
 moving.block <- mclapply(capacity.outcomes.list, 
-                         ChernoTest, ns=10000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                         ChernoTest, ns=20000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(moving.block,"moving_block.rds")
 
 iid.block <- mclapply(capacity.outcomes.list, 
-                      ChernoTest, ns=10000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                      ChernoTest, ns=20000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(iid.block,"iid_block.rds")
