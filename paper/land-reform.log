@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  22 FEB 2019 13:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  24 FEB 2019 13:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1347,76 +1347,72 @@ g (PNG copy)> <./plots/california_N_38_T_31_numruns_20_num_treated_19_simultane
 uous_0.png (PNG copy)> <./plots/germany_N_16_T_44_numruns_20_num_treated_8_simu
 ltaneuous_0.png (PNG copy)>] [12] [13]
 (./placebo-tests.tex)
-Overfull \hbox (24.33199pt too wide) in paragraph at lines 318--319
- [] 
- []
 
-[14]
-
-LaTeX Warning: Reference `encoder-decoder-loss-capacity-south' on page 15 undef
+LaTeX Warning: Reference `encoder-decoder-loss-capacity-south' on page 14 undef
 ined on input line 325.
 
 
-LaTeX Warning: Reference `encoder-decoder-loss-capacity-west' on page 15 undefi
+LaTeX Warning: Reference `encoder-decoder-loss-capacity-west' on page 14 undefi
 ned on input line 325.
 
 
-LaTeX Warning: Reference `mspe' on page 15 undefined on input line 325.
+LaTeX Warning: Reference `mspe' on page 14 undefined on input line 325.
 
 
-LaTeX Warning: Reference `encoder-decoder-mpse' on page 15 undefined on input l
+LaTeX Warning: Reference `encoder-decoder-mpse' on page 14 undefined on input l
 ine 325.
 
 
-LaTeX Warning: Reference `lstm-mpse' on page 15 undefined on input line 325.
+LaTeX Warning: Reference `lstm-mpse' on page 14 undefined on input line 325.
 
+[14] [15]
 
-LaTeX Warning: Reference `state-capacity-plot' on page 15 undefined on input li
+LaTeX Warning: Reference `state-capacity-plot' on page 16 undefined on input li
 ne 327.
 
 
-LaTeX Warning: Reference `homestead-map' on page 15 undefined on input line 327
+LaTeX Warning: Reference `homestead-map' on page 16 undefined on input line 327
 .
 
 
-LaTeX Warning: Reference `acres-time' on page 15 undefined on input line 327.
+LaTeX Warning: Reference `acres-time' on page 16 undefined on input line 327.
 
 
-LaTeX Warning: Reference `eq:pointwise' on page 15 undefined on input line 329.
+LaTeX Warning: Reference `eq:pointwise' on page 16 undefined on input line 329.
 
 
 
-LaTeX Warning: Reference `state-capacity-plot-effects' on page 15 undefined on 
+LaTeX Warning: Reference `state-capacity-plot-effects' on page 16 undefined on 
 input line 329.
 
 
-LaTeX Warning: Reference `state-capacity-plot-pvalues' on page 15 undefined on 
+LaTeX Warning: Reference `state-capacity-plot-pvalues' on page 16 undefined on 
 input line 329.
 
-[15]
 
 LaTeX Warning: Reference `state-capacity-plot-effects' on page 16 undefined on 
 input line 331.
 
-<plots/mc-educ-pc.png, id=389, 794.97pt x 614.295pt>
+[16]
+<plots/mc-educ-pc.png, id=392, 794.97pt x 614.295pt>
 File: plots/mc-educ-pc.png Graphic file (type png)
 <use plots/mc-educ-pc.png>
 Package pdftex.def Info: plots/mc-educ-pc.png  used on input line 337.
 (pdftex.def)             Requested size: 225.4804pt x 174.23228pt.
-<plots/mc-exp-pc.png, id=390, 794.97pt x 614.295pt>
+<plots/mc-exp-pc.png, id=393, 794.97pt x 614.295pt>
 File: plots/mc-exp-pc.png Graphic file (type png)
 <use plots/mc-exp-pc.png>
 Package pdftex.def Info: plots/mc-exp-pc.png  used on input line 343.
 (pdftex.def)             Requested size: 225.4804pt x 174.23228pt.
-<plots/mc-rev-pc.png, id=391, 794.97pt x 614.295pt>
+<plots/mc-rev-pc.png, id=394, 794.97pt x 614.295pt>
 File: plots/mc-rev-pc.png Graphic file (type png)
 <use plots/mc-rev-pc.png>
 Package pdftex.def Info: plots/mc-rev-pc.png  used on input line 349.
 (pdftex.def)             Requested size: 225.4804pt x 174.23228pt.
-(./mc-estimates.tex) [16] [17 <./plots/mc-educ-pc.png (PNG copy)> <./plots/mc-e
-xp-pc.png (PNG copy)> <./plots/mc-rev-pc.png (PNG copy)>] [18]
+ (./mc-estimates.tex) [17 <./plots/mc-educ-pc.png (PNG copy)> <./plots/mc-exp-p
+c.png (PNG copy)> <./plots/mc-rev-pc.png (PNG copy)>] [18] [19]
 </media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.png, id
-=420, 794.97pt x 614.295pt>
+=424, 794.97pt x 614.295pt>
 File: /media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.pn
 g Graphic file (type png)
 <use /media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.png
@@ -1424,12 +1420,13 @@ g Graphic file (type png)
 Package pdftex.def Info: /media/jason/Dropbox/github/land-reform/results/plots/
 did-state-robust.png  used on input line 382.
 (pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
- [19] [20 </media/jason/Dropbox/github/land-reform/results/plots/did-state-robu
-st.png (PNG copy)>]
+ [20]
+[21 </media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.png
+ (PNG copy)>]
 
-LaTeX Warning: Reference `rr-map' on page 21 undefined on input line 402.
+LaTeX Warning: Reference `rr-map' on page 22 undefined on input line 402.
 
-[21] [22] [23] (./land-reform.bbl [24] [25] [26]) [27]
+[22] [23] [24] (./land-reform.bbl [25] [26] [27]) [28]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 428.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 428.
  (./land-reform.aux)
@@ -1447,13 +1444,13 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 428.
  ) 
 Here is how much of TeX's memory you used:
- 30395 strings out of 492641
- 559833 string characters out of 6131787
- 654051 words of memory out of 5000000
+ 30396 strings out of 492641
+ 559840 string characters out of 6131787
+ 656897 words of memory out of 5000000
  33672 multiletter control sequences out of 15000+600000
  548933 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,16n,65p,2024b,562s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,18n,65p,2024b,562s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.18} has been referenced but does not ex
 ist, replaced by a fixed one
 
@@ -1537,10 +1534,10 @@ type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmtt12.pfb>
-Output written on land-reform.pdf (28 pages, 2179435 bytes).
+Output written on land-reform.pdf (29 pages, 2180405 bytes).
 PDF statistics:
- 591 PDF objects out of 1000 (max. 8388607)
- 527 compressed objects within 6 object streams
- 133 named destinations out of 1000 (max. 500000)
+ 595 PDF objects out of 1000 (max. 8388607)
+ 530 compressed objects within 6 object streams
+ 134 named destinations out of 1000 (max. 500000)
  152 words of extra memory for PDF output out of 10000 (max. 10000000)
 

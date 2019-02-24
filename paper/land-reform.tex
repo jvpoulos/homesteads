@@ -305,7 +305,7 @@ Prior to presenting the main results, I assess the validity of the key assumptio
 \text{H}_0: S (\hat{\bar{\alpha}}_{t}) = 0  \, \hspace{5mm} \,  \text{for} \, \hspace{2mm} T_0 - \tau +1 \leq t \leq T_0,
 \end{equation}
 %\frac{1}{\tau +1} \sum_{T_0 - \tau +1}^{T_0} \hat{\bar{\alpha}}_{t} 
-where $\tau \in \left\{20, 40, 60\right\}$. Equation (\ref{h0-placebo}) is tested by the same procedure described in Section \ref{hyp-test}, treating $\left\{1, \ldots, T_0 - \tau\right\}$ as the pre-period.
+where $\tau \in \left\{5, 10, 20\right\}$. Equation (\ref{h0-placebo}) is tested by the same procedure described in Section \ref{hyp-test}, treating $\left\{1, \ldots, T_0 - \tau\right\}$ as the pre-period.
 
 Table \ref{placebo-tests} reports the average treatment effect over the placebo post-period and 95\% randomization confidence intervals for the null hypothesis test. For each outcome and post-period length $\tau$, the confidence intervals tend to be very similar regardless of permutation structure. The results of the placebo tests provide evidence that the MC-NNM estimator is consistent because none of the intervals contain zero. 
 
@@ -315,9 +315,9 @@ Further evidence of the consistency of the estimator is demonstrated in Figure S
 	\captionsetup{font=normalsize}
 	\caption{Placebo tests.\label{placebo-tests}}
 	\begin{center}
-	\resizebox{.75\width}{!}{\input{placebo-tests}}
+	\input{placebo-tests}
 	\end{center}
-	\footnotesize{\emph{Notes:} $S (\hat{\bar{\alpha}}_{t})$ corresponds to the test statistic described in Equation (\ref{tstat}) and each value beneath is the 95\% $p$-value corresponding to each permutation structure. i.i.d. and i.i.d. block permutations are calculated using $|\Pi| = 10,000$ permutations. Moving block confidence intervals are based on $|\Pi| = T-1$ permutations.}
+	\footnotesize{\emph{Notes:} Values represent $p$-values at the 95\% confidence level corresponding to each permutation structure and value of $\tau$ and $q$. i.i.d. and i.i.d. block permutations are calculated using $|\Pi| = 20,000$ permutations. Moving block confidence intervals are based on $|\Pi| = T-1$ permutations.}
 \end{table}
 
 \subsection{Causal estimates}
@@ -354,11 +354,11 @@ An important characteristic of the estimates plotted in Fig.~\ref{state-capacity
 
 \begin{table}[htbp]
 	\captionsetup{font=normalsize}
-	\caption{Causal estimates.\label{mc-estimates}}
+	\caption{Causal estimates on state capacity datasets.\label{mc-estimates}}
 	\begin{center}
 		\input{mc-estimates}
 	\end{center}
-\hspace{20mm}	\footnotesize{\emph{Notes:} See Table \ref{placebo-tests} footnotes.}
+\footnotesize{\emph{Notes:} $S (\hat{\bar{\alpha}}_{t})$ corresponds to the test statistic described in Equation (\ref{tstat}) and each value beneath is the 95\% $p$-value corresponding to each permutation structure. See footnotes to Table \ref{placebo-tests}.}
 \end{table}
 
 \section{Continuous DID estimates} \label{DID}

@@ -1,11 +1,41 @@
-\begin{tabular}{@{}lccccccccc@{}}
-		\toprule
-		 & \multicolumn{3}{c}{Education Spending}        & \multicolumn{3}{c}{Expenditure}            & \multicolumn{3}{c}{Revenue}                \\ \midrule
-Post-period	 & 1858--1868     & 1848--1868      & 1838--1868      & 1858--1868     & 1848--1868      & 1838--1868  	  & 1858--1868     & 1848--1868      & 1838--1868   \\
-	 	 & ($\tau = 10$)  & ($\tau = 20$)   & ($\tau = 30$)   & ($\tau = 10$)  & ($\tau = 20$)  & ($\tau = 30$)   &  ($\tau = 10$)  &  ($\tau = 20$)  &  ($\tau = 30$)  \\
-		\hline
-		$S (\hat{\bar{\alpha}}_{t})$        &   0.02       	 & 	0.03       	  & 	0.05       &        0.24    &   0.17	       & 	0.15	   & 	0.16       &   0.13        & 	0.12\\
-		i.i.d.                      		&   0.15		 &  0.07		  & 	0.02	   & 		0	   	& 	0		   	   &	 	0	   & 	0		   & 	0		   & 	0	\\
-		i.i.d. Block                        & 	0.13  		 &  0.14		  & 	0.14	   & 		0.002	& 	0.01		   & 	0.001	   & 	0.09	   & 	0.01	   & 	0.001 \\
-		Moving Block                        & 	0.24	     &  0.31		  & 	0.29	   & 		0.05    &   0.01 		   & 	0		   &    0.08	   & 	0.05 	   & 0.01 \\ \bottomrule
+%\begin{tabular}{@{}lcccccccccccccccccc@{}}
+%		\toprule
+%		 & \multicolumn{3}{c}{Education Spending}        & \multicolumn{3}{c}{Expenditure}            & \multicolumn{3}{c}{Revenue}                \\ \midrule
+%%Post-period	 & 1858--1868     & 1848--1868      & 1838--1868      & 1858--1868     & 1848--1868      & 1838--1868  	  & 1858--1868     & 1848--1868      & 1838--1868   \\
+%	 	 & \multicolumn{2}{c}{$\tau = 10$}  &  \multicolumn{2}{c}{$\tau = 20$}   & \multicolumn{2}{c}{$\tau = 30$}   & \multicolumn{2}{c}{$\tau = 10$}  &  \multicolumn{2}{c}{$\tau = 20$}   & \multicolumn{2}{c}{$\tau = 30$}   & \multicolumn{2}{c}{$\tau = 10$}  &  \multicolumn{2}{c}{$\tau = 20$}   & \multicolumn{2}{c}{$\tau = 30$}   \\
+%		\hline
+%		$S (\hat{\bar{\alpha}}_{t})$        &   0.02       	 & 	0.03       	  & 	0.05       &        0.24    &   0.17	       & 	0.15	   & 	0.16       &   0.13        & 	0.12
+%											&   0.02       	 & 	0.03       	  & 	0.05       &        0.24    &   0.17	       & 	0.15	   & 	0.16       &   0.13        & 	0.12\\
+%		i.i.d.                      		&   0.15		 &  0.07		  & 	0.02	   & 		0	   	& 	0		   	   &	 	0	   & 	0		   & 	0		   & 	0	
+%											&   0.15		 &  0.07		  & 	0.02	   & 		0	   	& 	0		   	   &	 	0	   & 	0		   & 	0		   & 	0	\\
+%		i.i.d. Block                        & 	0.13  		 &  0.14		  & 	0.14	   & 		0.002	& 	0.01		   & 	0.001	   & 	0.09	   & 	0.01	   & 	0.001 
+%											& 	0.13  		 &  0.14		  & 	0.14	   & 		0.002	& 	0.01		   & 	0.001	   & 	0.09	   & 	0.01	   & 	0.001\\
+%		Moving Block                        & 	0.24	     &  0.31		  & 	0.29	   & 		0.05    &   0.01 		   & 	0		   &    0.08	   & 	0.05 	   & 0.01 
+%											& 	0.24	     &  0.31		  & 	0.29	   & 		0.05    &   0.01 		   & 	0		   &    0.08	   & 	0.05 	   & 0.01 \\ \bottomrule
+%\end{tabular}
+
+\begin{tabular}{@{}lcccccc@{}}
+	\toprule
+	& \multicolumn{6}{c}{ Education Spending } \\ \hline
+	& \multicolumn{2}{c}{ i.i.d. } & \multicolumn{2}{c}{ i.i.d. Block } & \multicolumn{2}{c}{ Moving Block } \\\hline
+	\diagbox{$\tau$}{$q$} & 1 & 2 & 1 & 2 & 1 & 2 \\\hline
+	5 & 0.06 & 0.15 & 0.23 & 0.2 & 0.32 & 0.31 \\
+	10 & 0.09 & 0.01 & 0.29 & 0.13 & 0.51 & 0.30 \\
+	20 & 0.14 & 0.01 & 0.39 & 0.16 & 0.58 & 0.37 \\
+	 &  &  &  &  &  &  \\
+
+	& \multicolumn{6}{c}{ Expenditure } \\\hline
+	& \multicolumn{2}{c}{ i.i.d. } & \multicolumn{2}{c}{ i.i.d. Block } & \multicolumn{2}{c}{ Moving Block } \\\hline
+	\diagbox{$\tau$}{$q$} & 1 & 2 & 1 & 2 & 1 & 2 \\ \hline
+	5 & 0 & 0 & 0.01 & 0.01 & 0 & 0.01 \\
+	10 & 0 & 0 & 0 & 0 & 0 & 0 \\
+	20 & 0 & 0 & 0.001 & 0 & 0 & 0 \\
+		 &  &  &  &  &  &  \\
+	& \multicolumn{6}{c}{ Revenue } \\\hline
+	& \multicolumn{2}{c}{ i.i.d. } & \multicolumn{2}{c}{ i.i.d. Block } & \multicolumn{2}{c}{ Moving Block } \\\hline
+	\diagbox{$\tau$}{$q$} & 1 & 2 & 1 & 2 & 1 & 2 \\ \hline
+	5 & 0 & 0 & 0.002 & 0.004 & 0.02 & 0.04 \\
+	10 & 0 & 0 & 0.008 & 0.003 & 0.10 & 0.01 \\
+	20 & 0 & 0 & 0 & 0 & 0.01 & 0.01 \\
+	\bottomrule
 \end{tabular}
