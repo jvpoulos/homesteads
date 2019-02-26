@@ -72,8 +72,8 @@ PlotMCCapacity <- function(x,y.title,limits,t0=which(colnames(capacity.outcomes[
   colnames(ts.means.m) <- c("year", "variable", "value", "se")
   
   ts.means.m <- ts.means.m %>%
-    mutate(upper = value + (se),
-           lower = value - (se))
+    mutate(upper = value + 1.96*se,
+           lower = value - 1.96*se)
 
   # # Adjust year for plot
  # ts.means.m$year <- as.Date(as.yearmon(ts.means.m$year) + 11/12, frac = 1) # end of year
