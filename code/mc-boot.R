@@ -34,11 +34,11 @@ bopt.rev.pc <- b.star(capacity.outcomes[["rev.pc"]]$M,round=TRUE)[[1]]  # get op
 bopt.exp.pc <- b.star(capacity.outcomes[["exp.pc"]]$M,round=TRUE)[[1]]  
 bopt.educ.pc <- b.star(capacity.outcomes[["educ.pc"]]$M,round=TRUE)[[1]]  
 
-rev.pc.boot <- tsboot(ts(t(capacity.outcomes[["rev.pc"]]$M)), MCEstBoot, M.missing= capacity.outcomes[["rev.pc"]]$M.missing, mask=capacity.outcomes[["rev.pc"]]$mask, t0=t0, simul=FALSE, R= 1000, parallel = "multicore", l =bopt.rev.pc, 
+rev.pc.boot <- tsboot(ts(t(capacity.outcomes[["rev.pc"]]$M)), MCEstBoot, M.missing= capacity.outcomes[["rev.pc"]]$M.missing, mask=capacity.outcomes[["rev.pc"]]$mask, t0=t0, simul=FALSE, R= 10000, parallel = "multicore", l =bopt.rev.pc, 
                       sim = "fixed") # block resampling with fixed block lengths of length l)
-exp.pc.boot <- tsboot(ts(t(capacity.outcomes[["exp.pc"]]$M)), MCEstBoot, M.missing= capacity.outcomes[["exp.pc"]]$M.missing, mask=capacity.outcomes[["exp.pc"]]$mask, t0=t0, simul=FALSE, R= 1000, parallel = "multicore", l =bopt.exp.pc, 
+exp.pc.boot <- tsboot(ts(t(capacity.outcomes[["exp.pc"]]$M)), MCEstBoot, M.missing= capacity.outcomes[["exp.pc"]]$M.missing, mask=capacity.outcomes[["exp.pc"]]$mask, t0=t0, simul=FALSE, R= 10000, parallel = "multicore", l =bopt.exp.pc, 
                       sim = "fixed") 
-educ.pc.boot <- tsboot(ts(t(capacity.outcomes[["educ.pc"]]$M)), MCEstBoot, M.missing= capacity.outcomes[["educ.pc"]]$M.missing, mask=capacity.outcomes[["educ.pc"]]$mask, t0=t0, simul=FALSE, R= 1000, parallel = "multicore", l =bopt.educ.pc, 
+educ.pc.boot <- tsboot(ts(t(capacity.outcomes[["educ.pc"]]$M)), MCEstBoot, M.missing= capacity.outcomes[["educ.pc"]]$M.missing, mask=capacity.outcomes[["educ.pc"]]$mask, t0=t0, simul=FALSE, R= 10000, parallel = "multicore", l =bopt.educ.pc, 
                        sim = "fixed") 
 
 saveRDS(rev.pc.boot, paste0(results.directory, "mc/rev-pc-boot.rds"))

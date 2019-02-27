@@ -26,6 +26,7 @@ source(paste0(homestead.code.directory,'patents-homestead.R'))
 source(paste0(homestead.code.directory,'prepare-homestead.R'))
 
 source(paste0(code.directory,'patents.R'))
+source(paste0(code.directory,'homestead-heatmap.R')) 
 
 ## Prepare state capacity data
 
@@ -72,8 +73,6 @@ source(paste0(code.directory,'dd-railroads.R'))
 source(paste0(code.directory,'dd-inequality.R')) # run dd-railroads first
 
 # Descriptive plots, scatter plots
-
-source(paste0(code.directory,'homestead-heatmap.R')) 
 
 source(paste0(code.directory,'homestead-map.R')) # Map homesteads
 

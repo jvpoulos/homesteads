@@ -78,7 +78,9 @@ patents.sum <- merge(patents.sum, census.ts.state[c('year','state','ns.pop')], b
 patents.sum  <- patents.sum  %>% group_by(county_code, state_code) %>% fill(ns.pop, .direction="up") # fill missing
 
 patents.sum$sales.pc <- NA
-patents.sum$sales.pc <- patents.sum$sales/patents.sum$ns.pop
+patents.sum$sales.pc <- log((patents.sum$sales/patents.sum$ns.pop) +.Machine
+                            $double.eps)
 
 patents.sum$homesteads.pc <- NA
-patents.sum$homesteads.pc <- patents.sum$homesteads/patents.sum$ns.pop
+patents.sum$homesteads.pc <- log((patents.sum$homesteads/patents.sum$ns.pop) +.Machine
+                                 $double.eps)

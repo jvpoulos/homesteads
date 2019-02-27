@@ -38,14 +38,24 @@ saveRDS(mc.est,"mc_est.rds")
 # Get NxT matrix of confidence intervals
 source("ChernoTest.R")
 
-iid <- mclapply(capacity.outcomes.list, 
-                ChernoTest, ns=50000, treat_indices_order=treat_indices_order, permtype="iid",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
-saveRDS(iid,"iid.rds")
+# p-values
+# iid <- mclapply(capacity.outcomes.list, 
+#                 ChernoTest, ns=50000, treat_indices_order=treat_indices_order, permtype="iid",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+# saveRDS(iid,"iid.rds")
+# 
+# moving.block <- mclapply(capacity.outcomes.list, 
+#                          ChernoTest, ns=50000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+# saveRDS(moving.block,"moving_block.rds")
+# 
+# iid.block <- mclapply(capacity.outcomes.list, 
+#                       ChernoTest, ns=50000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+# saveRDS(iid.block,"iid_block.rds")
 
+# CIs
 moving.block <- mclapply(capacity.outcomes.list, 
-                         ChernoTest, ns=50000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
-saveRDS(moving.block,"moving_block.rds")
+                         ChernoCI, alpha=0.025, l=1000, prec=1e-02, outcomes, ns=1000, q=c(1,2), treat_indices_order, permtype="moving.block",t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+saveRDS(moving.block,"moving_block_ci.rds")
 
 iid.block <- mclapply(capacity.outcomes.list, 
-                      ChernoTest, ns=50000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
-saveRDS(iid.block,"iid_block.rds")
+                      ChernoCI, alpha=0.025, l=1000, prec=1e-02, outcomes, ns=1000, q=c(1,2), treat_indices_order, permtype="iid.block",t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+saveRDS(iid.block,"iid_block_ci.rds")
