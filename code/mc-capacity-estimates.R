@@ -53,9 +53,9 @@ source("ChernoTest.R")
 
 # CIs
 moving.block <- mclapply(capacity.outcomes.list, 
-                         ChernoCI, alpha=0.025, l=1000, prec=1e-02, outcomes, ns=1000, q=c(1,2), treat_indices_order, permtype="moving.block",t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                         ChernoCI, alpha=0.025, l=2000, prec=1e-02, ns=1000, q=c(1,2), treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(moving.block,"moving_block_ci.rds")
 
 iid.block <- mclapply(capacity.outcomes.list, 
-                      ChernoCI, alpha=0.025, l=1000, prec=1e-02, outcomes, ns=1000, q=c(1,2), treat_indices_order, permtype="iid.block",t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                      ChernoCI, alpha=0.025, l=2000, prec=1e-02, ns=1000, q=c(1,2), treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(iid.block,"iid_block_ci.rds")

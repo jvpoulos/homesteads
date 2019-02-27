@@ -134,7 +134,7 @@ ChernoCI <- function(alpha=0.025, l=1000, prec=1e-02, outcomes, ns=1000, q=c(1,2
   # Returns:
   #   Vector of per-time-step randomization confidence interval
   # Get observed average treatment effects
-  mc.est <- MCEst(outcomes, t0=t0,sim=FALSE, covars=NULL,pca=FALSE)
+  mc.est <- MCEst(outcomes,treat_indices_order=treat_indices_order,t0=t0,imputed=FALSE,sim=FALSE, covars=NULL,pca=FALSE)
   pointwise <- mc.est$impact 
   
   real.att <- colMeans(pointwise[rownames(pointwise)%in%treat_indices_order,])
