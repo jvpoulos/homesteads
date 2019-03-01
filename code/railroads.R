@@ -1,20 +1,19 @@
 # Railroads, 1826-1911
 
 # Packages
-require(ggplot2)
-require(rgdal)
-require(rgeos)
-require(maptools)
-require(ggmap)
-require(sp)
-require(spdep)
-require(ifultools)
-require(broom)
+library(ggplot2)
+library(rgdal)
+library(rgeos)
+library(maptools)
+library(ggmap)
+library(sp)
+library(ifultools)
+library(broom)
 library(raster)
 library(reshape2)
 library(tidyr)
 library(dplyr)
-require(caret)
+library(caret)
 
 # download.data <- FALSE
 # 
@@ -106,7 +105,7 @@ require(caret)
 
 ################### Load railraods.RData
 
-load("/home/jason/Dropbox/github/land-reform/data/railroads.RData")
+load("/media/jason/Dropbox/github/land-reform/data/railroads.RData")
 
 detach("package:raster", unload=TRUE) # avoid dplyr select error
 

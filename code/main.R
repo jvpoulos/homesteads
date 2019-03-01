@@ -28,13 +28,17 @@ source(paste0(homestead.code.directory,'prepare-homestead.R'))
 source(paste0(code.directory,'patents.R'))
 source(paste0(code.directory,'homestead-heatmap.R')) 
 
-## Prepare state capacity data
+## Prepare state capacity, census and RR data
 
 source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
 source(paste0(code.directory,'capacity-state.R')) # prepare for mc
 
 source(paste0(code.directory,'prepare-capacity.R')) # prepare for DD # run homesteads first
+
+source(paste0(code.directory,'railroads.R'))  # rr.inter.m
+source(paste0(code.directory,'prepare-railroads.R'))
+source(paste0(code.directory,'prepare-farmval.R')) # farm vals counties
 
 ## MC experiments on synth data
 
@@ -61,10 +65,6 @@ source(paste0(code.directory,'mc-capacity-plots.R'))
 source(paste0(code.directory,'dd-capacity.R')) 
 
 # DD estimates on RR access
-
-source(paste0(code.directory,'railroads.R'))  # rr.inter.m
-source(paste0(code.directory,'prepare-railroads.R'))
-source(paste0(code.directory,'prepare-farmval.R')) # farm vals counties
 
 source(paste0(code.directory,'dd-railroads.R'))
 
