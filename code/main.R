@@ -32,13 +32,14 @@ source(paste0(code.directory,'homestead-heatmap.R'))
 
 source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
+source(paste0(code.directory,'railroads.R'))  # rr.inter.m
+source(paste0(code.directory,'prepare-railroads.R')) # railroad access counties
+source(paste0(code.directory,'prepare-railroads-state.R')) # railroad access states
+source(paste0(code.directory,'prepare-farmval.R')) # farm vals counties
+
 source(paste0(code.directory,'capacity-state.R')) # prepare for mc
 
 source(paste0(code.directory,'prepare-capacity.R')) # prepare for DD # run homesteads first
-
-source(paste0(code.directory,'railroads.R'))  # rr.inter.m
-source(paste0(code.directory,'prepare-railroads.R'))
-source(paste0(code.directory,'prepare-farmval.R')) # farm vals counties
 
 ## MC experiments on synth data
 
@@ -53,8 +54,10 @@ source(paste0(code.directory,'prepare-synth.R'))
 ## MC causal estimates on state capacity data
 
 # mc-capacity-placebo.sh --> mc-capacity-placebo.R  # placebo tests
+# mc-capacity-placebo-covars.sh --> mc-capacity-placebo-covars.R  # placebo tests
 
 # mc-capacity-estimates.sh --> mc-capacity-estimates.R 
+# mc-capacity-estimates-covars.sh --> mc-capacity-estimates-covars.R 
 
 source(paste0(code.directory,'mc-boot.R')) 
 

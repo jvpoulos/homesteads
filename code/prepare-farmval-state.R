@@ -6,10 +6,6 @@ farmval <- read.csv(paste0(census.data.directory,"census-county/farmval.csv"), s
 
 farmval$year <- farmval$year +1000 # fix year
 
-# Make logs
-farmval$farmval <- log(farmval$faval+.Machine
-                       $double.eps)
-
 # keep states
 farmval <- farmval[farmval$county==0,]
 

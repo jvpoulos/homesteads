@@ -4,8 +4,8 @@ MCEst <- function(outcomes,t0,treat_indices_order,imputed=FALSE,sim=FALSE,covars
   Y.missing <- outcomes$M.missing # NxT 
 
   if(!is.null(covars)){
-    Z <- rbind(covars$Z,"AK"=rep(0,ncol(covars$Z))) # NxT # missing AK
-    Z <- Z[row.names(Y),]  # reorder
+    covars <- covars[rownames(covars) %in% row.names(Y),]
+    covars <- covars[row.names(Y),]  # reorder
   }
   
   treat <- outcomes$mask # NxT masked matrix 
@@ -18,7 +18,7 @@ MCEst <- function(outcomes,t0,treat_indices_order,imputed=FALSE,sim=FALSE,covars
   treat_indices <- as.numeric(indices[order(match(indices[,2], treat_indices_order))][1:length(treat_indices_order)]) # sort indices increasingly based on T0
   
   N_t <- length(treat_indices) # Number of treated units desired
-  T0 <- t0 #which(colnames(Y)=="1869")# The first treatment time
+  T0 <- t0 # The first treatment time
   
   ## Simultaneuous (simul_adapt) or Staggered adoption (stag_adapt)
   if(sim){
@@ -34,7 +34,12 @@ MCEst <- function(outcomes,t0,treat_indices_order,imputed=FALSE,sim=FALSE,covars
     ## MC-NNM-W
     ## ------
     
-    est_model_MCPanel_w <- mcnnm_wc_fit(M=Y_obs, X = Z, Z=matrix(0L,0,0), mask=treat_mat, lambda_L=1, to_estimate_u = 1, to_estimate_v = 1)
+    est_model_MCPanel_w <- mcnnm_wc_cv(M=Y_obs, X = covars, Z=matrix(0L,0,0), mask=treat_mat,
+                                       to_normalize = 1, to_estimate_u = 1, to_estimate_v = 1, to_add_ID = 1, 
+                                       num_lam_L = 10, num_lam_H = 10, niter = 1000, rel_tol = 1e-05, cv_ratio = 0.8, 
+                                       num_folds = 1,
+                                       is_quiet = 1) 
+    
     est_model_MCPanel_w$Mhat <- est_model_MCPanel_w$L + replicate(T,est_model_MCPanel_w$u) + t(replicate(N,est_model_MCPanel_w$v))
     if(imputed){
       est_model_MCPanel_w$impact <- (Y*Y.missing-est_model_MCPanel_w$Mhat)
@@ -42,7 +47,7 @@ MCEst <- function(outcomes,t0,treat_indices_order,imputed=FALSE,sim=FALSE,covars
       est_model_MCPanel_w$impact <- (Y-est_model_MCPanel_w$Mhat)
     }
     
-    return(list("impact" = est_model_MCPanel_w$impact, "Mhat" = est_model_MCPanel_w$Mhat))
+    return(list("impact" = est_model_MCPanel_w$impact, "Mhat" = est_model_MCPanel_w$Mhat, "min_RMSE"= est_model_MCPanel_w$min_RMSE))
   } 
   
   if(pca){
@@ -70,7 +75,8 @@ MCEst <- function(outcomes,t0,treat_indices_order,imputed=FALSE,sim=FALSE,covars
     ## MC-NNM
     ## ------
     
-    est_model_MCPanel <- mcnnm_fit(Y_obs, treat_mat, lambda_L=1, to_estimate_u = 1, to_estimate_v = 1) 
+    est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, 
+                                  num_lam_L = 100, niter = 1000, rel_tol = 1e-05, cv_ratio = 0.8, num_folds = 5, is_quiet = 1)
     est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
     if(imputed){
       est_model_MCPanel$impact <- (Y*Y.missing-est_model_MCPanel$Mhat)
@@ -78,6 +84,6 @@ MCEst <- function(outcomes,t0,treat_indices_order,imputed=FALSE,sim=FALSE,covars
       est_model_MCPanel$impact <- (Y-est_model_MCPanel$Mhat)
     }
 
-    return(list("impact" = est_model_MCPanel$impact, "Mhat" = est_model_MCPanel$Mhat))
+    return(list("impact" = est_model_MCPanel$impact, "Mhat" = est_model_MCPanel$Mhat, "min_RMSE"= est_model_MCPanel$min_RMSE))
   }
 }

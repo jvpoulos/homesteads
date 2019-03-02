@@ -11,11 +11,6 @@ farmval$year <- farmval$year +1000 # fix year
 farmval$farmval <- log(farmval$faval+.Machine
                         $double.eps)
 
-# Create lags
-farmval <- farmval %>% 
-  group_by(fips) %>% 
-  mutate(farmval.lag = TLag(farmval, 10, time = year))
-
 # merge 
-homestead.rr.long <- merge(homestead.rr.long, farmval[c("fips","year","farmval","farmval.lag")], 
+homestead.rr.long <- merge(homestead.rr.long, farmval[c("fips","year","farmval")], 
                             by=c("fips","year"), all.x=TRUE)

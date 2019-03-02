@@ -138,12 +138,30 @@ rr.inter.m <- merge(rr.inter.m, county.map@data, by="ID_NUM") # merge back count
 
 rr.inter.m$state <- state.abb[match(rr.inter.m$STATE_TERR,state.name)] # state abbr
 
-# Create access measures
-rr.inter.m <- rr.inter.m %>% 
+# Create access measures - county level
+rr.inter.m.county <- rr.inter.m %>% 
   filter(!is.na(state)) %>% # rm DC & territories
-  arrange(ID_NUM,InOpBy)  %>% # sort by county/year
-  group_by(ID_NUM) %>% 
+  filter(InOpBy <= 1868) %>% # rm post-treatment
+  arrange(FIPS,InOpBy)  %>% # sort by county/year
+  group_by(FIPS) %>% 
   mutate(cumulative.track = cumsum(track), # cumulative sum of track miles by county
-         track2 = cumulative.track/AREA_SQMI, # cumulative track miles per square mile
-         access = ifelse(cumulative.track>0,1,0)) %>% 
-  dplyr::select(ID_NUM,InOpBy,FIPS,cumulative.track,track2,access,state,AREA_SQMI)
+         track2 = cumulative.track/AREA_SQMI) %>% # cumulative track miles per square mile
+  dplyr::select(InOpBy,FIPS,cumulative.track,track2,state,AREA_SQMI)
+
+rr.inter.m.county <- rr.inter.m.county[!duplicated(rr.inter.m.county[c("InOpBy","FIPS")]),] # keep one county-year obs
+
+# Create access measures - state level
+rr.inter.m.state <- rr.inter.m %>% 
+  filter(!is.na(state)) %>% # rm DC & territories
+  filter(InOpBy <= 1868) %>% # rm post-treatment
+  arrange(state,InOpBy)  %>% # sort by state/year
+  group_by(state) %>% 
+  mutate(cumulative.track = cumsum(track), # cumulative sum of track miles
+         track2 = cumulative.track/AREA_SQMI) %>% # cumulative track miles per square mile
+  dplyr::select(InOpBy,FIPS,cumulative.track,track2,state,AREA_SQMI)
+
+rr.inter.m.state <- rr.inter.m.state[!duplicated(rr.inter.m.state[c("InOpBy","state")]),] # keep one state-year obs
+
+rr.inter.m.state <- as.data.frame(rr.inter.m.state)
+
+rr.inter.m.state$year <- rr.inter.m.state$InOpBy

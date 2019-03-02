@@ -5,36 +5,35 @@
 library(tidyr)
 library(readr)
 
-rr.inter.m <- as.data.frame(rr.inter.m)
+rr.inter.m.county <- as.data.frame(rr.inter.m.county)
 
 ## standardize FIPS county
-rr.inter.m$fips <- as.numeric(as.character(rr.inter.m$FIPS))
+rr.inter.m.county$fips <- as.numeric(as.character(rr.inter.m.county$FIPS))
 
 census.ts.aland$fips <- census.ts.aland$state*1000 + census.ts.aland$county/10
 census.ts.wide$fips <- census.ts.wide$state*1000 + census.ts.wide$county/10
 
-rr.inter.m$year <- rr.inter.m$InOpBy
+rr.inter.m.county$year <- rr.inter.m.county$InOpBy
 
 ## Calc railroad access for each decennial 
 
 decennial.homestead <- read_csv(paste0(homestead.data.directory, "decennial-homestead.csv"), 
                                 col_names = c("year","year2"))
 
-rr.sum <- merge(rr.inter.m, decennial.homestead, by="year", all.x=TRUE)
+rr.sum.county <- merge(rr.inter.m.county, decennial.homestead, by="year", all.x=TRUE)
 
-rr.decennial <- rr.sum %>% # mean access for next decennial year
+rr.decennial.county <- rr.sum.county %>% # maximum access up to decennial year
   filter(!is.na(year2)) %>%
   group_by(year2,fips) %>%
-  mutate(access.mean = mean(access)) %>%
+  mutate(track2= max(track2)) %>%
   arrange(fips, year2) %>% # sort
-  dplyr::select(-year)%>%
-  dplyr::select(-access)
+  dplyr::select(-year)
 
-rr.decennial <- rr.decennial[!duplicated(rr.decennial[c("year2","fips")]),] # keep one county-decennial obs
+rr.decennial.county <- rr.decennial.county[!duplicated(rr.decennial.county[c("year2","fips")]),] # keep one county-decennial obs
 
 # Make wide
 
-rr.decennial.wide <- spread(rr.decennial[c("year2","state","fips","access.mean")], key = year2, value = access.mean, sep="rr")
+rr.decennial.wide <- spread(rr.decennial.county[c("year2","state","fips","track2")], key = year2, value = track2, sep="rr")
 
 rr.decennial.wide <- as.data.frame(rr.decennial.wide)
 
@@ -44,24 +43,7 @@ rr.decennial.wide <- as.data.frame(rr.decennial.wide)
 homestead.rr.wide <- merge(census.ts.aland, rr.decennial.wide, by = c("fips"), all.x=TRUE)
 
 # long datasets (for FE and pooled analyses)
-rr.decennial$year <- rr.decennial$year2
+rr.decennial.county$year <- rr.decennial.county$year2
 
-homestead.rr.long <- merge(census.ts.wide, rr.decennial[c("fips", "year", "access.mean")], 
+homestead.rr.long <- merge(census.ts.wide, rr.decennial.county[c("fips", "year", "track2")], 
                            by = c("fips", "year"), all.x=TRUE)
-
-# # Merge to long dataset with tax data (for FE robust)
-# 
-# homestead.tax.long <- merge(homestead.tax.long, homestead.rr.long[c("id", "year", "access.mean")],
-#                            by = c("id", "year"), all.x=TRUE)
-# 
-# # Create lags
-# TLag <- function(x, n = 1L, time) {
-#   index <- match(time - n, time, incomparables = NA)
-#   x[index]
-# }
-# 
-# homestead.tax.long  <- homestead.tax.long %>%
-#   group_by(state.abb,county) %>%
-#   mutate(access.mean.lag = TLag(access.mean, 10, time = year),
-#          output.lag = TLag(output, 10, time = year),
-#          wages.lag = TLag(wages, 10, time = year))

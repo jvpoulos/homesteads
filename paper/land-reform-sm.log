@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  28 FEB 2019 16:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  2 MAR 2019 07:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1251,7 +1251,7 @@ Non-PDF special ignored!
 <special> header=psfrag.pro
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./dv-table.tex)
-Overfull \hbox (63.96002pt too wide) in paragraph at lines 124--125
+Overfull \hbox (29.49336pt too wide) in paragraph at lines 124--125
  [] 
  []
 
@@ -1346,7 +1346,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 221.
 Here is how much of TeX's memory you used:
  29826 strings out of 492641
  551297 string characters out of 6131787
- 641133 words of memory out of 5000000
+ 641132 words of memory out of 5000000
  33223 multiletter control sequences out of 15000+600000
  545211 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1364,7 +1364,7 @@ pe1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmtt12.pfb>
-Output written on land-reform-sm.pdf (8 pages, 2650240 bytes).
+Output written on land-reform-sm.pdf (8 pages, 2650232 bytes).
 PDF statistics:
  163 PDF objects out of 1000 (max. 8388607)
  131 compressed objects within 2 object streams

@@ -7,11 +7,10 @@ require(reshape2)
 require(stringr)
 require(dplyr)
 require(weights)
-require(caret)
-require(zoo)
 require(tidyr)
 require(readr)
 require(imputeTS)
+require(randomForest)
 
 ## STATE-LEVEL DATA
 
@@ -205,6 +204,7 @@ colnames(rev.pc) <- sub("rev.pc.","", colnames(rev.pc))
 rownames(rev.pc) <- rev.pc$year
 rev.pc <- rev.pc[!colnames(rev.pc)%in% "year"]
 
+rev.pc <- rev.pc[,-c(19,25,37:49)] # drop states with 0 pretreatment variance
 rev.pc <- rev.pc[-which(rownames(rev.pc)=="1931"),] # discard 1931 (no variance)
 rev.pc[apply(rev.pc,2,is.nan)] <- NA # replace NaN with NA
 
@@ -213,6 +213,7 @@ colnames(exp.pc) <- sub("exp.pc.","", colnames(exp.pc))
 rownames(exp.pc) <- exp.pc$year
 exp.pc <- exp.pc[!colnames(exp.pc)%in% "year"]
 
+exp.pc <- exp.pc[,-c(11,19,25,37:49)] # drop states with 0 pretreatment variance
 exp.pc[apply(exp.pc,2,is.nan)] <- NA # replace NaN with NA
 
 educ.pc <- reshape(data.frame(funds[c("state","year","educ.pc")]), idvar = "year", timevar = "state", direction = "wide")
@@ -220,14 +221,42 @@ colnames(educ.pc) <- sub("educ.pc.","", colnames(educ.pc))
 rownames(educ.pc) <- educ.pc$year
 educ.pc <- educ.pc[!colnames(educ.pc)%in% "year"]
 
+educ.pc <- educ.pc[,-c(11,19,25,37:49)] # drop states with 0 pretreatment variance
 educ.pc <- educ.pc[1:(nrow(educ.pc)-3),] # discard last 3 years (no variance)
 educ.pc[apply(educ.pc,2,is.nan)] <- NA # replace NaN with NA
 
-# Covariates - farm values
+# Unit-specific covariates:
+# farm values @ 1850/1860
+# farm size @ 1860
+# RR access @ 1850/1860
+
 faval <- reshape(data.frame(farmval[c("state.abb","year","faval")]), idvar = "year", timevar = "state.abb", direction = "wide")
 colnames(faval) <- sub("faval.","", colnames(faval))
-rownames(faval) <- faval$year
+rownames(faval) <- paste0("faval.",faval$year)
 faval <- faval[!colnames(faval)%in% "year"]
+
+faval[which(rownames(faval)=="faval.1850"),] <- t(na.roughfix(t(faval[which(rownames(faval)=="faval.1850"),]))) # replace missing 1850 values with column medians
+
+farmsize <- reshape(data.frame(census.ts.state[c("state","year","farmsize")]), idvar = "year", timevar = "state", direction = "wide")
+colnames(farmsize) <- sub("farmsize.","", colnames(farmsize))
+rownames(farmsize) <- paste0("farmsize.",farmsize$year)
+farmsize <- farmsize[!colnames(farmsize)%in% "year"]
+
+access <- reshape(data.frame(rr.inter.m.state[c("year","state","track2")]), idvar = "year", timevar = "state", direction = "wide")
+colnames(access) <- sub("track2.","", colnames(access))
+rownames(access) <- paste0("track2.",access$year)
+access <- access[!colnames(access)%in% "year"]
+
+capacity.states <- sort(unique(c(colnames(rev.pc),colnames(exp.pc),colnames(educ.pc))))
+
+capacity.covariates <- rbind(faval[colnames(faval) %in% capacity.states][which(rownames(faval)=="faval.1850"),],
+                             faval[colnames(faval) %in% capacity.states][which(rownames(faval)=="faval.1860"),], 
+                             farmsize[colnames(farmsize) %in% capacity.states][which(rownames(farmsize)=="farmsize.1860"),],
+                             access[colnames(access) %in% capacity.states][which(rownames(access)=="track2.1850"),],
+                             access[colnames(access) %in% capacity.states][which(rownames(access)=="track2.1860"),])
+
+capacity.covariates.placebo <- rbind(faval[colnames(faval) %in% capacity.states][which(rownames(faval)=="faval.1850"),], 
+                             access[colnames(access) %in% capacity.states][which(rownames(access)=="track2.1850"),])
 
 capacity.outcomes <- list("rev.pc"=rev.pc,"exp.pc"=exp.pc, "educ.pc"=educ.pc)
 
@@ -238,9 +267,16 @@ CapacityMatrices <- function(d, outcomes=TRUE) {
   d.M.missing[is.nan(d.M.missing)] <- NA
   d.M.missing[!is.na(d.M.missing)] <-1
   
-  # impute missing 
-  d.imp <- log(na.interpolation(d, option="linear")) # take log
-
+  # impute missing
+  d.imp <- d
+  if(outcomes){
+    d.imp[1:which(rownames(d)=="1868"),] <- na.locf(d[1:which(rownames(d)=="1868"),], option = "locf", na.remaining = "rev")
+    d.imp[which(rownames(d)=="1868"): nrow(d),] <- na.locf(d[which(rownames(d)=="1868"): nrow(d),], option = "locf", na.remaining = "rev")  
+  } 
+  
+  d.imp <- log(d.imp+.Machine
+               $double.eps) # take log
+  
   # Matrix of observed entries (N x T)
   d.M <- t(as.matrix(d.imp))
   d.M[is.nan(d.M )] <- NA
@@ -268,12 +304,14 @@ CapacityMatrices <- function(d, outcomes=TRUE) {
   
   return(list("M"=d.M, "M.missing"=d.M.missing, "mask"=d.mask))
   } else{
-    return(list("Z"=d.M, "Z.missing"=d.M.missing))
+    return(d.M)
   }
 }
 
 capacity.outcomes <- lapply(capacity.outcomes, CapacityMatrices, outcomes=TRUE)
-capacity.covariates <- CapacityMatrices(faval, outcomes=FALSE)
+capacity.covariates <- CapacityMatrices(capacity.covariates, outcomes=FALSE)
+capacity.covariates.placebo <- CapacityMatrices(capacity.covariates.placebo, outcomes=FALSE)
 
 saveRDS(capacity.outcomes, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes.rds")
 saveRDS(capacity.covariates, "/media/jason/Dropbox/github/land-reform/data/capacity-covariates.rds")
+saveRDS(capacity.covariates.placebo, "/media/jason/Dropbox/github/land-reform/data/capacity-covariates-placebo.rds")
