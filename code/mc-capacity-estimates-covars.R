@@ -42,9 +42,9 @@ source("ChernoTest.R")
 # p-values - covars
 
 moving.block.w <- mclapply(capacity.outcomes.list,
-                         ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0,imputed=FALSE, covars=capacity.covars,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                         ChernoTest, ns=10000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0,imputed=FALSE, covars=capacity.covars,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(moving.block.w,"moving_block_w.rds")
 
 iid.block.w <- mclapply(capacity.outcomes.list,
-                      ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE, covars=capacity.covars,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                      ChernoTest, ns=10000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE, covars=capacity.covars,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(iid.block.w,"iid_block_w.rds")
