@@ -1,8 +1,8 @@
 #!/bin/bash
 #----------------------------------------------------
-#SBATCH -J mc_capacity_placebo           # Job name
-#SBATCH -o mc_capacity_placebo.o%j       # Name of stdout output file
-#SBATCH -e mc_capacity_placebo.e%j       # Name of stderr error file
+#SBATCH -J mc_capacity_placebo_covars           # Job name
+#SBATCH -o mc_capacity_placebo_covars.o%j       # Name of stdout output file
+#SBATCH -e mc_capacity_placebo_covars.e%j       # Name of stderr error file
 #SBATCH -p normal		        # Queue (partition) name
 #SBATCH -N 1              		# Total # of nodes (must be 1 for serial)
 #SBATCH -n 1              	 	# Total # of mpi tasks (should be 1 for serial)
