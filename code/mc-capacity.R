@@ -54,7 +54,7 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
   MCPanel_RMSE_test <- matrix(0L,num_runs,length(T0))
   SVD_RMSE_test <- matrix(0L,num_runs,length(T0))
   PCA_RMSE_test <- matrix(0L,num_runs,length(T0))
-  EN_RMSE_test <- matrix(0L,num_runs,length(T0))
+ # EN_RMSE_test <- matrix(0L,num_runs,length(T0))
   ENT_RMSE_test <- matrix(0L,num_runs,length(T0))
   DID_RMSE_test <- matrix(0L,num_runs,length(T0))
   ADH_RMSE_test <- matrix(0L,num_runs,length(T0))
@@ -111,15 +111,15 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
       PCA_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(PCA_msk_err^2, na.rm=TRUE))
       PCA_RMSE_test[i,j] <- PCA_test_RMSE
       
-      # ## -----
-      # ## HR-EN
-      # ## -----
-      #
-      est_model_EN <- en_mp_rows(Y_obs, treat_mat, num_folds=3)
-      est_model_EN_msk_err <- (est_model_EN - Y)*(1-treat_mat)
-      est_model_EN_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_EN_msk_err^2, na.rm = TRUE))
-      EN_RMSE_test[i,j] <- est_model_EN_test_RMSE
-      
+      # # ## -----
+      # # ## HR-EN
+      # # ## -----
+      # #
+      # est_model_EN <- en_mp_rows(Y_obs, treat_mat, num_folds=3)
+      # est_model_EN_msk_err <- (est_model_EN - Y)*(1-treat_mat)
+      # est_model_EN_test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_EN_msk_err^2, na.rm = TRUE))
+      # EN_RMSE_test[i,j] <- est_model_EN_test_RMSE
+      # 
       ## -----
       ## VT-EN 
       ## -----
@@ -158,8 +158,8 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
   PCA_avg_RMSE <- apply(PCA_RMSE_test,2,mean)
   PCA_std_error <- apply(PCA_RMSE_test,2,sd)/sqrt(num_runs)
   
-  EN_avg_RMSE <- apply(EN_RMSE_test,2,mean)
-  EN_std_error <- apply(EN_RMSE_test,2,sd)/sqrt(num_runs)
+  # EN_avg_RMSE <- apply(EN_RMSE_test,2,mean)
+  # EN_std_error <- apply(EN_RMSE_test,2,sd)/sqrt(num_runs)
   
   ENT_avg_RMSE <- apply(ENT_RMSE_test,2,mean)
   ENT_std_error <- apply(ENT_RMSE_test,2,sd)/sqrt(num_runs)
@@ -174,24 +174,24 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
   
   df1 <-
     data.frame(
-      "y" =  c(DID_avg_RMSE, EN_avg_RMSE, ENT_avg_RMSE, MCPanel_avg_RMSE, SVD_avg_RMSE, PCA_avg_RMSE, ADH_avg_RMSE),
+      "y" =  c(DID_avg_RMSE, ENT_avg_RMSE, MCPanel_avg_RMSE, SVD_avg_RMSE, PCA_avg_RMSE, ADH_avg_RMSE),
       "lb" = c(DID_avg_RMSE - 1.96*DID_std_error, 
-               EN_avg_RMSE - 1.96*ENT_std_error,
+           #    EN_avg_RMSE - 1.96*ENT_std_error,
                ENT_avg_RMSE - 1.96*ENT_std_error,
                MCPanel_avg_RMSE - 1.96*MCPanel_std_error, 
                SVD_avg_RMSE - 1.96*SVD_std_error, 
                PCA_avg_RMSE - 1.96*PCA_std_error, 
                ADH_avg_RMSE - 1.96*ADH_std_error),
       "ub" = c(DID_avg_RMSE + 1.96*DID_std_error, 
-               EN_avg_RMSE + 1.96*ENT_std_error,
+            #   EN_avg_RMSE + 1.96*ENT_std_error,
                ENT_avg_RMSE + 1.96*ENT_std_error,
                MCPanel_avg_RMSE + 1.96*MCPanel_std_error, 
                SVD_avg_RMSE + 1.96*SVD_std_error, 
                PCA_avg_RMSE + 1.96*PCA_std_error, 
                ADH_avg_RMSE + 1.96*ADH_std_error),
-      "x" = c(T0/T, T0/T ,T0/T, T0/T, T0/T, T0/T, T0/T),
+      "x" = c(T0/T, T0/T ,T0/T, T0/T, T0/T, T0/T),
       "Method" = c(replicate(length(T0),"DID"), 
-                   replicate(length(T0),"HR-EN"),
+          #         replicate(length(T0),"HR-EN"),
                    replicate(length(T0),"VT-EN"),
                    replicate(length(T0),"MC-NNM"), 
                    replicate(length(T0),"SVD"), 
@@ -220,10 +220,10 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
   if(to_save == 1){
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".png")
     ggsave(filename, plot = last_plot(), device="png", dpi=600)
-    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, EN_RMSE_test, ENT_RMSE_test, MCPanel_RMSE_test, SVD_RMSE_test, PCA_RMSE_test, ADH_RMSE_test)
+    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, ENT_RMSE_test, MCPanel_RMSE_test, SVD_RMSE_test, PCA_RMSE_test, ADH_RMSE_test)
     colnames(df2)<-c("N", "T", "N_t", "is_simul", 
                      replicate(length(T0), "DID"), 
-                     replicate(length(T0), "HR-EN"), 
+             #        replicate(length(T0), "HR-EN"), 
                      replicate(length(T0), "VT-EN"), 
                      replicate(length(T0), "MC-NNM"), 
                      replicate(length(T0),"SVD"), 
