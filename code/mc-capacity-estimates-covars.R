@@ -34,17 +34,17 @@ treat_indices_order <- c("CA", "CO", "IA", "KS", "MI", "MN", "MO", "NE", "OH", "
 
 mc.est.w <- mclapply(capacity.outcomes.list,
                    MCEst,t0=t0,treat_indices_order,imputed=FALSE,sim=FALSE,covars=capacity.covars,pca=FALSE,mc.cores=cores)
-saveRDS(mc.est,"mc_est_w.rds")
+saveRDS(mc.est.w,"mc_est_w.rds")
 
 # Get NxT matrix of confidence intervals
 source("ChernoTest.R")
 
 # p-values - covars
 
-moving.block <- mclapply(capacity.outcomes.list,
+moving.block.w <- mclapply(capacity.outcomes.list,
                          ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0,imputed=FALSE, covars=capacity.covars,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
-saveRDS(moving.block,"moving_block_w.rds")
+saveRDS(moving.block.w,"moving_block_w.rds")
 
-iid.block <- mclapply(capacity.outcomes.list,
+iid.block.w <- mclapply(capacity.outcomes.list,
                       ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE, covars=capacity.covars,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
-saveRDS(iid.block,"iid_block_w.rds")
+saveRDS(iid.block.w,"iid_block_w.rds")
