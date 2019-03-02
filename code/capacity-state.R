@@ -230,7 +230,7 @@ educ.pc[apply(educ.pc,2,is.nan)] <- NA # replace NaN with NA
 # farm size @ 1860
 # RR access @ 1850/1860
 
-faval <- reshape(data.frame(farmval[c("state.abb","year","faval")]), idvar = "year", timevar = "state.abb", direction = "wide")
+faval <- reshape(data.frame(farmval.state[c("state.abb","year","faval")]), idvar = "year", timevar = "state.abb", direction = "wide")
 colnames(faval) <- sub("faval.","", colnames(faval))
 rownames(faval) <- paste0("faval.",faval$year)
 faval <- faval[!colnames(faval)%in% "year"]

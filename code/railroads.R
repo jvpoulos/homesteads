@@ -103,9 +103,12 @@ library(caret)
 # 
 # ggsave(paste0(results.directory,"plots/rr-1862.png"), rr.1862, width=11, height=8.5) 
 
-################### Load railraods.RData
+################### Load railroads.RData
 
-load("/media/jason/Dropbox/github/land-reform/data/railroads.RData")
+#load("/media/jason/Dropbox/github/land-reform/data/railroads.RData")
+
+county.rr <- readRDS(paste0(data.directory,"county_rr.rds"))
+county.map <- readRDS(paste0(data.directory,"county_map.rds"))
 
 detach("package:raster", unload=TRUE) # avoid dplyr select error
 

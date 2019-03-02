@@ -17,6 +17,6 @@ homestead.funds.long <- merge(patents.sum.state,
                             by.y = c("state", "year"), all.y=TRUE) 
 
 homestead.funds.long$homesteads.pc <- log((homestead.funds.long$homesteads/homestead.funds.long$ns.pop) +.Machine
-                                          $double.eps) # cumulative homesteads pc
+                                          $double.eps) # log homesteads pc
 
 homestead.funds.long$homesteads.pc[is.na(homestead.funds.long$homesteads.pc)] <- 0
