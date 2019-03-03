@@ -58,8 +58,10 @@ source(paste0(code.directory,'prepare-synth.R'))
 # mc-capacity-estimates.sh --> mc-capacity-estimates.R 
 # mc-capacity-estimates-covars.sh --> mc-capacity-estimates-covars.R 
 
-source(paste0(code.directory,'mc-boot.R')) 
+source(paste0(code.directory,'mc-capacity-placebo-table.R')) 
+source(paste0(code.directory,'mc-capacity-table.R')) 
 
+source(paste0(code.directory,'mc-boot.R')) 
 source(paste0(code.directory,'mc-capacity-plots.R')) 
 
 # DD estimates on state capacity data
