@@ -138,13 +138,6 @@ Chernozhukov, V., K.~Wuthrich, and Y.~Zhu (2017).
   synthetic controls.
 \newblock {\em arXiv preprint arXiv:1712.09089\/}.
 
-\bibitem[\protect\citeauthoryear{Chernozhukov, Wuthrich, and Zhu}{Chernozhukov
-  et~al.}{2018}]{chernozhukov2018exact}
-Chernozhukov, V., K.~Wuthrich, and Y.~Zhu (2018).
-\newblock Exact and robust conformal inference methods for predictive machine
-  learning with dependent data.
-\newblock {\em arXiv preprint arXiv:1802.06300\/}.
-
 \bibitem[\protect\citeauthoryear{Donaldson and Hornbeck}{Donaldson and
   Hornbeck}{2016}]{donaldson2016railroads}
 Donaldson, D. and R.~Hornbeck (2016).
@@ -355,6 +348,13 @@ Vollrath, D. (2013).
 Wallis, J.~J., R.~E. Sylla, and A.~Grinath~III (2004).
 \newblock Sovereign debt and repudiation: The emerging-market debt crisis in
   the us states, 1839-1843.
+
+\bibitem[\protect\citeauthoryear{Williamson}{Williamson}{2017}]{williamson2017seven}
+Williamson, S.~H. (2017).
+\newblock Seven ways to compute the relative value of a us dollar amount, 1774
+  to present.
+\newblock \url{MeasuringWorth.com}.
+\newblock [Online; accessed 01-October-2017].
 
 \bibitem[\protect\citeauthoryear{Ziblatt}{Ziblatt}{2008}]{ziblatt2008does}
 Ziblatt, D. (2008).
