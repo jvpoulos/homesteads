@@ -10,7 +10,7 @@ iid_block <- readRDS(paste0(results.directory, "mc/iid_block.rds"))
 
 moving_block <- readRDS(paste0(results.directory, "mc/moving_block.rds"))
 
-## No covariates
+## Covariates
 mc_est_w <- readRDS(paste0(results.directory, "mc/mc_est_w.rds"))
 
 # P-values
