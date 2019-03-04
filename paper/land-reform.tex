@@ -311,7 +311,7 @@ where $\tau \in \left\{5, 10, 15\right\}$. Equation (\ref{h0-placebo}) is tested
 
 Table \ref{placebo-tests} reports the average treatment effect over the placebo post-period and 95\% randomization confidence intervals for the null hypothesis test. For each outcome and post-period length $\tau$, the confidence intervals tend to be very similar regardless of permutation structure. The results of the placebo tests provide evidence that the MC-NNM estimator is consistent because none of the intervals contain zero. 
 
-Further evidence of the consistency of the estimator is demonstrated in Figure SM-\ref{mc-stag}, which conducts placebo tests on control units using both pre- and post-period observations for each outcome in a staggered adoption setting. The MC-NNM estimator typically outperforms DID and SVD estimators in terms of minimizing RMSE across different ratios of $T_0/T$. The estimator yields comparable error rates to PCA, SCM, and vertical regression estimators at higher ratios. 
+Further evidence of the consistency of the estimator is demonstrated in Figures SM-\ref{mc-sim} and SM-\ref{mc-stag}, which conducts placebo tests on control units using both pre- and post-period observations for each outcome in each treatment adoption setting. The MC-NNM estimator typically outperforms DID and SVD estimators in terms of minimizing RMSE across different ratios of $T_0/T$. The estimator yields comparable error rates to PCA, SCM, and vertical regression estimators at higher ratios. 
 
 \begin{table}[htbp]
 	\captionsetup{font=normalsize}
@@ -319,7 +319,7 @@ Further evidence of the consistency of the estimator is demonstrated in Figure S
 	\begin{center}
 	\input{placebo-tests}
 	\end{center}
-	\footnotesize{\emph{Notes:} randomization $p$-values calculated by Equation (\ref{eq:pvalue}) corresponding to each permutation structure and value of $\tau$ and $q$. i.i.d. block $p$-values are calculated using $|\Pi| = 10,000$ permutations. Moving block $p$-values are based on $|\Pi| = T-1$ permutations.}
+	\footnotesize{\emph{Notes:} randomization $p$-values calculated by Equation (\ref{eq:pvalue}) corresponding to each permutation structure and value of $\tau$ and $q$. i.i.d. block $p$-values are calculated using $|\Pi| = 1,000$ permutations. Moving block $p$-values are based on $|\Pi| = T-1$ permutations.}
 \end{table}
 
 \subsection{Causal estimates}
@@ -351,7 +351,7 @@ An important characteristic of the estimates plotted in Fig.~\ref{state-capacity
 		\includegraphics[width=\textwidth]{plots/mc-rev-pc.png}
 		\caption{State government revenues}
 	\end{subfigure}
-	\caption{Average observed (solid line) and counterfactual predicted (dotted line) outcomes of public land states in state capacity datasets. Dashed vertical line represents the initial treatment year of 1869. Shaded regions represent $\hat{\bar{\alpha}}_{t}$ in Equation (\ref{eq:avg-pointwise}) $\pm 1.96$ the standard error of the distribution of 10,000 bootstrap replicates of $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates}} 
+	\caption{Average observed (solid line) and counterfactual predicted (dotted line) outcomes of public land states in state capacity datasets. Dashed vertical line represents the initial treatment year of 1869. Shaded regions represent $\hat{\bar{\alpha}}_{t}$ in Equation (\ref{eq:avg-pointwise}) $\pm 1.96$ the standard error of the distribution of 1,000 bootstrap replicates of $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates}} 
 \end{figure}
 
 \begin{table}[htbp]
