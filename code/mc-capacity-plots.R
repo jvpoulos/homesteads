@@ -43,7 +43,7 @@ PlotMCCapacity <- function(x,y.title,limits,t0=which(colnames(capacity.outcomes[
   ## Plot time series 
   
   treat.status <- matrix(rownames(pointwise), nrow=nrow(pointwise), ncol=1)
-  treat.status[rownames(pointwise) %in% c(southern.pub,western.pub)] <- "PLS"
+  treat.status[rownames(pointwise) %in% c(pub.states)] <- "PLS"
   treat.status[rownames(pointwise) %in% state.land.states] <- "SLS"
   treat.status <- matrix(treat.status, dimnames=list(NULL, "status"))
   

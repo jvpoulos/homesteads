@@ -62,6 +62,7 @@ source(paste0(code.directory,'mc-capacity-placebo-table.R'))
 source(paste0(code.directory,'mc-capacity-table.R')) 
 
 # mc-boot.sh --> mc-boot.R
+# mc-boot-covars.sh --> mc-boot-covars.R
 source(paste0(code.directory,'mc-capacity-plots.R')) 
 
 # DD estimates on state capacity data

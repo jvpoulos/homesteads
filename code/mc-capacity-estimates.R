@@ -48,3 +48,7 @@ saveRDS(moving.block,"moving_block.rds")
 iid.block <- mclapply(capacity.outcomes.list,
                       ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 saveRDS(iid.block,"iid_block.rds")
+
+iid <- mclapply(capacity.outcomes.list,
+                      ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid",t0=t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+saveRDS(iid.block,"iid.rds")
