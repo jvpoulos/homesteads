@@ -60,20 +60,20 @@ saveRDS(mc.est.placebo.w,"mc_est_placebo_w.rds")
 # Get p-values
 source("ChernoTest.R")
 
-moving.block.placebo.w <- foreach(tau = taus) %dopar% {
-  t0_placebo <- t_final_placebo-tau # n pre-treatment periods
-  mclapply(capacity.outcomes.list,
-           ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0_placebo,imputed=FALSE,sim=FALSE,covars=capacity.covars.placebo,pca=FALSE,mc.cores=cores)}
-saveRDS(moving.block.placebo.w,"moving_block_placebo_w.rds")
-
-iid.block.placebo.w <- foreach(tau = taus) %dopar% {
-  t0_placebo <- t_final_placebo-tau # n pre-treatment periods
-  mclapply(capacity.outcomes.list,
-           ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0_placebo,imputed=FALSE,sim=FALSE,covars=capacity.covars.placebo,pca=FALSE,mc.cores=cores)}
-saveRDS(iid.block.placebo.w,"iid_block_placebo_w.rds")
+# moving.block.placebo.w <- foreach(tau = taus) %dopar% {
+#   t0_placebo <- t_final_placebo-tau # n pre-treatment periods
+#   mclapply(capacity.outcomes.list,
+#            ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0_placebo,imputed=FALSE,sim=FALSE,covars=capacity.covars.placebo,pca=FALSE,mc.cores=cores)}
+# saveRDS(moving.block.placebo.w,"moving_block_placebo_w.rds")
+# 
+# iid.block.placebo.w <- foreach(tau = taus) %dopar% {
+#   t0_placebo <- t_final_placebo-tau # n pre-treatment periods
+#   mclapply(capacity.outcomes.list,
+#            ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0_placebo,imputed=FALSE,sim=FALSE,covars=capacity.covars.placebo,pca=FALSE,mc.cores=cores)}
+# saveRDS(iid.block.placebo.w,"iid_block_placebo_w.rds")
 
 iid.placebo.w <- foreach(tau = taus) %dopar% {
   t0_placebo <- t_final_placebo-tau # n pre-treatment periods
   mclapply(capacity.outcomes.list,
            ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid",t0=t0_placebo,imputed=FALSE,sim=FALSE,covars=capacity.covars.placebo,pca=FALSE,mc.cores=cores)}
-saveRDS(iid.block.placebo,"iid_placebo_w.rds")
+saveRDS(iid.placebo.w,"iid_placebo_w.rds")
