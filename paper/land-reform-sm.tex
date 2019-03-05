@@ -127,7 +127,7 @@
 
 \begin{figure}[htbp]
 	\begin{center}
-		\includegraphics[width=\textwidth]{/media/jason/Dropbox/github/land-reform/results/plots/homestead-heatmap.png}
+		\includegraphics[width=\textwidth]{plots/homestead-heatmap.png}
 	\end{center}
 	\caption{Per-capita statewide sum of homestead entries in state $i$ and year $t$, 1869-1922. \label{fig:homestead-heatmap}}
 \end{figure}
@@ -159,46 +159,39 @@
 
 \begin{figure}[htbp]
 	\centering
-	\begin{subfigure}[t]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_0.png}
-		\caption{State government education spending, $N_t = 10$}
-	\end{subfigure}
-	~ 
-	\begin{subfigure}[t]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_0.png}
-		\caption{State government expenditures, $N_t = 9$}
-	\end{subfigure}
-	~ 
-	\begin{subfigure}[t]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png}
-		\caption{State government revenues, $N_t = 10$}
-	\end{subfigure}
-	\caption{Placebo tests under staggered treatment adoption. See footnotes to Fig. \ref{synth-sim}. \label{mc-stag}} 
-\end{figure}
-
-\begin{figure}[htbp]
-	\centering
-	\begin{subfigure}[t]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{plots/educ_pc_N_17_T_156_numruns_20_num_treated_9_simultaneuous_1.png}
-		\caption{State government education spending, $N_t = 9$}
-	\end{subfigure}
-	~ 
+%	\begin{subfigure}[t]{0.48\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{plots/educ_pc_N_19_T_156_numruns_20_num_treated_10_simultaneuous_0.png}
+%		\caption{State government education spending, $N_t = 10$}
+%	\end{subfigure}
+%	~ 
+%		\includegraphics[width=\textwidth]{plots/educ_pc_N_17_T_156_numruns_20_num_treated_9_simultaneuous_1.png}
+%		\caption{State government education spending, $N_t = 9$}
+%	\end{subfigure}
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_1.png}
-		\caption{State government expenditures, $N_t = 9$}
+		\caption{Expenditures, simultaneous adoption}
 	\end{subfigure}
 	~ 
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{plots/rev_pc_N_18_T_158_numruns_20_num_treated_9_simultaneuous_1.png}
-		\caption{State government revenues, $N_t = 9$}
+		\caption{Revenues, simultaneous adoption}
 	\end{subfigure}
-	\caption{Placebo tests under simultaneous treatment adoption. See footnotes to Fig. \ref{synth-sim}. \label{mc-sim}} 
+	~ 
+	\begin{subfigure}[t]{0.48\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_0.png}
+	\caption{Expenditures, staggered adoption}
+\end{subfigure}
+~ 
+\begin{subfigure}[t]{0.48\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png}
+	\caption{Revenues, staggered adoption}
+\end{subfigure}
+	\caption{Placebo tests under simultaneous and staggered treatment adoption, with $N_t = 9$. See footnotes to Fig. \ref{synth-sim}. \label{mc-sim}} 
 \end{figure}
 
 \pagebreak

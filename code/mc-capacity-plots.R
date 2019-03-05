@@ -97,8 +97,8 @@ PlotMCCapacity <- function(x,y.title,limits,t0=which(colnames(capacity.outcomes[
   return(ts.plot)
 }
 
-mc.rev.pc <- PlotMCCapacity(x='rev.pc',y.title="Log per-capita state government revenue (1982$)",limits=c(as.POSIXct("1783-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")))
-mc.exp.pc <- PlotMCCapacity(x='exp.pc',y.title="Log per-capita state government expenditure (1982$)", limits=c(as.POSIXct("1783-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")))
+mc.rev.pc <- PlotMCCapacity(x='rev.pc',y.title="",limits=c(as.POSIXct("1783-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")))
+mc.exp.pc <- PlotMCCapacity(x='exp.pc',y.title="", limits=c(as.POSIXct("1783-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")))
 mc.educ.pc <- PlotMCCapacity(x='educ.pc',y.title="Log per-capita state government education spending (1942$)", limits=c(as.POSIXct("1783-01-01 01:00:00"), as.POSIXct("1942-01-01 01:00:00")))
 
 ggsave(paste0(results.directory,"plots/mc-rev-pc.png"), mc.rev.pc, width=11, height=8.5)

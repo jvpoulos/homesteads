@@ -295,9 +295,16 @@ where $\hat{\bar{\alpha}}_{\pi}$ is the average causal effect estimated on the p
 
 Did homestead acts impact state capacity over the long-run? In this section, I estimate the causal impact of homestead acts on frontier state government finances. I use measures of total expenditure and revenue collected from the records of 48 state governments during the period of 1783 to 1932 \citep{sylla1993sources} and the records of 16 state governments during the period of 1933 to 1937 \citep{sylla1995sourcesa,sylla1995sourcesb}. Comparable measures for 48 states are drawn from U.S. Census special reports for the years 1902, 1913, 1932, 1942, 1962, 1972, and 1982 \citep{haines2010}.\footnote{I take the mean of duplicate state-year observations, which arise for the years 1902, 1913, and 1932.} In order to capture a state's ability to fund public schooling, I create a measure of state government education spending from the state government expenditure sub-classifications. 
 
-The outcomes data pre-processing steps are as follows. Each measure is inflation-adjusted according to the U.S. Consumer Price Index \citep{williamson2017seven} and scaled by the total free population in the decennial census \citep{haines2010}. I impute missing values separately in the pre- and -post-periods by carrying the last observation forward and impute remaining missing values by carrying the next observation backward. I remove states without variance in the pre-intervention outcomes, resulting in complete $N \times T$ matrices of size $33 \times 156$, $33 \times 159$, and $34 \times 158$, for the education spending, expenditures, and revenues outcomes, respectively. About half of the states in each matrix is exposed to treatment. 
+The outcomes data pre-processing steps are as follows. Each measure is inflation-adjusted according to the U.S. Consumer Price Index \citep{williamson2017seven} and scaled by the total free population in the decennial census \citep{haines2010}. I impute missing values separately in the pre- and -post-periods by carrying the last observation forward and impute remaining missing values by carrying the next observation backward. I remove states without variance in the pre-intervention outcomes, resulting in complete $N \times T$ matrices of size $33 \times 156$, $33 \times 159$, and $34 \times 158$, for the education spending, expenditures, and revenues outcomes, respectively. 
 
-The staggered adoption setting is appropriate for the current application due to the fact the lag in time between passage of homestead acts and the time at which the first homesteads were settled varied across public land states due to selection bias. Figure SM-\ref{fig:homestead-heatmap} visualizes the timing and intensity of homestead entries aggregated to the state level from approximately 1.46 million individual land patent records authorized under the HSA.\footnote{Land patent records provide information on the initial transfer of land titles from the federal government and are made accessible online by the U.S. General Land Office (\url{https://glorecords.blm.gov}).} The earliest successful homestead filings occurred in 1869 in about half of the western frontier states, about seven years following the enactment of the HSA. The first homesteads were filed in southern states in 1872. 
+The staggered adoption setting is appropriate for the current application because the year of initial treatment exposure $T_0$ varies across states, about half of which are exposed to homesteads following the passage of the HSA. I determine the years of initial exposure to homesteads by aggregating to the state level approximately 1.46 million individual land patent records authorized under the HSA. Land patent records provide information on the initial transfer of land titles from the federal government and are made accessible online by the U.S. General Land Office (\url{https://glorecords.blm.gov}). The earliest successful homestead filings occurred in 1869 in about half of the western frontier states, about seven years following the enactment of the HSA. The first homesteads were filed in southern states in 1872. Figure SM-\ref{fig:homestead-heatmap} visualizes the timing and intensity of homestead entries. 
+
+I create the railroad access measure using digitized railroad maps provided by \citet{atack2013use}, which contain information on the year that each rail line was built. I overlay the railroad track map over historical county borders and calculate a binary variable indicating whether railroad access existed within a county for each year. Using these data, I estimate that 29\% of counties had railroad access in 1862 and 91\% had access by 1911 (Fig. SM-\ref{rr-map}).\footnote{The railroad access measure defines access with respect to county boundaries, which \citet{atack2012impact} point out has limitations because a county without access might be adjacent to one with access and county boundaries frequently changed over time.}
+
+%RR Data
+%I create the railroad access measure using digitized railroad maps provided by \citet{atack2013use}, which contain information on the year that each rail line was built. I overlay the railroad track map over historical county borders and calculate a binary variable indicating whether railroad access existed within a county for each year. Using these data, I estimate that 29\% of counties had railroad access in 1862 and 91\% had access by 1911 (Fig. OA-\ref{rr-map}). The railroad access measure defines access with respect to county boundaries, which \citet{atack2012impact} point out has limitations because a county without access might be adjacent to one with access and county boundaries frequently changed over time. 
+
+Table SM-\ref{dv-table}
 
 \subsection{Placebo tests} \label{placebo-tests}
 
@@ -311,15 +318,15 @@ where $\tau \in \left\{1, 2, 3\right\}$. Equation (\ref{h0-placebo}) is tested b
 
 Table \ref{placebo-tests} reports the average treatment effect over the placebo post-period and 95\% randomization confidence intervals for the null hypothesis test. For each outcome and post-period length $\tau$, the confidence intervals tend to be very similar regardless of permutation structure. The results of the placebo tests provide evidence that the MC-NNM estimator is consistent because none of the intervals contain zero. 
 
-Further evidence of the consistency of the estimator is demonstrated in Figures SM-\ref{mc-sim} and SM-\ref{mc-stag}, which conducts placebo tests on control units using both pre- and post-period observations for each outcome in each treatment adoption setting. The MC-NNM estimator typically outperforms DID and SVD estimators in terms of minimizing RMSE across different ratios of $T_0/T$. The estimator yields comparable error rates to PCA, SCM, and vertical regression estimators at higher ratios. 
+Further evidence of the consistency of the estimator is demonstrated in Figure SM-\ref{mc-sim}, which presents the results of placebo tests on control units using both pre- and post-period observations for each outcome in each treatment adoption setting. The MC-NNM estimator typically outperforms DID and SVD estimators in terms of minimizing RMSE across different ratios of $T_0/T$. The estimator yields comparable error rates to PCA, SCM, and vertical regression estimators at higher ratios. 
 
 \begin{table}[htbp]
 	\captionsetup{font=normalsize}
 	\caption{Placebo test $p$-values.\label{placebo-tests}}
 	\begin{center}
-	\input{placebo-tests}
+	\scalebox{.95}{\input{placebo-tests}}
 	\end{center}
-	\footnotesize{\emph{Notes:} randomization $p$-values calculated by Equation (\ref{eq:pvalue}) corresponding to each permutation structure and value of $\tau$ and $q$. i.i.d. block $p$-values are calculated using $|\Pi| = 1,000$ permutations. Moving block $p$-values are based on $|\Pi| = T-1$ permutations.}
+	\footnotesize{\emph{Notes:} randomization $p$-values calculated by Equation (\ref{eq:pvalue}) corresponding to each permutation structure and value of $\tau$ and $q$. i.i.d. block and i.i.d. block $p$-values are calculated using $|\Pi| = 1,000$ permutations. Moving block $p$-values are based on $|\Pi| = T-1$ permutations.}
 \end{table}
 
 \subsection{Causal estimates}
@@ -334,22 +341,22 @@ An important characteristic of the estimates plotted in Fig.~\ref{state-capacity
 
 \begin{figure}[htbp]
 	\centering
-	\begin{subfigure}[t]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{plots/mc-educ-pc.png}
-		\caption{State government education spending}
-	\end{subfigure}
-	~ 
-	\begin{subfigure}[t]{0.48\textwidth}
+%	\begin{subfigure}[t]{0.48\textwidth}
+%		\centering
+%		\includegraphics[width=\textwidth]{plots/mc-educ-pc.png}
+%		\caption{State government education spending}
+%	\end{subfigure}
+%	~ 
+	\begin{subfigure}[t]{0.75\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{plots/mc-exp-pc.png}
-		\caption{State government expenditures}
+		\caption{Log per-capita state government expenditure (1982\$)}
 	\end{subfigure}
 	~ 
-	\begin{subfigure}[t]{0.48\textwidth}
+	\begin{subfigure}[t]{0.75\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{plots/mc-rev-pc.png}
-		\caption{State government revenues}
+		\caption{Log per-capita state government revenue (1982\$)}
 	\end{subfigure}
 	\caption{Average observed (solid line) and counterfactual predicted (dotted line) outcomes of public land states in state capacity datasets. Dashed vertical line represents the initial treatment year of 1869. Shaded regions represent $\hat{\bar{\alpha}}_{t}$ in Equation (\ref{eq:avg-pointwise}) $\pm 1.96$ the standard error of the distribution of 1,000 bootstrap replicates of $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates}} 
 \end{figure}
@@ -375,7 +382,7 @@ In this model, $a_i$ and $b_t$ are vectors of unit and time fixed effects, respe
 
 The coefficient corresponding to the interaction term, $\hat{\delta}$, is the estimated average causal effect of exposure to homesteads. I use unit-stratified bootstrapped samples to construct nonparametric standard errors for $\hat{\delta}$.\footnote{The model assumes i.i.d. errors, which understates the standard errors for $\hat{\delta}$ when the regression errors are serially correlated, or $\mathrm{Corr} (\epsilon_{s, t}, \epsilon_{s, t-1}) \neq 0$, which can arise when the time-series lengths are not sufficiently long to reliably estimate the data generating process. \citet{bertrand2004much} show that the stratified bootstrap can be used to compute consistent standard errors when the number of units is sufficiently large.} $X'_{i,1860}$ is the average value of farm land in 1860, which is included to ensure that $\hat{\delta}$ is not biased by parallel trends in pre-intervention agricultural productivity. In theory, we would expect that homesteaders migrate to more valuable land and thus excluding average farm values from the regression would result in overestimating the actual impact of homesteads. 
 
-It should be emphasized that the DID estimator in a staggered adoption setting relies on several strong assumptions regarding both the assignment mechanism, which in this application is the distribution of initial treatment times $T_0$, and the counterfactual outcomes of the treated units. The framework of \citet{athey2018design}, for instance, assumes the distribution of $T_0$ is completely random conditional on $X'_{i,1860}$. In the current application, this assumption ignores the possibility that initial exposure to homesteads might be determined by unobserved factors, such as the accessibility of frontier land. The framework also that the counterfactual outcomes at time $t$ does not depend on the future date of treatment exposure if $t < T_0$ or the history of treatment exposure if $t > T_0$. Violations of these assumptions would arise if the homestead policy is anticipated prior to $T_0$ or if the size of frontier state government is determined by whether the state was exposed early or late to homesteads. 
+It should be emphasized that the DID estimator in a staggered adoption setting relies on several strong assumptions regarding both the assignment mechanism, which in this application is the distribution of initial treatment times $T_0$, and the counterfactual outcomes of the treated units. The framework of \citet{athey2018design}, for instance, assumes the distribution of $T_0$ is completely random conditional on $X'_{i,1860}$. In the current application, this assumption ignores the possibility that initial exposure to homesteads might be determined by unobserved factors. The framework also that the counterfactual outcomes at time $t$ does not depend on the future date of treatment exposure if $t < T_0$ or the history of treatment exposure if $t > T_0$. Violations of these assumptions would arise if the homestead policy is anticipated prior to $T_0$ or if the size of frontier state government is determined by whether the state was exposed early or late to homesteads. 
 
 \subsection{DID estimates}
 I apply the DID estimator on two unbalanced state-year panel datasets: the panel of southern public land states spans  from 1823 to 1982 and has 38 observations prior to the enactment of the SHA. The panel of western public land states spans from 1810 to 1982 and has 52 pre-intervention years. The treatment effect estimates, summarized in Fig.~\ref{fig:did-state-robust}, indicate that per-capita cumulative homesteads significantly increase per-capita revenue in western states by 0.02 log points [0.0007, 0.04] and has a nonsignificant impact on revenue in southern states. Estimates on per-capita expenditure in the South and West are also nonsignificant. Per-capita cumulative homesteads significantly raise education spending in the South by 0.17 log points [0.03, 0.28], while having no impact on education spending in the West. As expected, withholding average farm values from the DID specification biases treatment effect estimates upwards (Fig.~SM-\ref{fig:did-state-robust}).
@@ -402,7 +409,7 @@ What are the channels through which homesteads affect state capacity? Land inequ
 
 Table SM-\ref{dd-mechanisms} presents DID estimates of the impact of log per-capita cumulative homesteads on land inequality or railroad access during the period of 1860 to 1950.\footnote{Since railroad access is measured every year, I take the mean of railroad access to the nearest decennial year; e.g., $y_{s, 1870}$ is the mean of the access measure between 1862 and 1870 in county $s$.} Farm values are included in the regression as a proxy for agricultural productivity, which might be associated with farm sizes approaching ideal scale and therefore land inequality. I estimate that homesteads significantly decreased land inequality in western frontier state counties: a 10\% increase in log per-capita cumulative homesteads is expected to lower land inequality by -0.0004 [-0.0005, -0.0002] points. The estimated impact on land inequality in the South is in the same direction, but not significant. 
 
-Railroad access is theoretically expected to increase the capacity of county and state governments by increasing the returns to farm land. I create the railroad access measure using digitized railroad maps provided by \citet{atack2013use}, which contain information on the year that each rail line was built. I overlay the railroad track map over historical county borders and calculate a binary variable indicating whether railroad access existed within a county for each year. Using these data, I estimate that 29\% of counties had railroad access in 1862 and 91\% had access by 1911 (Fig. SM-\ref{rr-map}).\footnote{The railroad access measure defines access with respect to county boundaries, which \citet{atack2012impact} point out has limitations because a county without access might be adjacent to one with access and county boundaries frequently changed over time.} DID estimates of the effect of log per-capita cumulative homesteads on railroad access (value between 0 and 1) can be interpreted as follows: a 10\% increase in log per-capita cumulative homesteads is expected to increase railroad access in southern counties by 0.003 [0.001, 0.005] points and by 0.009 [0.007, 0.01] points in western counties. I include farm values in the specification as a proxy for economic development, which is expected to increase state capacity and correlate with other measures of development like railroad access. 
+Railroad access is theoretically expected to increase the capacity of county and state governments by increasing the returns to farm land. DID estimates of the effect of log per-capita cumulative homesteads on railroad access (value between 0 and 1) can be interpreted as follows: a 10\% increase in log per-capita cumulative homesteads is expected to increase railroad access in southern counties by 0.003 [0.001, 0.005] points and by 0.009 [0.007, 0.01] points in western counties. I include farm values in the specification as a proxy for economic development, which is expected to increase state capacity and correlate with other measures of development like railroad access. 
 
 \section{Conclusion} \label{discussion} 
 
