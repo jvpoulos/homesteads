@@ -33,22 +33,21 @@ t0 <- which(colnames(capacity.outcomes[["rev.pc"]]$M)=="1869") # first treatment
 treat_indices_order <- c("CA", "CO", "IA", "KS", "MI", "MN", "MO", "NE", "OH", "OR", "SD", "WA", "WI", "IL", "NV", "ID", "MT", "ND",  "UT", "AL", "MS", "AR", "FL", "LA", "IN", "NM", "WY", "AZ", "OK", "AK")
 
 mc.est.w <- mclapply(capacity.outcomes.list,
-                   MCEst,t0=t0,treat_indices_order,imputed=FALSE,sim=FALSE,covars=capacity.covars,pca=FALSE,mc.cores=cores)
+                   MCEst,imputed=FALSE,covars=capacity.covars,pca=FALSE,mc.cores=cores)
 saveRDS(mc.est.w,"mc_est_w.rds")
 
-# Get NxT matrix of confidence intervals
+# Hypothesis testing
 source("ChernoTest.R")
 
-# p-values - covars
 
 moving.block.w <- mclapply(capacity.outcomes.list,
-                         ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0,imputed=FALSE,sim=FALSE,covars=capacity.covars,pca=FALSE,mc.cores=cores)
+                         ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0,imputed=FALSE,covars=capacity.covars,pca=FALSE,mc.cores=cores)
 saveRDS(moving.block.w,"moving_block_w.rds")
 
 iid.block.w <- mclapply(capacity.outcomes.list,
-                      ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE, sim=FALSE,covars=capacity.covars,pca=FALSE,mc.cores=cores)
+                      ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE,covars=capacity.covars,pca=FALSE,mc.cores=cores)
 saveRDS(iid.block.w,"iid_block_w.rds")
 
 iid.w <- mclapply(capacity.outcomes.list,
-                        ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid",t0=t0,imputed=FALSE, sim=FALSE,covars=capacity.covars,pca=FALSE,mc.cores=cores)
+                        ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid",t0=t0,imputed=FALSE,covars=capacity.covars,pca=FALSE,mc.cores=cores)
 saveRDS(iid.w,"iid_w.rds")

@@ -14,19 +14,7 @@ MCEstBoot <- function(tseries, M.missing, mask, t0, treat_indices_order,imputed=
   N <- nrow(treat)
   T <- ncol(treat)
   
-  ## Treated indices
-  indices <- cbind("id"=1:nrow(Y), "name"=rownames(Y))
-  treat_indices <- as.numeric(indices[order(match(indices[,2], treat_indices_order))][1:length(treat_indices_order)]) # sort indices increasingly based on T0
-  
-  N_t <- length(treat_indices) # Number of treated units desired
-  T0 <- t0 # The first treatment time
-  
-  ## Simultaneuous (simul_adapt) or Staggered adoption (stag_adapt)
-  if(simul){
-    treat_mat <- simul_adapt(Y, N_t, T0, treat_indices)
-  }else{
-    treat_mat <- stag_adapt(Y, N_t, T0, treat_indices)
-  }
+  treat_mat <- 1-treat
   
   Y_obs <- Y * treat_mat
   
@@ -37,7 +25,7 @@ MCEstBoot <- function(tseries, M.missing, mask, t0, treat_indices_order,imputed=
     
     est_model_MCPanel_w <- mcnnm_wc_cv(M=Y_obs, X = covars, Z=matrix(0L,0,0), mask=treat_mat,
                                        to_normalize = 1, to_estimate_u = 1, to_estimate_v = 1, to_add_ID = 1, 
-                                       num_lam_L = 10, num_lam_H = 10, niter = 1000, rel_tol = 1e-05, cv_ratio = 0.8, 
+                                       num_lam_L = 30, num_lam_H = 30, niter = 100, rel_tol = 1e-05, cv_ratio = 0.8, 
                                        num_folds = 1,
                                        is_quiet = 1) 
     
@@ -77,7 +65,7 @@ MCEstBoot <- function(tseries, M.missing, mask, t0, treat_indices_order,imputed=
     ## ------
     
     est_model_MCPanel <- mcnnm_cv(Y_obs, treat_mat, to_estimate_u = 1, to_estimate_v = 1, 
-                                  num_lam_L = 100, niter = 1000, rel_tol = 1e-05, cv_ratio = 0.8, num_folds = 5, is_quiet = 1)
+                                  num_lam_L = 100, niter = 400, rel_tol = 1e-05, cv_ratio = 0.8, num_folds = 5, is_quiet = 1)
     est_model_MCPanel$Mhat <- est_model_MCPanel$L + replicate(T,est_model_MCPanel$u) + t(replicate(N,est_model_MCPanel$v))
     if(imputed){
       est_model_MCPanel$impact <- (Y*Y.missing-est_model_MCPanel$Mhat)

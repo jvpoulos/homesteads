@@ -23,7 +23,6 @@ RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
 # Load data
 capacity.outcomes <- readRDS("capacity-outcomes.rds")
-capacity.covars.placebo <- readRDS("capacity-covariates-placebo.rds")
 
 # Discard post-treatment 
 
@@ -47,14 +46,14 @@ source("MCEst.R")
 
 t_final_placebo <- ncol(capacity.outcomes[["rev.pc"]]$M) # all periods - same for each outcome
 
-taus <- c(1,2,3)
+taus <- c(1,10,25)
 
 treat_indices_order <- c("CA", "CO", "IA", "KS", "MI", "MN", "MO", "NE", "OH", "OR", "SD", "WA", "WI", "IL", "NV", "ID", "MT", "ND",  "UT", "AL", "MS", "AR", "FL", "LA", "IN", "NM", "WY", "AZ", "OK", "AK")
 
 mc.est.placebo <- foreach(tau = taus) %dopar% {
       t0_placebo <- t_final_placebo-(tau) # n pre-treatment periods
       mclapply(capacity.outcomes.list,
-                              MCEst,t0=t0_placebo,treat_indices_order,sim=FALSE, covars=NULL,pca=FALSE,mc.cores=cores)}
+                              MCEst,imputed=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
 saveRDS(mc.est.placebo,"mc_est_placebo.rds")
 
 # Get p-values
@@ -63,17 +62,17 @@ source("ChernoTest.R")
 moving.block.placebo <- foreach(tau = taus) %dopar% {
   t0_placebo <- t_final_placebo-tau # n pre-treatment periods
   mclapply(capacity.outcomes.list,
-           ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0_placebo,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
+           ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="moving.block",t0=t0_placebo,imputed=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
 saveRDS(moving.block.placebo,"moving_block_placebo.rds")
 
 iid.block.placebo <- foreach(tau = taus) %dopar% {
   t0_placebo <- t_final_placebo-tau # n pre-treatment periods
   mclapply(capacity.outcomes.list,
-           ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0_placebo,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
+           ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0_placebo,imputed=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
 saveRDS(iid.block.placebo,"iid_block_placebo.rds")
 
 iid.placebo <- foreach(tau = taus) %dopar% {
   t0_placebo <- t_final_placebo-tau # n pre-treatment periods
   mclapply(capacity.outcomes.list,
-           ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid",t0=t0_placebo,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
+           ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid",t0=t0_placebo,imputed=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
 saveRDS(iid.block.placebo,"iid_placebo.rds")

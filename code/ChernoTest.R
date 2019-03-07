@@ -4,7 +4,7 @@
 ##, permuting {û_t } is equivalent to permuting {Z_t }.
 ## modified from https://github.com/ebenmichael/ents
 
-ChernoTest <- function(outcomes, ns=1000, q=c(1,2), t.stat=NULL, treat_indices_order,permtype=c("iid", "moving.block", "iid.block"),t0,imputed=FALSE,sim=FALSE,covars=NULL,pca=FALSE) {
+ChernoTest <- function(outcomes, ns=1000, q=c(1,2), t.stat=NULL, treat_indices_order,permtype=c("iid", "moving.block", "iid.block"),t0,imputed=FALSE,covars=NULL,pca=FALSE) {
   
   t_final <- ncol(outcomes$M) # all periods
   
@@ -24,7 +24,7 @@ ChernoTest <- function(outcomes, ns=1000, q=c(1,2), t.stat=NULL, treat_indices_o
         new_mc_data[[x]] <- new_mc_data[[x]][,reorder,drop=FALSE]
       }, simplify = FALSE,USE.NAMES = TRUE)
       
-      mc.fit <-  MCEst(new_mc_data, t0, treat_indices_order,imputed,sim=FALSE,covars=NULL,pca=FALSE)
+      mc.fit <-  MCEst(new_mc_data)
       
       ## get treatment effect estimates
       
@@ -51,7 +51,7 @@ ChernoTest <- function(outcomes, ns=1000, q=c(1,2), t.stat=NULL, treat_indices_o
         new_mc_data[[x]] <- new_mc_data[[x]][,reorder,drop=FALSE]
       }, simplify = FALSE,USE.NAMES = TRUE)
       
-      mc.fit <-  MCEst(new_mc_data,t0,treat_indices_order,imputed,sim=FALSE,covars=NULL,pca=FALSE)
+      mc.fit <-  MCEst(new_mc_data)
       
       ## get treatment effect estimates
       
@@ -88,7 +88,7 @@ ChernoTest <- function(outcomes, ns=1000, q=c(1,2), t.stat=NULL, treat_indices_o
         new_mc_data[[x]] <- new_mc_data[[x]][,reorder,drop=FALSE]
       }, simplify = FALSE,USE.NAMES = TRUE)
       
-      mc.fit <-  MCEst(new_mc_data,t0,treat_indices_order,imputed,sim=FALSE,covars=NULL,pca=FALSE)
+      mc.fit <-  MCEst(new_mc_data)
       
       ## get treatment effect estimates
       
@@ -108,7 +108,7 @@ ChernoTest <- function(outcomes, ns=1000, q=c(1,2), t.stat=NULL, treat_indices_o
   if(!is.null(t.stat)){
     real_att <- t.stat
   } else{
-    mc.fit.actual <-  MCEst(outcomes,t0,treat_indices_order,imputed,sim=FALSE,covars=NULL,pca=FALSE)
+    mc.fit.actual <-  MCEst(outcomes,imputed=FALSE,covars=NULL,pca=FALSE)
     real_att <- as.matrix(colMeans(mc.fit.actual$impact[,t0:t_final,drop=FALSE][rownames(mc.fit.actual$impact) %in% treat_indices_order,], na.rm = TRUE)) # get mean post-period impact on treated
     if(imputed){
       real_att <- na.omit(real_att)
