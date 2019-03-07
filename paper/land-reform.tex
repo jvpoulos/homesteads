@@ -212,7 +212,7 @@ Y_{it} = L_{it}^{*} + \sum_{p=1}^{P} X_{ip} \beta^{*} + \gamma_{i}^{*} + \delta_
 where $\mathbf{L^{*}}$ a low-rank matrix to be estimated, $\mathbf{X}$ is a $N \times P$ matrix of normalized unit-specific covariates, and $\gamma^{*}$ and $\delta^{*}$ are unit and time fixed effects, respectively. The identifying condition is that the error term $\epsilon$ is independent across rows (units), conditional on $\mathbf{L^{*}}$, and $\E[\epsilon | \mathbf{L^{*}} + \beta^{*} + \gamma^{*} + \delta^{*}] = 0$. The MC-NNM estimator for $\mathbf{L^{*}}$ minimizes the sum of squared reconstruction errors via nuclear norm regularized least squares:
 %
 \begin{equation}
-\min_{\mathbf{L}, \beta} \Bigg[\sum_{(i,t) \in \mathcal{O}} \frac{1}{|\mathcal{O}|} \bigg(Y_{it} - L_{it} - \sum_{p=1}^{P} X_{ip} \beta - \gamma_{i} - \delta_{t} \bigg)^2 + \lambda \norm{\mathbf{L}}_\star \Bigg],
+\min_{\mathbf{L}, \beta} \Bigg[\sum_{(i,t) \in \mathcal{O}} \frac{1}{|\mathcal{O}|} \bigg(Y_{it} - L_{it} - \sum_{p=1}^{P} X_{ip} \beta - \gamma_{i} - \delta_{t} \bigg)^2 + \lambda \norm{\mathbf{L}}_\star \Bigg], \label{eq:mc-opt}
 \end{equation}
 %
 where $\lambda$ is the regularization term on the nuclear norm $\norm{\cdot}_\star$ (i.e., sum of singular values) that is chosen by cross-validation. The algorithm for calculating the estimator iteratively replaces missing values with those recovered from a singular value decomposition (SVD) \citep{mazumder2010spectral}.\footnote{\citet{amjad2018robust} propose an alternative approach of approximating $\mathbf{L^{*}}$ via SVD, and then using linear regression on the ``de-noised'' matrix, rather than relying on matrix norm regularizations.} 
@@ -289,7 +289,7 @@ where $T_\star = T-T_0$ and $q \in \left\{1, 2\right\}$ in the applications. I e
 \hat{p} = \frac{1}{\Pi} \sum_{\pi \in \Pi} \textbf{1} \left\{S (\hat{\bar{\alpha}}_{\pi}) > S (\hat{\bar{\alpha}}_{t}) \right\}, \label{eq:pvalue}
 \end{equation}
 %
-where $\hat{\bar{\alpha}}_{\pi}$ is the average causal effect estimated on the permuted data $\mathbf{Y_\pi}$. The idea for permuting time periods rather than treatment assignment is if the data are stationary and weakly dependent, which is often the case in an aggregate time-series setting, then the distribution of the error term $\epsilon$ in Equation (\ref{eq:mc-Y}) should be the same in the pre- and post-periods. \citet{chernozhukov2017exact} prove that the $p$-values resulting from their inferential procedure are approximately unbiased assuming that the MC-NNM estimator is consistent, which can be verified by placebo tests such as those described in Section \ref{placebo-tests}. I rely on three types of permutations: \emph{i.i.d.} random permutations of the time index $t$; \emph{i.i.d. block} random permutations of $K=T/b$ non-overlapping blocks, where $b$ is selected according to the optimal block length for the dependent bootstrap \citep{politis2004automatic}; and \emph{moving block} permutations that circularly shifts $t$ by one period, resulting in $T-1$ permutations. The latter two permutations are capable of preserving the dependence structure of the data and are thus appropriate for weakly dependent data. 
+where $\hat{\bar{\alpha}}_{\pi}$ is the average causal effect estimated on the permuted data $\mathbf{Y_\pi}$. The idea for permuting time periods rather than treatment assignment is if the data are stationary and weakly dependent, which is often the case in an aggregate time-series setting, then the distribution of the error term $\epsilon$ in Equation (\ref{eq:mc-Y}) should be the same in the pre- and post-periods. \citet{chernozhukov2017exact} prove that the $p$-values resulting from their inferential procedure are approximately unbiased assuming that the MC-NNM estimator is consistent, which can be verified by placebo tests such as those described in Section \ref{placebo-tests}. I rely on three types of permutations: \emph{i.i.d.} random permutations of the time index $t$; \emph{i.i.d. block} random permutations of $K=T/b$ non-overlapping blocks, where $b$ is selected according to the optimal block length for the dependent bootstrap \citep{politis2004automatic}; and \emph{moving block} permutations that circularly shift $t$ by one period, resulting in $T-1$ permutations. The latter two permutations are capable of preserving the dependence structure of the data and are thus appropriate for weakly dependent data. 
 
 \section{Impact of homestead acts on state capacity} \label{state-capacity}
 
@@ -312,6 +312,7 @@ Prior to presenting the main results, I assess the validity of the key assumptio
 where $\tau \in \left\{1, 2, 3\right\}$. This placebo null hypothesis is tested by the same procedure described in Section \ref{hyp-test}, treating $\left\{1, \ldots, T_0 - \tau\right\}$ as the pre-period.
 
 Table \ref{placebo-tests} reports the average treatment effect over the placebo post-period and randomization $p$-values calculated by Equation (\ref{eq:pvalue}). Placebo tests on the revenue outcome yield two-sided $p$-values greater than the significance level of $\alpha = 0.05$, regardless of the value of $q$ or permutation structure; however, the estimator typically fails to reject the null for placebo tests related to the expenditures outcome. Thus, the placebo tests provide mixed evidence with regard to the consistency of the MC-NNM estimator. 
+%Table \ref{placebo-tests}  shows that we cannot reject the null hypothesis at the conventional significance levels for both outcomes, all three methods, and both types of permutations. This provides evidence in favor of our model specifications and the validity of the consistency assumption.
 
 Further evidence is provided in Figure SM-\ref{mc-sim}, which presents the results of placebo tests on control units using both pre- and post-period observations for each outcome. In the staggered adoption setting, the MC-NNM estimator outperforms DID and SVD estimators in terms of minimizing RMSE for each ratio $T_0/T$. At $T_0/T \geq 0.5$, the estimator generally yields comparable error rates to PCA, SCM, and vertical regression estimators. 
 
@@ -324,15 +325,14 @@ Further evidence is provided in Figure SM-\ref{mc-sim}, which presents the resul
 	\footnotesize{\emph{Notes:} randomization $p$-values corresponding to each permutation structure and value of $\tau$ and $q$. i.i.d. block and i.i.d. block $p$-values are calculated using $|\Pi| = 1,000$ permutations. Moving block $p$-values are based on $|\Pi| = T-1$ permutations.}
 \end{table}
 
-\subsection{Causal estimates}
+\subsection{Main estimates}
 
-For each outcome, I train a separate encoder-decoder network to predict the counterfactual time-series of public land states, using only their previous history to generate predictions. Similar to the placebo tests on the SCM datasets, I evaluate the models two ways: first, I monitor the loss over 2,000 training epochs and save the model weights with the lowest error on a validation set consisting of the final 10\% of the time-series.\footnote{The models use both dropout and L2 regularization to control for overfitting on the training set. Figs. SM-\ref{encoder-decoder-loss-capacity-south} and SM-\ref{encoder-decoder-loss-capacity-west} record the training history of each model.} Second, I calculate MSPE (Eq.~\ref{mspe}) on $J=18$ state land states that serve as placebo treated units. Encoder-decoder networks outperform the baseline LSTM in terms of minimizing the MSPE in placebo tests (Tables SM-\ref{encoder-decoder-mpse} and SM-\ref{lstm-mpse}).
+In the main analyses, I fit the MC-NNM estimator described in Equation \ref{eq:mc-Y} on the entirety of observed entries in $\mathbf{Y}$ to recover its missing entries; i.e., the counterfactual outcomes of public land states. The value of the regularization term $\lambda$ is optimally selected on the value that yields the lowest average RMSE calculated during five-fold cross-validation. The average RMSE calculated on the validation sets are 0.42 and 0.48 for the state government expenditures and revenues outcomes, respectively. 
 
-Fig.~\ref{state-capacity-plot} plots the observed and counterfactual time-series for each outcome and region. Counterfactual predictions of state government finances in the absence of homestead acts generally tracks the observed time-series until the turn of the century, at which the counterfactual flattens and diverges from the increasing observed time-series. This delay can potentially be explained by the facts that homesteaders were required to make improvements on land for five years before filing a grant and homestead entries did not substantially accumulate until after the 1889 cash-entry restriction (Figs. SM-\ref{homestead-map} and SM-\ref{acres-time}). 
+The top panels of Figure \ref{mc-estimates-exp-pc} and \ref{mc-estimates-rev-pc} compare the means of the observed time-series of treated units and control units along with the mean predicted outcomes of treated units. The time-series in the bottom panels correspond to $\hat{\bar{\alpha}}_{t}$, or the per-period estimated average causal impacts across treated units as estimated by Equation (\ref{eq:avg-pointwise). Bootstrap confidence intervals for $\hat{\bar{\alpha}}_{t}$ are calculated by block resampling with optimal block lengths selected by the procedure described by \citet{politis2004automatic}. 
 
-Taking the difference between the observed and predicted time-series (Eq.~\ref{eq:pointwise}) yields time-specific estimates of treatment effects. Fig.~\ref{state-capacity-plot-effects} plots the temporal evolution of treatment effect estimates over the entire post-period and 95\% randomization confidence intervals that are constructed by inverting the randomization test described in the previous section.\footnote{Fig. SM-\ref{state-capacity-plot-pvalues} plots the time-specific estimates of randomization $p$-values inferred from the exact distribution of average placebo effects under the null hypothesis.} Fifty years after its passage, the estimated impact of the HSA on western state government education spending and revenue is 0.005 log points [-0.16, 0.19], and 0.61 log points [-0.19, 1.53], respectively. The confidence intervals surrounding these time-specific estimates contain zero, which implies that the estimated impacts are not significantly more extreme than the placebo treated effects estimated at the same time-step. The confidence interval on the estimated impact of the HSA on western state government expenditure in 1912, an increase of 0.17 log points [0.004, 0.3], does not contains zero, which implies that the estimated impact is significantly more extreme than the placebo treated effects. 
-
-An important characteristic of the estimates plotted in Fig.~\ref{state-capacity-plot-effects} is the progressive widening of confidence intervals. Intuitively, counterfactual predictions become more uncertain as we move farther into the future. In the present application, confidence intervals may become implausibly wide because the post-period extends well into the twentieth century. In order to compare with the DID estimates described in the section below, I average over the entire post-period and find no evidence that the HSA impacted western state government education spending, 0.07 [-0.32, 0.46], expenditure, 0.16 [-0.21, 0.57], or revenue, 0.05 [-0.33, 0.46]. Estimates on the impact of the SHA on state capacity in the South are in the same direction and similar magnitudes. 
+Table \ref{mc-estimates} 
+$S (\hat{\bar{\alpha}}_{t})$ corresponds to the test statistic described in Equation (\ref{tstat}) and each value beneath is the randomization $p$-value corresponding to each permutation structure.
 
 \begin{figure}[htbp]
 	\centering
@@ -342,18 +342,18 @@ An important characteristic of the estimates plotted in Fig.~\ref{state-capacity
 %		\caption{State government education spending}
 %	\end{subfigure}
 %	~ 
-	\begin{subfigure}[t]{0.75\textwidth}
+	\begin{subfigure}[t]{0.8\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{plots/mc-exp-pc.png}
-		\caption{Log per-capita state government expenditure (1982\$)}
+		\caption{Log per-capita state government expenditure (1982\$)\label{mc-estimates-exp-pc}}
 	\end{subfigure}
 	~ 
-	\begin{subfigure}[t]{0.75\textwidth}
+	\begin{subfigure}[t]{0.8\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{plots/mc-rev-pc.png}
-		\caption{Log per-capita state government revenue (1982\$)}
+		\caption{Log per-capita state government revenue (1982\$)\label{mc-estimates-rev-pc}}
 	\end{subfigure}
-	\caption{Average observed (solid line) and counterfactual predicted (dotted line) outcomes of public land states in state capacity datasets. Dashed vertical line represents the initial treatment year of 1869. Shaded regions represent $\hat{\bar{\alpha}}_{t}$ in Equation (\ref{eq:avg-pointwise}) $\pm 1.96$ the standard error of the distribution of 1,000 bootstrap replicates of $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates}} 
+	\caption{Top panel: Mean observed (solid time-series) and counterfactual predicted (dotted time-series) outcomes of treated units (PLS) and mean observed outcomes (dashed time-series) among control units (SLS). Dashed vertical line represents the initial treatment year of 1869. Bottom panel: Per-period average causal impacts of homestead exposure on PLS, or $\hat{\bar{\alpha}}_{t}$ in Equation (\ref{eq:avg-pointwise}). Shaded regions represent 95\% confidence intervals estimated by taking $\hat{\bar{\alpha}}_{t} \pm 1.96$ the standard error of the distribution of 1,000 bootstrap replicates of $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates}} 
 \end{figure}
 
 \begin{table}[htbp]
