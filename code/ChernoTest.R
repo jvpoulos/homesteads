@@ -66,7 +66,7 @@ ChernoTest <- function(outcomes, ns=1000, q=c(1,2), t.stat=NULL, treat_indices_o
   } else if(permtype=="iid.block") {
     
     source("PolitisWhite.R")
-    m <- b.star(outcomes$M,round=TRUE)[[1]]  # get optimal bootstrap lengths
+    m <- median(b.star(t(outcomes$M),round=TRUE)[,1])  # get optimal bootstrap lengths
     teststats <- matrix(NA, nrow=ns, ncol=length(q))
     
     for(i in 1:ns) {
@@ -117,5 +117,5 @@ ChernoTest <- function(outcomes, ns=1000, q=c(1,2), t.stat=NULL, treat_indices_o
   real_teststat <- sapply(q,
                            function(j) ((1/sqrt(length(real_att))) * sum(abs(real_att)^q[j]))^(1/q[j]))
   pval <- sapply(q, function(i) 1- ((1/length(teststats[,i]) * sum(teststats[,i] < real_teststat[i]))))
-  return(list("q"=q, "s"=real_teststat, "real_att" = real_att[,1],"p"=pval))
+  return(list("q"=q,"s"=real_teststat,"teststats"=teststats,"real_att" = real_att[,1],"p"=pval))
 }

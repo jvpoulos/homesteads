@@ -1,4 +1,4 @@
-MCEstBoot <- function(tseries, M.missing, mask, t0, treat_indices_order,imputed=FALSE,simul=FALSE,covars=NULL,pca=FALSE) {
+MCEstBoot <- function(tseries,M.missing,mask,imputed=FALSE,covars=NULL,pca=FALSE) {
   
   Y <- t(tseries) # NxT 
   Y.missing <- M.missing # NxT 
