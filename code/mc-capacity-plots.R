@@ -10,7 +10,7 @@ source(paste0(code.directory,"TsPlot.R"))
 
 capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes.rds"))
 
-PlotMCCapacity <- function(x,y.title,limits,t0=which(colnames(capacity.outcomes[["rev.pc"]]$M)=="1869")){
+PlotMCCapacity <- function(x,y.title,limits,breaks,t0=which(colnames(capacity.outcomes[["rev.pc"]]$M)=="1869")){
   ## Create time series data
   
   boot <- readRDS(paste0(results.directory, "mc/", gsub('\\.', '-', x), "-boot.rds"))
@@ -92,15 +92,17 @@ PlotMCCapacity <- function(x,y.title,limits,t0=which(colnames(capacity.outcomes[
   #ts.means.m$series<- factor(ts.means.m$series, levels=c("Time-series", "Per-period impact", "Cumulative impact")) # reverse order
   ts.means.m$series<- factor(ts.means.m$series, levels=c("Time-series", "Per-period impact")) # reverse order
   
-  ts.plot <- TsPlot(df=ts.means.m,y.title,limits=limits)
+  ts.plot <- TsPlot(df=ts.means.m,y.title,limits=limits, breaks=breaks)
   
   return(ts.plot)
 }
 
-mc.rev.pc <- PlotMCCapacity(x='rev.pc',y.title="",limits=c(as.POSIXct("1783-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")))
-mc.exp.pc <- PlotMCCapacity(x='exp.pc',y.title="", limits=c(as.POSIXct("1783-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")))
-mc.educ.pc <- PlotMCCapacity(x='educ.pc',y.title="Log per-capita state government education spending (1942$)", limits=c(as.POSIXct("1783-01-01 01:00:00"), as.POSIXct("1942-01-01 01:00:00")))
+mc.rev.pc <- PlotMCCapacity(x='rev.pc',y.title="",limits=c(as.POSIXct("1809-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")), breaks=seq(as.POSIXct("1809-1-31 00:00:00",tz="UTC"),
+                                                                                                                                             as.POSIXct("1982-1-31 00:00:00",tz="UTC"), "10 years"))
+mc.exp.pc <- PlotMCCapacity(x='exp.pc',y.title="",limits=c(as.POSIXct("1809-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")), breaks=seq(as.POSIXct("1809-1-31 00:00:00",tz="UTC"),
+                                                                                                                                             as.POSIXct("1982-1-31 00:00:00",tz="UTC"), "10 years"))
+#mc.educ.pc <- PlotMCCapacity(x='educ.pc',y.title="Log per-capita state government education spending (1942$)", limits=c(as.POSIXct("1783-01-01 01:00:00"), as.POSIXct("1942-01-01 01:00:00")))
 
 ggsave(paste0(results.directory,"plots/mc-rev-pc.png"), mc.rev.pc, width=11, height=8.5)
 ggsave(paste0(results.directory,"plots/mc-exp-pc.png"), mc.exp.pc, width=11, height=8.5)
-ggsave(paste0(results.directory,"plots/mc-educ-pc.png"), mc.educ.pc, width=11, height=8.5)
+#ggsave(paste0(results.directory,"plots/mc-educ-pc.png"), mc.educ.pc, width=11, height=8.5)

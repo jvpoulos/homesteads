@@ -1,4 +1,4 @@
-TsPlot <- function(df, main = "",y.title="",limits) {
+TsPlot <- function(df, main = "",y.title="",limits,breaks) {
   library(ggplot2)
   library(zoo)
   library(scales)
@@ -41,16 +41,17 @@ TsPlot <- function(df, main = "",y.title="",limits) {
   
   # horizontal ticks
   
-  ticks <- scale_x_datetime(date_breaks="16 years",labels=date_format("%Y"), 
+  ticks <- scale_x_datetime(breaks=breaks,
+                            labels=date_format("%Y"), 
                               time_trans(tz="UTC"),
-                              limits)
+                              limits=limits)
   
 
   # annotation text
   
-  # ann_text <- data.frame(year = c(as.POSIXlt("1980-01-01 EST"), as.POSIXlt("2006-12-31 EST")), value=8, 
-  #                        series = factor("Observed time-series", levels = c("Observed time-series","pointwise.pls","cumulative.pls")),
-  #                        lab = c("pre-period", "post-period"))
+  ann_text <- data.frame(year = c(as.POSIXlt("1849-01-01 UTC"), as.POSIXlt("1889-01-01 UTC")), value=1,
+                         series = factor("Time-series", levels = c("Time-series", "Per-period impact")),
+                         lab = c("pre-period","post-period"))
   
   # legend 
   
@@ -59,7 +60,7 @@ TsPlot <- function(df, main = "",y.title="",limits) {
     ticks +
     theme( legend.title = element_blank()
            , plot.title = element_text(hjust = 0.5)
-           , legend.position = c(0.2,0.9)
+           , legend.position = c(0.18,0.85)
            , legend.justification = c(1,0)
            #  , legend.position = "top"
            , legend.background = element_rect()
@@ -69,7 +70,7 @@ TsPlot <- function(df, main = "",y.title="",limits) {
            , axis.ticks.y=element_blank()
            , legend.text=element_text(size=12, family = "serif")
            , legend.box = "horizontal" # not working?)
-    ) + #geom_text(data = ann_text,aes(y = value, label =lab), family="serif", fontface="italic",  size=5) +
+    ) + geom_text(data = ann_text,aes(y = value, label =lab), family="serif", fontface="italic",  size=6) +
     scale_y_continuous(name=y.title) +
     scale_colour_manual(name="", values = c(  "observed.pls" = wes_palette("Darjeeling1")[5], 
                                               "observed.sls" = wes_palette("Darjeeling1")[1], 
