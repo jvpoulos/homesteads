@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  6 MAR 2019 13:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  8 MAR 2019 07:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1359,10 +1359,10 @@ Package rerunfilecheck Info: File `land-reform-sm.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 243.
  ) 
 Here is how much of TeX's memory you used:
- 29843 strings out of 492641
- 551615 string characters out of 6131787
- 640668 words of memory out of 5000000
- 33236 multiletter control sequences out of 15000+600000
+ 29848 strings out of 492641
+ 551718 string characters out of 6131787
+ 641302 words of memory out of 5000000
+ 33241 multiletter control sequences out of 15000+600000
  545211 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,18n,65p,984b,535s stack positions out of 5000i,500n,10000p,200000b,80000s
