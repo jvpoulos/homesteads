@@ -309,7 +309,7 @@ Prior to presenting the main results, I assess the validity of the key assumptio
 \text{H}_0: S (\hat{\bar{\alpha}}_{t}) = 0  \, \hspace{5mm} \,  \text{for} \, \hspace{2mm} T_0 - \tau +1 \leq t \leq T_0,
 \end{equation}
 %\frac{1}{\tau +1} \sum_{T_0 - \tau +1}^{T_0} \hat{\bar{\alpha}}_{t} 
-where $\tau \in \left\{1, 2, 3\right\}$. This placebo null hypothesis is tested by the same procedure described in Section \ref{hyp-test}, treating $\left\{1, \ldots, T_0 - \tau\right\}$ as the pre-period.
+where $\tau \in \left\{1, 10, 25\right\}$. This placebo null hypothesis is tested by the same procedure described in Section \ref{hyp-test}, treating $\left\{1, \ldots, T_0 - \tau\right\}$ as the pre-period.
 
 Table \ref{placebo-tests} reports the average treatment effect over the placebo post-period and randomization $p$-values calculated by Equation (\ref{eq:pvalue}). Placebo tests on the revenue outcome yield two-sided $p$-values greater than the significance level of $\alpha = 0.05$, regardless of the value of $q$ or permutation structure; however, the estimator typically fails to reject the null for placebo tests related to the expenditures outcome. Thus, the placebo tests provide mixed evidence with regard to the consistency of the MC-NNM estimator. 
 %Table \ref{placebo-tests}  shows that we cannot reject the null hypothesis at the conventional significance levels for both outcomes, all three methods, and both types of permutations. This provides evidence in favor of our model specifications and the validity of the consistency assumption.
@@ -329,10 +329,22 @@ Further evidence is provided in Figure SM-\ref{mc-sim}, which presents the resul
 
 In the main analyses, I fit the MC-NNM estimator described in Equation \ref{eq:mc-Y} on the entirety of observed entries in $\mathbf{Y}$ to recover its missing entries; i.e., the counterfactual outcomes of public land states. The value of the regularization term $\lambda$ is optimally selected on the value that yields the lowest average RMSE calculated during five-fold cross-validation. The average RMSE calculated on the validation sets are 0.42 and 0.48 for the state government expenditures and revenues outcomes, respectively. 
 
-The top panels of Figure \ref{mc-estimates-exp-pc} and \ref{mc-estimates-rev-pc} compare the means of the observed time-series of treated units and control units along with the mean predicted outcomes of treated units. The time-series in the bottom panels correspond to $\hat{\bar{\alpha}}_{t}$, or the per-period estimated average causal impacts across treated units as estimated by Equation (\ref{eq:avg-pointwise). Bootstrap confidence intervals for $\hat{\bar{\alpha}}_{t}$ are calculated by block resampling with optimal block lengths selected by the procedure described by \citet{politis2004automatic}. 
+The top panels of Figure \ref{mc-estimates-exp-pc} and \ref{mc-estimates-rev-pc} compare the means of the observed time-series of treated units and control units along with the mean predicted outcomes of treated units. The time-series in the bottom panels correspond to $\hat{\bar{\alpha}}_{t}$, or the per-period estimated average causal impacts across treated units as estimated by Equation (\ref{eq:avg-pointwise}). Bootstrap confidence intervals for $\hat{\bar{\alpha}}_{t}$ are calculated by block resampling with optimal block lengths selected by the procedure described by \citet{politis2004automatic}. 
 
-Table \ref{mc-estimates} 
 $S (\hat{\bar{\alpha}}_{t})$ corresponds to the test statistic described in Equation (\ref{tstat}) and each value beneath is the randomization $p$-value corresponding to each permutation structure.
+
+%\begin{tabular}{@{}lcccc@{}}
+%	\toprule 
+%	& \multicolumn{2}{c}{ Expenditure } & \multicolumn{2}{c}{ Revenue } \\
+%	\hline
+%	& $q=1$ & $q=2$ & $q=1$ & $q=2$ \\
+%	\hline \\
+%	$S (\hat{\bar{\alpha}}_{t})$ & 3.87 & 1.40 & 1.97 & 0.76\vspace{2mm}\\
+%	i.i.d. & $<0.01$ & $<0.01$ & $<0.01$ & $<0.01$\\
+%	i.i.d. Block & $<0.01$ & $<0.01$ & $<0.01$ & $<0.01$\\
+%	Moving Block & $<0.01$ & $<0.01$ & $<0.01$ & $<0.01$ \\
+%	\bottomrule
+%\end{tabular}
 
 \begin{figure}[htbp]
 	\centering
@@ -342,28 +354,19 @@ $S (\hat{\bar{\alpha}}_{t})$ corresponds to the test statistic described in Equa
 %		\caption{State government education spending}
 %	\end{subfigure}
 %	~ 
-	\begin{subfigure}[t]{0.8\textwidth}
+	\begin{subfigure}[t]{0.75\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{plots/mc-exp-pc.png}
 		\caption{Log per-capita state government expenditure (1982\$)\label{mc-estimates-exp-pc}}
 	\end{subfigure}
 	~ 
-	\begin{subfigure}[t]{0.8\textwidth}
+	\begin{subfigure}[t]{0.75\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{plots/mc-rev-pc.png}
 		\caption{Log per-capita state government revenue (1982\$)\label{mc-estimates-rev-pc}}
 	\end{subfigure}
 	\caption{Top panel: Mean observed (solid time-series) and counterfactual predicted (dotted time-series) outcomes of treated units (PLS) and mean observed outcomes (dashed time-series) among control units (SLS). Dashed vertical line represents the initial treatment year of 1869. Bottom panel: Per-period average causal impacts of homestead exposure on PLS, or $\hat{\bar{\alpha}}_{t}$ in Equation (\ref{eq:avg-pointwise}). Shaded regions represent 95\% confidence intervals estimated by taking $\hat{\bar{\alpha}}_{t} \pm 1.96$ the standard error of the distribution of 1,000 bootstrap replicates of $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates}} 
 \end{figure}
-
-\begin{table}[htbp]
-	\captionsetup{font=normalsize}
-	\caption{Causal estimates on state capacity datasets.\label{mc-estimates}}
-	\begin{center}
-		\input{mc-estimates}
-	\end{center}
-\footnotesize{\emph{Notes:} $S (\hat{\bar{\alpha}}_{t})$ corresponds to the test statistic described in Equation (\ref{tstat}) and each value beneath is the randomization $p$-value corresponding to each permutation structure. See footnotes to Table \ref{placebo-tests}.}
-\end{table}
 
 \section{DID estimation} \label{DID}
 
