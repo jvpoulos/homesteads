@@ -11,7 +11,7 @@
 \usepackage[linewidth=1pt]{mdframed}
 \usepackage[margin={1in}]{geometry} %1 inch margins
 
-\title{Building State Capacity through Public Land Disposal: An Application of Matrix Completion for Counterfactual Prediction} 
+\title{State-building through Public Land Disposal? An Application of Matrix Completion Methods for Counterfactual Prediction} 
 \author[ ]{Jason Poulos\thanks{\emph{Address for correspondence:} Department of Political Science, 210 Barrows Hall \#1950, Berkeley, CA 94720-1950. \emph{Email:} \href{mailto:poulos@berkeley.edu}{\nolinkurl{poulos@berkeley.edu}}. I thank Sean Gailmard, Eric Schickler, Ross Mattheis, and Shom Mazumder for helpful comments. I acknowledge support of the National Science Foundation Graduate Research Fellowship (DGE 1106400). This work used the computer resources of Stampede2 at the Texas Advanced Computing Center (TACC) under an Extreme Science and Engineering Discovery Environment (XSEDE) startup allocation (TG-SES180010).}}
 \affil[ ]{University of California, Berkeley}
 \date{}
@@ -285,7 +285,11 @@ where $T_\star = T-T_0$ and $q \in \left\{1, 2\right\}$ in the applications. I e
 \hat{p} = \frac{1}{\Pi} \sum_{\pi \in \Pi} \textbf{1} \left\{S (\hat{\bar{\alpha}}_{\pi}) > S (\hat{\bar{\alpha}}_{t}) \right\}, \label{eq:pvalue}
 \end{equation}
 %
-where $\hat{\bar{\alpha}}_{\pi}$ is the average causal effect estimated on the permuted data $\mathbf{Y_\pi}$. The idea for permuting time periods rather than treatment assignment is if the data are stationary and weakly dependent, which is often the case in an aggregate time-series setting, then the distribution of the error term $\epsilon$ in Equation (\ref{eq:mc-Y}) should be the same in the pre- and post-periods. \citet{chernozhukov2017exact} prove that the $p$-values resulting from their inferential procedure are approximately unbiased assuming that the MC-NNM estimator is consistent, which can be verified by placebo tests such as those described in Section \ref{placebo-tests}. I rely on three types of permutations: \emph{i.i.d.} random permutations of the time index $t$; \emph{i.i.d. block} random permutations of $K=T/b$ non-overlapping blocks, where $b$ is selected according to the optimal block length for the dependent bootstrap \citep{politis2004automatic}; and \emph{moving block} permutations that circularly shift $t$ by one period, resulting in $T-1$ permutations. The latter two permutations are capable of preserving the dependence structure of the data and are thus appropriate for weakly dependent data. 
+where $\hat{\bar{\alpha}}_{\pi}$ is the average causal effect estimated on the permuted data $\mathbf{Y_\pi}$. The idea for permuting time periods rather than treatment assignment is if the data are stationary and weakly dependent, which is often the case in an aggregate time-series setting, then the distribution of the error term $\epsilon$ in Equation (\ref{eq:mc-Y}) should be the same in the pre- and post-periods. \citet{chernozhukov2017exact} prove that the $p$-values resulting from their inferential procedure are approximately unbiased assuming that the MC-NNM estimator is consistent, which can be verified by placebo tests such as those described in Section \ref{placebo-tests}. 
+
+I rely on three types of permutations: \emph{i.i.d.} random permutations of the time index $t$; \emph{i.i.d. block} random permutations of $K=T/b$ non-overlapping blocks, where $b$ is selected according to the optimal block length for the dependent bootstrap \citep{politis2004automatic}; and \emph{moving block} permutations that circularly shift $t$ by one period, resulting in $T-1$ permutations. The latter two permutations are capable of preserving the dependence structure of the data and are thus appropriate for weakly dependent data. 
+
+I also construct per-period randomization confidence intervals for $\hat{\bar{\alpha}}_{t}$ via hypothesis test inversion by randomly sampling without replacement a set of null trajectories $\left\{\bar{\alpha}^{o}_{t}\right\}_{t=T_0}^T \in \mathcal{A}_t$ from a vector of evenly-spaced candidate values. For each element of $\mathcal{A}_t$, I calculate $\hat{p} (\bar{\alpha}^{o}_{t})$ using Equation (\ref{eq:pvalue}) and return the 95\% confidence set $\mathcal{C} (t) = \bar{\alpha}^{o}_{t} \in \mathcal{A}_t: \left\{\hat{p} (\bar{\alpha}^{o}_{t}) > 0.05\right\}$. 
 
 \section{Impact of homestead acts on state capacity} \label{state-capacity}
 
@@ -326,13 +330,9 @@ The MC-NNM estimator outperforms DID and SVD estimators in terms of minimizing R
 
 In the main analyses, I fit the MC-NNM estimator described in Equation \ref{eq:mc-Y} on the entirety of observed entries in $\mathbf{Y}$ to recover its missing entries; i.e., the counterfactual outcomes of public land states. The value of the regularization term $\lambda$ is optimally selected on the value that yields the lowest average RMSE calculated during cross-validation. The average RMSE calculated on the validation sets during the $\lambda$ selection process are 0.41 and 0.48 for the expenditures and revenues outcomes, respectively. 
 
-The top panels of Figure \ref{mc-estimates-exp-pc} and \ref{mc-estimates-rev-pc} compare the means of the observed time-series of treated units and control units along with the mean predicted outcomes of treated units. The observed means of the treated and control units are essentially identical in the post-period. However, we are interested primarily in the difference in the observed and predicted treated unit outcomes, which is the quantity $\hat{\bar{\alpha}}_{t}$ in Equation (\ref{eq:avg-pointwise}). This quantity corresponds to the estimated per-period average causal effects of treatment exposure on the treated units and the per-period effects are plotted in the bottom panels. For display purposes, bootstrap confidence intervals for $\hat{\bar{\alpha}}_{t}$ are calculated by block resampling with optimal block lengths selected by the procedure described by \citet{politis2004automatic}. 
+The top panels of Figure \ref{mc-estimates-exp-pc} and \ref{mc-estimates-rev-pc} compare the means of the observed time-series of treated units and control units along with the mean predicted outcomes of treated units. The observed means of the treated and control units are essentially identical in the post-period. However, we are interested primarily in the difference in the observed and predicted treated unit outcomes, which is the quantity $\hat{\bar{\alpha}}_{t}$ in Equation (\ref{eq:avg-pointwise}). This quantity corresponds to the estimated per-period average causal effects of treatment exposure on the treated units and the per-period effects are plotted in the bottom panels. Bootstrap confidence intervals for $\hat{\bar{\alpha}}_{t}$ are calculated by block resampling with optimal block lengths selected by the procedure described by \citet{politis2004automatic}. 
 
-Table \ref{mc-estimates} reports randomization $p$-values from testing the null hypothesis of a zero effect:
-
-\begin{equation} \label{h0}
-\text{H}_0: S (\hat{\bar{\alpha}}_{t}) = 0  \, \hspace{5mm} \,  \text{for} \, \hspace{2mm} T_0 + 1 \leq t \leq T.
-\end{equation}
+The per-period impact time-series for both outcomes are essentially zero during the pre-period and within the bounds of the bootstrap confidence intervals, which demonstrates that the model is closely fitting the pre-period observations. Per-period impacts on state government spending peak in 1870, at the same time most western public states had received their first homestead entries, representing a 0.18 [-0.35, 0.71] log increase in per-capita expenditure. By 1876, after most public land states had been exposed to homesteads, homestead exposure decreases expenditure by 0.51 [-1.67, 0.66] log points, and the trajectory of causal impacts remains negative for the rest of the time-series. Similarly, per-period impacts on revenue peak in 1873, representing a 0.43 [-0.57, 1.44] log increase in per-capita revenues, at the same time southern public land states are exposed to homesteads. The causal impacts on revenue quickly decrease and remain negative for the remaining time-series; in 1877, exposure to homesteads confer a 0.45 [-1.51, 0.61] log point decrease in per-capita revenue. 
 
 \begin{figure}[htbp]
 	\centering
@@ -356,6 +356,13 @@ Table \ref{mc-estimates} reports randomization $p$-values from testing the null 
 	\caption{Top panel: Mean observed (solid time-series) and counterfactual predicted (dotted time-series) outcomes of treated units (PLS) and mean observed outcomes (dashed time-series) among control units (SLS), displayed for the time period of 1809 to 1982. Dashed vertical line represents the initial treatment year of 1869. Bottom panel: Per-period average causal impacts of homestead exposure on PLS, or $\hat{\bar{\alpha}}_{t}$ in Equation (\ref{eq:avg-pointwise}). Shaded regions represent 95\% confidence intervals estimated by taking $\hat{\bar{\alpha}}_{t} \pm 1.96$ the standard error of the distribution of 1,000 bootstrap replicates of $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates}} 
 \end{figure}
 
+The estimated bootstrap confidence intervals useful for evaluating per-period causal impacts but are not helpful in evaluating the overall effect of homestead policy. Table \ref{mc-estimates} reports randomization $p$-values from testing the null hypothesis of a zero effect:
+%
+\begin{equation} \label{h0}
+\text{H}_0: S (\hat{\bar{\alpha}}_{t}) = 0  \, \hspace{5mm} \,  \text{for} \, \hspace{2mm} T_0 + 1 \leq t \leq T.
+\end{equation}
+%
+The null hypothesis (\ref{h0}) can rejected at the 5\% level for both outcomes, both values of $q$, and all three permutation schemes. Note that the relevant test statistic $S (\hat{\bar{\alpha}}_{t})$ measures the trajectory of average causal effects in absolute terms and thus does not provide information on the direction or evolution of the causal effects over time. %Figures 9 and 10 display pointwise 90\% confidence intervals. We find similar results for all three methods, which suggest that, while the effect was not or only marginally significant in the first year, legalizing indoor prostitution significantly decreased both rape rates and the incidence of female gonorrhea thereafter.
 
 \begin{table}[htbp]
 	\captionsetup{font=normalsize}
