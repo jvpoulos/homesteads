@@ -377,32 +377,24 @@ The null hypothesis (\ref{h0}) can rejected at the 5\% level for both outcomes, 
 
 The matrix completion approach estimates the impact of a discrete event on a continuous outcome. However, in this application a continuous form of treatment is available in the form of homestead entries. Equation (\ref{eq:dd}) estimates a continuous version of the DID estimator described in Section \ref{sims}. Similar to the case of binary treatment, the continuous DID estimator is adapted to a setting of staggered adoption because the initial date of exposure to homesteads varies across public land states. The first difference comes from variation in the date of initial exposure to homesteads, and the second difference comes from variation in the intensity of homestead entries.
 %
-\begin{equation} %check Acemoglu model
-Y_{it} =  \gamma_i + \delta_t + \gamma \, d_{it} + \delta \, (d_{it} \cdot \text{homesteads}_{it}) + X_{ip}  + \epsilon_{it}. \label{eq:dd} 
+\begin{equation} 
+Y_{it} =  \gamma_i + \delta_t + \gamma \, M_{it} + \delta \, (M_{it} \cdot \text{homesteads}_{it}) + X_{ip}  + \epsilon_{it}. \label{eq:dd} 
 \end{equation}
 
-In this model, $\gamma_i$ and $\delta_t$ are state and year effects, respectively, and $X_{ip}$ is a matrix of unit-specific pre-intervention covariates included to control for parallel trends in pre-intervention agricultural productivity and railroad access to frontier lands. In the staggered adoption setting, entries in the treatment indicator $d_{it} = 1$ at $t \geq T_0$, where the initial exposure time $T_0$ varies across units. The continuous treatment exposure variable $\text{homesteads}_{it}$ measures the per-capita statewide sum of homestead entries in state $i$ and year $t$.
+As in the MC-NNM estimator (\ref{eq:mc-Y}), $\gamma_i$ and $\delta_t$ are state and year effects, respectively, and $X_{ip}$ is a matrix of unit-specific pre-intervention covariates included to control for parallel trends in pre-intervention agricultural productivity and railroad access to frontier lands. In the staggered adoption setting, entries in the treatment indicator $M_{it} = 1$ at $t \geq T_0$, where the initial exposure time $T_0$ varies across units. The continuous treatment exposure variable $\text{homesteads}_{it}$ measures the per-capita statewide sum of homestead entries in state $i$ and year $t$.
 
-The coefficient corresponding to the interaction term, $\hat{\delta}$, is the estimated average causal effect of exposure to homesteads. I use unit-stratified bootstrapped samples to construct nonparametric standard errors for $\hat{\delta}$.\footnote{The model assumes i.i.d. errors, which understates the standard errors for $\hat{\delta}$ when the regression errors are serially correlated, or $\mathrm{Corr} (\epsilon_{s, t}, \epsilon_{s, t-1}) \neq 0$, which can arise when the time-series lengths are not sufficiently long to reliably estimate the data generating process. \citet{bertrand2004much} show that the stratified bootstrap can be used to compute consistent standard errors when the number of units is sufficiently large.} It should be emphasized that the DID estimator in a staggered adoption setting relies on several strong assumptions regarding both the assignment mechanism, which in this application is the distribution of initial treatment times $T_0$, and the counterfactual outcomes of the treated units. The framework of \citet{athey2018design}, for instance, assumes the distribution of $T_0$ is completely random conditional on $X'_{i,1860}$. In the current application, this assumption ignores the possibility that initial exposure to homesteads might be determined by unobserved factors. The framework also that the counterfactual outcomes at time $t$ does not depend on the future date of treatment exposure if $t < T_0$ or the history of treatment exposure if $t > T_0$. Violations of these assumptions would arise if the homestead policy is anticipated prior to $T_0$ or if the size of frontier state government is determined by whether the state was exposed early or late to homesteads. 
+The coefficient corresponding to the interaction term, $\hat{\delta}$, is the estimated average causal effect of exposure to homesteads. I use unit-stratified bootstrapped samples to construct nonparametric standard errors for $\hat{\delta}$.\footnote{The model assumes i.i.d. errors, which understates the standard errors for $\hat{\delta}$ when the regression errors are serially correlated, or $\mathrm{Corr} (\epsilon_{it}, \epsilon_{i,t-1}) \neq 0$, which can arise when the time-series lengths are not sufficiently long to reliably estimate the data generating process. \citet{bertrand2004much} show that the stratified bootstrap can be used to compute consistent standard errors when the number of units is sufficiently large.} It should be emphasized that the DID estimator in a staggered adoption setting relies on several strong assumptions regarding both the assignment mechanism, which in this application is the distribution of initial treatment times $T_0$, and the counterfactual outcomes of the treated units. The framework of \citet{athey2018design}, for instance, assumes the distribution of $T_0$ is completely random conditional on $X'_{i,1860}$. In the current application, this assumption ignores the possibility that initial exposure to homesteads might be determined by unobserved factors. The framework also that the counterfactual outcomes at time $t$ does not depend on the future date of treatment exposure if $t < T_0$ or the history of treatment exposure if $t > T_0$. Violations of these assumptions would arise if the homestead policy is anticipated prior to $T_0$ or if the size of frontier state government is determined by whether the state was exposed early or late to homesteads. 
 
 \subsection{DID estimates}
 I apply the DID estimator on two unbalanced state-year panel datasets: the panel of southern public land states spans  from 1823 to 1982 and has 38 observations prior to the enactment of the SHA. The panel of western public land states spans from 1810 to 1982 and has 52 pre-intervention years. The treatment effect estimates, summarized in Fig.~\ref{fig:did-state-robust}, indicate that per-capita cumulative homesteads significantly increase per-capita revenue in western states by 0.02 log points [0.0007, 0.04] and has a nonsignificant impact on revenue in southern states. Estimates on per-capita expenditure in the South and West are also nonsignificant. Per-capita cumulative homesteads significantly raise education spending in the South by 0.17 log points [0.03, 0.28], while having no impact on education spending in the West. As expected, withholding average farm values from the DID specification biases treatment effect estimates upwards (Fig.~SM-\ref{fig:did-state-robust}).
 
-\begin{figure}[htbp]
+\begin{table}[htbp]
 	\begin{center}
-		\includegraphics[width=\textwidth]{/media/jason/Dropbox/github/land-reform/results/plots/did-state-robust.png}
+		\caption{DID estimates: Impact of homestead entries on per-capita state government finances. \label{dd-capacity}}
+		\resizebox{.8\width}{!}{\input{dd-capacity}}
 	\end{center}
-	\caption{DID estimates of log per-capita cumulative homesteads on log per-capita state government finances. Lines represent 95\% confidence intervals are constructed using 10,000 state-stratified bootstrap samples. Lines with triangles represent western public land state estimates and lines with circles represent southern public land state estimates.  \label{fig:did-state-robust}}
-\end{figure}
-
-%+Farm values *cumulative*
-%south-educpc: 0.17 [0.03, 0.28]
-%south-exppc: 0.03 [-0.03, 0.09]
-%south-revpc: 0.03 [-0.03, 0.09]
-%
-%west-educpc: -0.005 [-0.04, 0.03]
-%west-exppc: 0.01 [-0.007, 0.03]
-%west-revpc: 0.02 [0.0007, 0.04]
+	\footnotesize{Notes: Values in brackets represent 95\% confidence intervals constructed using 1,000 state-stratified bootstrap samples.}
+\end{table}
 
 \subsection{Mechanisms: Inequality and railroads}  \label{mechanisms}
 

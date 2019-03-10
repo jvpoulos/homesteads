@@ -5,98 +5,97 @@ library(data.table)
 library(dplyr)
 library(boot)
 
+# Setup parallel processing 
+library(parallel)
+library(doParallel)
+
+cores <- 4#detectCores()
+
+cl <- parallel::makeForkCluster(cores)
+
+doParallel::registerDoParallel(cores) # register cores (<p)
+
+RNGkind("L'Ecuyer-CMRG") # ensure random number generation
+
 source(paste0(code.directory,"RunDiD.R"))
 
-# Load data
+# Load capacity data
 capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes.rds"))
 capacity.covars <- readRDS(paste0(data.directory,"capacity-covariates.rds"))
 capacity.covars <- data.frame(capacity.covars)
 capacity.covars$state <- rownames(capacity.covars)
 
 capacity.outcomes.M <- list("rev.pc"=capacity.outcomes[["rev.pc"]]$M,"exp.pc"=capacity.outcomes[["exp.pc"]]$M,"educ.pc"=capacity.outcomes[["educ.pc"]]$M)
+capacity.outcomes.mask <- list("rev.pc"=capacity.outcomes[["rev.pc"]]$mask,"exp.pc"=capacity.outcomes[["exp.pc"]]$mask,"educ.pc"=capacity.outcomes[["educ.pc"]]$mask)
 
-capacity.outcomes.panel <- lapply(capacity.outcomes.M, melt)
+capacity.outcomes.panel <- lapply(capacity.outcomes.M, melt, value.name="outcome")
+capacity.outcomes.mask <- lapply(capacity.outcomes.mask, melt, value.name="mask")
 
-capacity.outcomes.panel <- lapply(capacity.outcomes.panel, merge, y=capacity.covars, by.x="Var1",by.y="state", all.x=TRUE)
+capacity.outcomes.panel <- lapply(capacity.outcomes.panel, function(x){
+  colnames(x) <- c("state","year","outcome")
+  return(x)
+})
+capacity.outcomes.mask <- lapply(capacity.outcomes.mask, function(x){
+  colnames(x) <- c("state","year","mask")
+  return(x)
+})
+
+capacity.outcomes.panel$rev.pc <- merge(x=capacity.outcomes.panel$rev.pc, y=capacity.outcomes.mask$rev.pc, by=c("state","year"), all.x=TRUE)
+capacity.outcomes.panel$exp.pc <- merge(x=capacity.outcomes.panel$exp.pc, y=capacity.outcomes.mask$exp.pc, by=c("state","year"), all.x=TRUE)
+capacity.outcomes.panel$educ.pc <- merge(x=capacity.outcomes.panel$educ.pc, y=capacity.outcomes.mask$educ.pc, by=c("state","year"), all.x=TRUE)
+
+capacity.outcomes.panel <- lapply(capacity.outcomes.panel, merge, y=capacity.covars, by="state",all.x=TRUE)
 
 # Log per-capita total number of patents issued under the HSA 
-#funds.did<- homestead.funds.long
 
-# Create var for when treatment started
+homesteads.state <- patents.sum %>%
+  group_by(state_code,year) %>% #group counties by state and year
+  dplyr::mutate(homesteads.sum=sum(homesteads)) %>%
+  distinct(state_code,year,.keep_all = TRUE) %>%
+  arrange(state_code,year) %>%
+  select(state_code,year, homesteads.sum, ns.pop)
 
-funds.did$time <- NA
-funds.did$time <- 0
-funds.did$time[(funds.did$year >= 1862)] <- 1
+homesteads.state <- homesteads.state  %>%
+  group_by(state_code) %>%
+  dplyr::mutate(homesteads.pc = log((homesteads.sum/ns.pop) + .Machine
+                $double.eps)) %>%
+  select(state_code,year, homesteads.pc) %>%
+  arrange(state_code,year)
 
-funds.did$treat <- 0
-funds.did$treat <- funds.did$homesteads.pc 
+capacity.outcomes.panel <- lapply(capacity.outcomes.panel, merge, y=homesteads.state, by.x=c("state","year"),by.y=c("state_code","year"), all.x=TRUE)
 
-funds.did$did <- NA
-funds.did$did <- funds.did$treat* funds.did$time 
+# NAs are 0
+capacity.outcomes.panel$rev.pc$homesteads.pc[is.na(capacity.outcomes.panel$rev.pc$homesteads.pc)] <- log(.Machine
+                                                                                                         $double.eps)
+capacity.outcomes.panel$exp.pc$homesteads.pc[is.na(capacity.outcomes.panel$exp.pc$homesteads.pc)] <- log(.Machine
+                                                                                                         $double.eps)
+capacity.outcomes.panel$educ.pc$homesteads.pc[is.na(capacity.outcomes.panel$educ.pc$homesteads.pc)] <- log(.Machine
+                                                                                                         $double.eps)
+
+# create interaction term
+
+capacity.outcomes.panel <- lapply(capacity.outcomes.panel, function(x){
+  x$did <- NA
+  x$did <- x$mask*x$homesteads.pc
+  return(x)
+})
+
+# rev.pc
+f1 <- formula(outcome ~ factor(state) + 
+                factor(year) + mask + did)
+
+f2 <- formula(outcome ~ factor(state) + 
+                factor(year) + mask + did + faval.1850+faval.1860+farmsize.1860+track2.1850+track2.1860)
 
 # DD Estimates
 
-# educ.pc
-educ.f1 <- formula(educ.pc ~ factor(state_code) + 
-                time + did)
-
-educ.f2 <- formula(educ.pc ~ factor(state_code) + 
-                farmval + 
-                time + did)
-
-# All years
-educ.pc.all.did <- boot(data=funds.did,
-                        statistic=RunDiD,
-                        f1=educ.f1,
-                        R=1000,
-                        strata=as.factor(funds.did$state_code), # stratify by state
-                        parallel="multicore", ncpus = cores)
-
-educ.pc.all.did.delta <- educ.pc.all.did$t0
-
-educ.pc.all.did.CI <- boot.ci(educ.pc.all.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-
-# All years
-educ.pc.all.robust.did <- boot(data=funds.did,
-                        statistic=RunDiD,
-                        f1=educ.f2,
-                        R=1000,
-                        strata=as.factor(funds.did$state_code), # stratify by state
-                        parallel="multicore", ncpus = cores)
-
-educ.pc.all.robust.did.delta <- educ.pc.all.robust.did$t0
-educ.pc.all.robust.did.delta
-
-educ.pc.all.robust.did.CI <- boot.ci(educ.pc.all.robust.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-educ.pc.all.robust.did.CI
-
-# rev.pc
-rev.pc.f1 <- formula(rev.pc ~ factor(state_code) + 
-                     time + did)
-
-rev.pc.f2 <- formula(rev.pc ~ factor(state_code) + 
-                     farmval +
-                     time + did)
-
-# All years
-rev.pc.all.did <- boot(data=funds.did,
-                        statistic=RunDiD,
-                        f1=rev.pc.f1,
-                        R=1000,
-                        strata=as.factor(funds.did$state_code), # stratify by state
-                        parallel="multicore", ncpus = cores)
-
-rev.pc.all.did.delta <- rev.pc.all.did$t0
-
-rev.pc.all.did.CI <- boot.ci(rev.pc.all.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-
-# All years
-rev.pc.all.robust.did <- boot(data=funds.did,
-                               statistic=RunDiD,
-                               f1=rev.pc.f2,
-                               R=1000,
-                               strata=as.factor(funds.did$state_code), # stratify by state
-                               parallel="multicore", ncpus = cores)
+# Covars
+rev.pc.all.robust.did <- boot(data=capacity.outcomes.panel$rev.pc,
+                              statistic=RunDiD,
+                              f1=f2,
+                              R=1000,
+                              strata=as.factor(capacity.outcomes.panel$rev.pc$state), # stratify by state
+                              parallel="multicore", ncpus = cores)
 
 rev.pc.all.robust.did.delta <- rev.pc.all.robust.did$t0
 rev.pc.all.robust.did.delta
@@ -104,32 +103,16 @@ rev.pc.all.robust.did.delta
 rev.pc.all.robust.did.CI <- boot.ci(rev.pc.all.robust.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
 rev.pc.all.robust.did.CI
 
-# exp.pc
-exp.pc.f1 <- formula(exp.pc ~ factor(state_code) + 
-                       time + did)
+rev.pc.all.robust.did.delta
+rev.pc.all.robust.did.CI
+nobs(lm(f2, data=capacity.outcomes.panel$rev.pc))
 
-exp.pc.f2 <- formula(exp.pc ~ factor(state_code) + 
-                       farmval +
-                       time + did)
-
-# All years
-exp.pc.all.did <- boot(data=funds.did,
-                       statistic=RunDiD,
-                       f1=exp.pc.f1,
-                       R=1000,
-                       strata=as.factor(funds.did$state_code), # stratify by state
-                       parallel="multicore", ncpus = cores)
-
-exp.pc.all.did.delta <- exp.pc.all.did$t0
-
-exp.pc.all.did.CI <- boot.ci(exp.pc.all.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-
-# All years
-exp.pc.all.robust.did <- boot(data=funds.did,
+# Covars
+exp.pc.all.robust.did <- boot(data=capacity.outcomes.panel$exp.pc,
                               statistic=RunDiD,
-                              f1=exp.pc.f2,
+                              f1=f2,
                               R=1000,
-                              strata=as.factor(funds.did$state_code), # stratify by state
+                              strata=as.factor(capacity.outcomes.panel$exp.pc$state), # stratify by state
                               parallel="multicore", ncpus = cores)
 
 exp.pc.all.robust.did.delta <- exp.pc.all.robust.did$t0
@@ -138,70 +121,6 @@ exp.pc.all.robust.did.delta
 exp.pc.all.robust.did.CI <- boot.ci(exp.pc.all.robust.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
 exp.pc.all.robust.did.CI
 
-## Plot all estimates
-
-# Data for plot
-
-plot.data.did <- data.frame(region=rep(c("West","South"),each=3),
-                            variable= rep(c("Education","Revenue", "Expenditures"),times=2),
-                                y = c(educ.pc.all.did.delta,
-                                      rev.pc.all.did.delta,
-                                      exp.pc.all.did.delta,
-                                      educ.pc.all.south.did.delta,
-                                      rev.pc.all.south.did.delta,
-                                      exp.pc.all.south.did.delta),
-                            y.lo = c(educ.pc.all.did.CI[1],
-                                  rev.pc.all.did.CI[1],
-                                  exp.pc.all.did.CI[1],
-                                  educ.pc.all.south.did.CI[1],
-                                  rev.pc.all.south.did.CI[1],
-                                  exp.pc.all.south.did.CI[1]),
-                            y.hi = c(educ.pc.all.did.CI[2],
-                                      rev.pc.all.did.CI[2],
-                                      exp.pc.all.did.CI[2],
-                                      educ.pc.all.south.did.CI[2],
-                                      rev.pc.all.south.did.CI[2],
-                                      exp.pc.all.south.did.CI[2]))
-
-
-# Plot forest plots
-
-source(paste0(code.directory,"ForestPlot2.R"))
-
-plot.data.did$variable <- as.factor(plot.data.did$variable)
-did.state <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita cumulative homesteads",xlab="",title="",leglab="Region") + theme(legend.position="none")
-
-ggsave(paste0(results.directory,"plots/did-state.png"), did.state, width=11, height=8.5)
-
-## Plot all estimates (robust)
-
-# Data for plot
-
-plot.data.did <- data.frame(region=rep(c("West","South"),each=3),
-                            variable= rep(c("Education","Revenue", "Expenditures"),times=2),
-                            y = c(educ.pc.all.robust.did.delta,
-                                  rev.pc.all.robust.did.delta,
-                                  exp.pc.all.robust.did.delta,
-                                  educ.pc.all.south.robust.did.delta,
-                                  rev.pc.all.south.robust.did.delta,
-                                  exp.pc.all.south.robust.did.delta),
-                            y.lo = c(educ.pc.all.robust.did.CI[1],
-                                     rev.pc.all.robust.did.CI[1],
-                                     exp.pc.all.robust.did.CI[1],
-                                     educ.pc.all.south.robust.did.CI[1],
-                                     rev.pc.all.south.robust.did.CI[1],
-                                     exp.pc.all.south.robust.did.CI[1]),
-                            y.hi = c(educ.pc.all.robust.did.CI[2],
-                                     rev.pc.all.robust.did.CI[2],
-                                     exp.pc.all.robust.did.CI[2],
-                                     educ.pc.all.south.robust.did.CI[2],
-                                     rev.pc.all.south.robust.did.CI[2],
-                                     exp.pc.all.south.robust.did.CI[2]))
-
-
-# Plot forest plots
-
-plot.data.did$variable <- as.factor(plot.data.did$variable)
-did.state.robust <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita cumulative homesteads",xlab="",title="",leglab="Region")  + theme(legend.position="none")
-
-ggsave(paste0(results.directory,"plots/did-state-robust.png"), did.state.robust, width=11, height=8.5)
+exp.pc.all.robust.did.delta
+exp.pc.all.robust.did.CI
+nobs(lm(f2, data=capacity.outcomes.panel$exp.pc))
