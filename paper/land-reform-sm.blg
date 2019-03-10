@@ -3,44 +3,44 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: land-reform-sm.aux
 The style file: chicago.bst
 Database file #1: references.bib
-You've used 7 entries,
+You've used 6 entries,
             2861 wiz_defined-function locations,
-            650 strings with 6350 characters,
-and the built_in function-call counts, 4110 in all, are:
-= -- 350
-> -- 276
+            643 strings with 6198 characters,
+and the built_in function-call counts, 3530 in all, are:
+= -- 298
+> -- 250
 < -- 0
-+ -- 76
-- -- 91
-* -- 344
-:= -- 775
-add.period$ -- 21
-call.type$ -- 7
-change.case$ -- 48
-chr.to.int$ -- 6
-cite$ -- 7
-duplicate$ -- 112
-empty$ -- 255
-format.name$ -- 102
-if$ -- 746
++ -- 70
+- -- 81
+* -- 297
+:= -- 669
+add.period$ -- 18
+call.type$ -- 6
+change.case$ -- 42
+chr.to.int$ -- 5
+cite$ -- 6
+duplicate$ -- 94
+empty$ -- 211
+format.name$ -- 92
+if$ -- 641
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 3
-newline$ -- 38
-num.names$ -- 68
-pop$ -- 31
+missing$ -- 2
+newline$ -- 33
+num.names$ -- 58
+pop$ -- 28
 preamble$ -- 1
-purify$ -- 88
+purify$ -- 76
 quote$ -- 0
-skip$ -- 116
+skip$ -- 99
 stack$ -- 0
-substring$ -- 218
-swap$ -- 37
+substring$ -- 173
+swap$ -- 31
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 136
+type$ -- 116
 warning$ -- 0
-while$ -- 63
+while$ -- 51
 width$ -- 0
-write$ -- 93
+write$ -- 80
