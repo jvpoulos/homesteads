@@ -70,10 +70,6 @@ source(paste0(code.directory,'mc-CI-plots.R'))
 
 source(paste0(code.directory,'dd-capacity.R')) 
 
-# DD estimates on RR access
-
-source(paste0(code.directory,'dd-railroads.R'))
-
 # DD estimates on inequality
 
 source(paste0(code.directory,'dd-inequality.R')) # run dd-railroads first

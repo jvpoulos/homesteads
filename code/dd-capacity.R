@@ -1,14 +1,26 @@
 ###################################
 # DD Estimation (state-level measures)   #
 ###################################
+library(data.table)
 library(dplyr)
 library(boot)
 
 source(paste0(code.directory,"RunDiD.R"))
 
-## Western public land states
+# Load data
+capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes.rds"))
+capacity.covars <- readRDS(paste0(data.directory,"capacity-covariates.rds"))
+capacity.covars <- data.frame(capacity.covars)
+capacity.covars$state <- rownames(capacity.covars)
 
-funds.did<- homestead.funds.long[homestead.funds.long$state_code %in% western.pub,]
+capacity.outcomes.M <- list("rev.pc"=capacity.outcomes[["rev.pc"]]$M,"exp.pc"=capacity.outcomes[["exp.pc"]]$M,"educ.pc"=capacity.outcomes[["educ.pc"]]$M)
+
+capacity.outcomes.panel <- lapply(capacity.outcomes.M, melt)
+
+capacity.outcomes.panel <- lapply(capacity.outcomes.panel, merge, y=capacity.covars, by.x="Var1",by.y="state", all.x=TRUE)
+
+# Log per-capita total number of patents issued under the HSA 
+#funds.did<- homestead.funds.long
 
 # Create var for when treatment started
 
@@ -126,108 +138,6 @@ exp.pc.all.robust.did.delta
 exp.pc.all.robust.did.CI <- boot.ci(exp.pc.all.robust.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
 exp.pc.all.robust.did.CI
 
-## Southern public land states
-
-funds.did.south<- homestead.funds.long[homestead.funds.long$state_code %in% southern.pub,]
-
-# Create var for when treatment started
-
-funds.did.south$time <- NA
-funds.did.south$time <- 0
-funds.did.south$time[(funds.did.south$year >= 1866)] <- 1
-
-funds.did.south$treat <- 0
-funds.did.south$treat <- funds.did.south$homesteads.pc # treat: homesteads.pc (ln)
-
-funds.did.south$did <- NA
-funds.did.south$did <- funds.did.south$treat* funds.did.south$time 
-
-# DD Estimates
-
-# educ.pc
-
-# All years
-educ.pc.all.south.did <- boot(data=funds.did.south,
-                        statistic=RunDiD,
-                        f1=educ.f1,
-                        R=1000,
-                        strata=as.factor(funds.did.south$state_code), # stratify by state
-                        parallel="multicore", ncpus = cores)
-
-educ.pc.all.south.did.delta <- educ.pc.all.south.did$t0
-
-educ.pc.all.south.did.CI <- boot.ci(educ.pc.all.south.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-
-# All years
-educ.pc.all.south.robust.did <- boot(data=funds.did.south,
-                               statistic=RunDiD,
-                               f1=educ.f2,
-                               R=1000,
-                               strata=as.factor(funds.did.south$state_code), # stratify by state
-                               parallel="multicore", ncpus = cores)
-
-educ.pc.all.south.robust.did.delta <- educ.pc.all.south.robust.did$t0
-educ.pc.all.south.robust.did.delta
-
-educ.pc.all.south.robust.did.CI <- boot.ci(educ.pc.all.south.robust.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-educ.pc.all.south.robust.did.CI
-
-# rev.pc
-
-# All years
-rev.pc.all.south.did <- boot(data=funds.did.south,
-                       statistic=RunDiD,
-                       f1=rev.pc.f1,
-                       R=1000,
-                       strata=as.factor(funds.did.south$state_code), # stratify by state
-                       parallel="multicore", ncpus = cores)
-
-rev.pc.all.south.did.delta <- rev.pc.all.south.did$t0
-
-rev.pc.all.south.did.CI <- boot.ci(rev.pc.all.south.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-
-# All years
-rev.pc.all.south.robust.did <- boot(data=funds.did.south,
-                              statistic=RunDiD,
-                              f1=rev.pc.f2,
-                              R=1000,
-                              strata=as.factor(funds.did.south$state_code), # stratify by state
-                              parallel="multicore", ncpus = cores)
-
-rev.pc.all.south.robust.did.delta <- rev.pc.all.south.robust.did$t0
-rev.pc.all.south.robust.did.delta
-
-rev.pc.all.south.robust.did.CI <- boot.ci(rev.pc.all.south.robust.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-rev.pc.all.south.robust.did.CI
-
-# exp.pc
-
-# All years
-exp.pc.all.south.did <- boot(data=funds.did.south,
-                       statistic=RunDiD,
-                       f1=exp.pc.f1,
-                       R=1000,
-                       strata=as.factor(funds.did.south$state_code), # stratify by state
-                       parallel="multicore", ncpus = cores)
-
-exp.pc.all.south.did.delta <- exp.pc.all.south.did$t0
-
-exp.pc.all.south.did.CI <- boot.ci(exp.pc.all.south.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-
-# All years
-exp.pc.all.south.robust.did <- boot(data=funds.did.south,
-                              statistic=RunDiD,
-                              f1=exp.pc.f2,
-                              R=1000,
-                              strata=as.factor(funds.did.south$state_code), # stratify by state
-                              parallel="multicore", ncpus = cores)
-
-exp.pc.all.south.robust.did.delta <- exp.pc.all.south.robust.did$t0
-exp.pc.all.south.robust.did.delta
-
-exp.pc.all.south.robust.did.CI <- boot.ci(exp.pc.all.south.robust.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-exp.pc.all.south.robust.did.CI
-
 ## Plot all estimates
 
 # Data for plot
@@ -256,20 +166,7 @@ plot.data.did <- data.frame(region=rep(c("West","South"),each=3),
 
 # Plot forest plots
 
-ForestPlot2 <- function(d, xlab, ylab, title="", leglab, ylim=NULL){
-  p <- ggplot(d, aes(x=variable, y = y, ymin=y.lo, ymax=y.hi,colour=region, shape=region)) +
-    geom_pointrange(size=1, alpha=0.6) +
-    #  coord_flip() +
-    geom_hline(data=data.frame(x=0, y = 1), aes(x=x, yintercept=0), colour="black", lty=2) +
- #     scale_y_continuous(labels = scales::percent) +
- #   labs(colour = leglab, shape=region) +
-    ggtitle(title) +
-    theme(plot.title = element_text(hjust = 0.5)) +
-    coord_cartesian(ylim=ylim) +
-    ylab(ylab) +
-    xlab(xlab) #switch because of the coord_flip() above
-  return(p)
-}
+source(paste0(code.directory,"ForestPlot2.R"))
 
 plot.data.did$variable <- as.factor(plot.data.did$variable)
 did.state <- ForestPlot2(plot.data.did,ylab="Estimated effect of log per-capita cumulative homesteads",xlab="",title="",leglab="Region") + theme(legend.position="none")

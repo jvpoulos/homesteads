@@ -1,4 +1,3 @@
-
 # CIs
 
 iid_block_ci <- readRDS(paste0(results.directory, "mc/iid_block_ci.rds"))
