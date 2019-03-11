@@ -55,16 +55,16 @@ source("ChernoCI.R")
 # CIs
 
 moving.block.ci <- mclapply(capacity.outcomes.list, 
-                         ChernoCI, alpha=0.025, l=1000, prec=1e-02, ns=500, treat_indices_order=treat_indices_order, q=c(1,2), permtype="moving.block",t0=t0,imputed=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                         ChernoCI, alpha=0.025, l=500, prec=1e-02, ns=100, treat_indices_order=treat_indices_order, q=c(1,2), permtype="moving.block",t0=t0,imputed=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 
 saveRDS(moving.block.ci,"moving_block_ci.rds")
 
 iid.block.ci <- mclapply(capacity.outcomes.list, 
-                      ChernoCI, alpha=0.025, l=1000, prec=1e-02, ns=500, treat_indices_order=treat_indices_order, q=c(1,2), permtype="iid.block",t0=t0,imputed=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                      ChernoCI, alpha=0.025, l=500, prec=1e-02, ns=100, treat_indices_order=treat_indices_order, q=c(1,2), permtype="iid.block",t0=t0,imputed=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 
 saveRDS(iid.block.ci,"iid_block_ci.rds")
 
 iid.ci <- mclapply(capacity.outcomes.list, 
-                         ChernoCI, alpha=0.025, l=1000, prec=1e-02, ns=500, treat_indices_order=treat_indices_order, q=c(1,2), permtype="iid",t0=t0,imputed=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
+                         ChernoCI, alpha=0.025, l=500, prec=1e-02, ns=100, treat_indices_order=treat_indices_order, q=c(1,2), permtype="iid",t0=t0,imputed=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)
 
 saveRDS(iid.ci,"iid_ci.rds")

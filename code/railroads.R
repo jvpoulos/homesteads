@@ -153,6 +153,10 @@ rr.inter.m.county <- rr.inter.m %>%
 
 rr.inter.m.county <- rr.inter.m.county[!duplicated(rr.inter.m.county[c("InOpBy","FIPS")]),] # keep one county-year obs
 
+rr.inter.m.county <- as.data.frame(rr.inter.m.county)
+
+rr.inter.m.county$year <- rr.inter.m.county$InOpBy
+
 # Create access measures - state level
 rr.inter.m.state <- rr.inter.m %>% 
   filter(!is.na(state)) %>% # rm DC & territories

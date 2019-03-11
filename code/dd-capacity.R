@@ -62,7 +62,7 @@ capacity.outcomes.panel <- lapply(capacity.outcomes.panel, merge, y=homesteads.s
 # NAs are 0
 capacity.outcomes.panel$rev.pc$homesteads.pc[is.na(capacity.outcomes.panel$rev.pc$homesteads.pc)] <- 0
 capacity.outcomes.panel$exp.pc$homesteads.pc[is.na(capacity.outcomes.panel$exp.pc$homesteads.pc)] <- 0
-capacity.outcomes.panel$educ.pc$homesteads.pc[is.na(capacity.outcomes.panel$educ.pc$homesteads.pc)] <- 0
+capacity.outcomes.panel$educ.pc$homesteads.pc[is.na(capacity.outcomes.panel$educ.pc$homesteads.pc)] <- 0 # take logs line 99
 
 ## RR access (incl. post-treatment access)
 
@@ -96,37 +96,37 @@ capacity.outcomes.panel$rev.pc[capacity.outcomes.panel$rev.pc$year<=1868,] <- ca
   group_by(state) %>% 
   fill(track2, faval, farmsize) %>% #default direction down
   fill(track2, faval, farmsize, .direction = "up") %>% 
-  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc:farmsize) # take logs
+  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc,faval,farmsize) # take logs
 
 capacity.outcomes.panel$rev.pc[capacity.outcomes.panel$rev.pc$year>1868,] <- capacity.outcomes.panel$rev.pc[capacity.outcomes.panel$rev.pc$year>1868,]%>% 
   group_by(state) %>% 
   fill(track2, faval, farmsize) %>% #default direction down
   fill(track2, faval, farmsize, .direction = "up") %>% 
-  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc:farmsize) # take logs
+  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc,faval,farmsize) # take logs
 
 capacity.outcomes.panel$exp.pc[capacity.outcomes.panel$exp.pc$year<=1868,] <- capacity.outcomes.panel$exp.pc[capacity.outcomes.panel$exp.pc$year<=1868,]%>% 
   group_by(state) %>% 
   fill(track2, faval, farmsize) %>% #default direction down
   fill(track2, faval, farmsize, .direction = "up") %>% 
-  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc:farmsize) # take logs
+  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc,faval,farmsize) # take logs
 
 capacity.outcomes.panel$exp.pc[capacity.outcomes.panel$exp.pc$year>1868,] <- capacity.outcomes.panel$exp.pc[capacity.outcomes.panel$exp.pc$year>1868,]%>% 
   group_by(state) %>% 
   fill(track2, faval, farmsize) %>% #default direction down
   fill(track2, faval, farmsize, .direction = "up") %>% 
-  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc:farmsize) # take logs
+  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc,faval,farmsize) # take logs
 
 capacity.outcomes.panel$educ.pc[capacity.outcomes.panel$educ.pc$year<=1868,] <- capacity.outcomes.panel$educ.pc[capacity.outcomes.panel$educ.pc$year<=1868,]%>% 
   group_by(state) %>% 
   fill(track2, faval, farmsize) %>% #default direction down
   fill(track2, faval, farmsize, .direction = "up") %>% 
-  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc:farmsize) # take logs
+  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc,faval,farmsize) # take logs
 
 capacity.outcomes.panel$educ.pc[capacity.outcomes.panel$educ.pc$year>1868,] <- capacity.outcomes.panel$educ.pc[capacity.outcomes.panel$educ.pc$year>1868,]%>% 
   group_by(state) %>% 
   fill(track2, faval, farmsize) %>% #default direction down
   fill(track2, faval, farmsize, .direction = "up") %>% 
-  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc:farmsize) # take logs
+  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc,faval,farmsize) # take logs
                                   
 ## Create interaction term
 
@@ -153,10 +153,8 @@ rev.pc.all.robust.did <- boot(data=capacity.outcomes.panel$rev.pc,
                               parallel="multicore", ncpus = cores)
 
 rev.pc.all.robust.did.delta <- rev.pc.all.robust.did$t0
-rev.pc.all.robust.did.delta
 
 rev.pc.all.robust.did.CI <- boot.ci(rev.pc.all.robust.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-rev.pc.all.robust.did.CI
 
 rev.pc.all.robust.did.delta
 rev.pc.all.robust.did.CI
@@ -173,10 +171,8 @@ exp.pc.all.robust.did <- boot(data=capacity.outcomes.panel$exp.pc,
                               parallel="multicore", ncpus = cores)
 
 exp.pc.all.robust.did.delta <- exp.pc.all.robust.did$t0
-exp.pc.all.robust.did.delta
 
 exp.pc.all.robust.did.CI <- boot.ci(exp.pc.all.robust.did, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
-exp.pc.all.robust.did.CI
 
 exp.pc.all.robust.did.delta
 exp.pc.all.robust.did.CI
