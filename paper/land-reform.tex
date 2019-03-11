@@ -326,7 +326,7 @@ Further evidence of the consistency of the MC-NNM estimator is provided in Figur
 
 The MC-NNM estimator outperforms DID and SVD estimators in terms of minimizing RMSE for each ratio $T_0/T$. At $T_0/T \geq 0.5$, the estimator generally yields comparable error rates to PCA, SCM, and vertical regression estimators. 
 
-\subsection{Main estimates}
+\subsection{Main estimates} \label{main-estimates}
 
 In the main analyses, I fit the MC-NNM estimator described in Equation \ref{eq:mc-Y} on the entirety of observed entries in $\mathbf{Y}$ to recover its missing entries; i.e., the counterfactual outcomes of public land states. The value of the regularization term $\lambda$ is optimally selected on the value that yields the lowest average RMSE calculated during cross-validation. The average RMSE calculated on the validation sets during the $\lambda$ selection process are 0.41 and 0.48 for the expenditures and revenues outcomes, respectively. 
 
@@ -387,7 +387,7 @@ The coefficient corresponding to the interaction term, $\hat{\phi}$, is the esti
 
 \subsection{DID estimates}
 
-I apply the DID estimator (\ref{eq:dd}) on balanced state-year panel datasets containing the expenditure and revenue data described in Section \ref{state-capacity}. The covariate matrix $X_{it}$ includes measures of railroad access, average farm sizes, and average farm values. Missing values in $X_{it}$ are imputed separately in the time periods before and after 1868, carrying the last observation forward and impute remaining missing values by carrying the next observation backward. The treatment effect estimates, summarized in Table \ref{dd-estimates}, indicate that per-capita homestead entries significantly decrease per-capita expenditure and revenue by about 0.02 log points [-0.02, -0.01]. 
+I apply the DID estimator (\ref{eq:dd}) on balanced state-year panel datasets covering state government finances from the years 1783 to 1982 \ref{state-capacity}. The covariate matrix $X_{it}$ includes measures of railroad access, farm sizes, and farm values. Missing values in $X_{it}$ are imputed separately in the time periods before and after 1868, carrying the last observation forward and impute remaining missing values by carrying the next observation backward. Table \ref{dd-estimates} reports the treatment effect estimates corresponding to the interaction term $\hat{\phi}$. The estimates indicate that a 10\% increase in log per-capita homesteads is expected to significantly decrease log per-capita stage government finances by about 0.1\%. These estimates are considerably smaller in magnitude -- albeit in the the same direction-- as the per-period MC-NNM estimates presented in Section \ref{main-estimates}.
 
 \begin{table}[htbp]
 	\begin{center}
@@ -403,7 +403,7 @@ Through which channels do homesteads affect state capacity? Land inequality is e
 
 In Fig. SM-\ref{fig:ineq-capacity}, a bivariate regression model yields a positive relationship between land inequality and state government finances during the period of 1860 to 1950, especially at higher levels of inequality. This relationship points to inequality as a potential causal mechanism underlying the relationship between homesteads and state capacity; however, this relationship is subject to reverse causality because state policies determining expenditures and revenue can also shape the distribution of landownership. 
 
-Table \ref{dd-estimates} presents DID estimates of the impact of log per-capita homesteads on land inequality, in counties during the period of 1860 to 1950. Average farm values are included in the regression as a proxy for agricultural productivity, which might be associated with farm sizes approaching ideal scale and therefore land inequality. I estimate that homesteads significantly decreased land inequality in frontier state counties: a 10\% increase in log per-capita cumulative homesteads is expected to lower land inequality by -0.0004 [-0.0005, -0.0002] points. 
+Table \ref{dd-estimates} presents DID estimates of the impact of log per-capita homesteads on land inequality at the state-level during the period of 1870 to 1950.\footnote{Since land inequality is measured every decennial, I aggregate homesteads to the next decennial year; e.g., the number of homesteads measured in 1880 is the total for the years 1871 to 1880.} Average farm values are included in the regression as a proxy for agricultural productivity, which might be associated with farm sizes approaching ideal scale and therefore land inequality. I estimate that homesteads significantly decreased land inequality in frontier states: a 1\% increase in log per-capita homesteads is expected to lower the land inequality Gini coefficient by $4.81\,\cdot\,10^{-6}$ points. 
 
 \section{Conclusion} \label{discussion} 
 

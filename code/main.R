@@ -35,7 +35,7 @@ source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 source(paste0(code.directory,'railroads.R'))  # rr.inter.m
 
 source(paste0(code.directory,'capacity-state.R')) # prepare for mc
-#save.image("/media/jason/Dropbox/github/land-reform/data/capacity.RData")
+save.image("/media/jason/Dropbox/github/land-reform/data/capacity.RData")
 
 ## MC experiments on synth data
 
@@ -69,7 +69,7 @@ source(paste0(code.directory,'dd-capacity.R'))
 
 # DD estimates on inequality
 
-source(paste0(code.directory,'dd-inequality.R')) # run dd-railroads first
+source(paste0(code.directory,'dd-inequality.R')) 
 
 # Descriptive plots
 

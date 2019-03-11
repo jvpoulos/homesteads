@@ -54,15 +54,15 @@ homesteads.state <- patents.sum %>%
 homesteads.state <- homesteads.state  %>%
   group_by(state_code) %>%
   dplyr::mutate(homesteads.pc = homesteads.sum/ns.pop) %>%
-  select(state_code,year, homesteads.pc) %>%
+  select(state_code,year, homesteads.pc, homesteads.sum) %>%
   arrange(state_code,year)
 
-capacity.outcomes.panel <- lapply(capacity.outcomes.panel, merge, y=homesteads.state, by.x=c("state","year"),by.y=c("state_code","year"), all.x=TRUE)
+capacity.outcomes.panel <- lapply(capacity.outcomes.panel, merge, y=homesteads.state[c("state_code","year","homesteads.pc")], by.x=c("state","year"),by.y=c("state_code","year"), all.x=TRUE)
 
 # NAs are 0
 capacity.outcomes.panel$rev.pc$homesteads.pc[is.na(capacity.outcomes.panel$rev.pc$homesteads.pc)] <- 0
 capacity.outcomes.panel$exp.pc$homesteads.pc[is.na(capacity.outcomes.panel$exp.pc$homesteads.pc)] <- 0
-capacity.outcomes.panel$educ.pc$homesteads.pc[is.na(capacity.outcomes.panel$educ.pc$homesteads.pc)] <- 0 # take logs line 99
+capacity.outcomes.panel$educ.pc$homesteads.pc[is.na(capacity.outcomes.panel$educ.pc$homesteads.pc)] <- 0 # take logs later
 
 ## RR access (incl. post-treatment access)
 
