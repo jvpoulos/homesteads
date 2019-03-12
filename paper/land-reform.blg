@@ -8,7 +8,6 @@ Repeated entry---line 1664 of file references.bib
  :                       ,
 I'm skipping whatever remains of this entry
 Warning--empty note in atack2012impact
-Warning--page numbers missing in atack2011impact
 Warning--no number and no volume in athey2017matrix
 Warning--page numbers missing in athey2017matrix
 Warning--no number and no volume in athey2018design
@@ -19,51 +18,49 @@ Warning--page numbers missing in chernozhukov2017exact
 Warning--no number and no volume in doudchenko2016balancing
 Warning--page numbers missing in doudchenko2016balancing
 Warning--empty note in ferrie1997migration
-Warning--empty note in garcia2009myth
-Warning--no number and no volume in 2017arXiv171203553P
-Warning--page numbers missing in 2017arXiv171203553P
+Warning--no number and no volume in poulos2017rnn
+Warning--page numbers missing in poulos2017rnn
 Warning--no number and no volume in schnabel2016recommendations
 Warning--page numbers missing in schnabel2016recommendations
-Warning--empty note in suryanarayan2017hollowing
-You've used 58 entries,
+You've used 53 entries,
             2861 wiz_defined-function locations,
-            936 strings with 14452 characters,
-and the built_in function-call counts, 37717 in all, are:
-= -- 3156
-> -- 2730
+            912 strings with 13634 characters,
+and the built_in function-call counts, 34326 in all, are:
+= -- 2863
+> -- 2487
 < -- 0
-+ -- 818
-- -- 959
-* -- 3336
-:= -- 7011
-add.period$ -- 170
-call.type$ -- 58
-change.case$ -- 401
-chr.to.int$ -- 57
-cite$ -- 76
-duplicate$ -- 994
-empty$ -- 2262
-format.name$ -- 1102
-if$ -- 6836
++ -- 740
+- -- 871
+* -- 3025
+:= -- 6399
+add.period$ -- 158
+call.type$ -- 53
+change.case$ -- 366
+chr.to.int$ -- 52
+cite$ -- 68
+duplicate$ -- 908
+empty$ -- 2062
+format.name$ -- 998
+if$ -- 6220
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 56
-newline$ -- 289
-num.names$ -- 578
-pop$ -- 273
+missing$ -- 52
+newline$ -- 267
+num.names$ -- 528
+pop$ -- 249
 preamble$ -- 1
-purify$ -- 755
+purify$ -- 690
 quote$ -- 0
-skip$ -- 1091
+skip$ -- 991
 stack$ -- 0
-substring$ -- 1967
-swap$ -- 318
+substring$ -- 1780
+swap$ -- 289
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1076
-warning$ -- 18
-while$ -- 579
+type$ -- 976
+warning$ -- 15
+while$ -- 527
 width$ -- 0
-write$ -- 748
+write$ -- 689
 (There was 1 error message)

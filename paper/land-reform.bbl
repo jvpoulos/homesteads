@@ -4,7 +4,7 @@
   et~al.}{2010}]{abadie2010synthetic}
 Abadie, A., A.~Diamond, and J.~Hainmueller (2010).
 \newblock Synthetic control methods for comparative case studies: Estimating
-  the effect of california’s tobacco control program.
+  the effect of {C}alifornia’s tobacco control program.
 \newblock {\em Journal of the American Statistical Association\/}~{\em
   105\/}(490), 493--505.
 
@@ -36,7 +36,8 @@ Acemoglu, D., D.~Ticchi, and A.~Vindigni (2011).
 
 \bibitem[\protect\citeauthoryear{Allen}{Allen}{1991}]{allen1991homesteading}
 Allen, D.~W. (1991).
-\newblock Homesteading and property rights; or, ``how the west was really won".
+\newblock Homesteading and property rights; {O}r, ``{H}ow the west was really
+  won".
 \newblock {\em The Journal of Law and Economics\/}~{\em 34\/}(1), 1--23.
 
 \bibitem[\protect\citeauthoryear{Amjad, Shah, and Shen}{Amjad
@@ -55,21 +56,14 @@ Ansell, B. and D.~J. Samuels (2015).
 \bibitem[\protect\citeauthoryear{Atack}{Atack}{2013}]{atack2013use}
 Atack, J. (2013).
 \newblock On the use of geographic information systems in economic history: The
-  american transportation revolution revisited.
+  {A}merican transportation revolution revisited.
 \newblock {\em The Journal of Economic History\/}~{\em 73\/}(2), 313--338.
 
 \bibitem[\protect\citeauthoryear{Atack, Margo, and Perlman}{Atack
   et~al.}{2012}]{atack2012impact}
 Atack, J., R.~Margo, and E.~Perlman (2012).
 \newblock The impact of railroads on school enrollment in nineteenth century
-  america.
-
-\bibitem[\protect\citeauthoryear{Atack and Margo}{Atack and
-  Margo}{2011}]{atack2011impact}
-Atack, J. and R.~A. Margo (2011).
-\newblock The impact of access to rail transportation on agricultural
-  improvement: The american midwest as a test case, 1850-1860.
-\newblock {\em Journal of Transport and Land Use\/}~{\em 4\/}(2).
+  {A}merica.
 
 \bibitem[\protect\citeauthoryear{Athey, Bayati, Doudchenko, Imbens, and
   Khosravi}{Athey et~al.}{2017}]{athey2017matrix}
@@ -138,12 +132,6 @@ Chernozhukov, V., K.~Wuthrich, and Y.~Zhu (2017).
   synthetic controls.
 \newblock {\em arXiv preprint arXiv:1712.09089\/}.
 
-\bibitem[\protect\citeauthoryear{Donaldson and Hornbeck}{Donaldson and
-  Hornbeck}{2016}]{donaldson2016railroads}
-Donaldson, D. and R.~Hornbeck (2016).
-\newblock Railroads and american economic growth: A ``market access" approach.
-\newblock {\em The Quarterly Journal of Economics\/}~{\em 131\/}(2), 799--858.
-
 \bibitem[\protect\citeauthoryear{Doudchenko and Imbens}{Doudchenko and
   Imbens}{2016}]{doudchenko2016balancing}
 Doudchenko, N. and G.~W. Imbens (2016).
@@ -159,13 +147,13 @@ Engerman, S.~L. and K.~L. Sokoloff (2005).
 
 \bibitem[\protect\citeauthoryear{Ferrie}{Ferrie}{1997}]{ferrie1997migration}
 Ferrie, J.~P. (1997).
-\newblock Migration to the frontier in mid-nineteenth century america: A
-  re-examination of turner’s `safety valve;.
+\newblock Migration to the frontier in mid-nineteenth century {A}merica: {A}
+  re-examination of {T}urner's `safety valve'.
 
 \bibitem[\protect\citeauthoryear{Frymer}{Frymer}{2014}]{frymer2014rush}
 Frymer, P. (2014).
-\newblock `a rush and a push and the land is ours': Territorial expansion, land
-  policy, and u.s. state formation.
+\newblock `{A} rush and a push and the land is ours': {T}erritorial expansion,
+  land policy, and {U.S.} state formation.
 \newblock {\em Perspectives on Politics\/}~{\em 12\/}(1), 119.
 
 \bibitem[\protect\citeauthoryear{Galor, Moav, and Vollrath}{Galor
@@ -179,10 +167,11 @@ Galor, O., O.~Moav, and D.~Vollrath (2009).
   Robinson}{2009}]{garcia2009myth}
 Garcia-Jimeno, C. and J.~A. Robinson (2009).
 \newblock The myth of the frontier.
+\newblock National Bureau of Economic Research.
 
 \bibitem[\protect\citeauthoryear{Gates}{Gates}{1940}]{gates1940federal}
 Gates, P.~W. (1940).
-\newblock Federal land policy in the south 1866-1888.
+\newblock Federal land policy in the {S}outh 1866-1888.
 \newblock {\em The Journal of Southern History\/}~{\em 6\/}(3), 303--330.
 
 \bibitem[\protect\citeauthoryear{Gates}{Gates}{1942}]{gates1942role}
@@ -195,13 +184,6 @@ Gates, P.~W. (1942).
 Gates, P.~W. (1979).
 \newblock Federal land policies in the southern public land states.
 \newblock {\em Agricultural History\/}~{\em 53\/}(1), 206--227.
-
-\bibitem[\protect\citeauthoryear{Grosjean}{Grosjean}{2014}]{grosjean2014}
-Grosjean, P. (2014).
-\newblock A history of violence: The culture of h=honor and homicide in the
-  {US} {S}outh.
-\newblock {\em Journal of the European Economic Association\/}~{\em 12\/}(5),
-  1285--1316.
 
 \bibitem[\protect\citeauthoryear{Haines}{Haines}{2010}]{haines2010}
 Haines, M.~R. (2010).
@@ -227,8 +209,8 @@ Ilin, A. and T.~Raiko (2010).
 \bibitem[\protect\citeauthoryear{Imbens and Rubin}{Imbens and
   Rubin}{2015}]{imbens2015causal}
 Imbens, G.~W. and D.~B. Rubin (2015).
-\newblock {\em Causal inference in statistics, social, and biomedical
-  sciences}.
+\newblock {\em Causal Inference in Statistics, Social, and Biomedical
+  Sciences}.
 \newblock Cambridge University Press.
 
 \bibitem[\protect\citeauthoryear{Josse and Husson}{Josse and
@@ -256,7 +238,7 @@ Little, R.~J. and D.~B. Rubin (2014).
 Mazumder, R., T.~Hastie, and R.~Tibshirani (2010).
 \newblock Spectral regularization algorithms for learning large incomplete
   matrices.
-\newblock {\em Journal of machine learning research\/}~{\em 11\/}(Aug),
+\newblock {\em Journal of Machine Learning Research\/}~{\em 11\/}(Aug),
   2287--2322.
 
 \bibitem[\protect\citeauthoryear{Meltzer and Richard}{Meltzer and
@@ -276,14 +258,14 @@ Politis, D.~N. and H.~White (2004).
 \newblock Automatic block-length selection for the dependent bootstrap.
 \newblock {\em Econometric Reviews\/}~{\em 23\/}(1), 53--70.
 
-\bibitem[\protect\citeauthoryear{{Poulos}}{{Poulos}}{2017}]{2017arXiv171203553P}
-{Poulos}, J. (2017, December).
-\newblock {RNN-Based Counterfactual Time-Series Prediction}.
-\newblock {\em ArXiv e-prints\/}.
+\bibitem[\protect\citeauthoryear{Poulos}{Poulos}{2017}]{poulos2017rnn}
+Poulos, J. (2017).
+\newblock {RNN}-based counterfactual time-series prediction.
+\newblock {\em arXiv preprint arXiv:1712.03553\/}.
 
 \bibitem[\protect\citeauthoryear{Ramcharan}{Ramcharan}{2010}]{ramcharan2010inequality}
 Ramcharan, R. (2010).
-\newblock Inequality and redistribution: Evidence from u.s. counties and
+\newblock Inequality and redistribution: Evidence from {U.S.} counties and
   states, 1890--1930.
 \newblock {\em The Review of Economics and Statistics\/}~{\em 92\/}(4),
   729--744.
@@ -297,14 +279,8 @@ Schnabel, T., A.~Swaminathan, A.~Singh, N.~Chandak, and T.~Joachims (2016).
 \bibitem[\protect\citeauthoryear{Suryanarayan}{Suryanarayan}{2017}]{suryanarayan2017hollowing}
 Suryanarayan, P. (2017).
 \newblock Hollowing out the state: Franchise expansion and fiscal capacity in
-  colonial india.
-
-\bibitem[\protect\citeauthoryear{Sylla and Wallis}{Sylla and
-  Wallis}{1998}]{sylla1998anatomy}
-Sylla, R. and J.~J. Wallis (1998).
-\newblock The anatomy of sovereign debt crises: Lessons from the american state
-  defaults of the 1840s.
-\newblock {\em Japan and the World Economy\/}~{\em 10\/}(3), 267--293.
+  colonial {I}ndia.
+\newblock \url{https://ssrn.com/abstract=2951947}.
 
 \bibitem[\protect\citeauthoryear{Sylla, Legler, and Wallis}{Sylla
   et~al.}{1993}]{sylla1993sources}
@@ -346,26 +322,20 @@ Turner, F.~J. (1956).
 
 \bibitem[\protect\citeauthoryear{Vollrath}{Vollrath}{2013}]{vollrath2013inequality}
 Vollrath, D. (2013).
-\newblock Inequality and school funding in the rural united states, 1890.
+\newblock Inequality and school funding in the rural {U}nited {S}tates, 1890.
 \newblock {\em Explorations in Economic History\/}~{\em 50\/}(2), 267--284.
-
-\bibitem[\protect\citeauthoryear{Wallis, Sylla, and Grinath~III}{Wallis
-  et~al.}{2004}]{wallis2004sovereign}
-Wallis, J.~J., R.~E. Sylla, and A.~Grinath~III (2004).
-\newblock Sovereign debt and repudiation: The emerging-market debt crisis in
-  the us states, 1839-1843.
 
 \bibitem[\protect\citeauthoryear{Williamson}{Williamson}{2017}]{williamson2017seven}
 Williamson, S.~H. (2017).
-\newblock Seven ways to compute the relative value of a us dollar amount, 1774
-  to present.
+\newblock Seven ways to compute the relative value of a {US} dollar amount,
+  1774 to present.
 \newblock \url{MeasuringWorth.com}.
 \newblock [Online; accessed 01-October-2017].
 
 \bibitem[\protect\citeauthoryear{Ziblatt}{Ziblatt}{2008}]{ziblatt2008does}
 Ziblatt, D. (2008).
 \newblock Does landholding inequality block democratization?: A test of the
-  “bread and democracy” thesis and the case of prussia.
+  “bread and democracy” thesis and the case of {P}russia.
 \newblock {\em World Politics\/}~{\em 60\/}(4), 610--641.
 
 \end{thebibliography}
