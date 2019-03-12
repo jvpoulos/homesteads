@@ -3,6 +3,10 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: land-reform.aux
 The style file: chicago.bst
 Database file #1: references.bib
+Repeated entry---line 1664 of file references.bib
+ : @article{gates1942role
+ :                       ,
+I'm skipping whatever remains of this entry
 Warning--empty note in atack2012impact
 Warning--page numbers missing in atack2011impact
 Warning--no number and no volume in athey2017matrix
@@ -21,45 +25,45 @@ Warning--page numbers missing in 2017arXiv171203553P
 Warning--no number and no volume in schnabel2016recommendations
 Warning--page numbers missing in schnabel2016recommendations
 Warning--empty note in suryanarayan2017hollowing
-You've used 57 entries,
+You've used 58 entries,
             2861 wiz_defined-function locations,
-            930 strings with 14321 characters,
-and the built_in function-call counts, 37133 in all, are:
-= -- 3104
-> -- 2704
+            936 strings with 14452 characters,
+and the built_in function-call counts, 37717 in all, are:
+= -- 3156
+> -- 2730
 < -- 0
-+ -- 810
-- -- 949
-* -- 3289
-:= -- 6905
-add.period$ -- 167
-call.type$ -- 57
-change.case$ -- 395
-chr.to.int$ -- 56
-cite$ -- 75
-duplicate$ -- 976
-empty$ -- 2218
-format.name$ -- 1092
-if$ -- 6731
++ -- 818
+- -- 959
+* -- 3336
+:= -- 7011
+add.period$ -- 170
+call.type$ -- 58
+change.case$ -- 401
+chr.to.int$ -- 57
+cite$ -- 76
+duplicate$ -- 994
+empty$ -- 2262
+format.name$ -- 1102
+if$ -- 6836
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 55
-newline$ -- 284
-num.names$ -- 568
-pop$ -- 270
+missing$ -- 56
+newline$ -- 289
+num.names$ -- 578
+pop$ -- 273
 preamble$ -- 1
-purify$ -- 743
+purify$ -- 755
 quote$ -- 0
-skip$ -- 1074
+skip$ -- 1091
 stack$ -- 0
-substring$ -- 1920
-swap$ -- 312
+substring$ -- 1967
+swap$ -- 318
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1056
+type$ -- 1076
 warning$ -- 18
-while$ -- 567
+while$ -- 579
 width$ -- 0
-write$ -- 735
-(There were 18 warnings)
+write$ -- 748
+(There was 1 error message)
