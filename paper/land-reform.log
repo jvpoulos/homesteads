@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  12 MAR 2019 14:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  13 MAR 2019 14:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1312,95 +1312,83 @@ ination with the same identifier (name{page.1}) has been already used, duplicat
 e ignored
 <to be read again> 
                    \relax 
-l.139 
-       [1] [2] [3] [4] [5] [6] [7] [8]
-<plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png, id=287, 5
+l.141 
+       [1] [2] [3] [4] [5] [6] [7]
+<plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png, id=238, 5
 05.76955pt x 505.76955pt>
 File: plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png Graph
 ic file (type png)
 <use plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png>
 Package pdftex.def Info: plots/basque_N_16_T_43_numruns_20_num_treated_8_simult
-aneuous_0.png  used on input line 211.
+aneuous_0.png  used on input line 208.
 (pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
 <plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png, id=2
-88, 505.76955pt x 505.76955pt>
+39, 505.76955pt x 505.76955pt>
 File: plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png 
 Graphic file (type png)
 <use plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png>
 Package pdftex.def Info: plots/california_N_38_T_31_numruns_20_num_treated_19_s
-imultaneuous_0.png  used on input line 217.
+imultaneuous_0.png  used on input line 214.
 (pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
-<plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png, id=289, 
+<plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png, id=240, 
 505.76955pt x 505.76955pt>
 File: plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png Grap
 hic file (type png)
 <use plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png>
 Package pdftex.def Info: plots/germany_N_16_T_44_numruns_20_num_treated_8_simul
-taneuous_0.png  used on input line 223.
+taneuous_0.png  used on input line 220.
 (pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
- [9] [10 <./plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png
- (PNG copy)> <./plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneu
-ous_0.png (PNG copy)> <./plots/germany_N_16_T_44_numruns_20_num_treated_8_simul
-taneuous_0.png (PNG copy)>] [11] [12]
+ [8] [9 <./plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png 
+(PNG copy)> <./plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuo
+us_0.png (PNG copy)> <./plots/germany_N_16_T_44_numruns_20_num_treated_8_simult
+aneuous_0.png (PNG copy)>] [10] [11]
 (./placebo-tests.tex)
-Overfull \hbox (15.57631pt too wide) in paragraph at lines 286--287
+Overfull \hbox (15.57631pt too wide) in paragraph at lines 287--288
  [] 
  []
 
-[13] [14]
-<plots/mc-exp-pc.png, id=388, 794.97pt x 614.295pt>
+[12] [13]
+<plots/mc-exp-pc.png, id=340, 794.97pt x 614.295pt>
 File: plots/mc-exp-pc.png Graphic file (type png)
 <use plots/mc-exp-pc.png>
-Package pdftex.def Info: plots/mc-exp-pc.png  used on input line 313.
+Package pdftex.def Info: plots/mc-exp-pc.png  used on input line 314.
 (pdftex.def)             Requested size: 352.31625pt x 272.24966pt.
-<plots/mc-rev-pc.png, id=389, 794.97pt x 614.295pt>
+<plots/mc-rev-pc.png, id=341, 794.97pt x 614.295pt>
 File: plots/mc-rev-pc.png Graphic file (type png)
 <use plots/mc-rev-pc.png>
-Package pdftex.def Info: plots/mc-rev-pc.png  used on input line 319.
+Package pdftex.def Info: plots/mc-rev-pc.png  used on input line 320.
 (pdftex.def)             Requested size: 352.31625pt x 272.24966pt.
- [15] [16 <./plots/mc-exp-pc.png (PNG copy)> <./plots/mc-rev-pc.png (PNG copy)>
-] (./mc-estimates.tex) [17] [18] (./dd-estimates.tex) [19] [20]
-[21] [22] (./land-reform.bbl [23] [24] [25]) [26]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 396.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 396.
+ [14] [15 <./plots/mc-exp-pc.png (PNG copy)> <./plots/mc-rev-pc.png (PNG copy)>
+] (./mc-estimates.tex) [16] [17] (./dd-estimates.tex) [18] [19]
+[20] (./land-reform.bbl [21] [22] [23]) [24]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 401.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 401.
  (./land-reform.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 396.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 396.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 401.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 401.
 Package rerunfilecheck Info: File `land-reform.out' has not changed.
-(rerunfilecheck)             Checksum: 59A07FB4E106C0E6881E93327BBD73E0;892.
+(rerunfilecheck)             Checksum: A4561B697AD113C889E7300A873A1349;810.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 396.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 401.
  ) 
 Here is how much of TeX's memory you used:
- 30366 strings out of 492641
- 558890 string characters out of 6131787
- 655763 words of memory out of 5000000
- 33649 multiletter control sequences out of 15000+600000
+ 30336 strings out of 492641
+ 558152 string characters out of 6131787
+ 655514 words of memory out of 5000000
+ 33630 multiletter control sequences out of 15000+600000
  548933 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,19n,65p,2014b,558s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.15} has been referenced but does not ex
+ 62i,19n,65p,1987b,558s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.13} has been referenced but does not ex
 ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.14} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.7} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.13} has been referenced but does not exis
-t, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.12} has been referenced but does not exis
 t, replaced by a fixed one
 
-pdfTeX warning (dest): name{figure.caption.6} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.4} has been referenced but does not 
+pdfTeX warning (dest): name{figure.caption.7} has been referenced but does not 
 exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.11} has been referenced but does not exis
@@ -1409,17 +1397,23 @@ t, replaced by a fixed one
 pdfTeX warning (dest): name{Hfootnote.10} has been referenced but does not exis
 t, replaced by a fixed one
 
+pdfTeX warning (dest): name{figure.caption.6} has been referenced but does not 
+exist, replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.4} has been referenced but does not 
+exist, replaced by a fixed one
+
 pdfTeX warning (dest): name{Hfootnote.9} has been referenced but does not exist
 , replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.5} has been referenced but does not 
-exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.8} has been referenced but does not exist
 , replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.7} has been referenced but does not exist
 , replaced by a fixed one
+
+pdfTeX warning (dest): name{figure.caption.5} has been referenced but does not 
+exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.6} has been referenced but does not exist
 , replaced by a fixed one
@@ -1460,10 +1454,10 @@ ublic/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmtt12.pfb>
-Output written on land-reform.pdf (27 pages, 1682022 bytes).
+Output written on land-reform.pdf (25 pages, 1675607 bytes).
 PDF statistics:
- 598 PDF objects out of 1000 (max. 8388607)
- 535 compressed objects within 6 object streams
- 127 named destinations out of 1000 (max. 500000)
- 142 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 545 PDF objects out of 1000 (max. 8388607)
+ 485 compressed objects within 5 object streams
+ 116 named destinations out of 1000 (max. 500000)
+ 134 words of extra memory for PDF output out of 10000 (max. 10000000)
 

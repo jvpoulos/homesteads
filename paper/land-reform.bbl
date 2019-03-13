@@ -21,19 +21,6 @@ Abadie, A. and J.~Gardeazabal (2003).
 \newblock The economic costs of conflict: A case study of the basque country.
 \newblock {\em The American Economic Review\/}~{\em 93\/}(1), 113--132.
 
-\bibitem[\protect\citeauthoryear{Acemoglu and Robinson}{Acemoglu and
-  Robinson}{2008}]{acemoglu2008persistence}
-Acemoglu, D. and J.~A. Robinson (2008).
-\newblock Persistence of power, elites, and institutions.
-\newblock {\em American Economic Review\/}~{\em 98\/}(1), 267--293.
-
-\bibitem[\protect\citeauthoryear{Acemoglu, Ticchi, and Vindigni}{Acemoglu
-  et~al.}{2011}]{acemoglu2011emergence}
-Acemoglu, D., D.~Ticchi, and A.~Vindigni (2011).
-\newblock Emergence and persistence of inefficient states.
-\newblock {\em Journal of the European Economic Association\/}~{\em 9\/}(2),
-  177--208.
-
 \bibitem[\protect\citeauthoryear{Allen}{Allen}{1991}]{allen1991homesteading}
 Allen, D.~W. (1991).
 \newblock Homesteading and property rights; {O}r, ``{H}ow the west was really
@@ -78,11 +65,6 @@ Athey, S. and G.~Imbens (2018).
   staggered adoption.
 \newblock {\em arXiv preprint arXiv:1808.05293\/}.
 
-\bibitem[\protect\citeauthoryear{Benabou}{Benabou}{2000}]{benabou2000unequal}
-Benabou, R. (2000).
-\newblock Unequal societies: Income distribution and the social contract.
-\newblock {\em American Economic Review\/}, 96--129.
-
 \bibitem[\protect\citeauthoryear{Bensel}{Bensel}{1990}]{bensel1990}
 Bensel, R.~F. (1990).
 \newblock {\em Yankee Leviathan: the Origins of Central State Authority in
@@ -94,13 +76,6 @@ Bensel, R.~F. (1990).
 Bertrand, M., E.~Duflo, and S.~Mullainathan (2004).
 \newblock How much should we trust differences-in-differences estimates?
 \newblock {\em The Quarterly Journal of Economics\/}~{\em 119\/}(1), 249--275.
-
-\bibitem[\protect\citeauthoryear{Besley and Persson}{Besley and
-  Persson}{2009}]{besley2009origins}
-Besley, T. and T.~Persson (2009).
-\newblock The origins of state capacity: Property rights, taxation and
-  politics.
-\newblock {\em American Economic Review\/}~{\em 99\/}(4), 1218--1244.
 
 \bibitem[\protect\citeauthoryear{Besley and Persson}{Besley and
   Persson}{2010}]{besley2010state}
@@ -155,13 +130,6 @@ Frymer, P. (2014).
 \newblock `{A} rush and a push and the land is ours': {T}erritorial expansion,
   land policy, and {U.S.} state formation.
 \newblock {\em Perspectives on Politics\/}~{\em 12\/}(1), 119.
-
-\bibitem[\protect\citeauthoryear{Galor, Moav, and Vollrath}{Galor
-  et~al.}{2009}]{galor2009inequality}
-Galor, O., O.~Moav, and D.~Vollrath (2009).
-\newblock Inequality in landownership, the emergence of human-capital promoting
-  institutions, and the great divergence.
-\newblock {\em The Review of Economic Studies\/}~{\em 76\/}(1), 143--179.
 
 \bibitem[\protect\citeauthoryear{Garcia-Jimeno and Robinson}{Garcia-Jimeno and
   Robinson}{2009}]{garcia2009myth}
@@ -241,12 +209,6 @@ Mazumder, R., T.~Hastie, and R.~Tibshirani (2010).
 \newblock {\em Journal of Machine Learning Research\/}~{\em 11\/}(Aug),
   2287--2322.
 
-\bibitem[\protect\citeauthoryear{Meltzer and Richard}{Meltzer and
-  Richard}{1981}]{meltzer1981rational}
-Meltzer, A.~H. and S.~F. Richard (1981).
-\newblock A rational theory of the size of government.
-\newblock {\em Journal of Political Economy\/}~{\em 89\/}(5), 914--927.
-
 \bibitem[\protect\citeauthoryear{Murtazashvili}{Murtazashvili}{2013}]{murtazashvili2013political}
 Murtazashvili, I. (2013).
 \newblock {\em The Political Economy of the American Frontier}.
@@ -275,12 +237,6 @@ Ramcharan, R. (2010).
 Schnabel, T., A.~Swaminathan, A.~Singh, N.~Chandak, and T.~Joachims (2016).
 \newblock Recommendations as treatments: Debiasing learning and evaluation.
 \newblock {\em arXiv preprint arXiv:1602.05352\/}.
-
-\bibitem[\protect\citeauthoryear{Suryanarayan}{Suryanarayan}{2017}]{suryanarayan2017hollowing}
-Suryanarayan, P. (2017).
-\newblock Hollowing out the state: Franchise expansion and fiscal capacity in
-  colonial {I}ndia.
-\newblock \url{https://ssrn.com/abstract=2951947}.
 
 \bibitem[\protect\citeauthoryear{Sylla, Legler, and Wallis}{Sylla
   et~al.}{1993}]{sylla1993sources}
@@ -331,6 +287,13 @@ Williamson, S.~H. (2017).
   1774 to present.
 \newblock \url{MeasuringWorth.com}.
 \newblock [Online; accessed 01-October-2017].
+
+\bibitem[\protect\citeauthoryear{Yoon, Zame, and van~der Schaar}{Yoon
+  et~al.}{2018}]{yoon2018estimating}
+Yoon, J., W.~R. Zame, and M.~van~der Schaar (2018).
+\newblock Estimating missing data in temporal data streams using
+  multi-directional recurrent neural networks.
+\newblock {\em IEEE Transactions on Biomedical Engineering\/}.
 
 \bibitem[\protect\citeauthoryear{Ziblatt}{Ziblatt}{2008}]{ziblatt2008does}
 Ziblatt, D. (2008).
