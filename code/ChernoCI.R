@@ -1,7 +1,7 @@
 # ChernoTest return(pval)
 
 ## Invert for CIs
-ChernoCI <- function(alpha=0.025, l=1000, prec=1e-02, outcomes, ns=1000, q=c(1,2), treat_indices_order,
+ChernoCI <- function(alpha=0.025, l=100, prec=1e-02, outcomes, ns=100, q=c(1,2), treat_indices_order,
                      permtype=c("iid", "moving.block", "iid.block"),t0,imputed=FALSE,covars=NULL,pca=FALSE) {
   require(matrixStats)
   # Calculate randomization test confidence interval.
