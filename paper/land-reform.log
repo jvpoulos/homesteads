@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  14 MAR 2019 18:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  14 MAR 2019 19:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1315,17 +1315,25 @@ e ignored
 <to be read again> 
                    \relax 
 l.141 
-       [1] [2] [3] [4] [5]
+       [1] [2] [3] [4]
 
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <8> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 174.
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 161.
 
 
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <6> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 174.
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 161.
 
-[6] [7]
-<plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png, id=240, 5
+
+LaTeX Font Warning: Font shape `U/wasy/b/n' in size <7> not available
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 161.
+
+
+LaTeX Font Warning: Font shape `U/wasy/b/n' in size <5> not available
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 161.
+
+[5] [6] [7]
+<plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png, id=242, 5
 05.76955pt x 505.76955pt>
 File: plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png Graph
 ic file (type png)
@@ -1334,14 +1342,14 @@ Package pdftex.def Info: plots/basque_N_16_T_43_numruns_20_num_treated_8_simult
 aneuous_0.png  used on input line 208.
 (pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
 <plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png, id=2
-41, 505.76955pt x 505.76955pt>
+43, 505.76955pt x 505.76955pt>
 File: plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png 
 Graphic file (type png)
 <use plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png>
 Package pdftex.def Info: plots/california_N_38_T_31_numruns_20_num_treated_19_s
 imultaneuous_0.png  used on input line 214.
 (pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
-<plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png, id=242, 
+<plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png, id=244, 
 505.76955pt x 505.76955pt>
 File: plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png Grap
 hic file (type png)
@@ -1358,12 +1366,12 @@ Overfull \hbox (17.47629pt too wide) in paragraph at lines 291--292
  []
 
 [13]
-<plots/mc-exp-pc.png, id=349, 794.97pt x 614.295pt>
+<plots/mc-exp-pc.png, id=352, 794.97pt x 614.295pt>
 File: plots/mc-exp-pc.png Graphic file (type png)
 <use plots/mc-exp-pc.png>
 Package pdftex.def Info: plots/mc-exp-pc.png  used on input line 310.
 (pdftex.def)             Requested size: 352.31625pt x 272.24966pt.
-<plots/mc-rev-pc.png, id=350, 794.97pt x 614.295pt>
+<plots/mc-rev-pc.png, id=353, 794.97pt x 614.295pt>
 File: plots/mc-rev-pc.png Graphic file (type png)
 <use plots/mc-rev-pc.png>
 Package pdftex.def Info: plots/mc-rev-pc.png  used on input line 316.
@@ -1426,25 +1434,25 @@ Underfull \hbox (badness 7344) in paragraph at lines 259--263
  []
 
 ) [24]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 400.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 400.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 398.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 398.
  (./land-reform.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 400.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 400.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 398.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 398.
 Package rerunfilecheck Info: File `land-reform.out' has not changed.
 (rerunfilecheck)             Checksum: A4561B697AD113C889E7300A873A1349;810.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 400.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 398.
  ) 
 Here is how much of TeX's memory you used:
- 30452 strings out of 492641
- 559869 string characters out of 6131787
+ 30474 strings out of 492641
+ 560108 string characters out of 6131787
  662495 words of memory out of 5000000
- 33722 multiletter control sequences out of 15000+600000
- 553159 words of font info for 103 fonts, out of 8000000 for 9000
+ 33737 multiletter control sequences out of 15000+600000
+ 556964 words of font info for 116 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,19n,65p,1306b,644s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{Hfootnote.15} has been referenced but does not ex
@@ -1512,23 +1520,26 @@ f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/eu
-ler/eurb10.pfb>
-Output written on land-reform.pdf (25 pages, 1679563 bytes).
+msfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cmextra/cmmib8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eu
+rb10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler/eurm1
+0.pfb>
+Output written on land-reform.pdf (25 pages, 1697518 bytes).
 PDF statistics:
- 586 PDF objects out of 1000 (max. 8388607)
- 525 compressed objects within 6 object streams
+ 598 PDF objects out of 1000 (max. 8388607)
+ 534 compressed objects within 6 object streams
  126 named destinations out of 1000 (max. 500000)
  134 words of extra memory for PDF output out of 10000 (max. 10000000)
 
