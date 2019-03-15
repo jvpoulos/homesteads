@@ -1,46 +1,46 @@
 This is BibTeX, Version 0.99d (TeX Live 2019/dev/Debian)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: land-reform-sm.aux
-The style file: chicago.bst
+The style file: rss.bst
 Database file #1: references.bib
 You've used 6 entries,
-            2861 wiz_defined-function locations,
-            643 strings with 6200 characters,
-and the built_in function-call counts, 3530 in all, are:
-= -- 298
-> -- 250
-< -- 0
-+ -- 70
-- -- 81
-* -- 297
-:= -- 669
-add.period$ -- 18
+            2705 wiz_defined-function locations,
+            614 strings with 5933 characters,
+and the built_in function-call counts, 2547 in all, are:
+= -- 261
+> -- 108
+< -- 3
++ -- 43
+- -- 36
+* -- 201
+:= -- 496
+add.period$ -- 12
 call.type$ -- 6
-change.case$ -- 42
+change.case$ -- 46
 chr.to.int$ -- 5
 cite$ -- 6
-duplicate$ -- 94
-empty$ -- 211
-format.name$ -- 92
-if$ -- 641
+duplicate$ -- 116
+empty$ -- 169
+format.name$ -- 48
+if$ -- 485
 int.to.chr$ -- 2
-int.to.str$ -- 0
+int.to.str$ -- 1
 missing$ -- 2
-newline$ -- 33
-num.names$ -- 58
-pop$ -- 28
+newline$ -- 31
+num.names$ -- 24
+pop$ -- 42
 preamble$ -- 1
-purify$ -- 76
+purify$ -- 36
 quote$ -- 0
-skip$ -- 99
+skip$ -- 69
 stack$ -- 0
-substring$ -- 173
-swap$ -- 31
+substring$ -- 130
+swap$ -- 18
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 116
+type$ -- 54
 warning$ -- 0
-while$ -- 51
+while$ -- 22
 width$ -- 0
-write$ -- 80
+write$ -- 74

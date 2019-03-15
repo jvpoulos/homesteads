@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  13 MAR 2019 08:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  14 MAR 2019 14:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1352,10 +1352,10 @@ Package rerunfilecheck Info: File `land-reform-sm.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 225.
  ) 
 Here is how much of TeX's memory you used:
- 29830 strings out of 492641
- 551352 string characters out of 6131787
- 640174 words of memory out of 5000000
- 33232 multiletter control sequences out of 15000+600000
+ 29832 strings out of 492641
+ 551373 string characters out of 6131787
+ 640154 words of memory out of 5000000
+ 33234 multiletter control sequences out of 15000+600000
  545211 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,11n,65p,984b,535s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1372,7 +1372,7 @@ e1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmtt12.pfb>
-Output written on land-reform-sm.pdf (8 pages, 4497430 bytes).
+Output written on land-reform-sm.pdf (8 pages, 4496814 bytes).
 PDF statistics:
  165 PDF objects out of 1000 (max. 8388607)
  126 compressed objects within 2 object streams

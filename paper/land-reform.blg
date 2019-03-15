@@ -1,68 +1,52 @@
 This is BibTeX, Version 0.99d (TeX Live 2019/dev/Debian)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: land-reform.aux
-The style file: chicago.bst
+The style file: rss.bst
 Database file #1: references.bib
-Repeated entry---line 1664 of file references.bib
+Repeated entry---line 1663 of file references.bib
  : @article{gates1942role
  :                       ,
 I'm skipping whatever remains of this entry
-Warning--empty note in atack2012impact
-Warning--no number and no volume in athey2017matrix
-Warning--page numbers missing in athey2017matrix
-Warning--no number and no volume in athey2018design
-Warning--page numbers missing in athey2018design
-Warning--no number and no volume in benabou2000unequal
-Warning--no number and no volume in chernozhukov2017exact
-Warning--page numbers missing in chernozhukov2017exact
-Warning--no number and no volume in doudchenko2016balancing
-Warning--page numbers missing in doudchenko2016balancing
 Warning--empty note in ferrie1997migration
-Warning--no number and no volume in poulos2017rnn
-Warning--page numbers missing in poulos2017rnn
-Warning--no number and no volume in schnabel2016recommendations
-Warning--page numbers missing in schnabel2016recommendations
-Warning--no number and no volume in yoon2018estimating
-Warning--page numbers missing in yoon2018estimating
 You've used 54 entries,
-            2861 wiz_defined-function locations,
-            917 strings with 13868 characters,
-and the built_in function-call counts, 34844 in all, are:
-= -- 2900
-> -- 2522
-< -- 0
-+ -- 748
-- -- 879
-* -- 3073
-:= -- 6499
-add.period$ -- 161
+            2705 wiz_defined-function locations,
+            888 strings with 13660 characters,
+and the built_in function-call counts, 24683 in all, are:
+= -- 2458
+> -- 996
+< -- 38
++ -- 408
+- -- 333
+* -- 1998
+:= -- 4627
+add.period$ -- 108
 call.type$ -- 54
-change.case$ -- 373
+change.case$ -- 381
 chr.to.int$ -- 53
-cite$ -- 71
-duplicate$ -- 924
-empty$ -- 2097
-format.name$ -- 1006
-if$ -- 6314
+cite$ -- 55
+duplicate$ -- 1153
+empty$ -- 1824
+format.name$ -- 483
+if$ -- 4835
 int.to.chr$ -- 2
-int.to.str$ -- 0
-missing$ -- 53
-newline$ -- 272
-num.names$ -- 538
-pop$ -- 253
+int.to.str$ -- 1
+missing$ -- 54
+newline$ -- 222
+num.names$ -- 216
+pop$ -- 459
 preamble$ -- 1
-purify$ -- 703
+purify$ -- 327
 quote$ -- 0
-skip$ -- 1003
+skip$ -- 696
 stack$ -- 0
-substring$ -- 1803
-swap$ -- 294
+substring$ -- 1361
+swap$ -- 223
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 996
-warning$ -- 17
-while$ -- 533
+type$ -- 462
+warning$ -- 1
+while$ -- 224
 width$ -- 0
-write$ -- 702
+write$ -- 630
 (There was 1 error message)

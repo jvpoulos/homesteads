@@ -1,348 +1,296 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{54}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL: }\fi
 
-\bibitem[\protect\citeauthoryear{Abadie, Diamond, and Hainmueller}{Abadie
-  et~al.}{2010}]{abadie2010synthetic}
-Abadie, A., A.~Diamond, and J.~Hainmueller (2010).
-\newblock Synthetic control methods for comparative case studies: Estimating
-  the effect of {C}alifornia’s tobacco control program.
-\newblock {\em Journal of the American Statistical Association\/}~{\em
-  105\/}(490), 493--505.
+\bibitem[{Abadie et~al.(2010)Abadie, Diamond and
+  Hainmueller}]{abadie2010synthetic}
+Abadie, A., Diamond, A. and Hainmueller, J. (2010) Synthetic control methods
+  for comparative case studies: Estimating the effect of {C}alifornia’s
+  tobacco control program.
+\newblock \textit{Journal of the American Statistical Association},
+  \textbf{105}, 493--505.
 
-\bibitem[\protect\citeauthoryear{Abadie, Diamond, and Hainmueller}{Abadie
-  et~al.}{2015}]{abadie2015comparative}
-Abadie, A., A.~Diamond, and J.~Hainmueller (2015).
-\newblock Comparative politics and the synthetic control method.
-\newblock {\em American Journal of Political Science\/}~{\em 59\/}(2),
+\bibitem[{Abadie et~al.(2015)Abadie, Diamond and
+  Hainmueller}]{abadie2015comparative}
+--- (2015) Comparative politics and the synthetic control method.
+\newblock \textit{American Journal of Political Science}, \textbf{59},
   495--510.
 
-\bibitem[\protect\citeauthoryear{Abadie and Gardeazabal}{Abadie and
-  Gardeazabal}{2003}]{abadie2003economic}
-Abadie, A. and J.~Gardeazabal (2003).
-\newblock The economic costs of conflict: A case study of the {B}asque
-  {C}ountry.
-\newblock {\em The American Economic Review\/}~{\em 93\/}(1), 113--132.
+\bibitem[{Abadie and Gardeazabal(2003)}]{abadie2003economic}
+Abadie, A. and Gardeazabal, J. (2003) The economic costs of conflict: A case
+  study of the {B}asque {C}ountry.
+\newblock \textit{The American Economic Review}, \textbf{93}, 113--132.
 
-\bibitem[\protect\citeauthoryear{Acemoglu and Robinson}{Acemoglu and
-  Robinson}{2008}]{acemoglu2008persistence}
-Acemoglu, D. and J.~A. Robinson (2008).
-\newblock Persistence of power, elites, and institutions.
-\newblock {\em American Economic Review\/}~{\em 98\/}(1), 267--293.
+\bibitem[{Acemoglu and Robinson(2008)}]{acemoglu2008persistence}
+Acemoglu, D. and Robinson, J.~A. (2008) Persistence of power, elites, and
+  institutions.
+\newblock \textit{American Economic Review}, \textbf{98}, 267--293.
 
-\bibitem[\protect\citeauthoryear{Acemoglu, Ticchi, and Vindigni}{Acemoglu
-  et~al.}{2011}]{acemoglu2011emergence}
-Acemoglu, D., D.~Ticchi, and A.~Vindigni (2011).
-\newblock Emergence and persistence of inefficient states.
-\newblock {\em Journal of the European Economic Association\/}~{\em 9\/}(2),
+\bibitem[{Acemoglu et~al.(2011)Acemoglu, Ticchi and
+  Vindigni}]{acemoglu2011emergence}
+Acemoglu, D., Ticchi, D. and Vindigni, A. (2011) Emergence and persistence of
+  inefficient states.
+\newblock \textit{Journal of the European Economic Association}, \textbf{9},
   177--208.
 
-\bibitem[\protect\citeauthoryear{Allen}{Allen}{1991}]{allen1991homesteading}
-Allen, D.~W. (1991).
-\newblock Homesteading and property rights; {O}r, ``{H}ow the west was really
-  won".
-\newblock {\em The Journal of Law and Economics\/}~{\em 34\/}(1), 1--23.
+\bibitem[{Allen(1991)}]{allen1991homesteading}
+Allen, D.~W. (1991) Homesteading and property rights; {O}r, ``{H}ow the {W}est
+  was really won".
+\newblock \textit{The Journal of Law and Economics}, \textbf{34}, 1--23.
 
-\bibitem[\protect\citeauthoryear{Amjad, Shah, and Shen}{Amjad
-  et~al.}{2018}]{amjad2018robust}
-Amjad, M., D.~Shah, and D.~Shen (2018).
-\newblock Robust synthetic control.
-\newblock {\em The Journal of Machine Learning Research\/}~{\em 19\/}(1),
+\bibitem[{Amjad et~al.(2018)Amjad, Shah and Shen}]{amjad2018robust}
+Amjad, M., Shah, D. and Shen, D. (2018) Robust synthetic control.
+\newblock \textit{The Journal of Machine Learning Research}, \textbf{19},
   802--852.
 
-\bibitem[\protect\citeauthoryear{Ansell and Samuels}{Ansell and
-  Samuels}{2015}]{ansell2015}
-Ansell, B. and D.~J. Samuels (2015).
-\newblock {\em Inequality and Democratization: An Elite Competition Approach}.
-\newblock New York, NY: Cambridge University Press.
+\bibitem[{Ansell and Samuels(2015)}]{ansell2015}
+Ansell, B. and Samuels, D.~J. (2015) \textit{Inequality and Democratization: An
+  Elite Competition Approach}.
+\newblock Cambridge: Cambridge University Press.
 
-\bibitem[\protect\citeauthoryear{Atack}{Atack}{2013}]{atack2013use}
-Atack, J. (2013).
-\newblock On the use of geographic information systems in economic history: The
-  {A}merican transportation revolution revisited.
-\newblock {\em The Journal of Economic History\/}~{\em 73\/}(2), 313--338.
+\bibitem[{Atack(2013)}]{atack2013use}
+Atack, J. (2013) On the use of geographic information systems in economic
+  history: The {A}merican transportation revolution revisited.
+\newblock \textit{The Journal of Economic History}, \textbf{73}, 313--338.
 
-\bibitem[\protect\citeauthoryear{Atack, Margo, and Perlman}{Atack
-  et~al.}{2012}]{atack2012impact}
-Atack, J., R.~Margo, and E.~Perlman (2012).
-\newblock The impact of railroads on school enrollment in nineteenth century
-  {A}merica.
+\bibitem[{Atack et~al.(2012)Atack, Margo and Perlman}]{atack2012impact}
+Atack, J., Margo, R. and Perlman, E. (2012) The impact of railroads on school
+  enrollment in nineteenth century {A}merica.
+\newblock Available from
+  \url{http://elisabethperlman.net/papers/PerlmanMargoAtack_SchoolRR.html}.
 
-\bibitem[\protect\citeauthoryear{Athey, Bayati, Doudchenko, Imbens, and
-  Khosravi}{Athey et~al.}{2017}]{athey2017matrix}
-Athey, S., M.~Bayati, N.~Doudchenko, G.~Imbens, and K.~Khosravi (2017).
-\newblock Matrix completion methods for causal panel data models.
-\newblock {\em arXiv:1710.10251\/}.
+\bibitem[{Athey et~al.(2017)Athey, Bayati, Doudchenko, Imbens and
+  Khosravi}]{athey2017matrix}
+Athey, S., Bayati, M., Doudchenko, N., Imbens, G. and Khosravi, K. (2017)
+  Matrix completion methods for causal panel data models.
+\newblock \textit{arXiv:1710.10251}.
 
-\bibitem[\protect\citeauthoryear{Athey and Imbens}{Athey and
-  Imbens}{2018}]{athey2018design}
-Athey, S. and G.~Imbens (2018).
-\newblock Design-based analysis in difference-in-differences settings with
-  staggered adoption.
-\newblock {\em arXiv preprint arXiv:1808.05293\/}.
+\bibitem[{Athey and Imbens(2018)}]{athey2018design}
+Athey, S. and Imbens, G. (2018) Design-based analysis in
+  difference-in-differences settings with staggered adoption.
+\newblock \textit{arXiv:1808.05293}.
 
-\bibitem[\protect\citeauthoryear{Benabou}{Benabou}{2000}]{benabou2000unequal}
-Benabou, R. (2000).
-\newblock Unequal societies: Income distribution and the social contract.
-\newblock {\em American Economic Review\/}, 96--129.
+\bibitem[{Benabou(2000)}]{benabou2000unequal}
+Benabou, R. (2000) Unequal societies: Income distribution and the social
+  contract.
+\newblock \textit{American Economic Review}, 96--129.
 
-\bibitem[\protect\citeauthoryear{Bensel}{Bensel}{1990}]{bensel1990}
-Bensel, R.~F. (1990).
-\newblock {\em Yankee Leviathan: the Origins of Central State Authority in
-  America, 1859-1877}.
-\newblock Cambridge University Press.
+\bibitem[{Bensel(1990)}]{bensel1990}
+Bensel, R.~F. (1990) \textit{Yankee Leviathan: the Origins of Central State
+  Authority in America, 1859-1877}.
+\newblock Cambridge: Cambridge University Press.
 
-\bibitem[\protect\citeauthoryear{Bertrand, Duflo, and Mullainathan}{Bertrand
-  et~al.}{2004}]{bertrand2004much}
-Bertrand, M., E.~Duflo, and S.~Mullainathan (2004).
-\newblock How much should we trust differences-in-differences estimates?
-\newblock {\em The Quarterly Journal of Economics\/}~{\em 119\/}(1), 249--275.
+\bibitem[{Bertrand et~al.(2004)Bertrand, Duflo and
+  Mullainathan}]{bertrand2004much}
+Bertrand, M., Duflo, E. and Mullainathan, S. (2004) How much should we trust
+  differences-in-differences estimates?
+\newblock \textit{The Quarterly Journal of Economics}, \textbf{119}, 249--275.
 
-\bibitem[\protect\citeauthoryear{Besley and Persson}{Besley and
-  Persson}{2009}]{besley2009origins}
-Besley, T. and T.~Persson (2009).
-\newblock The origins of state capacity: Property rights, taxation and
-  politics.
-\newblock {\em American Economic Review\/}~{\em 99\/}(4), 1218--1244.
+\bibitem[{Besley and Persson(2009)}]{besley2009origins}
+Besley, T. and Persson, T. (2009) The origins of state capacity: Property
+  rights, taxation and politics.
+\newblock \textit{American Economic Review}, \textbf{99}, 1218--1244.
 
-\bibitem[\protect\citeauthoryear{Besley and Persson}{Besley and
-  Persson}{2010}]{besley2010state}
-Besley, T. and T.~Persson (2010).
-\newblock State capacity, conflict, and development.
-\newblock {\em Econometrica\/}~{\em 78\/}(1), 1--34.
+\bibitem[{Besley and Persson(2010)}]{besley2010state}
+--- (2010) State capacity, conflict, and development.
+\newblock \textit{Econometrica}, \textbf{78}, 1--34.
 
-\bibitem[\protect\citeauthoryear{Boix}{Boix}{2003}]{boix2003democracy}
-Boix, C. (2003).
-\newblock {\em Democracy and Redistribution}.
-\newblock New York, NY: Cambridge University Press.
+\bibitem[{Boix(2003)}]{boix2003democracy}
+Boix, C. (2003) \textit{Democracy and Redistribution}.
+\newblock Cambridge: Cambridge University Press.
 
-\bibitem[\protect\citeauthoryear{Candes and Plan}{Candes and
-  Plan}{2010}]{candes2010matrix}
-Candes, E.~J. and Y.~Plan (2010).
-\newblock Matrix completion with noise.
-\newblock {\em Proceedings of the IEEE\/}~{\em 98\/}(6), 925--936.
+\bibitem[{Candes and Plan(2010)}]{candes2010matrix}
+Candes, E.~J. and Plan, Y. (2010) Matrix completion with noise.
+\newblock \textit{Proceedings of the IEEE}, \textbf{98}, 925--936.
 
-\bibitem[\protect\citeauthoryear{Cand{\`e}s and Recht}{Cand{\`e}s and
-  Recht}{2009}]{candes2009exact}
-Cand{\`e}s, E.~J. and B.~Recht (2009).
-\newblock Exact matrix completion via convex optimization.
-\newblock {\em Foundations of Computational mathematics\/}~{\em 9\/}(6), 717.
+\bibitem[{Cand{\`e}s and Recht(2009)}]{candes2009exact}
+Cand{\`e}s, E.~J. and Recht, B. (2009) Exact matrix completion via convex
+  optimization.
+\newblock \textit{Foundations of Computational mathematics}, \textbf{9}, 717.
 
-\bibitem[\protect\citeauthoryear{Chernozhukov, Wuthrich, and Zhu}{Chernozhukov
-  et~al.}{2017}]{chernozhukov2017exact}
-Chernozhukov, V., K.~Wuthrich, and Y.~Zhu (2017).
-\newblock An exact and robust conformal inference method for counterfactual and
-  synthetic controls.
-\newblock {\em arXiv preprint arXiv:1712.09089\/}.
+\bibitem[{Chernozhukov et~al.(2017)Chernozhukov, Wuthrich and
+  Zhu}]{chernozhukov2017exact}
+Chernozhukov, V., Wuthrich, K. and Zhu, Y. (2017) An exact and robust conformal
+  inference method for counterfactual and synthetic controls.
+\newblock \textit{arXiv:1712.09089}.
 
-\bibitem[\protect\citeauthoryear{Doudchenko and Imbens}{Doudchenko and
-  Imbens}{2016}]{doudchenko2016balancing}
-Doudchenko, N. and G.~W. Imbens (2016).
-\newblock Balancing, regression, difference-in-differences and synthetic
-  control methods: A synthesis.
-\newblock {\em arXiv:1610.07748\/}.
+\bibitem[{Doudchenko and Imbens(2016)}]{doudchenko2016balancing}
+Doudchenko, N. and Imbens, G.~W. (2016) Balancing, regression,
+  difference-in-differences and synthetic control methods: A synthesis.
+\newblock \textit{arXiv:1610.07748}.
 
-\bibitem[\protect\citeauthoryear{Engerman and Sokoloff}{Engerman and
-  Sokoloff}{2005}]{engerman2005evolution}
-Engerman, S.~L. and K.~L. Sokoloff (2005).
-\newblock The evolution of suffrage institutions in the new world.
-\newblock {\em The Journal of Economic History\/}~{\em 65\/}(4), 891--921.
+\bibitem[{Engerman and Sokoloff(2005)}]{engerman2005evolution}
+Engerman, S.~L. and Sokoloff, K.~L. (2005) The evolution of suffrage
+  institutions in the new world.
+\newblock \textit{The Journal of Economic History}, \textbf{65}, 891--921.
 
-\bibitem[\protect\citeauthoryear{Ferrie}{Ferrie}{1997}]{ferrie1997migration}
-Ferrie, J.~P. (1997).
-\newblock Migration to the frontier in mid-nineteenth century {A}merica: {A}
-  re-examination of {T}urner's `safety valve'.
+\bibitem[{Ferrie(1997)}]{ferrie1997migration}
+Ferrie, J.~P. (1997) Migration to the frontier in mid-nineteenth century
+  {A}merica: {A} re-examination of {T}urner's `safety valve'.
 
-\bibitem[\protect\citeauthoryear{Frymer}{Frymer}{2014}]{frymer2014rush}
-Frymer, P. (2014).
-\newblock `{A} rush and a push and the land is ours': {T}erritorial expansion,
-  land policy, and {U.S.} state formation.
-\newblock {\em Perspectives on Politics\/}~{\em 12\/}(1), 119.
+\bibitem[{Frymer(2014)}]{frymer2014rush}
+Frymer, P. (2014) `{A} rush and a push and the land is ours': {T}erritorial
+  expansion, land policy, and {U.S.} state formation.
+\newblock \textit{Perspectives on Politics}, \textbf{12}, 119.
 
-\bibitem[\protect\citeauthoryear{Galor, Moav, and Vollrath}{Galor
-  et~al.}{2009}]{galor2009inequality}
-Galor, O., O.~Moav, and D.~Vollrath (2009).
-\newblock Inequality in landownership, the emergence of human-capital promoting
-  institutions, and the great divergence.
-\newblock {\em The Review of Economic Studies\/}~{\em 76\/}(1), 143--179.
+\bibitem[{Galor et~al.(2009)Galor, Moav and Vollrath}]{galor2009inequality}
+Galor, O., Moav, O. and Vollrath, D. (2009) Inequality in landownership, the
+  emergence of human-capital promoting institutions, and the great divergence.
+\newblock \textit{The Review of Economic Studies}, \textbf{76}, 143--179.
 
-\bibitem[\protect\citeauthoryear{Garcia-Jimeno and Robinson}{Garcia-Jimeno and
-  Robinson}{2009}]{garcia2009myth}
-Garcia-Jimeno, C. and J.~A. Robinson (2009).
-\newblock The myth of the frontier.
-\newblock National Bureau of Economic Research.
+\bibitem[{Garc{\'\i}a-Jimeno and Robinson(2008)}]{garcia2008myth}
+Garc{\'\i}a-Jimeno, C. and Robinson, J.~A. (2008) The myth of the frontier.
+\newblock In \textit{Understanding Long-Run Economic Growth: Geography,
+  Institutions, and the Knowledge Economy}, 49--88. Chicago, IL: University of
+  Chicago Press.
 
-\bibitem[\protect\citeauthoryear{Gates}{Gates}{1940}]{gates1940federal}
-Gates, P.~W. (1940).
-\newblock Federal land policy in the {S}outh 1866-1888.
-\newblock {\em The Journal of Southern History\/}~{\em 6\/}(3), 303--330.
+\bibitem[{Gates(1940)}]{gates1940federal}
+Gates, P.~W. (1940) Federal land policy in the {S}outh 1866-1888.
+\newblock \textit{The Journal of Southern History}, \textbf{6}, 303--330.
 
-\bibitem[\protect\citeauthoryear{Gates}{Gates}{1942}]{gates1942role}
-Gates, P.~W. (1942).
-\newblock The role of the land speculator in western development.
-\newblock {\em The Pennsylvania Magazine of History and Biography\/}~{\em
-  66\/}(3), 314--333.
+\bibitem[{Gates(1942)}]{gates1942role}
+--- (1942) The role of the land speculator in western development.
+\newblock \textit{The Pennsylvania Magazine of History and Biography},
+  \textbf{66}, 314--333.
 
-\bibitem[\protect\citeauthoryear{Gates}{Gates}{1979}]{gates1979federal}
-Gates, P.~W. (1979).
-\newblock Federal land policies in the southern public land states.
-\newblock {\em Agricultural History\/}~{\em 53\/}(1), 206--227.
+\bibitem[{Gates(1979)}]{gates1979federal}
+--- (1979) Federal land policies in the southern public land states.
+\newblock \textit{Agricultural History}, \textbf{53}, 206--227.
 
-\bibitem[\protect\citeauthoryear{Haines}{Haines}{2010}]{haines2010}
-Haines, M.~R. (2010).
-\newblock {H}istorical, {D}emographic, {E}conomic, and {S}ocial {D}ata: The
-  {U}nited {S}tates, 1790-2002.
+\bibitem[{Haines(2010)}]{haines2010}
+Haines, M.~R. (2010) {H}istorical, {D}emographic, {E}conomic, and {S}ocial
+  {D}ata: The {U}nited {S}tates, 1790-2002.
 \newblock Ann Arbor, MI: Inter-university Consortium for Political and Social
   Research [distributor], 2010-05-21. \url{doi.org/10.3886/ICPSR02896.v3}.
 
-\bibitem[\protect\citeauthoryear{Holland}{Holland}{1986}]{holland1986statistics}
-Holland, P.~W. (1986).
-\newblock Statistics and causal inference.
-\newblock {\em Journal of the American statistical Association\/}~{\em
-  81\/}(396), 945--960.
+\bibitem[{Holland(1986)}]{holland1986statistics}
+Holland, P.~W. (1986) Statistics and causal inference.
+\newblock \textit{Journal of the American statistical Association},
+  \textbf{81}, 945--960.
 
-\bibitem[\protect\citeauthoryear{Ilin and Raiko}{Ilin and
-  Raiko}{2010}]{ilin2010practical}
-Ilin, A. and T.~Raiko (2010).
-\newblock Practical approaches to principal component analysis in the presence
-  of missing values.
-\newblock {\em Journal of Machine Learning Research\/}~{\em 11\/}(Jul),
+\bibitem[{Ilin and Raiko(2010)}]{ilin2010practical}
+Ilin, A. and Raiko, T. (2010) Practical approaches to principal component
+  analysis in the presence of missing values.
+\newblock \textit{Journal of Machine Learning Research}, \textbf{11},
   1957--2000.
 
-\bibitem[\protect\citeauthoryear{Imbens and Rubin}{Imbens and
-  Rubin}{2015}]{imbens2015causal}
-Imbens, G.~W. and D.~B. Rubin (2015).
-\newblock {\em Causal Inference in Statistics, Social, and Biomedical
-  Sciences}.
-\newblock Cambridge University Press.
+\bibitem[{Imbens and Rubin(2015)}]{imbens2015causal}
+Imbens, G.~W. and Rubin, D.~B. (2015) \textit{Causal Inference in Statistics,
+  Social, and Biomedical Sciences}.
+\newblock Cambridge: Cambridge University Press.
 
-\bibitem[\protect\citeauthoryear{Lanza}{Lanza}{1999}]{lanza1999agrarianism}
-Lanza, M.~L. (1999).
-\newblock {\em Agrarianism and Reconstruction Politics: {T}he Southern
-  Homestead Act}.
+\bibitem[{Lanza(1999)}]{lanza1999agrarianism}
+Lanza, M.~L. (1999) \textit{Agrarianism and Reconstruction Politics: {T}he
+  Southern Homestead Act}.
 \newblock Baton Rouge, LA: LSU Press.
 
-\bibitem[\protect\citeauthoryear{Lieberman}{Lieberman}{2002}]{lieberman2002taxation}
-Lieberman, E.~S. (2002).
-\newblock Taxation data as indicators of state-society relations: Possibilities
-  and pitfalls in cross-national research.
-\newblock {\em Studies in Comparative International Development\/}~{\em
-  36\/}(4), 89--115.
+\bibitem[{Lieberman(2002)}]{lieberman2002taxation}
+Lieberman, E.~S. (2002) Taxation data as indicators of state-society relations:
+  Possibilities and pitfalls in cross-national research.
+\newblock \textit{Studies in Comparative International Development},
+  \textbf{36}, 89--115.
 
-\bibitem[\protect\citeauthoryear{Little and Rubin}{Little and
-  Rubin}{2014}]{little2014}
-Little, R.~J. and D.~B. Rubin (2014).
-\newblock {\em Statistical Analysis with Missing Data}.
-\newblock John Wiley \& Sons.
+\bibitem[{Little and Rubin(2014)}]{little2014}
+Little, R.~J. and Rubin, D.~B. (2014) \textit{Statistical Analysis with Missing
+  Data}.
+\newblock Hoboken, NJ: John Wiley \& Sons.
 
-\bibitem[\protect\citeauthoryear{Mazumder, Hastie, and Tibshirani}{Mazumder
-  et~al.}{2010}]{mazumder2010spectral}
-Mazumder, R., T.~Hastie, and R.~Tibshirani (2010).
-\newblock Spectral regularization algorithms for learning large incomplete
-  matrices.
-\newblock {\em Journal of Machine Learning Research\/}~{\em 11\/}(Aug),
+\bibitem[{Mazumder et~al.(2010)Mazumder, Hastie and
+  Tibshirani}]{mazumder2010spectral}
+Mazumder, R., Hastie, T. and Tibshirani, R. (2010) Spectral regularization
+  algorithms for learning large incomplete matrices.
+\newblock \textit{Journal of Machine Learning Research}, \textbf{11},
   2287--2322.
 
-\bibitem[\protect\citeauthoryear{Meltzer and Richard}{Meltzer and
-  Richard}{1981}]{meltzer1981rational}
-Meltzer, A.~H. and S.~F. Richard (1981).
-\newblock A rational theory of the size of government.
-\newblock {\em Journal of Political Economy\/}~{\em 89\/}(5), 914--927.
+\bibitem[{Meltzer and Richard(1981)}]{meltzer1981rational}
+Meltzer, A.~H. and Richard, S.~F. (1981) A rational theory of the size of
+  government.
+\newblock \textit{Journal of Political Economy}, \textbf{89}, 914--927.
 
-\bibitem[\protect\citeauthoryear{Murtazashvili}{Murtazashvili}{2013}]{murtazashvili2013political}
-Murtazashvili, I. (2013).
-\newblock {\em The Political Economy of the American Frontier}.
-\newblock New York, NY: Cambridge University Press.
+\bibitem[{Murtazashvili(2013)}]{murtazashvili2013political}
+Murtazashvili, I. (2013) \textit{The Political Economy of the American
+  Frontier}.
+\newblock Cambridge: Cambridge University Press.
 
-\bibitem[\protect\citeauthoryear{Politis and White}{Politis and
-  White}{2004}]{politis2004automatic}
-Politis, D.~N. and H.~White (2004).
-\newblock Automatic block-length selection for the dependent bootstrap.
-\newblock {\em Econometric Reviews\/}~{\em 23\/}(1), 53--70.
+\bibitem[{Politis and White(2004)}]{politis2004automatic}
+Politis, D.~N. and White, H. (2004) Automatic block-length selection for the
+  dependent bootstrap.
+\newblock \textit{Econometric Reviews}, \textbf{23}, 53--70.
 
-\bibitem[\protect\citeauthoryear{Poulos}{Poulos}{2017}]{poulos2017rnn}
-Poulos, J. (2017).
-\newblock {RNN}-based counterfactual time-series prediction.
-\newblock {\em arXiv preprint arXiv:1712.03553\/}.
+\bibitem[{Poulos(2017)}]{poulos2017rnn}
+Poulos, J. (2017) {RNN}-based counterfactual time-series prediction.
+\newblock \textit{arXiv:1712.03553}.
 
-\bibitem[\protect\citeauthoryear{Ramcharan}{Ramcharan}{2010}]{ramcharan2010inequality}
-Ramcharan, R. (2010).
-\newblock Inequality and redistribution: Evidence from {U.S.} counties and
-  states, 1890--1930.
-\newblock {\em The Review of Economics and Statistics\/}~{\em 92\/}(4),
+\bibitem[{Ramcharan(2010)}]{ramcharan2010inequality}
+Ramcharan, R. (2010) Inequality and redistribution: Evidence from {U.S.}
+  counties and states, 1890--1930.
+\newblock \textit{The Review of Economics and Statistics}, \textbf{92},
   729--744.
 
-\bibitem[\protect\citeauthoryear{Schnabel, Swaminathan, Singh, Chandak, and
-  Joachims}{Schnabel et~al.}{2016}]{schnabel2016recommendations}
-Schnabel, T., A.~Swaminathan, A.~Singh, N.~Chandak, and T.~Joachims (2016).
-\newblock Recommendations as treatments: Debiasing learning and evaluation.
-\newblock {\em arXiv preprint arXiv:1602.05352\/}.
+\bibitem[{Schnabel et~al.(2016)Schnabel, Swaminathan, Singh, Chandak and
+  Joachims}]{schnabel2016recommendations}
+Schnabel, T., Swaminathan, A., Singh, A., Chandak, N. and Joachims, T. (2016)
+  Recommendations as treatments: Debiasing learning and evaluation.
+\newblock \textit{arXiv:1602.05352}.
 
-\bibitem[\protect\citeauthoryear{Suryanarayan}{Suryanarayan}{2017}]{suryanarayan2017hollowing}
-Suryanarayan, P. (2017).
-\newblock Hollowing out the state: Franchise expansion and fiscal capacity in
-  colonial {I}ndia.
-\newblock \url{https://ssrn.com/abstract=2951947}.
+\bibitem[{Suryanarayan(2017)}]{suryanarayan2017hollowing}
+Suryanarayan, P. (2017) Hollowing out the state: Franchise expansion and fiscal
+  capacity in colonial {I}ndia.
+\newblock Available from \url{https://ssrn.com/abstract=2951947}.
 
-\bibitem[\protect\citeauthoryear{Sylla, Legler, and Wallis}{Sylla
-  et~al.}{1993}]{sylla1993sources}
-Sylla, R.~E., J.~B. Legler, and J.~Wallis (1993).
-\newblock {S}ources and {U}ses of {F}unds in {S}tate and {L}ocal {G}overnments,
-  1790-1915: [{U}nited {S}tates].
+\bibitem[{Sylla et~al.(1993)Sylla, Legler and Wallis}]{sylla1993sources}
+Sylla, R.~E., Legler, J.~B. and Wallis, J. (1993) {S}ources and {U}ses of
+  {F}unds in {S}tate and {L}ocal {G}overnments, 1790-1915: [{U}nited {S}tates].
 \newblock Ann Arbor, MI: Inter-university Consortium for Political and Social
   Research, 2017-05-21. \url{doi.org/10.3886/ICPSR06304.v1}.
 
-\bibitem[\protect\citeauthoryear{Sylla, Legler, and Wallis}{Sylla
-  et~al.}{1995a}]{sylla1995sourcesa}
-Sylla, R.~E., J.~B. Legler, and J.~Wallis (1995a).
-\newblock {S}tate and {L}ocal {G}overnment [{U}nited {S}tates]: {S}ources and
-  {U}ses of {F}unds, {C}ensus {S}tatistics, {T}wentieth {C}entury [{T}hrough
-  1982].
+\bibitem[{Sylla et~al.(1995{\natexlab{a}})Sylla, Legler and
+  Wallis}]{sylla1995sourcesa}
+--- (1995{\natexlab{a}}) {S}tate and {L}ocal {G}overnment [{U}nited {S}tates]:
+  {S}ources and {U}ses of {F}unds, {C}ensus {S}tatistics, {T}wentieth {C}entury
+  [{T}hrough 1982].
 \newblock Ann Arbor, MI: Inter-university Consortium for Political and Social
   Research, 2017-05-21. \url{doi.org/10.3886/ICPSR06304.v1}.
 
-\bibitem[\protect\citeauthoryear{Sylla, Legler, and Wallis}{Sylla
-  et~al.}{1995b}]{sylla1995sourcesb}
-Sylla, R.~E., J.~B. Legler, and J.~Wallis (1995b).
-\newblock {S}tate and {L}ocal {G}overnment [{U}nited {S}tates]: {S}ources and
-  {U}ses of {F}unds, {S}tate {F}inancial {S}tatistics, 1933-1937.
+\bibitem[{Sylla et~al.(1995{\natexlab{b}})Sylla, Legler and
+  Wallis}]{sylla1995sourcesb}
+--- (1995{\natexlab{b}}) {S}tate and {L}ocal {G}overnment [{U}nited {S}tates]:
+  {S}ources and {U}ses of {F}unds, {S}tate {F}inancial {S}tatistics, 1933-1937.
 \newblock Ann Arbor, MI: Inter-university Consortium for Political and Social
   Research, 2017-05-21. http://doi.org/10.3886/ICPSR06306.v1.
 
-\bibitem[\protect\citeauthoryear{Troyanskaya, Cantor, Sherlock, Brown, Hastie,
-  Tibshirani, Botstein, and Altman}{Troyanskaya
-  et~al.}{2001}]{troyanskaya2001missing}
-Troyanskaya, O., M.~Cantor, G.~Sherlock, P.~Brown, T.~Hastie, R.~Tibshirani,
-  D.~Botstein, and R.~B. Altman (2001).
-\newblock Missing value estimation methods for {DNA} microarrays.
-\newblock {\em Bioinformatics\/}~{\em 17\/}(6), 520--525.
+\bibitem[{Troyanskaya et~al.(2001)Troyanskaya, Cantor, Sherlock, Brown, Hastie,
+  Tibshirani, Botstein and Altman}]{troyanskaya2001missing}
+Troyanskaya, O., Cantor, M., Sherlock, G., Brown, P., Hastie, T., Tibshirani,
+  R., Botstein, D. and Altman, R.~B. (2001) Missing value estimation methods
+  for {DNA} microarrays.
+\newblock \textit{Bioinformatics}, \textbf{17}, 520--525.
 
-\bibitem[\protect\citeauthoryear{Turner}{Turner}{1956}]{turner1956significance}
-Turner, F.~J. (1956).
-\newblock {\em The Significance of the Frontier in American History}.
+\bibitem[{Turner(1956)}]{turner1956significance}
+Turner, F.~J. (1956) \textit{The Significance of the Frontier in American
+  History}.
 \newblock Ithaca, NY: Cornell University Press.
 
-\bibitem[\protect\citeauthoryear{Vollrath}{Vollrath}{2013}]{vollrath2013inequality}
-Vollrath, D. (2013).
-\newblock Inequality and school funding in the rural {U}nited {S}tates, 1890.
-\newblock {\em Explorations in Economic History\/}~{\em 50\/}(2), 267--284.
+\bibitem[{Vollrath(2013)}]{vollrath2013inequality}
+Vollrath, D. (2013) Inequality and school funding in the rural {U}nited
+  {S}tates, 1890.
+\newblock \textit{Explorations in Economic History}, \textbf{50}, 267--284.
 
-\bibitem[\protect\citeauthoryear{Williamson}{Williamson}{2017}]{williamson2017seven}
-Williamson, S.~H. (2017).
-\newblock Seven ways to compute the relative value of a {US} dollar amount,
-  1774 to present.
-\newblock \url{MeasuringWorth.com}.
-\newblock [Online; accessed 01-October-2017].
+\bibitem[{Williamson(2017)}]{williamson2017seven}
+Williamson, S.~H. (2017) Seven ways to compute the relative value of a {US}
+  dollar amount, 1774 to present.
+\newblock Available from \url{http://MeasuringWorth.com}.
 
-\bibitem[\protect\citeauthoryear{Yoon, Zame, and van~der Schaar}{Yoon
-  et~al.}{2018}]{yoon2018estimating}
-Yoon, J., W.~R. Zame, and M.~van~der Schaar (2018).
-\newblock Estimating missing data in temporal data streams using
-  multi-directional recurrent neural networks.
-\newblock {\em IEEE Transactions on Biomedical Engineering\/}.
+\bibitem[{Yoon et~al.(2018)Yoon, Zame and van~der Schaar}]{yoon2018estimating}
+Yoon, J., Zame, W.~R. and van~der Schaar, M. (2018) Estimating missing data in
+  temporal data streams using multi-directional recurrent neural networks.
+\newblock \textit{IEEE Transactions on Biomedical Engineering}.
 
-\bibitem[\protect\citeauthoryear{Ziblatt}{Ziblatt}{2008}]{ziblatt2008does}
-Ziblatt, D. (2008).
-\newblock Does landholding inequality block democratization?: A test of the
-  “bread and democracy” thesis and the case of {P}russia.
-\newblock {\em World Politics\/}~{\em 60\/}(4), 610--641.
+\bibitem[{Ziblatt(2008)}]{ziblatt2008does}
+Ziblatt, D. (2008) Does landholding inequality block democratization? {A} test
+  of the “bread and democracy” thesis and the case of {P}russia.
+\newblock \textit{World Politics}, \textbf{60}, 610--641.
 
 \end{thebibliography}
