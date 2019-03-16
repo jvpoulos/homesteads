@@ -1,4 +1,4 @@
-\begin{thebibliography}{54}
+\begin{thebibliography}{49}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -27,13 +27,6 @@ Abadie, A. and Gardeazabal, J. (2003) The economic costs of conflict: A case
 Acemoglu, D. and Robinson, J.~A. (2008) Persistence of power, elites, and
   institutions.
 \newblock \textit{American Economic Review}, \textbf{98}, 267--293.
-
-\bibitem[{Acemoglu et~al.(2011)Acemoglu, Ticchi and
-  Vindigni}]{acemoglu2011emergence}
-Acemoglu, D., Ticchi, D. and Vindigni, A. (2011) Emergence and persistence of
-  inefficient states.
-\newblock \textit{Journal of the European Economic Association}, \textbf{9},
-  177--208.
 
 \bibitem[{Allen(1991)}]{allen1991homesteading}
 Allen, D.~W. (1991) Homesteading and property rights; {O}r, ``{H}ow the {W}est
@@ -71,11 +64,6 @@ Athey, S., Bayati, M., Doudchenko, N., Imbens, G. and Khosravi, K. (2017)
 Athey, S. and Imbens, G. (2018) Design-based analysis in
   difference-in-differences settings with staggered adoption.
 \newblock \textit{arXiv:1808.05293}.
-
-\bibitem[{Benabou(2000)}]{benabou2000unequal}
-Benabou, R. (2000) Unequal societies: Income distribution and the social
-  contract.
-\newblock \textit{American Economic Review}, 96--129.
 
 \bibitem[{Bensel(1990)}]{bensel1990}
 Bensel, R.~F. (1990) \textit{Yankee Leviathan: the Origins of Central State
@@ -165,11 +153,6 @@ Haines, M.~R. (2010) {H}istorical, {D}emographic, {E}conomic, and {S}ocial
 \newblock Ann Arbor, MI: Inter-university Consortium for Political and Social
   Research [distributor], 2010-05-21. \url{doi.org/10.3886/ICPSR02896.v3}.
 
-\bibitem[{Holland(1986)}]{holland1986statistics}
-Holland, P.~W. (1986) Statistics and causal inference.
-\newblock \textit{Journal of the American statistical Association},
-  \textbf{81}, 945--960.
-
 \bibitem[{Ilin and Raiko(2010)}]{ilin2010practical}
 Ilin, A. and Raiko, T. (2010) Practical approaches to principal component
   analysis in the presence of missing values.
@@ -204,11 +187,6 @@ Mazumder, R., Hastie, T. and Tibshirani, R. (2010) Spectral regularization
 \newblock \textit{Journal of Machine Learning Research}, \textbf{11},
   2287--2322.
 
-\bibitem[{Meltzer and Richard(1981)}]{meltzer1981rational}
-Meltzer, A.~H. and Richard, S.~F. (1981) A rational theory of the size of
-  government.
-\newblock \textit{Journal of Political Economy}, \textbf{89}, 914--927.
-
 \bibitem[{Murtazashvili(2013)}]{murtazashvili2013political}
 Murtazashvili, I. (2013) \textit{The Political Economy of the American
   Frontier}.
@@ -234,11 +212,6 @@ Ramcharan, R. (2010) Inequality and redistribution: Evidence from {U.S.}
 Schnabel, T., Swaminathan, A., Singh, A., Chandak, N. and Joachims, T. (2016)
   Recommendations as treatments: Debiasing learning and evaluation.
 \newblock \textit{arXiv:1602.05352}.
-
-\bibitem[{Suryanarayan(2017)}]{suryanarayan2017hollowing}
-Suryanarayan, P. (2017) Hollowing out the state: Franchise expansion and fiscal
-  capacity in colonial {I}ndia.
-\newblock Available from \url{https://ssrn.com/abstract=2951947}.
 
 \bibitem[{Sylla et~al.(1993)Sylla, Legler and Wallis}]{sylla1993sources}
 Sylla, R.~E., Legler, J.~B. and Wallis, J. (1993) {S}ources and {U}ses of
