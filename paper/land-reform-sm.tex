@@ -1,5 +1,5 @@
-\title{Supporting Materials for\\
-	``State-Building through Public Land Disposal? An Application of Matrix Completion for Counterfactual Prediction''}
+\title{Web-based supporting materials for \\
+	``State-Building through Public Land Disposal? An Application of Matrix Completion for Counterfactual Prediction'' by Jason Poulos}
 
 \date{}
 
@@ -22,6 +22,23 @@
 
 % Footnotes stick at the bottom
 \usepackage[bottom]{footmisc}
+
+% Caption keys
+\usepackage{mathtools,tikz,caption}
+\captionsetup{labelfont=sc,labelsep=period}
+\DeclareRobustCommand\sampleline[1]{%
+	\tikz\draw[#1] (0,0) (0,\the\dimexpr\fontdimen22\textfont2\relax)
+	-- (2em,\the\dimexpr\fontdimen22\textfont2\relax);%
+}
+
+\usetikzlibrary{plotmarks}
+
+% Wes Anderson colors
+
+\usepackage{xcolor}
+
+\definecolor{Darjeeling11}{HTML}{FF0000}
+\definecolor{Darjeeling15}{HTML}{5BBCD6}
 
 % New footnote characters
 \usepackage{footmisc}
@@ -48,7 +65,7 @@
 \definecolor{Gray}{gray}{0.9}
 
 % Different font in captions
-\newcommand{\captionfonts}{\scriptsize}
+\newcommand{\captionfonts}{\normalsize}
 
 \makeatletter  % Allow the use of @ in command names
 \long\def\@makecaption#1#2{%
@@ -132,14 +149,6 @@
 	\caption{Per-capita homestead entries in state $i$ and year $t$, 1869-1922. \label{fig:homestead-heatmap}}
 \end{figure}
 
-\begin{figure}[htbp]
-	\begin{center}
-		\includegraphics[width=0.7\textwidth]{plots/rr-1862.png} \\
-		\includegraphics[width=0.7\textwidth]{plots/rr-1911.png} \\
-	\end{center}
-	\caption{Railroad lines in 1862 and 1911, overlaid on 1911 county borders. Railroad data from \cite{atack2013use} and county border data from \cite{long1995atlas}. \label{rr-map}} 
-\end{figure}
-
 \pagebreak
 \section{Simulations} \label{sims-sm}
 
@@ -162,7 +171,7 @@
 		\includegraphics[width=\textwidth]{plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_1.png}
 		\caption{West German reunification data, $N_t = 8$} 
 	\end{subfigure}
-	\caption{Placebo tests under simultaneous treatment adoption. See footnotes to Fig. \ref{synth-stag}. \label{synth-sim}} 
+	\caption{Placebo tests under simultaneous treatment adoption. See notes to Fig. \ref{synth-stag}. \label{synth-sim}} 
 \end{figure}
 
 \begin{figure}[htbp]
@@ -199,11 +208,24 @@
 	\includegraphics[width=\textwidth]{plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png}
 	\caption{Revenues, staggered adoption}
 \end{subfigure}
-	\caption{Placebo tests under simultaneous and staggered treatment adoption, with $N_t = 9$. See footnotes to Fig. \ref{synth-sim}. \label{mc-sim}} 
+	\caption{Placebo tests under simultaneous and staggered treatment adoption, with $N_t = 9$. See notes to Fig. \ref{synth-sim}. \label{mc-sim}} 
 \end{figure}
 
 \pagebreak
-\section{Causal mechanisms}
+\section{Causal estimates: state capacity}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{plots/mc-rev-pc.png}
+	\caption{MC-NNM estimates of treatment exposure on state government revenue, 1809 to 1982:
+		{\color{Darjeeling15}{\sampleline{}}}, observed treated;
+		{\color{Darjeeling11}{\sampleline{dashed}}}, observed control;
+		{\color{Darjeeling15}{\sampleline{dotted}}}, counterfactual treated;
+		{\color{Darjeeling15}{\sampleline{dash pattern=on .7em off .2em on .05em off .2em}}}, $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates-rev-pc}} 
+\end{figure}
+
+\pagebreak
+\section{Causal mechanisms: land inequality}
 
 \begin{figure}[htbp]
 	\begin{center}

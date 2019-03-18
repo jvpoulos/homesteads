@@ -1,4 +1,4 @@
-\begin{thebibliography}{49}
+\begin{thebibliography}{46}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -47,12 +47,6 @@ Ansell, B. and Samuels, D.~J. (2015) \textit{Inequality and Democratization: An
 Atack, J. (2013) On the use of geographic information systems in economic
   history: The {A}merican transportation revolution revisited.
 \newblock \textit{The Journal of Economic History}, \textbf{73}, 313--338.
-
-\bibitem[{Atack et~al.(2012)Atack, Margo and Perlman}]{atack2012impact}
-Atack, J., Margo, R. and Perlman, E. (2012) The impact of railroads on school
-  enrollment in nineteenth century {A}merica.
-\newblock Available from
-  \url{http://elisabethperlman.net/papers/PerlmanMargoAtack_SchoolRR.html}.
 
 \bibitem[{Athey et~al.(2017)Athey, Bayati, Doudchenko, Imbens and
   Khosravi}]{athey2017matrix}
@@ -169,12 +163,6 @@ Lanza, M.~L. (1999) \textit{Agrarianism and Reconstruction Politics: {T}he
   Southern Homestead Act}.
 \newblock Baton Rouge, LA: LSU Press.
 
-\bibitem[{Lieberman(2002)}]{lieberman2002taxation}
-Lieberman, E.~S. (2002) Taxation data as indicators of state-society relations:
-  Possibilities and pitfalls in cross-national research.
-\newblock \textit{Studies in Comparative International Development},
-  \textbf{36}, 89--115.
-
 \bibitem[{Little and Rubin(2014)}]{little2014}
 Little, R.~J. and Rubin, D.~B. (2014) \textit{Statistical Analysis with Missing
   Data}.
@@ -206,12 +194,6 @@ Ramcharan, R. (2010) Inequality and redistribution: Evidence from {U.S.}
   counties and states, 1890--1930.
 \newblock \textit{The Review of Economics and Statistics}, \textbf{92},
   729--744.
-
-\bibitem[{Schnabel et~al.(2016)Schnabel, Swaminathan, Singh, Chandak and
-  Joachims}]{schnabel2016recommendations}
-Schnabel, T., Swaminathan, A., Singh, A., Chandak, N. and Joachims, T. (2016)
-  Recommendations as treatments: Debiasing learning and evaluation.
-\newblock \textit{arXiv:1602.05352}.
 
 \bibitem[{Sylla et~al.(1993)Sylla, Legler and Wallis}]{sylla1993sources}
 Sylla, R.~E., Legler, J.~B. and Wallis, J. (1993) {S}ources and {U}ses of

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  14 MAR 2019 14:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  17 MAR 2019 20:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1086,9 +1086,6 @@ Package xr Info: IMPORTING LABELS FROM land-reform.aux on input line 21.
 
 LaTeX Warning: Label `placebo-tests' multiply defined.
 
-
-LaTeX Warning: Label `mc-estimates' multiply defined.
-
 (/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty
 Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
 \FN@temptoken=\toks44
@@ -1103,37 +1100,64 @@ Package footmisc Info: Declaring symbol style lamport* on input line 903.
 Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
 .
 )
-Package footmisc Info: Declaring symbol style mySymbols on input line 29.
+(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2018/01/08 v1.21 mathematical typesetting tools
 
-(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
+)
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
+\g_MT_multlinerow_int=\count366
+\l_MT_multwidth_dim=\dimen295
+\origjot=\skip143
+\l_MT_shortvdotswithinadjustabove_dim=\dimen296
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen297
+\l_MT_above_intertext_sep=\dimen298
+\l_MT_below_intertext_sep=\dimen299
+\l_MT_above_shortintertext_sep=\dimen300
+\l_MT_below_shortintertext_sep=\dimen301
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.co
+de.tex
+File: pgflibraryplotmarks.code.tex 2015/08/03 v3.0.1a (rcs-revision 1.14)
+))
+Package footmisc Info: Declaring symbol style mySymbols on input line 46.
+ (/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 2016/02/03 v2.11b `tabularx' package (DPC)
-\TX@col@width=\dimen295
-\TX@old@table=\dimen296
-\TX@old@col=\dimen297
-\TX@target=\dimen298
-\TX@delta=\dimen299
-\TX@cols=\count366
+\TX@col@width=\dimen302
+\TX@old@table=\dimen303
+\TX@old@col=\dimen304
+\TX@target=\dimen305
+\TX@delta=\dimen306
+\TX@cols=\count367
 \TX@ftn=\toks45
 )
 (./land-reform-sm.aux)
 \openout1 = `land-reform-sm.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 106.
-LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
 \AtBeginShipoutBox=\box69
-Package hyperref Info: Link coloring OFF on input line 106.
+Package hyperref Info: Link coloring OFF on input line 123.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1141,11 +1165,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count367
+\c@section@level=\count368
 )
-LaTeX Info: Redefining \ref on input line 106.
-LaTeX Info: Redefining \pageref on input line 106.
-LaTeX Info: Redefining \nameref on input line 106.
+LaTeX Info: Redefining \ref on input line 123.
+LaTeX Info: Redefining \pageref on input line 123.
+LaTeX Info: Redefining \nameref on input line 123.
 
 (./land-reform-sm.out) (./land-reform-sm.out)
 \@outlinefile=\write5
@@ -1154,16 +1178,16 @@ LaTeX Info: Redefining \nameref on input line 106.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count368
-\scratchdimen=\dimen300
+\scratchcounter=\count369
+\scratchdimen=\dimen307
 \scratchbox=\box70
-\nofMPsegments=\count369
-\nofMParguments=\count370
+\nofMPsegments=\count370
+\nofMParguments=\count371
 \everyMPshowfont=\toks46
-\MPscratchCnt=\count371
-\MPscratchDim=\dimen301
-\MPnumerator=\count372
-\makeMPintoPDFobject=\count373
+\MPscratchCnt=\count372
+\MPscratchDim=\dimen308
+\MPnumerator=\count373
+\makeMPintoPDFobject=\count374
 \everyMPtoPDFconversion=\toks47
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1225,16 +1249,16 @@ ABD: EveryShipout initializing macros
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 109.
+LaTeX Font Info:    Try loading font information for U+msa on input line 126.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 109.
+LaTeX Font Info:    Try loading font information for U+msb on input line 126.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+wasy on input line 109.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 126.
 
 (/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
@@ -1251,131 +1275,128 @@ Non-PDF special ignored!
 <special> header=psfrag.pro
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./dv-table.tex)
-Overfull \hbox (23.87169pt too wide) in paragraph at lines 124--125
+Overfull \hbox (23.87169pt too wide) in paragraph at lines 141--142
  [] 
  []
 
-<plots/homestead-heatmap.png, id=45, 794.97pt x 614.295pt>
+<plots/homestead-heatmap.png, id=50, 794.97pt x 614.295pt>
 File: plots/homestead-heatmap.png Graphic file (type png)
 <use plots/homestead-heatmap.png>
-Package pdftex.def Info: plots/homestead-heatmap.png  used on input line 130.
+Package pdftex.def Info: plots/homestead-heatmap.png  used on input line 147.
 (pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
-<plots/rr-1862.png, id=46, 3312.375pt x 2559.5625pt>
-File: plots/rr-1862.png Graphic file (type png)
-<use plots/rr-1862.png>
-Package pdftex.def Info: plots/rr-1862.png  used on input line 137.
-(pdftex.def)             Requested size: 328.82707pt x 254.05751pt.
-<plots/rr-1911.png, id=48, 3312.375pt x 2559.5625pt>
-File: plots/rr-1911.png Graphic file (type png)
-<use plots/rr-1911.png>
-Package pdftex.def Info: plots/rr-1911.png  used on input line 138.
-(pdftex.def)             Requested size: 328.82707pt x 254.05751pt.
-[1] [2 <./plots/homestead-heatmap.png (PNG copy)>] [3 <./plots/rr-1862.png> <./
-plots/rr-1911.png>]
-<plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_1.png, id=84, 50
+[1] [2 <./plots/homestead-heatmap.png (PNG copy)>]
+<plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_1.png, id=69, 50
 5.76955pt x 505.76955pt>
 File: plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_1.png Graph
 ic file (type png)
 <use plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_1.png>
 Package pdftex.def Info: plots/basque_N_16_T_43_numruns_20_num_treated_8_simult
-aneuous_1.png  used on input line 150.
+aneuous_1.png  used on input line 159.
 (pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
-<plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_1.png, id=8
-5, 505.76955pt x 505.76955pt>
+<plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_1.png, id=7
+0, 505.76955pt x 505.76955pt>
 File: plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_1.png 
 Graphic file (type png)
 <use plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_1.png>
 Package pdftex.def Info: plots/california_N_38_T_31_numruns_20_num_treated_19_s
-imultaneuous_1.png  used on input line 156.
+imultaneuous_1.png  used on input line 165.
 (pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
-<plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_1.png, id=86, 5
+<plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_1.png, id=71, 5
 05.76955pt x 505.76955pt>
 File: plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_1.png Grap
 hic file (type png)
 <use plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_1.png>
 Package pdftex.def Info: plots/germany_N_16_T_44_numruns_20_num_treated_8_simul
-taneuous_1.png  used on input line 162.
+taneuous_1.png  used on input line 171.
 (pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
-<plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_1.png, id=88, 5
+<plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_1.png, id=73, 5
 05.76955pt x 505.76955pt>
 File: plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_1.png Grap
 hic file (type png)
 <use plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_1.png>
 Package pdftex.def Info: plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simul
-taneuous_1.png  used on input line 181.
+taneuous_1.png  used on input line 190.
 (pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
-<plots/rev_pc_N_18_T_158_numruns_20_num_treated_9_simultaneuous_1.png, id=89, 5
+<plots/rev_pc_N_18_T_158_numruns_20_num_treated_9_simultaneuous_1.png, id=74, 5
 05.76955pt x 505.76955pt>
 File: plots/rev_pc_N_18_T_158_numruns_20_num_treated_9_simultaneuous_1.png Grap
 hic file (type png)
 <use plots/rev_pc_N_18_T_158_numruns_20_num_treated_9_simultaneuous_1.png>
 Package pdftex.def Info: plots/rev_pc_N_18_T_158_numruns_20_num_treated_9_simul
-taneuous_1.png  used on input line 187.
+taneuous_1.png  used on input line 196.
 (pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
-<plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_0.png, id=90, 5
+<plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_0.png, id=75, 5
 05.76955pt x 505.76955pt>
 File: plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_0.png Grap
 hic file (type png)
 <use plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_0.png>
 Package pdftex.def Info: plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simul
-taneuous_0.png  used on input line 193.
+taneuous_0.png  used on input line 202.
 (pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
-<plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png, id=91, 
+<plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png, id=76, 
 505.76955pt x 505.76955pt>
 File: plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png Gra
 phic file (type png)
 <use plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png>
 Package pdftex.def Info: plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simu
-ltaneuous_0.png  used on input line 199.
+ltaneuous_0.png  used on input line 208.
 (pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
- [4 <./plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_1.png (PNG
+ [3 <./plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_1.png (PNG
  copy)> <./plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_1
 .png (PNG copy)> <./plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneu
-ous_1.png (PNG copy)>] [5 <./plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_s
-imultaneuous_1.png (PNG copy)> <./plots/rev_pc_N_18_T_158_numruns_20_num_treate
-d_9_simultaneuous_1.png (PNG copy)> <./plots/exp_pc_N_17_T_159_numruns_20_num_t
-reated_9_simultaneuous_0.png (PNG copy)> <./plots/rev_pc_N_19_T_158_numruns_20_
-num_treated_10_simultaneuous_0.png (PNG copy)>]
-<plots/ineq-capacity.png, id=107, 794.97pt x 614.295pt>
+ous_1.png (PNG copy)>]
+[4 <./plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_1.png (PNG
+ copy)> <./plots/rev_pc_N_18_T_158_numruns_20_num_treated_9_simultaneuous_1.png
+ (PNG copy)> <./plots/exp_pc_N_17_T_159_numruns_20_num_treated_9_simultaneuous_
+0.png (PNG copy)> <./plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultan
+euous_0.png (PNG copy)>]
+<plots/mc-rev-pc.png, id=94, 614.295pt x 794.97pt>
+File: plots/mc-rev-pc.png Graphic file (type png)
+<use plots/mc-rev-pc.png>
+Package pdftex.def Info: plots/mc-rev-pc.png  used on input line 219.
+(pdftex.def)             Requested size: 469.75502pt x 607.9196pt.
+ [5] [6 <./plots/mc-rev-pc.png (PNG copy)>]
+<plots/ineq-capacity.png, id=105, 794.97pt x 614.295pt>
 File: plots/ineq-capacity.png Graphic file (type png)
 <use plots/ineq-capacity.png>
-Package pdftex.def Info: plots/ineq-capacity.png  used on input line 210.
+Package pdftex.def Info: plots/ineq-capacity.png  used on input line 232.
 (pdftex.def)             Requested size: 469.75502pt x 363.00267pt.
- [6 <./plots/ineq-capacity.png (PNG copy)>] (./land-reform-sm.bbl) [7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 225.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 225.
- (./land-reform-sm.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 225.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 225.
+ [7 <./plots/ineq-capacity.png (PNG copy)>] (./land-reform-sm.bbl) [8]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 247.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 247.
+
+(./land-reform-sm.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 247.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 247.
 Package rerunfilecheck Info: File `land-reform-sm.out' has not changed.
-(rerunfilecheck)             Checksum: E5A3A654A6E12308DEBF235D4A84A488;158.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 225.
+(rerunfilecheck)             Checksum: CD709AA9A29EE18476E48C69E0AA3823;242.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 247.
  ) 
 Here is how much of TeX's memory you used:
- 29832 strings out of 492641
- 551373 string characters out of 6131787
- 640154 words of memory out of 5000000
- 33234 multiletter control sequences out of 15000+600000
- 545211 words of font info for 76 fonts, out of 8000000 for 9000
+ 30384 strings out of 492641
+ 562560 string characters out of 6131787
+ 655371 words of memory out of 5000000
+ 33774 multiletter control sequences out of 15000+600000
+ 544653 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,11n,65p,984b,535s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,11n,65p,1183b,650s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{figure.caption.1} has been referenced but does no
 t exist, replaced by a fixed one
 
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmtt12.pfb>
-Output written on land-reform-sm.pdf (8 pages, 4496814 bytes).
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmtt12.pfb>
+Output written on land-reform-sm.pdf (9 pages, 2943260 bytes).
 PDF statistics:
- 165 PDF objects out of 1000 (max. 8388607)
- 126 compressed objects within 2 object streams
- 27 named destinations out of 1000 (max. 500000)
- 92 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 163 PDF objects out of 1000 (max. 8388607)
+ 129 compressed objects within 2 object streams
+ 29 named destinations out of 1000 (max. 500000)
+ 95 words of extra memory for PDF output out of 10000 (max. 10000000)
 

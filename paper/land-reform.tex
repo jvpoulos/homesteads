@@ -4,7 +4,7 @@
 
 % Define packages
 \usepackage{hyperref, url} 
-\usepackage{graphicx,amsfonts,psfrag,layout,subcaption,array,longtable,lscape,booktabs,dcolumn,amsmath,amssymb,amssymb,amsthm,setspace,epigraph,chronology,color,colortbl,caption,wasysym,diagbox,natbib,colortbl,authblk,commath,upgreek}
+\usepackage{graphicx,amsfonts,psfrag,layout,subcaption,array,longtable,lscape,booktabs,dcolumn,amsmath,amssymb,amssymb,amsthm,setspace,epigraph,chronology,color,colortbl,wasysym,diagbox,natbib,colortbl,authblk,commath,upgreek}
 \usepackage[]{graphicx}\usepackage[]{color}
 \usepackage[page]{appendix}
 \usepackage[section]{placeins}
@@ -18,6 +18,8 @@
 \setcounter{Maxaffil}{0}
 \renewcommand\Affilfont{\itshape\small}
 
+\renewcommand{\abstractname}{Summary} % For RSS-A
+ 
 % Reference labels in the online appendix
 \usepackage{xr}
 \externaldocument{land-reform-sm}
@@ -25,9 +27,25 @@
 % Footnotes stick at the bottom
 \usepackage[bottom]{footmisc}
 
-% Multicolumns for references
+% Caption keys
+\usepackage{mathtools,tikz,caption}
+\captionsetup{labelfont=sc,labelsep=period}
+\DeclareRobustCommand\sampleline[1]{%
+	\tikz\draw[#1] (0,0) (0,\the\dimexpr\fontdimen22\textfont2\relax)
+	-- (2em,\the\dimexpr\fontdimen22\textfont2\relax);%
+}
 
+\usetikzlibrary{plotmarks}
+
+% Multicolumns for references
 \usepackage{multicol}
+
+% Wes Anderson colors
+
+\usepackage{xcolor}
+
+\definecolor{Darjeeling11}{HTML}{FF0000}
+\definecolor{Darjeeling15}{HTML}{5BBCD6}
 
 % New footnote characters
 \usepackage{footmisc}
@@ -58,7 +76,7 @@
 \definecolor{Gray}{gray}{0.9}
 
 % Different font in captions
-\newcommand{\captionfonts}{\scriptsize}
+\newcommand{\captionfonts}{\normalsize}
 
 \makeatletter  % Allow the use of @ in command names
 \long\def\@makecaption#1#2{%
@@ -121,7 +139,7 @@
 
 %\pagebreak % abstract/keywords get own page 
 \begin{abstract}  %A short summary (no more than about 100 words) 
-\noindent
+	\noindent
 How would the frontier have evolved in the absence of homestead policies? I propose using a matrix completion method to predict the counterfactual time-series of frontier state capacity had there been no homesteading. In placebo tests, the matrix completion method outperforms the synthetic control method and other regression-based estimators in terms of minimizing prediction error. Causal estimates signify that homestead policies had significant and long-lasting negative impacts on state government expenditure and revenue. These results are consistent with difference-in-difference estimation that exploits variation in the timing and intensity of homestead entries aggregated from 1.46 million individual land patent records.
 \vspace{10mm}\\
 \emph{Keywords:} Counterfactual Prediction; Difference-in-Differences; Matrix Completion; State Capacity; Synthetic Control Method; Time-Series Cross-Section Data
@@ -148,9 +166,9 @@ The paper proceeds as follows: in Section \ref{history}, I overview the historic
 
 The 1862 HSA opened up hundreds of millions of acres of western public land for settlement. The HSA provides that any adult citizen --- including women, immigrants who had applied for citizenship, and freed slaves following the passage of the Fourteenth Amendment---  could apply for a homestead grant of 160 acres of frontier land. Applicants were required to live and make improvements on the land for five years before filing to claim a homestead land grant. 
 
-Under the HSA, the bulk of newly surveyed land on the western frontier was reserved for homesteads, although the law did not end sales of public land.\footnote{Congress repealed the cash entry restriction in 1876, and sharply reversed policy in 1889 by ending cash entry in all PLS except for Missouri \citep{gates1940federal}.} The explicit goal of the HSA was to liberalize the homesteading requirements set by the Preemption Act of 1841, which permitted individuals already inhabiting public land to purchase up to 160 acres at \$1.25 per acre before the land was put up for sale. The implicit goal was to promote rapid settlement on the western frontier and reduce federal government's enforcement costs \citep{allen1991homesteading}. 
+Under the HSA, the bulk of newly surveyed land on the western frontier was reserved for homesteads, although the law did not end sales of public land. The explicit goal of the HSA was to liberalize the homesteading requirements set by the Preemption Act of 1841, which permitted individuals already inhabiting public land to purchase up to 160 acres at \$1.25 per acre before the land was put up for sale. The implicit goal was to promote rapid settlement on the western frontier and reduce federal government's enforcement costs \citep{allen1991homesteading}. 
 
-In the pre-Reconstruction South, public land was not open to homestead but rather unrestricted cash entry, which permitted the direct sale of public land to private individuals of 80 acres or more for at least \$1.25 an acre. The 1866 SHA restricted cash entry and reserved for homesteading over 46 million acres of public land, or about one-third of the total land area in the five southern public land states (PLS) \citep[pp. 13]{lanza1999agrarianism}.\footnote{Note that I use the terminology of PLS interchangeably with ``frontier" states throughout the paper. PLS are states created out of the public domain. In the South, these states include Alabama, Arkansas, Florida, Louisiana, and Mississippi. Western PLS include the 25 states that comprise the Midwestern, Southwestern, and Western U.S. (except Hawaii).} Similar to the HSA, homesteaders could patent up to 160 acres after five years of inhabiting and improving the land, but unlike the HSA, could not commute homestead entries to cash entry after six months.
+In the pre-Reconstruction South, public land was not open to homestead but rather unrestricted cash entry, which permitted the direct sale of public land to private individuals of 80 acres or more for at least \$1.25 an acre. The 1866 SHA restricted cash entry and reserved for homesteading over 46 million acres of public land, or about one-third of the total land area in the five southern public land states (PLS) \citep[pp. 13]{lanza1999agrarianism}. PLS are states created out of the public domain. In the South, these states include Alabama, Arkansas, Florida, Louisiana, and Mississippi. Western PLS include the 25 states that comprise the Midwestern, Southwestern, and Western U.S. (except Hawaii). 
 
 Homestead policies were often exploited by speculators and corporations through fraudulent filings. Speculators and corporations engaged in the practice of paying individuals to stake out homesteads in order to extract resources from the land with no intention of filing for the final patent. In the South, these ``dummy entry-men'' were used by timber and mining companies to extract resources while the cash entry restriction of the SHA was in effect. When the restriction was removed, there was no need for fraudulent filings because the larger companies could buy land in unlimited amounts at a nominal price \citep{gates1940federal, gates1979federal}. The same pattern of fraudulent filings existed in the West, where \citet{murtazashvili2013political} argues that speculators benefited disproportionately from public land policies because the economic balance of power tilted toward the wealthy. \citet{gates1942role} characterizes western speculators who bought land in bulk prior to the 1889 restriction as being influential in state and local governments, resistant to paying taxes, and opposed to government spending. 
 
@@ -158,9 +176,9 @@ Homestead policies were often exploited by speculators and corporations through 
 
 An important problem in the social sciences is estimating the effect of a binary intervention on an outcome over time. When interventions take place at an aggregate level (e.g., a state), researchers make causal inferences by comparing the post-intervention (``post-period'') outcomes of affected (``treated'') units against the outcomes of unaffected  (``control'') units. A common approach to the problem is the synthetic control method, which predicts the counterfactual outcomes of treated units by finding a convex combination of control units that match the treated units in term of lagged outcomes. Correlations across units that are assumed to remain constant over time. 
 
-This paper applies a method of matrix completion via nuclear norm minimization (MC-NNM) proposed by \citet{athey2017matrix} to predict counterfactual outcomes in a setting where multiple treated units are exposed to a binary intervention and the date of initial exposure to treatment may vary between treated units.\footnote{\citet{schnabel2016recommendations} first connected the matrix completion problem with causal inference in an observational setting in the context of recommender systems under selection bias.} Matrix completion methods \citep[e.g.,][]{mazumder2010spectral} exploit correlations within and across units, but ignore the temporal dimension of the data. These methods typically assume missing values are sampled uniformly at random \citep{yoon2018estimating}. In contrast, the MC-NNM estimator allows for patterns of missing data to have a time-series dependency structure.
+This paper applies the method of matrix completion via nuclear norm minimization (MC-NNM) proposed by \citet{athey2017matrix} to predict counterfactual outcomes. Matrix completion methods \citep[e.g.,][]{mazumder2010spectral} exploit correlations within and across units, but ignore the temporal dimension of the data. These methods typically assume missing values are sampled uniformly at random \citep{yoon2018estimating}. In contrast, the MC-NNM estimator allows for patterns of missing data to have a time-series dependency structure in a setting where the date of initial exposure to treatment may vary among treated units.
 
-Let $Y$ denote a $\text{N} \times \text{T}$ matrix of outcomes for each unit $i =1, \ldots, \text{N}$ at time $t = 1, \ldots, \text{T}$. $Y$ is incomplete because we observe each element $Y_{it}$ for only the control units and the treated units prior to time of initial treatment exposure, $\text{T}_0$. Let $\mathcal{O}$ denote the set of $(it)$ values that are observed and $\mathcal{M}$ the set of $(it)$ missing values. Let the values of the $\text{N} \times \text{T}$ complete matrix $M$ be $M_{it} =1 $ if $(it) \in \mathcal{M}$ and $M_{it} = 0$ if $(it) \in \mathcal{O}$.\footnote{The process that generates $M$ is referred to the assignment mechanism in the causal inference literature \citep{imbens2015causal} and the missing data mechanism in missing data analysis \citep{little2014}.} 
+Let $Y$ denote a $\text{N} \times \text{T}$ matrix of outcomes for each unit $i =1, \ldots, \text{N}$ at time $t = 1, \ldots, \text{T}$. $Y$ is incomplete because we observe each element $Y_{it}$ for only the control units and the treated units prior to time of initial treatment exposure, $\text{T}_0$. Let $\mathcal{O}$ denote the set of $(it)$ values that are observed and $\mathcal{M}$ the set of $(it)$ missing values. Let the values of the $\text{N} \times \text{T}$ complete matrix $M$ be $M_{it} =1 $ if $(it) \in \mathcal{M}$ and $M_{it} = 0$ if $(it) \in \mathcal{O}$. Note that the process that generates $M$ is referred to the assignment mechanism in the causal inference literature \citep{imbens2015causal} and the missing data mechanism in missing data analysis \citep{little2014}.
 
 We cannot directly observe counterfactual outcomes and we instead wish to impute missing values in $Y$ for treated units with $M_{it}=1$. In an observational setting, units are part of the assignment mechanism that generates $M$ and patterns of missing data follow one of two specific structures. In the case of simultaneous adoption of treatment, a subset of units are exposed to treatment at time $\text{T}_0$ and every subsequent period. The second structure arises from the staggered adoption setting, where $\text{T}_0$ may vary across treated units. In either case, there are selection biases because the probability of missingness may depend on the unobserved data. The goal is to accurately estimate the effect of a policy intervention despite incomplete data subject to selection bias. 
 
@@ -180,7 +198,7 @@ where $L^{*}$ a low-rank matrix to be estimated, $X$ is a $\text{N} \times \text
 \end{equation}
 
 \noindent
-where $\lambda$ is the regularization term on the nuclear norm $\norm{\cdot}_\star$ --- i.e., sum of singular values --- and its value is selected by cross-validation. The algorithm for (\ref{eq:mc-opt}) iteratively replaces missing values with those recovered from a singular value decomposition (SVD) \citep{mazumder2010spectral}.\footnote{\citet{amjad2018robust} propose an alternative approach of approximating $L^{*}$ via SVD, and then using linear regression on the ``de-noised'' matrix, rather than relying on matrix norm regularizations.} 
+where $\lambda$ is the regularization term on the nuclear norm $\norm{\cdot}_\star$ --- i.e., sum of singular values --- and its value is selected by cross-validation. The algorithm for (\ref{eq:mc-opt}) iteratively replaces missing values with those recovered from a singular value decomposition (SVD) \citep{mazumder2010spectral}. \citet{amjad2018robust} propose an alternative approach of approximating $L^{*}$ via SVD, and then using linear regression on the ``de-noised'' matrix, rather than relying on matrix norm regularizations.
 
 \citet{athey2017matrix} note two drawbacks of the MC-NNM estimator: first, it penalizes the errors for each value with $M_{it} = 0$ equally without regard to the fact that $\Pr (M_{it}) = 1$ (i.e., the propensity score) increases with $t$. Second, the columns of $\boldsymbol{\upepsilon}$ may be autocorrelated because the estimator does not account for time-series dependencies in the observed data.
 
@@ -201,29 +219,44 @@ I benchmark the MC-NNM estimator against the following methods:
 	}
 \end{description}
 
-Figure \ref{synth-stag} reports the average prediction error of the estimators in a staggered treatment adoption setting, across different ratios $\text{T}_0/\text{T}$. Across all estimators, the average RMSE decreases and prediction intervals narrow as $\text{T}_0/\text{T}$ approaches unity because the estimators have more information to generate counterfactual predictions. The MC-NNM estimator generally outperforms all other estimators in terms of average RMSE across different ratios $\text{T}_0/\text{T}$.  The strong performance of the MC-NNM estimator can be attributed to the fact that it is capable of using additional information in the form of pre-intervention (``pre-period'') observations of the treated units, whereas the regression-based estimators rely only on the pre-period observations of control units to predict counterfactuals.\footnote{Figure SM-\ref{synth-sim} in the Supporting Materials (SM) presents a similar pattern of results in a simultaneous adoption setting.}
+Figure \ref{synth-stag} reports the average prediction error of the estimators in a staggered treatment adoption setting, with the estimates jittered horizontally to reduce overlap. Error bars represent 95\% prediction intervals calculated using the standard deviation of the prediction distribution for 20 trial runs. 
+
+Across all estimators, the average RMSE decreases and prediction intervals narrow as $\text{T}_0/\text{T}$ approaches unity because the estimators have more information to generate counterfactual predictions. The MC-NNM estimator generally outperforms all other estimators in terms of average RMSE across different ratios $\text{T}_0/\text{T}$.  The strong performance of the MC-NNM estimator can be attributed to the fact that it is capable of using additional information in the form of pre-intervention (``pre-period'') observations of the treated units, whereas the regression-based estimators rely only on the pre-period observations of control units to predict counterfactuals. Figure SM-\ref{synth-sim} in the Supporting Materials (SM) presents a similar pattern of results in a simultaneous adoption setting.
 
 \begin{figure}[htbp]
 	\centering
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png}
+		\includegraphics[width=\textwidth]{plots/basque-stag.png}
 		\caption{Basque Country terrorism data, $\text{N}_t = 8$} 
 	\end{subfigure}
 	~ 
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png}
+		\includegraphics[width=\textwidth]{plots/california-stag.png}
 		\caption{California smoking ban data, $\text{N}_t = 19$}
 	\end{subfigure}
 	~ 
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png}
+		\includegraphics[width=\textwidth]{plots/germany-stag.png}
 		\caption{West German reunification data, $\text{N}_t = 8$}
 	\end{subfigure}
-	\caption{Placebo tests under staggered treatment adoption. Error bars represent 95\% prediction intervals calculated using the standard deviation of the prediction distribution for 20 trial runs. Note that the estimates are jittered horizontally to reduce overlap. \label{synth-stag}} 
+\caption{Placebo tests under staggered treatment adoption: {\protect\tikz \protect\draw[color={rgb:red,4;green,0;yellow,1}] (0,0) -- plot[mark=o, mark options={scale=1.5}] (0.25,0) -- (0.5,0);}, DID;
+	{\protect\tikz \protect\draw[color={rgb:orange,4;yellow,2;pink,3}] (0,0) -- plot[mark=triangle*, mark options={scale=1.5,fill=white}] (0.25,0) -- (0.5,0);}, HR-EN; 
+	{\protect\tikz \protect\draw[color={rgb:red,0;green,5;blue,1}] (0,0) -- plot[mark=+, mark options={scale=1.5}] (0.25,0) -- (0.5,0);}, MC-NNM;
+	{\protect\tikz \protect\draw[color={rgb:red,0;green,4;blue,2}] (0,0) -- plot[mark=x, mark options={scale=1.5}] (0.25,0) -- (0.5,0);}, PCA;
+	{\protect\tikz \protect\draw[color=cyan] (0,0) -- plot[mark=diamond, mark options={scale=1.5}] (0.25,0) -- (0.5,0);}, SC-ADH;
+	{\protect\tikz \protect\draw[color={rgb:red,100;pink,100;blue,200}] (0,0) -- plot[mark=triangle, mark options={scale=1.5, rotate=180}] (0.25,0) -- (0.5,0);}, SVD;
+	{\protect\tikz \protect\draw[color=magenta] (0,0) -- plot[mark=square, mark options={scale=1.5}] (0.25,0) -- (0.5,0);}, VT-EN.
+		\label{synth-stag}}
 \end{figure}
+
+%{\protect\tikz \protect\draw[thick, color=red, fill=white] plot[mark=*, mark options={scale=1.3}] (0,0);}
+
+%\draw (0,0) -- 
+%plot[mark=*, mark options={fill=white}] (0.25,0) -- (0.5,0) 
+%node[right]{soft};
 
 \subsection{Hypothesis testing} \label{hyp-test}
 
@@ -264,13 +297,13 @@ Following \citet{chernozhukov2017exact}, (\ref{eq:pvalue}) is estimated by permu
 
 \section{Impact of homestead policies on state capacity} \label{state-capacity}
 
-In this section, I estimate the causal impacts of homestead policies on state capacity, as measured by state government spending and revenue. I create measures of total expenditure and revenue collected from the records of 48 state governments during the period of 1783 to 1932 \citep{sylla1993sources} and the records of 16 state governments during the period of 1933 to 1937 \citep{sylla1995sourcesa,sylla1995sourcesb}. Comparable measures for 48 states are drawn from U.S. Census special reports for the years 1902, 1913, 1932, 1942, 1962, 1972, and 1982 \citep{haines2010}.\footnote{I take the mean of duplicate state-year observations, which arise for the years 1902, 1913, and 1932.} The expenditure measure includes state government spending on education, social welfare programs, and transportation. The revenue measure incorporates state government income streams such as tax revenue and non-tax revenues such as land sales.\footnote{Tax revenue is commonly used as a measure of fiscal capacity \citep{lieberman2002taxation}, which is the bureaucratic ability of governments to raise taxes from multiple sources in order to finance policies. Fiscal capacity is strongly correlated with state capacity \citep{besley2010state}.} 
+In this section, I estimate the causal impacts of homestead policies on state capacity, as measured by state government spending and revenue. I create measures of total expenditure and revenue collected from the records of 48 state governments during the period of 1783 to 1932 \citep{sylla1993sources} and the records of 16 state governments during the period of 1933 to 1937 \citep{sylla1995sourcesa,sylla1995sourcesb}. Comparable measures for 48 states are drawn from U.S. Census special reports for the years 1902, 1913, 1932, 1942, 1962, 1972, and 1982 \citep{haines2010}. The expenditure measure includes state government spending on education, social welfare programs, and transportation. The revenue measure incorporates state government income streams such as tax revenue and non-tax revenues such as land sales.
 
 The data pre-processing steps are as follows. Each measure is inflation-adjusted according to the U.S. Consumer Price Index \citep{williamson2017seven} and scaled by the total free population in the decennial census \citep{haines2010}. Missing values are imputed separately in the pre- and -post-periods by carrying the last observation forward and remaining missing values are imputed by carrying the next observation backward. The raw outcomes data are log-transformed to alleviate exponential effects. Lastly, I remove states with no variance in the pre-period outcomes, resulting in complete $\text{N} \times \text{T}$ matrices of size $33 \times 159$ and $34 \times 158$ for the expenditures and revenues outcomes, respectively. 
 
-In this application, PLS are the treated units and state land states --- i.e., states that were not crafted from the public domain and were therefore not directly affected by homestead policies --- serve as control units.\footnote{This group includes states of the original 13 colonies, Maine, Tennessee, Texas, Vermont, and West Virginia.} The staggered adoption setting is appropriate for the current application because $\text{T}_0$ varies across states, about half of which are exposed to homesteads following the passage of the HSA. Aggregating to the state level approximately 1.46 million individual land patent records authorized under the HSA,\footnote{Land patent records provide information on the initial transfer of land titles from the federal government and are made accessible online by the U.S. General Land Office (\url{https://glorecords.blm.gov}). Figure SM-\ref{fig:homestead-heatmap} visualizes the timing and intensity of homestead entries.} I determine that the earliest homestead entries occurred in 1869 in about half of the western frontier states, about seven years following the enactment of the HSA. In 1872, the first homesteads were filed in southern PLS.
+In this application, PLS are the treated units and state land states --- i.e., states that were not crafted from the public domain and were therefore not directly affected by homestead policies --- serve as control units. This group includes states of the original 13 colonies, Maine, Tennessee, Texas, Vermont, and West Virginia. The staggered adoption setting is appropriate for the current application because $\text{T}_0$ varies across states, about half of which are exposed to homesteads following the passage of the HSA. I aggregate to the state level approximately 1.46 million individual land patent records authorized under the HSA. Land patent records provide information on the initial transfer of land titles from the federal government and are made accessible online by the U.S. General Land Office (\url{https://glorecords.blm.gov}). Using these records, I determine that the earliest homestead entries occurred in 1869 in about half of the western frontier states, about seven years following the enactment of the HSA. In 1872, the first homesteads were filed in southern PLS.
 
-When estimating (\ref{eq:mc-Y}), unit-specific covariates include state-level average farm sizes measured in the 1860 and average farm values measured in the 1850 and 1860 censuses. In theory, we should expect that homesteaders migrate to more productive land and thus excluding these pre-period measures of agricultural productivity may result in overestimating the actual impact of homestead policies. To control for selection bias arising from differences in access to frontier lands, I create a measure of railroad access using digitized railroad maps provided by \citet{atack2013use}, which contain information on the year that each rail line was built. Overlaying the railroad track map over historical county borders, I calculate the total miles of operational track per square mile and aggregate the measure to the state-level.\footnote{Using these data, I estimate that 29\% of counties had railroad access in 1862 and 91\% had access by 1911 (Fig. SM-\ref{rr-map}). The railroad access measure defines access with respect to county boundaries, which \citet{atack2012impact} point out has limitations because a county without access might be adjacent to one with access and county boundaries frequently changed over time.}
+When estimating (\ref{eq:mc-Y}), unit-specific covariates include state-level average farm sizes measured in the 1860 and average farm values measured in the 1850 and 1860 censuses. In theory, we should expect that homesteaders migrate to more productive land and thus excluding these pre-period measures of agricultural productivity may result in overestimating the actual impact of homestead policies. To control for selection bias arising from differences in access to frontier lands, I create a measure of railroad access using digitized railroad maps provided by \citet{atack2013use}, which contain information on the year that each rail line was built. Overlaying the railroad track map over historical county borders, I calculate the total miles of operational track per square mile and aggregate the measure to the state-level.
 
 \subsection{Placebo tests} \label{placebo-tests}
 
@@ -283,7 +316,7 @@ Prior to presenting the main results, I assess the validity of the key assumptio
 \noindent
 where $\tau \in \left\{1, 10, 25\right\}$ and $q \in \left\{1, 2\right\}$. 
 
-Table \ref{placebo-tests} reports the average treatment effect over the placebo post-period and randomization $p$-values calculated by (\ref{eq:pvalue}). When considering the revenue outcome, placebo tests yield two-sided $p$-values greater than the significance level of $\alpha = 0.05$, regardless of the value of $q$ or permutation structure. These results provide evidence in favor of the validity of the consistency assumption. However, we can only reject the null in the case of $\tau=1$ when considering the expenditure outcome. 
+Table \ref{placebo-tests} reports randomization $p$-values corresponding to each permutation structure and value of $\tau$ and $q$. i.i.d. block and i.i.d. block $p$-values are calculated using $|\Pi| = 1,000$ permutations. Moving block $p$-values are based on $|\Pi| = \text{T}-1$ permutations. When considering the revenue outcome, placebo tests yield two-sided $p$-values greater than the significance level of $\alpha = 0.05$, regardless of the value of $q$ or permutation structure. These results provide evidence in favor of the validity of the consistency assumption. However, we can only reject the null in the case of $\tau=1$ when considering the expenditure outcome. 
 
 \begin{table}[htbp]
 	\captionsetup{font=normalsize}
@@ -291,41 +324,36 @@ Table \ref{placebo-tests} reports the average treatment effect over the placebo 
 	\begin{center}
 		\scalebox{.95}{\input{placebo-tests}}
 	\end{center}
-	\footnotesize{\emph{Notes:} randomization $p$-values corresponding to each permutation structure and value of $\tau$ and $q$. i.i.d. block and i.i.d. block $p$-values are calculated using $|\Pi| = 1,000$ permutations. Moving block $p$-values are based on $|\Pi| = \text{T}-1$ permutations.}
 \end{table}
 
 Further evidence of the consistency of the MC-NNM estimator is provided in Figure SM-\ref{mc-sim}, which presents the results of placebo tests on control units using both pre- and post-period observations. Similar to the simulations on the synthetic control datasets discussed in Section \ref{sims}, there are no missing entries because the actual treated units are removed prior to the placebo tests. I randomly choose about half of the remaining control units as hypothetical treated units and predict their values for time periods following a randomly selected $\text{T}_0$. The MC-NNM estimator outperforms DID and SVD estimators in terms of minimizing RMSE for each ratio $\text{T}_0/\text{T}$. At $\text{T}_0/\text{T} \geq 0.5$, the estimator generally yields comparable error rates to PCA, synthetic control, and vertical regression estimators. 
 
 \subsection{Main estimates} \label{main-estimates}
 
-In the main analyses, I fit the MC-NNM estimator described in (\ref{eq:mc-Y}) on the entirety of observed entries in $Y$ to recover its missing entries; i.e., the counterfactual outcomes of PLS. The top panels of Figure \ref{mc-estimates-exp-pc} and \ref{mc-estimates-rev-pc} compare the observed time-series of treated units and control units along with the predicted outcomes of treated units. The observed means of the treated and control units are essentially identical in the post-period. However, we are interested primarily in the difference in the observed and predicted treated unit outcomes, which is the quantity $\hat{\bar{\alpha}}_{t}$, which corresponds to the estimated per-period average causal effect of treatment exposure on the treated units. These per-period causal impacts are plotted in the bottom panels. Bootstrap confidence intervals for $\hat{\bar{\alpha}}_{t}$ are calculated by block resampling with optimal block lengths selected by the procedure described by \citet{politis2004automatic}. 
+In the main analyses, I fit the MC-NNM estimator described in (\ref{eq:mc-Y}) on the entirety of observed entries in $Y$ to recover its missing entries; i.e., the counterfactual outcomes of PLS. The top panel of Figure \ref{mc-estimates-exp-pc} compares the observed time-series of treated units and control units along with the predicted outcomes of treated units. The dashed vertical line represents the initial treatment year of 1869. The observed means of the treated and control units are essentially identical in the post-period. However, we are interested primarily in the difference in the observed and predicted treated unit outcomes, which is the quantity $\hat{\bar{\alpha}}_{t}$, which corresponds to the estimated per-period average causal effect of treatment exposure on the treated units. These per-period causal impacts are plotted in the bottom panels, with 95\% confidence intervals estimated by taking $\hat{\bar{\alpha}}_{t} \pm 1.96$ the standard error of the distribution of 1,000 block bootstrap replicates of $\hat{\bar{\alpha}}_{t}$, with optimal block lengths selected by the procedure described by \citet{politis2004automatic}. 
 
-The per-period impact time-series for both outcomes are essentially zero during the pre-period and within the bounds of the bootstrap confidence intervals, which demonstrates that the model is closely fitting the pre-period observations. Per-period impacts on state government spending peak in 1870, at the same time most PLS were first exposed to homesteads, representing a 0.18 [-0.35, 0.71] log increase in per-capita expenditure. By 1876, after most PLS had been exposed to homesteads, homestead exposure decreases expenditure by 0.51 [-1.67, 0.66] log points, and the trajectory of causal impacts remains negative for the rest of the time-series. Similarly, per-period impacts on revenue peak in 1873, representing a 0.43 [-0.57, 1.44] log increase in per-capita revenues, at the same time southern PLS are exposed to homesteads. The causal impacts on revenue quickly decrease and remain negative for the remaining time-series; in 1877, exposure to homesteads confer a 0.45 [-1.51, 0.61] log point decrease in per-capita revenue. 
+The per-period impact time-series for both outcomes are essentially zero during the pre-period and within the bounds of the bootstrap confidence intervals, which demonstrates that the model is closely fitting the pre-period observations. Per-period impacts on state government spending peak in 1870, at the same time most PLS were first exposed to homesteads, representing a 0.18 [-0.35, 0.71] log increase in per-capita expenditure. By 1876, after most PLS had been exposed to homesteads, homestead exposure decreases expenditure by 0.51 [-1.67, 0.66] log points, and the trajectory of causal impacts remains negative for the rest of the time-series.
+
+A similar pattern of results emerges when estimating the impacts of homesteads on state government revenue (Figure SM-\ref{mc-estimates-rev-pc}). Per-period impacts on revenue peak in 1873, representing a 0.43 [-0.57, 1.44] log increase in per-capita revenues, at the same time southern PLS are exposed to homesteads. The causal impacts on revenue quickly decrease and remain negative for the remaining time-series; in 1877, exposure to homesteads confer a 0.45 [-1.51, 0.61] log point decrease in per-capita revenue. 
 
 \begin{figure}[htbp]
 	\centering
-	\begin{subfigure}[t]{0.75\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{plots/mc-exp-pc.png}
-		\caption{Log per-capita state government expenditure (1982\$)\label{mc-estimates-exp-pc}}
-	\end{subfigure}
-	~ 
-	\begin{subfigure}[t]{0.75\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{plots/mc-rev-pc.png}
-		\caption{Log per-capita state government revenue (1982\$)\label{mc-estimates-rev-pc}}
-	\end{subfigure}
-	\caption{Top panel: Mean observed (solid time-series) and counterfactual predicted (dotted time-series) outcomes of treated units and mean observed outcomes (dashed time-series) among control units, displayed for the time period of 1809 to 1982. Dashed vertical line represents the initial treatment year of 1869. Bottom panel: Per-period average causal impacts of homestead exposure on PLS, or $\hat{\bar{\alpha}}_{t}$ in (\ref{eq:avg-pointwise}). Shaded regions represent 95\% confidence intervals estimated by taking $\hat{\bar{\alpha}}_{t} \pm 1.96$ the standard error of the distribution of 1,000 bootstrap replicates of $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates}} 
+	\includegraphics[width=\textwidth]{plots/mc-exp-pc.png}
+	\caption{MC-NNM estimates of treatment exposure on state government expenditure, 1809 to 1982:
+		{\color{Darjeeling15}{\sampleline{}}}, observed treated;
+		{\color{Darjeeling11}{\sampleline{dashed}}}, observed control;
+		{\color{Darjeeling15}{\sampleline{dotted}}}, counterfactual treated;
+		{\color{Darjeeling15}{\sampleline{dash pattern=on .7em off .2em on .05em off .2em}}}, $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates-exp-pc}} 
 \end{figure}
 
-The estimated bootstrap confidence intervals are useful for evaluating per-period causal impacts but are not helpful in evaluating the overall effect of homestead policies. Table \ref{mc-estimates} reports randomization $p$-values for testing the null hypothesis:
+The estimated bootstrap confidence intervals are useful for evaluating per-period causal impacts but are not helpful in evaluating the overall effect of homestead policies. Table \ref{mc-estimates} reports the results of testing the null hypothesis:
 
 \begin{equation} \label{h0}
 \text{H}_0: \text{S}_q (\hat{\bar{\alpha}}_{t}) = 0  \, \hspace{5mm} \,  \text{for} \, \hspace{2mm}  \text{T}_0 + 1 \leq t \leq \text{T}.
 \end{equation}
 \noindent
 
-We can reject the null hypothesis (\ref{h0}) at the 5\% level for both outcomes, both values of $q$, and all three permutation schemes. Note that the relevant test statistic $S (\hat{\bar{\alpha}}_{t})$ measures the trajectory of average causal effects in absolute terms and thus does not provide information on the direction or evolution of the causal effects over time.
+In the table, $\text{S}_q (\boldsymbol{\hat{\bar{\alpha}}})$ corresponds to the test statistic described in (\ref{tstat}) and each value beneath is the randomization $p$-value corresponding to each permutation structure. We can reject the null hypothesis (\ref{h0}) at the 5\% level for both outcomes, both values of $q$, and all three permutation schemes. Note that the relevant test statistic $S (\hat{\bar{\alpha}}_{t})$ measures the trajectory of average causal effects in absolute terms and thus does not provide information on the direction or evolution of the causal effects over time.
 
 \begin{table}[htbp]
 	\captionsetup{font=normalsize}
@@ -333,7 +361,6 @@ We can reject the null hypothesis (\ref{h0}) at the 5\% level for both outcomes,
 	\begin{center}
 		\input{mc-estimates}
 	\end{center}
-	\footnotesize{\emph{Notes:} $\text{S}_q (\boldsymbol{\hat{\bar{\alpha}}})$ corresponds to the test statistic described in (\ref{tstat}) and each value beneath is the randomization $p$-value corresponding to each permutation structure. See footnotes to Table \ref{placebo-tests}.}
 \end{table}
 
 \section{DID estimation} \label{DID}
@@ -344,22 +371,21 @@ The matrix completion approach estimates the impact of a binary exposure to trea
 Y_{it} =  \gamma_i + \delta_t + \psi \, M_{it} + \phi \, (M_{it} \cdot H_{it}) + X_{it}  + \epsilon_{it}. \label{eq:dd} 
 \end{equation}
 
-In this model, $X$ is a matrix of unit- and time-varying covariates included to control for parallel trends in agricultural productivity and access to frontier lands. Entries in the treatment indicator $M$ are set to $M_{it} = 1$ at $t \geq  \text{T}_0$, where $\text{T}_0$ varies across units. The continuous treatment exposure variable $H_{it}$ measures the per-capita statewide sum of homestead entries in state $i$ and year $t$. The coefficient corresponding to the interaction term, $\hat{\phi}$, is the estimated average causal effect of exposure to homesteads. I use unit-stratified bootstrapped samples to construct nonparametric standard errors for $\hat{\phi}$.\footnote{The model assumes i.i.d. errors, which understates the standard errors for $\hat{\updelta}$ when the regression errors are serially correlated, or $\mathrm{Corr} (\epsilon_{it}, \epsilon_{i,t-1}) \neq 0$, which can arise when the time-series lengths are not sufficiently long to reliably estimate the data generating process. \citet{bertrand2004much} show that the stratified bootstrap can be used to compute consistent standard errors when the number of units is sufficiently large.} 
+In this model, $X$ is a matrix of unit- and time-varying covariates included to control for parallel trends in agricultural productivity and access to frontier lands. Entries in the treatment indicator $M$ are set to $M_{it} = 1$ at $t \geq  \text{T}_0$, where $\text{T}_0$ varies across units. The continuous treatment exposure variable $H_{it}$ measures the per-capita statewide sum of homestead entries in state $i$ and year $t$. The coefficient corresponding to the interaction term, $\hat{\phi}$, is the estimated average causal effect of exposure to homesteads. I use unit-stratified bootstrapped samples to construct nonparametric standard errors for $\hat{\phi}$. The model assumes i.i.d. errors, which understates the standard errors for $\hat{\updelta}$ when the regression errors are serially correlated, or $\mathrm{Corr} (\epsilon_{it}, \epsilon_{i,t-1}) \neq 0$, which can arise when the time-series lengths are not sufficiently long to reliably estimate the data generating process. \citet{bertrand2004much} show that the stratified bootstrap can be used to compute consistent standard errors when the number of units is sufficiently large. 
 
 Similar to the case of binary treatment, the continuous DID estimator is adapted to a setting of staggered adoption because the initial date of exposure to homesteads varies across PLS. It should be emphasized that estimating (\ref{eq:dd}) in a staggered adoption setting relies on several strong assumptions regarding both the assignment mechanism --- in this application, the distribution of $\text{T}_0$ --- and the counterfactual outcomes of the treated units. The framework of \citet{athey2018design}, for instance, assumes the distribution of $\text{T}_0$ is completely random conditional on the covariates. In the current application, this assumption ignores the possibility that initial exposure to homesteads might be determined by unobserved factors. The framework also that the counterfactual outcomes at time $t$ does not depend on the future date of treatment exposure if $t <  \text{T}_0$ or the history of treatment exposure if $t >  \text{T}_0$. Violations of these assumptions would arise if the homestead policies is anticipated prior to $\text{T}_0$ or if the size of frontier state government is determined by whether the state was exposed early or late to homesteads. 
 
 \subsection{DID estimates on state capacity}
 
-I estimate (\ref{eq:dd}) on balanced state-year panel datasets of state government finances from the years 1783 to 1982. The covariate matrix $X_{it}$ includes measures of railroad access, farm sizes, and farm values.\footnote{Missing values in $X_{it}$ are imputed separately in the time periods before and after 1868, carrying the last observation forward and impute remaining missing values by carrying the next observation backward.}
+I estimate (\ref{eq:dd}) on balanced state-year panel datasets of state government finances from the years 1783 to 1982. The covariate matrix $X_{it}$ includes measures of railroad access, farm sizes, and farm values. Missing values in $X_{it}$ are imputed separately in the time periods before and after 1868, carrying the last observation forward and impute remaining missing values by carrying the next observation backward.
 
-Table \ref{dd-estimates} reports the DID treatment effect estimates, which indicate that a 10\% increase in log per-capita homesteads is expected to significantly decrease log per-capita stage government finances by about 0.1\%. The point estimates are considerably smaller in magnitude -- albeit in the the same direction-- as the per-period MC-NNM estimates presented in Section \ref{main-estimates}. The bootstrap confidence intervals around the DID estimates are considerably more narrow than those for the MC-NNM per-period impacts displayed in Figure \ref{mc-estimates} and are potentially overoptimistic due to serial correlation in the DID regression errors.
+Table \ref{dd-estimates} reports the DID treatment effect estimates and corresponding 95\% confidence intervals constructed using 1,000 state-stratified bootstrap samples. The estimates indicate that a 10\% increase in log per-capita homesteads is expected to significantly decrease log per-capita stage government finances by about 0.1\%. The point estimates are considerably smaller in magnitude -- albeit in the the same direction-- as the per-period MC-NNM estimates presented in Section \ref{main-estimates}. The bootstrap confidence intervals around the DID estimates are considerably more narrow than those for the MC-NNM per-period impacts displayed in Figure \ref{mc-estimates} and are potentially overoptimistic due to serial correlation in the DID regression errors.
 
 \begin{table}[htbp]
 	\begin{center}
-		\caption{DID estimates: Impact of homestead entries on per-capita state government finances and land inequality. \label{dd-estimates}}
-		\resizebox{.8\width}{!}{\input{dd-estimates}}
+		\caption{DID estimates: Impact of homestead entries on outcomes. \label{dd-estimates}}
+		\resizebox{.9\width}{!}{\input{dd-estimates}}
 	\end{center}
-	\footnotesize{Notes: Values in brackets represent 95\% confidence intervals constructed using 1,000 state-stratified bootstrap samples.}
 \end{table}
 
 \subsection{Land inequality as a causal mechanism}  \label{mechanisms}
@@ -368,9 +394,9 @@ Through which channels do homesteads affect state capacity? The political econom
 
 To test whether homesteads affected future land inequality in frontier counties, I calculate a commonly-used measure of land inequality based on the Gini coefficient of census farm sizes. Gini-based land inequality measures are commonly used as proxy for the \emph{de facto} bargaining power of landed elites \citep[e.g.,][]{boix2003democracy,ziblatt2008does,ansell2015}. Note that the Gini coefficient will underestimate land inequality in counties with high shares of propertyless farmers because tenant farms are included in the farm size data, which is problematic because farms can be operated by different tenants but owned by the same landlord. I correct for this problem by adjusting the farm Gini coefficient by the ratio of farms to adult males, as recommended by \citet{vollrath2013inequality}.
 
-In Figure SM-\ref{fig:ineq-capacity}, a bivariate regression model yields a positive relationship between land inequality and state government finances during the period of 1860 to 1950, especially at higher levels of inequality. This relationship points to inequality as a potential causal mechanism underlying the relationship between homesteads and state capacity.\footnote{However, this relationship is subject to reverse causality because state policies determining expenditures and revenue can also shape the distribution of landownership.} The inverse relationship is consistent with the findings of \citet{ramcharan2010inequality} and \citet{vollrath2013inequality} in the context of taxes, revenues, and public school spending at the county-level in 1890 and 1930.
+In Figure SM-\ref{fig:ineq-capacity}, a bivariate regression model yields a positive relationship between land inequality and state government finances during the period of 1860 to 1950, especially at higher levels of inequality. This relationship points to inequality as a potential causal mechanism underlying the relationship between homesteads and state capacity. The inverse relationship is consistent with the findings of \citet{ramcharan2010inequality} and \citet{vollrath2013inequality} in the context of taxes, revenues, and public school spending at the county-level in 1890 and 1930.
 
-Table \ref{dd-estimates} presents DID estimates of the impact of log per-capita homesteads on land inequality at the state-level during the period of 1870 to 1950.\footnote{Since land inequality is measured every decennial, I aggregate homesteads to the next decennial year; e.g., the number of homesteads measured in 1880 is the total for the years 1871 to 1880.} Average farm values are included in the regression as a proxy for agricultural productivity, which might be associated with farm sizes approaching ideal scale and therefore land inequality. I estimate that homesteads significantly decreased land inequality in frontier states: a 1\% increase in log per-capita homesteads is expected to lower  land inequality by $4.81\,\cdot\,10^{-6}$ points. 
+Table \ref{dd-estimates} presents DID estimates of the impact of log per-capita homesteads on land inequality at the state-level during the period of 1870 to 1950. Since land inequality is measured every decennial, I aggregate homesteads to the next decennial year; e.g., the number of homesteads measured in 1880 is the total for the years 1871 to 1880. Average farm values are included in the regression as a proxy for agricultural productivity, which might be associated with farm sizes approaching ideal scale and therefore land inequality. I estimate that homesteads significantly decreased land inequality in frontier states: a 1\% increase in log per-capita homesteads is expected to lower  land inequality by $4.81\,\cdot\,10^{-6}$ points. 
 
 \section{Conclusion} \label{discussion} 
 
@@ -385,9 +411,9 @@ This paper makes a methodological contribution in applying matrix completion ---
 \bibliographystyle{rss}
 \begin{singlespace}
 \begin{footnotesize}
-%\begin{multicols}{2}
+\begin{multicols}{2}
 \bibliography{references}
-%\end{multicols}
+\end{multicols}
 \end{footnotesize}
 \end{singlespace}
 

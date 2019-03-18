@@ -8,45 +8,45 @@ Repeated entry---line 1663 of file references.bib
  :                       ,
 I'm skipping whatever remains of this entry
 Warning--empty note in ferrie1997migration
-You've used 49 entries,
+You've used 46 entries,
             2705 wiz_defined-function locations,
-            857 strings with 12919 characters,
-and the built_in function-call counts, 22382 in all, are:
-= -- 2216
-> -- 922
-< -- 34
-+ -- 377
-- -- 309
-* -- 1824
-:= -- 4202
-add.period$ -- 98
-call.type$ -- 49
-change.case$ -- 347
-chr.to.int$ -- 48
-cite$ -- 50
-duplicate$ -- 1043
-empty$ -- 1650
-format.name$ -- 448
-if$ -- 4375
+            841 strings with 12267 characters,
+and the built_in function-call counts, 20987 in all, are:
+= -- 2083
+> -- 844
+< -- 33
++ -- 345
+- -- 282
+* -- 1707
+:= -- 3929
+add.period$ -- 92
+call.type$ -- 46
+change.case$ -- 323
+chr.to.int$ -- 45
+cite$ -- 47
+duplicate$ -- 982
+empty$ -- 1563
+format.name$ -- 414
+if$ -- 4112
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 50
-newline$ -- 202
-num.names$ -- 196
-pop$ -- 425
+missing$ -- 48
+newline$ -- 190
+num.names$ -- 184
+pop$ -- 397
 preamble$ -- 1
-purify$ -- 299
+purify$ -- 278
 quote$ -- 0
-skip$ -- 625
+skip$ -- 589
 stack$ -- 0
-substring$ -- 1200
-swap$ -- 200
+substring$ -- 1143
+swap$ -- 190
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 417
+type$ -- 390
 warning$ -- 1
-while$ -- 200
+while$ -- 189
 width$ -- 0
-write$ -- 571
+write$ -- 537
 (There was 1 error message)

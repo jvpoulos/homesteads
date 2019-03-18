@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  16 MAR 2019 08:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2018.12.4)  17 MAR 2019 20:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1100,7 +1100,7 @@ Package: geometry 2018/04/16 v5.8 Page Geometry
 (/usr/share/texlive/texmf-dist/tex/latex/tools/xr.sty
 Package: xr 1994/05/28 v5.02 eXternal References (DPC)
 )
-Package xr Info: IMPORTING LABELS FROM land-reform-sm.aux on input line 23.
+Package xr Info: IMPORTING LABELS FROM land-reform-sm.aux on input line 25.
 
 (/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty
 Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
@@ -1116,25 +1116,52 @@ Package footmisc Info: Declaring symbol style lamport* on input line 903.
 Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
 .
 )
-(/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
+(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2018/01/08 v1.21 mathematical typesetting tools
+
+(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
+)
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
+\g_MT_multlinerow_int=\count369
+\l_MT_multwidth_dim=\dimen295
+\origjot=\skip145
+\l_MT_shortvdotswithinadjustabove_dim=\dimen296
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen297
+\l_MT_above_intertext_sep=\dimen298
+\l_MT_below_intertext_sep=\dimen299
+\l_MT_above_shortintertext_sep=\dimen300
+\l_MT_below_shortintertext_sep=\dimen301
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
+zlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.co
+de.tex
+File: pgflibraryplotmarks.code.tex 2015/08/03 v3.0.1a (rcs-revision 1.14)
+)) (/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2018/04/20 v1.8s multicolumn formatting (FMi)
-\c@tracingmulticols=\count369
+\c@tracingmulticols=\count370
 \mult@box=\box69
-\multicol@leftmargin=\dimen295
-\c@unbalance=\count370
-\c@collectmore=\count371
-\doublecol@number=\count372
-\multicoltolerance=\count373
-\multicolpretolerance=\count374
-\full@width=\dimen296
-\page@free=\dimen297
-\premulticols=\dimen298
-\postmulticols=\dimen299
-\multicolsep=\skip145
-\multicolbaselineskip=\skip146
+\multicol@leftmargin=\dimen302
+\c@unbalance=\count371
+\c@collectmore=\count372
+\doublecol@number=\count373
+\multicoltolerance=\count374
+\multicolpretolerance=\count375
+\full@width=\dimen303
+\page@free=\dimen304
+\premulticols=\dimen305
+\postmulticols=\dimen306
+\multicolsep=\skip146
+\multicolbaselineskip=\skip147
 \partial@page=\box70
 \last@line=\box71
-\maxbalancingoverflow=\dimen300
+\maxbalancingoverflow=\dimen307
 \mult@rightbox=\box72
 \mult@grightbox=\box73
 \mult@gfirstbox=\box74
@@ -1156,63 +1183,60 @@ Package: multicol 2018/04/20 v1.8s multicolumn formatting (FMi)
 \@tempa=\box90
 \@tempa=\box91
 \@tempa=\box92
-\c@columnbadness=\count375
-\c@finalcolumnbadness=\count376
-\last@try=\dimen301
-\multicolovershoot=\dimen302
-\multicolundershoot=\dimen303
+\c@columnbadness=\count376
+\c@finalcolumnbadness=\count377
+\last@try=\dimen308
+\multicolovershoot=\dimen309
+\multicolundershoot=\dimen310
 \mult@nat@firstbox=\box93
 \colbreak@box=\box94
-\mc@col@check@num=\count377
+\mc@col@check@num=\count378
 )
-Package footmisc Info: Declaring symbol style mySymbols on input line 35.
+Package footmisc Info: Declaring symbol style mySymbols on input line 53.
 
 (/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 2016/02/03 v2.11b `tabularx' package (DPC)
-\TX@col@width=\dimen304
-\TX@old@table=\dimen305
-\TX@old@col=\dimen306
-\TX@target=\dimen307
-\TX@delta=\dimen308
-\TX@cols=\count378
+\TX@col@width=\dimen311
+\TX@old@table=\dimen312
+\TX@old@col=\dimen313
+\TX@target=\dimen314
+\TX@delta=\dimen315
+\TX@cols=\count379
 \TX@ftn=\toks45
 ) (./land-reform.aux
 
 LaTeX Warning: Label `placebo-tests' multiply defined.
 
-
-LaTeX Warning: Label `mc-estimates' multiply defined.
-
 )
 \openout1 = `land-reform.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 131.
+LaTeX Font Info:    ... okay on input line 131.
 \AtBeginShipoutBox=\box95
-Package hyperref Info: Link coloring OFF on input line 113.
+Package hyperref Info: Link coloring OFF on input line 131.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count379
+\c@section@level=\count380
 )
-LaTeX Info: Redefining \ref on input line 113.
-LaTeX Info: Redefining \pageref on input line 113.
-LaTeX Info: Redefining \nameref on input line 113.
+LaTeX Info: Redefining \ref on input line 131.
+LaTeX Info: Redefining \pageref on input line 131.
+LaTeX Info: Redefining \nameref on input line 131.
 
 (./land-reform.out) (./land-reform.out)
 \@outlinefile=\write5
@@ -1221,16 +1245,16 @@ LaTeX Info: Redefining \nameref on input line 113.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count380
-\scratchdimen=\dimen309
+\scratchcounter=\count381
+\scratchdimen=\dimen316
 \scratchbox=\box96
-\nofMPsegments=\count381
-\nofMParguments=\count382
+\nofMPsegments=\count382
+\nofMParguments=\count383
 \everyMPshowfont=\toks46
-\MPscratchCnt=\count383
-\MPscratchDim=\dimen310
-\MPnumerator=\count384
-\makeMPintoPDFobject=\count385
+\MPscratchCnt=\count384
+\MPscratchDim=\dimen317
+\MPnumerator=\count385
+\makeMPintoPDFobject=\count386
 \everyMPtoPDFconversion=\toks47
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1292,16 +1316,16 @@ ABD: EveryShipout initializing macros
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 116.
+LaTeX Font Info:    Try loading font information for U+msa on input line 134.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 116.
+LaTeX Font Info:    Try loading font information for U+msb on input line 134.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+wasy on input line 116.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 134.
 
 (/usr/share/texlive/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
@@ -1314,181 +1338,134 @@ ination with the same identifier (name{page.1}) has been already used, duplicat
 e ignored
 <to be read again> 
                    \relax 
-l.141 
+l.159 
        [1] [2] [3] [4]
 
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <8> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 176.
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 194.
 
 
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <6> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 176.
-
-
-Overfull \vbox (0.56857pt too high) has occurred while \output is active []
-
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 194.
 
 [5] [6]
-<plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png, id=236, 5
-05.76955pt x 505.76955pt>
-File: plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png Graph
-ic file (type png)
-<use plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png>
-Package pdftex.def Info: plots/basque_N_16_T_43_numruns_20_num_treated_8_simult
-aneuous_0.png  used on input line 210.
-(pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
-<plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png, id=2
-37, 505.76955pt x 505.76955pt>
-File: plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png 
-Graphic file (type png)
-<use plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuous_0.png>
-Package pdftex.def Info: plots/california_N_38_T_31_numruns_20_num_treated_19_s
-imultaneuous_0.png  used on input line 216.
-(pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
-<plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png, id=238, 
-505.76955pt x 505.76955pt>
-File: plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png Grap
-hic file (type png)
-<use plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_0.png>
-Package pdftex.def Info: plots/germany_N_16_T_44_numruns_20_num_treated_8_simul
-taneuous_0.png  used on input line 222.
-(pdftex.def)             Requested size: 225.4804pt x 225.47961pt.
- [7] [8 <./plots/basque_N_16_T_43_numruns_20_num_treated_8_simultaneuous_0.png 
-(PNG copy)> <./plots/california_N_38_T_31_numruns_20_num_treated_19_simultaneuo
-us_0.png (PNG copy)> <./plots/germany_N_16_T_44_numruns_20_num_treated_8_simult
-aneuous_0.png (PNG copy)>] [9] [10] [11] (./placebo-tests.tex)
-Overfull \hbox (17.47629pt too wide) in paragraph at lines 292--293
+<plots/basque-stag.png, id=213, 614.295pt x 794.97pt>
+File: plots/basque-stag.png Graphic file (type png)
+<use plots/basque-stag.png>
+Package pdftex.def Info: plots/basque-stag.png  used on input line 230.
+(pdftex.def)             Requested size: 225.4804pt x 291.79315pt.
+<plots/california-stag.png, id=214, 614.295pt x 794.97pt>
+File: plots/california-stag.png Graphic file (type png)
+<use plots/california-stag.png>
+Package pdftex.def Info: plots/california-stag.png  used on input line 236.
+(pdftex.def)             Requested size: 225.4804pt x 291.79315pt.
+<plots/germany-stag.png, id=215, 614.295pt x 794.97pt>
+File: plots/germany-stag.png Graphic file (type png)
+<use plots/germany-stag.png>
+Package pdftex.def Info: plots/germany-stag.png  used on input line 242.
+(pdftex.def)             Requested size: 225.4804pt x 291.79315pt.
+
+
+LaTeX Warning: Float too large for page by 9.5229pt on input line 253.
+
+[7] [8 <./plots/basque-stag.png (PNG copy)> <./plots/california-stag.png (PNG c
+opy)> <./plots/germany-stag.png (PNG copy)>] [9] [10] [11] (./placebo-tests.tex
+)
+Overfull \hbox (15.57631pt too wide) in paragraph at lines 325--326
  [] 
  []
 
 [12] [13]
-<plots/mc-exp-pc.png, id=355, 794.97pt x 614.295pt>
+<plots/mc-exp-pc.png, id=311, 614.295pt x 794.97pt>
 File: plots/mc-exp-pc.png Graphic file (type png)
 <use plots/mc-exp-pc.png>
-Package pdftex.def Info: plots/mc-exp-pc.png  used on input line 309.
-(pdftex.def)             Requested size: 352.31625pt x 272.24966pt.
-<plots/mc-rev-pc.png, id=356, 794.97pt x 614.295pt>
-File: plots/mc-rev-pc.png Graphic file (type png)
-<use plots/mc-rev-pc.png>
-Package pdftex.def Info: plots/mc-rev-pc.png  used on input line 315.
-(pdftex.def)             Requested size: 352.31625pt x 272.24966pt.
- (./mc-estimates.tex)
-
-LaTeX Font Warning: Font shape `U/wasy/b/n' in size <7> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 336.
+Package pdftex.def Info: plots/mc-exp-pc.png  used on input line 341.
+(pdftex.def)             Requested size: 469.75502pt x 607.9196pt.
 
 
-LaTeX Font Warning: Font shape `U/wasy/b/n' in size <5> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 336.
+LaTeX Warning: Float too large for page by 12.78958pt on input line 347.
 
-[14] [15 <./plots/mc-exp-pc.png (PNG copy)> <./plots/mc-rev-pc.png (PNG copy)>]
-[16] (./dd-estimates.tex) [17] [18] [19] [20] (./land-reform.bbl [21] [22])
-[23]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 395.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 395.
+(./mc-estimates.tex) [14] [15 <./plots/mc-exp-pc.png (PNG copy)>] [16]
+(./dd-estimates.tex) [17] [18] [19] [20] (./land-reform.bbl
+Underfull \hbox (badness 5637) in paragraph at lines 102--105
+[]\OT1/cmr/m/n/10 Doudchenko, N. and Im-bens, G. W. (2016)
+ []
+
+
+Underfull \hbox (badness 8038) in paragraph at lines 102--105
+\OT1/cmr/m/n/10 Bal-anc-ing, re-gres-sion, difference-in-differences
+ []
+
+[21]
+Underfull \hbox (badness 6110) in paragraph at lines 214--218
+\OT1/cmr/m/n/10 Fi-nan-cial Statis-tics, 1933-1937.  Ann Ar-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--218
+\OT1/cmr/m/n/10 bor, MI: Inter-university Con-sor-tium for
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--218
+\OT1/cmr/m/n/10 Po-lit-i-cal and So-cial Re-search, 2017-05-21.
+ []
+
+) [22]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 421.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 421.
  (./land-reform.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 395.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 395.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 421.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 421.
 Package rerunfilecheck Info: File `land-reform.out' has not changed.
 (rerunfilecheck)             Checksum: A4561B697AD113C889E7300A873A1349;810.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 395.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 421.
  ) 
 Here is how much of TeX's memory you used:
- 30452 strings out of 492641
- 559534 string characters out of 6131787
- 654957 words of memory out of 5000000
- 33722 multiletter control sequences out of 15000+600000
- 556795 words of font info for 115 fonts, out of 8000000 for 9000
+ 30963 strings out of 492641
+ 569377 string characters out of 6131787
+ 713431 words of memory out of 5000000
+ 34246 multiletter control sequences out of 15000+600000
+ 553768 words of font info for 105 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,19n,65p,1277b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.15} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.14} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.7} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.13} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.12} has been referenced but does not exis
-t, replaced by a fixed one
+ 62i,19n,65p,1225b,789s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{figure.caption.7} has been referenced but does no
+t exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{figure.caption.6} has been referenced but does not 
 exist, replaced by a fixed one
 
-pdfTeX warning (dest): name{Hfootnote.11} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{figure.caption.3} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.10} has been referenced but does not exis
-t, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.9} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.8} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.7} has been referenced but does not exist
-, replaced by a fixed one
-
 pdfTeX warning (dest): name{figure.caption.5} has been referenced but does not 
 exist, replaced by a fixed one
 
-pdfTeX warning (dest): name{Hfootnote.6} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.5} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.4} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.3} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exist
-, replaced by a fixed one
-
-pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
-, replaced by a fixed one
-
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cmextra/cmmib8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/eu
-ler/eurb10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/euler
-/eurm10.pfb>
-Output written on land-reform.pdf (24 pages, 1684940 bytes).
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cmextra/cmmib8.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/euler/eurb10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/euler/eurm10.pfb>
+Output written on land-reform.pdf (23 pages, 871991 bytes).
 PDF statistics:
- 573 PDF objects out of 1000 (max. 8388607)
- 511 compressed objects within 6 object streams
- 120 named destinations out of 1000 (max. 500000)
- 134 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 499 PDF objects out of 1000 (max. 8388607)
+ 444 compressed objects within 5 object streams
+ 100 named destinations out of 1000 (max. 500000)
+ 129 words of extra memory for PDF output out of 10000 (max. 10000000)
 
