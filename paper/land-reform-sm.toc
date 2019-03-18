@@ -1,4 +1,4 @@
 \contentsline {section}{\numberline {1}Exploratory data analysis}{1}{section.1}
 \contentsline {section}{\numberline {2}Simulations}{3}{section.2}
 \contentsline {section}{\numberline {3}Causal estimates: state capacity}{5}{section.3}
-\contentsline {section}{\numberline {4}Causal mechanisms: land inequality}{7}{section.4}
+\contentsline {section}{\numberline {4}Causal mechanisms: land inequality}{6}{section.4}

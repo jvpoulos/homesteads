@@ -1,43 +1,7 @@
-\begin{thebibliography}{6}
+\begin{thebibliography}{0}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
 \expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL: }\fi
-
-\bibitem[{Atack(2013)}]{atack2013use}
-Atack, J. (2013) On the use of geographic information systems in economic
-  history: The {A}merican transportation revolution revisited.
-\newblock \textit{The Journal of Economic History}, \textbf{73}, 313--338.
-
-\bibitem[{Haines(2010)}]{haines2010}
-Haines, M.~R. (2010) {H}istorical, {D}emographic, {E}conomic, and {S}ocial
-  {D}ata: The {U}nited {S}tates, 1790-2002.
-\newblock Ann Arbor, MI: Inter-university Consortium for Political and Social
-  Research [distributor], 2010-05-21. \url{doi.org/10.3886/ICPSR02896.v3}.
-
-\bibitem[{Long(1995)}]{long1995atlas}
-Long, J.~H. (1995) Atlas of historical county boundaries.
-\newblock \textit{The Journal of American History}, \textbf{81}, 1859--1863.
-
-\bibitem[{Sylla et~al.(1993)Sylla, Legler and Wallis}]{sylla1993sources}
-Sylla, R.~E., Legler, J.~B. and Wallis, J. (1993) {S}ources and {U}ses of
-  {F}unds in {S}tate and {L}ocal {G}overnments, 1790-1915: [{U}nited {S}tates].
-\newblock Ann Arbor, MI: Inter-university Consortium for Political and Social
-  Research, 2017-05-21. \url{doi.org/10.3886/ICPSR06304.v1}.
-
-\bibitem[{Sylla et~al.(1995{\natexlab{a}})Sylla, Legler and
-  Wallis}]{sylla1995sourcesa}
---- (1995{\natexlab{a}}) {S}tate and {L}ocal {G}overnment [{U}nited {S}tates]:
-  {S}ources and {U}ses of {F}unds, {C}ensus {S}tatistics, {T}wentieth {C}entury
-  [{T}hrough 1982].
-\newblock Ann Arbor, MI: Inter-university Consortium for Political and Social
-  Research, 2017-05-21. \url{doi.org/10.3886/ICPSR06304.v1}.
-
-\bibitem[{Sylla et~al.(1995{\natexlab{b}})Sylla, Legler and
-  Wallis}]{sylla1995sourcesb}
---- (1995{\natexlab{b}}) {S}tate and {L}ocal {G}overnment [{U}nited {S}tates]:
-  {S}ources and {U}ses of {F}unds, {S}tate {F}inancial {S}tatistics, 1933-1937.
-\newblock Ann Arbor, MI: Inter-university Consortium for Political and Social
-  Research, 2017-05-21. http://doi.org/10.3886/ICPSR06306.v1.
 
 \end{thebibliography}

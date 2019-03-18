@@ -2,45 +2,47 @@ This is BibTeX, Version 0.99d (TeX Live 2019/dev/Debian)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: land-reform-sm.aux
 The style file: rss.bst
+I found no \citation commands---while reading file land-reform-sm.aux
 Database file #1: references.bib
-You've used 6 entries,
+You've used 0 entries,
             2705 wiz_defined-function locations,
-            614 strings with 5933 characters,
-and the built_in function-call counts, 2547 in all, are:
-= -- 261
-> -- 108
-< -- 3
-+ -- 43
-- -- 36
-* -- 201
-:= -- 496
-add.period$ -- 12
-call.type$ -- 6
-change.case$ -- 46
-chr.to.int$ -- 5
-cite$ -- 6
-duplicate$ -- 116
-empty$ -- 169
-format.name$ -- 48
-if$ -- 485
-int.to.chr$ -- 2
+            583 strings with 4608 characters,
+and the built_in function-call counts, 29 in all, are:
+= -- 0
+> -- 0
+< -- 0
++ -- 0
+- -- 0
+* -- 2
+:= -- 8
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 1
+format.name$ -- 0
+if$ -- 1
+int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 2
-newline$ -- 31
-num.names$ -- 24
-pop$ -- 42
+missing$ -- 0
+newline$ -- 7
+num.names$ -- 0
+pop$ -- 0
 preamble$ -- 1
-purify$ -- 36
+purify$ -- 0
 quote$ -- 0
-skip$ -- 69
+skip$ -- 1
 stack$ -- 0
-substring$ -- 130
-swap$ -- 18
+substring$ -- 0
+swap$ -- 0
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 54
+type$ -- 0
 warning$ -- 0
-while$ -- 22
+while$ -- 0
 width$ -- 0
-write$ -- 74
+write$ -- 6
+(There was 1 error message)

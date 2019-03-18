@@ -1,4 +1,4 @@
-\title{Web-based supporting materials for \\
+\title{Web-Based Supporting Materials for \\
 	``State-Building through Public Land Disposal? An Application of Matrix Completion for Counterfactual Prediction'' by Jason Poulos}
 
 \date{}
@@ -124,33 +124,13 @@
 
 %\begin{singlespacing}
 \maketitle \thispagestyle{empty}
-\tableofcontents \thispagestyle{empty}
+%\tableofcontents \thispagestyle{empty}
 %\end{singlespacing}
 
 \pagenumbering{roman}% Roman-numbered pages (start from i)
 
-\pagebreak
+%\pagebreak
 \pagenumbering{arabic}% Arabic-numbered pages (start from 1)
-
-\section{Exploratory data analysis} \label{eda}
-
-\begin{table}[htbp]
-	\captionsetup{font=normalsize}
-	\caption{Definitions and data sources of variables.\label{dv-table}}
-	\begin{center}
-	\scalebox{.6}{	\input{dv-table}}
-	\end{center}
-\end{table}
-
-\begin{figure}[htbp]
-	\begin{center}
-		\includegraphics[width=\textwidth]{plots/homestead-heatmap.png}
-	\end{center}
-	\caption{Per-capita homestead entries in state $i$ and year $t$, 1869-1922. \label{fig:homestead-heatmap}}
-\end{figure}
-
-\pagebreak
-\section{Simulations} \label{sims-sm}
 
 \begin{figure}[htbp]
 	\centering
@@ -172,6 +152,21 @@
 		\caption{West German reunification data, $N_t = 8$} 
 	\end{subfigure}
 	\caption{Placebo tests under simultaneous treatment adoption. See notes to Fig. \ref{synth-stag}. \label{synth-sim}} 
+\end{figure}
+
+%\begin{table}[htbp]
+%	\captionsetup{font=normalsize}
+%	\caption{Definitions and data sources of variables.\label{dv-table}}
+%	\begin{center}
+%	\scalebox{.6}{	\input{dv-table}}
+%	\end{center}
+%\end{table}
+
+\begin{figure}[htbp]
+	\begin{center}
+		\includegraphics[width=\textwidth]{plots/homestead-heatmap.png}
+	\end{center}
+	\caption{Per-capita homestead entries in state $i$ and year $t$, 1869-1922. \label{fig:homestead-heatmap}}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -211,21 +206,15 @@
 	\caption{Placebo tests under simultaneous and staggered treatment adoption, with $N_t = 9$. See notes to Fig. \ref{synth-sim}. \label{mc-sim}} 
 \end{figure}
 
-\pagebreak
-\section{Causal estimates: state capacity}
-
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=\textwidth]{plots/mc-rev-pc.png}
+	\includegraphics[width=0.9\textwidth]{plots/mc-rev-pc.png}
 	\caption{MC-NNM estimates of treatment exposure on state government revenue, 1809 to 1982:
 		{\color{Darjeeling15}{\sampleline{}}}, observed treated;
 		{\color{Darjeeling11}{\sampleline{dashed}}}, observed control;
 		{\color{Darjeeling15}{\sampleline{dotted}}}, counterfactual treated;
 		{\color{Darjeeling15}{\sampleline{dash pattern=on .7em off .2em on .05em off .2em}}}, $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates-rev-pc}} 
 \end{figure}
-
-\pagebreak
-\section{Causal mechanisms: land inequality}
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -234,13 +223,13 @@
 	\caption{Land inequality (lagged by 10 years) vs. log per-capita revenue and expenditure, 1860-1950. Each point is a state-year observation. Lines represent generalized additive model (GAM) fits to the data and shaded regions represent corresponding 95\% confidence intervals.   \label{fig:ineq-capacity}}
 \end{figure} 
 
-\pagebreak
-
-%Bibliography
-\bibliographystyle{rss}
-\bibliography{references}
-%\begin{thebibliography}{}
-%\end{thebibliography}
+%\pagebreak
+%
+%%Bibliography
+%\bibliographystyle{rss}
+%\bibliography{references}
+%%\begin{thebibliography}{}
+%%\end{thebibliography}
 
 
 \itemize
