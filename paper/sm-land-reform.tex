@@ -16,9 +16,9 @@
 \usepackage[linewidth=1pt]{mdframed}
 \usepackage[margin={1in}]{geometry} %1 inch margins
 
-% Reference labels in the online appendix
-\usepackage{xr}
-\externaldocument{land-reform}
+%% Reference labels in the online appendix
+%\usepackage{xr}
+%\externaldocument{land-reform}
 
 % Footnotes stick at the bottom
 \usepackage[bottom]{footmisc}
@@ -151,7 +151,7 @@
 		\includegraphics[width=\textwidth]{plots/germany_N_16_T_44_numruns_20_num_treated_8_simultaneuous_1.png}
 		\caption{West German reunification data, $N_t = 8$} 
 	\end{subfigure}
-	\caption{Placebo tests under simultaneous treatment adoption. See notes to Fig. \ref{synth-stag}. \label{synth-sim}} 
+	\caption{Placebo tests under simultaneous treatment adoption. \label{synth-sim}} 
 \end{figure}
 
 %\begin{table}[htbp]
@@ -203,17 +203,7 @@
 	\includegraphics[width=\textwidth]{plots/rev_pc_N_19_T_158_numruns_20_num_treated_10_simultaneuous_0.png}
 	\caption{Revenues, staggered adoption}
 \end{subfigure}
-	\caption{Placebo tests under simultaneous and staggered treatment adoption, with $N_t = 9$. See notes to Fig. \ref{synth-sim}. \label{mc-sim}} 
-\end{figure}
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.9\textwidth]{plots/mc-rev-pc.png}
-	\caption{MC-NNM estimates of treatment exposure on state government revenue, 1809 to 1982:
-		{\color{Darjeeling15}{\sampleline{}}}, observed treated;
-		{\color{Darjeeling11}{\sampleline{dashed}}}, observed control;
-		{\color{Darjeeling15}{\sampleline{dotted}}}, counterfactual treated;
-		{\color{Darjeeling15}{\sampleline{dash pattern=on .7em off .2em on .05em off .2em}}}, $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates-rev-pc}} 
+	\caption{Placebo tests under simultaneous and staggered treatment adoption, with $N_t = 9$. \label{mc-sim}} 
 \end{figure}
 
 \begin{figure}[htbp]

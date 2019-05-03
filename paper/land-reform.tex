@@ -1,3 +1,38 @@
+\pdfoutput=1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Supplementary Materials labels
+\begin{filecontents*}{sm-labels.aux} 
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\zref@newlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+	\global\let\oldcontentsline\contentsline
+	\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+	\global\let\oldnewlabel\newlabel
+	\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+	\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+	\AtEndDocument{\ifx\hyper@anchor\@undefined
+		\let\contentsline\oldcontentsline
+		\let\newlabel\oldnewlabel
+		\fi}
+	\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Placebo tests under simultaneous treatment adoption. \relax }}{2}{figure.caption.1}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{synth-sim}{{1}{2}{Placebo tests under simultaneous treatment adoption. \relax }{figure.caption.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Per-capita homestead entries in state $i$ and year $t$, 1869-1922. \relax }}{3}{figure.caption.2}}
+\newlabel{fig:homestead-heatmap}{{2}{3}{Per-capita homestead entries in state $i$ and year $t$, 1869-1922. \relax }{figure.caption.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Placebo tests under simultaneous and staggered treatment adoption, with $N_t = 9$. \relax }}{4}{figure.caption.3}}
+\newlabel{mc-sim}{{3}{4}{Placebo tests under simultaneous and staggered treatment adoption, with $N_t = 9$. \relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Land inequality (lagged by 10 years) vs. log per-capita revenue and expenditure, 1860-1950. Each point is a state-year observation. Lines represent generalized additive model (GAM) fits to the data and shaded regions represent corresponding 95\% confidence intervals. \relax }}{5}{figure.caption.4}}
+\newlabel{fig:ineq-capacity}{{4}{5}{Land inequality (lagged by 10 years) vs. log per-capita revenue and expenditure, 1860-1950. Each point is a state-year observation. Lines represent generalized additive model (GAM) fits to the data and shaded regions represent corresponding 95\% confidence intervals. \relax }{figure.caption.4}{}}
+\end{filecontents*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Set document class
 \documentclass[hidelinks,12pt]{article}
@@ -12,7 +47,7 @@
 \usepackage[margin={1in}]{geometry} %1 inch margins
 
 \title{State-Building through Public Land Disposal? An Application of Matrix Completion for Counterfactual Prediction} 
-\author[ ]{Jason Poulos\thanks{\emph{Address for correspondence:} Department of Political Science, 210 Barrows Hall \#1950, Berkeley, CA 94720-1950. \emph{E-mail:} \href{mailto:poulos@berkeley.edu}{\nolinkurl{poulos@berkeley.edu}}. I thank Eli Ben-Michael, Sean Gailmard, Eric Schickler, Ross Mattheis, and Shom Mazumder for helpful comments. I acknowledge support of the National Science Foundation Graduate Research Fellowship (DGE 1106400). This work used the computer resources of Stampede2 at the Texas Advanced Computing Center (TACC) under an Extreme Science and Engineering Discovery Environment (XSEDE) startup allocation (TG-SES180010).}}
+\author[ ]{Jason Poulos\thanks{\emph{Address for correspondence:} Department of Political Science, 210 Barrows Hall \#1950, Berkeley, CA 94720-1950. \emph{E-mail:} poulos@berkeley.edu. I thank Eli Ben-Michael, Sean Gailmard, Eric Schickler, Ross Mattheis, and Shom Mazumder for helpful comments. I acknowledge support of the National Science Foundation Graduate Research Fellowship (DGE 1106400). This work used the computer resources of Stampede2 at the Texas Advanced Computing Center (TACC) under an Extreme Science and Engineering Discovery Environment (XSEDE) startup allocation (TG-SES180010).}}
 \affil[ ]{University of California, Berkeley}
 \date{}
 \setcounter{Maxaffil}{0}
@@ -22,7 +57,7 @@
  
 % Reference labels in the online appendix
 \usepackage{xr}
-\externaldocument{land-reform-sm}
+\externaldocument{sm-labels}
 
 % Footnotes stick at the bottom
 \usepackage[bottom]{footmisc}
@@ -93,21 +128,6 @@
 % Set Spacing
 \doublespacing
 
-% Number assumptions
-\newtheorem*{assumption*}{\assumptionnumber}
-\providecommand{\assumptionnumber}{}
-\makeatletter
-\newenvironment{assumption}[2]
- {%
-  \renewcommand{\assumptionnumber}{Assumption #1}%
-  \begin{assumption*}%
-  \protected@edef\@currentlabel{#1}%
- }
- {%
-  \end{assumption*}
- }
-\makeatother
-
 % Macros
 \newcommand{\Adv}{{\mathbf{Adv}}}       
 \newcommand{\prp}{{\mathrm{prp}}}                  % How to define new commands 
@@ -154,7 +174,7 @@ Political scientists are increasingly interested in patterns of state developmen
 
 Public land policies had long-lasting impacts on state capacity, or the ability of governments to finance and implement policies \citep{besley2010state}. I explore the role of two U.S. public land policies in shaping state capacity: the Homestead Act (HSA) of 1862, which opened for settlement hundreds of millions of acres of western frontier land, and the Southern Homestead Act (SHA) of 1866, which opened over 46 million acres of land for homesteading. I provide evidence that homesteads authorized under these laws had significant long-run impacts on the capacity of frontier state governments. 
 
-The view that the western frontier had long-lasting impacts on the evolution of democratic institutions can be traced to \citet{turner1956significance}. Turner's ``frontier thesis" posited that homestead policies acted as a ``safety valve'' for relieving pressure from congested urban labor markets in eastern states. The view of the frontier as a ``safety valve'' has been explored by \citet{ferrie1997migration}, who finds evidence in a linked census sample of substantial migration to the frontier by unskilled workers and considerable gains in wealth for these migrant workers. Homestead policies not only offered greater economic opportunities to eastern migrants, but also the sparse population on the western frontier meant that state and local governments competed with each other to attract migrants in order to lower local labor costs and to increase land values and tax revenues. Frontier governments offered migrants broad access to cheap land and property rights, unrestricted voting rights, and a more generous provision of schooling and other public goods \citep{engerman2005evolution}.
+The view that the western frontier had long-lasting impacts on the evolution of democratic institutions can be traced to \citet{turner1956significance}. Turner's ``frontier thesis" posits that homestead policies acted as a ``safety valve'' for relieving pressure from congested urban labor markets in eastern states. The view of the frontier as a ``safety valve'' has been explored by \citet{ferrie1997migration}, who finds evidence in a linked census sample of substantial migration to the frontier by unskilled workers and considerable gains in wealth for these migrant workers. Homestead policies not only offered greater economic opportunities to eastern migrants, but also the sparse population on the western frontier meant that state and local governments competed with each other to attract migrants in order to lower local labor costs and to increase land values and tax revenues. Frontier governments offered migrants broad access to cheap land and property rights, unrestricted voting rights, and a more generous provision of schooling and other public goods \citep{engerman2005evolution}.
 
 \citet{garcia2008myth} test the frontier thesis in a global context and conclude that the economic effect of the frontier depends on the quality of political institutions at the time of frontier expansion. Frontier expansion promotes equitable outcomes only when societies are initially democratic. When institutional quality is weak, the existence of frontier land can yield worse developmental outcomes because non-democratic political elites can monopolize frontier lands. Historical scholars have noted that public land policies were often exploited by land speculators, ranchers, miners, and loggers, to accumulate public land and extract natural resources during the early stages of capitalist development \citep{gates1942role,murtazashvili2013political}. According to this view, homesteading laws were \emph{de jure} social polices but \emph{de facto} corporate welfarism. 
 
@@ -175,13 +195,13 @@ Homestead policies were often exploited by speculators and corporations through 
 
 \section{Matrix completion for counterfactual prediction} \label{estimation}
 
-An important problem in the social sciences is estimating the effect of a binary intervention on an outcome over time. When interventions take place at an aggregate level (e.g., a state), researchers make causal inferences by comparing the post-intervention (``post-period'') outcomes of affected (``treated'') units against the outcomes of unaffected  (``control'') units. A common approach to the problem is the synthetic control method, which predicts the counterfactual outcomes of treated units by finding a convex combination of control units that match the treated units in term of lagged outcomes. Correlations across units that are assumed to remain constant over time. 
+An important problem in the social sciences is estimating the effect of a binary intervention on an outcome over time. When interventions take place at an aggregate level (e.g., a state), researchers make causal inferences by comparing the post-intervention (``post-period'') outcomes of affected (``treated'') units against the outcomes of unaffected  (``control'') units. A common approach to the problem is the synthetic control method, which predicts the counterfactual outcomes of treated units by finding a convex combination of control units that match the treated units in term of lagged outcomes. Correlations across units are assumed to remain constant over time. 
 
 This paper applies the method of matrix completion via nuclear norm minimization (MC-NNM) proposed by \citet{athey2017matrix} to predict counterfactual outcomes. Matrix completion methods \citep[e.g.,][]{mazumder2010spectral} exploit correlations within and across units, but ignore the temporal dimension of the data. These methods typically assume missing values are sampled uniformly at random \citep{yoon2018estimating}; in contrast, the MC-NNM estimator allows for patterns of missing data to have a time-series dependency structure. 
 
-Let $Y$ denote a $\text{N} \times \text{T}$ matrix of outcomes for each unit $i =1, \ldots, \text{N}$ at time $t = 1, \ldots, \text{T}$. $Y$ is incomplete because we observe each element $Y_{it}$ for only the control units and the treated units prior to time of initial treatment exposure, $\text{T}_0$. Let $\mathcal{O}$ denote the set of $(it)$ values that are observed and $\mathcal{M}$ the set of $(it)$ missing values. Let the values of the $\text{N} \times \text{T}$ complete matrix $M$ be $M_{it} =1 $ if $(it) \in \mathcal{M}$ and $M_{it} = 0$ if $(it) \in \mathcal{O}$. Note that the process that generates $M$ is referred to the assignment mechanism in the causal inference literature \citep{imbens2015causal} and the missing data mechanism in missing data analysis \citep{little2014}.
+Let $Y$ denote a $\text{N} \times \text{T}$ matrix of outcomes for each unit $i =1, \ldots, \text{N}$ at time $t = 1, \ldots, \text{T}$. $Y$ is incomplete because we observe each element $Y_{it}$ for only the control units and the treated units prior to time of initial treatment exposure, $\text{T}_0 < \text{T}$. Let $\mathcal{O}$ denote the set of $(it)$ values that are observed and $\mathcal{M}$ the set of $(it)$ missing values. Let the values of the $\text{N} \times \text{T}$ complete matrix $M$ be $M_{it} =1 $ if $(it) \in \mathcal{M}$ and $M_{it} = 0$ if $(it) \in \mathcal{O}$. Note that the process that generates $M$ is referred to the assignment mechanism in the causal inference literature \citep{imbens2015causal} and the missing data mechanism in missing data analysis \citep{little2014}.
 
-We cannot directly observe counterfactual outcomes and we instead wish to impute missing values in $Y$ for treated units with $M_{it}=1$. In an observational setting, units are part of the assignment mechanism that generates $M$ and patterns of missing data follow one of two specific structures. In the case of simultaneous adoption of treatment, a subset of units are exposed to treatment at time $\text{T}_0$ and every subsequent period. The second structure arises from the staggered adoption setting, where $\text{T}_0$ may vary across treated units. In either case, there are selection biases because the probability of missingness may depend on the unobserved data. The goal is to accurately estimate the effect of a policy intervention despite incomplete data subject to selection bias. 
+We cannot directly observe counterfactual outcomes and instead wish to impute missing values in $Y$ for treated units with $M_{it}=1$. In an observational setting, units are part of the assignment mechanism that generates $M$ and patterns of missing data follow one of two specific structures. In the case of simultaneous adoption of treatment, a subset of units are exposed to treatment at time $\text{T}_0$ and every subsequent period. The second structure arises from the staggered adoption setting, where $\text{T}_0$ may vary across treated units. In either case, there are selection biases because the probability of missingness may depend on the unobserved data. The goal is to accurately estimate the effect of a policy intervention despite incomplete data subject to selection bias. 
 
 \subsection{Matrix completion estimator}
 
@@ -201,28 +221,28 @@ where $L^{*}$ a low-rank matrix to be estimated, $X$ is a $\text{N} \times \text
 \noindent
 where $\lambda$ is the regularization term on the nuclear norm $\norm{\cdot}_\star$ --- i.e., sum of singular values --- and its value is selected by cross-validation. The algorithm for (\ref{eq:mc-opt}) iteratively replaces missing values with those recovered from a singular value decomposition (SVD) \citep{mazumder2010spectral}. \citet{amjad2018robust} propose an alternative approach of approximating $L^{*}$ via SVD, and then using linear regression on the ``de-noised'' matrix, rather than relying on matrix norm regularizations.
 
-\citet{athey2017matrix} note two drawbacks of the MC-NNM estimator: first, it penalizes the errors for each value with $M_{it} = 0$ equally without regard to the fact that $\Pr (M_{it}) = 1$ (i.e., the propensity score) increases with $t$. Second, the columns of $\boldsymbol{\upepsilon}$ may be autocorrelated because the estimator does not account for time-series dependencies in the observed data.
+\citet{athey2017matrix} note two drawbacks of the MC-NNM estimator: first, it penalizes the errors for each value with $M_{it} = 0$ equally without regard to the fact that $\Pr (M_{it}) = 1$ (i.e., the propensity score) increases with $t$. \citet{athey2017matrix} suggest weighting the loss function by the propensity score, which is similar to the importance weighting scheme proposed by \citet{cortes2008sample} to address the problem of covariate shift, which occurs when training and test data are drawn from different distributions. Second, the columns of $\boldsymbol{\upepsilon}$ may be autocorrelated because the estimator does not account for time-series dependencies in the observed data. The estimator detects patterns row- and column-wise, but treat the data as perfectly synchronized \citep{yoon2018estimating}. 
 
 \subsection{Simulations} \label{sims}
 
-In this section, I evaluate the accuracy of the MC-NNM estimator on the following three datasets common to the synthetic control literature, with the actual treated unit removed from each dataset: \possessivecite{abadie2003economic} study of the economic impact of terrorism in the Basque Country during the late 1960s ($\text{N}=16$, $\text{T}=43$); \possessivecite{abadie2010synthetic} study of the effects of a large-scale tobacco control program implemented in California in 1988 ($\text{N}=38$, $\text{T}=31$); and \possessivecite{abadie2015comparative} study of the economic impact of the 1990 German reunification on West Germany ($\text{N}=16$, $\text{T}=44$). For each trial run, I randomly select half of the control units to be treated and predict their counterfactual outcomes for periods following a randomly selected $\text{T}_0$. I compare the predicted values to the observed values by calculating the root-mean squared error, $\text{RMSE} = \sum_{it}|L^{*} -\hat{L}|^2 / \sqrt{\text{NT}}$. 
+In this section, I evaluate the accuracy of the MC-NNM estimator on the following three datasets common to the synthetic control literature, with the actual treated unit removed from each dataset: \possessivecite{abadie2003economic} study of the economic impact of terrorism in the Basque Country during the late 1960s ($\text{N}=16$, $\text{T}=43$); \possessivecite{abadie2010synthetic} study of the effects of a large-scale tobacco control program implemented in California in 1988 ($\text{N}=38$, $\text{T}=31$); and \possessivecite{abadie2015comparative} study of the economic impact of the 1990 German reunification on West Germany ($\text{N}=16$, $\text{T}=44$). For each trial run, I randomly select half of the control units to be treated and predict their counterfactual outcomes for periods following a given $\text{T}_0$. I compare the predicted values to the observed values by calculating the root-mean squared error, $\text{RMSE} = \sum_{it}|L^{*} -\hat{L}|^2 / \sqrt{\text{NT}}$. 
 
 I benchmark the MC-NNM estimator against the following methods:
 
 \begin{description}
 	\begin{singlespace}
 	{\setlength\itemindent{1mm}
-		\item[(a) DID] Regression of $Y$ on $\boldsymbol{\upgamma}$ and $\boldsymbol{\updelta}$ and a binary treatment variable \citep{athey2017matrix}
-		\item[(b) HR-EN] Horizontal regression with elastic net regularization \citep{athey2017matrix} 
+		\item[(a) DID] Regression of $Y$ on $\boldsymbol{\upgamma}$ and $\boldsymbol{\updelta}$ and a binary treatment variable
+		\item[(b) HR-EN] Horizontal regression with elastic net regularization \citep{zou2005regularization,athey2017matrix} 
 		\item[(c) PCA] Regularized iterative principal components analysis \citep{ilin2010practical}
 		\item[(d) SC-ADH] Synthetic control approached via exponentiated gradient descent \citep{abadie2010synthetic}
 		\item[(e) SVD] Low-rank SVD approximation estimated by expectation maximization \citep{troyanskaya2001missing}
-		\item[(f) VT-EN] Vertical regression with elastic net regularization \citep{athey2017matrix}.
+		\item[(f) VT-EN] Vertical regression with elastic net regularization, Ibid. (b).
 	}
 	\end{singlespace}
 \end{description}
 
-Figure \ref{synth-stag} reports the average prediction error of the estimators in a staggered treatment adoption setting, with the estimates jittered horizontally to reduce overlap. Error bars represent 95\% prediction intervals calculated using the standard deviation of the prediction distribution for 20 trial runs. 
+Figure \ref{synth-stag} reports the average prediction error of the estimators in a staggered treatment adoption setting, with the estimates jittered horizontally to reduce overlap. Error bars represent 95\% prediction intervals calculated using the standard deviation of the error distribution for 20 trial runs. 
 
 Across all estimators, the average RMSE decreases and prediction intervals narrow as $\text{T}_0/\text{T}$ approaches unity because the estimators have more information to generate counterfactual predictions. The MC-NNM estimator generally outperforms all other estimators in terms of average RMSE across different ratios $\text{T}_0/\text{T}$.  The strong performance of the MC-NNM estimator can be attributed to the fact that it is capable of using additional information in the form of pre-intervention (``pre-period'') observations of the treated units, whereas the regression-based estimators rely only on the pre-period observations of control units to predict counterfactuals. Figure SM-\ref{synth-sim} in the Supporting Materials (SM) presents a similar pattern of results in a simultaneous adoption setting.
 
@@ -254,12 +274,6 @@ Across all estimators, the average RMSE decreases and prediction intervals narro
 	{\protect\tikz \protect\draw[color=magenta] (0,0) -- plot[mark=square, mark options={scale=1.5}] (0.25,0) -- (0.5,0);}, VT-EN.
 		\label{synth-stag}}
 \end{figure}
-
-%{\protect\tikz \protect\draw[thick, color=red, fill=white] plot[mark=*, mark options={scale=1.3}] (0,0);}
-
-%\draw (0,0) -- 
-%plot[mark=*, mark options={fill=white}] (0.25,0) -- (0.5,0) 
-%node[right]{soft};
 
 \subsection{Hypothesis testing} \label{hyp-test}
 
@@ -308,7 +322,7 @@ In this application, PLS are the treated units and state land states --- i.e., s
 
 When estimating (\ref{eq:mc-Y}), unit-specific covariates include state-level average farm sizes measured in the 1860 and average farm values measured in the 1850 and 1860 censuses. In theory, we should expect that homesteaders migrate to more productive land and thus excluding these pre-period measures of agricultural productivity may result in overestimating the actual impact of homestead policies. To control for selection bias arising from differences in access to frontier lands, I create a measure of railroad access using digitized railroad maps provided by \citet{atack2013use}, which contain information on the year that each rail line was built. Overlaying the railroad track map over historical county borders, I calculate the total miles of operational track per square mile and aggregate the measure to the state-level.
 
-\subsection{Placebo tests} \label{placebo-tests}
+\subsection{Placebo tests}
 
 Prior to presenting the main results, I assess the validity of the key assumption underlying the approach by discarding post-period observations from the data. Treating $t = \left\{1, \ldots,  \text{T}_0 - \tau\right\}$ as the pre-period, I estimate (\ref{tstat}) and test the zero effect null hypothesis 
 
@@ -319,7 +333,7 @@ Prior to presenting the main results, I assess the validity of the key assumptio
 \noindent
 where $\tau \in \left\{1, 10, 25\right\}$ and $q \in \left\{1, 2\right\}$. 
 
-Table \ref{placebo-tests} reports randomization $p$-values corresponding to each permutation structure and value of $\tau$ and $q$. i.i.d. block and i.i.d. block $p$-values are calculated using $|\Pi| = 1,000$ permutations. Moving block $p$-values are based on $|\Pi| = \text{T}-1$ permutations. When considering the revenue outcome, placebo tests yield two-sided $p$-values greater than the significance level of $\alpha = 0.05$, regardless of the value of $q$ or permutation structure. These results provide evidence in favor that the model is correctly specified. However, we can only reject the null in the case of $\tau=1$ when considering the expenditure outcome. 
+Table \ref{placebo-tests} reports randomization $p$-values corresponding to each permutation structure and value of $\tau$ and $q$. i.i.d. block and i.i.d. block $p$-values are calculated using $|\Pi| = 1,000$ permutations. Moving block $p$-values are based on $|\Pi| = \text{T}-1$ permutations. When considering the revenue outcome, placebo tests yield two-sided $p$-values greater than the significance level of $\alpha = 0.05$ (shaded cells), regardless of the value of $q$ or permutation structure. These placebo results provide evidence that the model is correctly specified. However, we can only reject the null in the case of $\tau=1$ and for i.i.d. and i.i.d. block structures when considering the expenditure outcome. The latter results underscore the need for sufficient pre-intervention observations when fitting the model. Moving block permutations are more likely to yield false positives in the placebo tests, where the number of available permutations used to calculate the $p$-values is relatively low. 
 
 \begin{table}[htbp]
 	\captionsetup{font=normalsize}
@@ -335,10 +349,6 @@ Further evidence of the unbiasedness of the estimator is provided in Figure SM-\
 
 In the main analyses, I fit the MC-NNM estimator described in (\ref{eq:mc-Y}) on the entirety of observed entries in $Y$ to recover its missing entries; i.e., the counterfactual outcomes of PLS. The top panel of Figure \ref{mc-estimates-exp-pc} compares the observed time-series of treated units and control units along with the predicted outcomes of treated units. The dashed vertical line represents the initial treatment year of 1869. The observed means of the treated and control units are essentially identical in the post-period. However, we are interested primarily in the difference in the observed and predicted treated unit outcomes, which is the quantity $\hat{\bar{\alpha}}_{t}$, which corresponds to the estimated per-period average causal effect of treatment exposure on the treated units. These per-period causal impacts are plotted in the bottom panels, with 95\% confidence intervals estimated by taking $\hat{\bar{\alpha}}_{t} \pm 1.96$ the standard error of the distribution of 1,000 block bootstrap replicates of $\hat{\bar{\alpha}}_{t}$, with optimal block lengths selected by the procedure described by \citet{politis2004automatic}. 
 
-The per-period impact time-series for both outcomes are essentially zero during the pre-period and within the bounds of the bootstrap confidence intervals, which demonstrates that the model is closely fitting the pre-period observations. Per-period impacts on state government spending peak in 1870, at the same time most PLS were first exposed to homesteads, representing a 0.18 [-0.35, 0.71] log increase in per-capita expenditure. By 1876, after most PLS had been exposed to homesteads, homestead exposure decreases expenditure by 0.51 [-1.67, 0.66] log points, and the trajectory of causal impacts remains negative for the rest of the time-series.
-
-A similar pattern of results emerges when estimating the impacts of homesteads on state government revenue (Figure SM-\ref{mc-estimates-rev-pc}). Per-period impacts on revenue peak in 1873, representing a 0.43 [-0.57, 1.44] log increase in per-capita revenues, at the same time southern PLS are exposed to homesteads. The causal impacts on revenue quickly decrease and remain negative for the remaining time-series; in 1877, exposure to homesteads confer a 0.45 [-1.51, 0.61] log point decrease in per-capita revenue. 
-
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=\textwidth]{plots/mc-exp-pc.png}
@@ -347,6 +357,20 @@ A similar pattern of results emerges when estimating the impacts of homesteads o
 		{\color{Darjeeling11}{\sampleline{dashed}}}, observed control;
 		{\color{Darjeeling15}{\sampleline{dotted}}}, counterfactual treated;
 		{\color{Darjeeling15}{\sampleline{dash pattern=on .7em off .2em on .05em off .2em}}}, $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates-exp-pc}} 
+\end{figure}
+
+The per-period impact time-series for both outcomes are essentially zero during the pre-period and within the bounds of the bootstrap confidence intervals, which demonstrates that the model is closely fitting the pre-period observations. Per-period impacts on state government spending peak in 1870, at the same time most PLS were first exposed to homesteads, representing a 0.18 [-0.35, 0.71] log increase in per-capita expenditure. By 1876, after most PLS had been exposed to homesteads, homestead exposure decreases expenditure by 0.51 [-1.67, 0.66] log points, and the trajectory of causal impacts remains negative for the rest of the time-series.
+
+A similar pattern of results emerges when estimating the impacts of homesteads on state government revenue (Figure \ref{mc-estimates-rev-pc}). Per-period impacts on revenue peak in 1873, representing a 0.43 [-0.57, 1.44] log increase in per-capita revenues, at the same time southern PLS are exposed to homesteads. The causal impacts on revenue quickly decrease and remain negative for the remaining time-series; in 1877, exposure to homesteads confer a 0.45 [-1.51, 0.61] log point decrease in per-capita revenue. 
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.9\textwidth]{plots/mc-rev-pc.png}
+	\caption{MC-NNM estimates of treatment exposure on state government revenue, 1809 to 1982:
+		{\color{Darjeeling15}{\sampleline{}}}, observed treated;
+		{\color{Darjeeling11}{\sampleline{dashed}}}, observed control;
+		{\color{Darjeeling15}{\sampleline{dotted}}}, counterfactual treated;
+		{\color{Darjeeling15}{\sampleline{dash pattern=on .7em off .2em on .05em off .2em}}}, $\hat{\bar{\alpha}}_{t}$.\label{mc-estimates-rev-pc}} 
 \end{figure}
 
 The estimated bootstrap confidence intervals are useful for evaluating per-period causal impacts but are not helpful in evaluating the overall effect of homestead policies. Table \ref{mc-estimates} reports the results of testing the null hypothesis:
@@ -393,19 +417,21 @@ Table \ref{dd-estimates} reports the DID treatment effect estimates and correspo
 
 \subsection{Land inequality as a causal mechanism}  \label{mechanisms}
 
-Through which channels do homesteads affect state capacity? The political economy literature is largely in agreement that inequality and state capacity are inversely related. In \possessivecite{besley2009origins} framework, for example, greater economic power of the ruling class reduces investment in state capacity. Similarly, \citet{galor2009inequality} propose a model where wealthy landowners block education reforms because education favors industrial labor productivity and decreases the value in farm rents. Inequality in this context can be thought of as a proxy for the amount of \emph{de facto} political influence elites have to block reforms and limit the capacity of the state \citep{acemoglu2008persistence}. 
+Inequality is a potential causal mechanism underlying the relationship between homesteads and state capacity. Median voter-based theories that assume parity in the political influence of voters predict a positive relationship between inequality and the size of governments \citep{meltzer1981rational}. In settings with high inequality, the median voter is poorer than the average voter, which in turn increases demand for redistribution in majority-rule elections. 
 
-To test whether homesteads affected future land inequality in frontier counties, I calculate a commonly-used measure of land inequality based on the Gini coefficient of census farm sizes. Gini-based land inequality measures are commonly used as proxy for the \emph{de facto} bargaining power of landed elites \citep[e.g.,][]{boix2003democracy,ziblatt2008does,ansell2015}. Note that the Gini coefficient will underestimate land inequality in counties with high shares of propertyless farmers because tenant farms are included in the farm size data, which is problematic because farms can be operated by different tenants but owned by the same landlord. I correct for this problem by adjusting the farm Gini coefficient by the ratio of farms to adult males, as recommended by \citet{vollrath2013inequality}.
+However, models that allow for economic differences in political influence predict a nonlinear or inverse relationship between inequality and government size. In \possessivecite{benabou2000unequal} model, for instance, the pivotal voter is wealthier than the median and has the power to block redistribution as inequality increases. But when inequality is too high, the poor can impose redistribution on elites through `universal' majority voting \citep{perotti1993political,saint1993education}. In \possessivecite{besley2009origins} framework, for example, greater economic power of the ruling class reduces investment in state capacity. Similarly, \citet{galor2009inequality} propose a model where wealthy landowners block education reforms because education favors industrial labor productivity and decreases the value in farm rents. Inequality in this context can be thought of as a proxy for the amount of \emph{de facto} political influence elites have to block reforms and limit the capacity of the state \citep{acemoglu2008persistence}. 
 
-In Figure SM-\ref{fig:ineq-capacity}, a bivariate regression model yields a positive relationship between land inequality and state government finances during the period of 1860 to 1950, especially at higher levels of inequality. This relationship points to inequality as a potential causal mechanism underlying the relationship between homesteads and state capacity. The inverse relationship agrees with the findings of \citet{ramcharan2010inequality} and \citet{vollrath2013inequality} in the context of taxes, revenues, and public school spending at the county-level in 1890 and 1930.
+To test whether homesteads affected future land inequality in frontier counties, I calculate a commonly-used measure of land inequality based on the Gini coefficient of census farm sizes, adjusted by the ratio of farms to adult males, as recommended by \citep{vollrath2013inequality}. Gini-based land inequality measures are commonly used as proxy for the \emph{de facto} bargaining power of landed elites \citep[e.g.,][]{boix2003democracy,ziblatt2008does,ansell2015}. A bivariate regression model yields a positive relationship between land inequality and state government finances during the period of 1860 to 1950, especially at higher levels of inequality (Figure SM-\ref{fig:ineq-capacity}). 
 
-Table \ref{dd-estimates} presents DID estimates of the impact of log per-capita homesteads on land inequality at the state-level during the period of 1870 to 1950. Since land inequality is measured every decennial, I aggregate homesteads to the next decennial year; e.g., the number of homesteads measured in 1880 is the total for the years 1871 to 1880. Average farm values are included in the regression as a proxy for agricultural productivity, which might be associated with farm sizes approaching ideal scale and therefore land inequality. I estimate that homesteads significantly decreased land inequality in frontier states: a 1\% increase in log per-capita homesteads is expected to lower  land inequality by $4.81\,\cdot\,10^{-6}$ points. 
+The direction of this relationship contrasts with recent empirical studies that establish a negative relationship based on county-level analyses in specific regions and over a single census year. \citet{ramcharan2010inequality}, for instance, finds an inverse relationship between land inequality and county-level property tax revenues in 1890. The authors find that the negative relationship is especially large in rural counties, where landownership tends to be more concentrated. \citet{vollrath2013inequality} establish a negative relationship between land inequality and local property tax revenues in 1890 in northern rural counties.  
+
+Table \ref{dd-estimates} presents DID estimates of the impact of log per-capita homesteads on land inequality at the state-level during the period of 1870 to 1950. Since land inequality is measured every decennial, I aggregate homesteads to the next decennial year; e.g., the number of homesteads measured in 1880 is the total for the years 1871 to 1880. Average farm values are included in the regression as a proxy for agricultural productivity, which might be associated with farm sizes approaching ideal scale and therefore land inequality. I estimate that homesteads significantly decreased land inequality in frontier states: a 1\% increase in log per-capita homesteads is expected to lower land inequality by $4.81\,\cdot\,10^{-6}$ points. The magnitude of this estimates implies that homestead policy did not fundamentally alter the long-run distribution of landownership, which may be explained by qualitative evidence that suggests public land laws were exploited by land speculators and natural resource companies and that the rents from public land were appropriated by the private sector. 
 
 \section{Conclusion} \label{discussion} 
 
-The findings of this paper signify that mid-nineteenth century homestead policies had long-lasting impacts that can potentially explain contemporary differences in state government capacity. MC-NNM and DID estimates imply that homestead policies --- or the homestead entries authorized by those policies --- had significant and negative impacts on state government expenditure and revenue that lasted a century following its implementation. The direction of these estimates contradicts the view that frontier state governments sought to increase public investments in order to attract eastern migrants following the passage of the HSA, and that homesteads would increase state and local tax bases. Instead, the results conform with the view that homestead policies were exploited by land speculators and natural resource companies and that the rents from public land were appropriated by the private sector. 
+The findings of this paper signify that mid-nineteenth century homestead policies had long-lasting impacts that can potentially explain contemporary differences in state government capacity. MC-NNM and DID estimates imply that homestead policies --- or the homestead entries authorized by those policies --- had significant and negative impacts on state government expenditure and revenue that lasted a century following its implementation.  
 
-I explore land inequality as a possible causal mechanism underlying the relationship between land reform and state capacity. First, I provide evidence of a positive relationship between land inequality and state government finances and that the slope of correlation increases at higher levels of inequality. A nonlinearity in the relationship between inequality and state capacity can arise in theoretical models that incorporate economic differences in political influence: greater income inequality reduces investments in fiscal capacity when elites have a monopoly on political power, however when inequality gets too high, the poor can impose redistribution through majority voting. Second, I present DID estimates that reveal per-capita homesteads significantly lowered land inequality in frontier states; although, the magnitude of the effect is negligible. 
+I explore land inequality as a possible causal mechanism underlying the relationship between land reform and state capacity. First, I provide evidence of a positive relationship between land inequality and state government finances and that the slope of correlation increases at higher levels of inequality. A nonlinearity in the relationship between inequality and state capacity can arise in theoretical models that incorporate economic differences in political influence: greater income inequality reduces investments in fiscal capacity when elites have a monopoly on political power, however when inequality gets too high, the poor can impose redistribution through majority voting. Second, I present DID estimates that reveal per-capita homesteads significantly lowered land inequality in frontier states; although, the magnitude of the effect is negligible. The failure of homestead policy to fundamentally alter the long-run distribution of landownership may be explained by qualitative evidence that suggests public land laws were \emph{de facto} corporate welfarism. 
 
 This paper makes a methodological contribution in applying matrix completion --- a machine learning method commonly used for user recommendation tasks --- for estimating causal impacts of policy interventions on time-series cross-sectional data. The promise of the method is three-fold. First, the method can be easily understood within the frameworks of modern causal inference and missing data imputation: we cannot directly observe the counterfactual outcomes of treated units and wish to impute these values on the basis of the observed values. Second, the method allows for patterns of missing data to have a time-series dependency structure and is thus adaptable to settings with staggered treatment adoption. Third, the method outperforms several other regression-based estimators in a battery of placebo tests. The performance advantage can be attributed to the fact that it is capable of using additional information in the form of pre-period observations of the treated units, whereas other estimators rely only on the pre-period observations of control units to predict counterfactuals. 
 

@@ -1,4 +1,4 @@
-\begin{thebibliography}{51}
+\begin{thebibliography}{46}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -59,11 +59,6 @@ Athey, S. and Imbens, G. (2018) Design-based analysis in
   difference-in-differences settings with staggered adoption.
 \newblock \textit{arXiv:1808.05293}.
 
-\bibitem[{Benabou(2000)}]{benabou2000unequal}
-Benabou, R. (2000) Unequal societies: Income distribution and the social
-  contract.
-\newblock \textit{American Economic Review}, 96--129.
-
 \bibitem[{Bensel(1990)}]{bensel1990}
 Bensel, R.~F. (1990) \textit{Yankee Leviathan: the Origins of Central State
   Authority in America, 1859-1877}.
@@ -102,13 +97,6 @@ Cand{\`e}s, E.~J. and Recht, B. (2009) Exact matrix completion via convex
 Chernozhukov, V., Wuthrich, K. and Zhu, Y. (2017) An exact and robust conformal
   inference method for counterfactual and synthetic controls.
 \newblock \textit{arXiv:1712.09089}.
-
-\bibitem[{Cortes et~al.(2008)Cortes, Mohri, Riley and
-  Rostamizadeh}]{cortes2008sample}
-Cortes, C., Mohri, M., Riley, M. and Rostamizadeh, A. (2008) Sample selection
-  bias correction theory.
-\newblock In \textit{International Conference on Algorithmic Learning Theory},
-  38--53. Springer.
 
 \bibitem[{Doudchenko and Imbens(2016)}]{doudchenko2016balancing}
 Doudchenko, N. and Imbens, G.~W. (2016) Balancing, regression,
@@ -187,19 +175,10 @@ Mazumder, R., Hastie, T. and Tibshirani, R. (2010) Spectral regularization
 \newblock \textit{Journal of Machine Learning Research}, \textbf{11},
   2287--2322.
 
-\bibitem[{Meltzer and Richard(1981)}]{meltzer1981rational}
-Meltzer, A.~H. and Richard, S.~F. (1981) A rational theory of the size of
-  government.
-\newblock \textit{Journal of Political Economy}, \textbf{89}, 914--927.
-
 \bibitem[{Murtazashvili(2013)}]{murtazashvili2013political}
 Murtazashvili, I. (2013) \textit{The Political Economy of the American
   Frontier}.
 \newblock Cambridge: Cambridge University Press.
-
-\bibitem[{Perotti(1993)}]{perotti1993political}
-Perotti, R. (1993) Political equilibrium, income distribution, and growth.
-\newblock \textit{The Review of Economic Studies}, \textbf{60}, 755--776.
 
 \bibitem[{Politis and White(2004)}]{politis2004automatic}
 Politis, D.~N. and White, H. (2004) Automatic block-length selection for the
@@ -215,10 +194,6 @@ Ramcharan, R. (2010) Inequality and redistribution: Evidence from {U.S.}
   counties and states, 1890--1930.
 \newblock \textit{The Review of Economics and Statistics}, \textbf{92},
   729--744.
-
-\bibitem[{Saint-Paul and Verdier(1993)}]{saint1993education}
-Saint-Paul, G. and Verdier, T. (1993) Education, democracy and growth.
-\newblock \textit{Journal of Development Economics}, \textbf{42}, 399--407.
 
 \bibitem[{Sylla et~al.(1993)Sylla, Legler and Wallis}]{sylla1993sources}
 Sylla, R.~E., Legler, J.~B. and Wallis, J. (1993) {S}ources and {U}ses of
