@@ -62,6 +62,13 @@ source(paste0(code.directory,'mc-capacity-table.R'))
 # mc-boot-covars.sh --> mc-boot-covars.R
 source(paste0(code.directory,'mc-capacity-plots.R')) 
 
+# Sensitivity: imputation method
+# mc-capacity-estimates-covars-linear.sh --> mc-capacity-estimates-covars-linear.R 
+# mc-capacity-estimates-covars-random.sh --> mc-capacity-estimates-covars-random.R 
+# mc-capacity-estimates-covars-median.sh --> mc-capacity-estimates-covars-median.R 
+
+source(paste0(code.directory,'mc-capacity-table-imp.R')) 
+
 # DD estimates on state capacity data
 
 source(paste0(code.directory,'dd-capacity.R')) 

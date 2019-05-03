@@ -10,7 +10,7 @@ require(weights)
 require(tidyr)
 require(readr)
 require(imputeTS)
-require(randomForest)
+require(caret)
 
 ## STATE-LEVEL DATA
 
@@ -260,7 +260,7 @@ capacity.covariates.placebo <- rbind(faval[colnames(faval) %in% capacity.states]
 
 capacity.outcomes <- list("rev.pc"=rev.pc,"exp.pc"=exp.pc, "educ.pc"=educ.pc)
 
-CapacityMatrices <- function(d, outcomes=TRUE) {
+CapacityMatrices <- function(d, outcomes=TRUE, imp=c("locf","linear","random","median")) {
   
   # Masked matrix for which 1=observed, NA=missing/imputed
   d.M.missing <- t(as.matrix(d))
@@ -270,8 +270,22 @@ CapacityMatrices <- function(d, outcomes=TRUE) {
   # impute missing
   d.imp <- d
   if(outcomes){
-    d.imp[1:which(rownames(d)=="1868"),] <- na.locf(d[1:which(rownames(d)=="1868"),], option = "locf", na.remaining = "rev")
-    d.imp[which(rownames(d)=="1868"): nrow(d),] <- na.locf(d[which(rownames(d)=="1868"): nrow(d),], option = "locf", na.remaining = "rev")  
+    if(imp=="locf"){
+      d.imp[1:which(rownames(d)=="1868"),] <- na.locf(d[1:which(rownames(d)=="1868"),], option = "locf", na.remaining = "rev")
+      d.imp[which(rownames(d)=="1868"): nrow(d),] <- na.locf(d[which(rownames(d)=="1868"): nrow(d),], option = "locf", na.remaining = "rev")  
+    }
+    if(imp=="linear"){
+      d.imp[1:which(rownames(d)=="1868"),] <- na.interpolation(d[1:which(rownames(d)=="1868"),], option = "linear")
+      d.imp[which(rownames(d)=="1868"): nrow(d),] <- na.interpolation(d[which(rownames(d)=="1868"): nrow(d),], option = "linear")  
+    }
+    if(imp=="random"){
+      d.imp[1:which(rownames(d)=="1868"),] <- na.random(d[1:which(rownames(d)=="1868"),])
+      d.imp[which(rownames(d)=="1868"): nrow(d),] <- na.random(d[which(rownames(d)=="1868"): nrow(d),])  
+    }
+    if(imp=="median"){
+      preProcValues <- preProcess(d[1:which(rownames(d)=="1868"),], method = c("medianImpute"), verbose=TRUE) # use training set median
+      d.imp <- predict(preProcValues, d)
+    }
   } 
   
   d.imp <- log(d.imp+.Machine
@@ -308,10 +322,18 @@ CapacityMatrices <- function(d, outcomes=TRUE) {
   }
 }
 
-capacity.outcomes <- lapply(capacity.outcomes, CapacityMatrices, outcomes=TRUE)
-capacity.covariates <- CapacityMatrices(capacity.covariates, outcomes=FALSE)
-capacity.covariates.placebo <- CapacityMatrices(capacity.covariates.placebo, outcomes=FALSE)
+capacity.outcomes.locf <- lapply(capacity.outcomes, CapacityMatrices, outcomes=TRUE, imp="locf")
+capacity.covariates.locf <- CapacityMatrices(capacity.covariates, outcomes=FALSE, imp="locf")
+capacity.covariates.placebo.locf <- CapacityMatrices(capacity.covariates.placebo, outcomes=FALSE, imp="locf")
 
-saveRDS(capacity.outcomes, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes.rds")
-saveRDS(capacity.covariates, "/media/jason/Dropbox/github/land-reform/data/capacity-covariates.rds")
-saveRDS(capacity.covariates.placebo, "/media/jason/Dropbox/github/land-reform/data/capacity-covariates-placebo.rds")
+saveRDS(capacity.outcomes.locf, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes.rds")
+saveRDS(capacity.covariates.locf, "/media/jason/Dropbox/github/land-reform/data/capacity-covariates.rds")
+saveRDS(capacity.covariates.placebo.locf, "/media/jason/Dropbox/github/land-reform/data/capacity-covariates-placebo.rds")
+
+capacity.outcomes.linear <- lapply(capacity.outcomes, CapacityMatrices, outcomes=TRUE, imp="linear")
+capacity.outcomes.random <- lapply(capacity.outcomes, CapacityMatrices, outcomes=TRUE, imp="random")
+capacity.outcomes.median <- lapply(capacity.outcomes, CapacityMatrices, outcomes=TRUE, imp="median")
+
+saveRDS(capacity.outcomes.linear, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes-linear.rds")
+saveRDS(capacity.outcomes.random, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes-random.rds")
+saveRDS(capacity.outcomes.median, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes-median.rds")
