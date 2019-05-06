@@ -323,10 +323,10 @@ CapacityMatrices <- function(d, outcomes=TRUE, imp=c("locf","linear","random","m
 }
 
 capacity.outcomes.locf <- lapply(capacity.outcomes, CapacityMatrices, outcomes=TRUE, imp="locf")
-capacity.covariates.locf <- CapacityMatrices(capacity.covariates, outcomes=FALSE, imp="locf")
-capacity.covariates.placebo.locf <- CapacityMatrices(capacity.covariates.placebo, outcomes=FALSE, imp="locf")
+capacity.covariates.locf <- CapacityMatrices(capacity.covariates, outcomes=FALSE, imp=NULL)
+capacity.covariates.placebo.locf <- CapacityMatrices(capacity.covariates.placebo, outcomes=FALSE, imp=NULL)
 
-saveRDS(capacity.outcomes.locf, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes.rds")
+saveRDS(capacity.outcomes.locf, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes-locf.rds")
 saveRDS(capacity.covariates.locf, "/media/jason/Dropbox/github/land-reform/data/capacity-covariates.rds")
 saveRDS(capacity.covariates.placebo.locf, "/media/jason/Dropbox/github/land-reform/data/capacity-covariates-placebo.rds")
 
