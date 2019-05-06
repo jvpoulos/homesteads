@@ -9,16 +9,14 @@ require(ggplot2)
 
 source(paste0(code.directory,"TsPlot.R"))
 
-capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes.rds"))
-
-PlotMCCapacity <- function(x,y.title,limits,breaks,t0=which(colnames(capacity.outcomes[["rev.pc"]]$M)=="1869")){
+PlotMCCapacity <- function(x,y.title,limits,breaks,t0=which(colnames(capacity.outcomes[["rev.pc"]]$M)=="1869"),imp="locf"){
   ## Create time series data
   
-  boot <- readRDS(paste0(results.directory, "mc/", gsub('\\.', '-', x), "-boot.rds"))
+  boot <- readRDS(paste0(results.directory, "mc/", gsub('\\.', '-', x), "-boot-",imp,".rds"))
   
   observed <- capacity.outcomes[[x]]$M
   
-  mc_est <- readRDS(paste0(results.directory, "mc/mc_est.rds"))
+  mc_est <- readRDS(paste0(results.directory, "mc/mc_est_w_",imp,".rds"))
   
   predicted <- mc_est[[x]]$Mhat
   
@@ -98,13 +96,48 @@ PlotMCCapacity <- function(x,y.title,limits,breaks,t0=which(colnames(capacity.ou
   return(ts.plot)
 }
 
+#LOCF
+capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes.rds"))
+
 mc.rev.pc <- PlotMCCapacity(x='rev.pc',y.title="Log per-capita state government revenue (1982$)\n",limits=c(as.POSIXct("1809-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")), breaks=seq(as.POSIXct("1809-1-31 00:00:00",tz="UTC"),
-                                                                                                                                             as.POSIXct("1982-1-31 00:00:00",tz="UTC"), "20 years")) 
+                                                                                                                                             as.POSIXct("1982-1-31 00:00:00",tz="UTC"), "20 years"),imp="locf") 
 mc.exp.pc <- PlotMCCapacity(x='exp.pc',y.title="Log per-capita state government expenditure (1982$)\n",
                             limits=c(as.POSIXct("1809-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")), breaks=seq(as.POSIXct("1809-1-31 00:00:00",tz="UTC"),
-                                                                                                                                             as.POSIXct("1982-1-31 00:00:00",tz="UTC"), "20 years"))
-#mc.educ.pc <- PlotMCCapacity(x='educ.pc',y.title="Log per-capita state government education spending (1942$)", limits=c(as.POSIXct("1783-01-01 01:00:00"), as.POSIXct("1942-01-01 01:00:00")))
+                                                                                                                                             as.POSIXct("1982-1-31 00:00:00",tz="UTC"), "20 years"),imp="locf")
 
 ggsave(paste0(results.directory,"plots/mc-rev-pc.png"), mc.rev.pc, width=8.5, height=11)
 ggsave(paste0(results.directory,"plots/mc-exp-pc.png"), mc.exp.pc, width=8.5, height=11)
-#ggsave(paste0(results.directory,"plots/mc-educ-pc.png"), mc.educ.pc, width=11, height=8.5)
+
+# linear
+capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes-linear.rds"))
+
+mc.rev.pc.linear <- PlotMCCapacity(x='rev.pc',y.title="Log per-capita state government revenue (1982$)\n",limits=c(as.POSIXct("1809-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")), breaks=seq(as.POSIXct("1809-1-31 00:00:00",tz="UTC"),
+                                                                                                                                                                                              as.POSIXct("1982-1-31 00:00:00",tz="UTC"), "20 years"),imp="linear") 
+mc.exp.pc.linear <- PlotMCCapacity(x='exp.pc',y.title="Log per-capita state government expenditure (1982$)\n",
+                            limits=c(as.POSIXct("1809-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")), breaks=seq(as.POSIXct("1809-1-31 00:00:00",tz="UTC"),
+                                                                                                                       as.POSIXct("1982-1-31 00:00:00",tz="UTC"), "20 years"),imp="linear")
+
+ggsave(paste0(results.directory,"plots/mc-exp-pc-linear.png"), mc.exp.pc.linear, width=8.5, height=11)
+ggsave(paste0(results.directory,"plots/mc-rev-pc-linear.png"), mc.rev.pc.linear, width=8.5, height=11)
+
+# median
+capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes-median.rds"))
+mc.rev.pc.median <- PlotMCCapacity(x='rev.pc',y.title="Log per-capita state government revenue (1982$)\n",limits=c(as.POSIXct("1809-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")), breaks=seq(as.POSIXct("1809-1-31 00:00:00",tz="UTC"),
+                                                                                                                                                                                                     as.POSIXct("1982-1-31 00:00:00",tz="UTC"), "20 years"),imp="median") 
+mc.exp.pc.median <- PlotMCCapacity(x='exp.pc',y.title="Log per-capita state government expenditure (1982$)\n",
+                                   limits=c(as.POSIXct("1809-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")), breaks=seq(as.POSIXct("1809-1-31 00:00:00",tz="UTC"),
+                                                                                                                              as.POSIXct("1982-1-31 00:00:00",tz="UTC"), "20 years"),imp="median")
+
+ggsave(paste0(results.directory,"plots/mc-exp-pc-median.png"), mc.exp.pc.median, width=8.5, height=11)
+ggsave(paste0(results.directory,"plots/mc-rev-pc-median.png"), mc.rev.pc.median, width=8.5, height=11)
+
+# random
+capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes-random.rds"))
+mc.rev.pc.random <- PlotMCCapacity(x='rev.pc',y.title="Log per-capita state government revenue (1982$)\n",limits=c(as.POSIXct("1809-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")), breaks=seq(as.POSIXct("1809-1-31 00:00:00",tz="UTC"),
+                                                                                                                                                                                                     as.POSIXct("1982-1-31 00:00:00",tz="UTC"), "20 years"),imp="random") 
+mc.exp.pc.random <- PlotMCCapacity(x='exp.pc',y.title="Log per-capita state government expenditure (1982$)\n",
+                                   limits=c(as.POSIXct("1809-01-01 01:00:00"), as.POSIXct("1982-01-01 01:00:00")), breaks=seq(as.POSIXct("1809-1-31 00:00:00",tz="UTC"),
+                                                                                                                              as.POSIXct("1982-1-31 00:00:00",tz="UTC"), "20 years"),imp="random")
+
+ggsave(paste0(results.directory,"plots/mc-rev-pc-random.png"), mc.rev.pc.random, width=8.5, height=11)
+ggsave(paste0(results.directory,"plots/mc-exp-pc-random.png"), mc.exp.pc.random, width=8.5, height=11)

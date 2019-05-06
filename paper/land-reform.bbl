@@ -1,4 +1,4 @@
-\begin{thebibliography}{51}
+\begin{thebibliography}{54}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -58,6 +58,12 @@ Athey, S., Bayati, M., Doudchenko, N., Imbens, G. and Khosravi, K. (2017)
 Athey, S. and Imbens, G. (2018) Design-based analysis in
   difference-in-differences settings with staggered adoption.
 \newblock \textit{arXiv:1808.05293}.
+
+\bibitem[{Bandiera et~al.(2018)Bandiera, Mohnen, Rasul and
+  Viarengo}]{bandiera2018nation}
+Bandiera, O., Mohnen, M., Rasul, I. and Viarengo, M. (2018) Nation-building
+  through compulsory schooling during the age of mass migration.
+\newblock \textit{The Economic Journal}, \textbf{129}, 62--109.
 
 \bibitem[{Benabou(2000)}]{benabou2000unequal}
 Benabou, R. (2000) Unequal societies: Income distribution and the social
@@ -192,6 +198,12 @@ Meltzer, A.~H. and Richard, S.~F. (1981) A rational theory of the size of
   government.
 \newblock \textit{Journal of Political Economy}, \textbf{89}, 914--927.
 
+\bibitem[{Meyer et~al.(1979)Meyer, Tyack, Nagel and Gordon}]{meyer1979public}
+Meyer, J.~W., Tyack, D., Nagel, J. and Gordon, A. (1979) Public education as
+  nation-building in {A}merica: Enrollments and bureaucratization in the
+  {A}merican states, 1870-1930.
+\newblock \textit{American Journal of Sociology}, \textbf{85}, 591--613.
+
 \bibitem[{Murtazashvili(2013)}]{murtazashvili2013political}
 Murtazashvili, I. (2013) \textit{The Political Economy of the American
   Frontier}.
@@ -215,6 +227,11 @@ Ramcharan, R. (2010) Inequality and redistribution: Evidence from {U.S.}
   counties and states, 1890--1930.
 \newblock \textit{The Review of Economics and Statistics}, \textbf{92},
   729--744.
+
+\bibitem[{Rubin(1990)}]{rubin1990}
+Rubin, D.~B. (1990) Comment: Neyman (1923) and causal inference in experiments
+  and observational studies.
+\newblock \textit{Statistical Science}, \textbf{5}, 472--480.
 
 \bibitem[{Saint-Paul and Verdier(1993)}]{saint1993education}
 Saint-Paul, G. and Verdier, T. (1993) Education, democracy and growth.
