@@ -1,4 +1,4 @@
-MCEst <- function(outcomes,imputed=FALSE,covars=NULL,pca=FALSE) {
+MCEst <- function(outcomes,imputed=FALSE,covars=NULL) {
   
   Y <- outcomes$M # NxT 
   Y.missing <- outcomes$M.missing # NxT 
@@ -36,28 +36,6 @@ MCEst <- function(outcomes,imputed=FALSE,covars=NULL,pca=FALSE) {
     }
     
     return(list("impact" = est_model_MCPanel_w$impact, "Mhat" = est_model_MCPanel_w$Mhat, "min_RMSE"= est_model_MCPanel_w$min_RMSE, "best_lambda"=est_model_MCPanel_w$best_lambda))
-  } 
-  
-  if(pca){
-    
-    treat_mat_NA <- treat_mat
-    treat_mat_NA[treat_mat==0] <- NA
-    
-    ## ------
-    ## PCA
-    ## ------
-    
-    nb <- estim_ncpPCA(data.frame(Y_obs*treat_mat_NA),ncp.max=5) # cv num components
-    
-    PCA_Mhat <- imputePCA(data.frame(Y_obs*treat_mat_NA), nb$ncp)$completeObs # regularized iterative PCA
-    if(imputed){
-      PCA_impact <- (Y*Y.missing-PCA_Mhat) 
-    } else{
-      PCA_impact <- (Y-PCA_Mhat) 
-    }
-    
-    return(list("impact" = PCA_impact, "Mhat" = PCA_Mhat))
-    
   } else{
     ## ------
     ## MC-NNM

@@ -1,4 +1,4 @@
-\begin{thebibliography}{54}
+\begin{thebibliography}{55}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \expandafter\ifx\csname url\endcsname\relax
   \def\url#1{\texttt{#1}}\fi
@@ -289,5 +289,11 @@ Yoon, J., Zame, W.~R. and van~der Schaar, M. (2018) Estimating missing data in
 Ziblatt, D. (2008) Does landholding inequality block democratization? {A} test
   of the “bread and democracy” thesis and the case of {P}russia.
 \newblock \textit{World Politics}, \textbf{60}, 610--641.
+
+\bibitem[{Zou and Hastie(2005)}]{zou2005regularization}
+Zou, H. and Hastie, T. (2005) Regularization and variable selection via the
+  elastic net.
+\newblock \textit{Journal of the Royal Statistical Society: Series B
+  (Statistical Methodology)}, \textbf{67}, 301--320.
 
 \end{thebibliography}

@@ -4,7 +4,6 @@
 
 ## Loading Source files
 library(MCPanel)
-library(missMDA)
 
 # Setup parallel processing 
 library(parallel)

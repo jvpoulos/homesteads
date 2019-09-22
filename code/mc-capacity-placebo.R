@@ -50,12 +50,6 @@ taus <- c(1,10,25)
 
 treat_indices_order <- c("CA", "CO", "IA", "KS", "MI", "MN", "MO", "NE", "OH", "OR", "SD", "WA", "WI", "IL", "NV", "ID", "MT", "ND",  "UT", "AL", "MS", "AR", "FL", "LA", "IN", "NM", "WY", "AZ", "OK", "AK")
 
-mc.est.placebo <- foreach(tau = taus) %dopar% {
-      t0_placebo <- t_final_placebo-(tau) # n pre-treatment periods
-      mclapply(capacity.outcomes.list,
-                              MCEst,imputed=FALSE,covars=NULL,pca=FALSE,mc.cores=cores)}
-saveRDS(mc.est.placebo,"mc_est_placebo.rds")
-
 # Get p-values
 source("ChernoTest.R")
 
