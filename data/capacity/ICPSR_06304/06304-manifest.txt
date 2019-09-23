@@ -1,0 +1,93 @@
+File Manifest for ICPSR 6304
+
+Sylla, Richard E., John B. Legler, and John Wallis. STATE AND LOCAL
+GOVERNMENT [UNITED STATES]: SOURCES AND USES OF FUNDS, CENSUS STATISTICS,
+TWENTIETH CENTURY [THROUGH 1982]. New York, NY: Richard E. Sylla, New York
+University/Athens, GA: John B. Legler, University of Georgia/College Park,
+MD: John Wallis, University of Maryland [producers], 1993. Ann Arbor, MI:
+Inter-university Consortium for Political and Social Research
+[distributor], 1995. http://doi.org/10.3886/ICPSR06304.v1
+
+Details on the version history can be found below the file listings.
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06304-related_literature.txt        -       -         -       2017-08-03  -
+
+    06304-manifest.txt                  -       -         -       2017-08-04  -
+
+    06304-Codebook.txt                  -       -         -       1997-06-03  19e7b584255d97a0e9908811439117d5
+
+
+DS0001 1902DATA.ISR: 1902 Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06304-0001-Data.txt                 50      8,079     5       1995-05-09  b6fdde6fdaff628e092ba45b1f8ed43c
+
+
+DS0002 1913DATA.ISR: 1913 Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06304-0002-Data.txt                 50      5,679     5       1995-05-09  1370e6b9c8644c79c63322964e790baf
+
+
+DS0003 1932DATA.ISR: 1932 Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06304-0003-Data.txt                 53      9,758     5       1995-05-09  68bbec10cdf5dba2b95931ea0cc21234
+
+
+DS0004 1942DATA.ISR: 1942 Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06304-0004-Data.txt                 64      4,239     5       1995-05-09  b637d10e972e4ea7631eef5400203d2e
+
+
+DS0005 1962DATA.ISR: 1962 Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06304-0005-Data.txt                 64      8,080     unknown 1995-05-09  d5e33114b99b123a24363cadc3d6bbfa
+
+
+DS0006 1972DATA.ISR: 1972 Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06304-0006-Data.txt                 60      8,079     5       1995-05-09  edb181d2809297316da25735e51e81e6
+
+
+DS0007 1982DATA.ISR: 1982 Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06304-0007-Data.txt                 51      7,695     unknown 1995-05-09  cbd7151231f20e58c0d880429174baaf
+
+
+DS0008 CODES.ISR: Categories of Expenditures and Revenues
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06304-0008-Data.txt                 63      372       3       1995-05-09  034449be12b1801402f8d09f9e98683e
+
+
+Version History
+
+2006-01-12 All files were removed from dataset 9 and flagged as study-level
+files, so that they will accompany all downloads.

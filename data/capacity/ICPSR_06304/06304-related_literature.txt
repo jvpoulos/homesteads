@@ -1,0 +1,23 @@
+Bibliography
+State and Local Government [United States]: Sources and Uses of Funds,
+Census Statistics, Twentieth Century [Through 1982]
+
+This bibliography includes published and unpublished works that are related 
+to ICPSR study 6304. It includes works that are based on primary
+or secondary analysis of the data, or which describe or critique those
+data or the collection methodology. This list represents all items known
+to ICPSR as of 2017-08-04.
+
+If you publish a work or know of other works that are based on these data,
+please send the complete citation and name of the ICPSR study used to:
+icpsr-biblio-notify@umich.edu 
+
+
+1. Gilligan, Thomas W.; Matsusaka, John G., "Fiscal Policy, Legislature
+Size, and Political Parties: Evidence from State and Local Governments in
+the First Half of the 20th Century." National Tax Journal. Mar 2001, 54,
+(1), 57 - 82.
+
+2. Hindman, Monty, "The Rise and Fall of Wealth Taxation: An Inquiry into
+the Fiscal History of the American States." Dissertation, University of
+Michigan, 2010.

@@ -1,0 +1,1124 @@
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                   SOURCES AND USES OF FUNDS IN STATE AND                       
+                LOCAL GOVERNMENTS, 1790-1915: [UNITED STATES]                   
+                                                                                
+                                (ICPSR 9728)                                    
+                                                                                
+                                                                                
+                                                                                
+                          Codebook for Parts 65-94                              
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                           Principal Investigators                              
+                                                                                
+                              Richard E. Sylla                                  
+                             New York University                                
+                                                                                
+                               John B. Legler                                   
+                            University of Georgia                               
+                                                                                
+                                    and                                         
+                                                                                
+                                 John Wallis                                    
+                           University of Maryland                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                             First ICPSR Release                                
+                                February 1995                                   
+                                                                                
+                                                                                
+                                                                                
+                       Inter-university Consortium for                          
+                        Political and Social Research                           
+                                P.O. Box 1248                                   
+                          Ann Arbor, Michigan 48106                             
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                             BIBLIOGRAPHIC CITATION                             
+                                                                                
+                                                                                
+            Publications  based  on  ICPSR  data  collections  should           
+            acknowledge  those  sources  by  means  of  bibliographic           
+            citations.  To ensure that such source  attributions  are           
+            captured  for  social  science  bibliographic  utilities,           
+            citations must appear in footnotes or  in  the  reference           
+            section  of publications.  The bibliographic citation for           
+            this data collection is:                                            
+                                                                                
+                                                                                
+                 Sylla, Richard E., John  B.  Legler,  and  John                
+                 Wallis.  SOURCES AND USES OF FUNDS IN STATE AND                
+                 LOCAL GOVERNMENTS, 1790-1915:  [UNITED  STATES]                
+                 [PARTS  65-94]  [Computer  file]. New York, NY:                
+                 Richard E. Sylla, New  York  University/Athens,                
+                 GA:    John    B.    Legler,    University   of                
+                 Georgia/College   Park,   MD:   John    Wallis,                
+                 University  of  Maryland [producers], 1994. Ann                
+                 Arbor, MI: Inter-university for  Political  and                
+                 Social Research [distributor], 1995.                           
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                REQUEST FOR INFORMATION ON USE OF ICPSR RESOURCES               
+                                                                                
+            To provide funding agencies  with  essential  information           
+            about  use  of  archival  resources and to facilitate the           
+            exchange  of  information   about   ICPSR   participants'           
+            research activities, users of ICPSR data are requested to           
+            send to ICPSR bibliographic citations for each  completed           
+            manuscript or thesis abstract. Please indicate in a cover           
+            letter which data were used.                                        
+                                                                                
+                                                                                
+                                                                                
+                                 DATA DISCLAIMER                                
+                                                                                
+            The original  collector  of  the  data,  ICPSR,  and  the           
+            relevant  funding  agency bear no responsibility for uses           
+            of this collection or for interpretations  or  inferences           
+            based upon such uses.                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                         DATA COLLECTION DESCRIPTION                            
+                                                                                
+                                                                                
+     Richard E. Sylla, John B. Legler, and John Wallis                          
+          SOURCES AND USES OF FUNDS  IN  STATE  AND  LOCAL  GOVERNMENTS,        
+     1790-1915: [UNITED STATES] (ICPSR 9728)                                    
+                                                                                
+     SUMMARY: This data collection contains preliminary  financial  data        
+     on  state government revenues and expenditures for 48 states during        
+     the period 1790-1915, plus final data on state government revenues,        
+     expenditures,  and debt for Missouri during 1849-1915, Parts 95 and        
+     96.  Parts 98 and 99, Final  Raw  Data  on  Missouri  Revenues  and        
+     Expenditures, are similar to Parts 95 and 96, with two differences.        
+     First, they contain every line entry that was transcribed from  the        
+     original  source.  Second,  the  files  have a line identifier that        
+     shows the order in which the data came from  the  original  source.        
+     Variables  in  the  data collection include state, year, and dollar        
+     amounts of revenues and expenditures at four levels of aggregation:        
+     (1)  total  expenditures  and  revenues,  (2) major categories that        
+     match  the  major  20th-century  categories  of  expenditures   and        
+     revenues,  (3) minor categories that correspond to special features        
+     of 19th- and/or 20th-century  governments,  and  (4)  idiosyncratic        
+     categories that differ from state to state. Part 100 contains codes        
+     for categories of expenditures, revenues, and debt for Parts 95-97.        
+                                                                                
+     UNIVERSE:  Financial  records  of   Alabama,   Arizona,   Arkansas,        
+     California,  Colorado,  Connecticut,  Delaware,  Florida,  Georgia,        
+     Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana, Maine,        
+     Maryland,    Massachusetts,   Michigan,   Minnesota,   Mississippi,        
+     Missouri, Montana, Nebraska, Nevada, New Hampshire, New Jersey, New        
+     Mexico,  New  York,  North  Carolina, North Dakota, Ohio, Oklahoma,        
+     Oregon, Pennsylvania, Rhode Island, South Carolina,  South  Dakota,        
+     Tennessee,   Texas,   Utah,  Vermont,  Virginia,  Washington,  West        
+     Virginia, Wisconsin, and Wyoming.                                          
+                                                                                
+     NOTE:  (1)  The  files  use  commas  and  quote  marks  to  delimit        
+     variables.   (2)  See  also  STATE  AND  LOCAL  GOVERNMENT  [UNITED        
+     STATES]: SOURCES AND USES OF FUNDS,  CENSUS  STATISTICS,  TWENTIETH        
+     CENTURY  [THROUGH  1982]  (ICPSR  6304), STATE AND LOCAL GOVERNMENT        
+     [UNITED STATES]: SOURCES AND USES OF FUNDS, CITY AND  COUNTY  DATA,        
+     NINETEENTH  CENTURY  (ICPSR  6305),  and STATE AND LOCAL GOVERNMENT        
+     [UNITED  STATES]:  SOURCES  AND  USES  OF  FUNDS,  STATE  FINANCIAL        
+     STATISTICS, 1933-1937 (ICPSR 6306).                                        
+                                                                                
+     EXTENT  OF  COLLECTION:   100   data   files   +   machine-readable        
+     documentation (text)                                                       
+                                                                                
+     DATA FORMAT: Logical Record Length                                         
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+     Part 1: AKREV.ISR: Preliminary Alaska Revenues Data                        
+     Part 2: AKEXP.ISR: Preliminary Alaska Expenditures Data                    
+     Part 3: ALREV.ISR: Preliminary Alabama Revenues Data                       
+     Part 4: ALEXP.ISR: Preliminary Alabama Expenditures Data                   
+     Part 5: COREV.ISR: Preliminary Colorado Revenues Data                      
+     Part 6: DEREV.ISR: Preliminary Delaware Revenues Data                      
+     Part 7: DEEXP.ISR: Preliminary Delaware Expenditures Data                  
+     Part 8: ILREV.ISR: Preliminary Illinois Revenues Data                      
+     Part 9: ILEXP.ISR: Preliminary Illinois Expenditures Data                  
+     Part 10: INREV.ISR: Preliminary Indiana Revenues Data                      
+     Part 11: INEXP.ISR: Preliminary Indiana Expenditures Data                  
+     Part 12: KSREV.ISR: Preliminary Kansas Revenues Data                       
+     Part 13: KSEXP.ISR: Preliminary Kansas Expenditures Data                   
+     Part 14: MAREV.ISR: Preliminary Massachusetts Revenues Data                
+     Part 15: MAEXP.ISR: Preliminary Massachusetts Expenditures Data            
+     Part 16: MDREV.ISR: Preliminary Maryland Revenues Data                     
+     Part 17: MDEXP.ISR: Preliminary Maryland Expenditures Data                 
+     Part 18: MEREV.ISR: Preliminary Maine Revenues Data                        
+     Part 19: MEEXP.ISR: Preliminary Maine Expenditures Data                    
+     Part 20: MIREV.ISR: Preliminary Michigan Revenues Data                     
+     Part 21: MIEXP.ISR: Preliminary Michigan Expenditures Data                 
+     Part 22: MNREV.ISR: Preliminary Minnesota Revenues Data                    
+     Part 23: MNEXP.ISR: Preliminary Minnesota Expenditures Data                
+     Part 24: MOREV.ISR: Preliminary Missouri Revenues Data                     
+     Part 25: MOEXP.ISR: Preliminary Missouri Expenditures Data                 
+     Part 26: MSREV.ISR: Preliminary Mississippi Revenues Data                  
+     Part 27: MSEXP.ISR: Preliminary Mississippi Expenditures Data              
+     Part 28: MTREV.ISR: Preliminary Montana Revenues Data                      
+     Part 29: NCREV.ISR: Preliminary North Carolina Revenues Data               
+     Part 30: NCEXP.ISR: Preliminary North Carolina Expenditures Data           
+     Part 31: NDREV.ISR: Preliminary North Dakota Revenues Data                 
+     Part 32: NDEXP.ISR: Preliminary North Dakota Expenditures Data             
+     Part 33: NEREV.ISR: Preliminary Nebraska Revenues Data                     
+     Part 34: NEEXP.ISR: Preliminary Nebraska Expenditures Data                 
+     Part 35: NHREV.ISR: Preliminary New Hampshire Revenues Data                
+     Part 36: NHEXP.ISR: Preliminary New Hampshire Expenditures Data            
+     Part 37: NJREV.ISR: Preliminary New Jersey Revenues Data                   
+     Part 38: NJEXP.ISR: Preliminary New Jersey Expenditures Data               
+     Part 39: NVREV.ISR: Preliminary Nevada Revenues Data                       
+     Part 40: NVEXP.ISR: Preliminary Nevada Expenditures Data                   
+     Part 41: OHREV.ISR: Preliminary Ohio Revenues Data                         
+     Part 42: OHEXP.ISR: Preliminary Ohio Expenditures Data                     
+     Part 43: OKREV.ISR: Preliminary Oklahoma Revenues Data                     
+     Part 44: OKEXP.ISR: Preliminary Oklahoma Expenditures Data                 
+     Part 45: PAREV.ISR: Preliminary Pennsylvania Revenues Data                 
+     Part 46: PAEXP.ISR: Preliminary Pennsylvania Expenditures Data             
+     Part 47: RIREV.ISR: Preliminary Rhode Island Revenues Data                 
+     Part 48: RIEXP.ISR: Preliminary Rhode Island Expenditures Data             
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+     Part 49: SCREV.ISR: Preliminary South Carolina Revenues Data               
+     Part 50: SCEXP.ISR: Preliminary South Carolina Expenditures Data           
+     Part 51: SDREV.ISR: Preliminary South Dakota Revenues Data                 
+     Part 52: SDEXP.ISR: Preliminary South Dakota Expenditures Data             
+     Part 53: TNREV.ISR: Preliminary Tennessee Revenues Data                    
+     Part 54: TNEXP.ISR: Preliminary Tennessee Expenditures Data                
+     Part 55: UTREV.ISR: Preliminary Utah Revenues Data                         
+     Part 56: UTEXP.ISR: Preliminary Utah Expenditures Data                     
+     Part 57: VAREV.ISR: Preliminary Virginia Revenues Data                     
+     Part 58: VAEXP.ISR: Preliminary Virginia Expenditures Data                 
+     Part 59: VTREV.ISR: Preliminary Vermont Revenues Data                      
+     Part 60: VTEXP.ISR: Preliminary Vermont Expenditures Data                  
+     Part 61: WAREV.ISR: Preliminary Washington Revenues Data                   
+     Part 62: WAEXP.ISR: Preliminary Washington Expenditures Data               
+     Part 63: WYREV.ISR: Preliminary Wyoming Revenues Data                      
+     Part 64: WYEXP.ISR: Preliminary Wyoming Expenditures Data                  
+     Part 65: AZEXP.ISR: Preliminary Arizona Expenditures Data                  
+     Part 66: AZREV.ISR: Preliminary Arizona Revenues Data                      
+     Part 67: CAEXP.ISR: Preliminary California Expenditures Data               
+     Part 68: CAREV.ISR: Preliminary California Revenues Data                   
+     Part 69: CTEXP.ISR: Preliminary Connecticut Expenditures Data              
+     Part 70: CTREV.ISR: Preliminary Connecticut Revenues Data                  
+     Part 71: FLEXP.ISR: Preliminary Florida Expenditures Data                  
+     Part 72: FLREV.ISR: Preliminary Florida Revenues Data                      
+     Part 73: GAEXP.ISR: Preliminary Georgia Expenditures Data                  
+     Part 74: GAREV.ISR: Preliminary Georgia Revenues Data                      
+     Part 75: IDEXP.ISR: Preliminary Idaho Expenditures Data                    
+     Part 76: IDREV.ISR: Preliminary Idaho Revenues Data                        
+     Part 77: IOEXP.ISR: Preliminary Iowa Expenditures Data                     
+     Part 78: IOREV.ISR: Preliminary Iowa Revenues Data                         
+     Part 79: KYEXP.ISR: Preliminary Kentucky Expenditures Data                 
+     Part 80: KYREV.ISR: Preliminary Kentucky Revenues Data                     
+     Part 81: LAEXP.ISR: Preliminary Louisiana Expenditures Data                
+     Part 82: LAREV.ISR: Preliminary Louisiana Revenues Data                    
+     Part 83: NMEXP.ISR: Preliminary New Mexico Expenditures Data               
+     Part 84: NMREV.ISR: Preliminary New Mexico Revenues Data                   
+     Part 85: NYEXP.ISR: Preliminary New York Expenditures Data                 
+     Part 86: NYREV.ISR: Preliminary New York Revenues Data                     
+     Part 87: OREXP.ISR: Preliminary Oregon Expenditures Data                   
+     Part 88: ORREV.ISR: Preliminary Oregon Revenues Data                       
+     Part 89: TXEXP.ISR: Preliminary Texas Expenditures Data                    
+     Part 90: TXREV.ISR: Preliminary Texas Revenues Data                        
+     Part 91: WIEXP.ISR: Preliminary Wisconsin Expenditures Data                
+     Part 92: WIREV.ISR: Preliminary Wisconsin Revenues Data                    
+     Part 93: WVEXP.ISR: Preliminary West Virginia Expenditures Data            
+     Part 94: WVREV.ISR: Preliminary West Virginia Revenues Data                
+     Part 95: MOEXP.ISR: Final Missouri Expenditures Data                       
+     Part 96: MOREV.ISR: Final Missouri Revenues Data                           
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+     Part 97: MODEBT.ISR: Final Missouri Debt Data                              
+     Part 98: MOISRRRR.ISR: Final Raw Data on Missouri Revenues                 
+     Part 99: MOISRXXX.ISR: Final Raw Data on Missouri Expenditures             
+     Part 100: MOCODE.ISR: Categories of Expenditures, Revenues, and Debt       
+       for Parts 95-97                                                          
+                                                                                
+     File Structure: rectangular                                                
+     Cases: 4 to 5,715 per part                                                 
+     Variables: 2 to 5 per part                                                 
+     Record Length: 18 to 66 per part                                           
+     Records Per Case: 1                                                        
+                                                                                
+     Part 101: Codebook for                  Part 102: Codebook for             
+       Parts 1-64                              Parts 65-94                      
+     Record Length: 80                       Record Length: 80                  
+                                                                                
+     Part 103: Codebook for                                                     
+       Parts 95-100                                                             
+     Record Length: 80                                                          
+                                                                                
+                                                                                
+1    ICPSR 9728                                        Page 1                   
+                                                                                
+            State and Local Government: Sources and Uses of Funds               
+                                                                                
+    Sponsoring Agency: National Bureau of Economic Research                     
+                                                                                
+                                                                                
+    Principal Investigators:                                                    
+                                                                                
+    Richard E. Sylla                                                            
+        Leonard N. Stern School of Business                                     
+        New York University                                                     
+        100 Trinity Place                                                       
+        New York, NY 10006-1594                                                 
+                                                                                
+    John B. Legler                                                              
+        Department of Economics                                                 
+        University of Georgia                                                   
+        Athens, GA                                                              
+                                                                                
+    John Wallis                                                                 
+        Department of Economics                                                 
+        University of Maryland                                                  
+        College Park, MD 10742                                                  
+                                                                                
+                                                                                
+                                                                                
+    Funded by:                                                                  
+                                                                                
+        National Science Foundation                                             
+                Grants: SES-8419857, SES-8706814, SES-8908272, and              
+                        SBR-9108618                                             
+                                                                                
+                                                                                
+    Data Edition:                                                               
+                                                                                
+        Preliminary Release, March 1994                                         
+                                                                                
+        Covering: Arizona, California, Connecticut, Florida,                    
+                  Georgia, Idaho, Iowa, Kentucky, Louisiana,                    
+                  New Mexico, New York, Oregon, Texas, West Virginia,           
+                  and Wisconsin.                                                
+                                                                                
+                                                                                
+                                                                                
+1    Page 2                                            ICPSR 9728               
+                                                                                
+        The data in this study are made available through ICPSR.                
+    They were originally collected by Richard Sylla, John Legler, and           
+    John Wallis.  Neither the original investigators, the National              
+    Bureau of Economic Research, or ICPSR bear any responsibility for           
+    the analysis or interpretations presented here.  Nor are they               
+    responsible for any uses to which this data may be put.                     
+                                                                                
+        Individuals receiving and using this data are strongly urged            
+    to inform the ICPSR and the principle investigators of any errors           
+    or discrepancies discovered during the use of this data.  In                
+    order to provide agencies with essential information about the              
+    use of archival sources and to facilitate the exchange of                   
+    information, each user is expected to send two copies of                    
+    completed manuscripts (or thesis) of work based on these data to            
+    ICPSR.                                                                      
+                                                                                
+                                                                                
+1    ICPSR 9728                                        Page 3                   
+                                                                                
+                          Table of Contents                                     
+                                                                                
+                                                                                
+                Data Collection and Coding ...................... 4             
+                                                                                
+                Data Sources .................................... 5             
+                                                                                
+                Form of Machine Readable Data ................... 6             
+                                                                                
+                Important Caveats ............................... 7             
+                                                                                
+                                                                                
+1    Page 4                                            ICPSR 9728               
+                                                                                
+        This codebook describes the "preliminary" release of state              
+    financial data collected by Richard Sylla, John Legler, and John            
+    Wallis under NSF Grants SES-8419857, SES-8706814, SES-8908272,              
+    and SBR-9108618.   This data is part of a larger data set                   
+    containing information on state and local government finances               
+    between 1790 and 1980.  The current data set contains information           
+    on state government revenues and expenditures between,                      
+    approximately, 1790 and 1915.  This release of the data includes            
+    information for fifteen states.  Earlier releases of preliminary            
+    data were made in 1991 and 1992, and revisions of preliminary               
+    data sets will occur as the data becomes available.  There is now           
+    preliminary data for every state.  Final data sets for individual           
+    states are also being released.                                             
+                                                                                
+        It must be recognized that this is a PRELIMINARY data set.              
+    There are many, multi-dimensional holes in the data.  The most              
+    obvious is missing years.  Less obvious are, as yet, uncorrected            
+    problems of misclassification, double counting, and inadvertent             
+    omission of relevant data.  In other words, caveat emptor]                  
+                                                                                
+                                                                                
+    Data Collection and Coding                                                  
+                                                                                
+        We began collecting data with three objectives in mind.  The            
+    first was to make our categories consistent with the existing               
+    categories used by the census in the 20th century, so that we can           
+    match our data with theirs.  The second was to facilitate the               
+    collection of the data.  This was particularly important since we           
+    typically face the problem of too much rather than too little               
+    information.  A method for organizing detail without losing                 
+    information was of primary importance.  Finally, we needed a                
+    method that could be followed independently by the three                    
+    principal investigators operating at some distances from one                
+    another.                                                                    
+                                                                                
+        The solution adopted resembles the standard industrial                  
+    classification (SIC) codes. Expenditures, revenues, and debt are            
+    given one-digit classifications; major categories that match the            
+    major 20th-century categories are given two-digit                           
+    classifications; minor categories that correspond to the special            
+    features of 19th- and/or 20th-century features of government are            
+    given three-digit codes; and idiosyncratic divisions, which                 
+    differ from state to state are given unique four-digit codes in             
+    each state.  This allows us to design a classification (coding)             
+    scheme for each state at the four-digit level that can be                   
+    aggregated into two- and three-digit categories that are                    
+    identical for every state by using a simple sorting program.                
+                                                                                
+        No coding scheme can be completely consistent with the                  
+    census classifications, since the census has continually changed            
+    its classifications over the twentieth century.   We, therefore,            
+    started with the major divisions of revenues and expenditures               
+    from the Census of Governments after 1960.  To that we added the            
+    major revenue and expenditure categories from the census for                
+    early part of the century excluded as categories after 1950.  The           
+1    ICPSR 9728                                        Page 5                   
+                                                                                
+    result is the major categories listed in Tables 1 and 2.  These             
+    are the major two-digit classifications.                                    
+                                                                                
+        Finer classifications, taken from actual census categories              
+    and from our own experience with the 19th century data, make up a           
+    set of three-digit categories.  The three digit categories are              
+    subsets of the two-digit categories.  In other words, the sum of            
+    all of the three-digit categories associated with a particular              
+    two-digit category, is the total for that two-digit category.  So           
+    the sum of the three digit codes 2110 through 2190, is equal to             
+    the total for the two-digit code 2100.  The three-digit codes are           
+    shown in Tables 3 and 4.                                                    
+                                                                                
+        In practice, the raw data is very heterogeneous.  States                
+    called similar financial items by different names, different                
+    items by similar names, and classified debt and intragovernmental           
+    transfers in different ways.  Therefore, a unique set of                    
+    four-digit classifications was created for each state.  That is,            
+    while all of the one-, two-, and three-digit codes are the same             
+    in every state, the four-digit codes are different for every                
+    state.                                                                      
+                                                                                
+        We begin the collection process by assigning a four-digit               
+    code to every line entry on revenues and expenditures in the                
+    source document (these are discussed below). The raw financial              
+    data and the codes were then entered into a spreadsheet file                
+    using Lotus.  The data were then transferred to a Paradox                   
+    database file where the data are sorted and aggregated by code.             
+    Then totals for each of the three-digit classifications are                 
+    calculated.  Since the three-digit classifications are the same             
+    for every state, we then have comparable financial statistics for           
+    every state.                                                                
+                                                                                
+        The current data release does not include the four-digit                
+    files.  We are willing to let people have access to them, and the           
+    final data release will include them.  The four-digit files,                
+    however, are really only useful in connection with the source               
+    documents.  Code 2924 doesn't mean the same thing in Vermont and            
+    it does in Tennessee, although 2920 does mean the same thing (at            
+    least in our judgement: dividends from bank stock).  In order to            
+    make sense of the four-digit codes, then, you need our                      
+    classification sheets for each state and the original source                
+    document.                                                                   
+                                                                                
+                                                                                
+    Data Sources                                                                
+                                                                                
+        What then are these source documents?  We went back to the              
+    existing record of state governments, primarily Treasurer's                 
+    Reports, Auditor's Reports, and Comptroller's Reports.  After               
+    1840 or so most of these documents are available at the Library             
+    of Congress.  Before 1840 we have relied on the LC/University of            
+    North Carolina Microfilm record of state government documents and           
+    trips to state archives.  The first step was to determine which             
+    of the available reports was most useful.  The second step was to           
+1    Page 6                                            ICPSR 9728               
+                                                                                
+    xerox the documents.                                                        
+                                                                                
+        We brought the documents back to our respective Universities            
+    and set research assistants to "coding" the documents.  This                
+    required that each financial entry, each line of the Report be              
+    given an appropriate four-code.  The data was then entered into             
+    the computer in the following form:                                         
+                                                                                
+    =========================================                                   
+        STATE    YEAR    ISO    TOTAL                                           
+    =========================================                                   
+                                                                                
+    Where:                                                                      
+                                                                                
+        STATE = State                                                           
+                                                                                
+        YEAR  = Fiscal Year, or, in the case of states that                     
+                maintained biennial or other) records, the calendar             
+                year in which the current fiscal period ended.                  
+                                                                                
+        ISO   = the appropriate four-digit code.                                
+                                                                                
+        TOTAL = the dollar amount of the revenue, expenditure, or               
+                debt.                                                           
+                                                                                
+                                                                                
+        The data is organized vertically rather than horizontally.              
+    The "observation" is a line entry from the source document,                 
+    coupled with is state, year, and code.  This allowed us the                 
+    maximum of flexibility in using database capabilities.                      
+                                                                                
+        It was then a simple process to add up the individual four-             
+    digit numbers into four-digit totals, and do likewise for three-,           
+    two-, and one-digit totals.  The last three sets of totals, for             
+    revenues and expenditures are on the data tapes accompanying this           
+    codebook.                                                                   
+                                                                                
+                                                                                
+    Form of Machine Readable Data                                               
+                                                                                
+        The data tapes that you are trying to figure out how use                
+    have a simple structure.  There are two data files for each                 
+    state: one for revenues and one for expenditures.  Each file                
+    begins with a two digit alphanumeric states abbreviation (we use            
+    the postal abbreviations) followed by __REV.ISR for revenues and            
+    __EXP.ISR for expenditures.                                                 
+                                                                                
+        The files are ASCII files, using a commas and quotes to                 
+    delimit variables.  Each file contains three sub-files.  Each               
+    sub-file contains information on a different level of                       
+    aggregation, given in descending order of aggregation.  Every               
+    observation in the data files has the same structure.  There are            
+    four variables per observation:                                             
+1    ICPSR 9728                                        Page 7                   
+                                                                                
+    =========================================                                   
+       STATE   YEAR   ISO    TOTAL                                              
+    =========================================                                   
+                                                                                
+    where the definitions are the same as above.                                
+                                                                                
+        I will use Oklahoma as an example, since the whole revenue              
+    file can be printed on one page.  [Oklahoma was in the earleir              
+    data release.]  It is shown in Table 5.  (We only have data for             
+    three years on Oklahoma, 1908, 1909, and 1911).                             
+                                                                                
+                                                                                
+        The first sub-file gives the revenue totals, this is the 1-             
+    digit sub-file. The ISO code for total revenues is "1".  There is           
+    a blank line at the end of the 1-digit sub-file.                            
+                                                                                
+        The 2-digit sub-file includes all 2-digit ISO codes (for                
+    revenues they all start with 1 or 2, for expenditures with 3 or             
+    4).  There is a blank line at the end of the 2-digit sub-file.              
+                                                                                
+        The 3-digit sub-file includes all 3-digit ISO codes (for                
+    revenues they all start with 1 or 2, for expenditures with 3 or             
+    4).  There is a blank line at the end of the 3-digit sub-file.              
+                                                                                
+    The order of the sub-files for every state is:                              
+                                                                                
+    Revenues, Totals                                                            
+    Revenues, 2-Digit                                                           
+    Revenues, 3-Digit                                                           
+    Expenditures, Totals                                                        
+    Expenditures, 2-Digit                                                       
+    Expenditures, 3-Digit                                                       
+                                                                                
+                                                                                
+        Each state has data on six sub-files.  These files can be               
+    broken up and entered separately, or they can be entered all at             
+    once.   For example, one could easily combine the revenue and               
+    expenditure files and enter the entire file into a database                 
+    program and sort by codes.                                                  
+                                                                                
+                                                                                
+    Important Caveats                                                           
+                                                                                
+        There are several things you should be aware of, even when              
+    there are not any problems with the underlying data:                        
+                                                                                
+        - Total Revenues have the code "1" and Total Expenditures               
+    have the code "3".                                                          
+                                                                                
+        - Two- and three-digit revenues have codes that start with              
+    the number "1" or "2"; two- and three-digit expenditures have               
+    codes that start with the number "3" or "4".  So adding up all of           
+    the two digit codes from 1000 to 1999 will not give you total               
+    revenues.                                                                   
+                                                                                
+1    Page 8                                            ICPSR 9728               
+                                                                                
+        - There is a difference between 1000 numbers and 2000                   
+    numbers.  They correspond to the early 20th century categories of           
+    "tax" and "non-tax" revenues.  There is no comparable meaning to            
+    the 3000 and 4000 numbers.                                                  
+                                                                                
+        - Most of the two-digit codes are straightforward.  That is,            
+    all of the three digit codes they encompass refer to related                
+    aspects of fiscal activity.  On the other hand, some two-digit              
+    codes encompass three-digit codes that have nothing to do with              
+    each other.  This is particularly true for the "miscellaneous"              
+    and "not elsewhere classified" categories 2900 and 3900.  If you            
+    use the two-digit codes, it is wise to examine the underlying               
+    three-digit codes.                                                          
+                                                                                
+        - Because this a preliminary data set there may be some                 
+    problems using three-digit codes.  You may find a three-digit               
+    code in the data that is not listed in Table 3 or 4.  We can go             
+    back to the original files and find out what the code is for you.           
+    Careful comparison of all the codes across states is the next               
+    stage in the project.                                                       
+                                                                                
+                                                                                
+        There is another set of substantive caveats that the wary               
+    user must keep in mind.                                                     
+                                                                                
+        - This is preliminary data.  The data has been carefully                
+    checked for errors in transcription and coding, undoubtedly some            
+    remain, but they are not systematic.  There are, however,                   
+    systematic errors in coding that occur when a research assistant            
+    uses the wrong code unwittingly; when one of the PI's makes a               
+    mistake in telling an RA how something should be coded; or when             
+    we misunderstand (or simply don't understand) what an line entry            
+    is in a particular state report.  We still hundreds of coding               
+    decisions to be made before the final version of the data is                
+    ready to release.  For the moment you have the best we could do             
+    in the first pass through the data.  We do not guarantee that the           
+    coding will not change.                                                     
+                                                                                
+                                                                                
+        -  There are many wild codes.  At this point in time, we                
+    have not gone back to fix problems that we could not solve on the           
+    first pass through the data.  You will find codes like 9999 or              
+    9990.  Those codes are for entries which we have yet to figure              
+    out.  You will also find codes number 6000, which correspond to             
+    transfers between funds.  These codes may (or may not) be taken             
+    out of the final data set.                                                  
+                                                                                
+        Occasionally RA's used their own shorthand codes for things.            
+    Unfortunately some of these codes did not contain four digits               
+    (e.g. some people used the code 1 or 100 to represent general               
+    fund revenues).  Because of the Paradox routines used to generate           
+    the aggregated files, these codes sometimes get rounded to "0".             
+    In other cases a 2-digit code will only have one digit (e.g.                
+    divide the code 100 by 100 and take the integer portion and you             
+    get a code "1") or a three digit code will have only two digits.            
+1    ICPSR 9728                                        Page 9                   
+                                                                                
+    The sub-files keep the true one-, two-, and three- digit totals             
+    separate.  You could, however, accidentally combine some of the             
+    two- and three- digit totals by entering all of the data and then           
+    sorting by code.  So be careful.                                            
+                                                                                
+        - There is no adjustment for fiscal years.  This has two                
+    dimensions to it.  First, states periodically changed the end               
+    dates on their fiscal years.  This produced some nine month                 
+    fiscal years and some 15 month fiscal years.  When possible we              
+    adjusted for this in the original coding (when it was possible to           
+    break out quarterly expenditures and revenues, for example).  In            
+    other cases we simply have to take what is given to us.  In time,           
+    we will make adjustments to the data (probably some type of                 
+    weighted linear interpolation), but these data do not include any           
+    such adjustments.                                                           
+                                                                                
+        Second, you will not be able to tell whether a state is on a            
+    two-year fiscal cycle, in which case this data set will only                
+    report a number for every other year; or whether a state is on an           
+    annual fiscal cycle and we just happened to miss a year or, as              
+    fate would have it, every other year for a decade or so.  It may            
+    sound unlikely, but there are over 4,000 years of data in this              
+    sample and lots of unlikely things are possible.  Again, this               
+    will be fixed in the final data set, but not in this one.                   
+                                                                                
+        - These numbers are "self-reported."  Total revenues in                 
+    Vermont is not likely to be exactly the same thing as total                 
+    revenues in Tennessee.  Some states include the proceeds from all           
+    loans as revenues, others only short term loans, others none at             
+    all.  (A classic case occurred in the 1830s when Maryland was in            
+    deep financial trouble.  It received the federal government                 
+    surplus payment, which it recorded as a revenue; deposited the              
+    money in the bank, which it did not record as an expenditure,;              
+    then the next year withdrew the money and recorded it as a                  
+    revenue).   The same thing is true for various classes of                   
+    expenditures.                                                               
+                                                                                
+        The current data set makes no allowance for such differences            
+    between states.  We have not imposed any common conceptual basis            
+    on the state accounts.  Again, that is something that will come             
+    in the future.                                                              
+                                                                                
+        This is a problem that you can deal with by paying close                
+    attention to some of the three-digit categories like loan                   
+    revenues, loan repayments, purchase of stock, etc.                          
+                                                                                
+        - The accounts of some of the states are horribly                       
+    convoluted.  For example, Washington broke up its accounts into             
+    over thirty individual funds, all of which had financial                    
+    transactions with the "general" fund.  There is ample opportunity           
+    for double counting when dealing with these states.  We have done           
+    our level best to take care of the problem.  But a brief look at            
+    some of the states that were coded early in the project indicates           
+    that we still have some work left before all of the double                  
+    counting problems are taken care of.                                        
+1    Page 10                                           ICPSR 9728               
+                                                                                
+        - In some cases it was impossible for us to find a                      
+    continuous series of one source document, so we had to make do              
+    with two.  For example, we might have Treasurer's Reports for               
+    most years, but be forced to fill in with Auditor's Reports for             
+    missing years.  Or Treasurer's Reports may have given sufficient            
+    details for a period of time, but then changed their format so              
+    that Comptroller's reports became more useful sources.  The                 
+    various reports typically report close to the same totals, but              
+    the breakdowns in activity often vary widely.  Changes in two-              
+    and three- digit levels of activity, therefore, may be due to               
+    changes in the source.  You can check for this by looking at long           
+    stretches of data: short-run blips may be the result of changing            
+    sources.  Again, a problem we will address in the final data set.           
+                                                                                
+        - Finally, there are several states, where revenues and                 
+    expenditures come from different reports and, further, the totals           
+    in the two reports do not agree.  Even worse, we have some states           
+    where internal accounts do not agree, although for an                       
+    understandable reason.  Florida is a state where we had to rely             
+    on one report for expenditures and another report for revenues              
+    and the totals are sometimes significantly different.                       
+                                                                                
+        Other states, Iowa and Washington are the two most egregious            
+    offenders, kept revenues and expenditures on different bases.               
+    Expenditures were often accounted for by "warrants issued" where            
+    the warrants were a kind of check (even this varied, some states            
+    issued interest bearing warrants that, apparently, circulated as            
+    money despite the constitutional prohibition against state                  
+    monetary issue), while receipts were counted on a cash basis.               
+    Most states that did this "balanced" there account every year, in           
+    which case outstanding warrants were simply short term debt.                
+    Some states didn't "balance" their books, at least not in the               
+    published reports.  The final version of the data will do that              
+    balancing, the current version of the data does not.                        
+                                                                                
+                                                                                
+        We hope that you will find the data set useful and would                
+    appreciate you keeping us informed of the uses to which the data            
+    is put.  Remember for now: CAVEAT EMPTOR.  We will speed clean              
+    versions of the data to ICPSR as becomes available and, we hope,            
+    will have a book explaining everything going on with the data by            
+    sometime in 1994.                                                           
+                                                                                
+        Any comments or suggestions will be greatly appreciated.                
+                                                                                
+    Richard Sylla      John Legler        John Wallis                           
+                                                                                
+                                                                                
+                                                                                
+1    ICPSR 9728                                        Page 11                  
+                                                                                
+                              TABLE 1                                           
+                         REVENUE CATEGORIES                                     
+                         2-DIGIT CATEGORIES                                     
+                                                                                
+                                                                                
+    0001        TOTAL REVENUE                                                   
+                                                                                
+    0002        GENERAL REVENUE                                                 
+                                                                                
+        1000       TAXES                                                        
+        1100          PROPERTY                                                  
+        1200          SPECIAL                                                   
+        1300            INCOME                                                  
+        1400            OTHER BUSINESS TAXES                                    
+        1500            SALES                                                   
+        1600            OTHER SPECIAL TAXES                                     
+        1700          POLL                                                      
+        1800          LICENSES AND PERMITS                                      
+        1900          OTHER TAXES                                               
+                                                                                
+        2000       NON-TAX REVENUES                                             
+                                                                                
+        2100          SPECIAL ASSESSMENTS                                       
+        2200          FINES,FORFEITS,& ESCHEATS                                 
+        2300          SUBVENTIONS AND GRANTS                                    
+        2350             INTERGOVERNMENTAL GRANTS                               
+        2400          DONATIONS, PRIVILEGES, & PENSION ASSESSMENTS              
+        2500          HIGHWAY PRIVILEGES, RENTS, & INTEREST                     
+        2600          EARNINGS OF GENERAL DEPTS.                                
+                                                                                
+        2700       EARNINGS OF PUBLIC SERVICE ENTERPRISES                       
+                                                                                
+        2800       INSURANCE TRUST REVENUE                                      
+                                                                                
+                                                                                
+        2900       CHARGES AND MISCELLANEOUS                                    
+                                                                                
+                                                                                
+1    Page 12                                           ICPSR 9728               
+                                                                                
+                              TABLE 2                                           
+                       EXPENDITURE CATEGORIES                                   
+                         2-DIGIT CATEGORIES                                     
+                                                                                
+                                                                                
+    0003        TOTAL EXPENDITURE                                               
+                                                                                
+    0004        GENERAL EXPENDITURE                                             
+                                                                                
+        3100       EDUCATION                                                    
+                                                                                
+        3200       SOCIAL SERVICE AND WELFARE                                   
+                                                                                
+        3300       TRANSPORTATION                                               
+                                                                                
+        3400       PUBLIC SAFETY                                                
+                                                                                
+        3500       ENVIRONMENTAL AND HOUSING                                    
+                                                                                
+        3600       GOVERNMENT ADMINISTRATION                                    
+                                                                                
+        3700       PUBLIC SERVICE ENTERPRISE EXPENDITURES                       
+                                                                                
+        3800       INSURANCE TRUST EXPENDITURES                                 
+                                                                                
+        3900       NOT ELSEWHERE CLASSIFIED                                     
+                                                                                
+        4000       INTEREST ON GENERAL DEBT                                     
+                                                                                
+                                                                                
+1    ICPSR 9728                                     Page 13                     
+                                                                                
+                              TABLE 3                                           
+                         REVENUE CATEGORIES                                     
+                         3-DIGIT CATEGORIES                                     
+                                                                                
+                                                                                
+    0001        TOTAL REVENUE                                                   
+                                                                                
+    0002        GENERAL REVENUE                                                 
+                                                                                
+        1000     TAXES                                                          
+                                                                                
+        1200      SPECIAL                                                       
+        1210        PROPERTY                                                    
+        1220        INHERITANCE                                                 
+        1230        CAPITATION                                                  
+                                                                                
+        1300      INCOME                                                        
+        1310        PERSONAL                                                    
+        1320        BUSINESS                                                    
+                                                                                
+        1400      OTHER BUSINESS TAXES                                          
+        1410        RAILROADS                                                   
+        1420        BANKS                                                       
+        1430        INSURANCE COSTS OR PREMIUMS                                 
+        1440        CANALS                                                      
+        1450        OTHER TRANSPORTATION                                        
+        1460        OTHER BUSINESS                                              
+        1470        TRANSIT DUTIES                                              
+        1480        DIVIDENDS                                                   
+                                                                                
+        1500      SALES                                                         
+                                                                                
+        1600      OTHER SPECIAL TAXES                                           
+        1610        TAX ON LOANS                                                
+        1620        TAX ON MONEY AT INTEREST                                    
+        1630        MILITIA                                                     
+                                                                                
+        1700      POLL                                                          
+                                                                                
+        1800      LICENSES AND PERMITS                                          
+        1810        LICENSE TAXES                                               
+                                                                                
+        1900      OTHER TAXES                                                   
+        1901          GENERAL TAXES                                             
+        1910        ARREARS ON TAXES                                            
+        1920        TAXES ON SPECIFIC SERVICES                                  
+        1930        OTHER TAXES                                                 
+                                                                                
+        2000    NON-TAX REVENUES                                                
+                                                                                
+        2100      SPECIAL ASSESSMENTS                                           
+                                                                                
+        2200      FINES, FORFEITS, & FEES                                       
+        2210        COURT CLERKS                                                
+        2220        FINES                                                       
+1    Page 14                                           ICPSR 9728               
+                                                                                
+        2230        FEES                                                        
+        2240        PROSECUTION                                                 
+        2250        PENALTIES                                                   
+        2270        FORFEITURES                                                 
+                                                                                
+        2300      SUBVENTIONS AND GRANTS                                        
+        2350        INTERGOVERNMENTAL GRANTS                                    
+        2360        INTERGOVERNMENTAL TRANSFERS                                 
+                                                                                
+        2400      DONATIONS, PRIVILEGES, & PENSION ASSESSMENTS                  
+        2410        BEQUESTS                                                    
+        2420        PENSIONS                                                    
+                                                                                
+        2500      TRANSPORTATION PRIVILEGES, RENTS, & INTEREST                  
+        2510        ROADS                                                       
+        2520        FUNDS                                                       
+        2530        WATERWAYS                                                   
+        2590        OTHER TRANSPORTATION                                        
+                                                                                
+        2600      EARNINGS OF GENERAL DEPTS.                                    
+        2610        EDUCATION                                                   
+        2620        CHARITIES                                                   
+        2630        PUBLIC WORKS                                                
+        2640        PUBLIC PROTECTION                                           
+        2650        NATURAL RESOURCES                                           
+        2660        GOVERNMENT                                                  
+        2680        HEALTH                                                      
+        2690        COMMISSIONERS                                               
+                                                                                
+        2700      EARNINGS OF PUBLIC SERVICE ENTERPRISES                        
+        2710        INTEREST                                                    
+        2720        ASSESSMENTS                                                 
+        2730        RECEIPTS & INCOME                                           
+        2740        PRIVILEGES                                                  
+        2750        LIQUOR STORES                                               
+        2760        ALL OTHER                                                   
+                                                                                
+        2800      INSURANCE TRUST REVENUE                                       
+                                                                                
+        2900      CHARGES AND MISCELLANEOUS                                     
+        2901          MISCELLANEOUS RECEIPTS                                    
+        2902          MISCELLANEOUS CHARGES                                     
+                                                                                
+        2910        INTEREST                                                    
+                                                                                
+        2920        DIVIDENDS                                                   
+                                                                                
+        2930        LOAN REVENUES                                               
+                                                                                
+        2940        LAND SALES & RENTALS                                        
+                                                                                
+        2950        INSPECTION FEES                                             
+                                                                                
+        2960        PRISONS                                                     
+                                                                                
+1    ICPSR 9728                                        Page 15                  
+                                                                                
+        2970        SLAVES                                                      
+                                                                                
+        2980        MISCELLANEOUS FUNDS                                         
+                                                                                
+        2990        BANKS                                                       
+                                                                                
+                                                                                
+                                                                                
+1    Page 16                                           ICPSR 9728               
+                                                                                
+                              TABLE 4                                           
+                       EXPENDITURE CATEGORIES                                   
+                         3-DIGIT CATEGORIES                                     
+                                                                                
+                                                                                
+    0003       TOTAL EXPENDITURE                                                
+                                                                                
+    0004       GENERAL EXPENDITURE                                              
+                                                                                
+        3100    EDUCATION                                                       
+        3110       SCHOOLS                                                      
+        3130       HIGHER                                                       
+        3140       LOWER                                                        
+        3150       ACADEMIC CERTIFICATE FUND                                    
+        3160       LIBRARIES                                                    
+        3170       MUSEUMS                                                      
+                                                                                
+        3200    SOCIAL SERVICE AND WELFARE                                      
+        3210       PUBLIC WELFARE (CHARITIES)                                   
+        3220       HOSPITALS                                                    
+        3230       ASYLUMS                                                      
+        3240       SOCIAL SERVICE ADMINISTRATION                                
+        3250       VETERANS' ADMINISTRATION                                     
+                                                                                
+        3300    TRANSPORTATION                                                  
+        3310       HIGHWAYS                                                     
+        3320       AIR TRANSPORT                                                
+        3330       BRIDGES                                                      
+        3340       WATER & TERMINALS                                            
+        3350       OTHER TRANSPORT                                              
+        3360       PUBLIC WORKS                                                 
+        3370       RAILROADS                                                    
+                                                                                
+        3400    PUBLIC SAFETY                                                   
+        3410       POLICE PROTECTION                                            
+        3420       FIRE PROTECTION                                              
+        3430       CORRECTIONS                                                  
+        3440       PROTECTIVE INSPECTION AND REGULATION                         
+        3450       MILITIA                                                      
+        3460       NATIONAL GUARD                                               
+        3470       NAVAL RESERVE                                                
+                                                                                
+        3500    ENVIRONMENTAL AND HOUSING                                       
+        3510       NATURAL RESOURCES                                            
+        3520       PARKS AND RECREATION                                         
+        3530       HOUSING                                                      
+        3540       SEWERAGE                                                     
+        3550       SANITATION                                                   
+        3560       DEPARTMENT OF HEALTH                                         
+        3570       WEATHER SERVICE                                              
+                                                                                
+        3600    GOVERNMENT ADMINISTRATION                                       
+        3610       LEGISLATIVE                                                  
+        3620       EXECUTIVE DEPARTMENT                                         
+        3630       JUDICIAL                                                     
+1    ICPSR 9728                                        Page 17                  
+                                                                                
+        3640       ELECTIONS                                                    
+        3650       FINANCIAL ADMINISTRATION                                     
+        3660       LEGAL EXPENSES                                               
+        3670       PUBLIC GROUNDS & BUILDINGS                                   
+        3680       DEPARTMENTS                                                  
+        3690       OTHER GOVERNMENT ADMINISTRATION                              
+                                                                                
+        3700    EXPENDITURES PUBLIC SERVICE ENTERPRISES                         
+                                                                                
+        3800    INSURANCE TRUST EXPENDITURES                                    
+                                                                                
+        3900    NOT ELSEWHERE CLASSIFIED                                        
+        3901       GENERAL APPROPRIATIONS                                       
+        3910       CONTINGENT FUND                                              
+        3920       WARRANTS ON ACCOUNT                                          
+        3950       SOCIETIES & ASSOCIATIONS                                     
+        3980       MISCELLANEOUS INCLUDING:                                     
+                                                                                
+        4000    INTEREST                                                        
+                                                                                
+        4100    SINKING FUNDS AND DEBT REPAYMENT, DEPOSITS AND STOCK            
+                PURCHASE                                                        
+        4110       SINKING FUND                                                 
+        4120       LOAN REPAYMENT TO SPECIFIC SOURCES                           
+        4130       LOANS REDEEMED                                               
+        4140       DEPOSITS                                                     
+        4150       PURCHASES OF BONDS                                           
+        4160       PUBLIC DEBT                                                  
+        4170       STOCK PURCHASES                                              
+                                                                                
+                                                                                
+                                                                                
+1    Page 18                                           ICPSR 9728               
+                                                                                
+                              Table 5                                           
+                         Oklahoma Revenues                                      
+                         File "OKREV.ISR"                                       
+                                                                                
+                                                                                
+    "OK",1908,1,1978937.7                                                       
+    "OK",1909,1,7583748.64                                                      
+    "OK",1911,1,8171748.77                                                      
+                                                                                
+    "OK",1908,10,251045.63                                                      
+    "OK",1908,26,1717900.71                                                     
+    "OK",1908,29,9991.36                                                        
+    "OK",1909,10,3502574.43                                                     
+    "OK",1909,26,4071137.45                                                     
+    "OK",1909,29,10036.76                                                       
+    "OK",1911,10,474930.99                                                      
+    "OK",1911,12,4125668.05                                                     
+    "OK",1911,26,3264475.84                                                     
+    "OK",1911,29,306673.89                                                      
+                                                                                
+    "OK",1908,100,251045.63                                                     
+    "OK",1908,261,1038168.96                                                    
+    "OK",1908,262,21283.19                                                      
+    "OK",1908,265,8709.19                                                       
+    "OK",1908,266,649739.37                                                     
+    "OK",1908,291,9991.36                                                       
+    "OK",1909,100,3502574.43                                                    
+    "OK",1909,261,2550548.91                                                    
+    "OK",1909,262,29700.23                                                      
+    "OK",1909,265,75983.2                                                       
+    "OK",1909,266,1413105.11                                                    
+    "OK",1909,269,1800                                                          
+    "OK",1909,291,10036.76                                                      
+    "OK",1911,100,474930.99                                                     
+    "OK",1911,120,4125668.05                                                    
+    "OK",1911,261,1807240.47                                                    
+    "OK",1911,262,3284.5                                                        
+    "OK",1911,264,8816.98                                                       
+    "OK",1911,265,899.77                                                        
+    "OK",1911,266,1444234.12                                                    
+    "OK",1911,291,210977                                                        
+    "OK",1911,298,95696.89                                                      

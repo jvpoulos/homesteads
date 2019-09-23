@@ -1,0 +1,656 @@
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                   SOURCES AND USES OF FUNDS IN STATE AND                       
+                LOCAL GOVERNMENTS, 1790-1915: [UNITED STATES]                   
+                                                                                
+                                (ICPSR 9728)                                    
+                                                                                
+                                                                                
+                                                                                
+                          Codebook for Parts 95-100                             
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                           Principal Investigators                              
+                                                                                
+                              Richard E. Sylla                                  
+                             New York University                                
+                                                                                
+                               John B. Legler                                   
+                            University of Georgia                               
+                                                                                
+                                    and                                         
+                                                                                
+                                 John Wallis                                    
+                           University of Maryland                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                             First ICPSR Release                                
+                                February 1995                                   
+                                                                                
+                                                                                
+                                                                                
+                       Inter-university Consortium for                          
+                        Political and Social Research                           
+                                P.O. Box 1248                                   
+                          Ann Arbor, Michigan 48106                             
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                             BIBLIOGRAPHIC CITATION                             
+                                                                                
+                                                                                
+            Publications  based  on  ICPSR  data  collections  should           
+            acknowledge  those  sources  by  means  of  bibliographic           
+            citations.  To ensure that such source  attributions  are           
+            captured  for  social  science  bibliographic  utilities,           
+            citations must appear in footnotes or  in  the  reference           
+            section  of publications.  The bibliographic citation for           
+            this data collection is:                                            
+                                                                                
+                                                                                
+                  Sylla, Richard E., John B.  Legler,  and  John                
+                 Wallis.  SOURCES AND USES OF FUNDS IN STATE AND                
+                 LOCAL GOVERNMENTS, 1790-1915:  [UNITED  STATES]                
+                 [PARTS  95-100]  [Computer file]. New York, NY:                
+                 Richard E. Sylla, New  York  University/Athens,                
+                 GA:    John    B.    Legler,    University   of                
+                 Georgia/College   Park,   MD:   John    Wallis,                
+                 University  of  Maryland [producers], 1994. Ann                
+                 Arbor, MI: Inter-university for  Political  and                
+                 Social Research [distributor], 1995.                           
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                REQUEST FOR INFORMATION ON USE OF ICPSR RESOURCES               
+                                                                                
+            To provide funding agencies  with  essential  information           
+            about  use  of  archival  resources and to facilitate the           
+            exchange  of  information   about   ICPSR   participants'           
+            research activities, users of ICPSR data are requested to           
+            send to ICPSR bibliographic citations for each  completed           
+            manuscript or thesis abstract. Please indicate in a cover           
+            letter which data were used.                                        
+                                                                                
+                                                                                
+                                                                                
+                                 DATA DISCLAIMER                                
+                                                                                
+            The original  collector  of  the  data,  ICPSR,  and  the           
+            relevant  funding  agency bear no responsibility for uses           
+            of this collection or for interpretations  or  inferences           
+            based upon such uses.                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                         DATA COLLECTION DESCRIPTION                            
+                                                                                
+                                                                                
+     Richard E. Sylla, John B. Legler, and John Wallis                          
+          SOURCES AND USES OF FUNDS  IN  STATE  AND  LOCAL  GOVERNMENTS,        
+     1790-1915: [UNITED STATES] (ICPSR 9728)                                    
+                                                                                
+     SUMMARY: This data collection contains preliminary  financial  data        
+     on  state government revenues and expenditures for 48 states during        
+     the period 1790-1915, plus final data on state government revenues,        
+     expenditures,  and debt for Missouri during 1849-1915, Parts 95 and        
+     96.  Parts 98 and 99, Final  Raw  Data  on  Missouri  Revenues  and        
+     Expenditures, are similar to Parts 95 and 96, with two differences.        
+     First, they contain every line entry that was transcribed from  the        
+     original  source.  Second,  the  files  have a line identifier that        
+     shows the order in which the data came from  the  original  source.        
+     Variables  in  the  data collection include state, year, and dollar        
+     amounts of revenues and expenditures at four levels of aggregation:        
+     (1)  total  expenditures  and  revenues,  (2) major categories that        
+     match  the  major  20th-century  categories  of  expenditures   and        
+     revenues,  (3) minor categories that correspond to special features        
+     of 19th- and/or 20th-century  governments,  and  (4)  idiosyncratic        
+     categories that differ from state to state. Part 100 contains codes        
+     for categories of expenditures, revenues, and debt for Parts 95-97.        
+                                                                                
+     UNIVERSE:  Financial  records  of   Alabama,   Arizona,   Arkansas,        
+     California,  Colorado,  Connecticut,  Delaware,  Florida,  Georgia,        
+     Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana, Maine,        
+     Maryland,    Massachusetts,   Michigan,   Minnesota,   Mississippi,        
+     Missouri, Montana, Nebraska, Nevada, New Hampshire, New Jersey, New        
+     Mexico,  New  York,  North  Carolina, North Dakota, Ohio, Oklahoma,        
+     Oregon, Pennsylvania, Rhode Island, South Carolina,  South  Dakota,        
+     Tennessee,   Texas,   Utah,  Vermont,  Virginia,  Washington,  West        
+     Virginia, Wisconsin, and Wyoming.                                          
+                                                                                
+     NOTE:  (1)  The  files  use  commas  and  quote  marks  to  delimit        
+     variables.   (2)  See  also  STATE  AND  LOCAL  GOVERNMENT  [UNITED        
+     STATES]: SOURCES AND USES OF FUNDS,  CENSUS  STATISTICS,  TWENTIETH        
+     CENTURY  [THROUGH  1982]  (ICPSR  6304), STATE AND LOCAL GOVERNMENT        
+     [UNITED STATES]: SOURCES AND USES OF FUNDS, CITY AND  COUNTY  DATA,        
+     NINETEENTH  CENTURY  (ICPSR  6305),  and STATE AND LOCAL GOVERNMENT        
+     [UNITED  STATES]:  SOURCES  AND  USES  OF  FUNDS,  STATE  FINANCIAL        
+     STATISTICS, 1933-1937 (ICPSR 6306).                                        
+                                                                                
+     EXTENT  OF  COLLECTION:   100   data   files   +   machine-readable        
+     documentation (text)                                                       
+                                                                                
+     DATA FORMAT: Logical Record Length                                         
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+     Part 1: AKREV.ISR: Preliminary Alaska Revenues Data                        
+     Part 2: AKEXP.ISR: Preliminary Alaska Expenditures Data                    
+     Part 3: ALREV.ISR: Preliminary Alabama Revenues Data                       
+     Part 4: ALEXP.ISR: Preliminary Alabama Expenditures Data                   
+     Part 5: COREV.ISR: Preliminary Colorado Revenues Data                      
+     Part 6: DEREV.ISR: Preliminary Delaware Revenues Data                      
+     Part 7: DEEXP.ISR: Preliminary Delaware Expenditures Data                  
+     Part 8: ILREV.ISR: Preliminary Illinois Revenues Data                      
+     Part 9: ILEXP.ISR: Preliminary Illinois Expenditures Data                  
+     Part 10: INREV.ISR: Preliminary Indiana Revenues Data                      
+     Part 11: INEXP.ISR: Preliminary Indiana Expenditures Data                  
+     Part 12: KSREV.ISR: Preliminary Kansas Revenues Data                       
+     Part 13: KSEXP.ISR: Preliminary Kansas Expenditures Data                   
+     Part 14: MAREV.ISR: Preliminary Massachusetts Revenues Data                
+     Part 15: MAEXP.ISR: Preliminary Massachusetts Expenditures Data            
+     Part 16: MDREV.ISR: Preliminary Maryland Revenues Data                     
+     Part 17: MDEXP.ISR: Preliminary Maryland Expenditures Data                 
+     Part 18: MEREV.ISR: Preliminary Maine Revenues Data                        
+     Part 19: MEEXP.ISR: Preliminary Maine Expenditures Data                    
+     Part 20: MIREV.ISR: Preliminary Michigan Revenues Data                     
+     Part 21: MIEXP.ISR: Preliminary Michigan Expenditures Data                 
+     Part 22: MNREV.ISR: Preliminary Minnesota Revenues Data                    
+     Part 23: MNEXP.ISR: Preliminary Minnesota Expenditures Data                
+     Part 24: MOREV.ISR: Preliminary Missouri Revenues Data                     
+     Part 25: MOEXP.ISR: Preliminary Missouri Expenditures Data                 
+     Part 26: MSREV.ISR: Preliminary Mississippi Revenues Data                  
+     Part 27: MSEXP.ISR: Preliminary Mississippi Expenditures Data              
+     Part 28: MTREV.ISR: Preliminary Montana Revenues Data                      
+     Part 29: NCREV.ISR: Preliminary North Carolina Revenues Data               
+     Part 30: NCEXP.ISR: Preliminary North Carolina Expenditures Data           
+     Part 31: NDREV.ISR: Preliminary North Dakota Revenues Data                 
+     Part 32: NDEXP.ISR: Preliminary North Dakota Expenditures Data             
+     Part 33: NEREV.ISR: Preliminary Nebraska Revenues Data                     
+     Part 34: NEEXP.ISR: Preliminary Nebraska Expenditures Data                 
+     Part 35: NHREV.ISR: Preliminary New Hampshire Revenues Data                
+     Part 36: NHEXP.ISR: Preliminary New Hampshire Expenditures Data            
+     Part 37: NJREV.ISR: Preliminary New Jersey Revenues Data                   
+     Part 38: NJEXP.ISR: Preliminary New Jersey Expenditures Data               
+     Part 39: NVREV.ISR: Preliminary Nevada Revenues Data                       
+     Part 40: NVEXP.ISR: Preliminary Nevada Expenditures Data                   
+     Part 41: OHREV.ISR: Preliminary Ohio Revenues Data                         
+     Part 42: OHEXP.ISR: Preliminary Ohio Expenditures Data                     
+     Part 43: OKREV.ISR: Preliminary Oklahoma Revenues Data                     
+     Part 44: OKEXP.ISR: Preliminary Oklahoma Expenditures Data                 
+     Part 45: PAREV.ISR: Preliminary Pennsylvania Revenues Data                 
+     Part 46: PAEXP.ISR: Preliminary Pennsylvania Expenditures Data             
+     Part 47: RIREV.ISR: Preliminary Rhode Island Revenues Data                 
+     Part 48: RIEXP.ISR: Preliminary Rhode Island Expenditures Data             
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+     Part 49: SCREV.ISR: Preliminary South Carolina Revenues Data               
+     Part 50: SCEXP.ISR: Preliminary South Carolina Expenditures Data           
+     Part 51: SDREV.ISR: Preliminary South Dakota Revenues Data                 
+     Part 52: SDEXP.ISR: Preliminary South Dakota Expenditures Data             
+     Part 53: TNREV.ISR: Preliminary Tennessee Revenues Data                    
+     Part 54: TNEXP.ISR: Preliminary Tennessee Expenditures Data                
+     Part 55: UTREV.ISR: Preliminary Utah Revenues Data                         
+     Part 56: UTEXP.ISR: Preliminary Utah Expenditures Data                     
+     Part 57: VAREV.ISR: Preliminary Virginia Revenues Data                     
+     Part 58: VAEXP.ISR: Preliminary Virginia Expenditures Data                 
+     Part 59: VTREV.ISR: Preliminary Vermont Revenues Data                      
+     Part 60: VTEXP.ISR: Preliminary Vermont Expenditures Data                  
+     Part 61: WAREV.ISR: Preliminary Washington Revenues Data                   
+     Part 62: WAEXP.ISR: Preliminary Washington Expenditures Data               
+     Part 63: WYREV.ISR: Preliminary Wyoming Revenues Data                      
+     Part 64: WYEXP.ISR: Preliminary Wyoming Expenditures Data                  
+     Part 65: AZEXP.ISR: Preliminary Arizona Expenditures Data                  
+     Part 66: AZREV.ISR: Preliminary Arizona Revenues Data                      
+     Part 67: CAEXP.ISR: Preliminary California Expenditures Data               
+     Part 68: CAREV.ISR: Preliminary California Revenues Data                   
+     Part 69: CTEXP.ISR: Preliminary Connecticut Expenditures Data              
+     Part 70: CTREV.ISR: Preliminary Connecticut Revenues Data                  
+     Part 71: FLEXP.ISR: Preliminary Florida Expenditures Data                  
+     Part 72: FLREV.ISR: Preliminary Florida Revenues Data                      
+     Part 73: GAEXP.ISR: Preliminary Georgia Expenditures Data                  
+     Part 74: GAREV.ISR: Preliminary Georgia Revenues Data                      
+     Part 75: IDEXP.ISR: Preliminary Idaho Expenditures Data                    
+     Part 76: IDREV.ISR: Preliminary Idaho Revenues Data                        
+     Part 77: IOEXP.ISR: Preliminary Iowa Expenditures Data                     
+     Part 78: IOREV.ISR: Preliminary Iowa Revenues Data                         
+     Part 79: KYEXP.ISR: Preliminary Kentucky Expenditures Data                 
+     Part 80: KYREV.ISR: Preliminary Kentucky Revenues Data                     
+     Part 81: LAEXP.ISR: Preliminary Louisiana Expenditures Data                
+     Part 82: LAREV.ISR: Preliminary Louisiana Revenues Data                    
+     Part 83: NMEXP.ISR: Preliminary New Mexico Expenditures Data               
+     Part 84: NMREV.ISR: Preliminary New Mexico Revenues Data                   
+     Part 85: NYEXP.ISR: Preliminary New York Expenditures Data                 
+     Part 86: NYREV.ISR: Preliminary New York Revenues Data                     
+     Part 87: OREXP.ISR: Preliminary Oregon Expenditures Data                   
+     Part 88: ORREV.ISR: Preliminary Oregon Revenues Data                       
+     Part 89: TXEXP.ISR: Preliminary Texas Expenditures Data                    
+     Part 90: TXREV.ISR: Preliminary Texas Revenues Data                        
+     Part 91: WIEXP.ISR: Preliminary Wisconsin Expenditures Data                
+     Part 92: WIREV.ISR: Preliminary Wisconsin Revenues Data                    
+     Part 93: WVEXP.ISR: Preliminary West Virginia Expenditures Data            
+     Part 94: WVREV.ISR: Preliminary West Virginia Revenues Data                
+     Part 95: MOEXP.ISR: Final Missouri Expenditures Data                       
+     Part 96: MOREV.ISR: Final Missouri Revenues Data                           
+                                                                                
+                                                                                
+                                                                                
+1                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+     Part 97: MODEBT.ISR: Final Missouri Debt Data                              
+     Part 98: MOISRRRR.ISR: Final Raw Data on Missouri Revenues                 
+     Part 99: MOISRXXX.ISR: Final Raw Data on Missouri Expenditures             
+     Part 100: MOCODE.ISR: Categories of Expenditures, Revenues, and Debt       
+       for Parts 95-97                                                          
+                                                                                
+     File Structure: rectangular                                                
+     Cases: 4 to 5,715 per part                                                 
+     Variables: 2 to 5 per part                                                 
+     Record Length: 18 to 66 per part                                           
+     Records Per Case: 1                                                        
+                                                                                
+     Part 101: Codebook for                  Part 102: Codebook for             
+       Parts 1-64                              Parts 65-94                      
+     Record Length: 80                       Record Length: 80                  
+                                                                                
+     Part 103: Codebook for                                                     
+       Parts 95-100                                                             
+     Record Length: 80                                                          
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+1     ICPSR 9728                                       Page 1                   
+                                                                                
+          State and Local Government: Sources and Uses of Funds                 
+              Missouri                                                          
+                                                                                
+    Sponsoring Agency: National Bureau of Economic Research                     
+                                                                                
+                                                                                
+    Principal Investigators:                                                    
+                                                                                
+    Richard E. Sylla                                                            
+         Leonard N. Stern School of Business                                    
+         New York University                                                    
+         100 Trinity Place                                                      
+         New York, NY 10006-1594                                                
+                                                                                
+    John B. Legler                                                              
+         Department of Economics                                                
+         University of Georgia                                                  
+         Athens, GA                                                             
+                                                                                
+    John Wallis                                                                 
+         Department of Economics                                                
+         University of Maryland                                                 
+         College Park, MD 20742                                                 
+                                                                                
+                                                                                
+    Funded by:                                                                  
+                                                                                
+         National Science Foundation                                            
+              Grants: SES-8419857, SES-8706814, SES-8908272, and                
+                      SBR-9108618                                               
+                                                                                
+                                                                                
+    Data Edition:                                                               
+         March 1994.                                                            
+                                                                                
+         This is final data set for the state of Missouri.                      
+                                                                                
+                                                                                
+                                                                                
+         The data in this study are made available through ICPSR.               
+    They were originally collected by Richard Sylla, John Legler, and           
+    John Wallis.  Neither the original investigators, the National              
+    Bureau of Economic Research, or ICPSR bear any responsibility for           
+    the analysis or interpretations presented here.  Nor are they               
+    responsible for any uses to which this data may be put.                     
+                                                                                
+         Individuals receiving and using this data are strongly urged           
+    to inform the ICPSR and the principle investigators of any errors           
+    or discrepancies discovered during the use of this data.  In                
+    order to provide agencies with essential information about the              
+    use of archival sources and to facilitate the exchange of                   
+    information, each user is expected to send two copies of                    
+    completed manuscripts (or thesis) ICPSR of work based on these              
+    data.                                                                       
+                                                                                
+1    Page 2                                            ICPSR 9728               
+                                                                                
+         This codebook describes the "final" release of data for the            
+    State of Missouri.  This data was collected by Richard Sylla,               
+    John Legler, and John Wallis under NSF Grants SES-8419857, SES-             
+    8706814, SES-8908272, and SBR-9108618.  This data is part of a              
+    larger data set containing information on state and local                   
+    government finances between 1790 and 1980.  The current data set            
+    contains information on Missouri state  finances beginning in               
+    1849 and continuing through 1915.                                           
+                                                                                
+         We put "final" in quotes.  At present we have been unable to           
+    locate any financial records for Missouri before 1849 and we are            
+    still missing a few years in the series.  We are also grappling             
+    with a few problems of classification.  What then does final                
+    mean?                                                                       
+                                                                                
+         We starting collecting data ten years ago.  We hired                   
+    research assistants who went to the Library of Congress and other           
+    libraries and xeroxed state financial documents.  In Missouri the           
+    relevant document is the Report of the Auditor of Public                    
+    Accounts.  We brought the xeroxed documents back to our                     
+    respective universities and the RAs began coding revenues,                  
+    expenditures, and debts and transcribing the coded figures onto             
+    spreadsheets.                                                               
+                                                                                
+         Despite our best intentions, we realized early in the                  
+    process that three PIs working in different parts of the country            
+    supervising over twenty RAs, over a ten year period would not be            
+    able to insure that the coding process was completely homogenous.           
+    So we planned for a third and "final" stage in the data                     
+    collection process.                                                         
+                                                                                
+         John Wallis has gone over the codes and figures for Missouri           
+    carefully.  The data in this release for Missouri represent our             
+    best efforts at accurately coding individual items of                       
+    expenditures, revenues, and debts.  They also represent our best            
+    effort at accounting for the appropriate totals of fiscal                   
+    activity, making sure that items of expenditure or revenue were             
+    not lost in funds reported separately from the Auditor's Report,            
+    for example.                                                                
+                                                                                
+         This data release also includes much more information than             
+    our preliminary releases.  There is an essay, if you will, on               
+    Missouri finances.  It begins with some basic data: sources of              
+    numbers, fiscal years, and missing years.  It continues with a              
+    brief sketch of Missouri finances.  Then we try to point out                
+    places where we remain uncertain about what to do, and how we               
+    resolved problems in interpreting the original sources.  As far             
+    as we were able, we have documented any deviations of our figures           
+    from the original financial reports.                                        
+                                                                                
+         It was our intention from the beginning to provide scholars            
+    with a user friendly data set.  One that was as clean and                   
+    consistent as possible.  This codebook describes the basic design           
+    of the data set.  There are four levels of aggregation, and the             
+    three highest levels are identical across states.  The fourth is            
+1    ICPSR 9728                                        Page 3                   
+                                                                                
+    unique to Missouri.  By consulting various files it is possible             
+    to reconstruct all of the detail we were able to extract from the           
+    Missouri records.  We have left nothing out.                                
+                                                                                
+                                                                                
+    Machine Readable Data:                                                      
+                                                                                
+    Revenues, Expenditures, and Debts:                                          
+                                                                                
+         Every file that we have archived with ICPSR is a machine               
+    readable ASCII file, with comma delimiters and quote identifiers            
+    for alphanumeric variables.                                                 
+                                                                                
+         Our coding scheme resembles the standard industrial                    
+    classification (SIC) codes. Expenditures, revenues, and debt are            
+    given one-digit classifications; major categories are given                 
+    two-digit classifications; minor categories are given three-digit           
+    codes.  To the extent possible, we modeled our major                        
+    classifications on 20th-century Census classifications.  But                
+    states are highly idiosyncratic and the 19th century is different           
+    from the 20th century.  Therefore the four-digit codes are                  
+    different in each state.  The codes, though, are nested.  The               
+    four-digit sum to the three-digit, the three-digit sum to the               
+    two-digit, and the two-digit sum to the one-digit.                          
+                                                                                
+         We began the collection process by assigning a four-digit              
+    code to every line entry on revenues and expenditures in the                
+    source document (these are discussed below). The raw financial              
+    data and the codes were then entered into a spreadsheet.  The               
+    data was then transferred to a database program, sorted, and                
+    aggregated by code.                                                         
+                                                                                
+                                                                                
+         What you have available is a series of files.  The three               
+    most important data files are titled:                                       
+                                                                                
+            MOREV.ISR  -  Missouri Revenues                                     
+            MOEXP.ISR  -  Missouri Expenditures                                 
+            MODEBT.ISR -  Missouri Debt                                         
+                                                                                
+         These tables have a common structure:                                  
+                                                                                
+    =========================================                                   
+         STATE    YEAR    ISO    TOTAL                                          
+    =========================================                                   
+                                                                                
+    Where:                                                                      
+                                                                                
+            STATE = State                                                       
+                                                                                
+            YEAR  = Fiscal Year, or, in the case of states that                 
+                    maintained biennial or other) records, the calendar         
+                    year in which the current fiscal period ended.              
+                                                                                
+            ISO   = the appropriate code.                                       
+1    Page 4                                            ICPSR 9728               
+                                                                                
+            TOTAL = the dollar amount of the revenue, expenditure, or           
+                    debt.                                                       
+                                                                                
+         Each file has four panels.  In the first panel there is one            
+    observation for each year.  In the revenue file, MOREV.ISR,                 
+    ISO = 1; in the expenditure file, MOEXP.ISR ISO = 3.  In the                
+    second panel of the file all the ISO codes have two-digits, in              
+    the third panel all the ISO codes have three-digits, and in the             
+    fourth panel all the ISO codes have four-digits.  Each subsequent           
+    panel has more observations, as the detail becomes greater.                 
+                                                                                
+         You must remember to separate the four panels before you use           
+    the data.  The sum of the four-digit codes is total expenditures            
+    (revenues), the sum of three-digit codes is total expenditures              
+    (revenues), the sum of two-digit codes is total expenditures                
+    (revenues), and the one-digit codes are total expenditures                  
+    (revenues).  If you don't separate the panels your will find that           
+    expenditures and revenues are four times what they should be.               
+                                                                                
+         The data set is organized as a database, not as a                      
+    rectangular data set.  Every expenditure, revenue, and debt is              
+    one observation.  Each observation is identified by state, year,            
+    and code.                                                                   
+                                                                                
+         Not every code appears in every year.  If a code does not              
+    appear in a given year it either means that the actual value for            
+    that code is zero or that it has been aggregated into another               
+    category.  It is important to remember that codes appear and                
+    disappear for these two reasons.  As the level of aggregation is            
+    increased, these problems become less important.                            
+                                                                                
+                                                                                
+    Code Files:                                                                 
+                                                                                
+         The second type of information is contained in one file:               
+                                                                                
+            MOCODES.ISR  - Missouri ISO codes                                   
+                                                                                
+         This file is organized as a database and has the following             
+    structure:                                                                  
+                                                                                
+    =========================================                                   
+         ISO    TITLE                                                           
+    =========================================                                   
+                                                                                
+         Every ISO code for Missouri is listed in the table, along              
+    with the title of that code.  We have done our best to keep the             
+    titles in this file as close to the original title given in the             
+    Auditor's Report as possible.  Many four digit codes, however,              
+    contain more than one title from the Auditor's Report.                      
+    Miscellaneous categories, for example, will not include all of              
+    the titles from the original source.                                        
+                                                                                
+         The MOCODE.ISR file can be used in conjunction with the                
+    MOREV.ISR, MOEXP.ISR, and MODEBT.ISR to identify individual                 
+1    ICPSR 9728                                        Page 5                   
+                                                                                
+    entries.                                                                    
+                                                                                
+         You should pay careful attention to the structure of the               
+    two-, three-, and four-digit codes.  Most of the two-digit codes            
+    encompass three- and four-digit codes that are related.  But the            
+    miscellaneous categories, particularly 1900, 2900, and 3900 are             
+    widely divergent.  There is little or no relation between the               
+    2910 codes and the 2920 codes, even though they share the same              
+    two digit-classification.  Be careful]                                      
+                                                                                
+                                                                                
+    Raw Data:                                                                   
+                                                                                
+         A third set of data is presented in two files:                         
+                                                                                
+            MOISRRRR.ISR  -  Raw Data on Missouri Revenues                      
+            MOISRXXX.ISR  -  Raw Data on Missouri Expenditures                  
+                                                                                
+         These files are very similar to the aggregated expenditure             
+    and revenue files with two differences.  First, they contain                
+    every line entry that we transcribed from the original source.              
+    Second, the have a line identifier that shows the order in which            
+    the data came from the original source.  So the file's structure            
+    is:                                                                         
+                                                                                
+    ====================================================                        
+         LINE    STATE    YEAR    ISO    TOTAL                                  
+    ====================================================                        
+                                                                                
+         Where line goes from 1 to n, and orders the observations by            
+    year and by appearance in the original source.[1]   This file is            
+    particularly important if you have access to the original                   
+    sources, but want to code your data differently from our coding             
+    scheme.  By searching and replacing, you can construct whatever             
+    scheme you like.                                                            
+                                                                                
+                                                                                
+    Notes:                                                                      
+                                                                                
+         The last file is MONOTES.ISR.  This is a more complicated              
+    text file.                                                                  
+                                                                                
+         The first two pages give some basic information about the              
+    Missouri data.  First it gives the original source.  Next, the              
+    chronological nature of the data:are the reports annual or                  
+    biennial, the fiscal years, and the missing years.  Then it gives           
+    report types.  Missouri was a "pure fund state."  That means that           
+    reconstructing Missouri accounts is very messy.  The state had a            
+    general fund a several independent fund.  The Auditor always                
+    reported on the general fund, but independent fund transactions             
+    were more difficult to trace. (the fund types will be discussed             
+    in more detail as final reports for states are made available).             
+    Finally the notes list years where "fixes" were necessary.  In              
+    these years it was necessary to interpolate, allocate, or                   
+    estimate some of the numbers.  The details of the fixes are given           
+1    Page 6                                            ICPSR 9728               
+                                                                                
+    in the sections that follow.                                                
+                                                                                
+         The next section is overall comments.  It is the barest                
+    outline of a financial history of the state.  The in\\purpose is            
+    to make you aware of major features of the state accounts.                  
+                                                                                
+         The next three sections are "revenue notes," "expenditure              
+    notes," and debt notes.  These notes were made as the data was              
+    collected and checked.  They are a bit haphazard, but they point            
+    to areas where questions about the data remain.  They also                  
+    document some of the decisions that we made.  The notes are                 
+    intended to be used with the source documents, they will not make           
+    much sense without the documents.                                           
+                                                                                
+                                                                                
+         We hope that you will find the data set useful and would               
+    appreciate you keeping us informed of the uses to which the data            
+    is put.  We have done our best to make sure that the data is                
+    consistently coded and organized.  We are willing to use the data           
+    in this form without too many reservations. Any comments or                 
+    suggestions will be greatly appreciated.                                    
+                                                                                
+    Richard Sylla        John Legler        John Wallis                         
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+    ------------------------                                                    
+         [1] It is embarrassing to do Missouri first.  We wanted people         
+    to be able to compare our files with the source documents easily,           
+    to see what we had coded.  In the process of coding the Missouri            
+    data, however, the research assistant sorted all of the original            
+    data by year and code.  This, unfortunately, makes it more                  
+    difficult to compare the raw data files with the original                   
+    sources, but it can be done.                                                

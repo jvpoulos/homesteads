@@ -1,0 +1,77 @@
+Revenue,,Expenditure,
+Code,Category,Code,Category
+100,Taxes,310,Education
+120,Special,311,Schools
+121,Property,313,Higher
+122,Inheritance,314,Lower
+123,Capitation,315,Academic Certificate Fund
+130,Income,316,Libraries
+131,Personal,317,Museums
+132,Business,320,Social Service And Welfare
+140,Other Business Taxes,321,Public Welfare (Charities)
+141,Railroads,322,Hospitals
+142,Banks,323,Asylums
+143,Insurance Costs Or Premiums,324,Social Service Administration
+144,Canals,325,Veterans' Administration
+145,Other Transportation,330,Transportation
+146,Other Business,331,Highways
+147,Transit Duties,332,Air Transport
+148,Dividends,333,Bridges
+150,Sales,334,Water & Terminals
+160,Other Special Taxes,335,Other Transport
+161,Tax On Loans,336,Public Works
+162,Tax On Money At Interest,337,Railroads
+163,Militia,340,Public Safety
+170,Poll,341,Police Protection
+180,Licenses And Permits,342,Fire Protection
+181,License Taxes,343,Corrections
+190,Other Taxes,344,Protective Inspection And Regulation
+191,Arrears On Taxes,345,Militia
+192,Taxes On Specific Services,346,National Guard
+193,Other Taxes,347,Naval Reserve
+200,Non-Tax Revenues,350,Environmental And Housing
+210,Special Assessments,351,Natural Resources
+220,"Fines,Forfeits,& Fees",352,Parks And Recreation
+221,Court Clerks,353,Housing
+222,Fines,354,Sewerage
+223,Fees,355,Sanitation
+224,Prosecution,356,Department Of Health
+225,Penalties,357,Weather Service
+227,Forfeitures,360,Government Administration
+230,Subventions And Grants,361,Legislative
+235,Intergovernmental Grants,362,Executive Department
+236,Intergovernmental Transfers,363,Judicial
+240,"Donations, Privileges, & Pension Assessments",364,Elections
+241,Bequests,365,Financial Administration
+242,Pensions,366,Legal Expenses
+251,Roads,367,Public Grounds & Buildings
+252,Funds,368,Departments
+253,Waterways,369,Other Government Administration
+259,Other Transportation,370,Expenditures Public Service Enterprises
+260,Earnings Of General Depts.,380,Insurance Trust Expenditures
+261,Education,390,Not Elsewhere Classified
+262,Charities,391,Contingent Fund
+263,Public Works,392,Warrants On Account
+264,Public Protection,395,Societies & Associations
+265,Natural Resources,398,Miscellaneous Including:
+266,Government,400,Interest
+268,Health,410,"Sinking Funds And Debt Repayment, Deposits And Stock Purchase"
+269,Commissioners,411,Sinking Fund
+270,Earnings Of Public Service Enterprises,412,Loan Repayment To Specific Sources
+271,Interest,413,Loans Redeemed
+272,Assessments,414,Deposits
+273,Receipts & Income,415,Purchases Of Bonds
+274,Privileges,416,Public Debt
+275,Liquor Stores,417,Stock Purchases
+276,All Other,,
+280,Insurance Trust Revenue,,
+290,Charges And Miscellaneous,,
+291,Interest,,
+292,Dividends,,
+293,Loan Revenues,,
+294,Land Sales & Rentals,,
+295,Inspection Fees,,
+296,Prisons,,
+297,Slaves,,
+298,Miscellaneous Funds,,
+299,Banks,,

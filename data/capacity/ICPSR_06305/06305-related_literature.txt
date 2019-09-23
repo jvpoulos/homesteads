@@ -1,0 +1,17 @@
+Bibliography
+State and Local Government [United States]: Sources and Uses of Funds, City
+and County Data, Nineteenth Century
+
+This bibliography includes published and unpublished works that are related 
+to ICPSR study 6305. It includes works that are based on primary
+or secondary analysis of the data, or which describe or critique those
+data or the collection methodology. This list represents all items known
+to ICPSR as of 2017-08-04.
+
+If you publish a work or know of other works that are based on these data,
+please send the complete citation and name of the ICPSR study used to:
+icpsr-biblio-notify@umich.edu 
+
+
+1. Kostikov, Igor V., Defaults on U.S. Municipal Debt Markets: In Economic
+Perspective. Moscow: Nauka, 2001.

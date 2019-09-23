@@ -1,0 +1,2187 @@
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                STATE AND LOCAL GOVERNMENT [UNITED STATES]:                     
+                         SOURCES AND USES OF FUNDS,                             
+            CENSUS STATISTICS, TWENTIETH CENTURY [THROUGH 1982]                 
+                                                                                
+                                (ICPSR 6304)                                    
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                           Principal Investigators                              
+                                                                                
+                              Richard E. Sylla                                  
+                             New York University                                
+                                                                                
+                               John B. Legler                                   
+                            University of Georgia                               
+                                                                                
+                                    and                                         
+                                                                                
+                                 John Wallis                                    
+                           University of Maryland                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                             First ICPSR Release                                
+                                February 1995                                   
+                                                                                
+                                                                                
+                                                                                
+                       Inter-university Consortium for                          
+                        Political and Social Research                           
+                                P.O. Box 1248                                   
+                          Ann Arbor, Michigan 48106                             
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+-                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                             BIBLIOGRAPHIC CITATION                             
+                                                                                
+                                                                                
+            Publications  based  on  ICPSR  data  collections  should           
+            acknowledge  those  sources  by  means  of  bibliographic           
+            citations.  To ensure that such source  attributions  are           
+            captured  for  social  science  bibliographic  utilities,           
+            citations must appear in footnotes or  in  the  reference           
+            section  of publications.  The bibliographic citation for           
+            this data collection is:                                            
+                                                                                
+                                                                                
+                 Sylla, Richard E., John  B.  Legler,  and  John                
+                 Wallis.  STATE  AND  LOCAL  GOVERNMENT  [UNITED                
+                 STATES]: SOURCES  AND  USES  OF  FUNDS,  CENSUS                
+                 STATISTICS,  TWENTIETH  CENTURY  [THROUGH 1982]                
+                 [Computer  file].  New  York,  NY:  Richard  E.                
+                 Sylla,  New York University/Athens, GA: John B.                
+                 Legler, University of Georgia/College Park, MD:                
+                 John    Wallis,    University    of    Maryland                
+                 [producers],  1993.  Ann  Arbor,   MI:   Inter-                
+                 university  Consortium for Political and Social                
+                 Research [distributor], 1995.                                  
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                REQUEST FOR INFORMATION ON USE OF ICPSR RESOURCES               
+                                                                                
+            To provide funding agencies  with  essential  information           
+            about  use  of  archival  resources and to facilitate the           
+            exchange  of  information   about   ICPSR   participants'           
+            research activities, users of ICPSR data are requested to           
+            send to ICPSR bibliographic citations for each  completed           
+            manuscript or thesis abstract. Please indicate in a cover           
+            letter which data were used.                                        
+                                                                                
+                                                                                
+                                                                                
+                                 DATA DISCLAIMER                                
+                                                                                
+            The original  collector  of  the  data,  ICPSR,  and  the           
+            relevant  funding  agency bear no responsibility for uses           
+            of this collection or for interpretations  or  inferences           
+            based upon such uses.                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+-                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                         DATA COLLECTION DESCRIPTION                            
+                                                                                
+                                                                                
+     Richard E. Sylla, John B. Legler, and John Wallis                          
+          STATE AND LOCAL GOVERNMENT [UNITED STATES]: SOURCES  AND  USES        
+     OF  FUNDS,  CENSUS  STATISTICS,  TWENTIETH  CENTURY  [THROUGH 1982]        
+     (ICPSR 6304)                                                               
+                                                                                
+     SUMMARY: This data collection contains fiscal data on revenues  and        
+     expenditures  of  state, county, and other local governments (urban        
+     governments of certain sizes,  school  districts,  etc.)  in  1902,        
+     1913,  1932,  1942,  1962,  1972,  and 1982. Variables in this data        
+     collection include state, year, type of government, and the  dollar        
+     amount of the revenue or expenditure at four levels of aggregation:        
+     (1) total expenditures and  revenues,  (2)  major  categories  that        
+     match   the  major  20th-century  categories  of  expenditures  and        
+     revenues, (3) minor categories that correspond to special  features        
+     of 19th- and/or 20th-century governments, and (4) and idiosyncratic        
+     categories that differ from state to state.                                
+                                                                                
+     UNIVERSE:  State,  county,  and  other  local  governments   (urban        
+     governments of certain sizes, school districts, etc.) in the United        
+     States.                                                                    
+                                                                                
+     NOTE: (1) The data files use commas  and  quote  marks  to  delimit        
+     variables.   (2)  See  also  SOURCES AND USES OF FUNDS IN STATE AND        
+     LOCAL GOVERNMENTS, 1790-1915: [UNITED STATES] (ICPSR 9728).                
+                                                                                
+     EXTENT OF COLLECTION: 8 data files + machine-readable documentation        
+     (text)                                                                     
+                                                                                
+     DATA FORMAT: Logical Record Length                                         
+                                                                                
+     Part 1: 1902DATA.ISR: 1902 Data     Part 2: 1913DATA.ISR: 1913 Data        
+     File Structure: rectangular         File Structure: rectangular            
+     Cases: 8,079                        Cases: 5,679                           
+     Variables: 5                        Variables: 5                           
+     Record Length: 50                   Record Length: 50                      
+     Records Per Case: 1                 Records Per Case: 1                    
+                                                                                
+     Part 3: 1932DATA.ISR: 1932 Data     Part 4: 1942DATA.ISR: 1942 Data        
+     File Structure: rectangular         File Structure: rectangular            
+     Cases: 9,758                        Cases: 4,239                           
+     Variables: 5                        Variables: 5                           
+     Record Length: 53                   Record Length: 64                      
+     Records Per Case: 1                 Records Per Case: 1                    
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+     Part 5: 1962DATA.ISR: 1962 Data     Part 6: 1972DATA.ISR: 1972 Data        
+     File Structure: rectangular         File Structure: rectangular            
+     Cases: 8,080                        Cases: 8,079                           
+     Variables: 5                        Variables: 5                           
+     Record Length: 64                   Record Length: 60                      
+     Records Per Case: 1                 Records Per Case: 1                    
+                                                                                
+     Part 7: 1982DATA.ISR: 1982 Data     Part 8: CODES.ISR: Categories of       
+     File Structure: rectangular           Expenditures and Revenues            
+     Cases: 7,695                        File Structure: rectangular            
+     Variables: 5                        Cases: 372                             
+     Record Length: 51                   Variables: 3                           
+     Records Per Case: 1                 Record Length: 63                      
+                                         Records Per Case: 1                    
+                                                                                
+     Part 9: Codebook for                                                       
+       All Parts                                                                
+     Record Length: 80                                                          
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+          State and Local Government: Sources and Uses of Funds                 
+          Twentieth Century Census Statistics                                   
+                                                                                
+    Sponsoring Agency: National Bureau of Economic Research                     
+                                                                                
+                                                                                
+    Principal Investigators:                                                    
+                                                                                
+    Richard E. Sylla                                                            
+         Leonard N. Stern School of Business                                    
+         New York University                                                    
+         100 Trinity Place                                                      
+         New York, NY 10006-1594                                                
+                                                                                
+    John B. Legler                                                              
+         Department of Economics                                                
+         University of Georgia                                                  
+         Athens, GA                                                             
+                                                                                
+    John Wallis                                                                 
+         Department of Economics                                                
+         University of Maryland                                                 
+         College Park, MD 10742                                                 
+                                                                                
+                                                                                
+    Funded by:                                                                  
+                                                                                
+         National Science Foundation                                            
+              Grants: SES-8419857, SES-8706814, and SES-8908272                 
+                                                                                
+                                                                                
+    Data Edition:                                                               
+         December 1993.                                                         
+                                                                                
+                                                                                
+         The data in this study are made available through ICPSR.               
+    They were originally collected by Richard Sylla, John Legler, and           
+    John Wallis.  Neither the original investigators, the National              
+    Bureau of Economic Research, or ICPSR bear any responsibility for           
+    the analysis or interpretations presented here.  Nor are they               
+    responsible for any uses to which this data may be put.                     
+                                                                                
+         Individuals receiving and using this data are strongly urged           
+    to inform the ICPSR and the principle investigators of any errors           
+    or discrepancies discovered during the use of this data.  In                
+    order to provide agencies with essential information about the              
+    use of archival sources and to facilitate the exchange of                   
+    information, each user is expected to send two copies of                    
+    completed manuscripts (or thesis) ICPSR of work based on these              
+    data.                                                                       
+                                                                                
+                                                                                
+         Over the twentieth century the Census Department collected             
+    information on government expenditures, revenues, and debt at               
+    somewhat irregular intervals.  The information collected,                   
+    however, varies significantly from census to census. This data              
+    set fills the need for a state level series on state and local              
+    fiscal activity for the twentieth century.  It is part of our               
+    larger effort to construct state level information for state and            
+    local fiscal activity from 1787 to the present.                             
+                                                                                
+         The first comprehensive attempt to measure all government              
+    activity in the United States was undertaken in 1902 and                    
+    published in the Census volume Wealth, Debt, and Taxation [1].              
+    This was followed by a similar census in 1913, which collected              
+    information from all governments in incorporated places with a              
+    population greater than 2,500 (including all county governments).           
+    In 1922, the Census limited its local government collection to              
+    tax revenues only, excluding all expenditures and non-tax                   
+    revenues.  There were censuses in 1932 and 1942.  These censuses            
+    were virtually complete in coverage (with gaps in 1932 for                  
+    expenditure detail in "towns and cities" in 28 states), but                 
+    reported more limited detail on fiscal categories.  The "Census             
+    of Government" series resumed in 1957, and has continued at five            
+    year intervals up to the present.  We have taken the original               
+    reported census data for the years 1902, 1913, 1932, 1942, 1962,            
+    1972, and 1982.                                                             
+                                                                                
+         In order for you to use this information effectively it is             
+    necessary to understand where the data came from and how we have            
+    categorized it.  We begin with a brief description of how the               
+    data files are organized.  The next section describes our                   
+    classification scheme and relates it to the Census                          
+    classification.  The fourth section discusses the problems in               
+    constructing consistent measures of fiscal activity over the                
+    course of the century.  In that section we talk about what you              
+    need to do to create a comparable series for the entire century,            
+    but we do not include any data in this data set that has been               
+    "fixed" in any way.  This data set is intended to reflect, as               
+    accurately as possible, the original census documents.                      
+                                                                                
+                                                                                
+                                                                                
+    Form of Machine Readable Data                                               
+                                                                                
+         The data is organized in a database format, not in tables.             
+    Each number in the Census is represented by a observation in the            
+    data set.  These are ASCII text files, using comma and quote                
+    delimiters.  Each observation includes the dollar amount of the             
+    expenditure or revenue, and four identifiers: state, year, type,            
+    and ISO (ISO is the Code).                                                  
+                                                                                
+    ==================================================                          
+         STATE     YEAR      TYPE      ISO       VALUE                          
+    ==================================================                          
+    Where:                                                                      
+         STATE = State                                                          
+         YEAR  = Census year                                                    
+                                                                                
+         TYPE  = type of government: state or local; county, urban              
+              government of certain sizes, school districts, etc.               
+                                                                                
+         ISO   = the appropriate code.                                          
+                                                                                
+         VALUE = the dollar amount of the revenue or expenditure.               
+                                                                                
+         There are seven data files, one for each year.  These files            
+    are named ****DATA.ISR, where **** is 1902, 1913, 1932, 1942,               
+    1962, 1972, or 1982.  Each data file has three panels.                      
+                                                                                
+         The first panel is ten to twelve lines.  It gives the source           
+    of the data, the number of observations, and the variable names.            
+                                                                                
+         The second panel, reports total revenues (ISO = 1) and total           
+    expenditures (ISO = 3), for each state and level of government.             
+                                                                                
+         The third panel reports details for each level of government           
+    in each state.  The panels are separated by blank lines.  With a            
+    few exceptions, discussed below, the data in the third panel sum            
+    to the data in the second panel.  Remember to separate the panels           
+    before you use them.  If you add up revenues before separating              
+    the panels, you will get twice the actual revenue total.                    
+                                                                                
+         Please note that the numbers correspond to the numbers                 
+    published in the Census.  For 1902 and 1913, the numbers are                
+    dollar figures.  For 1932 and later, the numbers are in thousands           
+    of dollars.                                                                 
+                                                                                
+         The actual Census data census is the "VALUE" variable.  The            
+    following section describes our coding scheme and how you can               
+    access and organize the data sets.                                          
+                                                                                
+         For reference, the number of observations in each years data           
+    file should be:                                                             
+         1902 = 8,064                                                           
+         1913 = 5,664                                                           
+         1932 = 9,744                                                           
+         1942 = 4,224                                                           
+         1962 = 8,064                                                           
+         1972 = 8,064                                                           
+         1982 = 7,680                                                           
+                                                                                
+                                                                                
+                                                                                
+         There is an eighth data set, named CODES.ISR.  This variable           
+    contains all of the codes used in each of the seven years.  Its             
+    structure is different:                                                     
+                                                                                
+    ===========================================                                 
+    YEAR      ISO       CODE TEXT                                               
+    ===========================================                                 
+                                                                                
+         This file has three variables, "YEAR", "ISO" (the code                 
+    number), and the "CODE TEXT".  As will be explained below, the              
+    code text is the title given to each expenditure or revenue                 
+    category by the census.  So the same code can have slightly                 
+    different code texts associated with it in different years.  By             
+    combining the CODES.ISR as a database with the individual year              
+    files it is simple to identify what each observation in the year            
+    files represents.  Note that not every code appears in every year.          
+                                                                                
+                                                                                
+                                                                                
+    Sources and Classifications                                                 
+                                                                                
+                                                                                
+         References to the Census source documents for revenues and             
+    expenditures are presented in Table 1.                                      
+                                                                                
+         The census continually altered the categories it used to               
+    organize fiscal data.  The categories used in 1902, for example,            
+    are not the same as the categories in 1982.  The census dealt               
+    with these changes by recasting the earlier censuses in terms of            
+    the later census's categories.  Unfortunately, published                    
+    documents present national aggregate totals for state and local             
+    fiscal activity, there are no comparable state level numbers.               
+    The difficulties in constructing a state level series are                   
+    formidable, but not insurmountable.                                         
+                                                                                
+         We are interested, of course, not only in constructing                 
+    consistent fiscal accounts for the twentieth century, but also              
+    for linking the 20th century Census information to our 19th                 
+    century data.  We designed a classification scheme flexible                 
+    enough to classify the actions of states between 1800 and 1982.             
+    We also wanted a design compatible with different ways of                   
+    organizing and presenting the data -- specifically, consistent              
+    with the census classifications used between 1902 and 1982.                 
+                                                                                
+         The solution we adopted resembles the standard industrial              
+    classification (SIC) codes. Expenditures, revenues, and debt are            
+    given one-digit classifications; major categories that match the            
+    major 20th-century categories are given two-digit                           
+    classifications; minor categories that correspond to the special            
+    features of 19th- and/or 20th-century features of government are            
+    given three-digit codes; and idiosyncratic divisions, which                 
+    differ from state to state are given unique four-digit codes in             
+    each state.  This allows us to design a classification (coding)             
+    scheme for each state at the four-digit level that can be                   
+    aggregated into two- and three-digit categories that are                    
+    identical for every state by using a simple sorting program.                
+                                                                                
+         We started with the major divisions of revenues and                    
+    expenditures from the Census of Governments after 1962.  To that            
+    we added the major revenue and expenditure categories from the              
+    census for early part of the century excluded as categories after           
+    1962.  The result is the major categories listed in Tables 2 and            
+    3.  These are the "two-digit" classifications.                              
+                                                                                
+         Finer classifications, taken from actual census categories             
+    and from our own experience with the 19th and 20th century data,            
+    make up a set of three-digit categories.  The three digit                   
+    categories are subsets of the two-digit categories.  In other               
+    words, the sum of all of the three-digit categories associated              
+    with a particular two-digit category, is the total for that two-            
+    digit category.  So the sum of the three digit codes 2510 through           
+    2590, is equal to the total for the two-digit code 2500.                    
+                                                                                
+         For our 19th century data the four-digit codes are unique to           
+    each state.  In this data set all of the data was taken from                
+    Census sources, so every state shares the same codes.  Four-digit           
+    codes represent a level of detail presented in one or more years,           
+    but not in all years.  For example, the 2500 code reports                   
+    "Transportation Rents and Privileges."  In the early years this             
+    was reported as a total, and we have coded it 2500.  In 1962 and            
+    later, the revenues are broken down in finer detail.  The                   
+    category 2520 reports earnings of airports, 2540 reports earnings           
+    of water transportation and terminals, and 2551 parking                     
+    facilities.  Each has its own four-digit code when it appears,              
+    and those four-digit codes are unique.                                      
+                                                                                
+         There is no simple or compact way to describe all of the               
+    codes.  Since every attempt has been made to report numbers that            
+    are actually found in the sources you can reorganize the data               
+    however you wish.  Sections that follow discuss problems of                 
+    comparability over time.  You may want to use in modifying the              
+    original data, but we have made any modifications to the data in            
+    this data set.  There is, however, one important way that our               
+    data differs from the original Census sources.                              
+                                                                                
+         We wanted our revenue numbers for individual functions to              
+    add up to total revenue, and the same for expenditures.  The                
+    Census tables, of course, include lots of sub-totals, and                   
+    including the sub-totals and then summing up all of the revenue             
+    items produces a sum greater than total revenues.  One might                
+    think it you can just record the individual line items from the             
+    census, but it isn't that easy.  Some of the census sub-totals              
+    are totals of more data than is presented in the tables; some               
+    census sub-totals don't total to their constituent elements; and            
+    some of the sub-totals are not supported by any detail at all.              
+    Sometimes, therefore, it was necessary to make calculations of              
+    our own to supplement the published census data.                            
+                                                                                
+         There are a few cases where the census numbers just don't              
+    add up.  If you sum the detailed revenue numbers from the third             
+    panel of each data file and compare it to the total revenue from            
+    the second panel, you will find that the numbers are not equal in           
+    35 instances, all but one of them in 1962 and 1972.  This                   
+    results, primarily, from the fact that the reported Census                  
+    figures for those years were rounded and do not add.  Only four             
+    states have discrepancies larger than 3 or 4 (thousand) dollars:            
+    Texas in 1962 is off by -10,000 thousand; Georgia in 1972 is off            
+    by 122 thousand; Minnesota in 1972 is off by 30 thousand; and               
+    South Carolina in 1972 is off by 10 thousand [2].  The exception is         
+    Missouri in 1902, which is off by exactly 100,000.                          
+                                                                                
+         On the expenditure side, if you sum the detailed expenditure           
+    numbers from the third panel of each data file and compare it to            
+    the total expenditures from the second panel, you will find that            
+    the numbers are not equal in 69 instances, all of them in 1962              
+    and 1972, the years that were rounded and do not add up exactly.            
+    Only four states have discrepancies larger than 3 or 4 (thousand)           
+    dollars: Minnesota in 1962 is off by -1,999 thousand; South                 
+    Dakota in 1962 is off by 3,999 thousand; Georgia in 1972 is off             
+    by 101 thousand; and New Mexico is off by 10 thousand.                      
+                                                                                
+         These are census errors, not ours, and you can treat them              
+    however you want, just don't pull out your hair trying to get the           
+    components to add to the totals.  It is completely arbitrary to             
+    assign the errors to one category or another (you can usually               
+    narrow it down to some category - in Missouri in 1902 the mistake           
+    is in General Government (ISO = 3600)).  One option is to put an            
+    dove factor in Miscellaneous Revenues (ISO = 2900).                         
+                                                                                
+         The result of our coding efforts are found in Table 4.                 
+    Table 4 is a very long table.  Each panel of the table presents a           
+    two-digit revenue and expenditure category, and reports whether             
+    or not a category corresponding to our two-digit category was               
+    reported in each census year.  If there is no code for a year,              
+    there was none published by the census.  The table lists the code           
+    we assigned to the census number, and the title (or the "code               
+    text") given to that number by the census.  The code text                   
+    corresponds to the dock used in the docs census publications.               
+    The file "CODES.ISR" is just Table 4, with the blank years taken            
+    out, put in database format.                                                
+                                                                                
+         By holding this table in one hand and the census in the                
+    other hand, you can figure out where each census category fits in           
+    to our codes.  There are a few exceptions.  If we had to                    
+    calculate a number, we will present a code for it but it will not           
+    appear in the census source.  These variables are identified in             
+    Table 4 as with a "C" in the third column.  In a few instances              
+    you may find detail in the Census that we report at the sub-total           
+    level.  Look closely and you will see that the details aren't               
+    consistent with the totals, and we have chosen to take the totals           
+    (for example, the Education revenues in 1962 and 1972).                     
+                                                                                
+         When the categories are not straightforward, additional                
+    complications are noted in each of the table's panels.  It is               
+    wise to pay close attention to the titles, particularly early in            
+    the century.  For example, Interest revenues (ISO = 2910) appear            
+    by themselves in 1902, 1962, 1972, and 1982.  In 1913 they appear           
+    as "Interest and Rents" which we have still coded as 2910, but in           
+    1932 they show up in "Highway Privileges, Rents, Interest."  We             
+    have coded it as 2500, because of the Highway Privileges part,              
+    but clearly it could be put in several places.  Do not infer that           
+    state local government received no interest revenues in 1932 just           
+    because the code 2910 isn't report din that year.  In other                 
+    words, be careful.                                                          
+                                                                                
+         The second important identifier in the data set is "TYPE".             
+    The censuses reported data at different levels of aggregation and           
+    level of government in each census.  We were interested in the              
+    major categories of state and local government.  Table 5 provides           
+    information on the various types of government data reported in             
+    each Census year, and whether we have included the details in               
+    this data set.  With the exception of 1932, we limited our                  
+    collection efforts into what was necessary to construct total               
+    local government.  If the total was available we did not collect            
+    the detail by level of government.                                          
+                                                                                
+                                                                                
+                                                                                
+    Creating a Comparable Series across Time                                    
+                                                                                
+         The consistency of the data series over time depends, in               
+    part, on the level of detail you wish to examine.  Total revenues           
+    and total expenditures are not too bad.  As you move to more                
+    specific functions, however, the difficulties mount.  Some of the           
+    problems are clear from an examination of the codes and titles in           
+    table 4.  Other problems are more systematic.  This discussion is           
+    necessarily brief.  A more detailed treatment of the issues can             
+    be found in various Census publications, particularly the "State            
+    and Local Special Studies" published by the U.S. Bureau of the              
+    Census and the post-1957 Census of Government volumes.  Special             
+    Studies #25, #38, and #43 are particularly helpful.  The problems           
+    divide themselves into two areas: concepts of total revenue and             
+    expenditure, and the breakdown of revenues and expenditures by              
+    function.                                                                   
+                                                                                
+    Fiscal Totals                                                               
+                                                                                
+         At the level of total revenues and expenditures the largest            
+    problem is 1942.  As described in Special Study #25, in 1937 the            
+    Census significantly changed the concept it used to measure                 
+    government revenues and expenditures [3].  The census later                 
+    reversed itself and, after 1950 returned, more or less, to the              
+    pre-1937 concepts of revenues and expenditures.  The reversion is           
+    described in detail in Special Study #32.  Two features are                 
+    particularly important.                                                     
+                                                                                
+         Before 1937 government debt transactions were not treated as           
+    part of revenues or expenditures.  That is, repayment of debt               
+    principle and revenues from bond sales were not included in                 
+    expenditures or revenues.  They were included in the reports, but           
+    under separate title.  In the 1942 Census of governments this was           
+    reversed, and "Provision for Debt Repayment" (ISO = 4100) was               
+    included in the 1942 expenditure totals.  The policy was reversed           
+    again after 1950.  To make expenditure totals comparable over               
+    time, therefore, it is a relative simple to deduct the Provision            
+    for Debt Repayment from the 1942 total expenditure.                         
+                                                                                
+         The second problem is more difficult: the earnings and                 
+    expenditures of "public service enterprises."  These enterprises            
+    include public utilities (water, gas, electricity, and transit)             
+    and liquor stores [4].  In 1902, 1913, 1932 and again from 1962             
+    onwards, gross receipts of utilities and liquor stores are                  
+    counted as revenues and gross expenditures are counted as                   
+    expenditures.  In 1942, these amounts only appear as part of the            
+    expenditure category "Contributions to trust funds and                      
+    enterprises," (ISO = 3800).  From the breakdown by levels of                
+    government it is clear that the bulk of this category is the                
+    "trust fund" portion, primarily unemployment and pension fund               
+    contributions.  The public enterprise part of this category has             
+    been netted out almost entirely.                                            
+                                                                                
+         Special Study #32 presents information on public service               
+    enterprise revenues and expenditures for State governments for              
+    1942.  It clear from the discussion on "Sources and Methods" that           
+    these estimates were based in part on "detailed worksheets and              
+    records" from the original census of 1942 and in part on some               
+    estimation and interpolation.  Unfortunately, the bulk of public            
+    service enterprises are operated by local governments, and                  
+    similar estimates for local governments were not been made (at              
+    least we haven't found them yet).                                           
+                                                                                
+         The third problem is the incomplete coverage of the 1913               
+    Census (the 1922 Census is so incomplete we have not included it            
+    here).  In 1913 the Census did not collect information from                 
+    incorporated places with populations of less than 2,500.  This              
+    one is very difficult, because there isn't a real satisfactory              
+    way to estimate the size, particularly by individual functions,             
+    for the government of those "other minor civil divisions."  A               
+    simple way to estimate the under 2,500 revenues and expenditures            
+    is simply to take the revenues (expenditures) of incorporated               
+    placed under 2,500 as a ratio of total local government                     
+    (excluding the under 2,500 portion) in 1902.  Then multiply total           
+    local revenues (expenditures) in 1913 times the 1902 ratio.  The            
+    data provided here enables you to perform that simple estimate.             
+    This could be refined by adjusting for population size by size of           
+    place of residence in 1900 and 1910.                                        
+                                                                                
+         A more complicated option is to use the 1902 Census to                 
+    calculate the ratio of revenues (expenditures) in "other minor              
+    civil divisions" with the total revenues (expenditures) of all              
+    places with populations between 2,500 and 8,000 (This number                
+    isn't directly reported in the 1902 Census, but it can be                   
+    calculated from the categories that were reported).  Since the              
+    1913 census does report revenues (expenditures) for incorporated            
+    places with populations 2,500 to 8,000, you can estimate the 1913           
+    total for places with less than 2,500 by applying the 1902 ratio.           
+    Again, this calculation could be made more accurate by adjusting            
+    the 1902 ratios for the change in the size distribution of                  
+    population by size of place of residence from the 1900 and 1910             
+    census.                                                                     
+                                                                                
+    Functional Breakdowns                                                       
+                                                                                
+         The problems with total revenues and expenditures are not              
+    too bad, and occur in 1942 and 1913.  The problems with                     
+    constructing consistent functional categories are more difficult,           
+    and while 1942 is still a problem year, there are other difficult           
+    years as well.                                                              
+                                                                                
+         One type of problem arises from the level of detail provided           
+    in each census.  For example, because of budgetary problems and             
+    the onset of the war, the 1942 census provides very little detail           
+    on revenues by function.  Basically we have total taxes - which             
+    can be divided into property taxes (ISO = 1110) and all other               
+    taxes (ISO = 1900); Aid from other governments (ISO = 2300, 2350,           
+    2361, and 2362); and Charges and Miscellaneous (ISO = 2900).                
+    That is all there is.  Any comparable functional categories for             
+    the entire century are limited to those four revenue categories,            
+    otherwise 1942 must be dropped.                                             
+                                                                                
+         Let us emphasize, it depends on what level of aggregation              
+    you are interested in.  If you want total revenues, 1942 is fine.           
+    If you want property and non-property taxes, 1942 is fine.                  
+    Likewise for the tax and non-tax revenue distinction.                       
+                                                                                
+         Similarly, in 1913 and 1932 the Census reported expenditures           
+    for "Charities, Hospitals, and Corrections."  This category                 
+    included all of the social welfare expenditures (ISO = 3200) and            
+    what today we would include under public safety for correction              
+    facilities and programs (ISO = 3430).  In 1902 there was a                  
+    distinct category for "Penal Institutions" (ISO = 3430); in 1942            
+    there was just "Other Public Safety" (ISO = 3409) with no                   
+    specific mention of corrections; and from 1962 to 1982                      
+    Corrections is always a distinct category (ISO = 3430).                     
+                                                                                
+         The final general problem concerns capital outlays.  Before            
+    1957, the Census reported a total for capital outlays separate              
+    from other expenditures.  In 1962 and 1972 the Census reported              
+    expenditures for individual expenditures that included detail for           
+    capital outlays and for operations and maintenance.  In 1982 the            
+    Census reported functional expenditures without distinguishing              
+    between capital outlays and operations and maintenance (although            
+    it is possible to obtain those numbers elsewhere in the census).            
+                                                                                
+         The problem for 1902, 1913, 1932, and 1942 is that you know            
+    what capital outlays were in total, but not how much were for               
+    education, highways, etc.  There is some supporting detail on               
+    capital outlay by function in the individual censuses.   But in             
+    no year is it complete.  It is possible to generate several                 
+    plausible allocations of the capital outlay expenditures between            
+    functions.  We have tried several alternatives, and can provide             
+    you with sources and data.  At the moment we have yet to settle             
+    on the best way to do it.                                                   
+                                                                                
+         A number of smaller problems are discussed in the notes to             
+    Table 4, which you should follow carefully if you are interested            
+    in a particular expenditure or revenue category.  As a general              
+    rule, the 1902 Census was quite good and detailed.  The 1913,               
+    1932, and 1942 provided limited detail.  The 1962, 1972, and 1982           
+    Censuses provide lots of detail.  If you stick with our two-digit           
+    categories as listed in Tables 2 and 3 and detailed in Table 4,             
+    you won't go too far wrong.                                                 
+                                                                                
+         We hope that you will find the data set useful and would               
+    appreciate you keeping us informed of the uses to which the data            
+    is put.  We have assembled several versions of this data set with           
+    "fixes" for the major problems.  We are willing to send you                 
+    copies or talk about them, but until we decide on the final form            
+    of the fixes we have not put them at ICPSR.  Any comments or                
+    suggestions you have will be greatly appreciated.                           
+                                                                                
+    Richard Sylla            John Legler              John Wallis               
+                                                                                
+                                                                                
+                                                                                
+    ------------------------------                                              
+    [1] The Census collected information in 1850, 1860, 1870, 1880 and 1890,    
+    but it was not complete.                                                    
+                                                                                
+    [2] Remember that the 1902 and 1913 census are reported in dollars, and     
+    the 1932 to 1982 census are reported in thousands of dollars.               
+                                                                                
+    [3] 1937 was the year the Census resumed collection and publication of      
+    "Financial Statistics of States" which had not been collected since 1933    
+     for financial reasons.                                                     
+                                                                                
+    [4] Revenues and expenditures for public water and sewage facilities are    
+    include under Sewerage and Sanitation other than Sewerage in the            
+    "Environmental and Housing Category" (ISO=3500).                            
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                 Table 1                                        
+                             Census Sources                                     
+                                                                                
+                                                                                
+    1902:  "Wealth, Debt, and Taxation" Washington, D.C. 1908.                  
+                                                                                
+         Table 10: "Payments for Expenditures and Receipts from                 
+    Revenues of States and Territories, Counties, Cities, and Other             
+    Minor Civil Divisions, By States and Territories: 1902."                    
+    _________________________________________________________________           
+                                                                                
+    1913:  "Wealth, Debt, and Taxation" Washington, D.C. 1914.                  
+                                                                                
+         States:  Table 6:  "Revenue Receipts of States, Total and              
+    Per Capita: 1913."                                                          
+                                                                                
+                  Table 8:  "Governmental Cost Payments of States,              
+    Total and Per Capita: 1913."                                                
+                                                                                
+         Counties: Table 3 (p. 123):  Revenue Receipts of Counties,             
+    Total and Per Capita, By Geographic Divisions and States: 1913."            
+                                                                                
+                   Table 5 (p. 211):  Governmental Cost Payments of             
+    Counties, Total and Per Capita, By Geographic Divisions and                 
+    States: 1913."                                                              
+                                                                                
+         Other Local Governments:  Table 3 (p. 463):  Revenue                   
+    Receipts of Incorporated Places having a Population of 2,500 and            
+    Over, Total and Per Capita, By States: 1913."                               
+                                                                                
+                   Table 5 (p. 561):  Governmental Cost Payments of             
+    Incorporated Places having a Population of 2,500 and Over, Total            
+    and Per Capita, By States: 1913."                                           
+    _________________________________________________________________           
+                                                                                
+    1932:  "Financial Statistics of State and Local Governments"                
+                                                                                
+         Table 1: "Revenue Receipts and Per Capita Total Revenue                
+    Receipts of State, Counties, Cities, Towns, Villages, and                   
+    Boroughs, School Districts, Townships, and Other Civil Divisions,           
+    By Geographic Divisions and States: 1932"                                   
+                                                                                
+         Table 3: "Governmental Cost Payments and Per Capita Total              
+    Governmental Cost Payments of State, Counties, Cities, Towns,               
+    Villages, and Boroughs, School Districts, Townships, and Other              
+    Civil Divisions, By Geographic Divisions and States: 1932"                  
+                                                                                
+                                                                                
+                                                                                
+                                 Table 1                                        
+                                Continued                                       
+                                                                                
+    1942: "Revised Summary of State and Local Government Finances in            
+              1942" State and Local Special Studies, #26, Washington,           
+              D.C., June 1948.                                                  
+                                                                                
+         Table 1: "General Revenue and General Expenditure of State             
+    and Local Governments, By State and Type of Government: 1942                
+    (Revised)."                                                                 
+                                                                                
+         Table 2: "General Expenditure of State and Local Governments           
+    for Operations, by State and Type of Government: 1942 (Revised)."           
+    _________________________________________________________________           
+                                                                                
+                                                                                
+    1962:  "Census of Governments: 1962: Compendium of Government               
+              Finances; Vol IV (Government Finances), No. 4."                   
+                                                                                
+         Table 46: Finances of State and Local Governments, by Level            
+    of Government, For States: 1962."                                           
+    _________________________________________________________________           
+                                                                                
+                                                                                
+    1972:  "1972 Census of Governments: Government Finances; Vol 4,             
+              No. 5."                                                           
+                                                                                
+         Table 46: Finances of State and Local Governments, by Level            
+    of Government, For States: 1971-72."                                        
+    _________________________________________________________________           
+                                                                                
+                                                                                
+    1982:  "1982 Census of Governments: Governmental Finances."                 
+                                                                                
+         Table 45: State and Local Government Finances by Level of              
+    Government and States: 1981-82."                                            
+    _________________________________________________________________           
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                 Table 2                                        
+                           Revenue Categories                                   
+                           2-Digit Categories                                   
+                                                                                
+                                                                                
+    0001      TOTAL REVENUE                                                     
+                                                                                
+    1000         TAXES                                                          
+                                                                                
+    1100            PROPERTY                                                    
+                                                                                
+    1200            SPECIAL                                                     
+                                                                                
+    1300              INCOME                                                    
+                                                                                
+    1400              OTHER BUSINESS TAXES                                      
+                                                                                
+    1500              SALES                                                     
+                                                                                
+    1600              OTHER SPECIAL TAXES                                       
+                                                                                
+    1700            POLL                                                        
+                                                                                
+    1800            LICENSES AND PERMITS                                        
+                                                                                
+    1900            OTHER TAXES                                                 
+                                                                                
+                                                                                
+    2000         NON-TAX REVENUES                                               
+                                                                                
+    2100            SPECIAL ASSESSMENTS                                         
+                                                                                
+    2200            FINES, FORFEITS, & ESCHEATS                                 
+                                                                                
+    2300            SUBVENTIONS AND GRANTS                                      
+                                                                                
+    2350               INTERGOVERNMENTAL GRANTS                                 
+                                                                                
+    2400            DONATIONS, PRIVILEGES, & PENSION ASSESSMENTS                
+                                                                                
+    2500            HIGHWAY PRIVILEGES, RENTS, & INTEREST                       
+                                                                                
+    2600            EARNINGS OF GENERAL DEPTS.                                  
+                                                                                
+    2700         EARNINGS OF PUBLIC SERVICE ENTERPRISES                         
+                                                                                
+    2800         INSURANCE TRUST REVENUE                                        
+                                                                                
+                                                                                
+    2900         CHARGES AND MISCELLANEOUS                                      
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                 Table 3                                        
+                         Expenditure Categories                                 
+                           2-Digit Categories                                   
+                                                                                
+                                                                                
+    0003    TOTAL EXPENDITURE                                                   
+                                                                                
+      3100     EDUCATION                                                        
+                                                                                
+      3200     SOCIAL SERVICE AND WELFARE                                       
+                                                                                
+      3300     TRANSPORTATION                                                   
+                                                                                
+      3400     PUBLIC SAFETY                                                    
+                                                                                
+      3500     ENVIRONMENTAL AND HOUSING                                        
+                                                                                
+      3600     GOVERNMENT ADMINISTRATION                                        
+                                                                                
+      3700     PUBLIC SERVICE ENTERPRISE EXPENDITURES                           
+                                                                                
+      3800     INSURANCE TRUST EXPENDITURES                                     
+                                                                                
+      3900     NOT ELSEWHERE CLASSIFIED                                         
+                                                                                
+      4000     INTEREST ON GENERAL DEBT                                         
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                 Table 4                                        
+                 Two-Digit Revenue and Expenditure Codes                        
+                                                                                
+    Total Revenues                                                              
+                                                                                
+    CODE:     0001                                                              
+                                                                                
+                                                                                
+    1902      0001 Total Revenue Receipts                                       
+                                                                                
+    1913      0001 Total Revenue Receipts                                       
+                                                                                
+    1932      0001 Total Revenue Receipts                                       
+                                                                                
+    1942      0001 Total General Revenue                                        
+                                                                                
+    1962      0001 Revenue, Total                                               
+                                                                                
+    1972      0001 Revenue                                                      
+                                                                                
+    1982      0001 Revenue, Total                                               
+                                                                                
+                                                                                
+    Property Tax Revenues                                                       
+                                                                                
+    CODE:     1100                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      1110      General Property                                        
+                                                                                
+    1913      1110      General Property Taxes                                  
+                                                                                
+    1932      1110      General Property Taxes                                  
+                                                                                
+    1942      1110      Property Taxes                                          
+                                                                                
+    1962      1110      Property                                                
+                                                                                
+    1972      1110      Property                                                
+                                                                                
+    1982      1110      Property                                                
+                                                                                
+                                                                                
+    Note: Some Property Tax revenues are reported in early years as             
+    "Special Tax Revenues" and coded as 1210.                                   
+                                                                                
+                                                                                
+                                                                                
+    Special Tax Revenues                                                        
+                                                                                
+    CODE:     1200                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      1210      Special Property Taxes                                  
+                                                                                
+    1913      1210      Special Property Taxes                                  
+                                                                                
+    1932      1220      Inheritance Taxes                                       
+                                                                                
+    1942                                                                        
+                                                                                
+    1962                                                                        
+                                                                                
+    1972                                                                        
+                                                                                
+    1982                                                                        
+                                                                                
+                                                                                
+    Note: Code 1210 should be included with code 1110, if you are               
+    concerned with total property tax revenues.                                 
+                                                                                
+                                                                                
+    Income Tax Revenues                                                         
+                                                                                
+    CODE:     1300                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902                                                                        
+                                                                                
+    1913                                                                        
+                                                                                
+    1932      1300      Special income Taxes                                    
+                                                                                
+    1942                                                                        
+                                                                                
+    1962      1310      Individual Income                                       
+                                                                                
+    1972      1310      Individual Income                                       
+                                                                                
+    1982      1310      Individual Income                                       
+                                                                                
+                                                                                
+    Business Tax Revenues                                                       
+                                                                                
+    CODE:     1400                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902                                                                        
+                                                                                
+    1913      1400      Business and Income Taxes                               
+                                                                                
+    1932                                                                        
+                                                                                
+    1942                                                                        
+                                                                                
+    1962                                                                        
+                                                                                
+    1972                                                                        
+                                                                                
+    1982                                                                        
+                                                                                
+    Note: From the detail in 1913 it seems clear that most of this              
+    category is business taxes, not income taxes.                               
+                                                                                
+                                                                                
+    Sales Taxes                                                                 
+                                                                                
+    CODE:     1500                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902                                                                        
+                                                                                
+    1913                                                                        
+                                                                                
+    1932                                                                        
+                                                                                
+    1942                                                                        
+                                                                                
+    1962      1510      General Sales Taxes                                     
+    1962      1520      Motor Fuels                                             
+    1962      1530      Alcoholic Beverages                                     
+    1962      1540      Tobacco Products                                        
+    1962      1550      Public Utilities                                        
+    1962      1590      Other Selective                                         
+                                                                                
+    1972      1510      General Sales Taxes                                     
+    1972      1520      Motor Fuels                                             
+    1972      1530      Alcoholic Beverages                                     
+    1972      1540      Tobacco Products                                        
+    1972      1550      Public Utilities                                        
+    1972      1590      Other Selective                                         
+                                                                                
+    1982      1510      General Sales Taxes                                     
+    1982      1520      Motor Fuels                                             
+    1982      1530      Alcoholic Beverages                                     
+    1982      1540      Tobacco Products                                        
+    1982      1550      Public Utilities                                        
+    1982      1590      Other Selective                                         
+                                                                                
+                                                                                
+    Other Special Taxes                                                         
+                                                                                
+    CODE:     1600                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902                                                                        
+                                                                                
+    1913                                                                        
+                                                                                
+    1932      1600      Other Special Taxes                                     
+                                                                                
+    1942                                                                        
+                                                                                
+    1962                                                                        
+                                                                                
+    1972                                                                        
+                                                                                
+    1982                                                                        
+                                                                                
+                                                                                
+    Poll Taxes                                                                  
+                                                                                
+    CODE:     1700                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      1700      Polls                                                   
+                                                                                
+    1913      1700      Poll and Occupation taxes                               
+                                                                                
+    1932      1700      Poll                                                    
+                                                                                
+    1942                                                                        
+                                                                                
+    1962                                                                        
+                                                                                
+    1972                                                                        
+                                                                                
+    1982                                                                        
+                                                                                
+                                                                                
+    Licenses and Permits                                                        
+                                                                                
+    CODE:     1800                                                              
+                                                                                
+                                                                                
+    1902      1850      From Liquor Licenses                                    
+    1902      1800      From Other Licenses and Permits                         
+                                                                                
+    1913      1850      From Liquor Licenses and Other Imposts                  
+    1913      1801      Other Business Licenses                                 
+    1913      1802      Other NonBusiness Licenses                              
+                                                                                
+    1932      1800      Licenses and Permits                                    
+                                                                                
+    1942                                                                        
+                                                                                
+    1962      1830      Motor Vehicle License                                   
+                                                                                
+    1972      1830      Motor Vehicle License                                   
+                                                                                
+    1982      1830      Motor Vehicle License                                   
+                                                                                
+                                                                                
+    Other Taxes                                                                 
+                                                                                
+    CODE:     1900                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902                                                                        
+                                                                                
+    1913                                                                        
+                                                                                
+    1932                                                                        
+                                                                                
+    1942      1900  C   Other Taxes are Total Taxes minus Property              
+                             Taxes                                              
+                                                                                
+    1962      1900      Other and Unallocable                                   
+                                                                                
+    1972      1900      Other and Unallocable                                   
+                                                                                
+    1982      1900      Other and Unallocable                                   
+                                                                                
+                                                                                
+    Special Assessments                                                         
+                                                                                
+    CODE:     2100                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      2100      From Special Assessments                                
+                                                                                
+    1913      2100      Special Assessments and Special Charges for             
+                             Outlays                                            
+                                                                                
+    1932      2100      Special Assessments                                     
+                                                                                
+    1942                                                                        
+                                                                                
+    1962      2100      Special Assessments                                     
+                                                                                
+    1972      2100      Special Assessments                                     
+                                                                                
+    1982      2100      Special Assessments                                     
+                                                                                
+                                                                                
+    Fines, Forfeitures, and Fees                                                
+                                                                                
+    CODE:     2200                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      2200      From Fines and Forfeits                                 
+                                                                                
+    1913      2200      Fines, Forfeitures, and Escheats                        
+                                                                                
+    1932      2200      Fines, Forfeitures, and Escheats                        
+                                                                                
+    1942                                                                        
+                                                                                
+    1962                                                                        
+                                                                                
+    1972                                                                        
+                                                                                
+    1982                                                                        
+                                                                                
+                                                                                
+    Subventions and Grants                                                      
+                                                                                
+    CODE:     2300                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      2300      Subventions and Grants                                  
+                                                                                
+    1913      2300      Subventions and Grants                                  
+                                                                                
+    1932      2300      Subventions and Grants                                  
+                                                                                
+    1942      2350  C   From Federal Government                                 
+    1942      2361  C   Aid From State Governments only                         
+                                                                                
+                                                                                
+    1962      2350      From Federal Government                                 
+    1962      2361      From State Government                                   
+    1962      2362      From Local Government                                   
+                                                                                
+    1972      2350      From Federal Government                                 
+    1972      2361      From State Government                                   
+    1972      2362      From Local Government                                   
+                                                                                
+    1982      2350      From Federal Government                                 
+    1982      2361      From State Government                                   
+    1982      2362      From Local Government                                   
+                                                                                
+    Note: In 1942 the Census reports two numbers for Aid received               
+    from other Governments: "Total" and "From State Governments                 
+    only."  We have assumed that the state only receives aid from the           
+    federal government, an inaccurate assumption, but not to far                
+    wrong.  Local government revenue from the federal government,               
+    (ISO = 2350) is "total" aid minus "Aid from State governments               
+    only" (which is ISO = 2361).                                                
+                                                                                
+    Note also that post-1962 there are aid numbers for all three                
+    levels of government.  But states do not receive aid from                   
+    themselves (ISO = 2361), and local governments do not receive aid           
+    from themselves (ISO = 2362).  This later is a bit abstract,                
+    however, since some local governments, particularly school                  
+    districts, do receive aid from other local governments.  The                
+    census has netted out those transfers already.                              
+                                                                                
+                                                                                
+    Donations, Privileges, and Pension Assessments                              
+                                                                                
+    CODE:     2400                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      2401      From Privileges                                         
+    1902      2402      Donations and Gifts                                     
+                                                                                
+    1913      2400      Donations, Gifts, and Pension Assessments               
+                                                                                
+    1932      2400      Donations, Gifts, and Pension Assessments               
+                                                                                
+    1942                                                                        
+                                                                                
+    1962                                                                        
+                                                                                
+    1972                                                                        
+                                                                                
+    1982                                                                        
+                                                                                
+                                                                                
+                                                                                
+    Note: In 1942 pension revenues appear in Insurance Trust Revenues           
+         (ISO = 2810, Employee Retirement).                                     
+                                                                                
+                                                                                
+    Transportation Rents and Privileges                                         
+                                                                                
+    CODE:     2500                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902                                                                        
+                                                                                
+    1913      2500      Highway Privileges                                      
+                                                                                
+    1932      2500      Highway Privileges, Rents, and Interest                 
+                                                                                
+    1942                                                                        
+                                                                                
+    1962      2520      Airports                                                
+    1962      2540      Water Transportation and Terminals                      
+    1962      2551      Parking Facilities                                      
+                                                                                
+    1972      2520      Airports                                                
+    1972      2540      Water Transportation and Terminals                      
+    1972      2551      Parking Facilities                                      
+                                                                                
+    1982      2510      Highways                                                
+    1982      2520      Airports                                                
+    1982      2540      Water Transportation and Terminals                      
+    1982      2551      Parking Facilities                                      
+                                                                                
+                                                                                
+    Note: The 1932 figure includes "rents and interest" which                   
+         appear elsewhere in other years.  Interest is ISO = 2910.              
+                                                                                
+                                                                                
+    Earnings of General Departments                                             
+                                                                                
+    CODE:     2600                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      2600      Departmental Receipts from Fees and Charges             
+                                                                                
+    1913      2600      Earnings of General Departments and                     
+                             Miscellaneous                                      
+                                                                                
+    1932      2600      Earnings of General Departments                         
+                                                                                
+    1942                                                                        
+                                                                                
+    1962      2600      Education                                               
+    1962      2620      Hospitals                                               
+    1962      2651      Sewerage                                                
+    1962      2652      Sanitation (not Sewerage)                               
+    1962      2653      Local Parks and Recreation                              
+    1962      2654      Natural resources                                       
+    1962      2655      Housing and Urban Renewal                               
+                                                                                
+    1972      2600      Education                                               
+    1972      2620      Hospitals                                               
+    1972      2651      Sewerage                                                
+    1972      2652      Sanitation (not Sewerage)                               
+    1972      2653      Local Parks and Recreation                              
+    1972      2654      Natural resources                                       
+    1972      2655      Housing and Urban Renewal                               
+                                                                                
+    1982      2600      Education                                               
+    1982      2620      Hospitals                                               
+    1982      2651      Sewerage                                                
+    1982      2652      Sanitation (not Sewerage)                               
+    1982      2653      Local Parks and Recreation                              
+    1982      2654      Natural resources                                       
+    1982      2655      Housing and Community Development                       
+                                                                                
+                                                                                
+    Note: In 1962, 1972, and 1982 the Census reports more detail on             
+    Education revenues.  However, the details do not add up to the              
+    sub-total.  This appears to be due to the fact that school lunch            
+    sales are reported in gross terms.  We have included the sub-               
+    total only.                                                                 
+                                                                                
+                                                                                
+    Earnings of Public Service Enterprises                                      
+                                                                                
+    CODE:     2700                                                              
+                                                                                
+                                                                                
+    1902      2700      From Industrial Income                                  
+                                                                                
+    1913      2700      Earnings of Public Service Enterprises                  
+                                                                                
+    1932      2700      Earnings of Public Service Enterprises                  
+                                                                                
+    1942                                                                        
+                                                                                
+    1962      2720      Water Supply                                            
+    1962      2730      Electric Power                                          
+    1962      2740      Transit                                                 
+    1962      2750      Gas Supply                                              
+    1962      2760      Liquor Stores                                           
+                                                                                
+    1972      2720      Water Supply                                            
+    1972      2730      Electric Power                                          
+    1972      2740      Transit                                                 
+    1972      2750      Gas Supply                                              
+    1972      2760      Liquor Stores                                           
+                                                                                
+    1982      2720      Water Supply                                            
+    1982      2730      Electric Power                                          
+    1982      2740      Transit                                                 
+    1982      2750      Gas Supply                                              
+    1982      2760      Liquor Stores                                           
+                                                                                
+                                                                                
+    Note: In 1942 only net earnings of PSE appear, and they appear in           
+         "Contributions to Trust Funds and Enterprises" ISO = 3800.             
+                                                                                
+                                                                                
+    Insurance Trust Revenue                                                     
+                                                                                
+    CODE:     2800                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902                                                                        
+                                                                                
+    1913                                                                        
+                                                                                
+    1932                                                                        
+                                                                                
+    1942                                                                        
+                                                                                
+    1962      2820      Unemployment Compensation                               
+    1962      2810      Employee Retirement                                     
+    1962      2801      All Other                                               
+                                                                                
+    1972      2820      Unemployment Compensation                               
+    1972      2810      Employee Retirement                                     
+    1972      2801      All Other                                               
+                                                                                
+    1982      2820      Unemployment Compensation                               
+    1982      2810      Employee Retirement                                     
+    1982      2801      All Other                                               
+                                                                                
+                                                                                
+    Note: Prior to 1942, pension assessments appear in ISO = 2400.              
+                                                                                
+                                                                                
+    Asset Sales                                                                 
+                                                                                
+    CODE:     2850                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902                                                                        
+                                                                                
+    1913                                                                        
+                                                                                
+    1932                                                                        
+                                                                                
+    1942                                                                        
+                                                                                
+    1962      2850      Sale of Property                                        
+                                                                                
+    1972      2850      Sale of Property                                        
+                                                                                
+    1982      2850      Sale of Property                                        
+                                                                                
+                                                                                
+    Note:  We ran out of 2-digit revenue codes, and for the time                
+         being asset sales are parked in 2850.                                  
+                                                                                
+                                                                                
+    Miscellaneous Revenues                                                      
+                                                                                
+    CODE:     2900                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      2910      Interest                                                
+    1902      2901      All Other General Revenue Receipts                      
+    1902      2902      All Other Commercial Receipts                           
+                                                                                
+    1913      2910      Interest and Rents                                      
+                                                                                
+    1932                                                                        
+                                                                                
+    1942      2900      Charges and Miscellaneous                               
+                                                                                
+    1962      2900      Other and Unallocable                                   
+    1962      2901      Other and Unallocable Charges                           
+    1962      2910      Interest Earnings                                       
+                                                                                
+    1972      2900      Other and Unallocable                                   
+    1972      2901      Other and Unallocable Charges                           
+    1972      2910      Interest Earnings                                       
+                                                                                
+    1982      2901      Other Charges (and miscellaneous)                       
+    1982      2902      Other General Revenue                                   
+    1982      2910      Interest Earnings                                       
+                                                                                
+    Note: In 1932 Interest appears in Highway rents and privileges,             
+         ISO = 2500.                                                            
+                                                                                
+                                                                                
+    Total Expenditures                                                          
+                                                                                
+    CODE:     3000                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      3    Total Payments for Expenditures                              
+                                                                                
+    1913      3    Governmental Cost Payments                                   
+                                                                                
+    1932      3    Governmental Cost Payments                                   
+                                                                                
+    1942      3    Total General Expenditure                                    
+                                                                                
+    1962      3    Expenditure, Total                                           
+                                                                                
+    1972      3    Expenditure                                                  
+                                                                                
+    1982      3    Expenditure, Total                                           
+                                                                                
+                                                                                
+    Note: The total for 1942 contains "Provision for Debt repayment"            
+         ISO = 4100, which is not included in any other year.                   
+                                                                                
+                                                                                
+    Education                                                                   
+                                                                                
+    CODE:     3100                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      3100      Education                                               
+                                                                                
+    1913      3110      Schools                                                 
+    1913      3160      Libraries                                               
+                                                                                
+    1932      3110      Schools                                                 
+    1932      3160      Libraries                                               
+                                                                                
+    1942      3100      Schools                                                 
+                                                                                
+    1962      3139      Institutions of Higher Learning, Capital                
+                             Outlay                                             
+    1962      3131      Institutions of Higher Learning, Other                  
+    1962      3119      Local Schools, Capital Outlay                           
+    1962      3111      Local Schools, Other                                    
+    1962      3101      Other Education                                         
+    1962      3160      Libraries                                               
+                                                                                
+    1972      3139      Institutions of Higher Learning, Capital                
+                             Outlay                                             
+    1972      3131      Institutions of Higher Learning, Other                  
+    1972      3119      Local Schools, Capital Outlay                           
+    1972      3111      Local Schools, Other                                    
+    1972      3101      Other Education                                         
+    1972      3160      Libraries                                               
+                                                                                
+    1982      3130      Higher Education                                        
+    1982      3110      Elementary and Secondary Education                      
+    1982      3109      Other Education                                         
+    1982      3160      Libraries                                               
+                                                                                
+    Note:  In 1913 state grants to local government (apportionments)            
+    reported detail on grants for education.  In that year they are             
+    coded as ISO = 3931.                                                        
+                                                                                
+                                                                                
+    Social Service and Welfare                                                  
+                                                                                
+    CODE:     3200                                                              
+                                                                                
+    1902      3210      Charities                                               
+    1902      3230      Insane                                                  
+                                                                                
+    1913      3200      Charities, Hospitals, and Corrections                   
+                                                                                
+    1932      3200      Charities, Hospitals, and Corrections                   
+                                                                                
+    1942      3200      Public Welfare                                          
+                                                                                
+    1962      3211      Cash Assistance, Categorical                            
+    1962      3212      Cash Assistance, Other                                  
+    1962      3219      Other Public Welfare                                    
+    1962      3229      Own Hospitals, Capital Outlay                           
+    1962      3221      Own Hospitals, Other                                    
+    1962      3222      Other Hospitals                                         
+    1962      3240      Employment Security Administration                      
+                                                                                
+    1972      3211      Cash Assistance, Categorical                            
+    1972      3212      Cash Assistance, Other                                  
+    1972      3219      Other Public Welfare                                    
+    1972      3229      Own Hospitals, Capital Outlay                           
+    1972      3221      Own Hospitals, Other                                    
+    1972      3222      Other Hospitals                                         
+    1972      3240      Employment Security Administration                      
+                                                                                
+    1982      3210      Cash Assistance Payments                                
+    1982      3209      Vendor Payments                                         
+    1982      3219      Other Public welfare                                    
+    1982      3220      Hospitals                                               
+    1982      3240      Social Service Administration                           
+    1982      3250      Veterans Services                                       
+                                                                                
+    Note: Health expenditures have been included in "Environmental              
+    and Housing" ISO = 3560, usually.  This is a sticky one.                    
+    Expenditures for hospitals are usually bundled with social                  
+    welfare programs.  Expenditures for public health programs are              
+    occasionally bundled with sanitation expenditures (1913 and 1932            
+    "Health and Sanitation" ISO = 3550, although it could be 3550).             
+                                                                                
+    The other combination occurs in 1942 when the category becomes              
+    "Health and Hospitals" which we have coded ISO = 3560.                      
+                                                                                
+    The operative distinction here is "public health" which is                  
+         environmental versus health assistance for individuals.                
+                                                                                
+                                                                                
+    Transportation                                                              
+                                                                                
+    CODE:     3300                                                              
+                                                                                
+    1902      3312      Street Lighting                                         
+    1902      3311      Other Highway expenditures                              
+                                                                                
+    1913      3310      Highways                                                
+                                                                                
+    1932      3310      Highways                                                
+                                                                                
+    1942      3310      Highways                                                
+                                                                                
+    1962      3319      Highways, Capital Outlay                                
+    1962      3311      Highways, Other                                         
+    1962      3320      Airports                                                
+    1962      3340      Water Transportation and Terminals                      
+    1962      3351      Parking Facilities                                      
+                                                                                
+    1972      3319      Highways, Capital Outlay                                
+    1972      3311      Highways, Other                                         
+    1972      3320      Airports                                                
+    1972      3340      Water Transportation and Terminals                      
+    1972      3351      Parking Facilities                                      
+                                                                                
+    1982      3310      Highways                                                
+    1982      3320      Air Transportation (Airports)                           
+    1982      3340      Water Transportation and Terminals                      
+    1982      3351      Parking Facilities                                      
+    1982      3301      Transit Subsidies                                       
+                                                                                
+                                                                                
+    Public Safety                                                               
+                                                                                
+    CODE:     3400                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      3430      Penal Institutions                                      
+    1902      3410      Military and Police                                     
+    1902      3420      Fire Department                                         
+    1902      3409      Miscellaneous Protection of Life and Property           
+                                                                                
+    1913      3400      Protection to Person and Property                       
+                                                                                
+    1932      3400      Protection to Person and Property                       
+                                                                                
+    1942      3410      Police                                                  
+    1942      3420      Fire                                                    
+    1942      3409      Other Public Safety                                     
+                                                                                
+    1962      3410      Police Protection                                       
+    1962      3420      Local Fire Protection                                   
+    1962      3430      Corrections                                             
+                                                                                
+    1972      3410      Police Protection                                       
+    1972      3420      Local Fire Protection                                   
+    1972      3430      Corrections                                             
+                                                                                
+    1982      3410      Police Protection                                       
+    1982      3420      Local Fire Protection                                   
+    1982      3430      Corrections                                             
+    1982      3440      Protective Inspection and Regulation                    
+                                                                                
+    Note:  In 1913 and 1932 expenditures for corrections appear in              
+         "Charities, Hospitals, and Corrections" ISO = 3200.                    
+                                                                                
+                                                                                
+    Environmental and Housing                                                   
+                                                                                
+    CODE:     3500                                                              
+                                                                                
+    1902      3560      Health Conservation                                     
+    1902      3520      Parks and Recreation                                    
+    1902      3570      Agriculture                                             
+    1902      3550      Sewers, Drainage, and other Sanitation                  
+                                                                                
+    1913      3520      Recreation                                              
+    1913      3550      Conservation of Health and Sanitation                   
+                                                                                
+    1932      3550      Health and Sanitation                                   
+    1932      3510      Development and Conservation of Natural                 
+                             Resources                                          
+                                                                                
+    1942      3560      Health and Hospitals                                    
+    1942      3550      Sanitation                                              
+                                                                                
+    1962      3560      Health                                                  
+    1962      3549      Sewerage, Capital Outlay                                
+    1962      3541      Sewerage, Other                                         
+    1962      3550      Sanitation other than Sewerage                          
+    1962      3529      Local Parks and Recreation, Capital Outlay              
+    1962      3521      Local parks and Recreation, Other                       
+    1962      3519      Natural Resources, Capital Outlay                       
+    1962      3511      Natural Resources, Other                                
+    1962      3539      Housing and Urban Renewal, Capital Outlay               
+    1962      3531      Housing and Urban Renewal, Other                        
+                                                                                
+    1972      3560      Health                                                  
+    1972      3549      Sewerage, Capital Outlay                                
+    1972      3541      Sewerage, Other                                         
+    1972      3550      Sanitation other than Sewerage                          
+    1972      3529      Local Parks and Recreation, Capital Outlay              
+    1972      3521      Local parks and Recreation, Other                       
+    1972      3519      Natural Resources, Capital Outlay                       
+    1972      3511      Natural Resources, Other                                
+    1972      3539      Housing and Urban Renewal, Capital Outlay               
+    1972      3531      Housing and Urban Renewal, Other                        
+                                                                                
+    1982      3560      Health                                                  
+    1982      3510      Natural Resources                                       
+    1982      3520      Parks and Recreation                                    
+    1982      3530      Housing and Community Development                       
+    1982      3540      Sewerage                                                
+    1982      3550      Sanitation other than Sewerage                          
+                                                                                
+                                                                                
+    Note: In 1942, 3560 could be in 3200 "Hospitals and Health"                 
+                                                                                
+                                                                                
+                                                                                
+    General Government                                                          
+                                                                                
+    CODE:     3600                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      3600  C   Total General Government                                
+    1902      3610        Legislature and Legislative Offices                   
+    1902      3620        Chief Executive Offices                               
+    1902      3632        Law Offices and Accounts                              
+    1902      3650        Finance Offices and Accounts                          
+    1902      3690        Miscellaneous General Government                      
+    1902      3631      Courts                                                  
+                                                                                
+    1913      3600      General Government                                      
+                                                                                
+    1932      3600      General Government                                      
+                                                                                
+    1942      3600      General Control                                         
+                                                                                
+    1962      3650      Financial Administration                                
+    1962      3690      General Control                                         
+    1962      3670      General Public Buildings                                
+                                                                                
+    1972      3650      Financial Administration                                
+    1972      3690      General Control                                         
+    1972      3670      General Public Buildings                                
+                                                                                
+    1982      3650      Financial Administration                                
+    1982      3690      Other Government Administration                         
+    1982      3670      General Public Buildings                                
+    1982      3630      Judicial and Legal                                      
+                                                                                
+                                                                                
+    Note: In 1902 General government is reported oddly.  There is no            
+         expenditure detail for counties and other minor civil                  
+         divisions.  For the other government types, the details do             
+         not always add up to the sub-total.  As a result, the two-             
+         digit 3600 numbers are calculated as the reported sub-total,           
+         minus any reported details.                                            
+                                                                                
+                                                                                
+    Expenditures of Public Service Enterprises                                  
+                                                                                
+    CODE:     3700                                                              
+                                                                                
+    1902      3700      Industries                                              
+                                                                                
+    1913      3700      Expenses of Public Service Enterprises                  
+                                                                                
+    1932      3700      Operation and Maintenance of Public Service             
+                             Enterprises                                        
+                                                                                
+    1942                                                                        
+                                                                                
+    1962      3720      Water Supplies                                          
+    1962      3730      Electric Power                                          
+    1962      3740      Transit                                                 
+    1962      3750      Gas Supply                                              
+    1962      3760      Liquor Store Expenditures                               
+                                                                                
+    1972      3720      Water Supplies                                          
+    1972      3730      Electric Power                                          
+    1972      3740      Transit                                                 
+    1972      3750      Gas Supply                                              
+    1972      3760      Liquor Store Expenditures                               
+                                                                                
+    1982      3720      Water Supplies                                          
+    1982      3730      Electric Power                                          
+    1982      3740      Transit                                                 
+    1982      3750      Gas Supply                                              
+    1982      3760      Liquor Store Expenditures                               
+                                                                                
+    Note: 1942 figures are net, and included in Insurance Trust                 
+         Expenditures, ISO = 3800.                                              
+                                                                                
+                                                                                
+    Insurance Trust                                                             
+                                                                                
+    CODE:     3800                                                              
+                                                                                
+                                                                                
+    1902                                                                        
+                                                                                
+                                                                                
+    1913                                                                        
+                                                                                
+    1932                                                                        
+                                                                                
+    1942      3800      Contributions to Trust Funds and to                     
+                             Enterprises                                        
+                                                                                
+    1962      3810      Employee Retirement                                     
+    1962      3820      Unemployment Compensation                               
+    1962      3801      Other                                                   
+                                                                                
+    1972      3810      Employee Retirement                                     
+    1972      3820      Unemployment Compensation                               
+    1972      3801      Other                                                   
+                                                                                
+    1982      3810      Employee Retirement                                     
+    1982      3820      Unemployment Compensation                               
+    1982      3801      Other  Insurance Trust                                  
+                                                                                
+                                                                                
+    Miscellaneous                                                               
+                                                                                
+    CODE:     3900                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      3900      All Other                                               
+                                                                                
+    1913      3900      Miscellaneous and General                               
+    1913      3931      Apportionments Education                                
+    1913      3932      Apportionments, All Other                               
+                                                                                
+    1932      3900      Miscellaneous                                           
+    1932      3909      All General Departments                                 
+                                                                                
+    1942      3900      Other and Undistributed                                 
+    1942      3930      Aid Paid to Other Governments                           
+                                                                                
+    1962      3900      Other and Unallocable                                   
+    1962      3930      Intergovernmental Expenditure                           
+                                                                                
+    1972      3900      Other and Unallocable                                   
+    1972      3930      Intergovernmental Expenditure                           
+                                                                                
+    1982      3900      General Expenditure, Other and Unallocable              
+    1982      3901      Miscellaneous Commercial Activities                     
+    1982      3930      Intergovernmental                                       
+                                                                                
+    Note: In 1913 the "Apportionments for Education, and for All                
+         Other" are grants to local governments from the state, ISO =           
+         3931 and 3932.  These codes do not appear in the local                 
+         government part of the data set.                                       
+                                                                                
+         In 1932 there is a discrepancy between the sub-total                   
+    reported  for "Operation and Maintenance of General Departments"            
+    and  the sum of the details.  We have coded the difference as ISO           
+         = 3909.                                                                
+                                                                                
+                                                                                
+    Interest                                                                    
+                                                                                
+    CODE:     4000                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      4000      Interest                                                
+                                                                                
+                                                                                
+    1913      4000      Interest                                                
+                                                                                
+    1932      4000      Interest                                                
+                                                                                
+    1942      4000      Interest                                                
+                                                                                
+    1962      4000      Interest on General Debt                                
+                                                                                
+    1972      4000      Interest on General Debt                                
+                                                                                
+    1982      4000      Interest on General Debt                                
+                                                                                
+    Note:  In 1962, 1972, and 1982 " Interest on General Debt" is not           
+         all of the interest paid by state and local governments.               
+         The difference in Public Service Enterprise Debt.  This is             
+         probably the case for the early years as well, but we have             
+         not yet resolved the issue.                                            
+                                                                                
+                                                                                
+    Sinking Funds and Debt Repayment                                            
+                                                                                
+    CODE:     4100                                                              
+                                                                                
+                                                                                
+    1902                                                                        
+                                                                                
+    1913                                                                        
+                                                                                
+    1932                                                                        
+                                                                                
+    1942      4100      Provision for Debt Repayment                            
+                                                                                
+    1962                                                                        
+                                                                                
+    1972                                                                        
+                                                                                
+    1982                                                                        
+                                                                                
+                                                                                
+    Capital Outlay/Loans made                                                   
+                                                                                
+    CODE:     4200                                                              
+                                                                                
+                                                                                
+                                                                                
+    1902      4250      Capital Outlay                                          
+    1902      4251      Investment Expenses                                     
+                                                                                
+    1913      4250      Capital Outlay                                          
+                                                                                
+    1932      4250      Outlays                                                 
+                                                                                
+    1942      4250      Capital Outlay                                          
+                                                                                
+    1962                                                                        
+                                                                                
+    1972                                                                        
+                                                                                
+    1982                                                                        
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                 Table 5                                        
+                           Types of Government                                  
+                             By Census Year                                     
+                                                                                
+                                                                                
+    1902                                                                        
+                                                                                
+                                                                                
+    Total Government              TGG                                           
+                                                                                
+    State Government              SSS                                           
+                                                                                
+    Local Government              LTT  calculated                               
+                                                                                
+    Counties                                                                    
+                                                                                
+    Cities > 25,000                                                             
+                                                                                
+    Cities 8,000 to 2,500                                                       
+                                                                                
+    Other Minor Civil Divisions   L03                                           
+                                                                                
+                                                                                
+    1913                                                                        
+                                                                                
+    State Government              SSS                                           
+                                                                                
+    Counties                      CCC                                           
+                                                                                
+                                                                                
+                                                                                
+    Incorporated Places           L11                                           
+     over 2,500                                                                 
+                                                                                
+    Incorporated Places           L12                                           
+     2,500 to 8,000                                                             
+                                                                                
+    Incorporated Places                                                         
+     over 8,000 to 30,000                                                       
+                                                                                
+    Incorporated Places                                                         
+     over 30,000                                                                
+                                                                                
+                                                                                
+                                                                                
+    1932                                                                        
+                                                                                
+                                                                                
+    State Government              SSS                                           
+                                                                                
+    Counties                      CCC                                           
+                                                                                
+    Cities and Towns              L31                                           
+                                                                                
+    School Districts              L32                                           
+                                                                                
+    Other Civil Divisions         L33                                           
+                                                                                
+    Towns (Townships)             L34                                           
+                                                                                
+    Total Government              TGG                                           
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+    1942                                                                        
+                                                                                
+    State Government              SSS                                           
+                                                                                
+    Local Government              LTT                                           
+                                                                                
+    Counties                                                                    
+                                                                                
+    Cities                                                                      
+                                                                                
+    School Districts                                                            
+                                                                                
+    Special Districts                                                           
+                                                                                
+    Total Government Gross        TGG                                           
+                                                                                
+    Total Government Net          TGN                                           
+                                                                                
+                                                                                
+                                                                                
+    1962                                                                        
+                                                                                
+    State Government              SSS                                           
+                                                                                
+    Local Government              LLL                                           
+                                                                                
+                                                                                
+                                                                                
+    1972                                                                        
+                                                                                
+    State Government              SSS                                           
+                                                                                
+    Local Government              LLL                                           
+                                                                                
+                                                                                
+                                                                                
+    1982                                                                        
+                                                                                
+    State Government              SSS                                           
+                                                                                
+    Local Government              LLL                                           

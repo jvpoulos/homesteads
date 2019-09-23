@@ -1,0 +1,77 @@
+File Manifest for ICPSR 6305
+
+Sylla, Richard E., John B. Legler, and John Wallis. STATE AND LOCAL
+GOVERNMENT [UNITED STATES]: SOURCES AND USES OF FUNDS, CITY AND COUNTY
+DATA, NINETEENTH CENTURY. New York, NY: Richard E. Sylla, New York
+University/Athens, GA: John B. Legler, University of Georgia/College Park,
+MD: John Wallis, University of Maryland [producers], 1994. Ann Arbor, MI:
+Inter-university for Political and Social Research [distributor], 1995.
+http://doi.org/10.3886/ICPSR06305.v1
+
+Details on the version history can be found below the file listings.
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06305-related_literature.txt        -       -         -       2017-08-03  -
+
+    06305-manifest.txt                  -       -         -       2017-08-04  -
+
+    06305-Codebook.txt                  -       -         -       1997-06-03  3c203c61bf68adbd05ac29068b4998ac
+
+
+DS0001 CITYEXP.TXT: City Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06305-0001-Data.txt                 42      2,849     6       1995-05-09  ab858295604f811fb9ddc406f0c8ba72
+
+
+DS0002 CITYREV.TXT: City Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06305-0002-Data.txt                 43      978       unknown 1995-05-09  e095c32600c1024f9ff92c37e3aba15f
+
+
+DS0003 COUNTEXP.TXT: County Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06305-0003-Data.txt                 64      889       unknown 1995-05-09  cd72d023afb4bf12f3e7e86a2ea46631
+
+
+DS0004 COUNTREV.TXT: County Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06305-0004-Data.txt                 42      652       unknown 1995-05-09  f4bf7bddad89c46a8726ead2e7f3f163
+
+
+DS0005 CNDEBT.TXT: County Debt Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06305-0005-Data.txt                 42      24        unknown 1995-05-09  09f449c189234815f12a7f1d73312b56
+
+
+DS0006 CNASSESS.TXT: Property Tax Assessments Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06305-0006-Data.txt                 42      82        6       1995-05-09  ef64a95568cc71434820283c908d4b66
+
+
+Version History
+
+2006-01-12 All files were removed from dataset 7 and flagged as study-level
+files, so that they will accompany all downloads.

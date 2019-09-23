@@ -1,0 +1,24 @@
+"Alameda","CA","CNT",1872,5000,69000      
+"Bristol","MA","CNT",1860,5000,92667      
+"Brooks","GA","CNT",1879,5000,2132        
+"Clarke","GA","CNT",1871,5000,30100       
+"Dukes","MA","CNT",1860,5000,13892        
+"Essex","MA","CNT",1860,5000,284690       
+"Franklin","MA","CNT",1861,5000,24000     
+"Hall","GA","CNT",1880,5000,1828          
+"Hampden","MA","CNT",1860,5000,6100       
+"Kennebec","ME","CNT",1860,5000,60000     
+"Kennebec","ME","CNT",1870,5000,50100     
+"Mecklenburg","NC","CNT",1873,5000,373530 
+"Middlesex","MA","CNT",1860,5000,300406.17
+"Muscogee","GA","CNT",1870,5000,16049     
+"Norfolk","MA","CNT",1860,5000,34965.04   
+"Oconee","GA","CNT",1873,5000,4844390     
+"Plymouth","MA","CNT",1852,5000,27000     
+"Plymouth","MA","CNT",1860,5000,49000     
+"Quitman","GA","CNT",1870,5000,1278       
+"St. Louis","MO","CNT",1870,5000,5212     
+"Sullivan","MO","CNT",1870,5000,1000      
+"Sumter","GA","CNT",1872,5000,23499       
+"Winneshiek","IA","CNT",1852,5000,81000   
+"Worcester","MA","CNT",1860,5000,134134   

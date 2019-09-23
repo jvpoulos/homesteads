@@ -1,0 +1,1113 @@
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                  STATE AND LOCAL GOVERNMENT [UNITED STATES]:                   
+                           SOURCES AND USES OF FUNDS,                           
+                    CITY AND COUNTY DATA, NINETEENTH CENTURY                    
+                                                                                
+                                  (ICPSR 6305)                                  
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                             Principal Investigators                            
+                                                                                
+                                Richard E. Sylla                                
+                               New York University                              
+                                                                                
+                                 John B. Legler                                 
+                              University of Georgia                             
+                                                                                
+                                      and                                       
+                                                                                
+                                   John Wallis                                  
+                             University of Maryland                             
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                               First ICPSR Release                              
+                                  February 1995                                 
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                         Inter-university Consortium for                        
+                          Political and Social Research                         
+                                  P.O. Box 1248                                 
+                            Ann Arbor, Michigan 48106                           
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+-                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                             BIBLIOGRAPHIC CITATION                             
+                                                                                
+                                                                                
+            Publications  based  on  ICPSR  data  collections  should           
+            acknowledge  those  sources  by  means  of  bibliographic           
+            citations.  To ensure that such source  attributions  are           
+            captured  for  social  science  bibliographic  utilities,           
+            citations must appear in footnotes or  in  the  reference           
+            section  of publications.  The bibliographic citation for           
+            this data collection is:                                            
+                                                                                
+                                                                                
+                 Sylla, Richard E., John  B.  Legler,  and  John                
+                 Wallis.  STATE  AND  LOCAL  GOVERNMENT  [UNITED                
+                 STATES]: SOURCES AND USES OF  FUNDS,  CITY  AND                
+                 COUNTY   DATA,   NINETEENTH  CENTURY  [Computer                
+                 file]. New York, NY: Richard E. Sylla, New York                
+                 University/Athens,   GA:   John   B.    Legler,                
+                 University of Georgia/College  Park,  MD:  John                
+                 Wallis,  University  of  Maryland  [producers],                
+                 1994.  Ann  Arbor,  MI:   Inter-university  for                
+                 Political  and  Social  Research [distributor],                
+                 1995.                                                          
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                REQUEST FOR INFORMATION ON USE OF ICPSR RESOURCES               
+                                                                                
+            To provide funding agencies  with  essential  information           
+            about  use  of  archival  resources and to facilitate the           
+            exchange  of  information   about   ICPSR   participants'           
+            research activities, users of ICPSR data are requested to           
+            send to ICPSR bibliographic citations for each  completed           
+            manuscript or thesis abstract. Please indicate in a cover           
+            letter which data were used.                                        
+                                                                                
+                                                                                
+                                                                                
+                                 DATA DISCLAIMER                                
+                                                                                
+            The original  collector  of  the  data,  ICPSR,  and  the           
+            relevant  funding  agency bear no responsibility for uses           
+            of this collection or for interpretations  or  inferences           
+            based upon such uses.                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+-                                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                         DATA COLLECTION DESCRIPTION                            
+                                                                                
+                                                                                
+     Richard E. Sylla, John B. Legler, and John Wallis                          
+          STATE AND LOCAL GOVERNMENT [UNITED STATES]: SOURCES  AND  USES        
+     OF FUNDS, CITY AND COUNTY DATA, NINETEENTH CENTURY (ICPSR 6305)            
+                                                                                
+     SUMMARY: This data collection contains  fiscal  data  on  city  and        
+     county  government  revenues,  expenditures, debt, and property tax        
+     assessments for 95 counties and 84 cities over the  course  of  the        
+     19th  century.   Variables  in this collection include state, year,        
+     type  of  government,  and  the  dollar  amount  of  the   revenue,        
+     expenditure, debt, or assessment. There are six data files. Parts 1        
+     and 2 contain city expenditures and revenues. Parts 3 and 4 contain        
+     county  expenditures  and  revenues.  Part  5  presents county debt        
+     totals, where available.  Part 6 reports property tax assessments.         
+                                                                                
+     UNIVERSE: Financial records of 95 counties and 84 cities throughout        
+     the United States.                                                         
+                                                                                
+     NOTE: (1) The data files use commas  and  quote  marks  to  delimit        
+     variables.   (2)  See  also  SOURCES AND USES OF FUNDS IN STATE AND        
+     LOCAL GOVERNMENTS, 1790-1915: [UNITED STATES] (ICPSR 9728).                
+                                                                                
+     EXTENT OF COLLECTION: 6 data files + machine-readable documentation        
+     (text)                                                                     
+                                                                                
+     DATA FORMAT: Logical Record Length                                         
+                                                                                
+     Part 1: CITYEXP.TXT: City           Part 2: CITYREV.TXT: City              
+       Expenditures Data                   Revenues Data                        
+     File Structure: rectangular         File Structure: rectangular            
+     Cases: 2,849                        Cases: 978                             
+     Variables: 6                        Variables: 6                           
+     Record Length: 42                   Record Length: 43                      
+     Records Per Case: 1                 Records Per Case: 1                    
+                                                                                
+     Part 3: COUNTEXP.TXT:              Part 4: COUNTREV.TXT: County            
+       County Expenditures Data            Revenues Data                        
+     File Structure: rectangular         File Structure: rectangular            
+     Cases: 889                          Cases: 652                             
+     Variables: 6                        Variables: 6                           
+     Record Length: 64                   Record Length: 42                      
+     Records Per Case: 1                 Records Per Case: 1                    
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+     Part 5: CNDEBT.TXT:                 Part 6: CNASSESS.TXT:                  
+       County Debt Data                    Property Tax Assessments Data        
+     File Structure: rectangular         File Structure: rectangular            
+     Cases: 24                           Cases: 82                              
+     Variables: 6                        Variables: 6                           
+     Record Length: 42                   Record Length: 42                      
+     Records Per Case: 1                 Records Per Case: 1                    
+                                                                                
+     Part 7: Codebook for All Parts                                             
+     Record Length: 80                                                          
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+          State and Local Government: Sources and Uses of Funds                 
+              City and County Data, 19th Century                                
+                                                                                
+    Sponsoring Agency: National Bureau of Economic Research                     
+                                                                                
+                                                                                
+    Principal Investigators:                                                    
+                                                                                
+    Richard E. Sylla                                                            
+         Leonard N. Stern School of Business                                    
+         New York University                                                    
+         100 Trinity Place                                                      
+         New York, NY 10006-1594                                                
+                                                                                
+    John B. Legler                                                              
+         Department of Economics                                                
+         University of Georgia                                                  
+         Athens, GA                                                             
+                                                                                
+    John Wallis                                                                 
+         Department of Economics                                                
+         University of Maryland                                                 
+         College Park, MD 20742                                                 
+                                                                                
+                                                                                
+    Funded by:                                                                  
+                                                                                
+         National Science Foundation                                            
+              Grants: SES-8419857, SES-8706814, SES-8908272, and                
+                      SBR-9108618                                               
+                                                                                
+                                                                                
+    Data Edition:                                                               
+         January 1994.                                                          
+                                                                                
+         This is preliminary data covering 95 counties and 84 cities            
+    governments throughout the 19th century.                                    
+                                                                                
+                                                                                
+         The data in this study are made available through ICPSR.               
+    They were originally collected by Richard Sylla, John Legler, and           
+    John Wallis.  Neither the original investigators, the National              
+    Bureau of Economic Research, or ICPSR bear any responsibility for           
+    the analysis or interpretations presented here.  Nor are they               
+    responsible for any uses to which this data may be put.                     
+                                                                                
+         Individuals receiving and using this data are strongly urged           
+    to inform the ICPSR and the principle investigators of any errors           
+    or discrepancies discovered during the use of this data.  In                
+    order to provide agencies with essential information about the              
+    use of archival sources and to facilitate the exchange of                   
+    information, each user is expected to send two copies of                    
+    completed manuscripts (or thesis) ICPSR of work based on these              
+    data.                                                                       
+                                                                                
+         This data set reports fiscal data for 95 counties and 84               
+    cities over the course of the 19th century.  These data were                
+    taken from a wide variety of sources, including newspaper                   
+    reports, reports of Selectmen, reports of county and city                   
+    Treasurer's, and the like.  They have been integrated into the              
+    coding scheme used in our other 19th and 20th century state and             
+    local data sets.                                                            
+                                                                                
+         We have tried to construct local government data at decade             
+    intervals, not on an annual basis.  (This is consistent with our            
+    local government data for the 20th century, taken from census               
+    sources.)  In practice, this meant taking local government data,            
+    where we could find it, at the year closest to the census year.             
+    As a result, the current series is spread over a wide number of             
+    years, bunched around the census years.                                     
+                                                                                
+         At the present time the data themselves are reliable, that             
+    is, the coding and numbers are unlikely to change.  They are,               
+    however, something of an eclectic sample.  As you will see, New             
+    England and Georgia are over represented at the present.  This is           
+    due to the abundant local government materials at Littauer                  
+    Library, and John Legler's residence in Georgia.                            
+                                                                                
+         The cities and counties covered in this release are listed             
+    in Tables 5 and 6.                                                          
+                                                                                
+         We are currently working on the late 19th century census               
+    sources on local governments, as well as the various WPA                    
+    documents inventories, which are particularly rich in county                
+    data.  These sources will be released as they become available.             
+                                                                                
+                                                                                
+                                                                                
+    Data Collection and Coding                                                  
+                                                                                
+         We began collecting data with two objectives in mind.  The             
+    first was to make our categories consistent with the existing               
+    categories used by the census in the 20th century, so that we can           
+    match our data with theirs.  The second was to facilitate the               
+    collection of the data.  This was particularly important since we           
+    typically face the problem of too much rather than too little               
+    information.  A method for organizing detail without losing                 
+    information was of primary importance.                                      
+                                                                                
+         The solution adopted resembles the standard industrial                 
+    classification (SIC) codes. Expenditures, revenues, and debt are            
+    given one-digit classifications; major categories that match the            
+    major 20th-century categories are given two-digit                           
+    classifications; minor categories that correspond to the special            
+    features of 19th- and/or 20th-century features of government are            
+    given three-digit codes.                                                    
+                                                                                
+         No coding scheme can be completely consistent with the                 
+    census classifications, since the census has continually changed            
+    its classifications over the twentieth century.   We, therefore,            
+    started with the major divisions of revenues and expenditures               
+    from the Census of Governments after 1960.  To that we added the            
+    major revenue and expenditure categories from the census for                
+    early part of the century excluded as categories after 1950.  The           
+    result is the major categories listed in Tables 1 and 2.  These             
+    are the major two-digit classifications.                                    
+                                                                                
+                                                                                
+         Finer classifications, taken from actual census categories             
+    and from our own experience with the 19th century data, make up a           
+    set of three-digit categories.  The three digit categories are              
+    subsets of the two-digit categories.  In other words, the sum of            
+    all of the three-digit categories associated with a particular              
+    two-digit category, is the total for that two-digit category.  So           
+    the sum of the three digit codes 2110 through 2190, is equal to             
+    the total for the two-digit code 2100.  The three-digit codes are           
+    shown in Tables 3 and 4.                                                    
+                                                                                
+         In practice, the raw data is very heterogeneous.  In the               
+    case of our state series, where we collected annual series for              
+    each state, we constructed unique four digit codes for each                 
+    states.  For many of the cities and counties, we were only able             
+    to uncover data on total expenditures or revenues.  In most other           
+    places the level of detail is fairly limited.  As a result we               
+    limited the coding to the three-digit level reported in Tables 3            
+    and 4.                                                                      
+                                                                                
+         This data set also includes some information on long-term              
+    debt and assessed property values, but only for counties.  Long-            
+    term debt is coded 5000, and assessed property values in the                
+    8000s.                                                                      
+                                                                                
+                                                                                
+    Form of Machine Readable Data                                               
+                                                                                
+         The data is organized in a database format, not in tables.             
+    Each value for expenditures, revenues, debt, or assessed value is           
+    represented by a observation in the data set.  All the files are            
+    ASCII text files, using comma and quote delimiters.  Each                   
+    observation includes the dollar amount of the expenditure or                
+    revenue, and three identifiers: state, year, type of government,            
+    and ISO (ISO is the Code).                                                  
+                                                                                
+    ==================================================                          
+         STATE     YEAR     TYPE    ISO       VALUE                             
+    ==================================================                          
+    Where:                                                                      
+         STATE = State.                                                         
+                                                                                
+         YEAR  = Census year.                                                   
+                                                                                
+         TYPE  = Type of Government.                                            
+                 City data = CTY                                                
+                 County data = CNT                                              
+                                                                                
+         ISO   = the appropriate code.                                          
+                                                                                
+         VALUE = the dollar amount of the revenue, expenditure, debt,           
+                   or assessment.                                               
+                                                                                
+         There are six data files.  Two files, CITYREV.TXT and                  
+    CITYEXP.TXT, report city revenues and expenditures, respectively.           
+    Two other files, COUNTREV.TXT and COUNTEXP.TXT report county                
+    revenues and expenditures, respectively.  The file CNDEBT.TXT               
+    reports county debt totals, where available.  And the final file,           
+    CNASSESS.TXT reports property tax assessments.                              
+                                                                                
+         Each of the expenditure and revenue files contains three               
+    panels.  Each panel contains information on a different level of            
+    aggregation, given in descending order of aggregation.                     
+         The first panel gives the revenue totals, this is the 1-               
+    digit panel. The ISO code for total revenues is "1".  There is a            
+    blank line at the end of the 1-digit panel.  The ISO codes are              
+    literally "1 digit" long.                                                   
+                                                                                
+         The 2-digit panel includes all 2-digit ISO codes (for                  
+    revenues they all start with 1 or 2, for expenditures with 3 or             
+    4).  There is a blank line at the end of the 2-digit panel.                 
+    Again, the ISO codes are literally 2 digits long.                           
+                                                                                
+         The 3-digit panel includes all 3-digit ISO codes (for                  
+    revenues they all start with 1 or 2, for expenditures with 3 or             
+    4).  Again, the ISO codes are literally 3 digits long.                      
+                                                                                
+         Because of the structure of the data, the values given for             
+    the 2-digit categories sum to the 1-digit totals, and the same is           
+    true for the 3-digit categories.  Before you use the data                   
+    remember to separate the panels.  If you total all of the codes             
+    for each state, you will get three times total revenue or                   
+    expenditure.                                                                
+                                                                                
+         There are no panels in the debt and assessed value files.              
+                                                                                
+                                                                                
+    CAVEATS                                                                     
+                                                                                
+    Important Caveats                                                           
+                                                                                
+         There are several things you should be aware of:                       
+                                                                                
+         - Total Revenues have the code "1" and Total Expenditures              
+    have the code "3".                                                          
+                                                                                
+         - Two- and three-digit revenues have codes that start with             
+    the number "1" or "2"; two- and three-digit expenditures have               
+    codes that start with the number "3" or "4".  So adding up all of           
+    the two digit codes from "10" to "19" will not give you total               
+    revenues.                                                                   
+                                                                                
+         - There is a difference between 1000 numbers and 2000                  
+    numbers.  They correspond to the categories of "tax" and                    
+    "non-tax" revenues.  There is no comparable meaning to the 3000             
+    and 4000 numbers.                                                           
+                                                                                
+         - Most of the two-digit codes are straightforward.  That is,           
+    all of the three digit codes they encompass refer to related                
+    aspects of fiscal activity.  On the other hand, some two-digit              
+    codes encompass three-digit codes that have nothing to do with              
+    each other.  This is particularly true for the "miscellaneous"              
+    and "not elsewhere classified" categories 2900 and 3900.  If you            
+    use the two-digit codes, it is wise to examine the underlying               
+    three-digit codes.                                                          
+                                                                                
+         - Because this a preliminary data set there may be some                
+    problems using three-digit codes.  You may find a three-digit               
+    code in the data that is not listed in Table 3 or 4.  We can go             
+    back to the original files and find out what the code is for you.           
+                                                                                
+                                                                                
+         We hope that you will find the data set useful and would               
+    appreciate you keeping us informed of the uses to which the data            
+    is put.  Remember for now: CAVEAT EMPTOR.  We will speed clean              
+    versions of the data to ISR as becomes available and, we hope,              
+    will have a book explaining everything going on with the data               
+    sometime soon.                                                              
+                                                                                
+         Any comments or suggestions will be greatly appreciated.               
+                                                                                
+    Richard Sylla            John Legler              John Wallis               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                 TABLE 1                                        
+                           REVENUE CATEGORIES                                   
+                           2-DIGIT CATEGORIES                                   
+                                                                                
+                                                                                
+    0001      TOTAL REVENUE                                                     
+                                                                                
+    0002      GENERAL REVENUE                                                   
+                                                                                
+    1000         TAXES                                                          
+    1100            PROPERTY                                                    
+    1200            SPECIAL                                                     
+    1300              INCOME                                                    
+    1400              OTHER BUSINESS TAXES                                      
+    1500              SALES                                                     
+    1600              OTHER SPECIAL TAXES                                       
+    1700            POLL                                                        
+    1800            LICENSES AND PERMITS                                        
+    1900            OTHER TAXES                                                 
+                                                                                
+    2000         NON-TAX REVENUES                                               
+                                                                                
+    2100            SPECIAL ASSESSMENTS                                         
+    2200            FINES,FORFEITS,& ESCHEATS                                   
+    2300            SUBVENTIONS AND GRANTS                                      
+    2350               INTERGOVERNMENTAL GRANTS                                 
+    2400            DONATIONS, PRIVILEGES, & PENSION ASSESSMENTS                
+                                                                                
+    2500            HIGHWAY PRIVILEGES, RENTS, & INTEREST                       
+    2600            EARNINGS OF GENERAL DEPTS.                                  
+                                                                                
+    2700         EARNINGS OF PUBLIC SERVICE ENTERPRISES                         
+                                                                                
+    2800         INSURANCE TRUST REVENUE                                        
+                                                                                
+                                                                                
+    2900         CHARGES AND MISCELLANEOUS                                      
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                 TABLE 2                                        
+                         EXPENDITURE CATEGORIES                                 
+                           2-DIGIT CATEGORIES                                   
+                                                                                
+                                                                                
+    0003    TOTAL EXPENDITURE                                                   
+                                                                                
+    0004    GENERAL EXPENDITURE                                                 
+                                                                                
+      3100     EDUCATION                                                        
+                                                                                
+      3200     SOCIAL SERVICE AND WELFARE                                       
+                                                                                
+      3300     TRANSPORTATION                                                   
+                                                                                
+      3400     PUBLIC SAFETY                                                    
+                                                                                
+      3500     ENVIRONMENTAL AND HOUSING                                        
+                                                                                
+      3600     GOVERNMENT ADMINISTRATION                                        
+                                                                                
+      3700     PUBLIC SERVICE ENTERPRISE EXPENDITURES                           
+                                                                                
+      3800     INSURANCE TRUST EXPENDITURES                                     
+                                                                                
+      3900     NOT ELSEWHERE CLASSIFIED                                         
+                                                                                
+      4000     INTEREST ON GENERAL DEBT                                         
+                                                                                
+                                                                                
+      5000     LONG-TERM DEBT                                                   
+                                                                                
+                                                                                
+      8000     ASSESSED PROPERTY VALUE                                          
+                                                                                
+      8100     VALUE OF REAL PROPERTY                                           
+                                                                                
+      8200     VALUE OF PERSONAL PROPERTY                                       
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                 TABLE 3                                        
+                           REVENUE CATEGORIES                                   
+                           3-DIGIT CATEGORIES                                   
+                                                                                
+                                                                                
+    0001    TOTAL REVENUE                                                       
+                                                                                
+    0002    GENERAL REVENUE                                                     
+                                                                                
+      1000   TAXES                                                              
+                                                                                
+      1200    SPECIAL                                                           
+      1210      PROPERTY                                                        
+      1220      INHERITANCE                                                     
+      1230      CAPITATION                                                      
+                                                                                
+      1300    INCOME                                                            
+      1310      PERSONAL                                                        
+      1320      BUSINESS                                                        
+                                                                                
+      1400    OTHER BUSINESS TAXES                                              
+      1410      RAILROADS                                                       
+      1420      BANKS                                                           
+      1430      INSURANCE COSTS OR PREMIUMS                                     
+      1440      CANALS                                                          
+      1450      OTHER TRANSPORTATION                                            
+      1460      OTHER BUSINESS                                                  
+      1470      TRANSIT DUTIES                                                  
+      1480      DIVIDENDS                                                       
+                                                                                
+      1500    SALES                                                             
+                                                                                
+      1600    OTHER SPECIAL TAXES                                               
+      1610      TAX ON LOANS                                                    
+      1620      TAX ON MONEY AT INTEREST                                        
+      1630      MILITIA                                                         
+                                                                                
+      1700    POLL                                                              
+                                                                                
+      1800    LICENSES AND PERMITS                                              
+      1810      LICENSE TAXES                                                   
+                                                                                
+      1900    OTHER TAXES                                                       
+      1901        GENERAL TAXES                                                 
+      1910      ARREARS ON TAXES                                                
+      1920      TAXES ON SPECIFIC SERVICES                                      
+      1930      OTHER TAXES                                                     
+                                                                                
+                                                                                
+      2000  NON-TAX REVENUES                                                    
+                                                                                
+      2100    SPECIAL ASSESSMENTS                                               
+                                                                                
+      2200    FINES,FORFEITS,& FEES                                             
+      2210      COURT CLERKS                                                    
+      2220      FINES                                                           
+      2230      FEES                                                            
+      2240      PROSECUTION                                                     
+      2250      PENALTIES                                                       
+      2270      FORFEITURES                                                     
+                                                                                
+      2300    SUBVENTIONS AND GRANTS                                            
+      2350      INTERGOVERNMENTAL GRANTS                                        
+      2360      INTERGOVERNMENTAL TRANSFERS                                     
+                                                                                
+      2400    DONATIONS, PRIVILEGES, & PENSION ASSESSMENTS                      
+      2410      BEQUESTS                                                        
+      2420      PENSIONS                                                        
+                                                                                
+      2500    TRANSPORTATION PRIVILEGES, RENTS, & INTEREST                      
+      2510      ROADS                                                           
+      2520      FUNDS                                                           
+      2530      WATERWAYS                                                       
+      2590      OTHER TRANSPORTATION                                            
+                                                                                
+      2600    EARNINGS OF GENERAL DEPTS.                                        
+      2610      EDUCATION                                                       
+      2620      CHARITIES                                                       
+      2630      PUBLIC WORKS                                                    
+      2640      PUBLIC PROTECTION                                               
+      2650      NATURAL RESOURCES                                               
+      2660      GOVERNMENT                                                      
+      2680      HEALTH                                                          
+      2690      COMMISSIONERS                                                   
+                                                                                
+      2700     EARNINGS OF PUBLIC SERVICE ENTERPRISES                           
+      2710      INTEREST                                                        
+      2720      ASSESSMENTS                                                     
+      2730      RECEIPTS & INCOME                                               
+      2740      PRIVILEGES                                                      
+      2750      LIQUOR STORES                                                   
+      2760      ALL OTHER                                                       
+                                                                                
+      2800    INSURANCE TRUST REVENUE                                           
+                                                                                
+                                                                                
+      2900    CHARGES AND MISCELLANEOUS                                         
+      2901        MISCELLANEOUS RECEIPTS                                        
+      2902        MISCELLANEOUS CHARGES                                         
+                                                                                
+      2910      INTEREST                                                        
+                                                                                
+      2920      DIVIDENDS                                                       
+                                                                                
+      2930      LOAN REVENUES                                                   
+                                                                                
+      2940      LAND SALES & RENTALS                                            
+                                                                                
+      2950      INSPECTION FEES                                                 
+                                                                                
+      2960      PRISONS                                                         
+                                                                                
+      2970      SLAVES                                                          
+                                                                                
+      2980      MISCELLANEOUS FUNDS                                             
+                                                                                
+      2990      BANKS                                                           
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                 TABLE 4                                        
+                         EXPENDITURE CATEGORIES                                 
+                           3-DIGIT CATEGORIES                                   
+                                                                                
+                                                                                
+                                                                                
+       0003 TOTAL EXPENDITURE                                                   
+                                                                                
+       0004 GENERAL EXPENDITURE                                                 
+                                                                                
+      3100  EDUCATION                                                           
+      3110     SCHOOLS                                                          
+      3130     HIGHER                                                           
+      3140     LOWER                                                            
+      3150     ACADEMIC CERTIFICATE FUND                                        
+      3160     LIBRARIES                                                        
+      3170     MUSEUMS                                                          
+                                                                                
+      3200  SOCIAL SERVICE AND WELFARE                                          
+      3210     PUBLIC WELFARE (CHARITIES)                                       
+      3220     HOSPITALS                                                        
+      3230     ASYLUMS                                                          
+      3240     SOCIAL SERVICE ADMINISTRATION                                    
+      3250     VETERANS' ADMINISTRATION                                         
+                                                                                
+      3300  TRANSPORTATION                                                      
+      3310     HIGHWAYS                                                         
+      3320     AIR TRANSPORT                                                    
+      3330     BRIDGES                                                          
+      3340     WATER & TERMINALS                                                
+      3350     OTHER TRANSPORT                                                  
+      3360     PUBLIC WORKS                                                     
+      3370     RAILROADS                                                        
+                                                                                
+      3400  PUBLIC SAFETY                                                       
+      3410     POLICE PROTECTION                                                
+      3420     FIRE PROTECTION                                                  
+      3430     CORRECTIONS                                                      
+      3440     PROTECTIVE INSPECTION AND REGULATION                             
+      3450     MILITIA                                                          
+      3460     NATIONAL GUARD                                                   
+      3470     NAVAL RESERVE                                                    
+                                                                                
+                                                                                
+      3500  ENVIRONMENTAL AND HOUSING                                           
+      3510     NATURAL RESOURCES                                                
+      3520     PARKS AND RECREATION                                             
+      3530     HOUSING                                                          
+      3540     SEWERAGE                                                         
+      3550     SANITATION                                                       
+      3560     DEPARTMENT OF HEALTH                                             
+      3570     WEATHER SERVICE                                                  
+                                                                                
+      3600  GOVERNMENT ADMINISTRATION                                           
+      3610     LEGISLATIVE                                                      
+      3620     EXECUTIVE DEPARTMENT                                             
+      3630     JUDICIAL                                                         
+      3640     ELECTIONS                                                        
+      3650     FINANCIAL ADMINISTRATION                                         
+      3660     LEGAL EXPENSES                                                   
+      3670     PUBLIC GROUNDS & BUILDINGS                                       
+      3680     DEPARTMENTS                                                      
+      3690     OTHER GOVERNMENT ADMINISTRATION                                  
+                                                                                
+      3700   EXPENDITURES PUBLIC SERVICE ENTERPRISES                            
+                                                                                
+      3800  INSURANCE TRUST EXPENDITURES                                        
+                                                                                
+      3900  NOT ELSEWHERE CLASSIFIED                                            
+      3901     GENERAL APPROPRIATIONS                                           
+      3910     CONTINGENT FUND                                                  
+      3920     WARRANTS ON ACCOUNT                                              
+      3950     SOCIETIES & ASSOCIATIONS                                         
+      3980     MISCELLANEOUS INCLUDING:                                         
+                                                                                
+      4000  INTEREST                                                            
+                                                                                
+      4100  SINKING FUNDS AND DEBT REPAYMENT, DEPOSITS AND STOCK                
+            PURCHASE                                                            
+      4110     SINKING FUND                                                     
+      4120     LOAN REPAYMENT TO SPECIFIC SOURCES                               
+      4130     LOANS REDEEMED                                                   
+      4140     DEPOSITS                                                         
+      4150     PURCHASES OF BONDS                                               
+      4160     PUBLIC DEBT                                                      
+      4170    STOCK PURCHASES                                                   
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                 Table 5                                        
+                             Cities Included                                    
+                                                                                
+                                                                                
+    Name                State                                                   
+                                                                                
+    Abington            MA                                                      
+    Acton               MA                                                      
+    Albany              GA                                                      
+    Arlington           MA                                                      
+    Athens              GA                                                      
+    Atlanta             GA                                                      
+    Augusta             GA                                                      
+    Augusta             ME                                                      
+    Baltimore           MD                                                      
+    Bangor              ME                                                      
+    Beverly             MA                                                      
+    Bolton              MA                                                      
+    Boston              MA                                                      
+    Brighton            MA                                                      
+    Brooklyn            CA                                                      
+    Brooklyn            NY                                                      
+    Buffalo             NY                                                      
+    Burlington          VT                                                      
+    Calhoun             GA                                                      
+    Cambridge           MA                                                      
+    Charleston          SC                                                      
+    Chelsea             MA                                                      
+    Chicago             IL                                                      
+    Cincinnati          OH                                                      
+    Cleveland           OH                                                      
+    Clinton             ME                                                      
+    Columbus            GA                                                      
+    Columbus            OH                                                      
+    Concord             MA                                                      
+    Concord             NH                                                      
+    Dauphin             PA                                                      
+    Dedham              MA                                                      
+    Detroit             OH                                                      
+    Dorcester           MA                                                      
+    Dougherty           GA                                                      
+    Fall River          MA                                                      
+    Fitchburg           MA                                                      
+    Gloucester          MA                                                      
+    Harrisburg          PA                                                      
+    Hartford            CT                                                      
+    Hollowell           ME                                                      
+    Hopkinton           MA                                                      
+    Houston             TX                                                      
+    Keene               NH                                                      
+    Kennebec            ME                                                      
+    Lawrence            MA                                                      
+    Lewiston            ME                                                      
+    Louisville          KY                                                      
+    Lowell              MA                                                      
+    Lunenberg           MA                                                      
+    Lynn                MA                                                      
+    Malden              MA                                                      
+    Manchester          NH                                                      
+    Memphis             TN                                                      
+    Milford             MA                                                      
+    Milwaukee           WI                                                      
+    Nashville           TN                                                      
+    New Bedford         MA                                                      
+    New Haven           CT                                                      
+    New Orleans         LA                                                      
+    New York            NY                                                      
+    Newbury             MA                                                      
+    Newport             RI                                                      
+    Oakland             CA                                                      
+    Perry               GA                                                      
+    Philadelphia        PA                                                      
+    Pittsburg           PA                                                      
+    Portland            ME                                                      
+    Portland            OR                                                      
+    Providence          RI                                                      
+    Richmond            GA                                                      
+    Richmond            VA                                                      
+    Rockland            ME                                                      
+    Rome                GA                                                      
+    Saco                ME                                                      
+    Salem               MA                                                      
+    San Francisco       CA                                                      
+    Savannah            GA                                                      
+    Springfield         MA                                                      
+    St. Louis           MO                                                      
+    Washington          DC                                                      
+    Watertown           MA                                                      
+    Worcester           MA                                                      
+    Worchester          MA                                                      
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                 Table 6                                        
+                            Counties Included                                   
+                                                                                
+                                                                                
+                                                                                
+    Name                State                                                   
+                                                                                
+    Adair               MO                                                      
+    Alameda             CA                                                      
+    Baker               GA                                                      
+    Barnstable          MA                                                      
+    Bartow              GA                                                      
+    Berkshire           MA                                                      
+    Bibb                GA                                                      
+    Bristol             MA                                                      
+    Brooks              GA                                                      
+    Burke               GA                                                      
+    Butts               GA                                                      
+    Carroll             GA                                                      
+    Charleston          SC                                                      
+    Chatooga            GA                                                      
+    Cherokee            GA                                                      
+    Clarke              GA                                                      
+    Cobb                GA                                                      
+    Cook                IL                                                      
+    Coweta              GA                                                      
+    Cumberland          ME                                                      
+    DeKalb              IL                                                      
+    DeWitt              IL                                                      
+    Dodge               GA                                                      
+    Dougherty           GA                                                      
+    Dukes               MA                                                      
+    Early               GA                                                      
+    Essex               MA                                                      
+    Fayette             GA                                                      
+    Floyd               GA                                                      
+    Franklin            MA                                                      
+    Fulton              GA                                                      
+    Gordon              GA                                                      
+    Hall                GA                                                      
+    Hampden             MA                                                      
+    Hancock             ME                                                      
+    Handcock            IN                                                      
+    Harris              GA                                                      
+    Henry               GA                                                      
+    Henry               IN                                                      
+    Hillsboro           FL                                                      
+    Horry               SC                                                      
+    Houston             GA                                                      
+    Jackson             GA                                                      
+    Jasper              GA                                                      
+    Jersey              IL                                                      
+    Jo Daviess          IL                                                      
+    Kane                IL                                                      
+    Kennebec            ME                                                      
+    Lauren              GA                                                      
+    Lee                 GA                                                      
+    Lincoln             ME                                                      
+    Lucus               OH                                                      
+    Lumpkin             GA                                                      
+    Macoupin            IL                                                      
+    Madison             AK                                                      
+    Madison             AL                                                      
+    Marion              GA                                                      
+    Marion              IN                                                      
+    Mecklenburg         NC                                                      
+    Middlesex           MA                                                      
+    Muscogee            GA                                                      
+    Norfolk             MA                                                      
+    Oconee              GA                                                      
+    Olgethorpe          GA                                                      
+    Oxford              ME                                                      
+    Penobscot           ME                                                      
+    Plymouth            MA                                                      
+    Polk                GA                                                      
+    Pulaski             GA                                                      
+    Putnam              MO                                                      
+    Quitman             GA                                                      
+    Randolph            GA                                                      
+    Randolph            IN                                                      
+    Richmond            GA                                                      
+    Schley              GA                                                      
+    Scott               IA                                                      
+    Snohomish           WA                                                      
+    Somerset            ME                                                      
+    Spaulding           GA                                                      
+    St. Louis           MO                                                      
+    Stewart             GA                                                      
+    Sullivan            MO                                                      
+    Sumter              GA                                                      
+    Terrell             GA                                                      
+    Thomas              GA                                                      
+    Upson               GA                                                      
+    Walker              GA                                                      
+    Washington          GA                                                      
+    Washington          ME                                                      
+    Webster             GA                                                      
+    Whitfield           GA                                                      
+    Wilkes              GA                                                      
+    Winneshiek          IA                                                      
+    Worcester           MA                                                      
+    York                ME                                                      

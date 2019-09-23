@@ -1,0 +1,99 @@
+File Manifest for ICPSR 6306
+
+Sylla, Richard E., John B. Legler, and John Wallis. STATE AND LOCAL
+GOVERNMENT [UNITED STATES]: SOURCES AND USES OF FUNDS, STATE FINANCIAL
+STATISTICS, 1933-1937. New York, NY: Richard E. Sylla, New York
+University/Athens, GA: John B. Legler, University of Georgia/College Park,
+MD: John Wallis, University of Maryland [producers], 1993. Ann Arbor, MI:
+Inter-university for Political and Social Research [distributor], 1995.
+http://doi.org/10.3886/ICPSR06306.v1
+
+Details on the version history can be found below the file listings.
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06306-manifest.txt                  -       -         -       2017-08-04  -
+
+    06306-Codebook.txt                  -       -         -       1997-06-03  57263b2db20fae4abd109d20440dad4b
+
+
+DS0001 30EXP1.TXT: Expenditures Data at 1-Digit Level of Aggregation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06306-0001-Data.txt                 24      73        3       1995-05-09  949cdfd8841b089d501f5bde4bfbcb1a
+
+
+DS0002 30EXP2.TXT: Expenditures Data at 2-Digit Level of Aggregation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06306-0002-Data.txt                 25      730       4       1995-05-09  ed539cf3d75fa08d23170cab74ec9a8f
+
+
+DS0003 30EXP3.TXT: Expenditures Data at 3-Digit Level of Aggregation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06306-0003-Data.txt                 26      2,211     4       1995-05-09  f99962d5c2f29eb65de4df8147481247
+
+
+DS0004 30EXP4.TXT: Expenditures Data at 4-Digit Level of Aggregation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06306-0004-Data.txt                 27      2,652     unknown 1995-05-09  cb9e28461f569214a1e2b69ccebde964
+
+
+DS0005 30REV1.TXT: Revenues Data at 1-Digit Level of Aggregation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06306-0005-Data.txt                 24      72        4       1995-05-09  cbbbf7bab316c4119ff865d3bbac2159
+
+
+DS0006 30REV2.TXT: Revenues Data at 2-Digit Level of Aggregation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06306-0006-Data.txt                 25      826       4       1995-05-09  ff57cb3e4ae48699de0d668ed47aab82
+
+
+DS0007 30REV3.TXT: Revenues Data at 3-Digit Level of Aggregation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06306-0007-Data.txt                 26      2,123     unknown 1995-05-09  1b5792f715e6b0c50f18408b0a4b893f
+
+
+DS0008 30REV4.TXT: Revenues Data at 4-Digit Level of Aggregation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06306-0008-Data.txt                 27      2,550     4       1995-05-09  d95f878e13820741fecb67d8df7b3e61
+
+
+DS0009 CODE.TXT: Categories of Expenditures and Revenues
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    06306-0009-Data.txt                 65      2,666     3       1995-05-09  64c20ffcf5e70002b1c2b7077a3b6bba
+
+
+Version History
+
+2006-01-12 All files were removed from dataset 10 and flagged as study-
+level files, so that they will accompany all downloads.

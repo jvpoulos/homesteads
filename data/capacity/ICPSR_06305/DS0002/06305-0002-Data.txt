@@ -1,0 +1,978 @@
+"Albany","GA","CTY",1860,1,5235            
+"Albany","GA","CTY",1871,1,18281           
+"Athens","GA","CTY",1840,1,1378            
+"Athens","GA","CTY",1846,1,1596            
+"Athens","GA","CTY",1871,1,11880           
+"Atlanta","GA","CTY",1870,1,193350         
+"Augusta","GA","CTY",1850,1,306459         
+"Augusta","GA","CTY",1870,1,266420         
+"Augusta","ME","CTY",1870,1,165381         
+"Baltimore","MD","CTY",1820,1,196426       
+"Baltimore","MD","CTY",1830,1,321466       
+"Baltimore","MD","CTY",1850,1,775195       
+"Baltimore","MD","CTY",1870,1,8340094      
+"Bangor","ME","CTY",1842,1,47502           
+"Bangor","ME","CTY",1853,1,134579          
+"Bangor","ME","CTY",1862,1,172106          
+"Boston","MA","CTY",1850,1,1753098         
+"Boston","MA","CTY",1860,1,3439236         
+"Boston","MA","CTY",1870,1,20925734        
+"Brooklyn","CA","CTY",1872,1,12146         
+"Brooklyn","NY","CTY",1870,1,34155861      
+"Calhoun","GA","CTY",1871,1,1245           
+"Charleston","SC","CTY",1850,1,388330      
+"Charleston","SC","CTY",1860,1,1192568     
+"Charleston","SC","CTY",1870,1,37408       
+"Chicago","IL","CTY",1850,1,25271          
+"Chicago","IL","CTY",1860,1,373315         
+"Chicago","IL","CTY",1870,1,4139799        
+"Cincinnati","OH","CTY",1851,1,438346      
+"Cincinnati","OH","CTY",1859,1,1584110     
+"Cincinnati","OH","CTY",1870,1,3259800     
+"Cleveland","OH","CTY",1850,1,24799        
+"Cleveland","OH","CTY",1860,1,308829       
+"Cleveland","OH","CTY",1870,1,1991365      
+"Columbus","GA","CTY",1870,1,120618        
+"Columbus","OH","CTY",1872,1,169146        
+"Dauphin","PA","CTY",1851,1,47612          
+"Detroit","OH","CTY",1857,1,200446         
+"Dougherty","GA","CTY",1870,1,12113        
+"Harrisburg","PA","CTY",1860,1,18469       
+"Hartford","CT","CTY",1861,1,230984        
+"Hartford","CT","CTY",1870,1,902153        
+"Houston","TX","CTY",1866,1,88239          
+"Kennebec","ME","CTY",1860,1,38101         
+"Lewiston","ME","CTY",1860,1,29580         
+"Lewiston","ME","CTY",1870,1,226072.4      
+"Louisville","KY","CTY",1866,1,1255853     
+"Lowell","MA","CTY",1840,1,74711           
+"Memphis","TN","CTY",1861,1,594241         
+"Milwaukee","WI","CTY",1854,1,169850       
+"Milwaukee","WI","CTY",1861,1,230269       
+"Milwaukee","WI","CTY",1872,1,906061       
+"Nashville","TN","CTY",1828,1,3810         
+"New Haven","CT","CTY",1860,1,100382       
+"New Haven","CT","CTY",1870,1,369794       
+"New Orleans","LA","CTY",1853,1,2861798    
+"New Orleans","LA","CTY",1860,1,3009214    
+"New Orleans","LA","CTY",1871,1,925911     
+"New Orleans","LA","CTY",1873,1,2423625    
+"New York","NY","CTY",1851,1,6170902       
+"New York","NY","CTY",1861,1,13098439      
+"New York","NY","CTY",1869,1,28696373      
+"Newbury","MA","CTY",1857,1,48000          
+"Newport","RI","CTY",1873,1,242027         
+"Oakland","CA","CTY",1872,1,109500         
+"Perry","GA","CTY",1872,1,1883             
+"Philadephia","PA","CTY",1820,1,138000     
+"Philadephia","PA","CTY",1828,1,200000     
+"Philadephia","PA","CTY",1838,1,258564     
+"Philadephia","PA","CTY",1860,1,5127496    
+"Philadephia","PA","CTY",1870,1,12033222   
+"Pittsburg","PA","CTY",1851,1,269205       
+"Portland","OR","CTY",1862,1,20355         
+"Portland","OR","CTY",1870,1,171530        
+"Providence","RI","CTY",1850,1,272300      
+"Providence","RI","CTY",1870,1,1680800     
+"Richmond","GA","CTY",1870,1,29830         
+"Richmond","VA","CTY",1873,1,1679908       
+"Rome","GA","CTY",1870,1,54721             
+"San Francisco","CA","CTY",1850,1,341632   
+"San Francisco","CA","CTY",1860,1,785392   
+"San Francisco","CA","CTY",1869,1,2446185  
+"Savannah","GA","CTY",1871,1,1806035       
+"St. Louis","MO","CTY",1850,1,518131       
+"St. Louis","MO","CTY",1860,1,1700818      
+"St. Louis","MO","CTY",1870,1,4304181      
+                                           
+                                           
+"Albany","GA","CTY",1860,11,4209           
+"Albany","GA","CTY",1860,29,1026           
+"Albany","GA","CTY",1871,11,11358          
+"Albany","GA","CTY",1871,14,2459           
+"Albany","GA","CTY",1871,22,938            
+"Albany","GA","CTY",1871,26,291            
+"Albany","GA","CTY",1871,29,3235           
+"Athens","GA","CTY",1840,11,1122           
+"Athens","GA","CTY",1840,14,200            
+"Athens","GA","CTY",1840,29,56             
+"Athens","GA","CTY",1846,11,1461           
+"Athens","GA","CTY",1846,14,135            
+"Athens","GA","CTY",1871,11,4687           
+"Athens","GA","CTY",1871,14,2565           
+"Athens","GA","CTY",1871,22,667            
+"Athens","GA","CTY",1871,26,196            
+"Athens","GA","CTY",1871,29,3765           
+"Atlanta","GA","CTY",1870,11,109543        
+"Atlanta","GA","CTY",1870,14,73240         
+"Atlanta","GA","CTY",1870,19,4371          
+"Atlanta","GA","CTY",1870,22,3919          
+"Atlanta","GA","CTY",1870,29,2277          
+"Augusta","GA","CTY",1850,11,50928         
+"Augusta","GA","CTY",1850,14,3875          
+"Augusta","GA","CTY",1850,19,1459          
+"Augusta","GA","CTY",1850,22,635           
+"Augusta","GA","CTY",1850,26,1771          
+"Augusta","GA","CTY",1850,29,247791        
+"Augusta","GA","CTY",1870,11,185654        
+"Augusta","GA","CTY",1870,14,18417         
+"Augusta","GA","CTY",1870,19,677           
+"Augusta","GA","CTY",1870,22,1674          
+"Augusta","GA","CTY",1870,27,2938          
+"Augusta","GA","CTY",1870,29,57060         
+"Augusta","ME","CTY",1870,11,110733        
+"Augusta","ME","CTY",1870,14,131           
+"Augusta","ME","CTY",1870,23,7839          
+"Augusta","ME","CTY",1870,29,46678         
+"Baltimore","MD","CTY",1820,11,102195      
+"Baltimore","MD","CTY",1820,19,45516       
+"Baltimore","MD","CTY",1820,21,21538       
+"Baltimore","MD","CTY",1820,22,5554        
+"Baltimore","MD","CTY",1820,29,21623       
+"Baltimore","MD","CTY",1830,11,121508      
+"Baltimore","MD","CTY",1830,14,60476       
+"Baltimore","MD","CTY",1830,19,865         
+"Baltimore","MD","CTY",1830,21,14587       
+"Baltimore","MD","CTY",1830,22,3380        
+"Baltimore","MD","CTY",1830,23,15166       
+"Baltimore","MD","CTY",1830,29,105484      
+"Baltimore","MD","CTY",1850,11,616576      
+"Baltimore","MD","CTY",1850,14,51935       
+"Baltimore","MD","CTY",1850,21,36443       
+"Baltimore","MD","CTY",1850,22,10013       
+"Baltimore","MD","CTY",1850,23,5526        
+"Baltimore","MD","CTY",1850,27,            
+"Baltimore","MD","CTY",1850,29,54702       
+"Baltimore","MD","CTY",1870,11,4272233     
+"Baltimore","MD","CTY",1870,14,247525      
+"Baltimore","MD","CTY",1870,21,324523      
+"Baltimore","MD","CTY",1870,22,21220       
+"Baltimore","MD","CTY",1870,23,0           
+"Baltimore","MD","CTY",1870,27,1404223     
+"Baltimore","MD","CTY",1870,29,2070370     
+"Bangor","ME","CTY",1842,11,39301          
+"Bangor","ME","CTY",1842,14,46             
+"Bangor","ME","CTY",1842,21,73             
+"Bangor","ME","CTY",1842,22,479            
+"Bangor","ME","CTY",1842,26,227            
+"Bangor","ME","CTY",1842,29,7376           
+"Bangor","ME","CTY",1853,11,56782          
+"Bangor","ME","CTY",1853,14,4              
+"Bangor","ME","CTY",1853,21,333            
+"Bangor","ME","CTY",1853,22,1529           
+"Bangor","ME","CTY",1853,23,1115           
+"Bangor","ME","CTY",1853,26,14346          
+"Bangor","ME","CTY",1853,29,60470          
+"Bangor","ME","CTY",1862,11,111146         
+"Bangor","ME","CTY",1862,14,70             
+"Bangor","ME","CTY",1862,20,119            
+"Bangor","ME","CTY",1862,22,953            
+"Bangor","ME","CTY",1862,23,2210           
+"Bangor","ME","CTY",1862,26,10632          
+"Bangor","ME","CTY",1862,29,46976          
+"Boston","MA","CTY",1850,11,1242437        
+"Boston","MA","CTY",1850,14,8116           
+"Boston","MA","CTY",1850,21,12374          
+"Boston","MA","CTY",1850,23,54546          
+"Boston","MA","CTY",1850,26,86348          
+"Boston","MA","CTY",1850,27,149025         
+"Boston","MA","CTY",1850,29,200252         
+"Boston","MA","CTY",1860,11,2479519        
+"Boston","MA","CTY",1860,14,7958           
+"Boston","MA","CTY",1860,21,25239          
+"Boston","MA","CTY",1860,23,84008          
+"Boston","MA","CTY",1860,26,51943          
+"Boston","MA","CTY",1860,27,372291         
+"Boston","MA","CTY",1860,29,418278         
+"Boston","MA","CTY",1870,11,9106482        
+"Boston","MA","CTY",1870,14,16798          
+"Boston","MA","CTY",1870,21,450412         
+"Boston","MA","CTY",1870,23,144899         
+"Boston","MA","CTY",1870,26,300312         
+"Boston","MA","CTY",1870,27,782610         
+"Boston","MA","CTY",1870,29,10124221       
+"Brooklyn","CA","CTY",1872,11,9504         
+"Brooklyn","CA","CTY",1872,14,1838         
+"Brooklyn","CA","CTY",1872,17,457          
+"Brooklyn","CA","CTY",1872,26,300          
+"Brooklyn","CA","CTY",1872,29,47           
+"Brooklyn","NY","CTY",1870,10,34155861     
+"Calhoun","GA","CTY",1871,11,247           
+"Calhoun","GA","CTY",1871,14,715           
+"Calhoun","GA","CTY",1871,19,134           
+"Calhoun","GA","CTY",1871,22,137           
+"Calhoun","GA","CTY",1871,29,12            
+"Charleston","SC","CTY",1850,11,171363     
+"Charleston","SC","CTY",1850,14,27148      
+"Charleston","SC","CTY",1850,21,13230      
+"Charleston","SC","CTY",1850,22,2897       
+"Charleston","SC","CTY",1850,23,7061       
+"Charleston","SC","CTY",1850,26,20995      
+"Charleston","SC","CTY",1850,29,145636     
+"Charleston","SC","CTY",1860,11,452857     
+"Charleston","SC","CTY",1860,14,49079      
+"Charleston","SC","CTY",1860,22,8529       
+"Charleston","SC","CTY",1860,23,127100     
+"Charleston","SC","CTY",1860,24,9760       
+"Charleston","SC","CTY",1860,26,19922      
+"Charleston","SC","CTY",1860,27,71         
+"Charleston","SC","CTY",1860,29,525250     
+"Charleston","SC","CTY",1870,26,7641       
+"Charleston","SC","CTY",1870,29,29767      
+"Chicago","IL","CTY",1850,11,25271         
+"Chicago","IL","CTY",1860,11,373315        
+"Chicago","IL","CTY",1870,11,4139799       
+"Cincinnati","OH","CTY",1851,10,438346     
+"Cincinnati","OH","CTY",1859,11,1584110    
+"Cincinnati","OH","CTY",1870,11,3259800    
+"Cleveland","OH","CTY",1850,11,15573       
+"Cleveland","OH","CTY",1850,14,1221        
+"Cleveland","OH","CTY",1850,17,1497        
+"Cleveland","OH","CTY",1850,26,1447        
+"Cleveland","OH","CTY",1850,29,5061        
+"Cleveland","OH","CTY",1860,11,200522      
+"Cleveland","OH","CTY",1860,14,1375        
+"Cleveland","OH","CTY",1860,21,19181       
+"Cleveland","OH","CTY",1860,26,148         
+"Cleveland","OH","CTY",1860,27,13824       
+"Cleveland","OH","CTY",1860,29,73779       
+"Cleveland","OH","CTY",1870,11,805256      
+"Cleveland","OH","CTY",1870,14,9619        
+"Cleveland","OH","CTY",1870,21,259463      
+"Cleveland","OH","CTY",1870,23,42162       
+"Cleveland","OH","CTY",1870,26,3587        
+"Cleveland","OH","CTY",1870,27,70411       
+"Cleveland","OH","CTY",1870,29,800867      
+"Columbus","GA","CTY",1870,11,55053        
+"Columbus","GA","CTY",1870,14,15096        
+"Columbus","GA","CTY",1870,22,650          
+"Columbus","GA","CTY",1870,29,49819        
+"Columbus","OH","CTY",1872,11,146937       
+"Columbus","OH","CTY",1872,14,509          
+"Columbus","OH","CTY",1872,22,3525         
+"Columbus","OH","CTY",1872,26,430          
+"Columbus","OH","CTY",1872,29,17745        
+"Dauphin","PA","CTY",1851,11,34489         
+"Dauphin","PA","CTY",1851,22,231           
+"Dauphin","PA","CTY",1851,23,1178          
+"Dauphin","PA","CTY",1851,26,1116          
+"Dauphin","PA","CTY",1851,29,10598         
+"Detroit","OH","CTY",1857,10,200446        
+"Dougherty","GA","CTY",1870,11,12113       
+"Harrisburg","PA","CTY",1860,11,14237      
+"Harrisburg","PA","CTY",1860,26,613        
+"Harrisburg","PA","CTY",1860,29,3619       
+"Hartford","CT","CTY",1861,11,88398        
+"Hartford","CT","CTY",1861,21,5517         
+"Hartford","CT","CTY",1861,22,959          
+"Hartford","CT","CTY",1861,26,481          
+"Hartford","CT","CTY",1861,27,38371        
+"Hartford","CT","CTY",1861,29,97258        
+"Hartford","CT","CTY",1870,11,302300       
+"Hartford","CT","CTY",1870,14,874          
+"Hartford","CT","CTY",1870,19,7000         
+"Hartford","CT","CTY",1870,21,10924        
+"Hartford","CT","CTY",1870,22,3080         
+"Hartford","CT","CTY",1870,26,3682         
+"Hartford","CT","CTY",1870,27,15348        
+"Hartford","CT","CTY",1870,29,558945       
+"Houston","TX","CTY",1866,11,5620          
+"Houston","TX","CTY",1866,14,63137         
+"Houston","TX","CTY",1866,26,4150          
+"Houston","TX","CTY",1866,29,15332         
+"Kennebec","ME","CTY",1860,11,34604        
+"Kennebec","ME","CTY",1860,14,105          
+"Kennebec","ME","CTY",1860,22,863          
+"Kennebec","ME","CTY",1860,29,2529         
+"Lewiston","ME","CTY",1860,11,24757        
+"Lewiston","ME","CTY",1860,14,30           
+"Lewiston","ME","CTY",1860,19,640          
+"Lewiston","ME","CTY",1860,22,154          
+"Lewiston","ME","CTY",1860,23,690          
+"Lewiston","ME","CTY",1860,26,18           
+"Lewiston","ME","CTY",1860,29,3291         
+"Lewiston","ME","CTY",1870,11,192346.28    
+"Lewiston","ME","CTY",1870,14,539          
+"Lewiston","ME","CTY",1870,22,1029.49      
+"Lewiston","ME","CTY",1870,26,2958.73      
+"Lewiston","ME","CTY",1870,29,29198.9      
+"Louisville","KY","CTY",1866,11,939088     
+"Louisville","KY","CTY",1866,14,172298     
+"Louisville","KY","CTY",1866,22,2087       
+"Louisville","KY","CTY",1866,26,5210       
+"Louisville","KY","CTY",1866,29,137170     
+"Lowell","MA","CTY",1840,11,51991          
+"Lowell","MA","CTY",1840,21,1373           
+"Lowell","MA","CTY",1840,23,2295           
+"Lowell","MA","CTY",1840,26,345            
+"Lowell","MA","CTY",1840,29,18707          
+"Memphis","TN","CTY",1861,11,352804        
+"Memphis","TN","CTY",1861,22,11728         
+"Memphis","TN","CTY",1861,29,229709        
+"Milwaukee","WI","CTY",1854,11,110656      
+"Milwaukee","WI","CTY",1854,14,4252        
+"Milwaukee","WI","CTY",1854,21,54942       
+"Milwaukee","WI","CTY",1854,29,0           
+"Milwaukee","WI","CTY",1861,11,143849      
+"Milwaukee","WI","CTY",1861,14,13375       
+"Milwaukee","WI","CTY",1861,21,13027       
+"Milwaukee","WI","CTY",1861,29,60018       
+"Milwaukee","WI","CTY",1872,11,750081      
+"Milwaukee","WI","CTY",1872,14,0           
+"Milwaukee","WI","CTY",1872,21,139497      
+"Milwaukee","WI","CTY",1872,29,16483       
+"Nashville","TN","CTY",1828,11,2513        
+"Nashville","TN","CTY",1828,14,1123        
+"Nashville","TN","CTY",1828,19,16          
+"Nashville","TN","CTY",1828,26,30          
+"Nashville","TN","CTY",1828,29,128         
+"New Haven","CT","CTY",1860,11,71039       
+"New Haven","CT","CTY",1860,14,418         
+"New Haven","CT","CTY",1860,21,792         
+"New Haven","CT","CTY",1860,29,28133       
+"New Haven","CT","CTY",1870,11,226000      
+"New Haven","CT","CTY",1870,14,1582        
+"New Haven","CT","CTY",1870,21,35018       
+"New Haven","CT","CTY",1870,22,3620        
+"New Haven","CT","CTY",1870,26,458         
+"New Haven","CT","CTY",1870,29,103116      
+"New Orleans","LA","CTY",1853,11,1019745   
+"New Orleans","LA","CTY",1853,14,586002    
+"New Orleans","LA","CTY",1853,21,48872     
+"New Orleans","LA","CTY",1853,22,6550      
+"New Orleans","LA","CTY",1853,23,31933     
+"New Orleans","LA","CTY",1853,26,48484     
+"New Orleans","LA","CTY",1853,29,1120212   
+"New Orleans","LA","CTY",1860,11,1560352   
+"New Orleans","LA","CTY",1860,14,324998    
+"New Orleans","LA","CTY",1860,22,70229     
+"New Orleans","LA","CTY",1860,23,137376    
+"New Orleans","LA","CTY",1860,26,43336     
+"New Orleans","LA","CTY",1860,27,18200     
+"New Orleans","LA","CTY",1860,29,854723    
+"New Orleans","LA","CTY",1871,10,925911    
+"New Orleans","LA","CTY",1873,11,1603125   
+"New Orleans","LA","CTY",1873,14,500000    
+"New Orleans","LA","CTY",1873,22,26000     
+"New Orleans","LA","CTY",1873,26,270000    
+"New Orleans","LA","CTY",1873,29,24500     
+"New York","NY","CTY",1851,11,2866298      
+"New York","NY","CTY",1851,21,66404        
+"New York","NY","CTY",1851,22,84252        
+"New York","NY","CTY",1851,26,24114        
+"New York","NY","CTY",1851,29,3129834      
+"New York","NY","CTY",1861,11,6405730      
+"New York","NY","CTY",1861,14,77861        
+"New York","NY","CTY",1861,21,237989       
+"New York","NY","CTY",1861,22,15993        
+"New York","NY","CTY",1861,26,212769       
+"New York","NY","CTY",1861,29,6148097      
+"New York","NY","CTY",1869,11,10369467     
+"New York","NY","CTY",1869,21,3098572      
+"New York","NY","CTY",1869,22,56553        
+"New York","NY","CTY",1869,26,254          
+"New York","NY","CTY",1869,29,15171527     
+"Newbury","MA","CTY",1857,11,48000         
+"Newport","RI","CTY",1873,10,242027        
+"Oakland","CA","CTY",1872,11,75000         
+"Oakland","CA","CTY",1872,14,10000         
+"Oakland","CA","CTY",1872,22,2500          
+"Oakland","CA","CTY",1872,23,20000         
+"Oakland","CA","CTY",1872,29,2000          
+"Perry","GA","CTY",1872,11,1308            
+"Perry","GA","CTY",1872,14,559             
+"Perry","GA","CTY",1872,22,16              
+"Philadephia","PA","CTY",1820,10,138000    
+"Philadephia","PA","CTY",1828,10,200000    
+"Philadephia","PA","CTY",1838,11,252365    
+"Philadephia","PA","CTY",1838,19,6199      
+"Philadephia","PA","CTY",1860,10,5127496   
+"Philadephia","PA","CTY",1870,10,12033222  
+"Pittsburg","PA","CTY",1851,11,62600       
+"Pittsburg","PA","CTY",1851,14,2200        
+"Pittsburg","PA","CTY",1851,22,2500        
+"Pittsburg","PA","CTY",1851,27,30000       
+"Pittsburg","PA","CTY",1851,29,171905      
+"Portland","OR","CTY",1862,11,10015        
+"Portland","OR","CTY",1862,14,10340        
+"Portland","OR","CTY",1870,11,103874       
+"Portland","OR","CTY",1870,14,19180        
+"Portland","OR","CTY",1870,19,11836        
+"Portland","OR","CTY",1870,21,32465        
+"Portland","OR","CTY",1870,22,1123         
+"Portland","OR","CTY",1870,29,3052         
+"Providence","RI","CTY",1850,11,136400     
+"Providence","RI","CTY",1850,14,1300       
+"Providence","RI","CTY",1850,17,400        
+"Providence","RI","CTY",1850,19,0          
+"Providence","RI","CTY",1850,22,200        
+"Providence","RI","CTY",1850,23,7600       
+"Providence","RI","CTY",1850,26,2400       
+"Providence","RI","CTY",1850,27,3000       
+"Providence","RI","CTY",1850,29,121000     
+"Providence","RI","CTY",1870,11,918600     
+"Providence","RI","CTY",1870,14,48100      
+"Providence","RI","CTY",1870,17,3700       
+"Providence","RI","CTY",1870,19,9100       
+"Providence","RI","CTY",1870,21,89100      
+"Providence","RI","CTY",1870,22,26300      
+"Providence","RI","CTY",1870,23,20800      
+"Providence","RI","CTY",1870,26,51800      
+"Providence","RI","CTY",1870,29,513300     
+"Richmond","GA","CTY",1870,11,22700        
+"Richmond","GA","CTY",1870,14,776          
+"Richmond","GA","CTY",1870,26,428          
+"Richmond","GA","CTY",1870,29,5926         
+"Richmond","VA","CTY",1873,11,467022       
+"Richmond","VA","CTY",1873,14,49422        
+"Richmond","VA","CTY",1873,21,3206         
+"Richmond","VA","CTY",1873,22,3480         
+"Richmond","VA","CTY",1873,26,1096         
+"Richmond","VA","CTY",1873,27,215974       
+"Richmond","VA","CTY",1873,29,939708       
+"Rome","GA","CTY",1870,11,14954            
+"Rome","GA","CTY",1870,14,5667             
+"Rome","GA","CTY",1870,29,34100            
+"San Francisco","CA","CTY",1850,11,282041  
+"San Francisco","CA","CTY",1850,14,59591   
+"San Francisco","CA","CTY",1860,11,761711  
+"San Francisco","CA","CTY",1860,14,23681   
+"San Francisco","CA","CTY",1860,29,0       
+"San Francisco","CA","CTY",1869,11,1786129 
+"San Francisco","CA","CTY",1869,14,153015  
+"San Francisco","CA","CTY",1869,29,507041  
+"Savannah","GA","CTY",1871,11,383769       
+"Savannah","GA","CTY",1871,14,36651        
+"Savannah","GA","CTY",1871,22,6883         
+"Savannah","GA","CTY",1871,26,55505        
+"Savannah","GA","CTY",1871,27,23616        
+"Savannah","GA","CTY",1871,29,1299611      
+"St. Louis","MO","CTY",1850,11,257900      
+"St. Louis","MO","CTY",1850,14,62048       
+"St. Louis","MO","CTY",1850,27,30944       
+"St. Louis","MO","CTY",1850,29,167239      
+"St. Louis","MO","CTY",1860,11,924427      
+"St. Louis","MO","CTY",1860,14,132898      
+"St. Louis","MO","CTY",1860,29,643493      
+"St. Louis","MO","CTY",1870,11,2012238     
+"St. Louis","MO","CTY",1870,14,343587      
+"St. Louis","MO","CTY",1870,21,55445       
+"St. Louis","MO","CTY",1870,22,39356       
+"St. Louis","MO","CTY",1870,26,26544       
+"St. Louis","MO","CTY",1870,29,1827011     
+                                           
+                                           
+"Albany","GA","CTY",1860,110,4209          
+"Albany","GA","CTY",1860,292,1026          
+"Albany","GA","CTY",1871,110,11358         
+"Albany","GA","CTY",1871,146,2459          
+"Albany","GA","CTY",1871,220,938           
+"Albany","GA","CTY",1871,260,291           
+"Albany","GA","CTY",1871,290,18            
+"Albany","GA","CTY",1871,291,938           
+"Albany","GA","CTY",1871,294,2279          
+"Athens","GA","CTY",1840,110,1122          
+"Athens","GA","CTY",1840,146,200           
+"Athens","GA","CTY",1840,292,56            
+"Athens","GA","CTY",1846,110,1461          
+"Athens","GA","CTY",1846,146,135           
+"Athens","GA","CTY",1871,110,4687          
+"Athens","GA","CTY",1871,141,1630          
+"Athens","GA","CTY",1871,146,935           
+"Athens","GA","CTY",1871,220,667           
+"Athens","GA","CTY",1871,260,196           
+"Athens","GA","CTY",1871,292,65            
+"Athens","GA","CTY",1871,296,3700          
+"Atlanta","GA","CTY",1870,110,109543       
+"Atlanta","GA","CTY",1870,141,15587        
+"Atlanta","GA","CTY",1870,146,57653        
+"Atlanta","GA","CTY",1870,190,4371         
+"Atlanta","GA","CTY",1870,220,3919         
+"Atlanta","GA","CTY",1870,292,2277         
+"Augusta","GA","CTY",1850,110,50928        
+"Augusta","GA","CTY",1850,146,3875         
+"Augusta","GA","CTY",1850,190,1459         
+"Augusta","GA","CTY",1850,220,635          
+"Augusta","GA","CTY",1850,260,1771         
+"Augusta","GA","CTY",1850,290,47235        
+"Augusta","GA","CTY",1850,291,11011        
+"Augusta","GA","CTY",1850,292,1545         
+"Augusta","GA","CTY",1850,294,188000       
+"Augusta","GA","CTY",1870,110,185654       
+"Augusta","GA","CTY",1870,146,18417        
+"Augusta","GA","CTY",1870,190,677          
+"Augusta","GA","CTY",1870,220,1674         
+"Augusta","GA","CTY",1870,270,2938         
+"Augusta","GA","CTY",1870,290,12306        
+"Augusta","GA","CTY",1870,291,1254         
+"Augusta","GA","CTY",1870,295,43500        
+"Augusta","ME","CTY",1870,110,110733       
+"Augusta","ME","CTY",1870,146,131          
+"Augusta","ME","CTY",1870,230,7839         
+"Augusta","ME","CTY",1870,290,465          
+"Augusta","ME","CTY",1870,292,1919         
+"Augusta","ME","CTY",1870,294,2300         
+"Augusta","ME","CTY",1870,296,41994        
+"Baltimore","MD","CTY",1820,110,102195     
+"Baltimore","MD","CTY",1820,190,45516      
+"Baltimore","MD","CTY",1820,210,21538      
+"Baltimore","MD","CTY",1820,220,5554       
+"Baltimore","MD","CTY",1820,290,16294      
+"Baltimore","MD","CTY",1820,292,2329       
+"Baltimore","MD","CTY",1820,294,3000       
+"Baltimore","MD","CTY",1830,110,121508     
+"Baltimore","MD","CTY",1830,146,60476      
+"Baltimore","MD","CTY",1830,190,865        
+"Baltimore","MD","CTY",1830,210,14587      
+"Baltimore","MD","CTY",1830,220,3380       
+"Baltimore","MD","CTY",1830,230,15166      
+"Baltimore","MD","CTY",1830,290,20836      
+"Baltimore","MD","CTY",1830,292,2503       
+"Baltimore","MD","CTY",1830,294,82145      
+"Baltimore","MD","CTY",1850,110,616576     
+"Baltimore","MD","CTY",1850,146,51935      
+"Baltimore","MD","CTY",1850,210,36443      
+"Baltimore","MD","CTY",1850,220,10013      
+"Baltimore","MD","CTY",1850,230,5526       
+"Baltimore","MD","CTY",1850,270,           
+"Baltimore","MD","CTY",1850,290,52722      
+"Baltimore","MD","CTY",1850,292,1980       
+"Baltimore","MD","CTY",1850,296,           
+"Baltimore","MD","CTY",1870,110,4272233    
+"Baltimore","MD","CTY",1870,146,247525     
+"Baltimore","MD","CTY",1870,210,324523     
+"Baltimore","MD","CTY",1870,220,21220      
+"Baltimore","MD","CTY",1870,230,0          
+"Baltimore","MD","CTY",1870,270,1404223    
+"Baltimore","MD","CTY",1870,290,1492544    
+"Baltimore","MD","CTY",1870,292,62561      
+"Baltimore","MD","CTY",1870,296,515265     
+"Bangor","ME","CTY",1842,110,39301         
+"Bangor","ME","CTY",1842,146,46            
+"Bangor","ME","CTY",1842,210,73            
+"Bangor","ME","CTY",1842,220,479           
+"Bangor","ME","CTY",1842,260,227           
+"Bangor","ME","CTY",1842,292,596           
+"Bangor","ME","CTY",1842,295,475           
+"Bangor","ME","CTY",1842,296,6305          
+"Bangor","ME","CTY",1853,110,56782         
+"Bangor","ME","CTY",1853,146,4             
+"Bangor","ME","CTY",1853,210,333           
+"Bangor","ME","CTY",1853,220,1529          
+"Bangor","ME","CTY",1853,230,1115          
+"Bangor","ME","CTY",1853,260,14346         
+"Bangor","ME","CTY",1853,290,27409         
+"Bangor","ME","CTY",1853,291,121           
+"Bangor","ME","CTY",1853,292,4540          
+"Bangor","ME","CTY",1853,294,10000         
+"Bangor","ME","CTY",1853,296,18400         
+"Bangor","ME","CTY",1862,110,111146        
+"Bangor","ME","CTY",1862,146,70            
+"Bangor","ME","CTY",1862,201,119           
+"Bangor","ME","CTY",1862,220,953           
+"Bangor","ME","CTY",1862,230,2210          
+"Bangor","ME","CTY",1862,260,10632         
+"Bangor","ME","CTY",1862,290,1420          
+"Bangor","ME","CTY",1862,292,130           
+"Bangor","ME","CTY",1862,294,26326         
+"Bangor","ME","CTY",1862,296,19100         
+"Boston","MA","CTY",1850,110,1242437       
+"Boston","MA","CTY",1850,146,8116          
+"Boston","MA","CTY",1850,210,12374         
+"Boston","MA","CTY",1850,230,54546         
+"Boston","MA","CTY",1850,260,86348         
+"Boston","MA","CTY",1850,270,149025        
+"Boston","MA","CTY",1850,290,165778        
+"Boston","MA","CTY",1850,291,19949         
+"Boston","MA","CTY",1850,292,14525         
+"Boston","MA","CTY",1860,110,2479519       
+"Boston","MA","CTY",1860,146,7958          
+"Boston","MA","CTY",1860,210,25239         
+"Boston","MA","CTY",1860,230,84008         
+"Boston","MA","CTY",1860,260,51943         
+"Boston","MA","CTY",1860,270,372291        
+"Boston","MA","CTY",1860,290,322563        
+"Boston","MA","CTY",1860,291,70128         
+"Boston","MA","CTY",1860,292,25587         
+"Boston","MA","CTY",1870,110,9106482       
+"Boston","MA","CTY",1870,146,16798         
+"Boston","MA","CTY",1870,210,450412        
+"Boston","MA","CTY",1870,230,144899        
+"Boston","MA","CTY",1870,260,300312        
+"Boston","MA","CTY",1870,270,782610        
+"Boston","MA","CTY",1870,290,710396        
+"Boston","MA","CTY",1870,291,227214        
+"Boston","MA","CTY",1870,292,99195         
+"Boston","MA","CTY",1870,294,8761416       
+"Boston","MA","CTY",1870,296,326000        
+"Brooklyn","CA","CTY",1872,110,9504        
+"Brooklyn","CA","CTY",1872,146,1838        
+"Brooklyn","CA","CTY",1872,170,457         
+"Brooklyn","CA","CTY",1872,260,300         
+"Brooklyn","CA","CTY",1872,292,47          
+"Brooklyn","NY","CTY",1870,100,34155861    
+"Calhoun","GA","CTY",1871,110,247          
+"Calhoun","GA","CTY",1871,146,715          
+"Calhoun","GA","CTY",1871,190,134          
+"Calhoun","GA","CTY",1871,220,137          
+"Calhoun","GA","CTY",1871,292,12           
+"Charleston","SC","CTY",1850,110,171363    
+"Charleston","SC","CTY",1850,141,4750      
+"Charleston","SC","CTY",1850,146,22398     
+"Charleston","SC","CTY",1850,210,13230     
+"Charleston","SC","CTY",1850,220,2897      
+"Charleston","SC","CTY",1850,230,7061      
+"Charleston","SC","CTY",1850,260,20995     
+"Charleston","SC","CTY",1850,290,21977     
+"Charleston","SC","CTY",1850,291,15082     
+"Charleston","SC","CTY",1850,292,1917      
+"Charleston","SC","CTY",1850,294,102790    
+"Charleston","SC","CTY",1850,295,3870      
+"Charleston","SC","CTY",1860,110,452857    
+"Charleston","SC","CTY",1860,141,13560     
+"Charleston","SC","CTY",1860,146,35519     
+"Charleston","SC","CTY",1860,220,8529      
+"Charleston","SC","CTY",1860,230,127100    
+"Charleston","SC","CTY",1860,240,9760      
+"Charleston","SC","CTY",1860,260,19922     
+"Charleston","SC","CTY",1860,270,71        
+"Charleston","SC","CTY",1860,290,19926     
+"Charleston","SC","CTY",1860,291,75366     
+"Charleston","SC","CTY",1860,292,736       
+"Charleston","SC","CTY",1860,294,239138    
+"Charleston","SC","CTY",1860,295,37790     
+"Charleston","SC","CTY",1860,296,152294    
+"Charleston","SC","CTY",1870,260,7641      
+"Charleston","SC","CTY",1870,290,3086      
+"Charleston","SC","CTY",1870,291,681       
+"Charleston","SC","CTY",1870,294,26000     
+"Chicago","IL","CTY",1850,110,25271        
+"Chicago","IL","CTY",1860,110,373315       
+"Chicago","IL","CTY",1870,110,4139799      
+"Cincinnati","OH","CTY",1851,100,438346    
+"Cincinnati","OH","CTY",1859,110,1584110   
+"Cincinnati","OH","CTY",1870,110,3259800   
+"Cleveland","OH","CTY",1850,110,15573      
+"Cleveland","OH","CTY",1850,146,1221       
+"Cleveland","OH","CTY",1850,170,1497       
+"Cleveland","OH","CTY",1850,260,1447       
+"Cleveland","OH","CTY",1850,290,1463       
+"Cleveland","OH","CTY",1850,294,649        
+"Cleveland","OH","CTY",1850,296,2949       
+"Cleveland","OH","CTY",1860,110,200522     
+"Cleveland","OH","CTY",1860,146,1375       
+"Cleveland","OH","CTY",1860,210,19181      
+"Cleveland","OH","CTY",1860,260,148        
+"Cleveland","OH","CTY",1860,270,13824      
+"Cleveland","OH","CTY",1860,290,5446       
+"Cleveland","OH","CTY",1860,291,555        
+"Cleveland","OH","CTY",1860,296,67778      
+"Cleveland","OH","CTY",1870,110,805256     
+"Cleveland","OH","CTY",1870,146,9619       
+"Cleveland","OH","CTY",1870,210,259463     
+"Cleveland","OH","CTY",1870,230,42162      
+"Cleveland","OH","CTY",1870,260,3587       
+"Cleveland","OH","CTY",1870,270,70411      
+"Cleveland","OH","CTY",1870,290,38064      
+"Cleveland","OH","CTY",1870,291,616        
+"Cleveland","OH","CTY",1870,294,762187     
+"Columbus","GA","CTY",1870,110,55053       
+"Columbus","GA","CTY",1870,141,3106        
+"Columbus","GA","CTY",1870,146,11990       
+"Columbus","GA","CTY",1870,220,650         
+"Columbus","GA","CTY",1870,290,34296       
+"Columbus","GA","CTY",1870,296,15523       
+"Columbus","OH","CTY",1872,110,146937      
+"Columbus","OH","CTY",1872,146,509         
+"Columbus","OH","CTY",1872,220,3525        
+"Columbus","OH","CTY",1872,260,430         
+"Columbus","OH","CTY",1872,290,2269        
+"Columbus","OH","CTY",1872,292,476         
+"Columbus","OH","CTY",1872,296,15000       
+"Dauphin","PA","CTY",1851,110,34489        
+"Dauphin","PA","CTY",1851,220,231          
+"Dauphin","PA","CTY",1851,230,1178         
+"Dauphin","PA","CTY",1851,260,1116         
+"Dauphin","PA","CTY",1851,290,13           
+"Dauphin","PA","CTY",1851,292,112          
+"Dauphin","PA","CTY",1851,294,10473        
+"Detroit","OH","CTY",1857,100,200446       
+"Dougherty","GA","CTY",1870,110,12113      
+"Harrisburg","PA","CTY",1860,110,14237     
+"Harrisburg","PA","CTY",1860,260,613       
+"Harrisburg","PA","CTY",1860,290,3619      
+"Hartford","CT","CTY",1861,110,88398       
+"Hartford","CT","CTY",1861,210,5517        
+"Hartford","CT","CTY",1861,220,959         
+"Hartford","CT","CTY",1861,260,481         
+"Hartford","CT","CTY",1861,270,38371       
+"Hartford","CT","CTY",1861,292,39258       
+"Hartford","CT","CTY",1861,296,58000       
+"Hartford","CT","CTY",1870,110,302300      
+"Hartford","CT","CTY",1870,146,874         
+"Hartford","CT","CTY",1870,190,7000        
+"Hartford","CT","CTY",1870,210,10924       
+"Hartford","CT","CTY",1870,220,3080        
+"Hartford","CT","CTY",1870,260,3682        
+"Hartford","CT","CTY",1870,270,15348       
+"Hartford","CT","CTY",1870,292,37952       
+"Hartford","CT","CTY",1870,294,68428       
+"Hartford","CT","CTY",1870,295,8565        
+"Hartford","CT","CTY",1870,296,444000      
+"Houston","TX","CTY",1866,110,5620         
+"Houston","TX","CTY",1866,146,63137        
+"Houston","TX","CTY",1866,260,4150         
+"Houston","TX","CTY",1866,290,15332        
+"Kennebec","ME","CTY",1860,110,34604       
+"Kennebec","ME","CTY",1860,146,105         
+"Kennebec","ME","CTY",1860,220,863         
+"Kennebec","ME","CTY",1860,290,62          
+"Kennebec","ME","CTY",1860,292,2467        
+"Lewiston","ME","CTY",1860,110,24757       
+"Lewiston","ME","CTY",1860,146,30          
+"Lewiston","ME","CTY",1860,190,640         
+"Lewiston","ME","CTY",1860,220,154         
+"Lewiston","ME","CTY",1860,230,690         
+"Lewiston","ME","CTY",1860,260,18          
+"Lewiston","ME","CTY",1860,290,584         
+"Lewiston","ME","CTY",1860,292,24          
+"Lewiston","ME","CTY",1860,296,2683        
+"Lewiston","ME","CTY",1870,110,192346.28   
+"Lewiston","ME","CTY",1870,146,539         
+"Lewiston","ME","CTY",1870,220,1029.49     
+"Lewiston","ME","CTY",1870,260,2958.73     
+"Lewiston","ME","CTY",1870,290,14063.73    
+"Lewiston","ME","CTY",1870,291,238.47      
+"Lewiston","ME","CTY",1870,292,36.7        
+"Lewiston","ME","CTY",1870,294,4860        
+"Lewiston","ME","CTY",1870,296,10000       
+"Louisville","KY","CTY",1866,110,939088    
+"Louisville","KY","CTY",1866,146,172298    
+"Louisville","KY","CTY",1866,220,2087      
+"Louisville","KY","CTY",1866,260,5210      
+"Louisville","KY","CTY",1866,290,50028     
+"Louisville","KY","CTY",1866,291,6341      
+"Louisville","KY","CTY",1866,292,5476      
+"Louisville","KY","CTY",1866,295,75042     
+"Louisville","KY","CTY",1866,296,283       
+"Lowell","MA","CTY",1840,110,51991         
+"Lowell","MA","CTY",1840,210,1373          
+"Lowell","MA","CTY",1840,230,2295          
+"Lowell","MA","CTY",1840,260,345           
+"Lowell","MA","CTY",1840,290,2390          
+"Lowell","MA","CTY",1840,291,518           
+"Lowell","MA","CTY",1840,292,299           
+"Lowell","MA","CTY",1840,294,15500         
+"Memphis","TN","CTY",1861,110,352804       
+"Memphis","TN","CTY",1861,220,11728        
+"Memphis","TN","CTY",1861,290,41123        
+"Memphis","TN","CTY",1861,294,51177        
+"Memphis","TN","CTY",1861,296,137409       
+"Milwaukee","WI","CTY",1854,110,110656     
+"Milwaukee","WI","CTY",1854,146,4252       
+"Milwaukee","WI","CTY",1854,210,54942      
+"Milwaukee","WI","CTY",1854,292,0          
+"Milwaukee","WI","CTY",1861,110,143849     
+"Milwaukee","WI","CTY",1861,146,13375      
+"Milwaukee","WI","CTY",1861,210,13027      
+"Milwaukee","WI","CTY",1861,291,52290      
+"Milwaukee","WI","CTY",1861,292,7728       
+"Milwaukee","WI","CTY",1872,110,750081     
+"Milwaukee","WI","CTY",1872,146,0          
+"Milwaukee","WI","CTY",1872,210,139497     
+"Milwaukee","WI","CTY",1872,292,16483      
+"Nashville","TN","CTY",1828,110,2513       
+"Nashville","TN","CTY",1828,146,1123       
+"Nashville","TN","CTY",1828,190,16         
+"Nashville","TN","CTY",1828,260,30         
+"Nashville","TN","CTY",1828,290,128        
+"New Haven","CT","CTY",1860,110,71039      
+"New Haven","CT","CTY",1860,146,418        
+"New Haven","CT","CTY",1860,210,792        
+"New Haven","CT","CTY",1860,290,1380       
+"New Haven","CT","CTY",1860,292,53         
+"New Haven","CT","CTY",1860,296,26700      
+"New Haven","CT","CTY",1870,110,226000     
+"New Haven","CT","CTY",1870,146,1582       
+"New Haven","CT","CTY",1870,210,35018      
+"New Haven","CT","CTY",1870,220,3620       
+"New Haven","CT","CTY",1870,260,458        
+"New Haven","CT","CTY",1870,292,1116       
+"New Haven","CT","CTY",1870,296,102000     
+"New Orleans","LA","CTY",1853,110,1019745  
+"New Orleans","LA","CTY",1853,141,1200     
+"New Orleans","LA","CTY",1853,146,584802   
+"New Orleans","LA","CTY",1853,210,48872    
+"New Orleans","LA","CTY",1853,220,6550     
+"New Orleans","LA","CTY",1853,230,31933    
+"New Orleans","LA","CTY",1853,260,48484    
+"New Orleans","LA","CTY",1853,290,84217    
+"New Orleans","LA","CTY",1853,291,1814     
+"New Orleans","LA","CTY",1853,292,391722   
+"New Orleans","LA","CTY",1853,295,13285    
+"New Orleans","LA","CTY",1853,296,629174   
+"New Orleans","LA","CTY",1860,110,1560352  
+"New Orleans","LA","CTY",1860,146,324998   
+"New Orleans","LA","CTY",1860,220,70229    
+"New Orleans","LA","CTY",1860,230,137376   
+"New Orleans","LA","CTY",1860,260,43336    
+"New Orleans","LA","CTY",1860,270,18200    
+"New Orleans","LA","CTY",1860,290,268439   
+"New Orleans","LA","CTY",1860,291,41424    
+"New Orleans","LA","CTY",1860,292,544597   
+"New Orleans","LA","CTY",1860,295,263      
+"New Orleans","LA","CTY",1871,100,925911   
+"New Orleans","LA","CTY",1873,110,1603125  
+"New Orleans","LA","CTY",1873,146,500000   
+"New Orleans","LA","CTY",1873,220,26000    
+"New Orleans","LA","CTY",1873,260,270000   
+"New Orleans","LA","CTY",1873,290,9500     
+"New Orleans","LA","CTY",1873,291,15000    
+"New York","NY","CTY",1851,110,2866298     
+"New York","NY","CTY",1851,210,66404       
+"New York","NY","CTY",1851,220,84252       
+"New York","NY","CTY",1851,260,24114       
+"New York","NY","CTY",1851,290,1243        
+"New York","NY","CTY",1851,291,36344       
+"New York","NY","CTY",1851,292,17207       
+"New York","NY","CTY",1851,294,801885      
+"New York","NY","CTY",1851,296,2273155     
+"New York","NY","CTY",1861,110,6405730     
+"New York","NY","CTY",1861,146,77861       
+"New York","NY","CTY",1861,210,237989      
+"New York","NY","CTY",1861,220,15993       
+"New York","NY","CTY",1861,260,212769      
+"New York","NY","CTY",1861,291,136106      
+"New York","NY","CTY",1861,292,15391       
+"New York","NY","CTY",1861,294,5996600     
+"New York","NY","CTY",1869,110,10369467    
+"New York","NY","CTY",1869,210,3098572     
+"New York","NY","CTY",1869,220,56553       
+"New York","NY","CTY",1869,260,254         
+"New York","NY","CTY",1869,290,2477        
+"New York","NY","CTY",1869,291,113902      
+"New York","NY","CTY",1869,292,2132340     
+"New York","NY","CTY",1869,294,6243860     
+"New York","NY","CTY",1869,295,6678948     
+"Newbury","MA","CTY",1857,110,48000        
+"Newport","RI","CTY",1873,100,242027       
+"Oakland","CA","CTY",1872,110,75000        
+"Oakland","CA","CTY",1872,146,10000        
+"Oakland","CA","CTY",1872,220,2500         
+"Oakland","CA","CTY",1872,230,20000        
+"Oakland","CA","CTY",1872,292,2000         
+"Perry","GA","CTY",1872,110,1308           
+"Perry","GA","CTY",1872,146,559            
+"Perry","GA","CTY",1872,220,16             
+"Philadephia","PA","CTY",1820,100,138000   
+"Philadephia","PA","CTY",1828,100,200000   
+"Philadephia","PA","CTY",1838,110,252365   
+"Philadephia","PA","CTY",1838,190,6199     
+"Philadephia","PA","CTY",1860,100,5127496  
+"Philadephia","PA","CTY",1870,100,12033222 
+"Pittsburg","PA","CTY",1851,110,62600      
+"Pittsburg","PA","CTY",1851,146,2200       
+"Pittsburg","PA","CTY",1851,220,2500       
+"Pittsburg","PA","CTY",1851,270,30000      
+"Pittsburg","PA","CTY",1851,290,22000      
+"Pittsburg","PA","CTY",1851,291,7255       
+"Pittsburg","PA","CTY",1851,292,4000       
+"Pittsburg","PA","CTY",1851,294,138650     
+"Portland","OR","CTY",1862,110,10015       
+"Portland","OR","CTY",1862,146,10340       
+"Portland","OR","CTY",1870,110,103874      
+"Portland","OR","CTY",1870,146,19180       
+"Portland","OR","CTY",1870,190,11836       
+"Portland","OR","CTY",1870,210,32465       
+"Portland","OR","CTY",1870,220,1123        
+"Portland","OR","CTY",1870,290,42          
+"Portland","OR","CTY",1870,291,1860        
+"Portland","OR","CTY",1870,292,1085        
+"Portland","OR","CTY",1870,295,65          
+"Providence","RI","CTY",1850,110,136400    
+"Providence","RI","CTY",1850,141,0         
+"Providence","RI","CTY",1850,146,1300      
+"Providence","RI","CTY",1850,170,400       
+"Providence","RI","CTY",1850,190,0         
+"Providence","RI","CTY",1850,220,200       
+"Providence","RI","CTY",1850,230,7600      
+"Providence","RI","CTY",1850,260,2400      
+"Providence","RI","CTY",1850,270,3000      
+"Providence","RI","CTY",1850,290,5900      
+"Providence","RI","CTY",1850,291,4300      
+"Providence","RI","CTY",1850,292,3000      
+"Providence","RI","CTY",1850,296,107800    
+"Providence","RI","CTY",1870,110,918600    
+"Providence","RI","CTY",1870,141,45800     
+"Providence","RI","CTY",1870,146,2300      
+"Providence","RI","CTY",1870,170,3700      
+"Providence","RI","CTY",1870,190,9100      
+"Providence","RI","CTY",1870,210,89100     
+"Providence","RI","CTY",1870,220,26300     
+"Providence","RI","CTY",1870,230,20800     
+"Providence","RI","CTY",1870,260,51800     
+"Providence","RI","CTY",1870,290,15300     
+"Providence","RI","CTY",1870,291,50200     
+"Providence","RI","CTY",1870,292,2300      
+"Providence","RI","CTY",1870,294,20500     
+"Providence","RI","CTY",1870,296,425000    
+"Richmond","GA","CTY",1870,110,22700       
+"Richmond","GA","CTY",1870,141,550         
+"Richmond","GA","CTY",1870,146,226         
+"Richmond","GA","CTY",1870,260,428         
+"Richmond","GA","CTY",1870,292,20          
+"Richmond","GA","CTY",1870,296,5906        
+"Richmond","VA","CTY",1873,110,467022      
+"Richmond","VA","CTY",1873,146,49422       
+"Richmond","VA","CTY",1873,210,3206        
+"Richmond","VA","CTY",1873,220,3480        
+"Richmond","VA","CTY",1873,260,1096        
+"Richmond","VA","CTY",1873,270,215974      
+"Richmond","VA","CTY",1873,290,26938       
+"Richmond","VA","CTY",1873,291,5551        
+"Richmond","VA","CTY",1873,292,322         
+"Richmond","VA","CTY",1873,294,156778      
+"Richmond","VA","CTY",1873,296,750119      
+"Rome","GA","CTY",1870,110,14954           
+"Rome","GA","CTY",1870,146,5667            
+"Rome","GA","CTY",1870,290,525             
+"Rome","GA","CTY",1870,292,75              
+"Rome","GA","CTY",1870,294,12500           
+"Rome","GA","CTY",1870,296,21000           
+"San Francisco","CA","CTY",1850,110,282041 
+"San Francisco","CA","CTY",1850,146,59591  
+"San Francisco","CA","CTY",1860,110,761711 
+"San Francisco","CA","CTY",1860,146,23681  
+"San Francisco","CA","CTY",1860,292,0      
+"San Francisco","CA","CTY",1869,110,1786129
+"San Francisco","CA","CTY",1869,146,153015 
+"San Francisco","CA","CTY",1869,292,507041 
+"Savannah","GA","CTY",1871,110,383769      
+"Savannah","GA","CTY",1871,146,36651       
+"Savannah","GA","CTY",1871,220,6883        
+"Savannah","GA","CTY",1871,260,55505       
+"Savannah","GA","CTY",1871,270,23616       
+"Savannah","GA","CTY",1871,290,35789       
+"Savannah","GA","CTY",1871,291,7596        
+"Savannah","GA","CTY",1871,292,14468       
+"Savannah","GA","CTY",1871,294,397534      
+"Savannah","GA","CTY",1871,296,844224      
+"St. Louis","MO","CTY",1850,110,257900     
+"St. Louis","MO","CTY",1850,146,62048      
+"St. Louis","MO","CTY",1850,270,30944      
+"St. Louis","MO","CTY",1850,290,46911      
+"St. Louis","MO","CTY",1850,292,120328     
+"St. Louis","MO","CTY",1860,110,924427     
+"St. Louis","MO","CTY",1860,146,132898     
+"St. Louis","MO","CTY",1860,290,428152     
+"St. Louis","MO","CTY",1860,292,215341     
+"St. Louis","MO","CTY",1870,110,2012238    
+"St. Louis","MO","CTY",1870,146,343587     
+"St. Louis","MO","CTY",1870,210,55445      
+"St. Louis","MO","CTY",1870,220,39356      
+"St. Louis","MO","CTY",1870,260,26544      
+"St. Louis","MO","CTY",1870,290,120739     
+"St. Louis","MO","CTY",1870,291,5102       
+"St. Louis","MO","CTY",1870,292,67508      
+"St. Louis","MO","CTY",1870,294,556378     
+"St. Louis","MO","CTY",1870,296,1077284    

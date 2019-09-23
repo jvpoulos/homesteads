@@ -1,0 +1,844 @@
+File Manifest for ICPSR 9728
+
+Sylla, Richard E., John B. Legler, and John Wallis. SOURCES AND USES OF
+FUNDS IN STATE AND LOCAL GOVERNMENTS, 1790-1915: [UNITED STATES]. New York,
+NY: New York University, Athens, GA: University of Georgia, and College
+Park, MD: University of Maryland [producers], 1991. Ann Arbor, MI: Inter-
+university Consortium for Political and Social Research [distributor],
+1993. http://doi.org/10.3886/ICPSR09728.v1
+
+
+Study-level Documentation
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-related_literature.txt        -       -         -       2017-08-03  -
+
+    09728-manifest.txt                  -       -         -       2017-08-04  -
+
+
+DS0001 Alaska Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0001-Data.txt                 21      396       unknown 1994-06-09  119046e3b0c348bcf6afd815784072e6
+
+
+DS0002 Alaska Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0002-Data.txt                 21      683       4       1994-06-09  14e7a58df12da98a70833393c81d41aa
+
+
+DS0003 Alabama Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0003-Data.txt                 24      1,196     4       1994-06-09  70833a6e749ef7ed8610045b09c6a785
+
+
+DS0004 Alabama Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0004-Data.txt                 24      1,497     4       1994-06-09  de34ce62b389c31cffb0ba6c09b91f99
+
+
+DS0005 Colorado Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0005-Data.txt                 24      397       4       1994-06-09  8cbf5d725ea6776623ee5af9ed09aad0
+
+
+DS0006 Delaware Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0006-Data.txt                 23      1,544     unknown 1994-06-09  004cd24365227cceea1456d0bd51a1a3
+
+
+DS0007 Delaware Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0007-Data.txt                 23      1,608     4       1994-06-09  9a1609d3dbbf493b1ce740213e395e8d
+
+
+DS0008 Illinois Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0008-Data.txt                 22      563       4       1994-06-09  67c43d6a3df9199755c113f8bf6276bf
+
+
+DS0009 Illinois Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0009-Data.txt                 21      1,182     4       1994-06-09  fedab5b57d1acc844f0e3b1170c4b380
+
+
+DS0010 Indiana Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0010-Data.txt                 22      1,435     unknown 1994-06-09  14ca3c6d967681c9704691fb41f40e2a
+
+
+DS0011 Indiana Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0011-Data.txt                 22      2,288     unknown 1994-06-09  262ce6d97da7405c888a00264a295dcd
+
+
+DS0012 Kansas Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0012-Data.txt                 24      921       4       1994-07-12  4f499ad86eb6344d408337e8f6cea0c9
+
+
+DS0013 Kansas Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0013-Data.txt                 24      1,553     4       1994-07-12  c11cf5337cd0f3185fd986f0cf8001e9
+
+
+DS0014 Massachusetts Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0014-Data.txt                 22      1,726     4       1994-06-09  186b952ba7e974b3e1700c53ab104bd9
+
+
+DS0015 Massachusetts Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0015-Data.txt                 22      2,368     unknown 1994-06-09  44c327b8165b21a17356802c759839cb
+
+
+DS0016 Maryland Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0016-Data.txt                 24      2,725     unknown 1994-06-09  4d9b488f1199f58b6f48bef51d4518af
+
+
+DS0017 Maryland Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0017-Data.txt                 24      3,308     unknown 1994-06-09  7f9c53ad4d14f9f1fec1feee7993ee47
+
+
+DS0018 Maine Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0018-Data.txt                 18      3,415     4       1994-06-09  46830eb4e1755940120e702a509e28f4
+
+
+DS0019 Maine Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0019-Data.txt                 19      3,465     4       1994-06-09  1a3dcf3b498e848e0191f4ffeee38b2b
+
+
+DS0020 Michigan Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0020-Data.txt                 24      1,798     4       1994-06-09  98660cc0c1d7d8bf88df5e85d16192a0
+
+
+DS0021 Michigan Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0021-Data.txt                 22      2,143     4       1994-06-09  5ffe91472bf41a312771548752307c42
+
+
+DS0022 Minnesota Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0022-Data.txt                 24      1,422     unknown 1994-06-09  12cc8fbf77cafa5a74bd4d7ac5ef9009
+
+
+DS0023 Minnesota Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0023-Data.txt                 24      2,150     unknown 1994-06-09  61235b23ea8c5f30664f0e58e26798de
+
+
+DS0024 Missouri Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0024-Data.txt                 24      1,631     4       1994-06-09  8f40fc64606f2e739c29acb8b0e14c1b
+
+
+DS0025 Missouri Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0025-Data.txt                 25      2,322     4       1994-06-09  6915115ce04b3fdc77fe2d58a319e5b2
+
+
+DS0026 Mississippi Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0026-Data.txt                 25      1,035     unknown 1994-06-09  2dc4bfbe6f113f66b1ca31a0a38a4833
+
+
+DS0027 Mississippi Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0027-Data.txt                 25      2,094     unknown 1994-06-09  c0706ab859b96a4f43060e9a5ea00b0b
+
+
+DS0028 Montana Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0028-Data.txt                 21      211       4       1994-06-09  a5396e49b4c5fab04bd1f03b9d1d030f
+
+
+DS0029 North Carolina Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0029-Data.txt                 22      1,950     4       1994-06-09  209dac7c141bab006400c0d57d5e200e
+
+
+DS0030 North Carolina Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0030-Data.txt                 22      2,744     unknown 1994-06-09  ea92f1f1062c9788bfb425bf10910978
+
+
+DS0031 North Dakota Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0031-Data.txt                 21      598       4       1994-06-09  4d35424b0376f7541a51257509fbf683
+
+
+DS0032 North Dakota Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0032-Data.txt                 21      640       unknown 1994-06-09  2b57911e2acc8fc59bd14b822ab0dca4
+
+
+DS0033 Nebraska Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0033-Data.txt                 24      464       unknown 1994-06-09  9981383ce6fec9d7066216384cef527b
+
+
+DS0034 Nebraska Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0034-Data.txt                 24      476       4       1994-06-09  baa4af2f9675921f87dcf979b29be9aa
+
+
+DS0035 New Hampshire Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0035-Data.txt                 21      1,181     unknown 1994-06-09  3caaf6bf99964a09a0a255509e06d81b
+
+
+DS0036 New Hampshire Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0036-Data.txt                 21      2,017     unknown 1994-06-09  00e79676b0549c2881f8e28ac0fec195
+
+
+DS0037 New Jersey Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0037-Data.txt                 24      1,361     4       1994-06-09  f710cf21351617cfb99dad486ca056a4
+
+
+DS0038 New Jersey Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0038-Data.txt                 24      1,558     4       1994-06-09  572f299c6e6b61f3e83bd04a251f3a0f
+
+
+DS0039 Nevada Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0039-Data.txt                 23      1,178     4       1994-06-09  3c1cc6a49bf0e5055c013fa09b3e2d0a
+
+
+DS0040 Nevada Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0040-Data.txt                 23      1,704     unknown 1994-06-09  3e7f14d252277976c8554a968f1f6c6e
+
+
+DS0041 Ohio Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0041-Data.txt                 24      1,338     unknown 1994-06-09  7a06e4766899d6ba7c6c64f75aa26a52
+
+
+DS0042 Ohio Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0042-Data.txt                 24      3,032     unknown 1994-06-09  798b1c8a4f36e5329253986444282072
+
+
+DS0043 Oklahoma Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0043-Data.txt                 24      37        unknown 1994-06-09  b68c01a7ee7f543df693beccc659cf56
+
+
+DS0044 Oklahoma Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0044-Data.txt                 24      43        4       1994-06-09  6512e475343c3e3b253b82ef141dd552
+
+
+DS0045 Pennsylvania Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0045-Data.txt                 25      3,200     4       1994-06-09  8f95806cad0b2c39e47da31571df836b
+
+
+DS0046 Pennsylvania Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0046-Data.txt                 25      3,085     unknown 1994-06-09  ca6c717b55aa5232fbe4a05080bdc020
+
+
+DS0047 Rhode Island Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0047-Data.txt                 20      1,785     unknown 1994-06-09  7c84ad91eaa6867e75038fc86637c504
+
+
+DS0048 Rhode Island Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0048-Data.txt                 21      1,725     unknown 1994-06-09  d5ec7a1fca82a6e472951ba89fb2d4f6
+
+
+DS0049 South Carolina Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0049-Data.txt                 23      1,658     unknown 1994-06-09  0cdd7a9e7675b0871caf42f378b7f2e4
+
+
+DS0050 South Carolina Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0050-Data.txt                 23      2,420     4       1994-06-09  36b1794436d018950af1aa0b49b71bdf
+
+
+DS0051 South Dakota Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0051-Data.txt                 24      436       4       1994-06-09  bc277d015aa69225303075c1d3997eec
+
+
+DS0052 South Dakota Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0052-Data.txt                 28      609       unknown 1994-06-09  f9958fee7bbbd7f8022e1c1fb74f37db
+
+
+DS0053 Tennessee Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0053-Data.txt                 21      853       unknown 1994-06-09  7d9782408dd22c1bfbbac897e8954972
+
+
+DS0054 Tennessee Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0054-Data.txt                 21      1,264     unknown 1994-06-09  e1ac00ed5b12c36da8a4649293fc127d
+
+
+DS0055 Utah Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0055-Data.txt                 24      563       4       1994-06-09  9a614c1267b656b609860466b04345cc
+
+
+DS0056 Utah Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0056-Data.txt                 24      980       4       1994-06-09  68e3efbb08dcc22bbfe6279bd54edc51
+
+
+DS0057 Virginia Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0057-Data.txt                 26      3,087     4       1994-06-09  469b9cd491a3bb7da7ae6da14eeff138
+
+
+DS0058 Virginia Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0058-Data.txt                 25      4,024     4       1994-06-09  026b49e64130a8e2a3127eba4c7b9dda
+
+
+DS0059 Vermont Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0059-Data.txt                 21      2,108     4       1994-06-09  7090ce3bc3f77e619d4a0709a79c6541
+
+
+DS0060 Vermont Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0060-Data.txt                 21      2,744     4       1994-06-09  936ad83b3126f20d8950de8ef320e41f
+
+
+DS0061 Washington Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0061-Data.txt                 24      618       4       1994-06-09  6bb6376ac6d5a08fb96467ba7790b395
+
+
+DS0062 Washington Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0062-Data.txt                 24      907       4       1994-06-09  8ccb0a569eb9897064244f4c0ee49c28
+
+
+DS0063 Wyoming Revenue Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0063-Data.txt                 24      672       unknown 1994-06-09  e24107192af72e42128c84449990cb91
+
+
+DS0064 Wyoming Expenditure Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0064-Data.txt                 24      1,021     4       1994-06-09  c111a4458dd62c17af4d796355144e4d
+
+
+DS0065 Codebook for All Parts
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0065-Data.txt                 22      6         inap.   1997-09-25  459b1cd5a62dd58b4efc4dccb9c42d49
+
+
+DS0066 Preliminary Arizona Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0066-Data.txt                 22      6         unknown 1996-06-26  d7cd1a0a58a84fd46c20ff776083bf95
+
+
+DS0067 Preliminary California Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0067-Data.txt                 26      2,859     unknown 1996-06-26  3ce7c8e59bfd8b8632e7b5b59577ca31
+
+
+DS0068 Preliminary California Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0068-Data.txt                 25      2,040     unknown 1996-06-26  ade8884b3bc472bdfca432a072e61b33
+
+
+DS0069 Preliminary Connecticut Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0069-Data.txt                 22      2,709     unknown 1996-06-26  89341e268e39b524eb526b01ac932c1a
+
+
+DS0070 Preliminary Connecticut Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0070-Data.txt                 20      788       unknown 1996-06-26  595b8f6966710d54ccefd765bb0a63a7
+
+
+DS0071 Preliminary Florida Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0071-Data.txt                 23      1,749     unknown 1996-06-26  24989f3c3aa2888bfffe548648089561
+
+
+DS0072 Preliminary Florida Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0072-Data.txt                 24      1,154     unknown 1996-06-26  bb9607c6c3ed6ec94fe35178702d2395
+
+
+DS0073 Preliminary Georgia Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0073-Data.txt                 22      10        unknown 1996-06-26  e6f0b478152d28621a31efa509a53bc4
+
+
+DS0074 Preliminary Georgia Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0074-Data.txt                 24      270       unknown 1996-06-26  458be96e549abc4ac1002c8ef5eb874f
+
+
+DS0075 Preliminary Idaho Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0075-Data.txt                 24      41        unknown 1996-06-26  8eb0c47562c0e68954f17262c118c1b2
+
+
+DS0076 Preliminary Idaho Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0076-Data.txt                 24      46        unknown 1996-06-26  dfd6703feab699dd3c2e31aae6424860
+
+
+DS0077 Preliminary Iowa Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0077-Data.txt                 24      1,354     unknown 1996-06-26  34a1d288947f4754b5ac8942f04bb056
+
+
+DS0078 Preliminary Iowa Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0078-Data.txt                 25      738       unknown 1996-06-26  6bdc45e25740d0c329035c36011f9176
+
+
+DS0079 Preliminary Kentucky Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0079-Data.txt                 24      2,929     unknown 1996-06-26  ae8a9c2a4b9a5b765d8b68f94d857ff2
+
+
+DS0080 Preliminary Kentucky Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0080-Data.txt                 24      2,062     unknown 1996-06-26  8c8e5a49e683b5ea367221674de3e67b
+
+
+DS0081 Preliminary Louisiana Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0081-Data.txt                 24      1,371     unknown 1996-06-26  cf845a878f891c3aaedc8e246ce430af
+
+
+DS0082 Preliminary Louisiana Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0082-Data.txt                 24      970       unknown 1996-06-26  59fc3cf44edd25036909b676b139ee93
+
+
+DS0083 Preliminary New Mexico Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0083-Data.txt                 22      4         unknown 1996-06-26  88c1c9fc12ed75cd821a89fe868408e7
+
+
+DS0084 Preliminary New Mexico Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0084-Data.txt                 23      12        unknown 1996-06-26  f39e455583c2b603b0c203a461bc445c
+
+
+DS0085 Preliminary New York Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0085-Data.txt                 22      3,059     unknown 1996-06-26  6ef7602294e52779adbabf6618ba2981
+
+
+DS0086 Preliminary New York Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0086-Data.txt                 22      4,092     unknown 1996-06-26  2e07ee82faf885e7c8ce95707d4fadc1
+
+
+DS0087 Preliminary Oregon Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0087-Data.txt                 24      549       unknown 1996-06-26  1a8597597b02bf75f24731875b792847
+
+
+DS0088 Preliminary Oregon Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0088-Data.txt                 24      911       unknown 1996-06-26  02c9e29838212f6cdff9fcb1cc519450
+
+
+DS0089 Preliminary Texas Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0089-Data.txt                 21      722       unknown 1996-06-26  1d4fd0618ff8105a3284bfc9ff6336d1
+
+
+DS0090 Preliminary Texas Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0090-Data.txt                 21      609       unknown 1996-06-26  d784f1901023150662e058df54b89c4c
+
+
+DS0091 Preliminary Wisconsin Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0091-Data.txt                 23      90        unknown 1996-06-26  6bfcaf4fb9ba2db46e6bf425bf30a243
+
+
+DS0092 Preliminary Wisconsin Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0092-Data.txt                 23      106       unknown 1996-06-26  1fb678145210ede9ca712c4f38a02fd5
+
+
+DS0093 Preliminary West Virginia Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0093-Data.txt                 24      836       unknown 1996-06-26  8d5cbdce1a3850e19391956c39775edb
+
+
+DS0094 Preliminary West Virginia Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0094-Data.txt                 25      1,018     unknown 1996-06-26  dfc3fc54833f2f8e5bd0069391a3f158
+
+
+DS0095 Final Missouri Expenditures Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0095-Data.txt                 26      5,714     unknown 1996-06-26  f9befa5bc4ed34d0991adeabc8603d2b
+
+
+DS0096 Final Missouri Revenues Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0096-Data.txt                 29      3,395     unknown 1996-06-26  6ba1cde0ce03033cd63b52069712335a
+
+
+DS0097 Final Missouri Debt Data
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0097-Data.txt                 26      558       unknown 1996-07-09  e903b902e2e86f83104e5cd664ca5cde
+
+
+DS0098 Final Raw Data on Missouri Revenues
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0098-Data.txt                 33      2,273     unknown 1996-06-26  30ed8a716883d5c0c103fa095f8487e1
+
+
+DS0099 Final Raw Data on Missouri Expenditures
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0099-Data.txt                 31      5,225     unknown 1996-06-26  583a6ef7b6e82bbd6b4e76d25953b3f2
+
+
+DS0100 Categories of Expenditures, Revenues, and Debt for Final Missouri
+Data (Parts 95-97)
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0100-Data.txt                 66      760       unknown 1996-06-26  cb2d912c14828062abe64fd29a5752c7
+
+
+DS0101 Codebook for Parts 1-64
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0101-Codebook.txt             -       -         -       1997-06-03  bb4034192b7bdfdfdce83c5ecbcf4e70
+
+
+DS0102 Codebook for Parts 65-94
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0102-Codebook.txt             -       -         -       1997-06-03  afb6050c824c84e97453edecf4e67192
+
+
+DS0103 Codebook for Parts 95-100
+
+    Filename                            Record  Record    Var.    Date        MD5
+                                        Length  Count     Count   Updated     Checksum
+
+    09728-0103-Codebook.txt             -       -         -       1997-06-03  9f10e8b396202671a0eddd534cd1d987
+
