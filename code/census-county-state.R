@@ -10,7 +10,7 @@ library(dplyr)
 years <- c(seq(1790,1960,10),1962,1967,1970,1983) 
 
 census.county <- sapply(years, function(i) {
-  census.county.i <- read.csv(paste0(census.data.directory,"census-county/",i,".csv"), stringsAsFactors=FALSE)
+  census.county.i <- read.csv(paste0(data.directory,"census-county/",i,".csv"), stringsAsFactors=FALSE)
   census.county.i <- cbind(census.county.i, "year"=rep(i, nrow(census.county.i)))
 }
 )

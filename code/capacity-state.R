@@ -326,14 +326,14 @@ capacity.outcomes.locf <- lapply(capacity.outcomes, CapacityMatrices, outcomes=T
 capacity.covariates.locf <- CapacityMatrices(capacity.covariates, outcomes=FALSE, imp=NULL)
 capacity.covariates.placebo.locf <- CapacityMatrices(capacity.covariates.placebo, outcomes=FALSE, imp=NULL)
 
-saveRDS(capacity.outcomes.locf, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes-locf.rds")
-saveRDS(capacity.covariates.locf, "/media/jason/Dropbox/github/land-reform/data/capacity-covariates.rds")
-saveRDS(capacity.covariates.placebo.locf, "/media/jason/Dropbox/github/land-reform/data/capacity-covariates-placebo.rds")
+saveRDS(capacity.outcomes.locf, paste0(data.directory,"capacity-outcomes-locf.rds"))
+saveRDS(capacity.covariates.locf, paste0(data.directory,"capacity-covariates.rds"))
+saveRDS(capacity.covariates.placebo.locf, paste0(data.directory,"capacity-covariates-placebo.rds"))
 
 capacity.outcomes.linear <- lapply(capacity.outcomes, CapacityMatrices, outcomes=TRUE, imp="linear")
 capacity.outcomes.random <- lapply(capacity.outcomes, CapacityMatrices, outcomes=TRUE, imp="random")
 capacity.outcomes.median <- lapply(capacity.outcomes, CapacityMatrices, outcomes=TRUE, imp="median")
 
-saveRDS(capacity.outcomes.linear, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes-linear.rds")
-saveRDS(capacity.outcomes.random, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes-random.rds")
-saveRDS(capacity.outcomes.median, "/media/jason/Dropbox/github/land-reform/data/capacity-outcomes-median.rds")
+saveRDS(capacity.outcomes.linear, paste0(data.directory,"capacity-outcomes-linear.rds"))
+saveRDS(capacity.outcomes.random, paste0(data.directory,"capacity-outcomes-random.rds"))
+saveRDS(capacity.outcomes.median, paste0(data.directory,"capacity-outcomes-median.rds"))

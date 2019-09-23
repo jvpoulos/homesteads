@@ -2,7 +2,7 @@
 ### Prepare average farm values        ###
 ##########################################
 
-farmval <- read.csv(paste0(census.data.directory,"census-county/farmval.csv"), stringsAsFactors=FALSE)
+farmval <- read.csv(paste0(data.directory,"census-county/farmval.csv"), stringsAsFactors=FALSE)
 
 farmval$year <- farmval$year +1000 # fix year
 

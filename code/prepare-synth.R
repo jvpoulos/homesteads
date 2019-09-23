@@ -1,15 +1,15 @@
-basque <- read.csv("/media/jason/Dropbox/github/gans-causal/data/basque/treated/basque-x.csv")
-germany <- read.csv("/media/jason/Dropbox/github/gans-causal/data/germany/treated/germany-x.csv")
-california <- read.csv("/media/jason/Dropbox/github/gans-causal/data/california/treated/california-x.csv")
+basque <- read.csv(paste0(data.directory,"basque/treated/basque-x.csv"))
+germany <- read.csv(paste0(data.directory,"germany/treated/germany-x.csv"))
+california <- read.csv(paste0(data.directory,"california/treated/california-x.csv"))
 
-basque.yz <- read.csv("/media/jason/Dropbox/github/gans-causal/data/basque/treated/basque-yz.csv") 
-basque.xz <- readRDS("/media/jason/Dropbox/github/gans-causal/data/basque/treated/basque-xz.rds")
+basque.yz <- read.csv(paste0(data.directory,"basque/treated/basque-yz.csv"))
+basque.xz <- readRDS(paste0(data.directory,"basque/treated/basque-xz.rds"))
 
-germany.yz <- read.csv("/media/jason/Dropbox/github/gans-causal/data/germany/treated/germany-yz.csv") 
-germany.xz <- readRDS("/media/jason/Dropbox/github/gans-causal/data/germany/treated/germany-xz.rds")
+germany.yz <- read.csv(paste0(data.directory,"germany/treated/germany-yz.csv"))
+germany.xz <- readRDS(paste0(data.directory,"germany/treated/germany-xz.rds"))
 
-california.yz <- read.csv("/media/jason/Dropbox/github/gans-causal/data/california/treated/california-yz.csv") 
-california.xz <- readRDS("/media/jason/Dropbox/github/gans-causal/data/california/treated/california-xz.rds")
+california.yz <- read.csv(paste0(data.directory,"california/treated/california-yz.csv"))
+california.xz <- readRDS(paste0(data.directory,"california/treated/california-xz.rds"))
 
 control.outcomes <- list("basque"=basque,"germany"=germany, "california"=california)
 treat.covars <- list("basque.yz"=basque.yz, "germany.yz"=germany.yz, "california.yz"=california.yz)
@@ -49,6 +49,6 @@ synth.control.covars <- lapply(control.covars, function(d) {
   })
 })
 
-saveRDS(synth.control.outcomes, "/media/jason/Dropbox/github/land-reform/data/synth-control-outcomes.rds")
-saveRDS(synth.treat.covars, "/media/jason/Dropbox/github/land-reform/data/synth-treat-covars.rds")
-saveRDS(synth.control.covars, "/media/jason/Dropbox/github/land-reform/data/synth-control-covars.rds")
+saveRDS(synth.control.outcomes, paste0(data.directory,"synth-control-outcomes.rds"))
+saveRDS(synth.treat.covars, paste0(data.directory,"synth-treat-covars.rds"))
+saveRDS(synth.control.covars, paste0(data.directory,"synth-control-covars.rds"))

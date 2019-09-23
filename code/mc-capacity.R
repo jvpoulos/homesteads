@@ -237,7 +237,7 @@ CapacitySim <- function(outcomes,d,sim,treated.indices){
 
 treat_indices_order <- c("CA", "CO", "IA", "KS", "MI", "MN", "MO", "NE", "OH", "OR", "SD", "WA", "WI", "IL", "NV", "ID", "MT", "ND",  "UT", "AL", "MS", "AR", "FL", "LA", "IN", "NM", "WY", "AZ", "OK", "AK")
 
-foreach(d = c('rev.pc','educ.pc','exp.pc')) %dopar% {
+foreach(d = c('rev.pc','exp.pc')) %dopar% {
   foreach(sim = c(0,1)) %dopar% {
     CapacitySim(capacity.outcomes,d,sim,treated.indices = treat_indices_order)
   }
