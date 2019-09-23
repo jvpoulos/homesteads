@@ -1,5 +1,5 @@
 ###################################
-# MC estimates #
+# MC placebo estimates #
 ###################################
 
 ## Loading Source files

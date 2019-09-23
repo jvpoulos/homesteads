@@ -1,5 +1,6 @@
 packages <- c("reldist","dplyr","data.table","reshape","reshape2","stringr","caret","zoo","tidyr","readr","readxl","scales","ggplot2","wesanderson","plm","imputeTS",
-              "MCPanel","glmnet","ggplot2","latex2exp","missMDA","bcv","parallel","doParallel")
+              "glmnet","ggplot2","latex2exp","missMDA","bcv","parallel","doParallel","boot","tidyverse","mgcv")
+
 map.packages <- c("rgdal","rgeos","maptools","ggmap","sp","ifultools","broom","raster")
 
 weights <- c("cluster","HMisc","weights") # install cluster -> HMisc -> weights

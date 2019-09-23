@@ -40,6 +40,12 @@ $ mkdir results/plots
 ```
 * Open `package-list.R` in a script editor
   * Verify that all required packages in `package-list.R`are installed in your **R** library
+* In **R**, install MCPanel from my forked repo:
+```
+install.packages("devtools")
+library(devtools) 
+install_github("jvpoulos/MCPanel")
+```
 * Make shell file `main.sh` executable from the Linux/Unix command line:
 ```
 $ chmod +x main.sh
@@ -49,3 +55,7 @@ $ chmod +x main.sh
 $ ./main.sh > main.txt
 ```
 * Repeat the last two steps for `mc-synth.sh` and `mc-capacity.sh` to run experiments
+* For MC placebo estimates: `mc-capacity-placebo.sh` and `mc-capacity-placebo-covars.sh`
+* For MC causal estimates: `mc-capacity-estimates.sh` and `mc-capacity-estimates-covars.sh`
+* For sensitivity based on imputation method: `mc-capacity-estimates-covars-linear.sh`, `mc-capacity-estimates-covars-random.sh`, and
+`mc-capacity-estimates-covars-median.sh`

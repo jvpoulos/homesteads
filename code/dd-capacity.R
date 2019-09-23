@@ -161,7 +161,6 @@ rev.pc.all.robust.did.CI
 summary(lm(f2, data=capacity.outcomes.panel$rev.pc))
 nobs(lm(f2, data=capacity.outcomes.panel$rev.pc))
 
-
 # Covars
 exp.pc.all.robust.did <- boot(data=capacity.outcomes.panel$exp.pc,
                               statistic=RunDiD,

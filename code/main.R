@@ -31,35 +31,32 @@ source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 source(paste0(code.directory,'railroads.R'))  # rr.inter.m
 
 source(paste0(code.directory,'capacity-state.R')) # prepare for mc
-save.image("~/data/capacity.RData")
 
-## MC experiments on synth data
+## MC estimates: experiments and causal estimates (see README)
 
-source(paste0(code.directory,'prepare-synth.R')) 
+source(paste0(code.directory,'prepare-synth.R')) # prepare synthetic control datasets for experiments
 
-## MC causal estimates on state capacity data
+tablesfigures <- FALSE # set to TRUE to produce tables and Figures
+if(tablesfigures){
+  source(paste0(code.directory,'synth-plots-rssa.R')) 
+}
 
-# mc-capacity-placebo.sh --> mc-capacity-placebo.R  # placebo tests
-# mc-capacity-placebo-covars.sh --> mc-capacity-placebo-covars.R  # placebo tests
+if(tablesfigures){
+  source(paste0(code.directory,'mc-capacity-placebo-table.R')) 
+  source(paste0(code.directory,'mc-capacity-table.R')) 
+  
+  bootstrap <- FALSE # set to TRUE for bootstrap SEs/CIs
+  if(bootstrap){
+    source(paste0(code.directory,'mc-boot.R'))
+    source(paste0(code.directory,'mc-boot-linear.R'))
+    source(paste0(code.directory,'mc-boot-median.R'))
+    source(paste0(code.directory,'mc-boot-random.R'))
+  }
 
-# mc-capacity-estimates.sh --> mc-capacity-estimates.R 
-# mc-capacity-estimates-covars.sh --> mc-capacity-estimates-covars.R 
-
-source(paste0(code.directory,'mc-capacity-placebo-table.R')) 
-source(paste0(code.directory,'mc-capacity-table.R')) 
-
-# mc-boot.sh --> mc-boot.R
-# mc-boot-linear.R
-# mc-boot-median.R
-# mc-boot-random.R
-source(paste0(code.directory,'mc-capacity-plots.R')) 
-
-# Sensitivity: imputation method
-# mc-capacity-estimates-covars-linear.sh --> mc-capacity-estimates-covars-linear.R 
-# mc-capacity-estimates-covars-random.sh --> mc-capacity-estimates-covars-random.R 
-# mc-capacity-estimates-covars-median.sh --> mc-capacity-estimates-covars-median.R 
-
-source(paste0(code.directory,'mc-capacity-table-imp.R')) 
+  source(paste0(code.directory,'mc-capacity-plots.R')) 
+  
+  source(paste0(code.directory,'mc-capacity-table-imp.R')) # Sensitivity: imputation method
+}
 
 # DD estimates on state capacity data
 
@@ -69,6 +66,7 @@ source(paste0(code.directory,'dd-capacity.R'))
 
 source(paste0(code.directory,'dd-inequality.R')) 
 
-# Descriptive plots
-
-source(paste0(code.directory,'ineq-capacity.R')) # inequality vs. state capacity
+if(tablesfigures){
+  # Descriptive plots
+  source(paste0(code.directory,'ineq-capacity.R')) # inequality vs. state capacity
+}
