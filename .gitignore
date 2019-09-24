@@ -33,9 +33,8 @@ vignettes/*.pdf
 *.knit.md
 
 # HTML and documentation files
-/*.html
-/*.pdf
-/*-manifest.txt
-/*-Codebook.txt
-/*-related_literature.txt
-
+*.html
+*.pdf
+*manifest.txt
+*-Codebook.txt
+*-related_literature.txt
