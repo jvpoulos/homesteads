@@ -35,6 +35,3 @@ vignettes/*.pdf
 # HTML and documentation files
 *.html
 *.pdf
-*manifest.txt
-*-Codebook.txt
-*-related_literature.txt
