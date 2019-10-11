@@ -1,6 +1,6 @@
 # homesteads
 
-This repository provides data and code for reproducing ["State-Building through Public Land Disposal? An Application of Matrix Completion for Counterfactual Prediction"](https://arxiv.org/abs/1901.02991).
+This repository provides data and code for reproducing ["State-Building through Public Land Disposal? An Application of Matrix Completion for Counterfactual Prediction"](https://arxiv.org/abs/1903.08028).
 
 Please cite the paper if you use this code for academic research:
 
@@ -40,7 +40,7 @@ $ mkdir results/plots
 ```
 * Open `package-list.R` in a script editor
   * Verify that all required packages in `package-list.R`are installed in your **R** library
-* In **R**, install MCPanel from my forked repo:
+* In **R**, install MCPanel from the forked repo:
 ```
 install.packages("devtools")
 library(devtools) 
