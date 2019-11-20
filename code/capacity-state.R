@@ -288,9 +288,6 @@ CapacityMatrices <- function(d, outcomes=TRUE, imp=c("locf","linear","random","m
     }
   } 
   
-  d.imp <- log(d.imp+.Machine
-               $double.eps) # take log
-  
   # Matrix of observed entries (N x T)
   d.M <- t(as.matrix(d.imp))
   d.M[is.nan(d.M )] <- NA
