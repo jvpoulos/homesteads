@@ -75,9 +75,9 @@ patents.sum <- patents %>% # get a county-year sum of patents
   summarise_each(funs(sum),homesteads) %>%
   arrange(state_code, county_code,year) # sort
 
-## Calc log per capita homesteads for each decennial 
+## Calc per capita homesteads for each decennial 
 
-decennial.homestead <- read_csv(paste0(homestead.data.directory,"decennial-homestead.csv"), 
+decennial.homestead <- read_csv(paste0(data.directory,"decennial-homestead.csv"), 
                                 col_names = c("year","year2"))
 
 patents.sum <- merge(patents.sum, decennial.homestead, by="year", all.x=TRUE)
