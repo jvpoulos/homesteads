@@ -11,6 +11,7 @@ require(tidyr)
 require(readr)
 require(imputeTS)
 require(caret)
+require(randomForest)
 
 ## STATE-LEVEL DATA
 
@@ -69,6 +70,7 @@ funds.9728$`31`[funds.9728$state=="ME"] <- funds.9728$`31`[funds.9728$state=="ME
 ## State and Local Government [United States]: Sources and Uses of Funds, State Financial Statistics, 1933-1937 (ICPSR 6306)
 
 # Set location of files
+setwd("../../../")
 setwd(paste0(data.directory, "capacity/","ICPSR_06306"))
 
 # Import files 
@@ -107,6 +109,7 @@ funds.6306$state[funds.6306$state=="NB"] <- "NE"
 ## State and Local Government: Sources and Uses of Funds, 1902, 1913, 1932, 1942, 1962, 1972, and 1982 (ICPSR 6304)
 
 # Set location of files
+setwd("../../../")
 setwd(paste0(data.directory, "capacity/","ICPSR_06304"))
 
 # Import files 
@@ -159,6 +162,7 @@ funds[(funds$state=="WA" & funds$year>=1907 & funds$year<=1918),] <- NA
 
 # Get historical CPI
 
+setwd("../../../")
 USCPI_1783_1982 <- read_csv(paste0(data.directory,"USCPI_1783-1982.csv"))
 
 USCPI_1783_1982$adj_factor_82 <- USCPI_1783_1982$`U.S. Consumer Price Index`/USCPI_1783_1982$`U.S. Consumer Price Index`[USCPI_1783_1982$Year == 1982] # adj. factor relative to 1982
