@@ -1,8 +1,8 @@
 # Railroads, 1826-1911
 
 # Packages
-library(ggplot2)
 library(rgdal)
+library(ggplot2)
 library(rgeos)
 library(maptools)
 library(ggmap)

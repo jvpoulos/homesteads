@@ -2,6 +2,17 @@
 # Main                            #
 ###################################
 
+# create plots dir. if it doesn't already exist
+directory <- getwd()
+plots.directory <- "results/plots"
+
+if(!dir.exists(file.path(directory, plots.directory))){
+  print("creating results/plots directory")
+  dir.create(file.path(directory, plots.directory))
+} else{
+  print("results/plots directory already exists")
+}
+
 ## Set directories
 data.directory <-"data/"
 code.directory <-"code/"
@@ -22,7 +33,6 @@ source(paste0(code.directory,'patents-homestead.R'))
 source(paste0(code.directory,'prepare-homestead.R'))
 
 source(paste0(code.directory,'patents.R'))
-source(paste0(code.directory,'homestead-heatmap.R')) 
 
 ## Prepare state capacity, census and RR data
 
@@ -30,7 +40,10 @@ source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
 source(paste0(code.directory,'railroads.R'))  # rr.inter.m
 
-source(paste0(code.directory,'capacity-state.R')) # prepare for mc
+source(paste0(code.directory,'capacity-state.R')) # prepare stae capacity data
+save.image(file=paste0(results.directory,'capacity-state.RData'))
+
+source(paste0(code.directory,'non-response-plot.R')) # Summarize non-response and treatment status
 
 ## MC estimates: experiments and causal estimates (see README)
 
@@ -38,7 +51,7 @@ source(paste0(code.directory,'prepare-synth.R')) # prepare synthetic control dat
 
 tablesfigures <- FALSE # set to TRUE to produce tables and Figures
 if(tablesfigures){
-  source(paste0(code.directory,'synth-plots-rssa.R')) 
+  source(paste0(code.directory,'simultation-plots.R')) # combine simulation plots
 }
 
 if(tablesfigures){

@@ -1,3 +1,7 @@
+############################################################################
+# Prepare synthetic control datasets                                      #
+############################################################################
+
 basque <- read.csv(paste0(data.directory,"basque/treated/basque-x.csv"))
 germany <- read.csv(paste0(data.directory,"germany/treated/germany-x.csv"))
 california <- read.csv(paste0(data.directory,"california/treated/california-x.csv"))

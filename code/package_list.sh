@@ -1,4 +1,4 @@
 #!/bin/bash
 #----------------------------------------------------
 
-R --no-save < code/mc-capacity-placebo.R
+R --no-save < code/package-list.R

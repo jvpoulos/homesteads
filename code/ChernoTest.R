@@ -4,7 +4,7 @@
 ##, permuting {û_t } is equivalent to permuting {Z_t }.
 ## modified from https://github.com/ebenmichael/ents
 
-ChernoTest <- function(outcomes, ns=100, q=c(1,2), t.stat=NULL, treat_indices_order,permtype=c("iid", "moving.block", "iid.block"),t0,imputed=FALSE,covars=NULL,pca=FALSE) {
+ChernoTest <- function(outcomes, t0, ns=100, q=c(1,2), t.stat=NULL, treat_indices_order,permtype=c("iid", "moving.block", "iid.block"),imputed=FALSE) {
   
   t_final <- ncol(outcomes$M) # all periods
   
@@ -65,7 +65,7 @@ ChernoTest <- function(outcomes, ns=100, q=c(1,2), t.stat=NULL, treat_indices_or
     }
   } else if(permtype=="iid.block") {
     
-    source("PolitisWhite.R")
+    source("code/PolitisWhite.R")
     m <- median(b.star(t(outcomes$M),round=TRUE)[,1])  # get optimal bootstrap lengths
     teststats <- matrix(NA, nrow=ns, ncol=length(q))
     
@@ -108,7 +108,7 @@ ChernoTest <- function(outcomes, ns=100, q=c(1,2), t.stat=NULL, treat_indices_or
   if(!is.null(t.stat)){
     real_att <- t.stat
   } else{
-    mc.fit.actual <-  MCEst(outcomes,imputed=FALSE,covars=NULL,pca=FALSE)
+    mc.fit.actual <-  MCEst(outcomes,imputed=FALSE)
     real_att <- as.matrix(colMeans(mc.fit.actual$impact[,t0:t_final,drop=FALSE][rownames(mc.fit.actual$impact) %in% treat_indices_order,], na.rm = TRUE)) # get mean post-period impact on treated
     if(imputed){
       real_att <- na.omit(real_att)

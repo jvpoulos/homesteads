@@ -199,13 +199,15 @@ census.county[[18]] <- census.county[[18]] %>%
 # 1962
 census.county[[19]] <- census.county[[19]] %>%
   group_by(state,county) %>%
-  mutate(tenancy = var145) # % tenant farms 1959
+  mutate(ns.pop = var3,
+         tenancy = var145) # % tenant farms 1959
 
 
 # 1967
 census.county[[20]] <- census.county[[20]] %>%
   group_by(state,county) %>%
-  mutate(tenancy = var125) # percent of farms operated by tenants 1964
+  mutate(ns.pop= var1,
+         tenancy = var125) # percent of farms operated by tenants 1964
 
 #1970
 census.county[[21]] <- census.county[[21]] %>%

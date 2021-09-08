@@ -35,3 +35,6 @@ vignettes/*.pdf
 # HTML and documentation files
 *.html
 *.pdf
+
+# batch files
+*.sb
