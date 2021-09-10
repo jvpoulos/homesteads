@@ -68,6 +68,7 @@ SynthSim <- function(outcomes,covars.x,d,sim){
       
       p.mod <- cv.glmnet(x=cbind(t(covars.x.sub),Y[,1:(t0-1)]), y=(1-treat_mat), family="mgaussian", alpha=1, parallel=TRUE,intercept=FALSE,type.multinomial="grouped",nfolds=5) 
       W <- predict(p.mod, cbind(t(covars.x.sub),Y[,1:(t0-1)]))[,,1]
+      W[,1:(t0-1)] <- W[,t0] # assume pre-treatment W same as t0 
       
       boundProbs <- function(x,bounds=c(0.01,0.99)){
         x[x>max(bounds)] <- max(bounds)
@@ -76,7 +77,7 @@ SynthSim <- function(outcomes,covars.x,d,sim){
       }
       
       p.weights <- matrix(NA, nrow=nrow(treat_mat), ncol=ncol(treat_mat), dimnames = list(rownames(treat_mat), colnames(treat_mat)))
-      p.weights <- (1-treat_mat)*(1-boundProbs(W)) + (treat_mat)*(boundProbs(W))
+      p.weights <- (1-treat_mat)*(1-boundProbs(W)) + (treat_mat)*(boundProbs(W)) # treated are 0
     
       ## ------
       ## MC-NNM

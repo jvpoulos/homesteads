@@ -34,8 +34,35 @@ for(d in c('rev.pc','exp.pc')){
   capacity.outcomes[[d]]$M <- capacity.outcomes.mice[[d]]$M[,1:(t0.loc-1)] 
   capacity.outcomes[[d]]$M.missing <- capacity.outcomes.mice[[d]]$M.missing[,1:(t0.loc-1)]
   capacity.outcomes[[d]]$mask <- capacity.outcomes.mice[[d]]$mask[,1:(t0.loc-1)] 
-  capacity.outcomes[[d]]$p.weights <- matrix(0.5, nrow = nrow(capacity.outcomes[[d]]$mask), ncol=ncol(capacity.outcomes[[d]]$mask), dimnames = dimnames(capacity.outcomes[[d]]$mask))
-}
+
+  # Transform covars to unit and time-specific inputs
+  capacity.covars <- cbind(capacity.outcomes.linear[[d]]$faval[,c("1850","1860")][sort(rownames(capacity.outcomes.linear[[d]]$faval[,c("1850","1860")])),], 
+                           capacity.outcomes.linear[[d]]$farmsize[,c("1860")][sort(names(capacity.outcomes.linear[[d]]$farmsize[,c("1860")]))],
+                           c("AZ"=0, "NM"=0, capacity.outcomes.linear[[d]]$access[,c("1860")])[sort(c(names(capacity.outcomes.linear[[d]]$access[,c("1860")]),"AZ","NM"))]) # AZ and NM not in dataset
+  
+  colnames(capacity.covars) <- c("faval.1850","faval.1860","farmsize.1860", "access.1860")
+  
+  capacity.covars <-capacity.covars[match(rownames(capacity.outcomes[[d]]$M), rownames(capacity.covars)), ] # same order
+  capacity.covars[is.na(capacity.covars)] <- 0
+  
+  ## Estimate propensity scores
+  
+  treat_mat <- 1-capacity.outcomes.mice[[d]]$mask
+  
+  p.mod <- cv.glmnet(x=cbind(capacity.covars,capacity.outcomes.mice[[d]]$M[,1:(t0.loc-1)]), y=(1-treat_mat), family="mgaussian", alpha=1, parallel=TRUE,intercept=FALSE,type.multinomial="grouped",nfolds=5) 
+  W <- predict(p.mod, cbind(capacity.covars,capacity.outcomes.mice[[d]]$M[,1:(t0.loc-1)]))[,,1]
+  W[,1:(t0.loc-1)] <- W[,t0.loc] # assume pre-treatment W same as t0
+  
+  boundProbs <- function(x,bounds=c(0.01,0.99)){
+    x[x>max(bounds)] <- max(bounds)
+    x[x<min(bounds)] <- min(bounds)
+    return(x)
+  }
+  
+  p.weights <- matrix(NA, nrow=nrow(treat_mat), ncol=ncol(treat_mat), dimnames = list(rownames(treat_mat), colnames(treat_mat)))
+  capacity.outcomes[[d]]$p.weights <- (1-treat_mat)*(1-boundProbs(W)) + (treat_mat)*(boundProbs(W)) # overlap weighting: treated are 0
+  capacity.outcomes[[d]]$p.weights <- capacity.outcomes[[d]]$p.weights[,1:(t0.loc-1)] # same dimension as outcome and treatment matrices
+  }
 
 capacity.outcomes.list <- list("rev.pc"=capacity.outcomes[["rev.pc"]],"exp.pc"=capacity.outcomes[["exp.pc"]])
 
