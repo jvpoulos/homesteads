@@ -1,6 +1,8 @@
-###################################
+##########################################
 # DD Estimation (county-level measures)   #
-###################################
+##########################################
+#N.B.: need to run dd-capacity.R first
+
 library(dplyr)
 library(boot)
 
@@ -8,7 +10,7 @@ library(boot)
 library(parallel)
 library(doParallel)
 
-cores <- 4#detectCores()
+cores <- detectCores()
 
 cl <- parallel::makeForkCluster(cores)
 

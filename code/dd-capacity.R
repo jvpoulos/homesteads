@@ -10,7 +10,7 @@ library(tidyverse)
 library(parallel)
 library(doParallel)
 
-cores <- 4#detectCores()
+cores <- detectCores()
 
 cl <- parallel::makeForkCluster(cores)
 
@@ -18,13 +18,14 @@ doParallel::registerDoParallel(cores) # register cores (<p)
 
 RNGkind("L'Ecuyer-CMRG") # ensure random number generation
 
-source(paste0(code.directory,"RunDiD.R"))
+source("code/RunDiD.R")
 
 ## Load capacity data
-capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes.rds"))
+load("results/capacity-state.RData")
+capacity.outcomes <- readRDS(paste0(data.directory,"capacity-outcomes-mice.rds")) # MICE imputed data
 
-capacity.outcomes.M <- list("rev.pc"=capacity.outcomes[["rev.pc"]]$M,"exp.pc"=capacity.outcomes[["exp.pc"]]$M,"educ.pc"=capacity.outcomes[["educ.pc"]]$M)
-capacity.outcomes.mask <- list("rev.pc"=capacity.outcomes[["rev.pc"]]$mask,"exp.pc"=capacity.outcomes[["exp.pc"]]$mask,"educ.pc"=capacity.outcomes[["educ.pc"]]$mask)
+capacity.outcomes.M <- list("rev.pc"=capacity.outcomes[["rev.pc"]]$M,"exp.pc"=capacity.outcomes[["exp.pc"]]$M)
+capacity.outcomes.mask <- list("rev.pc"=capacity.outcomes[["rev.pc"]]$mask,"exp.pc"=capacity.outcomes[["exp.pc"]]$mask)
 
 capacity.outcomes.panel <- lapply(capacity.outcomes.M, melt, value.name="outcome")
 capacity.outcomes.mask <- lapply(capacity.outcomes.mask, melt, value.name="mask")
@@ -40,7 +41,6 @@ capacity.outcomes.mask <- lapply(capacity.outcomes.mask, function(x){
 
 capacity.outcomes.panel$rev.pc <- merge(x=capacity.outcomes.panel$rev.pc, y=capacity.outcomes.mask$rev.pc, by=c("state","year"), all.x=TRUE)
 capacity.outcomes.panel$exp.pc <- merge(x=capacity.outcomes.panel$exp.pc, y=capacity.outcomes.mask$exp.pc, by=c("state","year"), all.x=TRUE)
-capacity.outcomes.panel$educ.pc <- merge(x=capacity.outcomes.panel$educ.pc, y=capacity.outcomes.mask$educ.pc, by=c("state","year"), all.x=TRUE)
 
 ## Per-capita total number of patents issued under the HSA 
 
@@ -62,7 +62,6 @@ capacity.outcomes.panel <- lapply(capacity.outcomes.panel, merge, y=homesteads.s
 # NAs are 0
 capacity.outcomes.panel$rev.pc$homesteads.pc[is.na(capacity.outcomes.panel$rev.pc$homesteads.pc)] <- 0
 capacity.outcomes.panel$exp.pc$homesteads.pc[is.na(capacity.outcomes.panel$exp.pc$homesteads.pc)] <- 0
-capacity.outcomes.panel$educ.pc$homesteads.pc[is.na(capacity.outcomes.panel$educ.pc$homesteads.pc)] <- 0 # take logs later
 
 ## RR access (incl. post-treatment access)
 
@@ -111,18 +110,6 @@ capacity.outcomes.panel$exp.pc[capacity.outcomes.panel$exp.pc$year<=1868,] <- ca
   mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc,faval,farmsize) # take logs
 
 capacity.outcomes.panel$exp.pc[capacity.outcomes.panel$exp.pc$year>1868,] <- capacity.outcomes.panel$exp.pc[capacity.outcomes.panel$exp.pc$year>1868,]%>% 
-  group_by(state) %>% 
-  fill(track2, faval, farmsize) %>% #default direction down
-  fill(track2, faval, farmsize, .direction = "up") %>% 
-  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc,faval,farmsize) # take logs
-
-capacity.outcomes.panel$educ.pc[capacity.outcomes.panel$educ.pc$year<=1868,] <- capacity.outcomes.panel$educ.pc[capacity.outcomes.panel$educ.pc$year<=1868,]%>% 
-  group_by(state) %>% 
-  fill(track2, faval, farmsize) %>% #default direction down
-  fill(track2, faval, farmsize, .direction = "up") %>% 
-  mutate_each(funs(log(.Machine$double.eps + .)), homesteads.pc,faval,farmsize) # take logs
-
-capacity.outcomes.panel$educ.pc[capacity.outcomes.panel$educ.pc$year>1868,] <- capacity.outcomes.panel$educ.pc[capacity.outcomes.panel$educ.pc$year>1868,]%>% 
   group_by(state) %>% 
   fill(track2, faval, farmsize) %>% #default direction down
   fill(track2, faval, farmsize, .direction = "up") %>% 

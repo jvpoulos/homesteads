@@ -65,5 +65,3 @@ $ ./main.sh > main.txt
 * Repeat the last two steps for `mc-synth.sh` and `mc-capacity.sh` to run experiments
 * For MC placebo estimates: `mc-capacity-placebo.sh`
 * For MC causal estimates: `mc-capacity-estimates.sh`
-* For sensitivity based on imputation method: `mc-capacity-estimates-covars-linear.sh`, `mc-capacity-estimates-covars-random.sh`, and
-`mc-capacity-estimates-covars-median.sh`

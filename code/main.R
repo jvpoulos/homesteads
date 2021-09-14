@@ -56,19 +56,8 @@ if(tablesfigures){
 
 if(tablesfigures){
   source(paste0(code.directory,'mc-capacity-placebo-table.R')) 
-  source(paste0(code.directory,'mc-capacity-table.R')) 
   
-  bootstrap <- FALSE # set to TRUE for bootstrap SEs/CIs
-  if(bootstrap){
-    source(paste0(code.directory,'mc-boot.R'))
-    source(paste0(code.directory,'mc-boot-linear.R'))
-    source(paste0(code.directory,'mc-boot-median.R'))
-    source(paste0(code.directory,'mc-boot-random.R'))
-  }
-
   source(paste0(code.directory,'mc-capacity-plots.R')) 
-  
-  source(paste0(code.directory,'mc-capacity-table-imp.R')) # Sensitivity: imputation method
 }
 
 # DD estimates on state capacity data
@@ -77,7 +66,7 @@ source(paste0(code.directory,'dd-capacity.R'))
 
 # DD estimates on inequality
 
-source(paste0(code.directory,'dd-inequality.R')) 
+source(paste0(code.directory,'dd-inequality.R'))  # N.B.: need to run dd-capacity.R first
 
 if(tablesfigures){
   # Descriptive plots

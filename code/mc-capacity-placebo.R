@@ -53,11 +53,7 @@ for(d in c('rev.pc','exp.pc')){
   W <- predict(p.mod, cbind(capacity.covars,capacity.outcomes.mice[[d]]$M[,1:(t0.loc-1)]))[,,1]
   W[,1:(t0.loc-1)] <- W[,t0.loc] # assume pre-treatment W same as t0
   
-  boundProbs <- function(x,bounds=c(0.01,0.99)){
-    x[x>max(bounds)] <- max(bounds)
-    x[x<min(bounds)] <- min(bounds)
-    return(x)
-  }
+  source("code/boundProbs.R")
   
   p.weights <- matrix(NA, nrow=nrow(treat_mat), ncol=ncol(treat_mat), dimnames = list(rownames(treat_mat), colnames(treat_mat)))
   capacity.outcomes[[d]]$p.weights <- (1-treat_mat)*(1-boundProbs(W)) + (treat_mat)*(boundProbs(W)) # overlap weighting: treated are 0
@@ -91,9 +87,3 @@ iid.block.placebo <- foreach(tau = taus) %dopar% {
   mclapply(capacity.outcomes.list,
            ChernoTest, t0=t0_placebo,ns=1000, treat_indices_order=treat_indices_order, permtype="iid.block",imputed=FALSE,mc.cores=cores)}
 saveRDS(iid.block.placebo,"iid_block_placebo.rds")
-
-iid.placebo <- foreach(tau = taus) %dopar% {
-  t0_placebo <- t_final_placebo-tau # n pre-treatment periods
-  mclapply(capacity.outcomes.list,
-           ChernoTest,t0=t0_placebo, ns=1000, treat_indices_order=treat_indices_order, permtype="iid",imputed=FALSE,mc.cores=cores)}
-saveRDS(iid.block.placebo,"iid_placebo.rds")
