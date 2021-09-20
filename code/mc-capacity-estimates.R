@@ -84,7 +84,7 @@ saveRDS(moving.block,paste0("moving_block_",settings,".rds"))
 
 iid.block <- mclapply(capacity.outcomes.list,
                       ChernoTest, ns=1000, treat_indices_order=treat_indices_order, permtype="iid.block",t0=t0,imputed=FALSE,mc.cores=cores)
-saveRDS(iid.block,paste0("iid_block",settings,".rds"))
+saveRDS(iid.block,paste0("iid_block_",settings,".rds"))
 
 # Bootstrap CIs
 
@@ -92,13 +92,15 @@ source("code/MCEstBoot.R")
 
 source("code/PolitisWhite.R")
 
-bopt.rev.pc <- b.star(t(capacity.outcomes[["rev.pc"]]$M),round=TRUE)[,1]  # get optimal stationary bootstrap lengths
-bopt.exp.pc <- b.star(t(capacity.outcomes[["exp.pc"]]$M),round=TRUE)[,1] 
-
-rev.pc.boot <- tsboot(ts(t(capacity.outcomes[["rev.pc"]]$M)), MCEstBoot, M.missing= capacity.outcomes[["rev.pc"]]$M.missing, mask=capacity.outcomes[["rev.pc"]]$mask, p.weights=capacity.outcomes[["rev.pc"]]$p.weights, imputed=FALSE, R= 1000, parallel = "multicore", l =bopt.rev.pc, 
-                      sim = "fixed") # block resampling with fixed block lengths of length l)
-saveRDS(rev.pc.boot, paste0("rev-pc-boot-",settings,".rds"))
-
-exp.pc.boot <- tsboot(ts(t(capacity.outcomes[["exp.pc"]]$M)), MCEstBoot, M.missing= capacity.outcomes[["exp.pc"]]$M.missing, mask=capacity.outcomes[["exp.pc"]]$mask, p.weights=capacity.outcomes[["rev.pc"]]$p.weights, imputed=FALSE,R= 1000, parallel = "multicore", l =bopt.exp.pc, 
-                      sim = "fixed") 
-saveRDS(exp.pc.boot, paste0("exp-pc-boot-",settings,".rds"))
+if(setting=="mice"){
+  bopt.rev.pc <- b.star(t(capacity.outcomes[["rev.pc"]]$M),round=TRUE)[,1]  # get optimal stationary bootstrap lengths
+  bopt.exp.pc <- b.star(t(capacity.outcomes[["exp.pc"]]$M),round=TRUE)[,1] 
+  
+  rev.pc.boot <- tsboot(ts(t(capacity.outcomes[["rev.pc"]]$M)), MCEstBoot, M.missing= capacity.outcomes[["rev.pc"]]$M.missing, mask=capacity.outcomes[["rev.pc"]]$mask, p.weights=capacity.outcomes[["rev.pc"]]$p.weights, imputed=FALSE, R= 1000, parallel = "multicore", l =bopt.rev.pc,
+                        sim = "fixed") # block resampling with fixed block lengths of length l)
+  saveRDS(rev.pc.boot, paste0("rev-pc-boot-",settings,".rds"))
+  
+  exp.pc.boot <- tsboot(ts(t(capacity.outcomes[["exp.pc"]]$M)), MCEstBoot, M.missing= capacity.outcomes[["exp.pc"]]$M.missing, mask=capacity.outcomes[["exp.pc"]]$mask, p.weights=capacity.outcomes[["rev.pc"]]$p.weights, imputed=FALSE,R= 1000, parallel = "multicore", l =bopt.exp.pc, 
+                        sim = "fixed") 
+  saveRDS(exp.pc.boot, paste0("exp-pc-boot-",settings,".rds"))
+}

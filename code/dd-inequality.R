@@ -61,8 +61,8 @@ ineq.did[ineq.did$year>1870,] <- ineq.did[ineq.did$year>1870,]%>%
 ineq.did$did <- NA
 ineq.did$did <- ineq.did$mask*ineq.did$homesteads.pc
 
-ineq.f2 <- formula(aland.gini ~ factor(state) + 
-                factor(year) + mask + did + faval)
+ineq.f2 <- formula(aland.gini ~ factor(state) + mask + did + faval)
+
 # DD Estimates
 
 aland.gini.robust.did <- boot(data=ineq.did,

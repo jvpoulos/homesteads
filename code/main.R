@@ -55,8 +55,6 @@ if(tablesfigures){
 }
 
 if(tablesfigures){
-  source(paste0(code.directory,'mc-capacity-placebo-table.R')) 
-  
   source(paste0(code.directory,'mc-capacity-plots.R')) 
 }
 

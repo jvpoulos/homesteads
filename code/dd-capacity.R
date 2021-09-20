@@ -123,13 +123,9 @@ capacity.outcomes.panel <- lapply(capacity.outcomes.panel, function(x){
   return(x)
 })
 
-f1 <- formula(outcome ~ factor(state) + 
-                factor(year) + mask + did)
+f2 <- formula(outcome ~ factor(state) + mask + did + track2 + faval + farmsize)
 
-f2 <- formula(outcome ~ factor(state) + 
-                factor(year) + mask + did + track2 + faval + farmsize)
-
-# DD Estimates
+# DD Estimates 
 
 # Covars
 rev.pc.all.robust.did <- boot(data=capacity.outcomes.panel$rev.pc,
