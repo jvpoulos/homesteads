@@ -40,7 +40,7 @@ source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
 source(paste0(code.directory,'railroads.R'))  # rr.inter.m
 
-source(paste0(code.directory,'capacity-state.R')) # prepare stae capacity data
+source(paste0(code.directory,'capacity-state.R')) # prepare state capacity data
 save.image(file=paste0(results.directory,'capacity-state.RData'))
 
 source(paste0(code.directory,'non-response-plot.R')) # Summarize non-response and treatment status

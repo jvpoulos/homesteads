@@ -78,7 +78,7 @@ mylegend <- g_legend(rev)
 
 ggsave(paste0(results.directory, "plots/capacity-stag.png"), grid.arrange(arrangeGrob(exp+ theme(legend.position="none"), 
                                                                                       rev+ theme(legend.position="none"),
-                                                                                      bottom=textGrob(TeX('$T_0/T$'), gp=gpar(fontfamily="serif", fontsize=16), vjust=-1.5, hjust=-0.35),
+                                                                                      bottom=textGrob(TeX('$a_{i}^{\\prime}/T$'), gp=gpar(fontfamily="serif", fontsize=16), vjust=-1.5, hjust=-0.35),
                                                                                       left=textGrob("Average RMSE", gp=gpar(fontfamily="serif", fontsize=16), vjust= 1.5 ,rot=90), nrow=1), 
                                                                           mylegend, nrow=2,heights=c(10, 1)), scale=1.25)
 
@@ -184,5 +184,5 @@ ggsave(paste0(results.directory, "plots/synth-stag.png"), grid.arrange(arrangeGr
                                                                                    california + theme(legend.position="none"),
                                                                                       germany+ theme(legend.position="none"),
                                                                                    as_ggplot(mylegend2),
-                                                                                   bottom=textGrob(TeX('$T_0/T$'), gp=gpar(fontfamily="serif", fontsize=16), hjust=-0.35),
-                                                                                   left=textGrob("Average RMSE", gp=gpar(fontfamily="serif", fontsize=16), vjust= 1.5 ,rot=90), ncol=2)), scale=1.25)
+                                                                                   bottom=textGrob(TeX('$a_{i}^{\\prime}/T$'), gp=gpar(fontfamily="serif", fontsize=16), hjust=-0.35),
+                                                                                   left=textGrob("Average RMSE", gp=gpar(fontfamily="serif", fontsize=16), vjust= 1.5 ,rot=90), ncol=2)), scale=1.5)
