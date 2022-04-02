@@ -29,13 +29,14 @@ SynthSim <- function(outcomes,covars.x,d,sim){
   number_T0 <- 5
   T0 <- ceiling(T*((1:number_T0)*2-1)/(2*number_T0))
   N_t <- ceiling(N*0.5) # no. treated units desired <=N
-  num_runs <- 1000
+  num_runs <- 2000
   is_simul <- sim ## Whether to simulate Simultaneus Adoption or Staggered Adoption
   to_save <- 1 ## Whether to save the plot or not
   
   ## Matrices for saving RMSE values
   
   MCPanel_RMSE_test <- matrix(0L,num_runs,length(T0))
+  MCPanel_plain_RMSE_test <- matrix(0L,num_runs,length(T0))
   ENT_RMSE_test <- matrix(0L,num_runs,length(T0))
   DID_RMSE_test <- matrix(0L,num_runs,length(T0))
   ADH_RMSE_test <- matrix(0L,num_runs,length(T0))
@@ -66,7 +67,7 @@ SynthSim <- function(outcomes,covars.x,d,sim){
         return(i[,1:(t0-1)])
       },covars.x)
       
-      p.mod <- cv.glmnet(x=cbind(t(covars.x.sub),Y[,1:(t0-1)]), y=(1-treat_mat), family="mgaussian", alpha=1, parallel=TRUE,intercept=FALSE,type.multinomial="grouped",nfolds=5) 
+      p.mod <- cv.glmnet(x=cbind(t(covars.x.sub),Y[,1:(t0-1)]), y=(1-treat_mat), family="mgaussian", alpha=1, parallel=TRUE,intercept=FALSE,nfolds=5) 
       W <- predict(p.mod, cbind(t(covars.x.sub),Y[,1:(t0-1)]))[,,1]
       W[,1:(t0-1)] <- W[,t0] # assume pre-treatment W same as t0 
       
@@ -85,6 +86,17 @@ SynthSim <- function(outcomes,covars.x,d,sim){
       est_model_MCPanel$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_MCPanel$msk_err^2, na.rm = TRUE))
       MCPanel_RMSE_test[i,j] <- est_model_MCPanel$test_RMSE
       print(paste("MC-NNM RMSE:", round(est_model_MCPanel$test_RMSE,3),"run",i))
+      
+      ## ------
+      ## MC-NNM (plain)
+      ## ------
+      
+      est_model_MCPanel_plain <- mcnnm_cv(Y_obs, mask=treat_mat, W=matrix(1, nrow(treat_mat),ncol(treat_mat)), to_estimate_u = 1, to_estimate_v = 1, num_lam_L = 30, num_folds = 5, niter = 200, rel_tol = 1e-05)
+      est_model_MCPanel_plain$Mhat <- est_model_MCPanel_plain$L + replicate(T,est_model_MCPanel_plain$u) + t(replicate(N,est_model_MCPanel_plain$v))
+      est_model_MCPanel_plain$msk_err <- (est_model_MCPanel_plain$Mhat - Y)*(1-treat_mat) 
+      est_model_MCPanel_plain$test_RMSE <- sqrt((1/sum(1-treat_mat)) * sum(est_model_MCPanel_plain$msk_err^2, na.rm = TRUE))
+      MCPanel_plain_RMSE_test[i,j] <- est_model_MCPanel_plain$test_RMSE
+      print(paste("MC-NNM RMSE (plain):", round(est_model_MCPanel_plain$test_RMSE,3),"run",i))
       
       ## -----
       ## VT-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
@@ -119,33 +131,45 @@ SynthSim <- function(outcomes,covars.x,d,sim){
   
   MCPanel_avg_RMSE <- apply(MCPanel_RMSE_test,2,mean)
   MCPanel_std_error <- apply(MCPanel_RMSE_test,2,sd)/sqrt(num_runs)
+  MCPanel_quantiles <- apply(MCPanel_RMSE_test,2,quantile, probs = c(.05/2, 1-.05/2))
+  
+  MCPanel_plain_avg_RMSE <- apply(MCPanel_plain_RMSE_test,2,mean)
+  MCPanel_plain_std_error <- apply(MCPanel_plain_RMSE_test,2,sd)/sqrt(num_runs)
+  MCPanel_plain_quantiles <- apply(MCPanel_plain_RMSE_test,2,quantile, probs = c(.05/2, 1-.05/2))
   
   ENT_avg_RMSE <- apply(ENT_RMSE_test,2,mean)
   ENT_std_error <- apply(ENT_RMSE_test,2,sd)/sqrt(num_runs)
+  ENT_quantiles <- apply(ENT_RMSE_test,2,quantile, probs = c(.05/2, 1-.05/2))
   
   DID_avg_RMSE <- apply(DID_RMSE_test,2,mean)
   DID_std_error <- apply(DID_RMSE_test,2,sd)/sqrt(num_runs)
+  DID_quantiles <- apply(DID_RMSE_test,2,quantile, probs = c(.05/2, 1-.05/2))
   
   ADH_avg_RMSE <- apply(ADH_RMSE_test,2,mean)
   ADH_std_error <- apply(ADH_RMSE_test,2,sd)/sqrt(num_runs)
+  ADH_quantiles <- apply(ADH_RMSE_test,2,quantile, probs = c(.05/2, 1-.05/2))
+  
   
   ## Creating plots
   
   df1 <-
     data.frame(
-      "y" =  c(DID_avg_RMSE, ENT_avg_RMSE, MCPanel_avg_RMSE, ADH_avg_RMSE),
-      "lb" = c(DID_avg_RMSE - 1.96*DID_std_error, 
-               ENT_avg_RMSE - 1.96*ENT_std_error,
-               MCPanel_avg_RMSE - 1.96*MCPanel_std_error, 
-               ADH_avg_RMSE - 1.96*ADH_std_error),
-      "ub" = c(DID_avg_RMSE + 1.96*DID_std_error, 
-               ENT_avg_RMSE + 1.96*ENT_std_error,
-               MCPanel_avg_RMSE + 1.96*MCPanel_std_error, 
-               ADH_avg_RMSE + 1.96*ADH_std_error),
-      "x" = c(T0/T, T0/T ,T0/T, T0/T),
+      "y" =  c(DID_avg_RMSE, ENT_avg_RMSE, MCPanel_avg_RMSE, MCPanel_plain_avg_RMSE, ADH_avg_RMSE),
+      "lb" = c(DID_quantiles[1,], 
+               ENT_quantiles[1,],
+               MCPanel_quantiles[1,], 
+               MCPanel_plain_quantiles[1,], 
+               ADH_quantiles[1,]),
+      "ub" = c(DID_quantiles[2,], 
+               ENT_quantiles[2,],
+               MCPanel_quantiles[2,], 
+               MCPanel_plain_quantiles[2,], 
+               ADH_quantiles[2,]),
+      "x" = c(T0/T, T0/T ,T0/T, T0/T, T0/T),
       "Method" = c(replicate(length(T0),"DID"), 
                    replicate(length(T0),"SCM-L1"),
-                   replicate(length(T0),"MC"), 
+                   replicate(length(T0),"MC (weights)"), 
+                   replicate(length(T0),"MC (no weights)"), 
                    replicate(length(T0),"SCM")))
   
   p <- ggplot(data = df1, aes(x, y, color = Method, shape = Method)) +
@@ -156,7 +180,7 @@ SynthSim <- function(outcomes,covars.x,d,sim){
       width = 0.3,
       linetype = "solid",
       position=position_dodge(width=0.2)) +
-    scale_shape_manual("Method",values=c(1:4)) +
+    scale_shape_manual("Method",values=c(1:5)) +
     scale_color_discrete("Method")+
     theme_bw() +
     xlab(TeX('$T_0/T$')) +
@@ -175,11 +199,12 @@ SynthSim <- function(outcomes,covars.x,d,sim){
   if(to_save == 1){
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".png")
     ggsave(filename, plot = last_plot(), device="png", dpi=600)
-    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, ENT_RMSE_test, MCPanel_RMSE_test, ADH_RMSE_test)
+    df2<-data.frame(N,T,N_t,is_simul, DID_RMSE_test, ENT_RMSE_test, MCPanel_RMSE_test, MCPanel_plain_RMSE_test,ADH_RMSE_test)
     colnames(df2)<-c("N", "T", "N_t", "is_simul", 
                      replicate(length(T0), "DID"), 
                      replicate(length(T0), "SCM-L1"), 
-                     replicate(length(T0), "MC"), 
+                     replicate(length(T0), "MC (weights)"), 
+                     replicate(length(T0), "MC (no weights)"), 
                      replicate(length(T0),"SCM"))
     
     filename<-paste0(paste0(paste0(paste0(paste0(paste0(gsub("\\.", "_", d),"_N_", N),"_T_", T),"_numruns_", num_runs), "_num_treated_", N_t), "_simultaneuous_", is_simul),".rds")

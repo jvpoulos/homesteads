@@ -54,14 +54,14 @@ $ git clone https://github.com/jvpoulos/homesteads
 * Download and extract patents data (2.8 GB uncompressed) to `data/` directory:
   * [patents.tar.xz](https://www.dropbox.com/s/3g5jlqpp6kvreur/patents.tar.xz?dl=1)
 
-* Make shell file `main.sh` executable from the Linux/Unix command line:
+* Make shell file `code/main.sh` executable from the Linux/Unix command line:
 ```
-$ chmod +x main.sh
+$ chmod +x code/main.sh
 ```
 * Execute the file:
 ```
-$ ./main.sh > main.txt
+$ ./code/main.sh > main.txt
 ```
-* Repeat the last two steps for `mc-synth.sh` and `mc-capacity.sh` to run experiments
-* For MC placebo estimates: `mc-capacity-placebo.sh`
-* For MC causal estimates: `mc-capacity-estimates.sh`
+* Repeat the last two steps for `code/mc-synth.sh` and `code/mc-capacity.sh` to run experiments
+* For MC placebo estimates: `code/mc-capacity-placebo.sh`
+* For MC causal estimates: `code/mc-capacity-estimates.sh`
