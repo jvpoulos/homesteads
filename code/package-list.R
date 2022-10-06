@@ -1,5 +1,5 @@
 packages <- c("reldist","dplyr","data.table","reshape","reshape2","stringr","caret","zoo","tidyr","readr","readxl","scales","ggplot2","wesanderson",
-              "glmnet","ggplot2","latex2exp","bcv","parallel","doParallel","boot","tidyverse","mgcv","imputeTS","mice","missForest","VIM","plm",
+              "glmnet","ggplot2","latex2exp","bcv","parallel","doParallel","boot","tidyverse","mgcv","imputeTS","mice","missForest","VIM","plm","Amelia","mtsdi",
               "devtools","gridExtra","grid","ggpubr","Matrix")
 
 map.packages <- c("rgdal","rgeos","maptools","ggmap","sp","ifultools","broom","raster")

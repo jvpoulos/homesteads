@@ -13,7 +13,7 @@ census.ts.means <- census.ts %>% # Take county-year means
   group_by(state,county,year) %>% 
   summarise_all(funs(mean(., na.rm = TRUE))) 
 
-census.ts.means <- census.ts.means[c("fips","state", "county", "land.gini","aland.gini","farmsize", "tenancy","wages","output","year")]
+census.ts.means <- census.ts.means[c("fips","state", "county", "land.gini","aland.gini","farmsize", "tenancy","wages","output","slave.share","aa.share","native.share","asian.share","white.share","water.access","rail.access","year")]
 
 # Get state abbreviations
 fips.codes <- data.frame(read_excel(paste0(data.directory,'US_FIPS_Codes.xls'), skip = 1))

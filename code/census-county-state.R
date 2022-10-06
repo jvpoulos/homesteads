@@ -25,6 +25,8 @@ names(census.county) <- years
 ## farm tenancy (1880-1950, 1962, 1967)
 ## farm wages as share of adult male pop. (1870, 1900)
 ## farm output as share of total # farms (1870-1900)
+## ratio of slaves to the total population in 1860
+## share of whites, free African Americans, or Native Americans to non-slave pop. in 1860
 
 
 # 1790
@@ -80,7 +82,11 @@ census.county[[8]] <- census.county[[8]] %>%
     adultm = sum(wm2029,wm3039,wm4049,wm5059,wm6069,wm7079,wm8089,wm9099,wm100) + sum(fcm2029,fcm3039,fcm4049,fcm5059,fcm6069,fcm7079,fcm8089,fcm9099,fcm100), # free adult males 20+
     p = farms/adultm, # ratio of farms to adult males
     aland.gini = p*land.gini + (1-p),
-    farmsize = sum(c((farm39*6),(farm1019*14.5),(farm2049*34.5),(farm5099*74.5),(farm100*299.5),(farm500*749.5),(farm1000)*1000))/farms)
+    farmsize = sum(c((farm39*6),(farm1019*14.5),(farm2049*34.5),(farm5099*74.5),(farm100*299.5),(farm500*749.5),(farm1000)*1000))/farms,
+    slave.share = stot/totpop, 
+    aa.share = fctot/ns.pop,
+    native.share=indtot/ns.pop,
+    white.share=whtot/ns.pop)
 
 #1870, 1880
 
@@ -231,11 +237,16 @@ census.list <- list(census.county[[1]],census.county[[2]],census.county[[3]],cen
 
 census.ts <- do.call(rbind, census.list) 
 
-census.ts <- subset(census.ts, select=c("year","name","state","county","fips","land.gini", "aland.gini","ns.pop","adultm","farms","farmsize","tenancy","wages","output"))
+census.ts <- subset(census.ts, select=c("year","name","state","county","fips","land.gini", "aland.gini","ns.pop","adultm","farms","farmsize","tenancy","wages","output",
+                                        "slave.share","aa.share","native.share","white.share"))
 
 # Rm inf in wages
 
 census.ts$wages[is.infinite(census.ts$wages)] <- NA
+
+# bound ratios 
+
+census.ts$white.share[!is.na(census.ts$white.share) & census.ts$white.share>1] <- 1
 
 # Fix county codes
 
