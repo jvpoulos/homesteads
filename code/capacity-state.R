@@ -191,7 +191,7 @@ funds.6304 <- spread(funds.6304, key = iso, value = value)
 # Collapse by state/year
 
 funds.6304 <- funds.6304 %>% 
-  select(-type) %>% 
+ # select(-type) %>% 
   group_by(state,year) %>% 
   summarise_each(funs(mean(., na.rm = TRUE))) 
 
@@ -402,7 +402,6 @@ educ.pc <- educ.pc[,match(sort(colnames(educ.pc)), colnames(educ.pc)),] # sort c
 # RR access 
 # ratio of slaves to the total population in 1860
 # share of whites, free African Americans, Asian, or Native Americans to non-slave pop. in 1860
-# water transport or rail access in 1860
 
 faval <- reshape(data.frame(farmval.state[c("state.abb","year","faval")]), idvar = "year", timevar = "state.abb", direction = "wide")
 colnames(faval) <- sub("faval.","", colnames(faval))
@@ -413,6 +412,11 @@ farmsize <- reshape(data.frame(funds[c("state","year2","farmsize")]), idvar = "y
 colnames(farmsize) <- sub("farmsize.","", colnames(farmsize))
 rownames(farmsize) <- farmsize$year2
 farmsize <- farmsize[!colnames(farmsize)%in% "year2"]
+
+access <- reshape(data.frame(rr.inter.m.state[c("year","state","track2")]), idvar = "year", timevar = "state", direction = "wide")
+colnames(access) <- sub("track2.","", colnames(access))
+rownames(access) <- access$year
+access <- access[!colnames(access)%in% "year"]
 
 slave.share <- reshape(data.frame(funds[c("state","year2","slave.share")]), idvar = "year2", timevar = "state", direction = "wide")
 colnames(slave.share) <- sub("slave.share.","", colnames(slave.share))
@@ -434,7 +438,7 @@ colnames(white.share) <- sub("white.share.","", colnames(white.share))
 rownames(white.share) <- white.share$year2
 white.share <- white.share[!colnames(white.share)%in% "year2"]
 
-CapacityMatrices <- function(d, imp=c("none","knn","locf","linear","ma","mean","mice","random","rf","amelia","mtsdi"),faval,farmsize,access,slave.share,aa.share,native.share,white.share,homesteads=TRUE){
+CapacityMatrices <- function(d, imp=c("none","knn","locf","linear","ma","mean","mice","random","rf","amelia","mtsdi"),faval,farmsize,access,slave.share,aa.share,native.share,white.share,homesteads=TRUE,mice.method=NULL){
   
   if(homesteads==TRUE){
 
@@ -462,13 +466,12 @@ CapacityMatrices <- function(d, imp=c("none","knn","locf","linear","ma","mean","
   farmsize <- farmsize[,colnames(farmsize)%in%colnames(d)][rownames(farmsize)%in%rownames(d),]
   faval <- faval[,colnames(faval)%in%colnames(d)][rownames(faval)%in%rownames(d),]
   access <- access[,colnames(access)%in%colnames(d)][rownames(access)%in%rownames(d),]
-  access <- access[,colnames(access)%in%colnames(d)][rownames(access)%in%rownames(d),]
   slave.share <- slave.share[,colnames(slave.share)%in%colnames(d)][rownames(slave.share)%in%rownames(d),]
   aa.share <- aa.share[,colnames(aa.share)%in%colnames(d)][rownames(aa.share)%in%rownames(d),]
   native.share <- native.share[,colnames(native.share)%in%colnames(d)][rownames(native.share)%in%rownames(d),]
   white.share <- white.share[,colnames(white.share)%in%colnames(d)][rownames(white.share)%in%rownames(d),]
   
-  if(imp=="locf"){
+  if(imp=="none"){
     print(paste("farmsize missing: ",sum(is.na(farmsize[rownames(farmsize)=="1860",]))/(dim(farmsize[rownames(farmsize)=="1860",])[1]*dim(farmsize[rownames(farmsize)=="1860",])[2]))) # % missing in 1860: 26.31%
     print(paste("faval missing: ",sum(is.na(faval[rownames(faval)%in%c("1850","1860"),]))/(dim(faval[rownames(faval)%in%c("1850","1860"),])[1]*dim(faval[rownames(faval)%in%c("1850","1860"),])[2]))) # % missing in 1850+1860: 15.78%
     print(paste("slave.share missing: ",sum(is.na(slave.share[rownames(slave.share)=="1860",]))/(dim(slave.share[rownames(slave.share)=="1860",])[1]*dim(slave.share[rownames(slave.share)=="1860",])[2]))) # % missing in 1860: 39.58%
@@ -482,7 +485,7 @@ CapacityMatrices <- function(d, imp=c("none","knn","locf","linear","ma","mean","
   d.M.missing[is.nan(d.M.missing)] <- NA
   d.M.missing[!is.na(d.M.missing)] <-1
   
-  if(imp=="locf"){
+  if(imp=="none"){
     print(paste("missing total: ",sum(is.na(d))/(dim(d)[1]*dim(d)[2]))) # 39.98% # (NxT) = (48 x 203) (# else: 34.15% # (NxT) = (38 x 203)
   }
   
@@ -556,7 +559,7 @@ CapacityMatrices <- function(d, imp=c("none","knn","locf","linear","ma","mean","
     farmsize.imp[,!colnames(farmsize.imp)%in%pub.states] <- na_mean(farmsize.imp[,!colnames(farmsize.imp)%in%pub.states]) 
     farmsize.imp[,colnames(farmsize.imp)%in%pub.states] <- na_mean(farmsize.imp[,colnames(farmsize.imp)%in%pub.states])
   }
-  if(imp=="mice"){
+  if(imp=="mice" && homesteads==FALSE){
     # outcomes
     train.imp <- mice(d.imp[,!colnames(d.imp)%in%pub.states])
     test.imp <- mice(d.imp[,colnames(d.imp)%in%pub.states])  
@@ -610,6 +613,32 @@ CapacityMatrices <- function(d, imp=c("none","knn","locf","linear","ma","mean","
       test.farmsize.imp <- mice(farmsize.imp[,colnames(farmsize.imp)%in%pub.states])  
       
       farmsize.imp[,colnames(farmsize.imp)%in%pub.states] <-  as.matrix(mice::complete(test.farmsize.imp))
+    }
+  }
+  if(imp=="mice" && !is.null(mice.method)){
+    # outcomes
+    
+    predictor.mat <- matrix(0, ncol = ncol(d.imp), nrow = ncol(d.imp)) # a value of '1' means that the column variable is used as a predictor for the target variable (in the rows)
+    rownames(predictor.mat) <- colnames(d.imp)
+    colnames(predictor.mat) <- colnames(d.imp)
+    
+    imputer.mat <- predictor.mat
+    imputed.mat <- predictor.mat
+    
+    imputer.mat[,!colnames(d.imp)%in%pub.states] <- 1 # specify variables informing imputation (control states)
+    imputed.mat[colnames(d.imp)%in%pub.states,] <- 1 # specify variables with missngess to be imputed (treated states)
+    
+    predictor.mat <- imputer.mat*imputed.mat
+    diag(predictor.mat) <- 0 # diagonals must be zeros (a variable cannot impute itself)
+    
+    set.seed(3561126)
+    
+    train.imp <- mice(data = d.imp, m = 1, method=mice.method, predictorMatrix = predictor.mat, print=TRUE)
+    
+    d.imp <- as.matrix(mice::complete(train.imp))
+    
+    if(any(!is.na(d.imp) & d.imp<0)){
+      d.imp[!is.na(d.imp) & d.imp<0] <- min(d[,!colnames(d)%in%pub.states], na.rm=TRUE) # replace neg. values with lowest in training set
     }
   }
   if(imp=="random"){
@@ -632,109 +661,18 @@ CapacityMatrices <- function(d, imp=c("none","knn","locf","linear","ma","mean","
     farmsize.imp[,!colnames(farmsize.imp)%in%pub.states] <- missForest(farmsize.imp[,!colnames(farmsize.imp)%in%pub.states])$ximp
     farmsize.imp[,colnames(farmsize.imp)%in%pub.states]<- missForest(farmsize.imp[,colnames(farmsize.imp)%in%pub.states])$ximp
   }
-  
-  if(imp=="amelia"){
+  if(imp=="mtsdi"){ 
+    
+    set.seed(3561126)
     # outcomes
-    train.imp <- amelia(melt(d.imp[,!colnames(d.imp)%in%pub.states]), ts="Var1",cs="Var2", polytime = 2, bounds=matrix(c(3,0,max(d[,!colnames(d.imp)%in%pub.states], na.rm = TRUE)), 1,3))
-    test.imp <- amelia(melt(d.imp[,colnames(d.imp)%in%pub.states]), ts="Var1",cs="Var2", polytime = 2, bounds=matrix(c(3,0,max(d[,colnames(d.imp)%in%pub.states], na.rm = TRUE)), 1,3))
+    train.imp <- mnimput(formula = paste(" ~ ",paste(colnames(d.imp[,!colnames(d.imp)%in%pub.states]), collapse="+"),sep = ""), dataset=data.frame(d.imp[,!colnames(d.imp)%in%pub.states])) # use train set to predict train missing # method = "spline"
+    test.imp <- mnimput(formula = paste(" ~ ",paste(colnames(d.imp[,colnames(d.imp)%in%pub.states]), collapse="+"),sep = ""), dataset=data.frame(d.imp)) # use train set to predict test missing
+
+    d.imp[,!colnames(d.imp)%in%pub.states]  <- as.matrix(train.imp$filled.dataset)
+    d.imp[,colnames(d.imp)%in%pub.states] <-  as.matrix(test.imp$filled.dataset)
     
-    d.imp[,!colnames(d.imp)%in%pub.states]  <- as.matrix(dcast(train.imp$imputations$imp1, Var1~Var2))[,-1]
-    d.imp[,colnames(d.imp)%in%pub.states] <-  as.matrix(dcast(test.imp$imputations$imp1, Var1~Var2))[,-1]
-    
-    # covariates: impute with mice
-    # faval
-    
-    train.faval.imp <- mice(faval.imp[,!colnames(faval.imp)%in%pub.states])
-    test.faval.imp <- mice(faval.imp[,colnames(faval.imp)%in%pub.states])  
-    
-    faval.imp[,!colnames(faval.imp)%in%pub.states]  <- as.matrix(mice::complete(train.faval.imp))
-    faval.imp[,colnames(faval.imp)%in%pub.states] <-  as.matrix(mice::complete(test.faval.imp))
-    
-    if(sum(is.na(faval.imp[,!colnames(faval.imp)%in%pub.states]))>0){ # rerun if remaining missing
-      train.faval.imp <- mice(faval.imp[,!colnames(faval.imp)%in%pub.states])
-      
-      faval.imp[,!colnames(faval.imp)%in%pub.states]  <- as.matrix(mice::complete(train.faval.imp))
-    }
-    if(sum(is.na(faval.imp[,colnames(faval.imp)%in%pub.states]))>0){ # rerun if remaining missing
-      test.faval.imp <- mice(faval.imp[,colnames(faval.imp)%in%pub.states])  
-      
-      faval.imp[,colnames(faval.imp)%in%pub.states] <-  as.matrix(mice::complete(test.faval.imp))
-    }
-    
-    # farmsize
-    
-    train.farmsize.imp <- mice(farmsize.imp[,!colnames(farmsize.imp)%in%pub.states])
-    test.farmsize.imp <- mice(farmsize.imp[,colnames(farmsize.imp)%in%pub.states])  
-    
-    farmsize.imp[,!colnames(farmsize.imp)%in%pub.states]  <- as.matrix(mice::complete(train.farmsize.imp))
-    farmsize.imp[,colnames(farmsize.imp)%in%pub.states] <-  as.matrix(mice::complete(test.farmsize.imp))
-    
-    if(sum(is.na(farmsize.imp[,!colnames(farmsize.imp)%in%pub.states]))>0){ # rerun if remaining missing
-      train.farmsize.imp <- mice(farmsize.imp[,!colnames(farmsize.imp)%in%pub.states])
-      
-      farmsize.imp[,!colnames(farmsize.imp)%in%pub.states]  <- as.matrix(mice::complete(train.farmsize.imp))
-    }
-    if(sum(is.na(farmsize.imp[,colnames(farmsize.imp)%in%pub.states]))>0){ # rerun if remaining missing
-      test.farmsize.imp <- mice(farmsize.imp[,colnames(farmsize.imp)%in%pub.states])  
-      
-      farmsize.imp[,colnames(farmsize.imp)%in%pub.states] <-  as.matrix(mice::complete(test.farmsize.imp))
-    }
-  }
-  
-  if(imp=="mtsdi"){ # Continue here
-    # outcomes
-    train.imp <- mice(d.imp[,!colnames(d.imp)%in%pub.states])
-    test.imp <- mice(d.imp[,colnames(d.imp)%in%pub.states])  
-    
-    d.imp[,!colnames(d.imp)%in%pub.states]  <- as.matrix(mice::complete(train.imp))
-    d.imp[,colnames(d.imp)%in%pub.states] <-  as.matrix(mice::complete(test.imp))
-    
-    if(sum(is.na(d.imp[,!colnames(d.imp)%in%pub.states]))>0){ # rerun if remaining missing
-      train.imp <- mice(d.imp[,!colnames(d.imp)%in%pub.states])
-      
-      d.imp[,!colnames(d.imp)%in%pub.states]  <- as.matrix(mice::complete(train.imp))
-    }
-    if(sum(is.na(d.imp[,colnames(d.imp)%in%pub.states]))>0){ # rerun if remaining missing
-      test.imp <- mice(d.imp[,colnames(d.imp)%in%pub.states])  
-      
-      d.imp[,colnames(d.imp)%in%pub.states] <-  as.matrix(mice::complete(test.imp))
-    }
-    # faval
-    
-    train.faval.imp <- mice(faval.imp[,!colnames(faval.imp)%in%pub.states])
-    test.faval.imp <- mice(faval.imp[,colnames(faval.imp)%in%pub.states])  
-    
-    faval.imp[,!colnames(faval.imp)%in%pub.states]  <- as.matrix(mice::complete(train.faval.imp))
-    faval.imp[,colnames(faval.imp)%in%pub.states] <-  as.matrix(mice::complete(test.faval.imp))
-    
-    if(sum(is.na(faval.imp[,!colnames(faval.imp)%in%pub.states]))>0){ # rerun if remaining missing
-      train.faval.imp <- mice(faval.imp[,!colnames(faval.imp)%in%pub.states])
-      
-      faval.imp[,!colnames(faval.imp)%in%pub.states]  <- as.matrix(mice::complete(train.faval.imp))
-    }
-    if(sum(is.na(faval.imp[,colnames(faval.imp)%in%pub.states]))>0){ # rerun if remaining missing
-      test.faval.imp <- mice(faval.imp[,colnames(faval.imp)%in%pub.states])  
-      
-      faval.imp[,colnames(faval.imp)%in%pub.states] <-  as.matrix(mice::complete(test.faval.imp))
-    }
-    
-    # farmsize
-    
-    train.farmsize.imp <- mice(farmsize.imp[,!colnames(farmsize.imp)%in%pub.states])
-    test.farmsize.imp <- mice(farmsize.imp[,colnames(farmsize.imp)%in%pub.states])  
-    
-    farmsize.imp[,!colnames(farmsize.imp)%in%pub.states]  <- as.matrix(mice::complete(train.farmsize.imp))
-    farmsize.imp[,colnames(farmsize.imp)%in%pub.states] <-  as.matrix(mice::complete(test.farmsize.imp))
-    
-    if(sum(is.na(farmsize.imp[,!colnames(farmsize.imp)%in%pub.states]))>0){ # rerun if remaining missing
-      train.farmsize.imp <- mice(farmsize.imp[,!colnames(farmsize.imp)%in%pub.states])
-      
-      farmsize.imp[,!colnames(farmsize.imp)%in%pub.states]  <- as.matrix(mice::complete(train.farmsize.imp))
-    }
-    if(sum(is.na(farmsize.imp[,colnames(farmsize.imp)%in%pub.states]))>0){ # rerun if remaining missing
-      test.farmsize.imp <- mice(farmsize.imp[,colnames(farmsize.imp)%in%pub.states])  
-      
-      farmsize.imp[,colnames(farmsize.imp)%in%pub.states] <-  as.matrix(mice::complete(test.farmsize.imp))
+    if(any(!is.na(d.imp) & d.imp<0)){
+      d.imp[!is.na(d.imp) & d.imp<0] <- min(d[,!colnames(d)%in%pub.states], na.rm=TRUE) # replace neg. values with lowest in training set
     }
   }
   
@@ -787,13 +725,15 @@ CapacityMatrices <- function(d, imp=c("none","knn","locf","linear","ma","mean","
 if(homesteads){
   capacity.outcomes <- list("rev.pc"=rev.pc,"exp.pc"=exp.pc)
   capacity.outcomes.none <- lapply(capacity.outcomes, CapacityMatrices, imp="none",faval,farmsize,access,slave.share,aa.share,native.share,white.share)
-  capacity.outcomes.locf <- lapply(capacity.outcomes, CapacityMatrices, imp="locf",faval,farmsize,access,slave.share,aa.share,native.share,white.share)
-  capacity.outcomes.linear <- lapply(capacity.outcomes, CapacityMatrices, imp="linear",faval,farmsize,access,slave.share,aa.share,native.share,white.share)
-  capacity.outcomes.ma <- lapply(capacity.outcomes, CapacityMatrices, imp="ma",faval,farmsize,access,slave.share,aa.share,native.share,white.share)
-  capacity.outcomes.mean <- lapply(capacity.outcomes, CapacityMatrices, imp="mean",faval,farmsize,access,slave.share,aa.share,native.share,white.share)
-  capacity.outcomes.mice <- lapply(capacity.outcomes, CapacityMatrices, imp="mice",faval,farmsize,access,slave.share,aa.share,native.share,white.share)
-  capacity.outcomes.random <- lapply(capacity.outcomes, CapacityMatrices, imp="random",faval,farmsize,access,slave.share,aa.share,native.share,white.share)
-  capacity.outcomes.rf <- lapply(capacity.outcomes, CapacityMatrices, imp="rf",faval,farmsize,access,slave.share,aa.share,native.share,white.share)
+  capacity.outcomes.mice.cart <- lapply(capacity.outcomes, CapacityMatrices, imp="mice",faval,farmsize,access,slave.share,aa.share,native.share,white.share,mice.method="cart")
+  capacity.outcomes.mice.pmm <- lapply(capacity.outcomes, CapacityMatrices, imp="mice",faval,farmsize,access,slave.share,aa.share,native.share,white.share,mice.method="pmm")
+  capacity.outcomes.mtsdi <- lapply(capacity.outcomes, CapacityMatrices, imp="mtsdi",faval,farmsize,access,slave.share,aa.share,native.share,white.share)
+
+  saveRDS(capacity.outcomes.none, paste0(data.directory,"capacity-outcomes-none.rds"))
+  saveRDS(capacity.outcomes.mice.cart, paste0(data.directory,"capacity-outcomes-mice-cart.rds"))
+  saveRDS(capacity.outcomes.mice.pmm, paste0(data.directory,"capacity-outcomes-mice-pmm.rds"))
+  saveRDS(capacity.outcomes.mtsdi, paste0(data.directory,"capacity-outcomes-mtsdi.rds"))
+  
 }else{
   capacity.outcomes <- list("educ.pc"=educ.pc)
   
@@ -807,16 +747,13 @@ if(homesteads){
   capacity.outcomes.rf <- lapply(capacity.outcomes, CapacityMatrices, imp="rf",faval,farmsize,access, homesteads=FALSE)
   capacity.outcomes.knn <- lapply(capacity.outcomes, CapacityMatrices, imp="knn",faval,farmsize,access, homesteads=FALSE)
   
+  saveRDS(capacity.outcomes.none, paste0(data.directory,"capacity-outcomes-none.rds"))
+  saveRDS(capacity.outcomes.locf, paste0(data.directory,"capacity-outcomes-locf.rds"))
+  saveRDS(capacity.outcomes.linear, paste0(data.directory,"capacity-outcomes-linear.rds"))
+  saveRDS(capacity.outcomes.ma, paste0(data.directory,"capacity-outcomes-ma.rds"))
+  saveRDS(capacity.outcomes.mean, paste0(data.directory,"capacity-outcomes-mean.rds"))
+  saveRDS(capacity.outcomes.mice, paste0(data.directory,"capacity-outcomes-mice.rds"))
+  saveRDS(capacity.outcomes.random, paste0(data.directory,"capacity-outcomes-random.rds"))
+  saveRDS(capacity.outcomes.rf, paste0(data.directory,"capacity-outcomes-rf.rds"))
   saveRDS(capacity.outcomes.knn, paste0(data.directory,"capacity-outcomes-knn.rds"))
 }
-
-# Save
-
-saveRDS(capacity.outcomes.none, paste0(data.directory,"capacity-outcomes-none.rds"))
-saveRDS(capacity.outcomes.locf, paste0(data.directory,"capacity-outcomes-locf.rds"))
-saveRDS(capacity.outcomes.linear, paste0(data.directory,"capacity-outcomes-linear.rds"))
-saveRDS(capacity.outcomes.ma, paste0(data.directory,"capacity-outcomes-ma.rds"))
-saveRDS(capacity.outcomes.mean, paste0(data.directory,"capacity-outcomes-mean.rds"))
-saveRDS(capacity.outcomes.mice, paste0(data.directory,"capacity-outcomes-mice.rds"))
-saveRDS(capacity.outcomes.random, paste0(data.directory,"capacity-outcomes-random.rds"))
-saveRDS(capacity.outcomes.rf, paste0(data.directory,"capacity-outcomes-rf.rds"))
