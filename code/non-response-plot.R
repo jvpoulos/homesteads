@@ -21,6 +21,14 @@ Y <- exp$M # NxT
 pub.states2 <- pub.states[pub.states%in%rownames(Y)]
 state.land.states2 <- state.land.states[state.land.states%in%rownames(Y)]
 
+# summary stats for paper
+print(round(sum(Y.missing)/(dim(Y.missing)[1]*dim(Y.missing)[2]),3)) # % missing overall
+
+print(round(sum(Y.missing[rownames(Y.missing)%in%pub.states2,][,colnames(Y.missing) >= 1869])/(dim(Y.missing)[1]*dim(Y.missing)[2]),3)) # % missing in test set
+
+print(round(sum(Y.missing[rownames(Y.missing)%in%pub.states2,])/(dim(Y.missing)[1]*dim(Y.missing)[2]),3)) # % missing in treated
+print(round(sum(Y.missing[rownames(Y.missing)%in%state.land.states2,])/(dim(Y.missing)[1]*dim(Y.missing)[2]),3)) # % missing in control
+
 # N x T Heatmap: Nonresponse
 
 Y.missing[is.na(Y.missing)] <- 2 # 1=observed, 2=missing
@@ -45,7 +53,7 @@ nonre.heat <- ggplot(Y.missing.m, aes(Year,State)) + geom_tile(aes(fill = value)
   scale_fill_gradient(low="lightblue", high="red",
                       breaks=c(0, 1),
                       limits=c(0, 1),
-                      labels=rev(c("Missing/Imputed","Present"))) + 
+                      labels=rev(c("Missing","Present"))) + 
   theme_grey(base_size=9) + labs(x="Year", y=" ") + 
   theme_bw() + 
   geom_hline(yintercept = 19.5) +

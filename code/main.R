@@ -40,25 +40,24 @@ source(paste0(code.directory,'prepare-farmval-state.R')) # farm vals for states
 
 source(paste0(code.directory,'railroads.R'))  # rr.inter.m
 
-source(paste0(code.directory,'capacity-state.R')) # prepare state capacity data
+source(paste0(code.directory,'capacity-state.R')) # prepare state government finance data
 save.image(file=paste0(results.directory,'capacity-state.RData'))
 
 source(paste0(code.directory,'non-response-plot.R')) # Summarize non-response and treatment status
 
-## MC estimates: experiments and causal estimates (see README)
+## Simulations (see README for instructions to run experiments on synthetic control and state government finance data)
 
 source(paste0(code.directory,'prepare-synth.R')) # prepare synthetic control datasets for experiments
 
-tablesfigures <- FALSE # set to TRUE to produce tables and Figures
-if(tablesfigures){
-  source(paste0(code.directory,'simultation-plots.R')) # combine simulation plots
-}
+## Matrix completion estimates
 
+# See README for instructions to obtain causal estimates from state government finance data
+
+tablesfigures <- FALSE # set to TRUE to produce tables and Figures
 if(tablesfigures){
   source(paste0(code.directory,'mc-capacity-plots.R')) 
 }
-
-# DD estimates on state capacity data
+# DD estimates on state government finance data
 
 source(paste0(code.directory,'dd-capacity.R')) 
 
@@ -68,5 +67,5 @@ source(paste0(code.directory,'dd-inequality.R'))  # N.B.: need to run dd-capacit
 
 if(tablesfigures){
   # Descriptive plots
-  source(paste0(code.directory,'ineq-capacity.R')) # inequality vs. state capacity
+  source(paste0(code.directory,'ineq-capacity.R')) # inequality vs. state size
 }

@@ -12,7 +12,6 @@ require(readr)
 require(imputeTS)
 require(mice)
 require(mtsdi)
-require(Amelia)
 require(missForest)
 require(caret)
 require(VIM)
@@ -438,7 +437,7 @@ colnames(white.share) <- sub("white.share.","", colnames(white.share))
 rownames(white.share) <- white.share$year2
 white.share <- white.share[!colnames(white.share)%in% "year2"]
 
-CapacityMatrices <- function(d, imp=c("none","knn","locf","linear","ma","mean","mice","random","rf","amelia","mtsdi"),faval,farmsize,access,slave.share,aa.share,native.share,white.share,homesteads=TRUE,mice.method=NULL){
+CapacityMatrices <- function(d, imp=c("none","knn","locf","linear","ma","mean","mice","random","rf","mtsdi"),faval,farmsize,access,slave.share,aa.share,native.share,white.share,homesteads=TRUE,mice.method=NULL){
   
   if(homesteads==TRUE){
 

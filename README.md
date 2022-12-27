@@ -44,7 +44,7 @@ install_github("jvpoulos/MCPanel")
 ```
 **Note:** fitting the matrix completion model with covariates (*mcnnm_wc_cv*) is computationally expensive and will likely make a laptop crash. The code below is run on a single node with 30G RAM and 6 CPU-cores on a high-performance compute cluster.  
 
-Instructions
+Instructions for data assembly
 ------
 * Clone a copy of the repository to your working directory with the command
 ```
@@ -62,6 +62,15 @@ $ chmod +x code/main.sh
 ```
 $ ./code/main.sh > main.txt
 ```
-* Repeat the last two steps for `code/mc-synth.sh` and `code/mc-capacity.sh` to run experiments
+
+Run order for experiments and causal estimates
+------
+
+1. `code/mc-simulation.R` # simulated data experiments
+  * set flag `doMPI` to `FALSE` to run serially
+  * run with command line argument  `Rscript mc-simulation.R [arg1]`, where `[arg1]` is a number specifying the simulation setting
+  * mc-simulation-plot.R # plot results for simulated data experiments
+2. Repeat the last step for `code/mc-synth.R` and `code/mc-capacity.R` to run experiments on synthetic control and state government finance datasets, resp.
+  * simulation-plots.R # to plot results
 * For MC placebo estimates: `code/mc-capacity-placebo.sh`
 * For MC causal estimates: `code/mc-capacity-estimates.sh`

@@ -13,7 +13,6 @@ library(raster)
 library(reshape2)
 library(tidyr)
 library(dplyr)
-library(caret)
 
 download.data <- FALSE
 
