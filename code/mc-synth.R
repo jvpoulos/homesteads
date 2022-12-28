@@ -64,14 +64,14 @@ SynthSim <- function(outcomes,covars.x,d,T0,sim,estimator=c("mc_plain","mc_weigh
   t0 <- ceiling(T*((1:number_T0)*2-1)/(2*number_T0))[T0]
   
   att.true <- 0
+
+  ## Simultaneuous (simul_adapt) or Staggered adoption (stag_adapt)
   
   covars.x <-mapply(function(i){
     return(i[,1:(t0-1)])
   },covars.x)
   
   covars.x <- scale(t(covars.x)[,1:T])
-
-  ## Simultaneuous (simul_adapt) or Staggered adoption (stag_adapt)
   
   e <-plogis(scale(cbind(Y[,1:(t0-1)],replicate((T-t0+1),Y[,(t0-1)])))+covars.x) # prob of being missing (treated/missing)
   e <- boundProbs(e) # winsorize extreme probabilities 

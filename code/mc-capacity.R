@@ -67,8 +67,6 @@ CapacitySim <- function(outcomes.missing,outcomes.imputed,covars.x,d,T0,sim,trea
   Y <- Y[!rownames(Y)%in%treated.indices,] 
   covars.x <- covars.x[!rownames(covars.x)%in%treated.indices,]
   
-  covars.x <- scale(matrix(covars.x[,1],N,T) + matrix(covars.x[,2],N,T) + matrix(covars.x[,3],N,T) +matrix(covars.x[,4],N,T)) # need to combine covars in NxT matrix
-  
   ## Setting up the configuration
   N <- nrow(treat)
   T <- ncol(treat)
@@ -78,7 +76,9 @@ CapacitySim <- function(outcomes.missing,outcomes.imputed,covars.x,d,T0,sim,trea
   
   att.true <- 0
 
-  ## Simultaneuous (simul_adapt) or Staggered adoption (stag_adapt
+  ## Simultaneuous (simul_adapt) or Staggered adoption (stag_adapt)
+  
+  covars.x <- scale(matrix(covars.x[,1],N,T) + matrix(covars.x[,2],N,T) + matrix(covars.x[,3],N,T) +matrix(covars.x[,4],N,T)) # need to combine covars in NxT matrix
   
   e <-plogis(scale(cbind(Y[,1:(t0-1)],replicate((T-t0+1),Y[,(t0-1)]))) + covars.x) # prob of being missing (treated/missing)
   e <- boundProbs(e) # winsorize extreme probabilities 

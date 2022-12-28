@@ -72,5 +72,5 @@ Run order for experiments and causal estimates
   * mc-simulation-plot.R # plot results for simulated data experiments
 2. Repeat the last step for `code/mc-synth.R` and `code/mc-capacity.R` to run experiments on synthetic control and state government finance datasets, resp.
   * simulation-plots.R # to plot results
-* For MC placebo estimates: `code/mc-capacity-placebo.sh`
-* For MC causal estimates: `code/mc-capacity-estimates.sh`
+3. For MC placebo estimates: `code/mc-capacity-placebo.sh`
+4. For MC causal estimates: `code/mc-capacity-estimates.sh`

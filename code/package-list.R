@@ -14,7 +14,7 @@ install_github("jvpoulos/MCPanel") # propensity weighting of objective fn.; ADH 
 install_github("Duane321/emfactor")
 
 # doMPI
-doMPI <- FALSE
+doMPI <- TRUE
 if(doMPI){
   install.packages("Rmpi")
   install.packages("doMPI", dependencies=TRUE, repos = "http://cran.us.r-project.org")
