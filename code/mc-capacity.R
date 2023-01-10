@@ -327,7 +327,7 @@ CapacitySim <- function(outcomes.missing,outcomes.imputed,covars.x,d,T0,sim,trea
 
 # Load data
 capacity.outcomes.none <- readRDS("data/capacity-outcomes-none.rds")
-capacity.outcomes.mice <- readRDS("data/capacity-outcomes-mice.rds") 
+capacity.outcomes.mice <- readRDS("data/capacity-outcomes-mice-cart.rds") 
 capacity.outcomes.linear <- readRDS("data/capacity-outcomes-linear.rds") # for covariates
 
 # define settings for simulation

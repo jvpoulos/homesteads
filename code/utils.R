@@ -174,3 +174,10 @@ boot_CI <- function(est_coefficent,est_var,alpha=0.05){
   return(list("lb"=est_coefficent - qnorm(1 - alpha/2)*sqrt(est_var),
                "ub"=est_coefficent + qnorm(1 - alpha/2)*sqrt(est_var) ))
 }
+
+#Helper function for continuous DID regression bootstrap
+RunDiD <- function(data, indices, f1) {
+  d <- data[indices,]
+  did.model <- glm(f1, data=d)
+  return(coef(did.model)[['did']])
+}

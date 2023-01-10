@@ -345,7 +345,7 @@ MCsim <- function(N,T,R,T0,N_t,beta_sc,loading_sc,logi_sc,shift_sc,estimator=c("
 }
 
 # define settings for simulation
-settings <- expand.grid("NT"=c(60**2,80**2,100**2),
+settings <- expand.grid("NT"=c(60**2,80**2),
                         "N_t" =c(0.5), # N_ST = 30,40,50
                         "shift_scale"=c(0.1),
                         "R"=c(10,20,40),
@@ -371,7 +371,7 @@ if(doMPI){
   print(paste0("number of cores used: ", cores))
 }
 
-n.runs <- 1000 # Num. simulation runs
+n.runs <- 500 # Num. simulation runs
 
 output_dir <- './outputs/'
 simulation_version <- paste0(format(Sys.time(), "%Y%m%d"),"/")

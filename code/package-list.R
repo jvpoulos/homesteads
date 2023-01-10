@@ -13,6 +13,11 @@ install_github("jvpoulos/MCPanel") # propensity weighting of objective fn.; ADH 
 
 install_github("Duane321/emfactor")
 
+options(repos = c(
+  skranz = 'https://skranz.r-universe.dev',
+  CRAN = 'https://cloud.r-project.org'))
+install.packages('ParallelTrendsPlot')
+
 # doMPI
 doMPI <- TRUE
 if(doMPI){

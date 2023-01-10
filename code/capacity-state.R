@@ -727,11 +727,13 @@ if(homesteads){
   capacity.outcomes.mice.cart <- lapply(capacity.outcomes, CapacityMatrices, imp="mice",faval,farmsize,access,slave.share,aa.share,native.share,white.share,mice.method="cart")
   capacity.outcomes.mice.pmm <- lapply(capacity.outcomes, CapacityMatrices, imp="mice",faval,farmsize,access,slave.share,aa.share,native.share,white.share,mice.method="pmm")
   capacity.outcomes.mtsdi <- lapply(capacity.outcomes, CapacityMatrices, imp="mtsdi",faval,farmsize,access,slave.share,aa.share,native.share,white.share)
+  capacity.outcomes.linear <- lapply(capacity.outcomes, CapacityMatrices, imp="linear",faval,farmsize,access,slave.share,aa.share,native.share,white.share)
 
   saveRDS(capacity.outcomes.none, paste0(data.directory,"capacity-outcomes-none.rds"))
   saveRDS(capacity.outcomes.mice.cart, paste0(data.directory,"capacity-outcomes-mice-cart.rds"))
   saveRDS(capacity.outcomes.mice.pmm, paste0(data.directory,"capacity-outcomes-mice-pmm.rds"))
   saveRDS(capacity.outcomes.mtsdi, paste0(data.directory,"capacity-outcomes-mtsdi.rds"))
+  saveRDS(capacity.outcomes.mtsdi, paste0(data.directory,"capacity-outcomes-linear.rds"))
   
 }else{
   capacity.outcomes <- list("educ.pc"=educ.pc)

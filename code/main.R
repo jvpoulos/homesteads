@@ -49,14 +49,8 @@ source(paste0(code.directory,'non-response-plot.R')) # Summarize non-response an
 
 source(paste0(code.directory,'prepare-synth.R')) # prepare synthetic control datasets for experiments
 
-## Matrix completion estimates
+## Matrix completion estimates (See README for instructions to obtain causal estimates from state government finance data)
 
-# See README for instructions to obtain causal estimates from state government finance data
-
-tablesfigures <- FALSE # set to TRUE to produce tables and Figures
-if(tablesfigures){
-  source(paste0(code.directory,'mc-capacity-plots.R')) 
-}
 # DD estimates on state government finance data
 
 source(paste0(code.directory,'dd-capacity.R')) 
@@ -65,7 +59,15 @@ source(paste0(code.directory,'dd-capacity.R'))
 
 source(paste0(code.directory,'dd-inequality.R'))  # N.B.: need to run dd-capacity.R first
 
+tablesfigures <- FALSE # set to TRUE to produce tables and Figures
 if(tablesfigures){
   # Descriptive plots
   source(paste0(code.directory,'ineq-capacity.R')) # inequality vs. state size
+}
+
+## Diagnostic plots
+
+if(tablesfigures){
+  source(paste0(code.directory,'binary-did-parallel.R')) # DID (binary treatment) parallel trends plot
+  source(paste0(code.directory,'pscore-diagnostic.R')) # propensity scores diagnostic plot
 }

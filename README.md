@@ -66,11 +66,17 @@ $ ./code/main.sh > main.txt
 Run order for experiments and causal estimates
 ------
 
-1. `code/mc-simulation.R` # simulated data experiments
+1. For simulated data experiments, run with command line argument  `Rscript code/mc-simulation.R [arg1]`, where `[arg1]` is a number specifying the estimator and simulation setting
   * set flag `doMPI` to `FALSE` to run serially
-  * run with command line argument  `Rscript mc-simulation.R [arg1]`, where `[arg1]` is a number specifying the simulation setting
-  * mc-simulation-plot.R # plot results for simulated data experiments
+  * `code/mc-simulation-plot.R` # plot results for simulated data experiments
+
 2. Repeat the last step for `code/mc-synth.R` and `code/mc-capacity.R` to run experiments on synthetic control and state government finance datasets, resp.
-  * simulation-plots.R # to plot results
-3. For MC placebo estimates: `code/mc-capacity-placebo.sh`
-4. For MC causal estimates: `code/mc-capacity-estimates.sh`
+  * set flag `doMPI` to `FALSE` to run serially
+  * `code/simulation-plots.R` # to plot results
+
+3. For MC placebo estimates on state government finances: `Rscript code/mc-capacity-placebo.R [arg1]`, where `[arg1]` is a number specifying the estimator and outcome of interest
+
+4. For causal estimates on state government finances via MC and comparison estimators: `Rscript code/mc-capacity-estimates.R [arg1]`, where `[arg1]` is a number specifying the estimator and outcome of interest
+  * `code/mc-capacity-plots.R` # to plot results
+
+5. For causal estimates on state government finances and land inequality via continuous treatment DID: `Rscript code/dd-capacity.R [arg1]`,  where `[arg1]` is a number specifying the imputation method, and `Rscript code/dd-inequality.R`

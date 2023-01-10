@@ -19,7 +19,7 @@ TsPlot <- function(df, main = "",y.title,limits,breaks) {
     geom_line(data = subset(df, variable == "observed.sls"), aes(y = value, colour = "observed.sls", linetype="observed.sls"), show.legend = TRUE, size=1) +
     
     # intervals
-    geom_ribbon(data = subset(df, variable == "pointwise.pls"), aes(ymin = lower, ymax=upper, colour="pointwise.pls"), alpha=.1, size=0.5, show.legend = FALSE) +
+    geom_ribbon(data = subset(df, variable == "pointwise.pls"), aes(ymin = lower, ymax=upper, colour="pointwise.pls"), alpha=.05, size=0.5, show.legend = FALSE) +
     
     # horizontal line to indicate zero values
     geom_hline(yintercept = 0, size = 0.5, colour = "black") +
