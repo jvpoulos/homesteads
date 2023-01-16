@@ -175,9 +175,30 @@ boot_CI <- function(est_coefficent,est_var,alpha=0.05){
                "ub"=est_coefficent + qnorm(1 - alpha/2)*sqrt(est_var) ))
 }
 
-#Helper function for continuous DID regression bootstrap
+# Helper function for continuous DID regression bootstrap
 RunDiD <- function(data, indices, f1) {
   d <- data[indices,]
   did.model <- glm(f1, data=d)
   return(coef(did.model)[['did']])
+}
+
+# For inequality descriptive plot
+LmEq <- function(m) {
+  
+  l <- list(a = format(coef(m)[1], digits = 2),
+            b = format(abs(coef(m)[2]), digits = 2),
+            p.val = format(summary(m)[[4]][2], digits = 1));
+  
+  if (coef(m)[2] >= 0)  {
+    eq <- substitute(italic(y) == a + b %.% italic(x)*","~~italic(p)~"="~p.val,l)
+  } else {
+    eq <- substitute(italic(y) == a - b %.% italic(x)*","~~italic(p)~"="~p.val,l)    
+  }
+  
+  as.character(as.expression(eq));                 
+}
+
+TLag <- function(x, n = 1L, time) { 
+  index <- match(time - n, time, incomparables = NA)
+  x[index]
 }

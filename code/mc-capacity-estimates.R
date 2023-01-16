@@ -276,11 +276,11 @@ if(!dir.exists(output_dir)){
   dir.create(output_dir)
 }
 
-results <- foreach(imp_method %in% c("mice-cart","mice-pmm","mtsdi"), .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor"), .verbose = FALSE) %dopar% {
+results <- foreach(i = c("mice-cart","mice-pmm","mtsdi"), .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor"), .verbose = FALSE) %dopar% {
   
   # Load data
   outcomes.missing <- readRDS("data/capacity-outcomes-none.rds")
-  outcomes.imputed <- readRDS(paste0("data/capacity-outcomes-", imp_method,".rds")) 
+  outcomes.imputed <- readRDS(paste0("data/capacity-outcomes-", i,".rds")) 
   capacity.outcomes.linear <- readRDS("data/capacity-outcomes-linear.rds") # for covariates
   
   t0 <- which(colnames(outcomes.missing[[d]]$M)=="1869")

@@ -112,6 +112,8 @@ DDInequalityEst <- function(cores=parallel::detectCores()){
   
   did.nobs <- nobs(did.model)
   
+  did.ar2 <- summary(lm(ineq.f2, data=ineq.did))$adj.r.squared
+  
   # bootstrap variance estimation
   
   did.boot <- boot(data=ineq.did,
@@ -125,7 +127,8 @@ DDInequalityEst <- function(cores=parallel::detectCores()){
   
   did.boot.CI <- boot.ci(did.boot, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
   
-  return(list("model"=did.model,"delta"=did.delta,"CI"=did.ci,"nobs"=did.nobs,"boot"=did.boot, "boot.delta"=did.boot.delta,"did.boot.CI"=did.boot.CI))
+  return(list("model"=did.model,"delta"=did.delta,"CI"=did.ci,"nobs"=did.nobs, "ar2"=didar2,
+              "boot"=did.boot, "boot.delta"=did.boot.delta,"did.boot.CI"=did.boot.CI))
 }
 
 ## Load capacity data

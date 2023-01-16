@@ -1,17 +1,11 @@
 ###################################
 # DD Estimation (state-level measures)   #
 ###################################
-library(data.table)
-library(dplyr)
-library(tidyverse) 
-library(boot)
-
-source('code/utils.R')
-
 # Setup parallel processing 
 library(parallel)
 library(doParallel)
 library(foreach)
+library(boot)
 
 # Setup parallel processing
 doMPI <- FALSE
@@ -57,7 +51,14 @@ if(!dir.exists(output_dir)){
 
 DDCapacityEst <- function(imp_method, d, cores=parallel::detectCores()){
   
-  capacity.outcomes <- readRDS(paste0("data/capacity-outcomes-", imp_method,".rds")) # MICE imputed data
+  library(data.table)
+  library(dplyr)
+  library(tidyverse) 
+  library(boot)
+  
+  source('code/utils.R')
+  
+  capacity.outcomes <- readRDS(paste0("data/capacity-outcomes-", imp_method,".rds"))
   
   capacity.outcomes.M <- list("rev.pc"=capacity.outcomes[["rev.pc"]]$M,"exp.pc"=capacity.outcomes[["exp.pc"]]$M)
   capacity.outcomes.mask <- list("rev.pc"=capacity.outcomes[["rev.pc"]]$mask,"exp.pc"=capacity.outcomes[["exp.pc"]]$mask)
@@ -170,6 +171,8 @@ DDCapacityEst <- function(imp_method, d, cores=parallel::detectCores()){
   
   did.nobs <- nobs(did.model)
   
+  did.ar2 <- summary(lm(f2, data=capacity.outcomes.panel[[d]]))$adj.r.squared
+  
   # bootstrap variance estimation
   
   did.boot <- boot(data=capacity.outcomes.panel[[d]],
@@ -183,7 +186,8 @@ DDCapacityEst <- function(imp_method, d, cores=parallel::detectCores()){
 
   did.boot.CI <- boot.ci(did.boot, conf=0.95, index=1, type="norm")$normal[2:3] # 95% nonparametric bootstrap CIs
 
-  return(list("model"=did.model,"delta"=did.delta,"CI"=did.ci,"nobs"=did.nobs,"boot"=did.boot, "boot.delta"=did.boot.delta,"did.boot.CI"=did.boot.CI))
+  return(list("model"=did.model,"delta"=did.delta,"CI"=did.ci,"nobs"=did.nobs, "ar2"=didar2,
+              "boot"=did.boot, "boot.delta"=did.boot.delta,"did.boot.CI"=did.boot.CI))
 }
 
 # define settings 
@@ -197,7 +201,7 @@ imp_method <- as.character(thisrun[1])
 ## Load capacity data
 load("results/capacity-state.RData")
 
-results <- foreach(d %in% c('rev.pc','exp.pc'), .combine='cbind', .verbose = FALSE) %dopar% {
+results <- foreach(d = c('rev.pc','exp.pc'), .combine='cbind', .verbose = FALSE) %dopar% {
   DDCapacityEst(imp_method=imp_method, d=d, cores=cores)
 }
 results
