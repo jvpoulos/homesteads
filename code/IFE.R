@@ -3,16 +3,12 @@
 # https://duane321.github.io/emfactor-site/#Demotoy #
 #####################################################
 
-IFE <- function(M, mask, k=2, retrospective=TRUE){
+IFE <- function(M, mask, k=2){
   M_NA <- t(M) # T x N
   M_NA[t(mask)==0] <- NA
   
-  if(retrospective){
-    out_idx <- 1:max(rowSums(1-mask)) # first initial treatment time
-  }else{
-    out_idx <- max(rowSums(1-mask)):ncol(mask) # first initial treatment time
-  }
-
+  out_idx <- max(rowSums(1-mask)):ncol(mask) # first initial treatment time
+  
   units_observed <- which(rowSums(mask) == T) # AT
   units_to_predict <- which(rowSums(mask) < T) # ST
 

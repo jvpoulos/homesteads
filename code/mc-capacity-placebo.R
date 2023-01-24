@@ -15,9 +15,12 @@ library(glmnet)
 library(ggplot2)
 library(latex2exp)
 library(glmnet)
+library(boot)
 
 source('code/utils.R')
 source('code/IFE.R')
+source("code/MCEst.R")
+source("code/PolitisWhite.R")
 
 # Setup parallel processing 
 library(parallel)
@@ -25,7 +28,7 @@ library(doParallel)
 library(foreach)
 
 # Setup parallel processing
-doMPI <- FALSE
+doMPI <- TRUE
 if(doMPI){
   library(doMPI)
   
@@ -37,6 +40,10 @@ if(doMPI){
   
   # Check cluster size
   print(paste0("cluster size: ", clusterSize(cl)))
+  
+  # cores for parallelization
+  cores <- parallel::detectCores()
+  print(paste0("number of cores used: ", cores))
   
 } else{
   library(parallel)
@@ -51,37 +58,31 @@ if(doMPI){
   doParallel::registerDoParallel(cl) # register cluster
 }
 
-CapacityPlacebo <- function(outcomes.missing,outcomes.imputed,covars.x,d,T0,sim,treated.indices,cores,estimator=c("mc_plain","mc_weights","ADH","ENT","DID","IFE")){
+CapacityPlacebo <- function(outcomes.imputed,covars.x,d,t0,sim,treated.indices,cores,estimator=c("mc_plain","mc_weights","ADH","ENT","DID","IFE")){
   
   # Discard post-treatment 
   t0.loc <- which(colnames(outcomes.imputed[[d]]$M)=="1869")
-  Y.missing <- outcomes.missing[[d]]$M[,1:(t0.loc-1)]  # to train on: 0s = missing
   Y <- outcomes.imputed[[d]]$M[,1:(t0.loc-1)] # NxT  # imputed outcomes
   missing.mat <- outcomes.imputed[[d]]$M.missing[,1:(t0.loc-1)]
   missing.mat[is.na(missing.mat)] <- 0 # 0s are missing/imputed
-  treat <- outcomes.imputed[[d]]$mask[,1:(t0.loc-1)] # NxT masked matrix: 0 for control units and treated units before treatment and 1 for treated units after treatment
-  
-  N <- dim(treat)[1]
-  T <- dim(treat)[2]
-  
-  covars.x <- scale(matrix(covars.x[,1],N,T) + matrix(covars.x[,2],N,T) + matrix(covars.x[,3],N,T) +matrix(covars.x[,4],N,T)) # need to combine covars in NxT matrix
+
+  N <- dim(Y)[1]
+  T <- dim(Y)[2]
   
   # Random staggered adoption among actual treated 
-  t0 <- ceiling(c(T*0.5, T*0.65, T*0.8, T*0.95))[T0]
-  print(paste0("placebo T0:,", t0))
+  placebo_t0 <- T-t0
+  print(paste0("placebo T0:", placebo_t0))
   
   treat_indices <- which(rownames(Y) %in%treated.indices) # keep treated fixed to actual treated
   
-  mask <- stag_adapt(Y, length(treat_indices),t0, treat_indices) # masked matrix, 1= control units and treated units before treatment and 0 = treated units after treatment
-  rownames(mask) <- rownames(treat)
-  colnames(mask) <- colnames(treat)
+  mask <- stag_adapt(Y, length(treat_indices),placebo_t0, treat_indices) # masked matrix, 1= control units and treated units before treatment and 0 = treated units after treatment
+  rownames(mask) <- rownames(Y)
+  colnames(mask) <- colnames(Y)
   
   Y_obs <- Y * mask * missing.mat
   
   fr_obs <- sum(mask)/(N*T) # store fraction observed entries
   print(paste0("fraction observed: ", fr_obs))
-  
-  att.true <- 0
   
   # get vector of initial treatment periods for N_t treated units
   
@@ -94,269 +95,32 @@ CapacityPlacebo <- function(outcomes.missing,outcomes.imputed,covars.x,d,T0,sim,
                   FUN = function(x) x[1])$row  # switch treated indices
   NT <- setdiff(1:N, ST) # control indices
   
-  ## Estimate propensity scores
-  
-  if(estimator%in%c("mc_weights")){
-    
-    p.mod <- cv.glmnet(x=cbind(covars.x,Y_obs[,1:(t0-1)]), y=(1-mask*missing.mat), family="mgaussian", alpha=1,nfolds=10,intercept=FALSE)
-    W <- predict(p.mod, cbind(covars.x,Y_obs[,1:(t0-1)]))[,,1]
-    
-    p.weights <- matrix(NA, nrow=nrow(mask), ncol=ncol(mask), dimnames = list(rownames(mask), colnames(mask)))
-    p.weights <- boundProbs(W)/(1-boundProbs(W))
-  }
-  
-  ## ------ ------ ------ ------ ------
-  ## MC-NNM plain (no weighting, no covariate)
-  ## ------ ------ ------ ------ ------
-  
-  est_mc_plain <- list()
-  if(estimator=="mc_plain"){
-    est_mc_plain <- mcnnm_cv(M = Y_obs, mask = mask, W = matrix(1, nrow(mask),ncol(mask)), to_estimate_u = 1, to_estimate_v = 1, rel_tol = 1e-05, is_quiet = 1)
-    
-    est_mc_plain$rankL <- rankMatrix(t(est_mc_plain$L), method="qr.R")[1]
-    
-    est_mc_plain$Mhat <- est_mc_plain$L + replicate(T,est_mc_plain$u) + t(replicate(N,est_mc_plain$v))
-    est_mc_plain$tau <- (Y-est_mc_plain$Mhat) # estimated treatment effect, Y(ST) - Y(NT)
-    est_mc_plain$err <- (est_mc_plain$tau - 0) # error (wrt to ground truth)
-    
-    est_mc_plain$msk_err <- est_mc_plain$err*(1-mask) # masked error (wrt to ground truth)
-    est_mc_plain$RMSE <- sqrt((1/sum(1-mask)) * sum(est_mc_plain$msk_err^2)) # RMSE on test set (wrt to ground truth)
-    print(paste("MC-NNM (Plain) RMSE:", round(est_mc_plain$RMSE,3)))
-    
-    est_mc_plain$att <- apply(est_mc_plain$tau*(1-mask),1,nzmean)[ST]
-    est_mc_plain$att.bar <- mean(est_mc_plain$att)
-    est_mc_plain$abs.bias <- abs(est_mc_plain$att.bar-att.true)
-    print(paste("MC-NNM (Plain) abs. bias:", round(est_mc_plain$abs.bias,3)))
-    
-    # bootstrap variance estimation
-    df_mc_plain <- widetoLong(Y= Y, mask = mask, X = NULL)
-    df_mc_plain$person_id <- as.numeric(df_mc_plain$person_id)
-    est_mc_plain$boot_var <- clustered_bootstrap(current_data_realized_long=df_mc_plain, estimator="mc_plain", N=nrow(Y), T=ncol(Y), T0=t0, B = 999, est_weights = FALSE, ncores = cores)
-    print(paste("MC-NNM (Plain) variance:", round(est_mc_plain$boot_var,3)))
-    
-    est_mc_plain$CI <- boot_CI(est_coefficent=est_mc_plain$att.bar, est_var=est_mc_plain$boot_var)
-    print(paste("MC-NNM (Plain) CI lower:", round(est_mc_plain$CI$lb,3)))
-    print(paste("MC-NNM (Plain) CI upper:", round(est_mc_plain$CI$ub,3)))
-    
-    est_mc_plain$cp <- CI_test(est_coefficent=est_mc_plain$att.bar, real_coefficent=att.true, est_var=est_mc_plain$boot_var)
-    print(paste("MC-NNM (Plain) CP:", round(est_mc_plain$cp,3)))
-    
-    est_mc_plain$CI_width <- abs(boot_CI(est_coefficent=est_mc_plain$att.bar, est_var=est_mc_plain$boot_var)$lb-boot_CI(est_coefficent=est_mc_plain$att.bar, est_var=est_mc_plain$boot_var)$ub)
-    print(paste("MC-NNM (Plain) CI width:", round(est_mc_plain$CI_width,3)))
-  }
-  
-  ## ------ ------ ------ ------ ------
-  ## MC-NNM weights (no covariate)
-  ## ------ ------ ------ ------ ------
-  
-  est_mc_weights <- list()
-  if(estimator=="mc_weights"){
-    est_mc_weights <- mcnnm_cv(M = Y_obs, mask = mask, W = p.weights, to_estimate_u = 1, to_estimate_v = 1, rel_tol = 1e-05, is_quiet = 1)
-    
-    est_mc_weights$rankL <- rankMatrix(t(est_mc_weights$L), method="qr.R")[1]
-    
-    est_mc_weights$Mhat <- est_mc_weights$L + replicate(T,est_mc_weights$u) + t(replicate(N,est_mc_weights$v))
-    est_mc_weights$tau <- (Y-est_mc_weights$Mhat) # estimated treatment effect, Y(AT) - Y(ST)
-    est_mc_weights$err <- (est_mc_weights$tau - 0) # error (wrt to ground truth)
-    
-    est_mc_weights$msk_err <- est_mc_weights$err*(1-mask) # masked error (wrt to ground truth)
-    est_mc_weights$RMSE <- sqrt((1/sum(1-mask)) * sum(est_mc_weights$msk_err^2)) # RMSE on test set (wrt to ground truth)
-    print(paste("MC-NNM (weights) RMSE:", round(est_mc_weights$RMSE,3)))
-    
-    est_mc_weights$att <- apply(est_mc_weights$tau*(1-mask),1,nzmean)[ST]
-    est_mc_weights$att.bar <- mean(est_mc_weights$att)
-    est_mc_weights$abs.bias <- abs(est_mc_weights$att.bar-att.true)
-    print(paste("MC-NNM (weights) abs. bias:", round(est_mc_weights$abs.bias,3)))
-    
-    # bootstrap variance estimation
-    df_mc_weights <- widetoLong(Y= Y, mask = mask, X = covars.x)
-    df_mc_weights$person_id <- as.numeric(df_mc_weights$person_id)
-    est_mc_weights$boot_var <- clustered_bootstrap(current_data_realized_long=df_mc_weights, estimator="mc_weights", N=nrow(Y), T=ncol(Y), T0=t0, B = 999, est_weights = TRUE, ncores = cores)
-    print(paste("MC-NNM (weights) variance:", round(est_mc_weights$boot_var,3)))
-    
-    est_mc_weights$CI <- boot_CI(est_coefficent=est_mc_weights$att.bar, est_var=est_mc_weights$boot_var)
-    print(paste("MC-NNM (weights) CI lower:", round(est_mc_weights$CI$lb,3)))
-    print(paste("MC-NNM (weights) CI upper:", round(est_mc_weights$CI$ub,3)))
-    
-    est_mc_weights$cp <- CI_test(est_coefficent=est_mc_weights$att.bar, real_coefficent=att.true, est_var=est_mc_weights$boot_var)
-    print(paste("MC-NNM (weights) CP:", round(est_mc_weights$cp,3)))
-    
-    est_mc_weights$CI_width <- abs(boot_CI(est_coefficent=est_mc_weights$att.bar, est_var=est_mc_weights$boot_var)$lb-boot_CI(est_coefficent=est_mc_weights$att.bar, est_var=est_mc_weights$boot_var)$ub)
-    print(paste("MC-NNM (weights) CI width:", round(est_mc_weights$CI_width,3)))
-  }
-  
-  ## -----
-  ## ADH
-  ## -----
-  est_model_ADH <- list()
-  if(estimator=="ADH"){
-    est_model_ADH$Mhat <- adh_mp_rows(Y_obs, mask)
-    est_model_ADH$tau <- (Y-est_model_ADH$Mhat) # estimated treatment effect
-    est_model_ADH$err <- (est_model_ADH$tau - 0) # error (wrt to ground truth)
-    
-    est_model_ADH$msk_err <- est_model_ADH$err*(1-mask) # masked error (wrt to ground truth)
-    est_model_ADH$RMSE <- sqrt((1/sum(1-mask)) * sum(est_model_ADH$msk_err^2)) # RMSE on test set (wrt to ground truth)
-    print(paste("ADH RMSE:", round(est_model_ADH$RMSE,3)))
-    
-    est_model_ADH$att <- apply(est_model_ADH$tau*(1-mask),1,nzmean)[ST]
-    est_model_ADH$att.bar <- mean(est_model_ADH$att)
-    est_model_ADH$abs.bias <- abs(est_model_ADH$att.bar-att.true)
-    print(paste("ADH abs. bias:", round(est_model_ADH$abs.bias,3)))
-    
-    # bootstrap variance estimation
-    df_ADH <- widetoLong(Y= Y, mask = mask, X = NULL)
-    df_ADH$person_id <- as.numeric(df_ADH$person_id)
-    est_model_ADH$boot_var <- clustered_bootstrap(current_data_realized_long=df_ADH, estimator="ADH", N=nrow(Y), T=ncol(Y), T0=t0, B = 999, est_weights = FALSE, ncores = cores)
-    print(paste("ADH variance:", round(est_model_ADH$boot_var,3)))
-    
-    est_model_ADH$CI <- boot_CI(est_coefficent=est_model_ADH$att.bar, est_var=est_model_ADH$boot_var)
-    print(paste("ADH CI lower:", round(est_model_ADH$CI$lb,3)))
-    print(paste("ADH CI upper:", round(est_model_ADH$CI$ub,3)))
-    
-    est_model_ADH$cp <- CI_test(est_coefficent=est_model_ADH$att.bar, real_coefficent=att.true, est_var=est_model_ADH$boot_var)
-    print(paste("ADH CP:", round(est_model_ADH$cp,3)))
-    
-    est_model_ADH$CI_width <- abs(boot_CI(est_coefficent=est_model_ADH$att.bar, est_var=est_model_ADH$boot_var)$lb-boot_CI(est_coefficent=est_model_ADH$att.bar, est_var=est_model_ADH$boot_var)$ub)
-    print(paste("ADH CI width:", round(est_model_ADH$CI_width,3)))
-  }
-  
-  ## -----
-  ## VT-EN : It does Not cross validate on alpha (only on lambda) and keep alpha = 1 (LASSO).
-  ## -----
-  
-  est_model_ENT <- list()
-  if(estimator=="ENT"){
-    est_model_ENT$Mhat <- t(en_mp_rows(t(Y_obs), t(mask), num_alpha = 1))
-    est_model_ENT$tau <- (Y-est_model_ENT$Mhat) # estimated treatment effect
-    est_model_ENT$err <- (est_model_ENT$tau - 0) # error (wrt to ground truth)
-    
-    est_model_ENT$msk_err <- est_model_ENT$err*(1-mask) # masked error (wrt to ground truth)
-    est_model_ENT$RMSE <- sqrt((1/sum(1-mask)) * sum(est_model_ENT$msk_err^2)) # RMSE on test set (wrt to ground truth)
-    print(paste("VT-EN RMSE:", round(est_model_ENT$RMSE,3)))
-    
-    est_model_ENT$att <- apply(est_model_ENT$tau*(1-mask),1,nzmean)[ST]
-    est_model_ENT$att.bar <- mean(est_model_ENT$att)
-    est_model_ENT$abs.bias <- abs(est_model_ENT$att.bar-att.true)
-    print(paste("VT-EN abs. bias:", round(est_model_ENT$abs.bias,3)))
-    
-    # bootstrap variance estimation
-    df_ENT <- widetoLong(Y= Y, mask = mask, X = NULL)
-    df_ENT$person_id <- as.numeric(df_ENT$person_id)
-    est_model_ENT$boot_var <- clustered_bootstrap(current_data_realized_long=df_ENT, estimator="ENT", N=nrow(Y), T=ncol(Y), T0=t0, B = 999, est_weights = FALSE, ncores = cores)
-    print(paste("VT-EN variance:", round(est_model_ENT$boot_var,3)))
-    
-    est_model_ENT$CI <- boot_CI(est_coefficent=est_model_ENT$att.bar, est_var=est_model_ENT$boot_var)
-    print(paste("ENT CI lower:", round(est_model_ENT$CI$lb,3)))
-    print(paste("ENT CI upper:", round(est_model_ENT$CI$ub,3)))
-    
-    est_model_ENT$cp <- CI_test(est_coefficent=est_model_ENT$att.bar, real_coefficent=att.true, est_var=est_model_ENT$boot_var)
-    print(paste("VT-EN CP:", round(est_model_ENT$cp,3)))
-    
-    est_model_ENT$CI_width <- abs(boot_CI(est_coefficent=est_model_ENT$att.bar, est_var=est_model_ENT$boot_var)$lb-boot_CI(est_coefficent=est_model_ENT$att.bar, est_var=est_model_ENT$boot_var)$ub)
-    print(paste("VT-EN CI width:", round(est_model_ENT$CI_width,3)))
-  }
-  
-  ## -----
-  ## DID
-  ## -----
-  est_model_DID <- list()
-  if(estimator=="DID"){
-    est_model_DID$Mhat <- DID(Y_obs, mask)
-    est_model_DID$tau <- (Y-est_model_DID$Mhat) # estimated treatment effect
-    est_model_DID$err <- (est_model_DID$tau  - 0) # error (wrt to ground truth)
-    
-    est_model_DID$msk_err <- est_model_DID$err*(1-mask) # masked error (wrt to ground truth)
-    est_model_DID$RMSE <- sqrt((1/sum(1-mask)) * sum(est_model_DID$msk_err^2)) # RMSE on test set (wrt to ground truth)
-    print(paste("DID RMSE:", round(est_model_DID$RMSE,3)))
-    
-    est_model_DID$att <- apply(est_model_DID$tau*(1-mask),1,nzmean)[ST]
-    est_model_DID$att.bar <- mean(est_model_DID$att)
-    est_model_DID$abs.bias <- abs(est_model_DID$att.bar-att.true)
-    print(paste("DID abs. bias:", round(est_model_DID$abs.bias,3)))
-    
-    # bootstrap variance estimation
-    df_DID <- widetoLong(Y= Y, mask = mask, X = NULL)
-    df_DID$person_id <- as.numeric(df_DID$person_id)
-    est_model_DID$boot_var <- clustered_bootstrap(current_data_realized_long=df_DID, estimator="DID", N=nrow(Y), T=ncol(Y), T0=t0, B = 999, est_weights = FALSE, ncores = cores)
-    print(paste("DID variance:", round(est_model_DID$boot_var,3)))
-    
-    est_model_DID$CI <- boot_CI(est_coefficent=est_model_DID$att.bar, est_var=est_model_DID$boot_var)
-    print(paste("DID CI lower:", round(est_model_DID$CI$lb,3)))
-    print(paste("DID CI upper:", round(est_model_DID$CI$ub,3)))
-    
-    est_model_DID$cp <- CI_test(est_coefficent=est_model_DID$att.bar, real_coefficent=att.true, est_var=est_model_DID$boot_var)
-    print(paste("DID CP:", round(est_model_DID$cp,3)))
-    
-    est_model_DID$CI_width <- abs(boot_CI(est_coefficent =est_model_DID$att.bar, est_var=est_model_DID$boot_var)$lb-boot_CI(est_coefficent =est_model_DID$att.bar, est_var=est_model_DID$boot_var)$ub)
-    print(paste("DID CI width:", round(est_model_DID$CI_width,3)))
-  }
-  
-  ## ---------------
-  ## IFEs
-  ## ---------------
-  
-  est_model_IFE <- list()
-  if(estimator=="IFE"){
-    est_model_IFE$Mhat <- IFE(Y_obs, mask, k=2)
-    est_model_IFE$tau <- (Y-est_model_IFE$Mhat) # estimated treatment effect
-    est_model_IFE$err <- (est_model_IFE$tau - 0) # error (wrt to ground truth)
-    
-    est_model_IFE$msk_err <- est_model_IFE$err*(1-mask) # masked error (wrt to ground truth)
-    est_model_IFE$RMSE <- sqrt((1/sum(1-mask)) * sum(est_model_IFE$msk_err^2)) # RMSE on test set (wrt to ground truth)
-    print(paste("IFE RMSE:", round(est_model_IFE$RMSE,3)))
-    
-    est_model_IFE$att <- apply(est_model_IFE$tau*(1-mask),1,nzmean)[ST]
-    est_model_IFE$att.bar <- mean(est_model_IFE$att)
-    est_model_IFE$abs.bias <- abs(est_model_IFE$att.bar-att.true)
-    print(paste("IFE abs. bias:", round(est_model_IFE$abs.bias,3)))
-    
-    # bootstrap variance estimation
-    df_IFE <- widetoLong(Y= Y, mask = mask, X = NULL)
-    df_IFE$person_id <- as.numeric(df_IFE$person_id)
-    est_model_IFE$boot_var <- clustered_bootstrap(current_data_realized_long=df_IFE, estimator="IFE", N=nrow(Y), T=ncol(Y), T0=t0, B = 999, est_weights = FALSE, ncores = cores)
-    print(paste("IFE variance:", round(est_model_IFE$boot_var,3)))
-    
-    est_model_IFE$CI <- boot_CI(est_coefficent=est_model_IFE$att.bar, est_var=est_model_IFE$boot_var)
-    print(paste("IFE CI lower:", round(est_model_IFE$CI$lb,3)))
-    print(paste("IFE CI upper:", round(est_model_IFE$CI$ub,3)))
-    
-    est_model_IFE$cp <- CI_test(est_coefficent=est_model_IFE$att.bar, real_coefficent=att.true, est_var=est_model_IFE$boot_var)
-    print(paste("IFE CP:", round(est_model_IFE$cp,3)))
-    
-    est_model_IFE$CI_width <- abs(boot_CI(est_coefficent =est_model_IFE$att.bar, est_var=est_model_IFE$boot_var)$lb-boot_CI(est_coefficent =est_model_IFE$att.bar, est_var=est_model_IFE$boot_var)$ub)
-    print(paste("IFE CI width:", round(est_model_IFE$CI_width,3)))
-  }
-  
-  # cleanup
-  return(list("N"=N, "T"=T, "T0"=t0,"estimator"=estimator,"fr_obs"= fr_obs,
-              "est_mc_plain_RMSE"=est_mc_plain$RMSE,"est_mc_plain_abs_bias"=est_mc_plain$abs.bias,"est_mc_plain_cp"=est_mc_plain$cp,"est_mc_plain_boot_var"=est_mc_plain$boot_var,"est_mc_plain_CI"=est_mc_plain$CI,"est_mc_plain_CI_width"=est_mc_plain$CI_width,"est_mc_plain_rankL"=est_mc_plain$rankL, 
-              "est_mc_weights_RMSE"=est_mc_weights$RMSE,"est_mc_weights_abs_bias"=est_mc_weights$abs.bias,"est_mc_weights_cp"=est_mc_weights$cp,"est_mc_weights_boot_var"=est_mc_weights$boot_var,"est_mc_weights_CI"=est_mc_weights$CI,"est_mc_weights_CI_width"=est_mc_weights$CI_width,"est_mc_weights_rankL"=est_mc_weights$rankL,
-              "est_model_ADH_RMSE"=est_model_ADH$RMSE,"est_model_ADH_abs_bias"=est_model_ADH$abs.bias,"est_model_ADH_cp"=est_model_ADH$cp,"est_model_ADH_boot_var"=est_model_ADH$boot_var,"est_model_ADH_CI"=est_model_ADH$CI,"est_model_ADH_width"=est_model_ADH$CI_width,
-              "est_model_ENT_RMSE"=est_model_ENT$RMSE,"est_model_ENT_abs_bias"=est_model_ENT$abs.bias,"est_model_ENT_cp"=est_model_ENT$cp,"est_model_ENT_boot_var"=est_model_ENT$boot_var,"est_model_ENT_CI"=est_model_ENT$CI_width,"est_model_ENT_CI"=est_model_ENT$CI_width,
-              "est_model_DID_RMSE"=est_model_DID$RMSE,"est_model_DID_abs_bias"=est_model_DID$abs.bias,"est_model_DID_cp"=est_model_DID$cp,"est_model_DID_boot_var"=est_model_DID$boot_var,"est_model_DID_CI"=est_model_DID$CI,"est_model_DID_width"=est_model_DID$CI_width,
-              "est_model_IFE_RMSE"=est_model_IFE$RMSE,"est_model_IFE_abs_bias"=est_model_IFE$abs.bias,"est_model_IFE_cp"=est_model_IFE$cp,"est_model_IFE_boot_var"=est_model_IFE$boot_var,"est_model_IFE_CI"=est_model_IFE$CI,"est_model_IFE_width"=est_model_IFE$CI_width))
-  
-}
 
-# Load data
-outcomes.missing <- readRDS("data/capacity-outcomes-none.rds")
-outcomes.imputed <- readRDS("data/capacity-outcomes-mice-pmm.rds") 
-capacity.outcomes.linear <- readRDS("data/capacity-outcomes-linear.rds") # for covariates
+  # combine data back into list
+  outcomes.placebo <- list("Y"=Y,
+                           "Y_obs"=Y_obs,
+                           "missing.mat"= missing.mat,
+                           "mask"=mask)
+  
+  bopt <- max(b.star(t(Y),round=TRUE))   # get optimal stationary bootstrap lengths
+  
+  boot.att.bar <- tsboot(tseries=t(Y), MCEst, outcomes=outcomes.placebo, covars.x=covars.x, t0=placebo_t0, ST=ST, estimator=estimator, estimand="att.bar",
+                         R= 999, parallel = "multicore", l =bopt, sim = "fixed")
+  
+  return(list("N"=N, "T"=T, "T0"=placebo_t0,"data"=d,"estimator"=estimator,"fr_obs"= fr_obs, "boot_att_bar"=boot.att.bar, "bopt"=bopt))
+}
 
 # define settings for simulation
 settings <- expand.grid("d"=c('rev.pc','exp.pc'),
-                        "estimator"=c("mc_plain","mc_weights","ADH","ENT","DID","IFE"))
+                        "estimator"=c("mc_plain","mc_weights","ADH","ENT","DID","IFE"),
+                        "t" = c(1,10,25))
 
 args <- commandArgs(trailingOnly = TRUE) # command line arguments
 thisrun <- settings[as.numeric(args[1]),] 
 
 d <- as.character(thisrun[1]$d)
 estimator <- as.character(thisrun[2]$estimator)
-
-if(doMPI){
-  cores <- parallel::detectCores()
-  print(paste0("number of cores used: ", cores))
-}
+t <- as.numeric(thisrun[3]$t)
 
 output_dir <- './outputs/'
 simulation_version <- paste0(format(Sys.time(), "%Y%m%d"),"/")
@@ -370,9 +134,11 @@ if(!dir.exists(output_dir)){
   dir.create(output_dir)
 }
 
-results <- foreach(t = seq(1:4), .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor"), .verbose = FALSE) %dopar% {
+results <- foreach(i = c("mice-cart","mice-pmm","mtsdi"), .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor","glmnet","boot"), .verbose = FALSE) %dopar% {
   
-  T0 <- as.numeric(t)
+  # Load data
+  outcomes.imputed <- readRDS(paste0("data/capacity-outcomes-", i,".rds")) 
+  capacity.outcomes.linear <- readRDS("data/capacity-outcomes-linear.rds") # for covariates
   
   # Transform covars to unit and time-specific inputs
   capacity.covars <- cbind(capacity.outcomes.linear[[d]]$faval[,c("1850","1860")][sort(rownames(capacity.outcomes.linear[[d]]$faval[,c("1850","1860")])),], 
@@ -387,10 +153,10 @@ results <- foreach(t = seq(1:4), .combine='cbind', .packages =c("MCPanel","matri
   pub.states <- c("AK","AL","AR","AZ","CA","CO","FL","IA","ID","IL","IN","KS","LA","MI","MN","MO","MS","MT","ND","NE","NM","NV","OH","OK","OR","SD","UT","WA","WI","WY") # 30 public land states
   treat_indices_order <- row.names(outcomes.imputed[[d]]$M)[row.names(outcomes.imputed[[d]]$M)%in% pub.states]
   
-  CapacityPlacebo(outcomes.missing=outcomes.missing,outcomes.imputed=outcomes.imputed,covars.x=capacity.covars,d=d,T0=T0,treated.indices=treat_indices_order,cores=parallel::detectCores(),estimator=estimator)
+  CapacityPlacebo(outcomes.imputed=outcomes.imputed,covars.x=capacity.covars,d=d,t0=t,treated.indices=treat_indices_order,cores=cores,estimator=estimator)
 }
 results
-saveRDS(results, paste0(output_dir,"mc_capacity_placebo_results_","data_",d,"_T0_",T0,"_estimator_",estimator,".rds"))
+saveRDS(results, paste0(output_dir,"mc_capacity_placebo_results_","data_",d,"_t0_",t,"_estimator_",estimator,".rds"))
 
 if(doMPI){
   closeCluster(cl) # close down MPIcluster
