@@ -66,20 +66,21 @@ SynthSim <- function(outcomes,covars.x,d,T0,sim,estimator=c("mc_plain","mc_weigh
   N <- nrow(treat)
   T <- ncol(treat)
   N_t <- ceiling(N*0.5) # no. treated units desired <=N
-  number_T0 <- 5
+  number_T0 <- 4
   t0 <- ceiling(T*((1:number_T0)*2-1)/(2*number_T0))[T0]
   
   att.true <- 0
 
   ## Simultaneuous (simul_adapt) or Staggered adoption (stag_adapt)
+  # covars.x is pxT, list of N
   
   covars.x <-mapply(function(i){
-    return(i[,1:(t0-1)])
-  },covars.x)
+    return(i[,1:(t0-1)]) #
+  },covars.x) # pxN
   
-  covars.x <- t(covars.x)[,1:T]
+  covars.x <- t(covars.x) # NxP
   
-  e <-plogis(scale(cbind(Y[,1:(t0-1)],replicate((T-t0+1),Y[,(t0-1)])))+covars.x) # prob of being missing (treated/missing)
+  e <-plogis(scale(cbind(Y[,1:(t0-1)],replicate((T-t0+1),Y[,(t0-1)]))+matrix(rowSums(covars.x),N,T))) # prob of being missing (treated/missing)
   e <- boundProbs(e) # winsorize extreme probabilities 
    
   if(sim == 1){ # masked matrix, 1= control units and treated units before treatment and 0 = treated units after treatment
@@ -113,19 +114,20 @@ SynthSim <- function(outcomes,covars.x,d,T0,sim,estimator=c("mc_plain","mc_weigh
   # bootstrap variance estimation
   bopt <- max(b.star(t(Y),round=TRUE))   # get optimal stationary bootstrap lengths
   boot.att.bar <- tsboot(tseries=t(Y), MCEst, outcomes=outcomes, covars.x=covars.x, t0=t0, ST=ST, estimator=estimator, estimand="att.bar",
-                         R = 999, parallel = "multicore", l = bopt, sim = "fixed")
+                         R = 399, parallel = "multicore", l = bopt, sim = "fixed")
   
   # evaluate
   boot_var <- apply(boot.att.bar$t, 2, var)
   print(paste("variance:", round(boot_var,3)))
   
-  cp <- CI_test(est_coefficent=att.bar, real_coefficent=att.true, est_var=boot_var)
+  cp <- as.numeric(boot.ci(boot.att.bar, type="basic")$basic[4] <= att.true &
+                     boot.ci(boot.att.bar, type="basic")$basic[5] >= att.true)
   print(paste("CP:", round(cp,3)))
   
   abs_bias <- abs(boot.att.bar$t0-att.true)
   print(paste("abs. bias:", round(abs_bias,3)))
   
-  CI_width <- abs(boot_CI(est_coefficent=att.bar, est_var=boot_var)$lb-boot_CI(est_coefficent=att.bar, est_var=boot_var)$ub)
+  CI_width <- abs(boot.ci(boot.att.bar, type="basic")$basic[5]-boot.ci(boot.att.bar, type="basic")$basic[4])
   print(paste("CI width:", round(CI_width,3)))
   
   return(list("N"=N, "T"=T, "T0"=t0, "N_t"=N_t,"estimator"=estimator, "data" = d, "fr_obs"= fr_obs,
@@ -138,7 +140,7 @@ synth.control.covariates <- readRDS("data/synth-control-covars.rds")
 
 # define settings for simulation
 settings <- expand.grid("d"=c('basque','germany','california'),
-                        "T0"= seq(1:5),  
+                        "T0"= seq(1:4),  
                         "estimator"=c("mc_plain","mc_weights","ADH","ENT","DID","IFE"))
 
 args <- commandArgs(trailingOnly = TRUE) # command line arguments

@@ -14,17 +14,6 @@ nzmean <- function(x) {
   if (all(x==0)) 0 else mean(x[x!=0])
 }
 
-# confidence interval
-CI_test <- function(est_coefficent, real_coefficent, est_var,alpha=0.05){
-  return(as.numeric(est_coefficent - qnorm(1 - alpha/2)*sqrt(est_var) <= real_coefficent &
-               est_coefficent + qnorm(1 - alpha/2)*sqrt(est_var) >= real_coefficent ))
-}
-
-boot_CI <- function(est_coefficent,est_var,alpha=0.05){
-  return(list("lb"=est_coefficent - qnorm(1 - alpha/2)*sqrt(est_var),
-               "ub"=est_coefficent + qnorm(1 - alpha/2)*sqrt(est_var) ))
-}
-
 # Helper function for continuous DID regression bootstrap
 RunDiD <- function(data, indices, f1) {
   d <- data[indices,]

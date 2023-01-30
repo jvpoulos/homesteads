@@ -3,7 +3,7 @@ MCEst <- function(outcomes, covars.x, t0, ST, estimator, estimand=NULL, tseries=
   if(!is.null(tseries)){
     Y <- t(tseries)
     
-    Y_obs <- Y * outcomes$mask * outcomes$missing.mat
+    Y_obs <- Y * outcomes$mask
     
     # combine data back into list
     outcomes[["Y"]] <- Y
@@ -48,7 +48,7 @@ MCEst <- function(outcomes, covars.x, t0, ST, estimator, estimand=NULL, tseries=
     rankL <- rankMatrix(t(est_mc_weights$L), method="qr.R")[1]
     
     Mhat <- est_mc_weights$L + replicate(dim(outcomes$Y_obs)[2],est_mc_weights$u) + t(replicate(dim(outcomes$Y_obs)[1],est_mc_weights$v))
-    tau <- (outcomes$Y-Mhat) # estimated treatment effect, Y(AT) - Y(ST)
+    tau <- (outcomes$Y-Mhat) # estimated treatment effect, Y(ST) - Y(NT)
     
     att <- apply(tau*(1-outcomes$mask),1,nzmean)[ST]
     att.bar <- mean(att)

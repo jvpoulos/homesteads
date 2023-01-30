@@ -67,7 +67,7 @@ CapacityEst <- function(outcomes.imputed,covars.x,d,t0,treated.indices,cores,est
   N <- dim(mask)[1]
   T <- dim(mask)[2]
   
-  Y_obs <- Y * mask * missing.mat
+  Y_obs <- Y * mask
   
   fr_obs <- sum(mask)/(N*T) # store fraction observed entries
   print(paste0("fraction observed: ", fr_obs))
@@ -89,20 +89,24 @@ CapacityEst <- function(outcomes.imputed,covars.x,d,t0,treated.indices,cores,est
                   FUN = function(x) x[1])$row  # switch treated indices
   NT <- setdiff(1:N, ST) # control indices
   
-  # Get per-period bootstrap CIs
+  # Get  bootstrap CIs 
+  # block resampling with fixed block lengths of length bopt
   
   bopt <- max(b.star(t(Y),round=TRUE))   # get optimal stationary bootstrap lengths
 
   boot.tau <- tsboot(tseries=t(Y), MCEst, outcomes=outcomes, covars.x=covars.x, t0=t0, ST=ST, estimator=estimator, estimand="tau",
-                 R= 999, parallel = "multicore", l =bopt, sim = "fixed") # block resampling with fixed block lengths of length bopt
+                 R= 999, parallel = "multicore", l =bopt, sim = "fixed") 
   
   boot.att <- tsboot(tseries=t(Y), MCEst, outcomes=outcomes, covars.x=covars.x, t0=t0, ST=ST, estimator=estimator, estimand="att",
-                         R= 999, parallel = "multicore", l =bopt, sim = "fixed")
+                         R= 999, parallel = "multicore", l =bopt, sim = "fixed") 
   
   boot.att.bar <- tsboot(tseries=t(Y), MCEst, outcomes=outcomes, covars.x=covars.x, t0=t0, ST=ST, estimator=estimator, estimand="att.bar",
                      R= 999, parallel = "multicore", l =bopt, sim = "fixed")
   
-  return(list("N"=N, "T"=T, "T0"=t0,"data"=d,"estimator"=estimator,"fr_obs"= fr_obs, "boot_tau"=boot.tau, "boot_att"=boot.att, "boot_att_bar"=boot.att.bar, "bopt"=bopt))
+  boot.att.bar.ci <- boot.ci(boot.att.bar)
+  
+  return(list("N"=N, "T"=T, "T0"=t0,"data"=d,"estimator"=estimator,"fr_obs"= fr_obs, "boot_tau"=boot.tau, "boot_att"=boot.att, "boot_att_bar"=boot.att.bar, "bopt"=bopt,
+              "boot.att.bar.ci"=boot.att.bar.ci))
 }
 
 # define settings 

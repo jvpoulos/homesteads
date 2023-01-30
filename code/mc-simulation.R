@@ -85,7 +85,7 @@ MCsim <- function(N,T,R,T0,N_t,beta_sc,loading_sc,logi_sc,shift_sc,estimator=c("
     
     # True missingness model
     
-    e <-plogis(cbind(true_mat[,1:(T0-1)],replicate((T-T0+1),true_mat[,(T0-1)]))+X) # prob of being missing (treated/missing)
+    e <-plogis(scale(cbind(true_mat[,1:(T0-1)],replicate((T-T0+1),true_mat[,(T0-1)]))+X)) # prob of being missing (treated/missing)
     e <- boundProbs(e) # winsorize extreme probabilities 
     mask <- stag_adapt(M = matrix(1, nrow=N, ncol=T) , N_t = N_t, T0 = T0, treat_indices = 0, weights = e[,T0]) # 0s missing and to be imputed; 1s are observed
   }
@@ -172,19 +172,20 @@ MCsim <- function(N,T,R,T0,N_t,beta_sc,loading_sc,logi_sc,shift_sc,estimator=c("
   # bootstrap variance estimation
   bopt <- max(b.star(t(shifted_mat),round=TRUE))   # get optimal stationary bootstrap lengths
   boot.att.bar <- tsboot(tseries=t(shifted_mat), MCEst, outcomes=outcomes, covars.x=shifted_X, t0=T0, ST=ST, estimator=estimator, estimand="att.bar",
-                         R = 999, parallel = "multicore", l = bopt, sim = "fixed")
+                         R = 399, parallel = "multicore", l = bopt, sim = "fixed")
   
   # evaluate
   boot_var <- apply(boot.att.bar$t, 2, var)
   print(paste("variance:", round(boot_var,3)))
   
-  cp <- CI_test(est_coefficent=att.bar, real_coefficent=att.true, est_var=boot_var)
+  cp <- as.numeric(boot.ci(boot.att.bar, type="basic")$basic[4] <= att.true &
+                     boot.ci(boot.att.bar, type="basic")$basic[5] >= att.true)
   print(paste("CP:", round(cp,3)))
   
   abs_bias <- abs(boot.att.bar$t0-att.true)
   print(paste("abs. bias:", round(abs_bias,3)))
   
-  CI_width <- abs(boot_CI(est_coefficent=att.bar, est_var=boot_var)$lb-boot_CI(est_coefficent=att.bar, est_var=boot_var)$ub)
+  CI_width <- abs(boot.ci(boot.att.bar, type="basic")$basic[5]-boot.ci(boot.att.bar, type="basic")$basic[4])
   print(paste("CI width:", round(CI_width,3)))
   
   return(list("N"=N, "T"=T, "R"=R, "T0"=T0, "N_t"=N_t, "beta_sc"=beta_sc,"loading_sc"=loading_sc, "logi_sc" = logi_sc, "shift_sc"=shift_sc, 

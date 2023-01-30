@@ -75,6 +75,7 @@ Run order for experiments and causal estimates
   * `code/simulation-plots.R` # to plot results
 
 3. For MC placebo estimates on state government finances: `Rscript code/mc-capacity-placebo.R [arg1]`, where `[arg1]` is a number specifying the estimator and outcome of interest
+  * set flag `doMPI` to `FALSE` to run serially
 
 4. For causal estimates on state government finances via MC and comparison estimators: `Rscript code/mc-capacity-estimates.R [arg1]`, where `[arg1]` is a number specifying the estimator and outcome of interest
   * `code/mc-capacity-plots.R` # to plot results
