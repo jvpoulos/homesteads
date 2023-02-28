@@ -26,7 +26,6 @@ library(parallel)
 library(doParallel)
 library(foreach)
 
-# Setup parallel processing
 doMPI <- TRUE
 if(doMPI){
   library(doMPI)
@@ -44,10 +43,7 @@ if(doMPI){
   print(paste0("number of cores used: ", cores))
   
 } else{
-  library(parallel)
-  library(doParallel)
-  library(foreach)
-  
+
   cores <- parallel::detectCores()
   print(paste0("number of cores used: ", cores))
   
@@ -56,7 +52,7 @@ if(doMPI){
   doParallel::registerDoParallel(cl) # register cluster
 }
 
-CapacityEst <- function(outcomes.imputed,covars.x,d,t0,treated.indices,cores,estimator=c("mc_plain","mc_weights","ADH","ENT","DID","IFE")){
+CapacityEst <- function(outcomes.imputed,covars.x,d,t0,treated.indices,cores,estimator=c("mc_plain","mc_weights","ADH","ENT","DID","IFE"), point.est=FALSE){
 
   # specify outcome and treatment matrix
   Y <- outcomes.imputed[[d]]$M # NxT  # imputed outcomes
@@ -89,6 +85,11 @@ CapacityEst <- function(outcomes.imputed,covars.x,d,t0,treated.indices,cores,est
                   FUN = function(x) x[1])$row  # switch treated indices
   NT <- setdiff(1:N, ST) # control indices
   
+  if(point.est){ # return point estimates for plots
+    mc_est <- MCEst(outcomes, covars.x, t0, ST, estimator, estimand=NULL, tseries=NULL)
+    saveRDS(mc_est, paste0(output_dir,"mc_capacity_point_estimates_","data_",d,"_estimator_",estimator,".rds"))
+  }
+  
   # Get  bootstrap CIs 
   # block resampling with fixed block lengths of length bopt
   
@@ -111,7 +112,7 @@ CapacityEst <- function(outcomes.imputed,covars.x,d,t0,treated.indices,cores,est
 
 # define settings 
 settings <- expand.grid("d"=c('rev.pc','exp.pc'),
-                        "estimator"=c("mc_plain","mc_weights","ADH","ENT","DID","IFE"))
+                        "estimator"=c("mc_plain","mc_weights","ADH","ENT","DID"))
 
 args <- commandArgs(trailingOnly = TRUE) # command line arguments
 thisrun <- settings[as.numeric(args[1]),] 
@@ -131,7 +132,7 @@ if(!dir.exists(output_dir)){
   dir.create(output_dir)
 }
 
-results <- foreach(i = c("mice-cart","mice-pmm","mtsdi"), .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor","boot","glmnet"), .verbose = FALSE) %dopar% {
+results <- foreach(i = c("mice-cart","mice-pmm","mtsdi"), .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor","boot","glmnet"), .verbose = TRUE) %dopar% {
   
   # Load data
   outcomes.imputed <- readRDS(paste0("data/capacity-outcomes-", i,".rds")) 

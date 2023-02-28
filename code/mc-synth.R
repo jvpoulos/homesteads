@@ -141,7 +141,7 @@ synth.control.covariates <- readRDS("data/synth-control-covars.rds")
 # define settings for simulation
 settings <- expand.grid("d"=c('basque','germany','california'),
                         "T0"= seq(1:4),  
-                        "estimator"=c("mc_plain","mc_weights","ADH","ENT","DID","IFE"))
+                        "estimator"=c("mc_plain","mc_weights","ADH","ENT","DID"))
 
 args <- commandArgs(trailingOnly = TRUE) # command line arguments
 thisrun <- settings[as.numeric(args[1]),] 
@@ -164,7 +164,7 @@ if(!dir.exists(output_dir)){
   dir.create(output_dir)
 }
 
-results <- foreach(i = 1:n.runs, .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor","boot"), .verbose = FALSE) %dopar% {
+results <- foreach(i = 1:n.runs, .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor","boot"), .verbose = TRUE) %dopar% {
   SynthSim(outcomes=synth.control.outcomes,covars.x=lapply(synth.control.covariates[[paste0(d,'.xz')]],t),d,T0,sim=0,estimator,cores,n=i)
 }
 results

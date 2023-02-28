@@ -144,7 +144,7 @@ capacity.outcomes.linear <- readRDS("data/capacity-outcomes-linear.rds") # for c
 # define settings for simulation
 settings <- expand.grid("d"=c('rev.pc','exp.pc'),
                         "T0"= seq(1:4),  
-                        "estimator"=c("mc_plain","mc_weights","ADH","ENT","DID","IFE"))
+                        "estimator"=c("mc_plain","mc_weights","ADH","ENT","DID"))
 
 args <- commandArgs(trailingOnly = TRUE) # command line arguments
 thisrun <- settings[as.numeric(args[1]),] 
@@ -167,7 +167,7 @@ if(!dir.exists(output_dir)){
   dir.create(output_dir)
 }
 
-results <- foreach(i = 1:n.runs, .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor","boot"), .verbose = FALSE) %dopar% {
+results <- foreach(i = 1:n.runs, .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor","boot"), .verbose = TRUE) %dopar% {
   
   # Transform covars to unit and time-specific inputs
   capacity.covars <- cbind(capacity.outcomes.linear[[d]]$faval[,c("1850","1860")][sort(rownames(capacity.outcomes.linear[[d]]$faval[,c("1850","1860")])),], 

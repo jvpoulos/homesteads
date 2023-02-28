@@ -1,4 +1,4 @@
-TsPlot <- function(df, main = "",y.title,limits,breaks) {
+TsPlot <- function(df, main = "",y.title,limits,breaks,hline) {
   library(ggplot2)
   library(zoo)
   library(scales)
@@ -9,26 +9,26 @@ TsPlot <- function(df, main = "",y.title,limits,breaks) {
     # panel layout
     facet_grid(series~., scales = "free_y", space = "fixed", shrink = TRUE, drop = TRUE, labeller = label_value) + # label_value is default
     
-    theme(strip.text= element_text(size = 16, family = "serif", face='bold'), strip.background = element_blank()) +
+    theme(strip.text= element_text(size = 16, family = "serif"), strip.background = element_blank()) +
     
     # line colours
-    geom_line(data = subset(df, variable == "observed.pls"), aes(y = value, colour = "observed.pls", linetype="observed.pls"), show.legend = TRUE, size=1) +
-    geom_line(data = subset(df, variable == "predicted.pls"), aes(y = value, colour = "predicted.pls", linetype="predicted.pls"), show.legend = FALSE, size=1) +
-    geom_line(data = subset(df, variable == "pointwise.pls"), aes(y = value, colour = "pointwise.pls", linetype="pointwise.pls"), show.legend = FALSE, size=1) +
+    geom_line(data = subset(df, variable == "observed.pls"), aes(y = value, colour = "observed.pls", linetype="observed.pls"), show.legend = TRUE, alpha=0.7, size=1) +
+    geom_line(data = subset(df, variable == "predicted.pls"), aes(y = value, colour = "predicted.pls", linetype="predicted.pls"), show.legend = FALSE, alpha=0.7, size=1.5) +
+    geom_line(data = subset(df, variable == "pointwise.pls"), aes(y = value, colour = "pointwise.pls", linetype="pointwise.pls"), show.legend = FALSE, alpha=0.7, size=1, na.rm=TRUE) +
     
-    geom_line(data = subset(df, variable == "observed.sls"), aes(y = value, colour = "observed.sls", linetype="observed.sls"), show.legend = TRUE, size=1) +
+    geom_line(data = subset(df, variable == "observed.sls"), aes(y = value, colour = "observed.sls", linetype="observed.sls"), show.legend = TRUE, alpha=0.7, size=1) +
     
     # intervals
-    geom_ribbon(data = subset(df, variable == "pointwise.pls"), aes(ymin = lower, ymax=upper, colour="pointwise.pls"), alpha=.05, size=0.5, show.legend = FALSE) +
+    geom_ribbon(data = subset(df, variable == "pointwise.pls"), aes(ymin = lower, ymax=upper, colour="pointwise.pls"), alpha=.1, size=0, show.legend = FALSE) +
     
     # horizontal line to indicate zero values
-    geom_hline(yintercept = 0, size = 0.5, colour = "black") +
+    geom_hline(yintercept = 0, size = 0.25, colour = "black") +
     
     # main y-axis title
     ylab(y.title) +
     
     # x-axis title
-    xlab("\nTime") +
+    xlab("Year") +
   
     # main chart title
     ggtitle(main)
@@ -49,15 +49,16 @@ TsPlot <- function(df, main = "",y.title,limits,breaks) {
     intervention +
     ticks + 
     theme( legend.title = element_blank()
-           , plot.title = element_text(hjust = 0.5)
+           , plot.title = element_text(hjust = 0.5, size = 16)
            , legend.justification = c(1,0)
             , legend.position = "none"
-           , legend.background = element_rect()
-           , axis.text=element_text(size=14)
-           , axis.title.x=element_text(size = 16)
-           , axis.title.y=element_text(size = 16)
+           , legend.background = element_rect(fill="transparent")
+           , axis.text=element_text(size=10)
+           , axis.title.x=element_text(size = 14, margin = margin(t = 20, r = 0, b = 0, l = 0))
+           , axis.title.y=element_text(size = 14, margin = margin(t = 0, r = 20, b = 0, l = 0))
            , legend.text=element_text(size=14, family = "serif")
-           , legend.box = "horizontal" # not working?)
+           , legend.box = "vertical"
+           , legend.key = element_blank()
     ) + 
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
           panel.background = element_blank(), axis.line = element_line(colour = "black")) + # rm background

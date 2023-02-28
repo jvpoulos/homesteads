@@ -170,7 +170,12 @@ MCsim <- function(N,T,R,T0,N_t,beta_sc,loading_sc,logi_sc,shift_sc,estimator=c("
   }
   
   # bootstrap variance estimation
-  bopt <- max(b.star(t(shifted_mat),round=TRUE))   # get optimal stationary bootstrap lengths
+  # bopt <- max(b.star(t(shifted_mat),round=TRUE))   # get optimal stationary bootstrap lengths
+  # if(is.null(bopt) | !is.numeric(bopt)){
+  #   bopt <- 12
+  # }
+  bopt <- 6
+
   boot.att.bar <- tsboot(tseries=t(shifted_mat), MCEst, outcomes=outcomes, covars.x=shifted_X, t0=T0, ST=ST, estimator=estimator, estimand="att.bar",
                          R = 399, parallel = "multicore", l = bopt, sim = "fixed")
   
@@ -189,7 +194,7 @@ MCsim <- function(N,T,R,T0,N_t,beta_sc,loading_sc,logi_sc,shift_sc,estimator=c("
   print(paste("CI width:", round(CI_width,3)))
   
   return(list("N"=N, "T"=T, "R"=R, "T0"=T0, "N_t"=N_t, "beta_sc"=beta_sc,"loading_sc"=loading_sc, "logi_sc" = logi_sc, "shift_sc"=shift_sc, 
-              "estimator"=estimator, "data" = d, "fr_obs"= fr_obs, "att.true" = att.true, "rankL"=rankL, "rank_error"=rank_error,
+              "estimator"=estimator, "fr_obs"= fr_obs, "att.true" = att.true, "rankL"=rankL, "rank_error"=rank_error,
               "bopt"=bopt, "boot.att.bar"=boot.att.bar, "boot_var"=boot_var,"cp"=cp, "abs_bias"=abs_bias, "CI_width"=CI_width))
 }
 
@@ -198,7 +203,7 @@ settings <- expand.grid("NT"=c(60**2),
                         "N_t" =c(0.5),
                         "shift_scale"=c(0.1),
                         "R"=c(10,20,40),
-                        "estimator"=c("mc_plain","mc_weights","ADH","ENT","DID","IFE"))
+                        "estimator"=c("mc_plain","mc_weights","ADH","ENT","DID"))
 
 args <- commandArgs(trailingOnly = TRUE) # command line arguments
 thisrun <- settings[as.numeric(args[1]),] 
@@ -215,7 +220,7 @@ beta_sc <- 0.1 # beta scale
 loading_sc <- 0.1 # factor loading scale
 logi_sc <- 8 # logistic scale
 
-n.runs <- 1000 # Num. simulation runs
+n.runs <- 100 # Num. simulation runs
 
 output_dir <- './outputs/'
 simulation_version <- paste0(format(Sys.time(), "%Y%m%d"),"/")
@@ -232,7 +237,7 @@ if(!dir.exists(output_dir)){
 setting <- paste0("N = ", N, ", T = ", T, ", R = ",R, "T0 = " ,T0, "N_t", N_t, ", beta_sc = ", beta_sc, ", shift_sc = ", shift_sc, ", estimator = ", estimator)
 tic(print(paste0("setting: ",setting)))
 
-results <- foreach(i = 1:n.runs, .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor","boot"), .verbose = FALSE) %dopar% {
+results <- foreach(i = 1:n.runs, .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor","boot"), .verbose = TRUE) %dopar% {
   MCsim(N,T,R,T0,N_t,beta_sc,loading_sc,logi_sc,shift_sc,estimator,cores,n=i)
 }
 results
