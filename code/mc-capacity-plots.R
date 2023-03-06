@@ -13,7 +13,7 @@ library(wesanderson)
 
 source(paste0(code.directory,"TsPlot.R"))
 
-PlotMCCapacity <- function(estimates, boot, x,y.title,limits,breaks,imp,alpha=0.05){ # labels,  trends (see mc-plot.R in euro)
+PlotMCCapacity <- function(estimates, boot, x,y.title,limits,breaks,imp,alpha=0.05){
   
   ## load observed data
   

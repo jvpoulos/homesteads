@@ -70,9 +70,9 @@ Run order for experiments and causal estimates
   * set flag `doMPI` to `FALSE` to run serially
   * `code/mc-simulation-plot.R` # plot results for simulated data experiments
 
-2. Repeat the last step for `code/mc-synth.R` and `code/mc-capacity.R` to run experiments on synthetic control and state government finance datasets, resp.
+2. Repeat the last step for `code/mc-synth.R`, `code/mc-capacity.R`, and `code/mc-simulation.R` to run experiments on synthetic control, state government finance datasets, and simulated data, resp.
   * set flag `doMPI` to `FALSE` to run serially
-  * `code/simulation-plots.R` # to plot results
+  * `code/mc-synth-simulation-plot.R`, `code/mc-capacity-simulation-plot.R`, and `code/mc-simulation-plot.R` to plot results
 
 3. For MC placebo estimates on state government finances: `Rscript code/mc-capacity-placebo.R [arg1]`, where `[arg1]` is a number specifying the estimator and outcome of interest
   * set flag `doMPI` to `FALSE` to run serially
