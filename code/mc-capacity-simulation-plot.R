@@ -23,7 +23,9 @@ filenames <- c(list.files(path="outputs/20230202", pattern = ".rds", full.names 
                list.files(path="outputs/20230212", pattern = ".rds", full.names = TRUE),
                list.files(path="outputs/20230214", pattern = ".rds", full.names = TRUE),
                list.files(path="outputs/20230218", pattern = ".rds", full.names = TRUE),
-               list.files(path="outputs/20230223", pattern = ".rds", full.names = TRUE))
+               list.files(path="outputs/20230223", pattern = ".rds", full.names = TRUE),
+               list.files(path="outputs/20230305", pattern = ".rds", full.names = TRUE),
+               list.files(path="outputs/20230306", pattern = ".rds", full.names = TRUE))
 
 filenames <- filenames[grep("mc_capacity_sim_",filenames)] 
 filenames <- filenames[-grep("IFE",filenames)] # exclude IFE
