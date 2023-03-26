@@ -23,10 +23,6 @@ filenames <- c(list.files(path="outputs/20230220", pattern = ".rds", full.names 
 filenames <- filenames[grep("results_N",filenames)] 
 filenames <- filenames[-which(duplicated(substr(filenames, 18, nchar(filenames))))]
 
-#list("N"=N, "T"=T, "R"=R, "T0"=T0, "N_t"=N_t, "beta_sc"=beta_sc,"loading_sc"=loading_sc, "logi_sc" = logi_sc, "shift_sc"=shift_sc, 
-#"estimator"=estimator, "fr_obs"= fr_obs, "att.true" = att.true, "rankL"=rankL, "rank_error"=rank_error,
-#"bopt"=bopt, "boot.att.bar"=boot.att.bar, "boot_var"=boot_var,"cp"=cp, "abs_bias"=abs_bias, "CI_width"=CI_width)
-
 results <- list() # structure is: [[filename]][[metric]]
 for(f in filenames){
   print(f)
@@ -42,7 +38,6 @@ for(f in filenames){
 # structure is: [[estimator]][[filename]]
 
 abs.bias <- lapply(1:length(filenames), function(f) results[[f]]$abs_bias)
-
 
 CP <- lapply(1:length(filenames), function(f) results[[f]]$CP)
 
@@ -77,6 +72,11 @@ results.df <- results.df %>%
   group_by(Estimator,R,N_t) %>% 
   mutate(CP = mean(Coverage)) 
 
+# summary stats by group
+setDT(results.df)[, .(avg = mean(abs_bias)) , by = .(Estimator)]
+setDT(results.df)[, .(avg = mean(boot_var)) , by = .(Estimator)]
+setDT(results.df)[, .(avg = mean(Coverage)) , by = .(Estimator)]
+
 # reshape and plot
 results.df$id <- with(results.df, paste(Estimator,R,N_t, sep = "_"))
 results_long <- reshape2::melt(results.df[!colnames(results.df) %in% c("id","filename")], id.vars=c("Estimator","R","N_t"))  # convert to long format
@@ -108,7 +108,7 @@ sim.results.coverage <- ggplot(data=results_long[results_long$variable=="CP",],
   xlab("Rank") + ylab("Coverage probability (%)") +
   scale_fill_discrete(name = "Estimator:") +
   scale_y_continuous(breaks= pretty_breaks()) +
-  # coord_cartesian(ylim=c(0.95,1)) +
+  coord_cartesian(ylim=c(0,1)) +
   geom_hline(yintercept = 0.95, linetype="dotted")+
   theme(legend.position="bottom") +   theme(plot.title = element_text(hjust = 0.5, family="serif", size=16)) +
   theme(axis.title=element_text(family="serif", size=16)) +
@@ -130,7 +130,7 @@ sim.results.boot.var <- ggplot(data=results_long[results_long$variable=="boot_va
                                aes(x=factor(R), y=value, fill=Estimator))  + geom_boxplot(outlier.alpha = 0.3,outlier.size = 1, outlier.stroke = 0.1, lwd=0.25) +
   xlab("Rank")  + ylab("Bootstrap variance") +
   scale_fill_discrete(name = "Estimator:") +
-  scale_y_continuous(expand = c(0, 0), limits = c(0, NA))+ #,breaks= pretty_breaks()
+#  scale_y_continuous(expand = c(0, 0), limits = c(0, NA))+ #,breaks= pretty_breaks()
   coord_cartesian(ylim=c(0,0.45)) +
   theme(legend.position="bottom") +   theme(plot.title = element_text(hjust = 0.5, family="serif", size=16)) +
   theme(axis.title=element_text(family="serif", size=16)) +
@@ -150,7 +150,7 @@ sim.results.rank.error <- ggplot(data=results_long[results_long$variable=="rank_
                                aes(x=factor(R), y=value, fill=Estimator))  + geom_boxplot(outlier.alpha = 0.3,outlier.size = 1, outlier.stroke = 0.1, lwd=0.25) +
   xlab("Rank")  + ylab("Absolute difference between actual and estimated rank") +
   scale_fill_discrete(name = "Estimator:") +
-  scale_y_continuous(expand = c(0, 0), limits = c(0, NA))+ #,breaks= pretty_breaks()
+#  scale_y_continuous(expand = c(0, 0), limits = c(0, NA))+ #,breaks= pretty_breaks()
  # coord_cartesian(ylim=c(0,0.45)) +
   theme(legend.position="bottom") +   theme(plot.title = element_text(hjust = 0.5, family="serif", size=16)) +
   theme(axis.title=element_text(family="serif", size=16)) +

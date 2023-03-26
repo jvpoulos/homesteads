@@ -49,7 +49,7 @@ if(doMPI){
   doParallel::registerDoParallel(cl) # register cluster
 }
 
-MCsim <- function(N,T,R,T0,N_t,beta_sc,loading_sc,logi_sc,shift_sc,estimator=c("mc_plain","mc_weights","ADH","ENT","DID","IFE"),cores,n){
+MCsim <- function(N,T,R,T0,N_t,loading_sc,logi_sc,shift_sc,estimator=c("mc_plain","mc_weights","ADH","ENT","DID","IFE"),cores,n){
   
   # check inputs 
   if(N!=T){
@@ -193,7 +193,7 @@ MCsim <- function(N,T,R,T0,N_t,beta_sc,loading_sc,logi_sc,shift_sc,estimator=c("
   CI_width <- abs(boot.ci(boot.att.bar, type="basic")$basic[5]-boot.ci(boot.att.bar, type="basic")$basic[4])
   print(paste("CI width:", round(CI_width,3)))
   
-  return(list("N"=N, "T"=T, "R"=R, "T0"=T0, "N_t"=N_t, "beta_sc"=beta_sc,"loading_sc"=loading_sc, "logi_sc" = logi_sc, "shift_sc"=shift_sc, 
+  return(list("N"=N, "T"=T, "R"=R, "T0"=T0, "N_t"=N_t, "loading_sc"=loading_sc, "logi_sc" = logi_sc, "shift_sc"=shift_sc, 
               "estimator"=estimator, "fr_obs"= fr_obs, "att.true" = att.true, "rankL"=rankL, "rank_error"=rank_error,
               "bopt"=bopt, "boot.att.bar"=boot.att.bar, "boot_var"=boot_var,"cp"=cp, "abs_bias"=abs_bias, "CI_width"=CI_width))
 }
@@ -216,7 +216,6 @@ shift_sc <- as.numeric(thisrun[3]) # shift scale
 R <- as.numeric(thisrun[4])
 estimator <- as.character(thisrun[5]$estimator)
 
-beta_sc <- 0.1 # beta scale
 loading_sc <- 0.1 # factor loading scale
 logi_sc <- 8 # logistic scale
 
@@ -234,11 +233,11 @@ if(!dir.exists(output_dir)){
   dir.create(output_dir)
 }
 
-setting <- paste0("N = ", N, ", T = ", T, ", R = ",R, "T0 = " ,T0, "N_t", N_t, ", beta_sc = ", beta_sc, ", shift_sc = ", shift_sc, ", estimator = ", estimator)
+setting <- paste0("N = ", N, ", T = ", T, ", R = ",R, "T0 = " ,T0, "N_t", N_t, ", shift_sc = ", shift_sc, ", estimator = ", estimator)
 tic(print(paste0("setting: ",setting)))
 
 results <- foreach(i = 1:n.runs, .combine='cbind', .packages =c("MCPanel","matrixStats","Matrix","MASS","data.table","reshape","reshape2","emfactor","boot"), .verbose = TRUE) %dopar% {
-  MCsim(N,T,R,T0,N_t,beta_sc,loading_sc,logi_sc,shift_sc,estimator,cores,n=i)
+  MCsim(N,T,R,T0,N_t,loading_sc,logi_sc,shift_sc,estimator,cores,n=i)
 }
 results
 saveRDS(results, paste0(output_dir,"results_","N_",N,"_T_",T,"_R_", R, "_T0_",T0, "_N_t_", N_t, "_shift_sc_",shift_sc,"_estimator_",estimator,"_n_",n.runs,".rds"))

@@ -90,6 +90,11 @@ results.df <- results.df %>%
   group_by(Estimator,d,T0,N_t) %>% 
   mutate(CP = mean(Coverage)) 
 
+# summary stats by group
+setDT(results.df)[, .(avg = mean(abs_bias)) , by = .(Estimator, d)]
+setDT(results.df)[, .(avg = mean(boot_var)) , by = .(Estimator, d)]
+setDT(results.df)[, .(avg = mean(Coverage)) , by = .(Estimator, d)]
+
 # reshape and plot
 results.df$id <- with(results.df, paste(Estimator,T0,d,N_t, sep = "_"))
 results_long <- reshape2::melt(results.df[!colnames(results.df) %in% c("id","filename")], id.vars=c("Estimator","T0","d","N_t"))  # convert to long format
@@ -120,9 +125,10 @@ ggsave("plots/mc_capacity_simulation_placebo_abs_bias.png",plot = sim.results.ab
 sim.results.coverage <- ggplot(data=results_long[results_long$variable=="CP",],
                                aes(x=factor(T0), y=value, colour=Estimator, group=forcats::fct_rev(Estimator)))  +   geom_line()  +
   xlab(TeX('Placebo $a_i^{\\prime}/T$')) + ylab("Coverage probability (%)") +
+  facet_grid(~d) +
   scale_fill_discrete(name = "Estimator:") +
   scale_y_continuous(breaks= pretty_breaks()) +
- # coord_cartesian(ylim=c(0.95,1)) +
+  coord_cartesian(ylim=c(0,1)) +
   geom_hline(yintercept = 0.95, linetype="dotted")+
   theme(legend.position="bottom") +   theme(plot.title = element_text(hjust = 0.5, family="serif", size=16)) +
   theme(axis.title=element_text(family="serif", size=16)) +
@@ -143,9 +149,10 @@ ggsave("plots/mc_capacity_simulation_placebo_coverage.png",plot = sim.results.co
 sim.results.boot.var <- ggplot(data=results_long[results_long$variable=="boot_var",],
                                aes(x=factor(T0), y=value, fill=Estimator))  + geom_boxplot(outlier.alpha = 0.3,outlier.size = 1, outlier.stroke = 0.1, lwd=0.25) +
   xlab(TeX('Placebo $a_i^{\\prime}/T$'))  + ylab("Bootstrap variance") +
+  facet_grid(~d) +
   scale_fill_discrete(name = "Estimator:") +
   scale_y_continuous(expand = c(0, 0), limits = c(0, NA))+ #,breaks= pretty_breaks()
-  coord_cartesian(ylim=c(0,0.6)) +
+ # coord_cartesian(ylim=c(0,0.6)) +
   theme(legend.position="bottom") +   theme(plot.title = element_text(hjust = 0.5, family="serif", size=16)) +
   theme(axis.title=element_text(family="serif", size=16)) +
   theme(axis.text.y=element_text(family="serif", size=14)) +
