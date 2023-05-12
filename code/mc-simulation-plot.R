@@ -18,7 +18,10 @@ filenames <- c(list.files(path="outputs/20230220", pattern = ".rds", full.names 
                list.files(path="outputs/20230221", pattern = ".rds", full.names = TRUE),
                list.files(path="outputs/20230224", pattern = ".rds", full.names = TRUE),
                list.files(path="outputs/20230228", pattern = ".rds", full.names = TRUE),
-               list.files(path="outputs/20230308", pattern = ".rds", full.names = TRUE))
+               list.files(path="outputs/20230308", pattern = ".rds", full.names = TRUE),
+               list.files(path="outputs/20230406", pattern = ".rds", full.names = TRUE),
+               list.files(path="outputs/20230409", pattern = ".rds", full.names = TRUE),
+               list.files(path="outputs/20230417", pattern = ".rds", full.names = TRUE))
 
 filenames <- filenames[grep("results_N",filenames)] 
 filenames <- filenames[-which(duplicated(substr(filenames, 18, nchar(filenames))))]
@@ -49,7 +52,6 @@ rank.error <- lapply(1:length(filenames), function(f) results[[f]]$rank_error)
 results.df <- data.frame("abs_bias"=as.numeric(unlist(abs.bias)),
                          "Coverage"=as.numeric(unlist(CP)),
                          "boot_var"=as.numeric(unlist(boot.var)),
-                         "rank_error"=as.numeric(unlist(rank.error)),
                          "filename"=c(sapply(1:length(filenames), function(i) rep(filenames[i], length.out=R))))
 
 results.df$Estimator <- NA
@@ -58,6 +60,9 @@ results.df[grep("mc_weights",results.df$filename),]$Estimator <- "MC-W"
 results.df[grep("DID",results.df$filename),]$Estimator <- "DID"
 results.df[grep("ADH",results.df$filename),]$Estimator <- "SCM"
 results.df[grep("ENT",results.df$filename),]$Estimator <- "SCM-L1"
+
+results.df$rank_error <- NA
+results.df$rank_error[results.df$Estimator %in% c("MC","MC-W")] <- as.numeric(unlist(rank.error))
 
 results.df$R <- NA
 results.df[grep("R_10",results.df$filename),]$R <- "10"
@@ -79,7 +84,7 @@ setDT(results.df)[, .(avg = mean(Coverage)) , by = .(Estimator)]
 
 # reshape and plot
 results.df$id <- with(results.df, paste(Estimator,R,N_t, sep = "_"))
-results_long <- reshape2::melt(results.df[!colnames(results.df) %in% c("id","filename")], id.vars=c("Estimator","R","N_t"))  # convert to long format
+results_long <- reshape2::melt(results.df[,c("abs_bias","Coverage","boot_var","rank_error", "Estimator", "R", "N_t", "CP")], id.vars=c("Estimator","R","N_t"))  # convert to long format
 
 # abs.bias (NxT)
 sim.results.abs.bias <- ggplot(data=results_long[results_long$variable=="abs_bias",],
@@ -87,7 +92,7 @@ sim.results.abs.bias <- ggplot(data=results_long[results_long$variable=="abs_bia
   ylab("Absolute bias") +  xlab("Rank") +
   scale_fill_discrete(name = "Estimator:") +
   # scale_y_continuous(expand = c(0, 0), limits = c(0, NA))+ # ,breaks= pretty_breaks()
-  # coord_cartesian(ylim=c(0,0.03)) +
+   coord_cartesian(ylim=c(0,1.5)) +
   theme(legend.position="bottom") +   theme(plot.title = element_text(hjust = 0.5, family="serif", size=22)) +
   theme(axis.title=element_text(family="serif", size=16)) +
   theme(axis.text.y=element_text(family="serif", size=14)) +
@@ -131,7 +136,7 @@ sim.results.boot.var <- ggplot(data=results_long[results_long$variable=="boot_va
   xlab("Rank")  + ylab("Bootstrap variance") +
   scale_fill_discrete(name = "Estimator:") +
 #  scale_y_continuous(expand = c(0, 0), limits = c(0, NA))+ #,breaks= pretty_breaks()
-  coord_cartesian(ylim=c(0,0.45)) +
+  coord_cartesian(ylim=c(0,0.3)) +
   theme(legend.position="bottom") +   theme(plot.title = element_text(hjust = 0.5, family="serif", size=16)) +
   theme(axis.title=element_text(family="serif", size=16)) +
   theme(axis.text.y=element_text(family="serif", size=14)) +
@@ -146,7 +151,7 @@ sim.results.boot.var <- ggplot(data=results_long[results_long$variable=="boot_va
 
 ggsave("plots/mc_simulation_placebo_boot_var.png",plot = sim.results.boot.var)
 
-sim.results.rank.error <- ggplot(data=results_long[results_long$variable=="rank_error" &results_long$Estimator%in%c("MC","MC-W") ,],
+sim.results.rank.error <- ggplot(data=results_long[results_long$variable=="rank_error" ,],
                                aes(x=factor(R), y=value, fill=Estimator))  + geom_boxplot(outlier.alpha = 0.3,outlier.size = 1, outlier.stroke = 0.1, lwd=0.25) +
   xlab("Rank")  + ylab("Absolute difference between actual and estimated rank") +
   scale_fill_discrete(name = "Estimator:") +

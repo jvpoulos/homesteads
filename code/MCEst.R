@@ -13,7 +13,7 @@ MCEst <- function(outcomes, covars.x, t0, ST, estimator, estimand=NULL, tseries=
   
   p.weights <- NULL
   if(estimator%in%c("mc_weights")){
-    p.mod <- cv.glmnet(x=cbind(covars.x,outcomes$Y_obs[,1:(t0-1)]), y=(1-outcomes$mask), family="mgaussian", alpha=1,nfolds=10,intercept=FALSE)
+    p.mod <- glmnet::cv.glmnet(x=cbind(covars.x,outcomes$Y_obs[,1:(t0-1)]), y=(1-outcomes$mask), family="mgaussian", alpha=1,nfolds=10,intercept=FALSE)
     W <- predict(p.mod, cbind(covars.x,outcomes$Y_obs[,1:(t0-1)]))[,,1]
     
     p.weights <- matrix(NA, nrow=nrow(outcomes$mask), ncol=ncol(outcomes$mask), dimnames = list(rownames(outcomes$mask), colnames(outcomes$mask)))

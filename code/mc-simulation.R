@@ -13,14 +13,14 @@ library(reshape2)
 library(emfactor)
 library(glmnet)
 library(boot)
+library(methods)
 
 source('code/utils.R')
-source('code/IFE.R')
 source("code/MCEst.R")
 source("code/PolitisWhite.R")
 
 # Setup parallel processing
-doMPI <- TRUE
+doMPI <- FALSE
 if(doMPI){
   library(doMPI)
   
@@ -49,7 +49,7 @@ if(doMPI){
   doParallel::registerDoParallel(cl) # register cluster
 }
 
-MCsim <- function(N,T,R,T0,N_t,loading_sc,logi_sc,shift_sc,estimator=c("mc_plain","mc_weights","ADH","ENT","DID","IFE"),cores,n){
+MCsim <- function(N,T,R,T0,N_t,loading_sc,logi_sc,shift_sc,estimator=c("mc_plain","mc_weights","ADH","ENT","DID"),cores,n){
   
   # check inputs 
   if(N!=T){
@@ -136,7 +136,7 @@ MCsim <- function(N,T,R,T0,N_t,loading_sc,logi_sc,shift_sc,estimator=c("mc_plain
     
     ## Estimate propensity scores
     
-    p.mod <- cv.glmnet(x=cbind(shifted_X,obs_mat[,1:T0]), y=(1-mask), family="mgaussian", alpha=1,nfolds=10,intercept=FALSE)
+    p.mod <- glmnet:::cv.glmnet(x=cbind(shifted_X,obs_mat[,1:T0]), y=(1-mask), family="mgaussian", alpha=1,nfolds=10,intercept=FALSE)
     W <- predict(p.mod, cbind(shifted_X,obs_mat[,1:T0]))[,,1]
     
     p.weights <- matrix(NA, nrow=nrow(mask), ncol=ncol(mask), dimnames = list(rownames(mask), colnames(mask)))
