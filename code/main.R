@@ -71,3 +71,9 @@ if(tablesfigures){
   source(paste0(code.directory,'binary-did-parallel.R')) # DID (binary treatment) parallel trends plot
   source(paste0(code.directory,'pscore-diagnostic.R')) # propensity scores diagnostic plot
 }
+
+## Homestead map plots
+
+if(tablesfigures){
+  source(paste0(code.directory,'homestead-map.R'))
+}
