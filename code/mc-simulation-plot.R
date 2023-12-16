@@ -92,8 +92,8 @@ sim.results.abs.bias <- ggplot(data=results_long[results_long$variable=="abs_bia
   ylab("Absolute bias") +  xlab("Rank") +
   scale_fill_discrete(name = "Estimator:") +
   # scale_y_continuous(expand = c(0, 0), limits = c(0, NA))+ # ,breaks= pretty_breaks()
-   coord_cartesian(ylim=c(0,1.5)) +
-  theme(legend.position="bottom") +   theme(plot.title = element_text(hjust = 0.5, family="serif", size=22)) +
+   coord_cartesian(ylim=c(0,1)) +
+  theme(legend.position="none") +   theme(plot.title = element_text(hjust = 0.5, family="serif", size=22)) +
   theme(axis.title=element_text(family="serif", size=16)) +
   theme(axis.text.y=element_text(family="serif", size=14)) +
   theme(axis.text.x=element_text(family="serif", size=14)) +
@@ -136,8 +136,8 @@ sim.results.boot.var <- ggplot(data=results_long[results_long$variable=="boot_va
   xlab("Rank")  + ylab("Bootstrap variance") +
   scale_fill_discrete(name = "Estimator:") +
 #  scale_y_continuous(expand = c(0, 0), limits = c(0, NA))+ #,breaks= pretty_breaks()
-  coord_cartesian(ylim=c(0,0.3)) +
-  theme(legend.position="bottom") +   theme(plot.title = element_text(hjust = 0.5, family="serif", size=16)) +
+  coord_cartesian(ylim=c(0,0.2)) +
+  theme(legend.position="none") +   theme(plot.title = element_text(hjust = 0.5, family="serif", size=16)) +
   theme(axis.title=element_text(family="serif", size=16)) +
   theme(axis.text.y=element_text(family="serif", size=14)) +
   theme(axis.text.x=element_text(family="serif", size=14)) +
@@ -170,3 +170,13 @@ sim.results.rank.error <- ggplot(data=results_long[results_long$variable=="rank_
   theme(panel.spacing = unit(1, "lines"))
 
 ggsave("plots/mc_simulation_placebo_rank_error.png",plot = sim.results.rank.error)
+
+# Get color hues
+
+gg_color_hue <- function(n) {
+  hues = seq(15, 375, length = n + 1)
+  hcl(h = hues, l = 65, c = 100)[1:n]
+}
+
+n.estimators <- 5
+gg_color_hue(n.estimators)

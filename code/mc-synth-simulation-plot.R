@@ -108,7 +108,7 @@ setDT(results.df)[, .(avg = mean(Coverage)) , by = .(Estimator, d)]
 
 # reshape and plot
 results.df$id <- with(results.df, paste(Estimator,T0,d,N_t, sep = "_"))
-results_long <- reshape2::melt(results.df[!colnames(results.df) %in% c("id","filename")], id.vars=c("Estimator","T0","d","N_t"))  # convert to long format
+results_long <- reshape2::melt(data.frame(results.df)[!colnames(results.df) %in% c("id","filename")], id.vars=c("Estimator","T0","d","N_t"))  # convert to long format
 
 # abs.bias (NxT)
 for(d in c("basque","california","germany")){
@@ -119,7 +119,7 @@ for(d in c("basque","california","germany")){
     # facet_grid(~d) +
     scale_fill_discrete(name = "Estimator:") +
    # scale_y_continuous(expand = c(0, 0), limits = c(0, NA))+ # ,breaks= pretty_breaks()
-    # coord_cartesian(ylim=c(0,0.03)) +
+    coord_cartesian(ylim=c(0,1)) +
     theme(legend.position="bottom") +   theme(plot.title = element_text(hjust = 0.5, family="serif", size=22)) +
     theme(axis.title=element_text(family="serif", size=16)) +
     theme(axis.text.y=element_text(family="serif", size=14)) +
@@ -132,7 +132,7 @@ for(d in c("basque","california","germany")){
     theme(axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l =0))) +
     theme(panel.spacing = unit(1, "lines")) 
   
-  ggsave(paste0("plots/",d,"_placebo_abs_bias.png"),plot = sim.results.abs.bias)
+  ggsave(paste0("plots/",d,"_placebo_abs_bias.png"),plot = sim.results.abs.bias, scale=1.2)
 }
 
 # coverage
@@ -157,7 +157,7 @@ sim.results.coverage <- ggplot(data=results_long[results_long$variable=="CP",],
   theme(axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l =0))) +
   theme(panel.spacing = unit(1, "lines")) 
 
-ggsave(paste0("plots/mc_synth_simulation_placebo_coverage.png"),plot = sim.results.coverage)
+ggsave(paste0("plots/mc_synth_simulation_placebo_coverage.png"),plot = sim.results.coverage, scale=1.2)
 
 # boot_var
 
@@ -181,5 +181,15 @@ for(d in c("basque","california","germany")){
     theme(axis.title.x = element_text(margin = margin(t = 20, r = 0, b = 0, l =0))) +
     theme(panel.spacing = unit(1, "lines"))
   
-  ggsave(paste0("plots/",d,"_placebo_boot_var.png"),plot = sim.results.boot.var)
+  ggsave(paste0("plots/",d,"_placebo_boot_var.png"),plot = sim.results.boot.var, scale=1.2)
 }
+
+# Get color hues
+
+gg_color_hue <- function(n) {
+  hues = seq(15, 375, length = n + 1)
+  hcl(h = hues, l = 65, c = 100)[1:n]
+}
+
+n.estimators <- 5
+gg_color_hue(n.estimators)
