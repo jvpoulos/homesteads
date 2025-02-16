@@ -52,7 +52,7 @@ $ git clone https://github.com/jvpoulos/homesteads
 ```
 
 * Download and extract patents data (2.8 GB uncompressed) to `data/` directory:
-  * [patents.tar.xz](https://www.dropbox.com/s/3g5jlqpp6kvreur/patents.tar.xz?dl=1)
+  * [patents.tar.xz](https://drive.google.com/file/d/1l58NrJruCpoMZloby5y8TO5-LM8u8A5S/view?usp=sharing)
 
 * Make shell file `code/main.sh` executable from the Linux/Unix command line:
 ```
