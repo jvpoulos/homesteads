@@ -1,24 +1,20 @@
 # homesteads
 
-This repository provides data and code for reproducing ["State-Building through Public Land Disposal? An Application of Matrix Completion for Counterfactual Prediction"](https://arxiv.org/abs/1903.08028).
+This repository provides data and code for reproducing ["State-Building through Public Land Disposal? An Application of Matrix Completion for Counterfactual Prediction"]([https://arxiv.org/abs/1903.08028](https://www.tandfonline.com/doi/full/10.1080/2330443X.2024.2356514)).
 
 Please cite the paper if you use this code for academic research:
 
 ```
-@ARTICLE{2019arXiv190308028P,
-       author = {{Poulos}, Jason},
-        title = "{State-Building through Public Land Disposal? An Application of Matrix Completion for Counterfactual Prediction}",
-      journal = {arXiv e-prints},
-     keywords = {Economics - General Economics, Economics - Econometrics, Statistics - Applications},
-         year = "2019",
-        month = "Mar",
-          eid = {arXiv:1903.08028},
-        pages = {arXiv:1903.08028},
-archivePrefix = {arXiv},
-       eprint = {1903.08028},
- primaryClass = {econ.GN},
-       adsurl = {https://ui.adsabs.harvard.edu/abs/2019arXiv190308028P},
-      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+@article{doi:10.1080/2330443X.2024.2356514,
+        author = {Jason Poulos},
+        title = {State-Building through Public Land Disposal? An Application of Matrix Completion for Counterfactual Prediction},
+        journal = {Statistics and Public Policy},
+        year = {2024},
+        pages = {1--21},
+        publisher = {Taylor \& Francis},
+        doi = {10.1080/2330443X.2024.2356514},
+        URL = {https://doi.org/10.1080/2330443X.2024.2356514},
+        eprint = {https://doi.org/10.1080/2330443X.2024.2356514}
 }
 ```
 
